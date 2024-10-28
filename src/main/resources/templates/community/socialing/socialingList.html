@@ -1,0 +1,2421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../static/css/reset2.css" />
+    <link
+      rel="stylesheet"
+      href="../../../static/css/community/socialing/socialingList.css"
+    />
+    <title>나눔게시판</title>
+  </head>
+  <body>
+    <header id="header"></header>
+    <main>
+      <!-- 각 게시판의 헤더 -->
+      <!-- ✅게시판 제목, 게시판 설명, wirte-btn 연결 onclick 링크 수정하시면 됩니다. -->
+      <section class="board-header-container">
+        <div class="board-title">소셜링 🙌🏻</div>
+        <div class="board-description">
+          똑같은 일상을 다채롭게 만들어 줄 소셜링!
+        </div>
+        <div class="btn-wrap">
+          <div class="searchbar">
+            <input type="text" placeholder="" />
+            <button type="button" class="search-btn">검색</button>
+          </div>
+          <button
+            type="button"
+            class="write-btn"
+            onclick="location.href='socialingWrite.html'"
+          >
+            소셜링 생성하기
+          </button>
+        </div>
+      </section>
+      <section class="sharing-board-container">
+        <!-- 커뮤니티 게시판 왼쪽 카테고리 영역-->
+        <!-- ✅수정사항 없음(나중에 페이지 연결 필요) -->
+        <div class="community-category-container">
+          <ul>
+            <div>
+              <img src="../../../static/img/community/community_category.png" />
+              <span>커뮤니티</span>
+            </div>
+            <li>에코프로젝트</li>
+            <li>소셜링</li>
+            <li>레시피</li>
+            <li>나눔게시판</li>
+            <li>자유게시판</li>
+          </ul>
+        </div>
+        <!-- 소셜링 영역 -->
+        <div class="board-container">
+          <div class="sharing-board-category">
+            <div id="eat-together-btn" class="sharing-category-btn active">
+              함께 먹어요
+            </div>
+            <div id="go-together-btn" class="sharing-category-btn">
+              함께 떠나요
+            </div>
+            <div id="volunteer-btn" class="sharing-category-btn">봉사활동</div>
+            <div id="hobby-btn" class="sharing-category-btn">취미</div>
+            <div id="activity-btn" class="sharing-category-btn">운동</div>
+            <div id="improvement-btn" class="sharing-category-btn">
+              자기개발
+            </div>
+            <div id="challenge-btn" class="sharing-category-btn">챌린지</div>
+          </div>
+          <!-- 함께 먹어요 -->
+          <div id="eat-together-list" class="sharing-list-container  ">
+            <ul>
+              <li class="socialing-card-view" onclick="location.href='socialingDetail.html'">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/dining.webp"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">우리 함께 모여 저녁식사 어때요?</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view" onclick="location.href='socialingDetail.html'">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/dining.webp"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">우리 함께 모여 저녁식사 어때요?</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view" onclick="location.href='socialingDetail.html'">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/dining.webp"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">우리 함께 모여 저녁식사 어때요?</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view" onclick="location.href='socialingDetail.html'">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/dining.webp"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">우리 함께 모여 저녁식사 어때요?</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view" onclick="location.href='socialingDetail.html'">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/dining.webp"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">우리 함께 모여 저녁식사 어때요?</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view" onclick="location.href='socialingDetail.html'">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/dining.webp"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">우리 함께 모여 저녁식사 어때요?</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view" onclick="location.href='socialingDetail.html'">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/dining.webp"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">우리 함께 모여 저녁식사 어때요?</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view" onclick="location.href='socialingDetail.html'">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/dining.webp"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">우리 함께 모여 저녁식사 어때요?</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <!-- <li class="sharing-card-view" onclick="location.href='sharingDetail.html'">
+                            <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                            <div class="sharing-title">강아지옷 나눔해요!!</div>
+                            <div class="sharing-wrap">
+                                <div class="sharing-nickname">역삼동불주먹</div>
+                                <div class="sharing-status available">나눔가능</div>
+                            </div>
+                        </li> -->
+            </ul>
+          </div>
+          <!-- 함께 떠나요 -->
+          <div id="go-together-list" class="sharing-list-container hidden">
+            <ul>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <!-- <li class="sharing-card-view" onclick="location.href='sharingDetail.html'">
+                                        <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                                        <div class="sharing-title">강아지옷 나눔해요!!</div>
+                                        <div class="sharing-wrap">
+                                            <div class="sharing-nickname">역삼동불주먹</div>
+                                            <div class="sharing-status available">나눔가능</div>
+                                        </div>
+                                    </li> -->
+            </ul>
+          </div>
+          <!-- 봉사활동 -->
+          <div id="volunteer-list" class="sharing-list-container hidden">
+            <ul>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 봉사활동!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <!-- <li class="sharing-card-view" onclick="location.href='sharingDetail.html'">
+                                                    <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                                                    <div class="sharing-title">강아지옷 나눔해요!!</div>
+                                                    <div class="sharing-wrap">
+                                                        <div class="sharing-nickname">역삼동불주먹</div>
+                                                        <div class="sharing-status available">나눔가능</div>
+                                                    </div>
+                                                </li> -->
+            </ul>
+          </div>
+          <!-- 취미 -->
+          <div id="hobby-list" class="sharing-list-container hidden">
+            <ul>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 취미생활!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <!-- <li class="sharing-card-view" onclick="location.href='sharingDetail.html'">
+                                        <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                                        <div class="sharing-title">강아지옷 나눔해요!!</div>
+                                        <div class="sharing-wrap">
+                                            <div class="sharing-nickname">역삼동불주먹</div>
+                                            <div class="sharing-status available">나눔가능</div>
+                                        </div>
+                                    </li> -->
+            </ul>
+          </div>
+          <!-- 운동 -->
+          <div id="activity-list" class="sharing-list-container hidden">
+            <ul>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <!-- <li class="sharing-card-view" onclick="location.href='sharingDetail.html'">
+                                                    <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                                                    <div class="sharing-title">강아지옷 나눔해요!!</div>
+                                                    <div class="sharing-wrap">
+                                                        <div class="sharing-nickname">역삼동불주먹</div>
+                                                        <div class="sharing-status available">나눔가능</div>
+                                                    </div>
+                                                </li> -->
+            </ul>
+          </div>
+          <!-- 자기개발 -->
+          <div id="improvement-list" class="sharing-list-container hidden">
+            <ul>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 자기개발!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <!-- <li class="sharing-card-view" onclick="location.href='sharingDetail.html'">
+                                        <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                                        <div class="sharing-title">강아지옷 나눔해요!!</div>
+                                        <div class="sharing-wrap">
+                                            <div class="sharing-nickname">역삼동불주먹</div>
+                                            <div class="sharing-status available">나눔가능</div>
+                                        </div>
+                                    </li> -->
+            </ul>
+          </div>
+          <!-- 챌린지 -->
+          <div id="challenge-list" class="sharing-list-container hidden">
+            <ul>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 챌린지!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <li class="socialing-card-view">
+                <div class="socialing-img">
+                  <img
+                    src="../../../static/img/community/socialing/yoga.jpg"
+                    alt="yogaPic"
+                  />
+                </div>
+                <div class="socialing-description">
+                  <div class="socialing-title">다함께 요가!</div>
+                  <div class="socialing-period">
+                    <img
+                      src="../../../static/img/community/socialing/calendar.png"
+                      alt="calendarIcon"
+                    />
+                    <span class="socialing-start-date">2024/10/18</span>-<span
+                      class="socialing-end-date"
+                      >2024/11/15</span
+                    >
+                  </div>
+                  <div class="socialing-personnel">
+                    <img
+                      src="../../../static/img/community/socialing/people.png"
+                      alt="peopleIcon"
+                    />
+                    <span class="socialing-current-personnel">2</span>/<span
+                      socialing-maximum-personnel
+                      >8</span
+                    >
+                  </div>
+                  <div class="socialing-marks">
+                    <div class="socialing-age-mark">
+                      <span class="socialing-minimum-age">20</span>-<span
+                        class="socialing-maximum-age"
+                        >30</span
+                      >대
+                    </div>
+                    <div class="socialing-sex">성별무관</div>
+                  </div>
+                </div>
+              </li>
+              <!-- <li class="sharing-card-view" onclick="location.href='sharingDetail.html'">
+                                                    <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                                                    <div class="sharing-title">강아지옷 나눔해요!!</div>
+                                                    <div class="sharing-wrap">
+                                                        <div class="sharing-nickname">역삼동불주먹</div>
+                                                        <div class="sharing-status available">나눔가능</div>
+                                                    </div>
+                                                </li> -->
+            </ul>
+          </div>
+
+          <!-- 페이지네이션 -->
+          <div class="pagination">
+            <button id="prev-btn">&lt;</button>
+            <span id="page-numbers">페이지네이션..</span>
+            <button id="next-btn">&gt;</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer id="footer"></footer>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    $(function () {
+      $("#header").load("../../main/fragment/header/userHeaderLogin.html");
+      $("#footer").load("../../main/fragment/footer/userFooter.html");
+    });
+  </script>
+  <script src="../../../static/js/community/socialing/socialingList.js"></script>
+</html>

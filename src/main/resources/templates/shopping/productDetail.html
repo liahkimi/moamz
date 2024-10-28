@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f79c59b6071fb92267e232c13fea51f&libraries=services"></script>
+    <script src="./../../static/js/shopping/produceDetail.js"></script>
+    <link rel="stylesheet" href="./../../static/css/reset.css">
+    <link rel="stylesheet" href="./../../static/css/shopping/productDetail.css">
+</head>
+<body>
+    <header id="header"></header>
+    <div class="productDetail-container container">
+        <div class="productDetail-wrap1">
+            <div class="productDetail-product">
+                <div class="productDetail-product-img">
+                    <img src="./../../static/img/shopping/abocadoBig.png" alt="">
+                    <div class="productDetail-product-lt">&lt;</div>
+                    <div class="productDetail-product-gt">&gt;</div>
+                </div>
+                <div class="productDetail-product-count">
+                    <div class="productDetail-product-count-name">
+                        [Dole] 아보카도 1kg
+                    </div>
+                    <div class="productDetail-product-count-count">
+                        <!-- <div class="productDetail-product-count-btn">
+                            <button type="button" id="inc">+</button>
+                            <div class="productDetail-product-count-num">
+                                1
+                            </div>
+                            <button type="button" id="dec">-</button>
+                        </div> -->
+                        <div class="payment-product-count-btn">
+                            <button type="button" id="inc">+</button>
+                            <div class="payment-product-count-num">
+                                1
+                            </div>
+                            <button type="button" id="dec">-</button>
+                        </div>
+                        <span>9,900원</span>
+                    </div>
+                    <div class="productDetail-product-price">
+                        <span>
+                            총 상품금액: 
+                            <div class="productDetail-product-total">9,900원</div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="productDetail-detail">
+                <div class="productDetail-detail-top">
+                    <div class="productDetail-detail-top-name">
+                        [Dole] 아보카도
+                    </div>
+                    <div class="productDetail-detail-top-eco">
+                        <span>
+                            <div class="productDetail-detail-top-calendar">
+                                <img src="./../../static/img/shopping/productListcalendar.png" alt="">
+                                24.10.15
+                            </div>
+                            <div class="productDetail-detail-top-co2">
+                                <img src="./../../static/img/shopping/productListco2.png" alt="">
+                                2kg
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <div class="productDetail-detail-detail">
+                    <div class="productDetail-detail-detail-box">
+                        <div class="productDetail-detail-detail-title">중량/용량</div>
+                        <div class="productDetail-detail-text">
+                            1kg(4~7입)
+                        </div>
+                    </div>
+                    <div class="productDetail-detail-detail-box">
+                        <div class="productDetail-detail-detail-title">소비기한</div>
+                        <div class="productDetail-detail-text">
+                            ~ 2024년 10월 15일
+                        </div>
+                    </div>
+                    <div class="productDetail-detail-detail-box">
+                        <div class="productDetail-detail-detail-title">상품 설명</div>
+                        <div class="productDetail-detail-text" id="description">
+                            부드럽고 고소한 아보카도 과육은 마치 싱그러운 버터를 한 입 베어 문 것 같은 착각에 빠지게 만들어요. 울퉁불퉁하고 투박한 겉모습과 달리, 반을 가르면 등장하는 매끄러운 과육과 동글동글한 씨앗이 눈길을 끌지요. 샐러드, 비빔밥, 샌드위치 등 다양한 요리에 활용할 수 있는 만능 식재료이니까요.
+                        </div>
+                    </div>
+                    <div class="productDetail-detail-detail-box">
+                        <div class="productDetail-detail-detail-title">업체명</div>
+                        <span>
+                            <div class="productDetail-detail-text">
+                                빌즈 강남
+                            </div>
+                            <div class="productDetail-detail-text-chat">
+                                <button type="button" id="chat-btn">
+                                    <img src="./../../static/img/shopping/chat.png" alt="">
+                                    판매자와 채팅하기
+                                </button>
+                            </div>
+                        </span>
+                    </div>
+                    <div class="productDetail-detail-detail-box">
+                        <div class="productDetail-detail-detail-title">업체 주소</div>
+                        <div class="productDetail-detail-text">
+                            서울 강남구 테헤란로 142 아크플레이스 2층
+                        </div>
+                    </div>
+                    <div class="productDetail-detail-detail-box">
+                        <div class="productDetail-detail-detail-title">영업시간</div>
+                        <div class="productDetail-detail-text">
+                            매일 10:30 ~ 22:00
+                        </div>
+                    </div>
+                    <div class="productDetail-detail-detail-box">
+                        <div class="productDetail-detail-detail-title">업체 전화번호</div>
+                        <div class="productDetail-detail-text">
+                           02-568-1353
+                        </div>
+                    </div>
+                    <div class="productDetail-detail-detail-map">
+                        <div id="productDetail-map" style="width:600px;height:360px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="productDetail-wrap2">
+            <div class="productDetail-buy">
+                <button type="button" id="cart" onclick="location.href='cart.html'">장바구니</button>
+                <button type="button" id="buy" onclick="location.href='payment.html'">바로 구매</button>
+            </div>
+        </div>
+    </div>
+    <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("./../main/fragment/header/userHeaderLogin.html");
+        $("#footer").load("./../main/fragment/footer/userFooter.html");
+    });     
+</script>
+</html>

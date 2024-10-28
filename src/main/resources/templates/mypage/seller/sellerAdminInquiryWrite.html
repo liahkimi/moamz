@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/reset2.css">
+    <link rel="stylesheet" href="../../../static/css/mypage/seller/sellerAdminInquiryWrite.css">
+    <script defer src="../../../static/js/mypage/seller/sellerAdminInquiryWrite.js"></script>
+    <title>마이페이지</title>
+</head>
+<body>
+    <header id="header"></header>
+    <main>
+        <div class="product-write-container">
+            <!-- 제목 영역 -->
+            <div class="title-wrap">
+                <div class="write-title">관리자 문의하기</div>
+            </div>
+            <!-- 글 작성 영역 -->
+            <div class="write-content-container">
+                <form method="post" action="">
+                    <div class="write-item">
+                        <p class="write-label">📝 문의제목*</p>
+                        <input type="text" required/>
+                    </div>
+                    <div class="write-item">
+                        <p class="write-label">📝 문의내용*</p>
+                        <textarea required></textarea>
+                    </div>
+                    <div class="btn-wrap">
+                        <button id="cancle-btn" type="button">취소</button>
+                        <button id="write-btn" type="submit">등록</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("../../main/fragment/header/sellerHeader.html");
+        $("#footer").load("../../main/fragment/footer/sellerFooter.html");
+    });
+</script>
+</html>

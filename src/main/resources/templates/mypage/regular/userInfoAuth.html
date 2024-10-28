@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>userInfoAuth</title>
+  <link rel="stylesheet" href="../../../static/css/reset2.css">
+  <link rel="stylesheet" href="../../../static/css/mypage/regular/userInfoAuth.css">
+  <script defer src="../../../static/js/mypage/regular/userInfoAuth.js"></script>
+</head>
+<body>
+  <header id="header"></header>
+  <div id="auth-container">
+    <div id="auth-wrap">
+      <div id="auth-text">
+        <h2>회원 정보 확인</h2>
+        <p>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다</p>
+      </div>
+      <div id="auth-box">
+        <div id="auth-id">
+          <h3>ID</h3><input type="text" placeholder="user123@gmail.com" readonly>
+        </div>
+        <div id="auth-pw">
+          <h3>PW</h3><input type="password" id="input-password">
+        </div>
+      </div>
+      <div id="auth-box-btn">
+        <button id="check">확인</button>
+        <button id="cancel">취소</button>
+      </div>
+    </div>
+  </div>
+  <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
+        $("#footer").load("../../main/fragment/footer/userFooter.html");
+    });
+</script>
+</html>

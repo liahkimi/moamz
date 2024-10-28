@@ -1,0 +1,16 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+#service-container{
+  width: 1000px;
+  height: 2271px;  
+  margin: auto;
+}
+
+#service-container>img{
+  width: 1000px;
+  height: 2271px;  
+  /* border: 1px solid black; */
+}

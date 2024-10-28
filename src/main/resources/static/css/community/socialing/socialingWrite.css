@@ -1,0 +1,116 @@
+
+.product-write-container {
+    width: 700px;
+    margin: 20px auto ;
+}
+/* 제목 영역 */
+.title-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.write-title {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+/* 글 작성 영역 */
+.write-content-container {
+    border-radius: 10px;
+    background-color: #f8fae9;
+    padding: 20px 10px;
+}
+.write-item {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+/* 소셜링제목 */
+#socialing-title {
+    height: 28px;
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+#max-person-num,
+select,
+input[type='date'] {
+    width: 200px;
+    height: 28px;
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+.age-limit input{
+    width: 50px;
+    height: 28px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+/* input type='number' 화살표 없애기 */
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.write-item input:focus {
+    border: 1px solid #a2b541;
+}
+.category-wrap,
+.max-person-wrap,
+.start-date-wrap,
+.end-date-wrap,
+.location-wrap,
+.gender-wrap {
+    display: flex;
+    align-items: baseline;
+}
+.category-wrap,
+.start-date-wrap,
+.location-wrap {
+    margin-right: 30px;
+}
+.write-item.product-detail {
+    flex-direction: column;
+}
+/* 라벨 설정 */
+.write-label {
+    width: 120px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #a2b541;
+}
+/* textarea */
+textarea { 
+    width: 540px;
+    height: 110px;
+    /* 크기 조절 버튼 지우기 */
+    resize: none; 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 0 10px;
+}
+/* 버튼 영역 */
+.btn-wrap {
+    text-align: right;
+}
+.btn-wrap button {
+    width: 60px;
+    height: 30px;
+    font-size: 17px;
+    border-radius: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+#cancle-btn {
+    border: 1px solid #ddd;
+    background-color: white;
+}
+#write-btn {
+    border: none;
+    background-color: #cedd61;
+}

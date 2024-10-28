@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>일반회원문의-상세</title>
+    <link rel="stylesheet" href="../../static/css/reset2.css" />
+    <link
+      rel="stylesheet"
+      href="../../static/css/admin/adminUserInquiryDetail.css"
+    />
+  </head>
+  <body>
+    <header id="adminHeader"></header>
+    <main>
+      <nav id="adminNavBar"></nav>
+      <!-- 우측 녹색 메인 화면-->
+      <div class="content-box">
+        <!-- 타이틀 : dashboard -->
+        <div class="page-title-box">
+          <p class="page-title">일반회원 문의</p>
+        </div>
+        <!------<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+        <!-- 흰색 게시판 전체 -->
+        <div class="content">
+          <div class="content-title-box">
+            <div class="content-title">판매자가 전화를 안받는데 어떡하죠?</div>
+            <div class="content-info">
+              <div class="profile-box">
+                <img
+                  src="../../static/img/admin/profileCat.webp"
+                  alt="profile"
+                />
+              </div>
+              <div class="writer">user1</div>
+
+              <div class="text-box">
+                <div class="write-date">작성일</div>
+                <div class="write-date-value">24/10/04 23:53</div>
+              </div>
+              <div class="text-box">미확인 상태</div>
+              <div class="btn-wrapper">
+                <button
+                  class="btn"
+                  type="button"
+                  onclick="location.href='adminUserInquiryList.html'"
+                >
+                  목록으로 가기
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="content-detail-box">
+            <p>판매자가 전화를 안받는데 어떡하죠?</p>
+            <div class="comment-container">
+              <div class="comment">댓글</div>
+              <div class="comment-input-box">
+                <input type="text" placeholder="댓글을 작성해보세요." />
+                <button class="submitBtn" id="submitBtn">작성완료</button>
+              </div>
+              <div class="comment-box">
+                <div class="comment-info">
+                  <div class="comment-info-details">
+                    <div class="comment-id">관리자</div>
+                    <div class="comment-date">2024/10/08 13:00</div>
+                    <div class="comment-modified">수정됨</div>
+                  </div>
+                  <div class="btns-box">
+                    <button class="edit-btn" id="edit-btn">수정 |</button>
+                    <button class="delete-btn" id="delete-btn">삭제</button>
+                  </div>
+                </div>
+                <div class="comment-detail">안타깝네요.....</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    $(function () {
+      $("#adminNavBar").load("adminNavBar.html");
+      $("#adminHeader").load("adminHeader.html");
+    });
+  </script>
+</html>

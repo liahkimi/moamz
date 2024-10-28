@@ -1,0 +1,303 @@
+main{
+  width: 1000px;
+  display: flex;
+  margin: auto;
+  color: #6a6a6a;
+}
+
+.mypage-list{
+  width: 250px;
+  /* border: 1px solid black; */
+}
+
+.mypage-user{
+  width: 220px;
+  height: 388px;
+  border: 1px solid #dddddd;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.mypage-user-img{
+  width: 220px;
+  height: 220px;
+  background-color: #d9d9d9;
+}
+
+.user-name{
+  font-weight: bold;
+  text-align: center;
+  font-size: 17px;
+  margin-top: 20px;
+  color: black;
+}
+
+.mypage-user-info{
+  display: flex;
+  flex-direction: column;
+  padding: 5px 10px;
+  margin-top: 30px;
+}
+
+.mypage-user-info-box{
+  margin-bottom: 5px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.mypage-user-info-box img{
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.info-list{
+  margin-left: auto;
+}
+
+.info-list-tree{
+  margin-left: auto;
+  color: #A1B60A;
+  font-weight: bold;
+}
+
+/* 마이페이지 메뉴 카테고리 */
+.mypage-side-category{
+  width: 220px;
+  margin: 20px auto;
+}
+
+.category-list{
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.category-list a{
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 10px;
+  font-size: 17px;
+  font-weight: bold;
+  display: block;
+}
+
+.category-list a:hover,
+.category-list a.clicked{
+  background-color:#F8FAE9;
+  color: #CEDD61;
+}
+
+
+a{
+  text-decoration: none;  
+  font-size:17px;
+  color: #6a6a6a;
+  font-weight: bold;
+}
+
+/* 거래상세내역 */
+.userPurchaseHistory-list{
+  width: 750px;
+  height: 1000px;
+  border: 1px solid black;
+  background-color: #F7F7F7;
+}
+
+.userPurchaseHistory-list-box{
+  width: 700px;
+  height: 700px;
+  /* border: 1px solid black; */
+  margin: auto;
+  margin-top: 15px;
+}
+
+.purchase-order-box{
+  width: 700px;
+  height: 152px;
+  border: 0.5px solid #6a6a6a;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.purchase-order-box2{
+  width: 700px;
+  height: 132px;
+  /* border: 0.5px solid #6a6a6a; */
+  border-radius: 10px;
+  margin-top: 5px;
+  /* display: flex; */
+  border: 1px solid black;
+}
+
+.purchase-date {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.purchase-info-clock {
+  font-size: 15px;
+  color: #6a6a6a;
+  margin-left: 20px;
+}
+
+.purchase-state{
+  display: flex;
+  width: 80px;
+  height: 24px;
+  margin-right: 10px;
+  background-color: #CEDD61;
+  font-size:15px;
+  border-radius: 10px;
+  align-items: center;
+  padding-left: 10px;
+  color: #6a6a6a;
+}
+
+.purchase-order-info{
+  margin-left: 20px;
+}
+
+.info-label {
+  font-size: 17px;
+  color: black;
+  font-weight: bold;
+}
+.info-number {
+  font-size: 17px;
+  margin-top: 10px;
+  color: #6a6a6a;
+  display: inline-block;
+}
+
+.seller-detail{
+  /* border: 1px solid black; */
+}
+
+#seller-detail-img,
+#purchase-order-img{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.seller-detail>span,
+.purchase-order-list>span{
+  font-size: 17px;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#seller-chat-btn{
+  margin-left: 250px;
+  border: 1px solid #ddd;
+  background-color: white;
+  font-size: 15px;
+  border-radius: 5px;
+  margin-left: auto;
+  cursor: pointer;
+  height: 25px;
+}
+
+.review-write{
+  display: flex;
+  width: 100px;
+  height: 24px;
+  /* margin-right: 10px; */
+  background-color: #CEDD61;
+  font-size:15px;
+  border-radius: 10px;
+  align-items: center;
+  padding-left: 10px;
+  color: #6a6a6a;
+  cursor: pointer;
+}
+
+.seller-detail-info{
+  /* border: 1px solid black; */
+  margin-top: 5px;
+  margin-left: 20px;
+}
+
+.seller-label {
+    width: 100px;
+    font-weight: bold;
+    color: #6a6a6a;
+    font-size: 15px;
+}
+
+.purchase-order-box3{
+  width: 700px;
+  height: 162px;
+  border: 0.5px solid #6a6a6a;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.purchase-order-list-text{
+  margin-top: 8px;
+  margin-left: 20px;
+}
+
+.product-label{
+  width: 100px;
+  font-weight: bold;
+  color: #6a6a6a;
+  font-size: 15px;
+}
+
+.purchase-order-box4{
+  width: 700px;
+  height: 152px;
+  border: 0.5px solid #6a6a6a;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.purchase-amount {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.amount-label,
+.amount-item>span{
+  font-weight: bold;
+}
+
+#seller-chat-btn {
+  border: 1px solid #ddd;
+  background-color: white;
+  font-size: 15px;
+  border-radius: 5px;
+  margin-left: auto;
+  cursor: pointer;
+  height: 25px;
+}
+
+.total-amount{
+  padding-top: 10px;
+}
+
+.total-amount-text {
+  color: #A2B541;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* 구매내역으로 이동 버튼 */
+.move-purchase-list-btn {
+  background-color: #CEDD61;
+  color: #6a6a6a;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold; 
+  border-radius: 20px; 
+  cursor: pointer;
+  box-shadow: 0 4px 4px #6a6a6a6a;
+  margin-left: 250px;
+  margin-top: 10px;
+}
