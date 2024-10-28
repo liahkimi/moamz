@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>noticeDetail</title>
+  <link rel="stylesheet" href="../../../static/css/main/main/noticeDetail.css">
+  <!-- <link rel="stylesheet" href="../../../static/css/reset.css"> -->
+</head>
+<body>
+  <header id="header"></header>
+  <main>
+    <div class="noticeDetail-container">
+        <h2>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</h2>
+        <div class="noticeDetail-wrap">
+          <div class="noticeDetail-box1">
+            <span>관리자</span>
+          </div>
+          <div class="noticeDetail-box2">
+            <span>작성일  24.10.04 23:53</span>
+          </div>
+          <div class="noticeDetail-box3">
+            <span>조회수 10</span>
+          </div>
+        </div>
+        <div class="noticeDetail-write">
+          <span>동해물과 백두산이 마르고 닳도록</span><br>
+          <span>하느님이 보우하사 우리나라 만세</span><br>
+          <span>무궁화 삼천리 화려강산</span>
+        </div>
+        <button type="button"><a href="noticeList.html">공지사항 목록으로 가기</a></button>
+    </div>
+  </main>
+  <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
+        $("#footer").load("../../main/fragment/footer/userFooter.html");
+    });
+</script>
+</html>

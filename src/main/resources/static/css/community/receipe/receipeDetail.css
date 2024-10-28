@@ -1,0 +1,213 @@
+* {
+  color: #6a6a6a;
+}
+main {
+  width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.top-img{
+  margin: 0 auto;
+}
+.top-img > img{
+  width: 1000px;
+  height: 200px;
+}
+/* 게시글 영역 */
+.post-container {
+  width: 700px;
+  min-height: 600px;
+  margin-bottom: 20px;
+}
+/* 게시물 정보 영역 */
+.post-info-wrap {
+  width: 100%;
+  padding: 20px 0 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+.post-title {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+.user-info-wrap {
+  display: flex;
+  align-items: center;
+}
+.user-info-wrap img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.user-info-wrap .user-nickname {
+  width: 160px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.post-write-time-wrap {
+  margin-right: 10px;
+}
+.post-view-count-wrap {
+  margin-right: 10px;
+}
+.btn-wrap {
+  margin-left: auto;
+  margin-right: 5px;
+  width: 200px;
+}
+/* 다른사람이 쓴 글일 때 보이는 버튼 */
+.btn-others {
+  text-align: right;
+}
+.btn-others>.chat-to-writer-btn {
+  border-radius: 0;
+  width: 149px;
+  height: 25px;
+  cursor: pointer;
+}
+/* 내가 쓴 글일때 보이는 버튼 */
+.btn-writer {
+  text-align: right;
+}
+.btn-writer button {
+  width: 55px;
+  height: 25px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.hidden {
+  display: none;
+}
+/* 게시물 내용 */
+.post-content-wrap {
+  padding: 20px;
+}
+.post-content-wrap > p{
+  /* border: 1px solid black; */
+  padding: 15px;
+}
+.receipe-box{
+  width: 100%;
+  height: 80px;
+  background-color: rgba(206, 221, 97, 0.2);
+  /* background-color: ; */
+  border-radius: 12px;
+  display: flex;
+}
+.receipe-box-top{
+  color: #A2B541;
+  margin-bottom: 5px;
+}
+.receipe-make-time{
+  margin-right: 20px;
+  padding: 15px;
+  border-right: 1px solid snow;
+}
+.receipe-make-time > span{
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+}
+.receipe-ingredient{
+  padding: 15px;
+}
+.receipe-name{
+  font-size: 25px;
+  font-weight: bold;
+  margin: 20px 0 20px 0;
+}
+/* 목록으로 이동 버튼 */
+.move-list-btn {
+  background-color: #A2B541;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold; 
+  border-radius: 20px; 
+  cursor: pointer;
+  box-shadow: 0 4px 4px #6a6a6a6a;
+  margin-bottom: 20px;
+}
+.comment-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0;
+}
+.comment-title {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+.comment-wrap {
+  width: 100%;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  padding: 20px;;
+}
+/* 댓글 input 부분 */
+.comment-input-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.comment-input-wrap input {
+  width: 600px;
+  height: 25px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+.comment-input-wrap input:focus {
+  border: 1px solid #A2B541;
+}
+.comment-input-wrap button {
+  width: 70px;
+  height: 28px;
+  color: white;
+  background-color: #A2B541;
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+}
+/* 댓글 정보 부분 */
+.comment-list {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+.comment-list>div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.comment-info-wrap {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+.comment-info-wrap .user-nickname {
+  margin-right: 5px;
+}
+.comment-write-time {
+  margin-right: 10px;
+}
+.comment-btn-wrap button {
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  cursor: pointer;
+}
+.comment-btn-wrap button:hover {
+  text-decoration: underline;
+}

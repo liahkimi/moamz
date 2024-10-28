@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>userPurchaseDetail</title>
+  <link rel="stylesheet" href="../../../static/css/reset2.css">
+  <link rel="stylesheet" href="../../../static/css/mypage/regular/userPurchaseDetail.css">
+  
+</head>
+<body>
+  <header id="header"></header>
+  <main>
+    <div class="mypage-list">
+      <div class="mypage-user">
+        <div class="mypage-user-img">
+        </div>
+        <div class="user-name">역삼동 불주먹</div>
+
+        <!-- user 프로필 정보 -->
+        <div class="mypage-user-info">
+          <div class="mypage-user-info-box">
+            <img src="../../../static/img/mypage/regular/mypageUserPointIcon.png" alt="포인트 아이콘">
+            <span>포인트</span>
+            <span class="info-list">1,000</span>
+          </div>
+          <div class="mypage-user-info-box">
+            <img src="../../../static/img/mypage/regular/mypageUserFoodIcon.png" alt="포인트 아이콘">
+            <span>구해준 음식물</span>
+            <span class="info-list">7.333kg</span>
+          </div>
+          <div class="mypage-user-info-box">
+            <img src="../../../static/img/mypage/regular/mypageUserCo2Icon.png" alt="포인트 아이콘">
+            <span>탄소감축량</span>
+            <span class="info-list">18.25kg</span>
+          </div>
+          <div class="mypage-user-info-box">
+            <img src="../../../static/img/mypage/regular/mypageUserTreeIcon.png" alt="포인트 아이콘">
+            <span>내가 심은 나무</span>
+            <span class="info-list-tree">1 그루</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 마이페이지 메뉴 카테고리 -->
+      <div class="mypage-side-category">
+        <ul>
+            <li class="category-list">
+              <a href="#" class="clicked">● 상품 구매 내역</a>
+            </li>
+            <li class="category-list">
+              <a href="userMySocialing.html">● MY소셜링</a>
+            </li>
+            <li class="category-list">
+              <a href="userMySharing.html">● My나눔</a>
+            </li>
+            <li class="category-list">
+              <a href="userMyReview.html">● MY리뷰</a>
+            </li>
+            <li class="category-list">
+              <a href="userMyLike.html">● MY좋아요</a>
+            </li>
+            <li class="category-list">
+              <a href="userMyPost.html">● MY게시글</a>
+            </li>
+            <li class="category-list">
+              <a href="userInfoAuth.html">● 회원정보변경</a>
+            </li>
+            <li class="category-list">
+              <a href="userInfoAuth.html">● 비밀번호변경</a>
+            </li>
+            <li class="category-list">
+              <a href="userAdminInquiryList.html">● 관리자 문의</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+       <!-- 거래상세내역 -->
+    <div class="userPurchaseHistory-list">
+      <div class="userPurchaseHistory-list-box">
+        <div class="purchase-order-box">
+          <div class="purchase-date">
+            <span class="purchase-info-clock">2024.10.05  14:49</span>
+            <div class="purchase-state">상품 준비중</div>
+          </div>
+          <div class="purchase-order-info">
+            <span class="info-label">주문번호</span>
+            <span class="info-number">OR2024100500001</span>
+            <br>
+            <span class="info-label">픽업예정시간</span>
+            <span class="info-number">2024/10/10 14:00</span>
+            <br>
+            <span class="info-label">픽업완료시간</span>
+            <span class="info-number">-</span>
+            <br>
+            <span class="info-label">요청사항</span>
+            <span class="info-number">좀 늦을수도 있습니다.</span>
+          </div>
+        </div>
+        <div class="purchase-order-box2">
+          <div class="seller-wrap">
+            <div class="seller-detail">
+              <img src="../../../static/img/mypage/regular/purchaseImg.png" id="seller-detail-img" alt="상품 이미지">
+              <span>업체명</span>
+            </div>
+            <div class="seller-detail-info">
+              <span class="seller-label">업체위치</span>
+              <span>서울특별시 강남구 테헤란로 146 현익빌딩 3,4층</span>
+            </div>
+            <div class="seller-detail-info">
+              <span class="seller-label">영업시간</span>
+              <span>10:00 ~22:00</span>
+            </div>
+            <div class="seller-detail-info">
+              <span class="seller-label">대표번호</span>
+              <span>02-538-0021</span>
+            </div>
+          <div class="seller-chat">
+            <button type="button" id="seller-chat-btn">💬판매자와 채팅하기</button>
+            <div class="review-write" onclick="location.href='userWriteReview.html'">리뷰 작성하기</div>
+          </div>
+        </div>  
+        <div class="purchase-order-box3">
+          <div class="purchase-order-list">
+            <img src="../../../static/img/mypage/regular/purchaseImg.png" id="purchase-order-img" alt="상품이미지">
+            <span>방울토마토 500g</span>
+          </div>
+          <div class="purchase-order-list-text">
+            <span class="product-label">소비기한</span>
+            <span>2024/10/12</span>
+          </div>
+          <div class="purchase-order-list-text">
+            <span class="product-label">탄소감축량</span>
+            <span>2kg</span>
+          </div>
+          <div class="purchase-order-list-text">
+            <span class="product-label">구매수량</span>
+            <span>1</span>
+          </div>
+          <div class="purchase-order-list-text">
+            <span class="product-label">가격</span>
+            <span>8,000원</span>
+          </div>
+        </div>
+        <div class="purchase-order-box4">
+          <div class="purchase-amount">
+            <div class="amount-item">
+              <span class="amount-label">상품금액</span>
+              <span>24,000원</span>
+            </div>
+            <div class="amount-item">
+              <span class="amount-label">포인트할인</span>
+              <span>-</span>
+              <span>0원</span>
+            </div>
+          </div>  
+          <div class="total-amount">
+            <span class="total-amount-text">결제총액</span>
+            <span class="total-amount-text">24,000원</span>
+            <div class="amount-item2">
+              <span class="amount-label2">결제수단</span>
+              <span>카카오페이</span>
+            </div>
+          </div>
+        </div>
+          <!-- 구매내역으로 이동 버튼 -->
+          <button type="button" class="move-purchase-list-btn" onclick="location.href='userPurchaseHistory.html'">상품 구매 내역으로 이동</button>
+      </div>
+    </div>
+  </main>
+  <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+  $(function () {
+    $("#header").load("../../main/fragment/header/userHeaderLogin.html");
+    $("#footer").load("../../main/fragment/footer/userFooter.html");
+  });
+</script>
+</html>
+

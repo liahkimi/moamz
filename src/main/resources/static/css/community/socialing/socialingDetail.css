@@ -1,0 +1,178 @@
+* {
+    color: #6a6a6a;
+}
+main {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.top-img{
+    width: 700px;
+}
+.top-img img{
+    width: 700px;
+    height: 200px;
+}
+/* 게시글 영역 */
+.post-container {
+    width: 700px;
+    min-height: 600px;
+    margin-bottom: 20px;
+}
+/* 게시물 정보 영역 */
+.post-info-wrap {
+    width: 100%;
+    padding: 20px 0 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+.post-title {
+    color: black;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.host-box{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.user-info-wrap {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.host-box img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.socialing-info-wrap{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 35px;
+    align-items: center;
+}
+.socialing-period{
+    display: flex;
+    gap: 3px;
+}
+.socialing-period img{
+    width: 18px;
+    height: 18px;
+}
+.socialing-personnel{
+    display: flex;
+    gap: 2px;
+}
+.socialing-personnel img{
+    width: 20px;
+    height: 15px;
+}
+.socialing-marks{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+.socialing-age-mark,.socialing-sex{
+    padding: 5px;
+    border-radius: 3px;
+    background-color: #999;
+    color: white;
+    font-size: 12px;
+}
+.socialing-age-mark span{
+    color: white;
+}
+.socialinginfo-and-chat{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between  ;
+    width: 100%;
+}
+.chat-btn{
+width: 200px;
+display: flex;
+gap: 10px;
+border: 1px solid #ddd;
+padding: 5px;
+border-radius: 10px;
+}
+.chat-btn img{
+
+}
+.chat-btn  .chat-btn-text{
+
+}
+.user-info-wrap .user-nickname {
+    width: 160px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.post-write-time-wrap {
+    margin-right: 10px;
+}
+.post-view-count-wrap {
+    margin-right: 10px;
+}
+.btn-wrap {
+    margin-left: auto;
+    margin-right: 5px;
+    width: 200px;
+}
+/* 다른사람이 쓴 글일 때 보이는 버튼 */
+.btn-others {
+    text-align: right;
+}
+.btn-others>.chat-to-writer-btn {
+    border-radius: 0;
+    width: 149px;
+    height: 25px;
+    cursor: pointer;
+}
+/* 내가 쓴 글일때 보이는 버튼 */
+.btn-writer {
+    text-align: right;
+}
+.btn-writer button {
+    width: 55px;
+    height: 25px;
+    font-size: 15px;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.hidden {
+    display: none;
+}
+/* 게시물 내용 */
+.post-content-wrap {
+    padding: 20px;
+}
+.post-content-wrap p{
+    line-height: 30px;
+    margin-bottom: 10px;
+
+}
+.post-content-wrap img{
+
+}
+/* 목록으로 이동 버튼 */
+.move-list-btn {
+    background-color: #A2B541;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold; 
+    border-radius: 20px; 
+    cursor: pointer;
+    box-shadow: 0 4px 4px #6a6a6a6a;
+    margin-bottom: 20px;
+}

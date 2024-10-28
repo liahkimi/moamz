@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>userPurchaseHistory</title>
+  <link rel="stylesheet" href="../../../static/css/mypage/regular/userPurchaseHistory.css">
+  <link rel="stylesheet" href="../../../static/css/reset2.css">
+</head>
+<body>
+  <header id="header"></header>
+  <main>
+    <div class="mypage-list">
+      <div class="mypage-user">
+        <div class="mypage-user-img">
+        </div>
+        <div class="user-name">역삼동 불주먹</div>
+
+        <!-- user 프로필 정보 -->
+        <div class="mypage-user-info">
+          <div class="mypage-user-info-box">
+            <img src="../../../static/img/mypage/regular/mypageUserPointIcon.png" alt="포인트 아이콘">
+            <span>포인트</span>
+            <span class="info-list">1,000</span>
+          </div>
+          <div class="mypage-user-info-box">
+            <img src="../../../static/img/mypage/regular/mypageUserFoodIcon.png" alt="포인트 아이콘">
+            <span>구해준 음식물</span>
+            <span class="info-list">7.333kg</span>
+          </div>
+          <div class="mypage-user-info-box">
+            <img src="../../../static/img/mypage/regular/mypageUserCo2Icon.png" alt="포인트 아이콘">
+            <span>탄소감축량</span>
+            <span class="info-list">18.25kg</span>
+          </div>
+          <div class="mypage-user-info-box">
+            <img src="../../../static/img/mypage/regular/mypageUserTreeIcon.png" alt="포인트 아이콘">
+            <span>내가 심은 나무</span>
+            <span class="info-list-tree">1 그루</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 마이페이지 메뉴 카테고리 -->
+      <div class="mypage-side-category">
+        <ul>
+            <li class="category-list">
+              <a href="#" class="clicked">● 상품 구매 내역</a>
+            </li>
+            <li class="category-list">
+              <a href="userMySocialing.html">● MY소셜링</a>
+            </li>
+            <li class="category-list">
+              <a href="userMySharing.html">● My나눔</a>
+            </li>
+            <li class="category-list">
+              <a href="userMyReview.html">● MY리뷰</a>
+            </li>
+            <li class="category-list">
+              <a href="userMyLike.html">● MY좋아요</a>
+            </li>
+            <li class="category-list">
+              <a href="userMyPost.html">● MY게시글</a>
+            </li>
+            <li class="category-list">
+              <a href="userInfoAuth.html">● 회원정보변경</a>
+            </li>
+            <li class="category-list">
+              <a href="userInfoAuth.html">● 비밀번호변경</a>
+            </li>
+            <li class="category-list">
+              <a href="userAdminInquiryList.html">● 관리자 문의</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="userPurchaseHistory-container">
+      <div class="userPurchaseHistory-title">
+        <img src="../../../static/img/mypage/regular/mypageProductListIcon.png" alt="상품구매내역 이미지">
+        <span id="product-list-title">상품구매내역</span>
+      </div>
+      <div class="userPurchaseHistory-list">
+        <div class="userPurchaseHistory-list-box">
+          <div class="purchase-date">
+            <span class="purchase-info-clock">2024.10.05  14:45</span>
+            <div class="purchase-state">상품 준비중</div>
+          </div>
+          <div class="purchase-info-detail-box">
+            <div class="purchase-info">
+              <img src="../../../static/img/mypage/regular/purchaseImg.png" alt="구매상품사진">
+              <div class="purchase-name">
+                <span id="purchase-name-title">방울토마토 500g</span>
+                <span>8,000원</span>
+              </div>
+            </div>
+            <div class="purchase-pickup">
+              <span id="purchase-pickup-time">픽업시간</span>
+              <span>2024/10/05 17:25</span>
+            </div>
+            <div class="purchase-seller">
+              <span id="purchase-seller-name">업체명</span>
+              <span>seller123</span>
+            </div>
+            <div class="purchase-requested">
+              <span id="purchase-requested-term">요청사항</span><br>
+              <span>좀 늦을수도 있습니다.</span>
+            </div>
+          </div>
+          <div id="detail-btn"><a href="userPurchaseDetail.html">자세히 보러가기 &gt;</a></div>
+        </div>
+        <div class="userPurchaseHistory-list-box">
+          <div class="purchase-date">
+            <span class="purchase-info-clock">2024.10.05  14:45</span>
+            <div class="purchase-state">픽업 대기중</div>
+          </div>
+          <div class="purchase-info-detail-box">
+            <div class="purchase-info">
+              <img src="../../../static/img/mypage/regular/purchaseImg.png" alt="구매상품사진">
+              <div class="purchase-name">
+                <span id="purchase-name-title">방울토마토 500g</span>
+                <span>8,000원</span>
+              </div>
+            </div>
+            <div class="purchase-pickup">
+              <span id="purchase-pickup-time">픽업시간</span>
+              <span>2024/10/05 17:25</span>
+            </div>
+            <div class="purchase-seller">
+              <span id="purchase-seller-name">업체명</span>
+              <span>seller123</span>
+            </div>
+            <div class="purchase-requested">
+              <span id="purchase-requested-term">요청사항</span><br>
+              <span>좀 늦을수도 있습니다.</span>
+            </div>
+          </div>
+          <div id="detail-btn"><a href="userPurchaseDetail.html">자세히 보러가기 &gt;</a></div>
+        </div>
+        <div class="userPurchaseHistory-list-box">
+          <div class="purchase-date">
+            <span class="purchase-info-clock">2024.10.05  14:45</span>
+            <div class="purchase-state">상품 준비중</div>
+          </div>
+          <div class="purchase-info-detail-box">
+            <div class="purchase-info">
+              <img src="../../../static/img/mypage/regular/purchaseImg.png" alt="구매상품사진">
+              <div class="purchase-name">
+                <span id="purchase-name-title">방울토마토 500g</span>
+                <span>8,000원</span>
+              </div>
+            </div>
+            <div class="purchase-pickup">
+              <span id="purchase-pickup-time">픽업시간</span>
+              <span>2024/10/05 17:25</span>
+            </div>
+            <div class="purchase-seller">
+              <span id="purchase-seller-name">업체명</span>
+              <span>seller123</span>
+            </div>
+            <div class="purchase-requested">
+              <span id="purchase-requested-term">요청사항</span><br>
+              <span>좀 늦을수도 있습니다.</span>
+            </div>
+          </div>
+          <div id="detail-btn"><a href="userPurchaseDetail.html">자세히 보러가기 &gt;</a></div>
+        </div>
+        <div class="userPurchaseHistory-list-box">
+          <div class="purchase-date">
+            <span class="purchase-info-clock">2024.10.05  14:45</span>
+            <div class="purchase-state">상품 준비중</div>
+          </div>
+          <div class="purchase-info-detail-box">
+            <div class="purchase-info">
+              <img src="../../../static/img/mypage/regular/purchaseImg.png" alt="구매상품사진">
+              <div class="purchase-name">
+                <span id="purchase-name-title">방울토마토 500g</span>
+                <span>8,000원</span>
+              </div>
+            </div>
+            <div class="purchase-pickup">
+              <span id="purchase-pickup-time">픽업시간</span>
+              <span>2024/10/05 17:25</span>
+            </div>
+            <div class="purchase-seller">
+              <span id="purchase-seller-name">업체명</span>
+              <span>seller123</span>
+            </div>
+            <div class="purchase-requested">
+              <span id="purchase-requested-term">요청사항</span><br>
+              <span>좀 늦을수도 있습니다.</span>
+            </div>
+          </div>
+          <div id="detail-btn"><a href="userPurchaseDetail.html">자세히 보러가기 &gt;</a></div>
+        </div>
+        <div class="userPurchaseHistory-list-box">
+          <div class="purchase-date">
+            <span class="purchase-info-clock">2024.10.05  14:45</span>
+            <div class="purchase-state">상품 준비중</div>
+          </div>
+          <div class="purchase-info-detail-box">
+            <div class="purchase-info">
+              <img src="../../../static/img/mypage/regular/purchaseImg.png" alt="구매상품사진">
+              <div class="purchase-name">
+                <span id="purchase-name-title">방울토마토 500g</span>
+                <span>8,000원</span>
+              </div>
+            </div>
+            <div class="purchase-pickup">
+              <span id="purchase-pickup-time">픽업시간</span>
+              <span>2024/10/05 17:25</span>
+            </div>
+            <div class="purchase-seller">
+              <span id="purchase-seller-name">업체명</span>
+              <span>seller123</span>
+            </div>
+            <div class="purchase-requested">
+              <span id="purchase-requested-term">요청사항</span><br>
+              <span>좀 늦을수도 있습니다.</span>
+            </div>
+          </div>
+          <div id="detail-btn"><a href="userPurchaseDetail.html">자세히 보러가기 &gt;</a></div>
+        </div>
+        <div class="userPurchaseHistory-list-box">
+          <div class="purchase-date">
+            <span class="purchase-info-clock">2024.10.05  14:45</span>
+            <div class="purchase-state">상품 준비중</div>
+          </div>
+          <div class="purchase-info-detail-box">
+            <div class="purchase-info">
+              <img src="../../../static/img/mypage/regular/purchaseImg.png" alt="구매상품사진">
+              <div class="purchase-name">
+                <span id="purchase-name-title">방울토마토 500g</span>
+                <span>8,000원</span>
+              </div>
+            </div>
+            <div class="purchase-pickup">
+              <span id="purchase-pickup-time">픽업시간</span>
+              <span>2024/10/05 17:25</span>
+            </div>
+            <div class="purchase-seller">
+              <span id="purchase-seller-name">업체명</span>
+              <span>seller123</span>
+            </div>
+            <div class="purchase-requested">
+              <span id="purchase-requested-term">요청사항</span><br>
+              <span>좀 늦을수도 있습니다.</span>
+            </div>
+          </div>
+          <div id="detail-btn"><a href="userPurchaseDetail.html">자세히 보러가기 &gt;</a></div>
+        </div>
+        <div class="userPurchaseHistory-list-box">
+          <div class="purchase-date">
+            <span class="purchase-info-clock">2024.10.05  14:45</span>
+            <div class="purchase-state">상품 준비중</div>
+          </div>
+          <div class="purchase-info-detail-box">
+            <div class="purchase-info">
+              <img src="../../../static/img/mypage/regular/purchaseImg.png" alt="구매상품사진">
+              <div class="purchase-name">
+                <span id="purchase-name-title">방울토마토 500g</span>
+                <span>8,000원</span>
+              </div>
+            </div>
+            <div class="purchase-pickup">
+              <span id="purchase-pickup-time">픽업시간</span>
+              <span>2024/10/05 17:25</span>
+            </div>
+            <div class="purchase-seller">
+              <span id="purchase-seller-name">업체명</span>
+              <span>seller123</span>
+            </div>
+            <div class="purchase-requested">
+              <span id="purchase-requested-term">요청사항</span><br>
+              <span>좀 늦을수도 있습니다.</span>
+            </div>
+          </div>
+          <div id="detail-btn"><a href="userPurchaseDetail.html">자세히 보러가기 &gt;</a></div>
+        </div>
+        <div class="userPurchaseHistory-list-box">
+          <div class="purchase-date">
+            <span class="purchase-info-clock">2024.10.05  14:45</span>
+            <div class="purchase-state">상품 준비중</div>
+          </div>
+          <div class="purchase-info-detail-box">
+            <div class="purchase-info">
+              <img src="../../../static/img/mypage/regular/purchaseImg.png" alt="구매상품사진">
+              <div class="purchase-name">
+                <span id="purchase-name-title">방울토마토 500g</span>
+                <span>8,000원</span>
+              </div>
+            </div>
+            <div class="purchase-pickup">
+              <span id="purchase-pickup-time">픽업시간</span>
+              <span>2024/10/05 17:25</span>
+            </div>
+            <div class="purchase-seller">
+              <span id="purchase-seller-name">업체명</span>
+              <span>seller123</span>
+            </div>
+            <div class="purchase-requested">
+              <span id="purchase-requested-term">요청사항</span><br>
+              <span>좀 늦을수도 있습니다.</span>
+            </div>
+          </div>
+          <div id="detail-btn"><a href="userPurchaseDetail.html">자세히 보러가기 &gt;</a></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
+        $("#footer").load("../../main/fragment/footer/userFooter.html");
+    });
+</script>
+</html>

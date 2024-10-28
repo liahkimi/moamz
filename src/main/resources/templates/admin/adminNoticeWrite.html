@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공지사항-작성</title>
+    <link rel="stylesheet" href="../../static/css/reset2.css" />
+    <link rel="stylesheet" href="../../static/css/admin/adminNoticeWrite.css" />
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- include summernote css/js -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script defer src="../../static/js/admin/adminNoticeWrite.js"></script>
+  </head>
+  <body>
+    <header id="adminHeader"></header>
+    <!-- 네비바 + 메인화면 -->
+    <main>
+      <div class="nav-and-content-box">
+        <nav id="adminNavBar"></nav>
+        <!-- 우측 녹색 메인 화면-->
+        <div class="content-box">
+          <!-- 타이틀 : dashboard -->
+          <div class="page-title-box">
+            <div class="page-title">공지사항 게시글 작성하기</div>
+          </div>
+          <!-- 흰색 게시판 전체 -->
+          <div class="content">
+            <div class="edit-wrap">
+              <div class="title-box">
+                <span class="write-form-title">📝 제목*</span>
+                <input class="write-form-title__value" type="text" />
+              </div>
+              <span class="write-form-detail">📝 상세내용*</span>
+              <div class="summernote-box">
+                <div class="h-sum"><textarea
+                  id="summernote"
+                  name="content"
+                  class="summernote"
+                ></textarea></div>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <button class="cancle-btn" id="cancle-btn">취소</button>
+              <button class="register-btn" id="register-btn">등록</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+  <script>
+    $(function () {
+      $("#adminNavBar").load("adminNavBar.html");
+      $("#adminHeader").load("adminHeader.html");
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      $("#summernote").summernote();
+    });
+  </script>
+</html>

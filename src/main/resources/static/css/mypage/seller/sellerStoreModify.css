@@ -1,0 +1,189 @@
+.product-write-container {
+    width: 700px;
+    margin: 30px auto ;
+}
+/* 제목 영역 */
+.write-title {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+/* 정보 변경 영역 */
+.write-content-container {
+    width: 100%;
+    /* text-align: center; */
+}
+/* 변경 안되는 영역 */
+.cannot-modify-container {
+    margin-bottom: 50px;
+}
+.cannot-modify-container .modify-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+input[type='text'],
+input[type='number'] {
+    flex-grow: 1;
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+
+/* 썸네일 영역 */
+.thumbnail-container {
+    display: flex;
+    margin-bottom: 50px;
+}
+.thumbnail-wrap {
+    position: relative;
+    /* margin-right: auto; */
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.thumbnail-img {
+    background-image: url("../../../img/mypage/seller/thumbnail.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+.thumbnail-cancle-btn {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    background-image: url("../../../img/mypage/seller/thumbnail_cancle_btn.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
+    right: 5px;
+    top: 5px;
+}
+
+/* 업체주소, 대표번호 영역 */
+.address-modify-container,
+.store-phone-num-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+.address-modify-container .modify-item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+.store-phone-num-container .modify-item {
+    margin-top: 5px;
+}
+#address-search-btn {
+    width: 50px;
+    color: white;
+    background-color: #947160;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+/* input type='number' 화살표 없애기 */
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* 영업시간 영역 */
+.store-run-hours-container {
+    display: flex;
+    margin-bottom: 30px;
+}
+.store-run-hours-container div {
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+}
+.store-run-hours-container .modify-item {
+    margin-bottom: 5px;
+}
+input[type='time'] {
+    width: 150px;
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+/* 업체 상세정보 */
+.store-detail-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+.store-detail-container .modify-item {
+    margin-bottom: 5px;
+}
+#store-detail {
+    flex-grow: 1;
+    height: 110px;
+    /* 크기 조절 버튼 지우기 */
+    resize: none; 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* 버튼 */
+.btn-container {
+    margin-top: 50px;
+    text-align: center;
+}
+.btn-container button {
+    width: 140px;
+    height: 40px;
+    margin-right: 15px;
+    border-radius: 6px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 4px #6a6a6a6a;
+}
+#cancle-btn {
+    background-color: #ddd;
+}
+#store-modify-btn {
+    background-color: #947160;
+    color: white;
+}
+/* 회원탈퇴 */
+.withdraw-container {
+    margin-top: 130px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.withdraw-container span {
+    color: #6a6a6a;
+    font-size: 14px;
+    margin-right: 5px;
+}
+#withdraw-btn {
+    border: none;
+    background-color: #ddd;
+    color: #6a6a6a;
+    font-size: 14px;
+    width: 40px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}

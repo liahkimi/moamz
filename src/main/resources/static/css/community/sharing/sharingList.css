@@ -1,0 +1,216 @@
+* {
+    color: #6a6a6a;
+}
+main {
+    width: 1000px;
+    margin: 0 auto;
+}
+/* 게시판 헤더 */
+.board-header-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    background-color: white;
+}
+.board-title {
+    color: black;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.board-description {
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.searchbar {
+    width: 392px;
+    height: 32px;
+    border: 2px solid #CEDD61;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+.searchbar input {
+    height: 30px;
+    border: none;
+    flex-grow: 1; /* input이 버튼을 제외한 나머지 공간을 차지함 */
+    padding-left: 10px;
+    border-radius: 10px 0 0 10px;
+}
+.search-btn {
+    width: 45px;
+    height: 32px;
+    border: none;
+    background-color: #CEDD61;
+    border-radius: 8px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.write-btn {
+    width: 392px;
+    height: 32px;
+    border: none;
+    background-color: #999;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.sharing-board-container {
+    width: 100%;
+    display: flex;
+}
+/* 왼쪽 카테고리 영역 */
+.community-category-container {
+    width: 140px;
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    font-size: 17px;
+    overflow: hidden;
+    margin-right: 20px;
+}
+.community-category-container div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.community-category-container img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.community-category-container span {
+    font-weight: bold;
+    color: black;
+}
+.community-category-container li {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.community-category-container li:hover {
+    background-color: #CEDD61;
+    color: black;
+}
+/* 게시판 영역 */
+.board-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+/* 나눔게시판 카테고리 */
+.sharing-board-category {
+    height: 48px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    margin-bottom: 10px;
+}
+.sharing-category-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 48px;
+    text-align: center;
+    font-size: 17px;
+    cursor: pointer;
+    /* 아래쪽 테두리 일단 투명으로 */
+    border-bottom: 2px solid transparent;
+    color: #6a6a6a;
+    line-height: 48px;
+}
+.sharing-category-btn.active {
+    border-bottom: 2px solid black;
+    color: black;
+    font-weight: bold;
+}
+.hidden {
+    display: none;
+}
+/* 카드뷰 표시 */
+.sharing-list-container {
+    min-height: 500px;
+}
+.sharing-list-container ul {
+    display: flex;
+    /* 이 영역 벗어나면 카드가 알아서 줄바꿈 */
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.sharing-card-view {
+    width: 240px;
+    height: 260px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    box-shadow: 0 2px 5px #dddddddd;
+    cursor: pointer;
+}
+.sharing-card-view img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.sharing-title {
+    font-size: 17px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    width: 100%;
+    margin: 15px 0;
+}
+.sharing-wrap {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.sharing-nickname {
+    font-size: 15px;
+}
+.sharing-status.available {
+    width:70px;
+    height: 20px;
+    background-color: #F8FAE9;
+    border-radius: 5px;
+    color: #A1B60A;
+    font-size: 15px;
+    text-align: center;
+    line-height: 20px;
+}
+.sharing-status.reserved{
+    width: 70px;
+    height: 20px;
+    background-color: #F8FAE9;
+    border-radius: 5px;
+    color: #A1B60A;
+    font-size: 15px;
+    text-align: center;
+    line-height: 20px;
+}
+.sharing-status.completed{
+    width: 70px;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    line-height: 20px;
+}

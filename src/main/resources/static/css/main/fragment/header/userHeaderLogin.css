@@ -1,0 +1,228 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: "Pretendard-Variable";
+}
+
+#container{
+  background-color: #CEDD61;
+  height: 60px;
+  margin: auto;
+  /* border: 1px solid black; */
+  display: flex;
+  text-align: center;
+}
+
+.header{
+  background-color: #CEDD61;
+  width: 1000px;
+  height: 60px;
+  margin: auto;
+  /* border: 1px solid black; */
+  display: flex;
+  /* align-items: center; */
+}
+
+.header>img{
+  margin-left:15px;
+}
+
+.header-search{
+  list-style-type: none;
+  display: flex;
+  margin-top: 20px;
+}
+
+.header-search>li{
+  margin-left: 20px;
+  position: relative;
+}
+
+.header-search>li>a{
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size:15px;
+}
+
+/* 드롭다운 커뮤니티 박스 */
+/* .community-dropdown-box{
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  position: relative;
+  cursor: pointer;
+} */
+
+/* .community-dropdown-box a{
+  text-decoration: none;
+  color: white;
+} */
+
+/* 드롭다운 아이콘 */
+/* .dropdown-icon{
+  width: 15px; 아이콘 크기 
+  height: 15px;
+  margin-left: 5px;
+  display: none; 기본적으로 숨김 
+} */
+
+
+.dropdown-content{
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  left: 0; 
+}
+
+.header-search li:hover .dropdown-content{
+  display: block;
+}
+
+/* 드롭다운 아이콘 호버 */
+/* .community-dropdown-box:hover .dropdown-content {
+  display: block;
+} */
+
+/* .community-dropdown-box:hover .dropdown-icon {
+  display: inline;  드롭다운 시 아이콘 표시 
+} */
+
+.dropdown-content a{
+  color: #CEDD61; 
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: block;
+  text-align: left; 
+}
+
+.dropdown-content a:hover{
+  background-color: #f0f0f0;
+}
+
+.search{
+  background-color: white;
+  width: 190px;
+  height: 24px;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.search>input{
+  border: none;
+}
+
+.search>img{
+  margin-left:165px;
+}
+
+.header-btn{
+  display: flex;
+  width: 300px;
+  /* border: 1px solid black; */
+}
+
+.btn-img{
+  margin-left: 30px;
+  margin-top: 15px;
+  width: 25px;
+  height: 25px;
+  position: relative;
+}
+
+.btn-img img {
+  cursor: pointer; 
+}
+
+/* 알림창 드롭박스 */
+.notification-dropdown{
+  display: none; 
+  position: absolute;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  top: 60px;
+  right: -15px;
+  width: 252px;
+  height: 250px;
+  background-color: #CEDD61;
+  border-radius: 12px;
+  /* display: flex;
+  flex-direction: column;
+  gap:5px; */
+}
+
+/* 알림창 드롭박스 말풍선 */
+.notification-dropdown:after {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 90%;
+   width: 0;
+   height: 0;
+   border: 23px solid transparent;
+   border-bottom-color: #CEDD61;
+   border-top: 0;
+   margin-left: -23px;
+   margin-top: -20px;
+}
+
+.btn-img:hover .notification-dropdown {
+  display: block; 
+}
+
+.notification-dropdown-box{
+  /* padding: 8px; */
+  /* margin: 15px 10px 15px 15px; */
+  background-color: #ffffff;
+  text-align: center;
+  cursor: pointer; 
+  width: 250px;
+  height: 80px;
+  border-radius: 10px;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.userMypagePurchaseImg{
+  margin-left: 5px;
+  margin-top: 8px;
+}
+
+.userMypagePurchaseText{
+  width: 200px;
+  height: 62px;
+}
+
+#purchase-name{
+  font-size: 12px;
+  color: #6a6a6a;
+  font-weight: bold;
+}
+
+.userMypagePurchaseText>img{
+  margin-left: 140px;
+}
+
+#purchase-already{
+  font-size: 10px;
+  color: #ED663B;
+  font-weight: bold;
+  /* margin-bottom: 10px; */
+}
+
+.login{
+  margin-left: 20px;
+  margin-top: 15px;
+  color:#A1B60A;
+  background-color: white;
+  border: none;
+  height: 30px;
+  font-weight: bold;
+  border-radius: 3px;
+}

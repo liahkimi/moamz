@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/reset2.css">
+    <link rel="stylesheet" href="../../../static/css/mypage/seller/sellerInfoAuth.css">
+    <script defer src="../../../static/js/mypage/seller/sellerInfoAuth.js"></script>
+    <title>마이페이지</title>
+</head>
+<body>
+    <header id="header"></header>
+    <main>
+        <div class="user-auth-container">
+            <!-- 제목 영역 -->
+            <div class="title-wrap">
+                <div class="write-title">회원정보확인</div>
+                <div class="write-description">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</div>
+            </div>
+            <!-- 회원정보 입력 영역 -->
+            <form action="" method="">
+                <div class="auth-item">
+                    <label>ID</label>
+                    <input type="text" id="user-id" value="회원id" disabled/>
+                </div>
+                <div class="auth-item">
+                    <label for="input-password">PW</label>
+                    <input type="password" id="input-password" required/>
+                </div>
+                <div class="btn-wrap">
+                    <button id="cancle-btn" type="button">취소</button>
+                    <button id="confirm-btn" type="submit">확인</button>
+                </div>
+            </form>
+
+        </div>
+        
+    </main>
+    <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("../../main/fragment/header/sellerHeader.html");
+        $("#footer").load("../../main/fragment/footer/sellerFooter.html");
+    });
+</script>
+</html>

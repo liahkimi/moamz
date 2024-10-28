@@ -1,0 +1,102 @@
+main {
+  width: 700px;
+  margin: 0 auto;
+  color: #6a6a6a;
+}
+
+.userWriteReview-container{
+  width: 100%;
+  /* text-align: center; */
+}
+
+.userWriterReview-title{
+  color: black;
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.userWriterReview-wrap{
+  width: 700px;
+  height: 88px;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 20px;
+  gap:10px;
+}
+
+.info-title{
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 10px;
+  display: inline-block;
+  width: 100px;
+}
+
+.review-write-content{
+  /* width: 700px; */
+  /* height: 193px; */
+  border-radius: 10px;
+  background-color: #F8FAE9;
+  padding: 30px 20px;
+}
+
+.review-write-title{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.review-write-title input{
+  width: 150px;
+  height: 30px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  padding: 0 10px;
+  margin-left: 30px;
+}
+
+.review-write-form-title,
+.review-write-form-star{
+  font-size: 17px;
+  font-weight: bold;
+  color: #A2B541;
+}
+
+/* textarea */
+textarea { 
+    width: 540px;
+    height: 110px;
+    /* 크기 조절 버튼 지우기 */
+    resize: none; 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.review-write-btn{
+  text-align: right;
+}
+.review-write-btn>button{
+  width: 60px;
+  height: 30px;
+  border-radius: 10px;
+  margin-left: 10px;
+  font-size: 17px;
+}
+
+/* 취소 등록 버튼 */
+#cancle-btn {
+  border: 1px solid #ddd;
+  background-color: white;
+}
+#write-btn {
+  border: none;
+  background-color: #CEDD61;
+}

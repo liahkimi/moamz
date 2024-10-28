@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/reset2.css">
+    <link rel="stylesheet" href="../../../static/css/community/sharing/sharingList.css">
+    <script defer src="../../../static/js/community/sharing/sharingList.js"></script>
+    <title>나눔게시판</title>
+</head>
+<body>
+    <header id="header"></header>
+    <main>
+        <!-- 각 게시판의 헤더 -->
+         <!-- ✅게시판 제목, 게시판 설명, wirte-btn 연결 onclick 링크 수정하시면 됩니다. -->
+        <section class="board-header-container">
+            <div class="board-title">나눔게시판 🙌🏻</div>
+            <div class="board-description">내겐 필요없어도,  누군가에겐 필요한 물품! 여기서 나누고 채팅으로 소통해봐요!</div>
+            <div class="btn-wrap">
+                <div class="searchbar">
+                    <input type="text" placeholder="">
+                    <button type="button" class="search-btn">검색</button>
+                </div>
+                <button type="button" class="write-btn" onclick="location.href='sharingWrite.html'">글 작성하기</button>
+            </div>
+        </section>
+        <section class="sharing-board-container">
+            <!-- 커뮤니티 게시판 왼쪽 카테고리 영역-->
+            <!-- ✅수정사항 없음(나중에 페이지 연결 필요) -->
+            <div class="community-category-container">
+                <ul>
+                    <div>
+                        <img src="../../../static/img/community/community_category.png">
+                        <span>커뮤니티</span>
+                    </div>
+                    <li>에코프로젝트</li>
+                    <li>소셜링</li>
+                    <li>레시피</li>
+                    <li>나눔게시판</li>
+                    <li>자유게시판</li>
+                </ul>
+            </div>
+            <!-- 나눔 게시판 영역 -->
+            <div class="board-container">
+                <div class="sharing-board-category">
+                    <div id="sharing-available-btn" class="sharing-category-btn active">나눔가능</div>
+                    <div id="sharing-reserved-btn" class="sharing-category-btn">예약중</div>
+                    <div id="sharing-completed-btn" class="sharing-category-btn">나눔완료</div>
+                </div>
+                <!-- 나눔가능 -->
+                <div id="sharing-available-list" class="sharing-list-container">
+                    <ul>
+                        <li class="sharing-card-view" onclick="location.href='sharingDetail.html'">
+                            <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                            <div class="sharing-title">강아지옷 나눔해요!!</div>
+                            <div class="sharing-wrap">
+                                <div class="sharing-nickname">역삼동불주먹</div>
+                                <div class="sharing-status available">나눔가능</div>
+                            </div>
+                        </li>
+                        <li class="sharing-card-view">
+                            <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                            <div class="sharing-title">강아지옷 나눔해요!!</div>
+                            <div class="sharing-wrap">
+                                <div class="sharing-nickname">역삼동불주먹</div>
+                                <div class="sharing-status available">나눔가능</div>
+                            </div>
+                        </li>
+                        <li class="sharing-card-view">
+                            <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                            <div class="sharing-title">강아지옷 나눔해요!!</div>
+                            <div class="sharing-wrap">
+                                <div class="sharing-nickname">역삼동불주먹</div>
+                                <div class="sharing-status available">나눔가능</div>
+                            </div>
+                        </li>
+                        <li class="sharing-card-view">
+                            <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                            <div class="sharing-title">강아지옷 나눔해요!!</div>
+                            <div class="sharing-wrap">
+                                <div class="sharing-nickname">역삼동불주먹</div>
+                                <div class="sharing-status available">나눔가능</div>
+                            </div>
+                        </li>
+                        <li class="sharing-card-view">
+                            <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                            <div class="sharing-title">강아지옷 나눔해요!!</div>
+                            <div class="sharing-wrap">
+                                <div class="sharing-nickname">역삼동불주먹</div>
+                                <div class="sharing-status available">나눔가능</div>
+                            </div>
+                        </li>
+                        <li class="sharing-card-view">
+                            <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                            <div class="sharing-title">강아지옷 나눔해요!!</div>
+                            <div class="sharing-wrap">
+                                <div class="sharing-nickname">역삼동불주먹</div>
+                                <div class="sharing-status available">나눔가능</div>
+                            </div>
+                        </li>
+                        <li class="sharing-card-view">
+                            <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                            <div class="sharing-title">강아지옷 나눔해요!!</div>
+                            <div class="sharing-wrap">
+                                <div class="sharing-nickname">역삼동불주먹</div>
+                                <div class="sharing-status available">나눔가능</div>
+                            </div>
+                        </li>
+                        <li class="sharing-card-view">
+                            <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                            <div class="sharing-title">강아지옷 나눔해요!!</div>
+                            <div class="sharing-wrap">
+                                <div class="sharing-nickname">역삼동불주먹</div>
+                                <div class="sharing-status available">나눔가능</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                 <!-- 예약중 -->
+                 <div id="sharing-reserved-list" class="sharing-list-container hidden">
+                    <ul>
+                        <li class="sharing-card-view">
+                            <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                            <div class="sharing-title">강아지옷 나눔해요!!</div>
+                            <div class="sharing-wrap">
+                                <div class="sharing-nickname">역삼동불주먹</div>
+                                <div class="sharing-status reserved">예약중</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 나눔완료 -->
+                <div id="sharing-completed-list" class="sharing-list-container hidden">
+                    <ul>
+                        <li class="sharing-card-view">
+                            <img src="../../../static/img/community/sharing/sharing_product.jpg" alt="나눔물품 이미지">
+                            <div class="sharing-title">강아지옷 나눔해요!!</div>
+                            <div class="sharing-wrap">
+                                <div class="sharing-nickname">역삼동불주먹</div>
+                                <div class="sharing-status completed">나눔완료</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 페이지네이션 -->
+                <div class="pagination">
+                    <button id="prev-btn">&lt;</button>
+                    <span id="page-numbers">페이지네이션..</span>
+                    <button id="next-btn">&gt;</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
+        $("#footer").load("../../main/fragment/footer/userFooter.html");
+    });     
+</script>
+</html>

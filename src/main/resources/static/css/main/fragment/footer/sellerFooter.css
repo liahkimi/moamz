@@ -1,0 +1,68 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: "Pretendard-Variable";
+}
+
+footer{
+  margin:auto;
+  background-color: #947160;
+  height: 98px;
+}
+
+.footer-wrap{
+  margin:auto;
+  background-color: #947160;
+  width: 1000px;
+  height: 98px;
+  display: flex;
+}
+
+.company{
+  width: 150px;
+  height: 80px;
+  /* border: 1px solid black; */
+  margin-top: 10px;
+}
+
+.company-list{
+  color:white;
+  font-size:9px;
+  margin-left:30px;
+  list-style-type: none;
+}
+
+#list-text{
+  margin-top:5px;
+}
+
+#notice{
+  width: 400px;
+  height: 80px;
+  margin-left: 400px;
+  margin-bottom: 70px;
+  /* border: 1px solid black; */
+  margin-top:10px;
+}
+
+.moamz-info{
+  display: flex;
+  list-style-type: none;
+  color:white;
+  font-size:8px;
+  font-weight: bold;
+  /* border: 1px solid black; */
+  width: 200px;
+  justify-content: space-around;
+}
+
+.notice-text{
+  font-size:8px;
+  color:white;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+#notice-text-box{
+  font-weight: bold;
+}

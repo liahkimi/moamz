@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/reset2.css">
+    <link rel="stylesheet" href="../../../static/css/mypage/regular/userInfoModify.css">
+    <script defer src="../../../static/js/mypage/regular/userInfoModify.js"></script>
+    <title>마이페이지</title>
+</head>
+<body>
+    <header id="header"></header>
+    <main>
+        <div class="product-write-container">
+            <!-- 제목 영역 -->
+            <div class="title-wrap">
+                <div class="write-title">회원 정보 변경</div>
+            </div>
+            <!-- 정보 변경 영역 -->
+            <div class="write-content-container">
+                <form method="post" action="">
+                    <!-- 썸네일 영역 -->
+                    <div class="thumbnail-container">
+                        <div class="modify-label">프로필 사진</div>
+                        <div class="thumbnail-wrap">
+                            <!--lable을 누르면 input type=file이 실행-->
+                            <label for="attach">
+                                <div class="thumbnail-img"></div>
+                            </label>
+                            <div class="thumbnail-cancle-btn"></div>
+                        </div>
+                        <input type="file" id="attach" style="display: none;"> 
+                    </div>
+
+                    <!-- 변경 안되는 영역 -->
+                    <div class="cannot-modify-container">
+                        <div class="modify-item">
+                            <label class="modify-label" for="user-id">아이디</label>
+                            <input id="user-id" type="text" value="user123@naver.com" disabled>
+                        </div>
+                        <div class="modify-item">
+                            <label class="modify-label" for="user-nickname">닉네임</label>
+                            <input id="user-nickname" type="text" value="역삼동불주먹" disabled>
+                        </div>
+                        <div class="modify-item">
+                            <label class="modify-label" for="user-name">이름</label>
+                            <input id="user-name" type="text" value="황진" disabled>
+                        </div>
+                        <div class="modify-item">
+                            <label class="modify-label" for="user-phone-num">휴대폰 번호</label>
+                            <input id="user-phone-num" type="text" value="01012341234" disabled>
+                        </div>
+                    </div>
+
+                    <!-- 생년월일, 성별 영역 -->
+                    <div class="birth-gender-container">
+                        <div class="modify-item">
+                            <label class="modify-label" for="user-birth">생년월일</label>
+                            <input id="user-birth" type="date" value="1997-05-27">
+                        </div>
+                        <div class="radio-item">
+                            <label class="modify-label">성별</label>
+                            <input type="radio" name="user-gender" value="m">남성
+                            <input type="radio" name="user-gender" value="f">여성
+                        </div>
+                    </div>
+
+                    <!-- 주소 영역-->
+                    <div class="address-modify-container">
+                        <label class="modify-item modify-label">주소</label>
+                        <div class="modify-item">
+                            <input id="address-num" type="text" value="12345" disabled>
+                            <input type="button" id="address-search-btn" value="검색">
+                        </div>
+                        <input id="address-detail-1" class="modify-item" type="text" value="서울특별시 강남구 테헤란로 146" disabled>
+                        <input id="address-detail-2" class="modify-item" type="text" value="현익빌딩 3층, 4층">
+                    </div>
+
+                    <!-- 휴대폰번호 변경하기 영역 -->
+                    <div class="phone-modify-container">
+                        <label class="modify-item modify-label" for="input-phone-num">휴대폰번호 변경하기</label>
+                        <div class="modify-item">
+                            <input id="input-phone-num" type="number" placeholder="휴대폰번호 입력">
+                            <input type="button" id="msg-submit-btn" value="전송">
+                        </div>
+                        <div class="modify-item">
+                            <input id="certification-num" type="number" placeholder="인증번호 입력">
+                            <input type="button" id="certicifation-num-check-btn" value="확인">
+                        </div>
+                        <p id="success-message">d</p>
+                        <input type="button" id="phone-modify-btn" value="휴대폰번호 변경" disabled/>
+                    </div>
+                </form>
+                <!-- 버튼 -->
+                <div class="btn-container">
+                    <button type="button" id="cancle-btn" >나가기</button>
+                    <button type="button" id="user-info-modify-btn" >변경하기</button>
+                </div>
+                <!-- 회원탈퇴 -->
+                <div class="withdraw-container">
+                    <span>회원 탈퇴를 원하시나요?</span>
+                    <button type="button" id="withdraw-btn" onclick="location.href='userWithdraw.html'">탈퇴</button>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
+        $("#footer").load("../../main/fragment/footer/userFooter.html");
+    });
+</script>
+</html>

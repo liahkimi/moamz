@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/reset2.css">
+    <link rel="stylesheet" href="../../../static/css/mypage/seller/sellerSalesDetail.css">
+    <title>마이페이지</title>
+</head>
+<body>
+    <header id="header"></header>
+    <main>
+        <section id="side-section"></section>
+
+        <!-- 거래상세내역 영역-->
+        <section class="sales-history-section">
+            <!-- 거래정보 -->
+            <div class="order-info-container">
+                <p class="order-time">2024/10/14 17:17</p>
+                <span class="order-label">주문번호</span>
+                <span class="order-number">OR2024101400001</span>
+            </div>
+            <!-- 상품정보 -->
+            <div>
+                <div class="mypage-title-wrap">
+                    <img src="../../../static/img/mypage/seller/shopping_bag_icon.png" alt="쇼핑백아이콘">
+                    상품정보
+                </div>
+                <div class="product-info-container">
+                    <img src="../../../static/img/mypage/seller/cherry_image.png" alt="상품이미지">
+                    <div class="product-detail">
+                        <div class="product-item">
+                            <span class="product-label">상품명</span>
+                            <span>타트체리 1kg</span>
+                        </div>
+                        <div class="product-item">
+                            <span class="product-label">상품가격</span>
+                            <span>8,000</span>원
+                        </div>
+                        <div class="product-item">
+                            <span class="product-label">소비기한</span>
+                            <span>24/10/15</span>까지
+                        </div>
+                        <div class="product-item">
+                            <span class="product-label">중량</span>
+                            <span>1</span>kg    
+                        </div>
+                        <div class="product-item">
+                            <span class="product-label">상세정보</span>
+                            <span class="product-description">타트체리 판매합니다.타트체리 판합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다.타트체리 판매합니다. 진짜 맛있고 상태 좋아요. 타트체리 판매합니다. 진짜 맛있고 상태 좋아요.타트체리 판매합니다. 진짜 맛있고 상태 좋아요.타트체리 판매합니다. 진짜 맛있고 상태 좋아요.타트체리 판매합니다. 진짜 맛있고 상태 좋아요.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 고객정보 -->
+            <div>
+                <div class="mypage-title-wrap">
+                    <img src="../../../static/img/mypage/seller/shopping_bag_icon.png" alt="쇼핑백아이콘">
+                    고객정보
+                </div>
+                <div class="client-info-container">
+                    <div class="client-detail">
+                        <div class="client-item">
+                            <span class="client-label">고객명</span>
+                            <span>역삼동불주먹</span>
+                            <button type="button" id="client-chat-btn">💬구매자와 채팅하기</button>
+                        </div>
+                        <div class="client-item">
+                            <span class="client-label">픽업예정시간</span>
+                            <span>24/10/14 18:00</span>
+                        </div>
+                        <div class="client-item">
+                            <span class="client-label">요청사항</span>
+                            <span>퇴근이 늦어서 픽업 예정시간보다 좀 더 늦게 갈 수도 있어요ㅠㅠ</span>
+                        </div>
+                    </div>
+                    <div class="status-info">
+                        <p class="status-text">상품준비중</p>
+                        <div class="client-item">
+                            <span class="client-label">픽업완료시간</span>
+                            <span>-</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- 목록으로 이동 버튼 -->
+            <button type="button" class="move-list-btn" onclick="location.href='sellerSalesHistory.html'">상품 판매 내역으로 이동</button>
+            </section>
+        
+    </main>
+    <footer id="footer"></footer>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("#side-section").load("sellerMypageSide.html");
+        $("#header").load("../../main/fragment/header/sellerHeader.html");
+        $("#footer").load("../../main/fragment/footer/sellerFooter.html");
+    });
+</script>
+</html>

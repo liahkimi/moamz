@@ -1,0 +1,368 @@
+hr{
+    margin: 0;
+}
+button{
+    border: none;
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+.container{
+    width: 1000px;
+    height: 1400px;
+    margin: 0 auto;
+}
+.storeList-wrap1 {
+    margin: 40px auto 60px auto;
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    border: 2px solid #CEDD61;
+    overflow: hidden;
+}
+.storeList-wrap1 button {
+    width: 50%;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+.storeList-wrap1 .storeList-button-map {
+    background-color: #CEDD61;
+    color: black;
+}
+.storeList-wrap2{
+    position: relative;
+    height: 1200px;
+    display: flex;
+}
+
+.storeList-menu{
+    z-index: 20;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #F5F5F5;
+    width: 270px;
+    height: 1170px;
+    padding-top: 30px;
+    /* border: 1px solid black; */
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.storeList-menu-option{
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    padding-left: 15px;
+    margin-bottom: 30px;    /* background-color: #D3D3D3; */
+}
+.storeList-menu-form{
+    position: relative;
+    
+}
+.storeList-menu-input { 
+    border: 2px solid #CEDD61;
+    height: 30px;
+    border-radius: 6px;
+}
+.storeList-menu-input::placeholder{
+    color: #aaa;
+    padding-left: 5px;
+}
+.storeList-menu-btn > img{
+    position: absolute;
+    bottom: 8px;
+    left: 162px;
+    width: 18px;
+}
+.storeList-menu-btn > img:hover{
+    cursor: pointer;
+}
+.storelist-menu-stores{
+    /* padding-left: 15px; */
+    height: 280px;
+    padding-top: 20px;
+}
+.storelist-menu-stores:hover{
+    /* background-color: #D3D3D3; */
+    cursor: pointer;
+    
+}
+.storelist-menu-stores-name{
+    color: #947160;
+    font-size: 18px;
+    margin-bottom: 5px;
+    padding-left: 15px;
+}
+.storelist-menu-stores-star > span{
+    display: flex;
+    margin-bottom: 5px;
+    padding-left: 15px;
+}
+.storelist-menu-stores-img{
+    width: 240px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    margin: 15px auto;
+}
+.storelist-menu-stores-img img{
+    width: 100%;
+    height: 100%;
+}
+.storelist-menu-stores-text{
+    background-color: #D3D3D3;
+    width: 210px;
+    height: 200px;
+    margin: 0 auto;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+}
+.storelist-menu-stores-text > p{
+    font-size: 10px;
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    
+}
+.storeList-menu-stores-page{
+    margin: 30px 0;
+    display: flex;
+    width: 100%;
+    justify-content: center
+}
+.storeList-menu-stores-page-lt{
+    margin-right: 7px;
+}
+.storeList-menu-stores-page-num{
+    margin-right: 7px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    /* opacity: 0.2; */
+}
+.storeList-menu-detail-store{
+    width: 282px;
+    height: 96%;
+    z-index: 20;
+    /* border: 1px solid black; */
+    position: absolute;
+    left: 285px;
+    background-color: white;
+    margin: 5px 0;
+    border-radius: 6px;
+    overflow: scroll;
+}
+.storeList-menu-detail-store-top{
+    display: flex;
+    flex-direction: column;
+}
+.storeList-menu-detail-store-top-text{
+    display: flex;
+    align-items: center;
+    width: 100%;
+   
+}
+.storeList-menu-detail-store-top-text > span{
+    font-size: 25px;
+    font-weight: bold;
+    color: #947160;
+    margin: 10px 0 10px 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px 0 10px;
+}
+.storeList-menu-detail-store-top-star{
+    /* border: 1px solid black; */
+    padding: 0 20px 0 10px;
+    margin-bottom: 15px;
+}
+.storeList-menu-detail-store-top-star > span{
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+.storeList-menu-detail-store-select > span{
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    height: 40px;
+}
+.storeList-menu-detail-store-select > span >button{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    color: #d9d9d9;
+}
+#intro{
+    color: black;
+}
+.storeList-menu-detail-store-intro-short{
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px 0 15px;
+    margin-bottom: 20px;
+}
+.storeList-menu-detail-store-intro-short-loc > span{
+    display: flex;
+    align-items: center;
+}
+.storeList-menu-detail-store-intro-short-time > span{
+    display: flex;
+    align-items: center;
+}
+.storeList-menu-detail-store-intro-short-phone > span{
+    display: flex;
+    align-items: center;
+}
+.storeList-menu-detail-store-intro-short-intro > span{
+    display: flex;
+    align-items: center;
+}
+.storeList-menu-detail-store-intro-short-loc > span > img{
+    margin-right: 5px;
+}
+.storeList-menu-detail-store-intro-short-time > span > img{
+    margin-right: 5px;
+}.storeList-menu-detail-store-intro-short-phone > span > img{
+    margin-right: 5px;
+}.storeList-menu-detail-store-intro-short-intro > span > img{
+    margin-right: 5px;
+}
+.intro-text{
+    font-size: 12px;
+    font-weight: bold;
+}
+#street-num{
+    margin-top: 4px;
+    font-size: 12px;
+}
+.storeList-menu-detail-store-intro-top{
+    font-size: 12px;
+    padding: 0 12px 0 12px;
+    margin-bottom: 10px;
+    color: #947160;
+}
+.storeList-menu-detail-store-intro-long{
+    font-size: 12px;
+    padding: 0 12px 0 12px;
+    margin-bottom: 10px;
+    color: #6A6A6A;
+}
+.storeList-menu-detail-store-intro-long > p{
+    margin-bottom: 5px;
+}
+.storeList-menu-detail-store-product-detail{ 
+    display: flex;
+    padding: 15px;
+    justify-content: space-evenly;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    margin-bottom: 5px;
+}
+.storeList-menu-detail-store-product-products{
+    margin-bottom: 20px;
+    /* border: 1px solid black; */
+}
+.storeList-menu-detail-store-product-img > img{
+    width: 85px;
+    height: 78px;
+    margin-right: 8px;
+}
+.storeList-menu-detail-store-product-text{
+    font-size: 12px;
+    font-weight: bold;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 4px 0 4px 0;
+}
+.storeList-menu-detail-store-product-eco > span{
+    display: flex;
+}
+.storeList-menu-detail-store-product-calendar{
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+    border-radius: 6px;
+    background-color: #f7f7f7;
+}
+.storeList-menu-detail-store-product-co2{
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    background-color: #f7f7f7;
+}
+.storeList-menu-detail-store-product-calendar > img{
+    margin-right: 5px;
+}
+.storeList-menu-detail-store-product-co2 > img{
+    margin-right: 5px;
+}
+.storeList-menu-detail-store-product-more{
+    display: flex;
+    justify-content: center;
+}
+.more-btn{
+    width: 70px;
+    height: 30px;
+    border-radius: 30px;
+    margin: 0 auto;
+}
+.storeList-menu-detail-store-review-box{
+    font-size: 11px;
+    padding: 0 8px 0 8px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.storeList-menu-detail-store-review-profile > span{
+    display: flex;
+    align-items: center;
+}
+.storeList-menu-detail-store-review-star-score > span{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+.storeList-menu-detail-store-review-star-score > span > img{
+    margin-left: 8px;
+    /* border: 1px solid black; */
+}
+.storeList-menu-detail-store-review-profile > span > img{
+    margin: 5px;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+}
+.storeList-menu-detail-store-review-text{ 
+    padding: 0 8px 0 8px;
+    margin-bottom: 12px;
+}
+.storeList-menu-detail-store-review-star{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.storeList-menu-detail-store-review-text > p{
+    margin-bottom: 8px;
+}
+.storeList-menu-detail-store-review-product{
+    border: 1px solid black;
+    display: inline-block;
+    padding: 8px;
+    border-radius: 15px;
+    color: white;
+    background-color: #6A6A6A;
+}
+.storeList-menu-detail-store-review-more{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

@@ -1,0 +1,76 @@
+
+.product-write-container {
+    width: 700px;
+    margin: 30px auto ;
+    min-height: 500px;
+}
+/* 제목 영역 */
+.title-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.write-title {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+/* 글 작성 영역 */
+.write-content-container {
+    border-radius: 10px;
+    background-color: #EFEBEA;
+    padding: 20px 10px;
+}
+.write-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.write-item input {
+    height: 28px;
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+.write-item input:focus {
+    border: 1px solid #9E7E6F;
+}
+/* 라벨 설정 */
+.write-label {
+    width: 120px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #9E7E6F;
+}
+/* textarea */
+textarea { 
+    width: 540px;
+    height: 110px;
+    /* 크기 조절 버튼 지우기 */
+    resize: none; 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
+/* 버튼 영역 */
+.btn-wrap {
+    text-align: right;
+}
+.btn-wrap button {
+    width: 60px;
+    height: 30px;
+    font-size: 17px;
+    border-radius: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+#cancle-btn {
+    border: 1px solid #ddd;
+    background-color: white;
+}
+#write-btn {
+    border: none;
+    background-color: #947160;
+    color: white;
+}
