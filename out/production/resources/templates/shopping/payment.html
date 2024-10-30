@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./../../static/css/reset.css">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f79c59b6071fb92267e232c13fea51f&libraries=services"></script>
+    <script src="./../../static/js/shopping/payment.js"></script>
+    <link rel="stylesheet" href="./../../static/css/shopping/payment.css">
+</head>
+<body>
+    <header id="header"></header>
+  <div class="payment-container container">
+    <div class="payment-wrap1">
+      <span>
+        <img src="./../../static/img/shopping/cart.png" alt="">
+        상품 결제
+      </span>
+    </div>
+    <div class="payment-wrap2">
+        <div class="payment-payment">
+            <div class="payment-payment-product">
+                <div class="payment-payment-product-img">
+                    <img src="./../../static/img/shopping/abocado.png" alt="">
+                </div>
+                <div class="payment-payment-product-text">
+                    <div class="payment-payment-product-text-name">
+                        [Dole] 아보카도
+                    </div>
+                    <div class="payment-payment-product-text-eco">
+                        <span>
+                            <div class="payment-payment-product-text-eco-calendar">
+                                <img src="./../../static/img/shopping/productListcalendar.png" alt="">
+                                24.10.15
+                            </div>
+                            <div class="payment-payment-product-text-eco-co2">
+                                <img src="./../../static/img/shopping/productListco2.png" alt="">
+                                2kg
+                            </div>
+                        </span>
+                    </div>
+                    <div class="payment-payment-product-price">
+                        <span>
+                            75,600원
+                            <div class="payment-product-count-btn">
+                                <button type="button" id="inc">+</button>
+                                <div class="payment-product-count-num">
+                                    1
+                                </div>
+                                <button type="button" id="dec">-</button>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-payment-payment">
+                <div class="payment-payment-payment-top">
+                    결제금액
+                </div>
+                <div class="payment-payment-payment-price">
+                    <div class="payment-payment-payment-price-product">
+                        <span>
+                            <div class="payment-payment-payment-text">
+                                상품 금액
+                            </div>
+                            75,600원
+                        </span>
+                    </div>
+                    <div class="payment-payment-payment-price-product">
+                        <span>
+                            <div class="payment-payment-payment-text">
+                                포인트 차감
+                                <span>(100p)</span>
+                            </div>
+                            <textarea name="point" id="" style="resize: none;" placeholder="200p"></textarea>
+                        </span>
+                    </div>
+                </div>
+                <div class="payment-payment-payment-final">
+                    <div class="payment-payment-payment-final-price">
+                        결제 예정 금액
+                        <span>75,400원</span>
+                    </div>
+                    <div class="payment-payment-payment-final-policy">
+                        회원 본인은 주문내용을 확인했으며, 
+                        물품의 소비기한, 픽업 방식과 결제에 동의합니다
+                    </div>
+                    <div class="payment-payment-payment-final-btn">
+                        <button type="button">
+                            <img src="./../../static/img/shopping/kakaopay.png" alt="">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="payment-store">
+            <div class="payment-store-top">
+                <span>
+                    업체 정보
+                    <button type="button" onclick="location.href='./../chat/chatRoom.html'">판매자와 1:1 채팅하기</button>
+                </span>
+            </div>
+            <div class="payment-store-box">
+                <div class="payment-store-box-first">
+                    업체명
+                </div>
+                <div class="payment-store-box-second">
+                    빌즈 강남
+                </div>
+            </div>
+            <div class="payment-store-box">
+                <div class="payment-store-box-first">
+                    영업 시간
+                </div>
+                <div class="payment-store-box-second">
+                    10:00 ~ 22:00
+                </div>
+            </div>
+            <div class="payment-store-box">
+                <div class="payment-store-box-first">
+                    업체 주소
+                </div>
+                <div class="payment-store-box-second" id="zipcode">
+                    서울 강남구 테헤란로 146 지번 역삼동 736-6
+                </div>
+            </div>
+            <div class="payment-store-box">
+                <div class="payment-store-box-first">
+                    픽업 시간
+                </div>
+                <div class="payment-store-box-second">
+                    <textarea name="pickup" id="pickup" style="resize: none;" placeholder="2024-10-06 10:00 형식으로 작성해주세요"></textarea>
+                </div>
+            </div>
+            <div class="payment-store-box">
+                <div class="payment-store-box-first">
+                    요청 사항
+                </div>
+                <div class="payment-store-box-second">
+                    <textarea name="require" id="require" style="resize: none;" placeholder="길이제한 100자"></textarea>
+                </div>
+            </div>
+            <div class="payment-store-map">
+                <div id="payment-map" style="width:500px;height:200px;"></div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("./../main/fragment/header/userHeaderLogin.html");
+        $("#footer").load("./../main/fragment/footer/userFooter.html");
+    });     
+</script>
+</html>

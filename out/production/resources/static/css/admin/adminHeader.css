@@ -1,0 +1,57 @@
+a {
+    color: inherit; /* 링크 색상 제거 */
+    text-decoration: none; /* 밑줄 제거 */
+    background: none; /* 배경색 제거 */
+    outline: none; /* 포커스시 나타나는 외곽선 제거 */
+}
+header{
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;
+    align-items: center;/* 높이를 맞춰 중앙 정렬 */
+    box-shadow: 0px 2.49px 7.18px rgba(0, 0, 0, 0.16);  
+    position: relative;
+    display:flex;
+    justify-content: space-between;
+}
+
+/* 로고 */
+header .admin-logo{
+    display: flex;
+    align-items: center;  
+    padding-left: 20px;
+}
+/* 로고 이미지 */
+header .admin-logo img{
+    width: 35px;
+    margin-right: 10px;
+}
+/* 타이틀 */
+ header .admin-logo div{
+    color: #0B3051; 
+    font-weight: bold;
+    font-size: 25px;
+}
+/* 나가기 버튼 box */
+ header .admin-logout__btn{
+    width: 60px;
+    height: 25px;
+    border: 1px solid #0B3051;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 70px;
+}
+/* 나가기 폰트 */
+header .admin-logout__btn a{
+    font-size: 17px; 
+    color:#1B494C;
+}
+header .admin-logout__btn:hover{
+    background-color: #1B494C;
+}
+header .admin-logout__btn a:hover{
+    color:white;
+    background-color: #1B494C;
+}

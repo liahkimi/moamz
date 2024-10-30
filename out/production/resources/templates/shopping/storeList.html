@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./../../static/css/shopping/storeList.css">
+    <link rel="stylesheet" href="./../../static/css/reset2.css">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f79c59b6071fb92267e232c13fea51f&libraries=services"></script>
+    <script defer src="./../../static/js/shopping/storeList.js"></script>
+</head>
+<body>
+    <header id="header"></header>
+    <div class="container storeList-container">
+        <div class="storeList-wrap1">
+            <button class="storeList-button-product" type="button" onclick="location.href='productList.html'">상품</button>
+            <button class="storeList-button-map" type="button">지도</button>
+        </div>
+       
+        <div class="storeList-wrap2">
+            <div id="storeList-map" style="width:100%;height:100%;"></div>
+            <div class="storeList-menu-wrap">
+                <div class="storeList-menu">
+                    <div class="storeList-menu-option">
+                        <form class="storeList-menu-form">
+                            <input type="text" id="keyword" placeholder="검색어를 입력하세요" class="storeList-menu-input"> 
+                            <button type="submit" class="storeList-menu-btn">
+                                <img src="./../../static/img/shopping/storeListsearch.png" alt="#">
+                            </button> 
+                        </form>
+                    </div>
+                    <hr>
+                    <div class="storelist-menu-stores" onclick="location.href='storeDetailMain.html'">
+                        <div class="storelist-menu-stores-name">
+                            오브제 그린
+                        </div>
+                        <div class="storelist-menu-stores-star">
+                            <span>
+                                <img src="./../../static/img/shopping/storeListstar.png" alt="star">
+                                4.8
+                            </span>
+                        </div>
+                        <div class="storelist-menu-stores-img">
+                            <img src="./../../static/img/shopping/storeListstoreImg.png" alt="storeimg">
+                        </div>
+                        <div class="storelist-menu-stores-text">
+                            <p>자연이 선사하는 신선함과 영양을 그대로 담아낸 역삼 샐러드 맛집(카페) 역삼 오브제그린입니다.</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="storelist-menu-stores" onclick="location.href='storeDetailMain.html'">
+                        <div class="storelist-menu-stores-name">
+                            오브제 그린
+                        </div>
+                        <div class="storelist-menu-stores-star">
+                            <span>
+                                <img src="./../../static/img/shopping/storeListstar.png" alt="star">
+                                4.8
+                            </span>
+                        </div>
+                        <div class="storelist-menu-stores-img">
+                            <img src="./../../static/img/shopping/storeListstoreImg.png" alt="storeimg">
+                        </div>
+                        <div class="storelist-menu-stores-text">
+                            <p>자연이 선사하는 신선함과 영양을 그대로 담아낸 역삼 샐러드 맛집(카페) 역삼 오브제그린입니다.</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="storelist-menu-stores" onclick="location.href='storeDetailMain.html'">
+                        <div class="storelist-menu-stores-name">
+                            오브제 그린
+                        </div>
+                        <div class="storelist-menu-stores-star">
+                            <span>
+                                <img src="./../../static/img/shopping/storeListstar.png" alt="star">
+                                4.8
+                            </span>
+                        </div>
+                        <div class="storelist-menu-stores-img">
+                            <img src="./../../static/img/shopping/storeListstoreImg.png" alt="storeimg">
+                        </div>
+                        <div class="storelist-menu-stores-text">
+                            <p>자연이 선사하는 신선함과 영양을 그대로 담아낸 역삼 샐러드 맛집(카페) 역삼 오브제그린입니다.</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="storelist-menu-stores" onclick="location.href='storeDetailMain.html'">
+                        <div class="storelist-menu-stores-name">
+                            오브제 그린
+                        </div>
+                        <div class="storelist-menu-stores-star">
+                            <span>
+                                <img src="./../../static/img/shopping/storeListstar.png" alt="star">
+                                4.8
+                            </span>
+                        </div>
+                        <div class="storelist-menu-stores-img">
+                            <img src="./../../static/img/shopping/storeListstoreImg.png" alt="storeimg">
+                        </div>
+                        <div class="storelist-menu-stores-text">
+                            <p>자연이 선사하는 신선함과 영양을 그대로 담아낸 역삼 샐러드 맛집(카페) 역삼 오브제그린입니다.</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="storeList-menu-stores-page">
+                        <div class="storeList-menu-stores-page-lt">
+                            <a href="">&lt;</a>
+                        </div>
+                        <div class="storeList-menu-stores-page-num">
+                            <a href="">1</a>
+                        </div>
+                        <div class="storeList-menu-stores-page-num">
+                            <a href="">2</a>
+                        </div>
+                        <div class="storeList-menu-stores-page-num">
+                            <a href="">3</a>
+                        </div>
+                        <div class="storeList-menu-stores-page-num">
+                            <a href="">4</a>
+                        </div>
+                        <div class="storeList-menu-stores-page-num">
+                            <a href="">5</a>
+                        </div>
+                        <div class="storeList-menu-stores-page-gt">
+                            <a href="">&gt;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="storeList-menu-detail-store">
+                <div class="storeList-menu-detail-store-top">
+                    <div class="storeList-menu-detail-store-top-img">
+                        <img src="./../../static/img/shopping/obejegreen.png" alt="">
+                    </div>
+                    <div class="storeList-menu-detail-store-top-text">
+                        <span>
+                            오브제 그린
+                            <img src="./../../static/img/shopping/storeListheart.png" alt="" srcset="">
+                        </span>
+                    </div>
+                    <div class="storeList-menu-detail-store-top-star">
+                        <span>
+                            <img src="./../../static/img/shopping/storeListstar.png" alt="">
+                            4.8
+                        </span>
+                    </div>
+                </div>
+                <div class="storeList-menu-detail-store-select">
+                    <span>
+                        <button type="button" id="intro">
+                            정보
+                        </button>
+                        <button type="button" id="product">
+                            상품
+                        </button>
+                        <button type="button" id="review">
+                            리뷰
+                        </button>
+                    </span>
+                </div>
+                <div class="storeList-menu-detail-store-intro" id="infoBox">
+                    <div class="storeList-menu-detail-store-intro-short">
+                        <div class="storeList-menu-detail-store-intro-short-loc">
+                            <span>
+                                <img src="./../../static/img/shopping/Location.png" alt="">
+                                <div id="storeLocation">
+                                    <p class="intro-text">서울 강남구 논현로95길 9 1층</p>
+                                    <p id="street-num">지번 역삼동 643-6</p>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-intro-short-time">
+                            <span>
+                                <img src="./../../static/img/shopping/Clock.png" alt="">
+                                <p class="intro-text">10:00 ~ 21:00</p>
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-intro-short-phone">
+                            <span>
+                                <img src="./../../static/img/shopping/Phone.png" alt="">
+                                <p class="intro-text">0507-1449-0481</p>
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-intro-short-intro">
+                            <span>
+                                <img src="./../../static/img/shopping/ViewDetails.png" alt="">
+                                <p class="intro-text">소개</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-intro-top">
+                        <p>자연이 선사하는 신선함과 영양을 그대로 담아낸 역삼 샐러드 맛집(카페) 역삼 오브제 그린입니다.</p>
+                    </div>
+                    <div class="storeList-menu-detail-store-intro-long">
+                        <p>
+                            [Objet Green] 저희는 고객들이 인공적인 비타민 섭취에 의존하지 않길 바라는 마음으로, 다채로운 자연 재료에서 오는 비타민과 영양소를 요리에 담아드립니다.
+                        </p>
+                        <p>
+                            신선한 채소, 과일, 견과류, 고품질 단백질 소스 등 14가지 토핑을 취향에 맞게 선택해 본인만의 오브제 샐러드, 파스타를 만들어보세요!
+                        </p>
+                        <p> 
+                          [우리의 비전] Objet Green에서는 건강한 식습관 (다이어트)이 일상의 기쁨이 되어야 한다고 믿습니다.
+                        </p>
+                        <p> 
+                            매일 매일 건강한 선택을 쉽고 맛있게 할 수 있도록 지속 가능하고 윤리적으로 재배된 재료만을 사용하며 노력하고 있습니다. 단순한 식사가 아닌, 생기를 주는 경험을 제공하겠습니다.
+                        </p> 
+                        <p>
+                            오브제그린은 한 끼 식사를 넘어서, 미래의 건강한 나를 위한 다양한 재료 선택지를 제공합니다. 저희는 지역 농가와 협력하여 신선하고 계절에 맞는 재료를 공급 받음으로써, 식탁 위의 지속 가능성을 실천합니다.
+                        </p> 
+                        <p>
+                             모든 음식은 사랑과 정성을 담아 주문 즉시 준비하며, 건강과 환경에 대한 책임감을 담고 있습니다!
+                        </p>
+                        <p> 
+                            Objet Green에서 자연으로부터 온 선물을 통해 건강하고 지속 가능한 생활을 경험하세요. 우리는 여러분의 삶에 자연스럽게 스며들어, 매일을 더 건강하고 활기차게 만들어 드리고자 합니다. 
+                        </p>
+                        <p>
+                            Objet Green과 함께 자연에서 온 진정한 영양을 경험하세요!
+                        </p>
+                    </div>
+                </div>
+                <div class="storeList-menu-detail-store-product" id="productBox" style="display: none;">
+                    <div class="storeList-menu-detail-store-product-products">
+                        <div class="storeList-menu-detail-store-product-detail" onclick="location.href='productDetail.html'">
+                            <div class="storeList-menu-detail-store-product-img">
+                                <img src="./../../static/img/shopping/abocado.png" alt="">
+                            </div>
+                            <div class="storeList-menu-detail-store-product-text">
+                                <div class="storeList-menu-detail-store-product-name">
+                                    [Dole] 아보카도 1kg
+                                </div>
+                                <div class="storeList-menu-detail-store-product-price">
+                                    9,900원
+                                </div>
+                                <div class="storeList-menu-detail-store-product-eco">
+                                    <span>
+                                        <div class="storeList-menu-detail-store-product-calendar">
+                                            <img src="./../../static/img/shopping/productListcalendar.png" alt="">
+                                            24.10.15
+                                        </div>
+                                        <div class="storeList-menu-detail-store-product-co2">
+                                            <img src="./../../static/img/shopping/productListco2.png" alt="">
+                                            2kg
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="storeList-menu-detail-store-product-detail" onclick="location.href='productDetail.html'">
+                            <div class="storeList-menu-detail-store-product-img">
+                                <img src="./../../static/img/shopping/abocado.png" alt="">
+                            </div>
+                            <div class="storeList-menu-detail-store-product-text">
+                                <div class="storeList-menu-detail-store-product-name">
+                                    [Dole] 아보카도 1kg
+                                </div>
+                                <div class="storeList-menu-detail-store-product-price">
+                                    9,900원
+                                </div>
+                                <div class="storeList-menu-detail-store-product-eco">
+                                    <span>
+                                        <div class="storeList-menu-detail-store-product-calendar">
+                                            <img src="./../../static/img/shopping/productListcalendar.png" alt="">
+                                            24.10.15
+                                        </div>
+                                        <div class="storeList-menu-detail-store-product-co2">
+                                            <img src="./../../static/img/shopping/productListco2.png" alt="">
+                                            2kg
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="storeList-menu-detail-store-product-detail" onclick="location.href='productDetail.html'">
+                            <div class="storeList-menu-detail-store-product-img">
+                                <img src="./../../static/img/shopping/abocado.png" alt="">
+                            </div>
+                            <div class="storeList-menu-detail-store-product-text">
+                                <div class="storeList-menu-detail-store-product-name">
+                                    [Dole] 아보카도 1kg
+                                </div>
+                                <div class="storeList-menu-detail-store-product-price">
+                                    9,900원
+                                </div>
+                                <div class="storeList-menu-detail-store-product-eco">
+                                    <span>
+                                        <div class="storeList-menu-detail-store-product-calendar">
+                                            <img src="./../../static/img/shopping/productListcalendar.png" alt="">
+                                            24.10.15
+                                        </div>
+                                        <div class="storeList-menu-detail-store-product-co2">
+                                            <img src="./../../static/img/shopping/productListco2.png" alt="">
+                                            2kg
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="storeList-menu-detail-store-product-detail" onclick="location.href='productDetail.html'">
+                            <div class="storeList-menu-detail-store-product-img">
+                                <img src="./../../static/img/shopping/abocado.png" alt="">
+                            </div>
+                            <div class="storeList-menu-detail-store-product-text">
+                                <div class="storeList-menu-detail-store-product-name">
+                                    [Dole] 아보카도 1kg
+                                </div>
+                                <div class="storeList-menu-detail-store-product-price">
+                                    9,900원
+                                </div>
+                                <div class="storeList-menu-detail-store-product-eco">
+                                    <span>
+                                        <div class="storeList-menu-detail-store-product-calendar">
+                                            <img src="./../../static/img/shopping/productListcalendar.png" alt="">
+                                            24.10.15
+                                        </div>
+                                        <div class="storeList-menu-detail-store-product-co2">
+                                            <img src="./../../static/img/shopping/productListco2.png" alt="">
+                                            2kg
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="storeList-menu-detail-store-product-detail" onclick="location.href='productDetail.html'">
+                            <div class="storeList-menu-detail-store-product-img">
+                                <img src="./../../static/img/shopping/abocado.png" alt="">
+                            </div>
+                            <div class="storeList-menu-detail-store-product-text">
+                                <div class="storeList-menu-detail-store-product-name">
+                                    [Dole] 아보카도 1kg
+                                </div>
+                                <div class="storeList-menu-detail-store-product-price">
+                                    9,900원
+                                </div>
+                                <div class="storeList-menu-detail-store-product-eco">
+                                    <span>
+                                        <div class="storeList-menu-detail-store-product-calendar">
+                                            <img src="./../../static/img/shopping/productListcalendar.png" alt="">
+                                            24.10.15
+                                        </div>
+                                        <div class="storeList-menu-detail-store-product-co2">
+                                            <img src="./../../static/img/shopping/productListco2.png" alt="">
+                                            2kg
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="storeList-menu-detail-store-product-detail" onclick="location.href='productDetail.html'">
+                            <div class="storeList-menu-detail-store-product-img">
+                                <img src="./../../static/img/shopping/abocado.png" alt="">
+                            </div>
+                            <div class="storeList-menu-detail-store-product-text">
+                                <div class="storeList-menu-detail-store-product-name">
+                                    [Dole] 아보카도 1kg
+                                </div>
+                                <div class="storeList-menu-detail-store-product-price">
+                                    9,900원
+                                </div>
+                                <div class="storeList-menu-detail-store-product-eco">
+                                    <span>
+                                        <div class="storeList-menu-detail-store-product-calendar">
+                                            <img src="./../../static/img/shopping/productListcalendar.png" alt="">
+                                            24.10.15
+                                        </div>
+                                        <div class="storeList-menu-detail-store-product-co2">
+                                            <img src="./../../static/img/shopping/productListco2.png" alt="">
+                                            2kg
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="storeList-menu-detail-store-product-detail" onclick="location.href='productDetail.html'">
+                            <div class="storeList-menu-detail-store-product-img">
+                                <img src="./../../static/img/shopping/abocado.png" alt="">
+                            </div>
+                            <div class="storeList-menu-detail-store-product-text">
+                                <div class="storeList-menu-detail-store-product-name">
+                                    [Dole] 아보카도 1kg
+                                </div>
+                                <div class="storeList-menu-detail-store-product-price">
+                                    9,900원
+                                </div>
+                                <div class="storeList-menu-detail-store-product-eco">
+                                    <span>
+                                        <div class="storeList-menu-detail-store-product-calendar">
+                                            <img src="./../../static/img/shopping/productListcalendar.png" alt="">
+                                            24.10.15
+                                        </div>
+                                        <div class="storeList-menu-detail-store-product-co2">
+                                            <img src="./../../static/img/shopping/productListco2.png" alt="">
+                                            2kg
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="storeList-menu-detail-store-product-detail" onclick="location.href='productDetail.html'">
+                            <div class="storeList-menu-detail-store-product-img">
+                                <img src="./../../static/img/shopping/abocado.png" alt="">
+                            </div>
+                            <div class="storeList-menu-detail-store-product-text">
+                                <div class="storeList-menu-detail-store-product-name">
+                                    [Dole] 아보카도 1kg
+                                </div>
+                                <div class="storeList-menu-detail-store-product-price">
+                                    9,900원
+                                </div>
+                                <div class="storeList-menu-detail-store-product-eco">
+                                    <span>
+                                        <div class="storeList-menu-detail-store-product-calendar">
+                                            <img src="./../../static/img/shopping/productListcalendar.png" alt="">
+                                            24.10.15
+                                        </div>
+                                        <div class="storeList-menu-detail-store-product-co2">
+                                            <img src="./../../static/img/shopping/productListco2.png" alt="">
+                                            2kg
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-product-more">
+                        <button type="button" class="more-btn" id="product-more">
+                            더보기
+                        </button>
+                    </div>
+                </div>
+                <div class="storeList-menu-detail-store-review" id="reviewBox" style="display: none;">
+                    <div class="storeList-menu-detail-store-review-box">
+                        <div class="storeList-menu-detail-store-review-profile">
+                            <span>
+                                <img src="./../../static/img/shopping/profile.png" alt="">
+                                아가리어터
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-review-text">
+                            <div class="storeList-menu-detail-store-review-star">
+                                <div class="storeList-menu-detail-store-review-star-score">
+                                    <span>
+                                        5
+                                        <img src="./../../static/img/shopping/star5.png" alt="">
+                                    </span>
+                                </div>
+                                <div class="storeList-menu-detail-store-review-star-date">
+                                    2024.10.6
+                                </div>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-text">
+                                <p>
+                                    매장도 넓고 너무 깨끗하고 분위기가 너무 좋아요! 신선한 재료에 푸짐한 양까지 너무 맘에 들어요!
+                                </p>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-product">
+                                [Dole] 아보카도 1kg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-review-box">
+                        <div class="storeList-menu-detail-store-review-profile">
+                            <span>
+                                <img src="./../../static/img/shopping/profile.png" alt="">
+                                아가리어터
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-review-text">
+                            <div class="storeList-menu-detail-store-review-star">
+                                <div class="storeList-menu-detail-store-review-star-score">
+                                    <span>
+                                        5
+                                        <img src="./../../static/img/shopping/star5.png" alt="">
+                                    </span>
+                                </div>
+                                <div class="storeList-menu-detail-store-review-star-date">
+                                    2024.10.6
+                                </div>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-text">
+                                <p>
+                                    매장도 넓고 너무 깨끗하고 분위기가 너무 좋아요! 신선한 재료에 푸짐한 양까지 너무 맘에 들어요!
+                                </p>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-product">
+                                [Dole] 아보카도 1kg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-review-box">
+                        <div class="storeList-menu-detail-store-review-profile">
+                            <span>
+                                <img src="./../../static/img/shopping/profile.png" alt="">
+                                아가리어터
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-review-text">
+                            <div class="storeList-menu-detail-store-review-star">
+                                <div class="storeList-menu-detail-store-review-star-score">
+                                    <span>
+                                        5
+                                        <img src="./../../static/img/shopping/star5.png" alt="">
+                                    </span>
+                                </div>
+                                <div class="storeList-menu-detail-store-review-star-date">
+                                    2024.10.6
+                                </div>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-text">
+                                <p>
+                                    매장도 넓고 너무 깨끗하고 분위기가 너무 좋아요! 신선한 재료에 푸짐한 양까지 너무 맘에 들어요!
+                                </p>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-product">
+                                [Dole] 아보카도 1kg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-review-box">
+                        <div class="storeList-menu-detail-store-review-profile">
+                            <span>
+                                <img src="./../../static/img/shopping/profile.png" alt="">
+                                아가리어터
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-review-text">
+                            <div class="storeList-menu-detail-store-review-star">
+                                <div class="storeList-menu-detail-store-review-star-score">
+                                    <span>
+                                        5
+                                        <img src="./../../static/img/shopping/star5.png" alt="">
+                                    </span>
+                                </div>
+                                <div class="storeList-menu-detail-store-review-star-date">
+                                    2024.10.6
+                                </div>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-text">
+                                <p>
+                                    매장도 넓고 너무 깨끗하고 분위기가 너무 좋아요! 신선한 재료에 푸짐한 양까지 너무 맘에 들어요!
+                                </p>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-product">
+                                [Dole] 아보카도 1kg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-review-box">
+                        <div class="storeList-menu-detail-store-review-profile">
+                            <span>
+                                <img src="./../../static/img/shopping/profile.png" alt="">
+                                아가리어터
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-review-text">
+                            <div class="storeList-menu-detail-store-review-star">
+                                <div class="storeList-menu-detail-store-review-star-score">
+                                    <span>
+                                        5
+                                        <img src="./../../static/img/shopping/star5.png" alt="">
+                                    </span>
+                                </div>
+                                <div class="storeList-menu-detail-store-review-star-date">
+                                    2024.10.6
+                                </div>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-text">
+                                <p>
+                                    매장도 넓고 너무 깨끗하고 분위기가 너무 좋아요! 신선한 재료에 푸짐한 양까지 너무 맘에 들어요!
+                                </p>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-product">
+                                [Dole] 아보카도 1kg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-review-box">
+                        <div class="storeList-menu-detail-store-review-profile">
+                            <span>
+                                <img src="./../../static/img/shopping/profile.png" alt="">
+                                아가리어터
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-review-text">
+                            <div class="storeList-menu-detail-store-review-star">
+                                <div class="storeList-menu-detail-store-review-star-score">
+                                    <span>
+                                        5
+                                        <img src="./../../static/img/shopping/star5.png" alt="">
+                                    </span>
+                                </div>
+                                <div class="storeList-menu-detail-store-review-star-date">
+                                    2024.10.6
+                                </div>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-text">
+                                <p>
+                                    매장도 넓고 너무 깨끗하고 분위기가 너무 좋아요! 신선한 재료에 푸짐한 양까지 너무 맘에 들어요!
+                                </p>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-product">
+                                [Dole] 아보카도 1kg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-review-box">
+                        <div class="storeList-menu-detail-store-review-profile">
+                            <span>
+                                <img src="./../../static/img/shopping/profile.png" alt="">
+                                아가리어터
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-review-text">
+                            <div class="storeList-menu-detail-store-review-star">
+                                <div class="storeList-menu-detail-store-review-star-score">
+                                    <span>
+                                        5
+                                        <img src="./../../static/img/shopping/star5.png" alt="">
+                                    </span>
+                                </div>
+                                <div class="storeList-menu-detail-store-review-star-date">
+                                    2024.10.6
+                                </div>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-text">
+                                <p>
+                                    매장도 넓고 너무 깨끗하고 분위기가 너무 좋아요! 신선한 재료에 푸짐한 양까지 너무 맘에 들어요!
+                                </p>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-product">
+                                [Dole] 아보카도 1kg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-review-box">
+                        <div class="storeList-menu-detail-store-review-profile">
+                            <span>
+                                <img src="./../../static/img/shopping/profile.png" alt="">
+                                아가리어터
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-review-text">
+                            <div class="storeList-menu-detail-store-review-star">
+                                <div class="storeList-menu-detail-store-review-star-score">
+                                    <span>
+                                        5
+                                        <img src="./../../static/img/shopping/star5.png" alt="">
+                                    </span>
+                                </div>
+                                <div class="storeList-menu-detail-store-review-star-date">
+                                    2024.10.6
+                                </div>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-text">
+                                <p>
+                                    매장도 넓고 너무 깨끗하고 분위기가 너무 좋아요! 신선한 재료에 푸짐한 양까지 너무 맘에 들어요!
+                                </p>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-product">
+                                [Dole] 아보카도 1kg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-review-box">
+                        <div class="storeList-menu-detail-store-review-profile">
+                            <span>
+                                <img src="./../../static/img/shopping/profile.png" alt="">
+                                아가리어터
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-review-text">
+                            <div class="storeList-menu-detail-store-review-star">
+                                <div class="storeList-menu-detail-store-review-star-score">
+                                    <span>
+                                        5
+                                        <img src="./../../static/img/shopping/star5.png" alt="">
+                                    </span>
+                                </div>
+                                <div class="storeList-menu-detail-store-review-star-date">
+                                    2024.10.6
+                                </div>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-text">
+                                <p>
+                                    매장도 넓고 너무 깨끗하고 분위기가 너무 좋아요! 신선한 재료에 푸짐한 양까지 너무 맘에 들어요!
+                                </p>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-product">
+                                [Dole] 아보카도 1kg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-review-box">
+                        <div class="storeList-menu-detail-store-review-profile">
+                            <span>
+                                <img src="./../../static/img/shopping/profile.png" alt="">
+                                아가리어터
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-review-text">
+                            <div class="storeList-menu-detail-store-review-star">
+                                <div class="storeList-menu-detail-store-review-star-score">
+                                    <span>
+                                        5
+                                        <img src="./../../static/img/shopping/star5.png" alt="">
+                                    </span>
+                                </div>
+                                <div class="storeList-menu-detail-store-review-star-date">
+                                    2024.10.6
+                                </div>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-text">
+                                <p>
+                                    매장도 넓고 너무 깨끗하고 분위기가 너무 좋아요! 신선한 재료에 푸짐한 양까지 너무 맘에 들어요!
+                                </p>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-product">
+                                [Dole] 아보카도 1kg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-review-box">
+                        <div class="storeList-menu-detail-store-review-profile">
+                            <span>
+                                <img src="./../../static/img/shopping/profile.png" alt="">
+                                아가리어터
+                            </span>
+                        </div>
+                        <div class="storeList-menu-detail-store-review-text">
+                            <div class="storeList-menu-detail-store-review-star">
+                                <div class="storeList-menu-detail-store-review-star-score">
+                                    <span>
+                                        5
+                                        <img src="./../../static/img/shopping/star5.png" alt="">
+                                    </span>
+                                </div>
+                                <div class="storeList-menu-detail-store-review-star-date">
+                                    2024.10.6
+                                </div>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-text">
+                                <p>
+                                    매장도 넓고 너무 깨끗하고 분위기가 너무 좋아요! 신선한 재료에 푸짐한 양까지 너무 맘에 들어요!
+                                </p>
+                            </div>
+                            <div class="storeList-menu-detail-store-review-product">
+                                [Dole] 아보카도 1kg
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeList-menu-detail-store-review-more">
+                        <button type="button" class="more-btn" id="review-more">
+                            더보기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("./../main/fragment/header/userHeaderLogin.html");
+        $("#footer").load("./../main/fragment/footer/userFooter.html");
+    });     
+</script>
+</html>

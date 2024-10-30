@@ -1,0 +1,138 @@
+.product-write-container {
+    width: 700px;
+    margin: 30px auto ;
+}
+/* 제목 영역 */
+.write-title {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+/* 정보 변경 영역 */
+.write-content-container {
+    width: 100%;
+    /* text-align: center; */
+}
+/* 변경 안되는 영역 */
+.cannot-modify-container {
+    margin-bottom: 50px;
+}
+.cannot-modify-container .modify-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+input[type='text'],
+input[type='password'],
+input[type='number'] {
+    flex-grow: 1;
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+/* 라벨 */
+.modify-label {
+    width: 170px;
+    color: #947160;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* 비밀번호 변경 */
+.password-modify-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+.password-modify-container>div {
+    display: flex;
+    justify-content: space-between;
+}
+#available-special-char {
+    color: #6a6a6a;
+    font-size: 14px;
+}
+.password-modify-container .modify-item {
+    margin-top: 10px;
+}
+#password-message,
+#confirm-message,
+#success-message {
+    margin-top: 5px;
+    font-size: 14px;
+}
+#pw-modify-btn,
+#phone-modify-btn,
+.move-list-btn {
+    margin-top: 10px;
+    width: 140px;
+    height: 40px;
+    margin-left: auto;
+    border-radius: 6px;
+    border: none;
+    background-color: #947160;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 4px #6a6a6a6a;
+}
+#pw-modify-btn:disabled,
+#phone-modify-btn:disabled {
+    background-color: #ddd;
+}
+
+/* 휴대폰번호 변경 */
+.phone-modify-container {
+    display: flex;
+    flex-direction: column;
+}
+.phone-modify-container .modify-item {
+    margin-top: 10px;
+    display: flex;
+}
+/* input type='number' 화살표 없애기 */
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+#msg-submit-btn,
+#certicifation-num-check-btn {
+    width: 50px;
+    color: white;
+    background-color: #947160;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    margin-left: 5px;
+}
+
+/* 나가기 버튼 */
+.exit-btn-container {
+    margin-top: 50px;
+    text-align: center;
+}
+/* 회원탈퇴 */
+.withdraw-container {
+    margin-top: 130px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.withdraw-container span {
+    color: #6a6a6a;
+    font-size: 14px;
+    margin-right: 5px;
+}
+#withdraw-btn {
+    border: none;
+    background-color: #ddd;
+    color: #6a6a6a;
+    font-size: 14px;
+    width: 40px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}

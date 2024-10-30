@@ -1,0 +1,60 @@
+
+/* 좌측 네비바 */
+a {
+    color: inherit; /* 링크 색상 제거 */
+    text-decoration: none; /* 밑줄 제거 */
+    background: none; /* 배경색 제거 */
+    outline: none; /* 포커스시 나타나는 외곽선 제거 */
+}
+nav{
+    width: 250px;
+    background-color: #ffffff;
+}
+/* 네비바 전체 */
+nav ul{
+    padding-top: 30px;
+    padding-left: 13px;
+
+    /* li들간에 위아래 간격 9px주기 */
+    display: flex;
+    flex-direction: column;
+    gap:25px
+}
+nav ul li{
+    display: flex;
+    height: 26px;
+    align-items: center ;
+    margin-right: 10px;
+}
+nav ul li .nav-logo{
+    margin-right: 11.76px;
+}
+
+ nav ul li .nav-logo img{
+    width: 20px;
+}
+ nav ul li .nav-title a{
+    font-size: 20px;
+    color: #5D7285;
+}
+ nav ul li{
+    width: 250px;
+    height: 45px;
+}
+nav ul li:hover{
+    background-color: #F0F6FF;
+    font-weight: bold;
+}
+nav ul li a:hover{
+    background-color: #F0F6FF;
+    font-weight: bold;
+}
+
+/* 네비게이션바  active */
+.nav-link{
+}
+
+.nav-link.active{
+    background-color: #F0F6FF;
+    font-weight: bold;
+}

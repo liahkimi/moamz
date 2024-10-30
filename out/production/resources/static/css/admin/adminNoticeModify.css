@@ -1,0 +1,125 @@
+/* a 태그 기본 스타일 제거 */
+a {
+    color: inherit; /* 링크 색상 제거 */
+    text-decoration: none; /* 밑줄 제거 */
+    background: none; /* 배경색 제거 */
+    outline: none; /* 포커스시 나타나는 외곽선 제거 */
+  }
+  /* 버튼 reset css */
+  button {
+    background: none; /* 배경 제거 */
+    border: none; /* 테두리 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    margin: 0; /* 기본 마진 제거 */
+    box-shadow: none; /* 그림자 제거 */
+    cursor: pointer; /* 마우스를 올리면 클릭 커서가 나타나도록 설정 */
+    outline: none; /* 포커스시 나타나는 외곽선 제거 */
+  }
+  header {
+    height: 70px;
+    background-color: #ffffff;
+    align-items: center; /* 높이를 맞춰 중앙 정렬 */
+    box-shadow: 0px 2.49px 7.18px rgba(0, 0, 0, 0.16);
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+  main {
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+  }
+  
+  .nav-and-content-box {
+    display: flex;
+    height: 100vh;
+  }
+  /* 좌측 네비바 */
+  nav {
+    width: 20%;
+    background-color: #ffffff;
+  }
+  
+  /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+  
+  /* 타이틀 + 카운팅카드뷰 + 에코프젝 + 그래프의 부모 */
+  main .content-box {
+    display: flex;
+    flex-direction: column;
+    background-color: #1b494c;
+    width: 100%;
+  }
+  /* 타이틀 */
+  main .content-box .page-title-box {
+    position: relative;
+    top: 30px;
+    left: 8px;
+    margin-bottom: 50px;
+  }
+  main .content-box .page-title-box .page-title {
+    font-size: 25px;
+    color: #ffffff;
+  }
+  
+  .content {
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+  
+    position: relative;
+  }
+  .edit-wrap{
+          padding: 30px;
+  }
+  .title-box {
+    display: flex;
+    margin-bottom: 30px;
+  }
+  
+  .title-box span {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 15px;
+  }
+  .write-form-title__value {
+    width: 800px;
+    
+  }
+  .write-form-detail {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px; /* 💥마진 안됨!!*/
+  }
+  
+  
+  .summernote-box {
+    width: 80%;
+    margin-bottom: 50px; /* 💥마진 안됨!!*/
+    /* height: 400px;💥높이 안됨!! */
+  }
+  .h-sum{
+      height: 400px;
+  }
+  
+  .summernote-box textarea {
+    height: 100%;
+  }
+  
+  .btn-wrap{
+      position: absolute;
+      top: 400px;
+      left: 550px;
+  }
+  .btn-wrap button{
+      font-size: 17px;
+      border: 1px solid #DDDDDD;
+      width: 50px;
+      height: 32px;
+      border-radius: 10px;
+      font-weight: bold;
+  }
+  .register-btn{
+      background-color: #30595C;
+      color: white;
+      margin-left: 5px;
+  }

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공지사항</title>
+    <link rel="stylesheet" href="../../static/css/reset2.css" />
+    <link rel="stylesheet" href="../../static/css/admin/adminNoticeList.css" />
+  </head>
+  <body>
+    <header id="adminHeader"></header>
+    <main>
+      <nav id="adminNavBar"></nav>
+      <!-- 우측 녹색 메인 화면-->
+      <div class="content-box">
+        <!-- 타이틀 : dashboard -->
+        <div class="page-title-box">
+          <div class="page-title">공지사항</div>
+        </div>
+        <!-- 글작성하기 버튼(💥추후 글작성하기 페이지로 연결시키기)-->
+        <div class="write-btn">
+          <button type="button" onclick="location.href='adminNoticeWrite.html'">글 작성하기</button>
+        </div>
+        <!-- 흰색 게시판 전체 -->
+        <div class="content">
+          <!-- <div class="toggle-btn-container">
+            <button id="user-management-btn" class="active-btn">
+             
+            </button>
+            <button id="seller-management-btn"></button>
+          </div> -->
+          <!-- 일반 회원 목록 -->
+          <div id="user-table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>번호</th>
+                  <th>제목</th>
+                  <th>등록일</th>
+                  <th>조회수</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- 💥추후 각 tr클릭시 해당 상세페이지로 이동시키기 -->
+                <tr onclick="location.href='adminNoticeDetail.html'">
+                  <td>1</td>
+                  <td>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
+                  <td class="gray-text">2024/10/11</td>
+                  <td class="gray-text">
+                    <img src="../../static/img/admin/eye.png" alt="morebtn" />
+                    10
+                  </td>
+                </tr>
+                <tr onclick="location.href='adminNoticeDetail.html'">
+                  <td>2</td>
+                  <td>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
+                  <td class="gray-text">2024/10/11</td>
+                  <td class="gray-text">
+                    <img src="../../static/img/admin/eye.png" alt="morebtn" />
+                    10
+                  </td>
+                </tr>
+                <tr onclick="location.href='adminNoticeDetail.html'">
+                  <td>3</td>
+                  <td>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
+                  <td class="gray-text">2024/10/11</td>
+                  <td class="gray-text">
+                    <img src="../../static/img/admin/eye.png" alt="morebtn" />
+                    10
+                  </td>
+                </tr>
+                <tr onclick="location.href='adminNoticeDetail.html'">
+                  <td>4</td>
+                  <td>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
+                  <td class="gray-text">2024/10/11</td>
+                  <td class="gray-text">
+                    <img src="../../static/img/admin/eye.png" alt="morebtn" />
+                    10
+                  </td>
+                </tr>
+                <tr onclick="location.href='adminNoticeDetail.html'">
+                  <td>5</td>
+                  <td>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
+                  <td class="gray-text">2024/10/11</td>
+                  <td class="gray-text">
+                    <img src="../../static/img/admin/eye.png" alt="morebtn" />
+                    10
+                  </td>
+                </tr>
+                <tr onclick="location.href='adminNoticeDetail.html'">
+                  <td>6</td>
+                  <td>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
+                  <td class="gray-text">2024/10/11</td>
+                  <td class="gray-text">
+                    <img src="../../static/img/admin/eye.png" alt="morebtn" />
+                    10
+                  </td>
+                </tr>
+                <tr onclick="location.href='adminNoticeDetail.html'">
+                  <td>7</td>
+                  <td>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
+                  <td class="gray-text">2024/10/11</td>
+                  <td class="gray-text">
+                    <img src="../../static/img/admin/eye.png" alt="morebtn" />
+                    10
+                  </td>
+                </tr>
+                <tr onclick="location.href='adminNoticeDetail.html'">
+                  <td>8</td>
+                  <td>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
+                  <td class="gray-text">2024/10/11</td>
+                  <td class="gray-text">
+                    <img src="../../static/img/admin/eye.png" alt="morebtn" />
+                    10
+                  </td>
+                </tr>
+                <tr onclick="location.href='adminNoticeDetail.html'">
+                  <td>9</td>
+                  <td>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
+                  <td class="gray-text">2024/10/11</td>
+                  <td class="gray-text">
+                    <img src="../../static/img/admin/eye.png" alt="morebtn" />
+                    10
+                  </td>
+                </tr>
+                <tr onclick="location.href='adminNoticeDetail.html'">
+                  <td>10</td>
+                  <td>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
+                  <td class="gray-text">2024/10/11</td>
+                  <td class="gray-text">
+                    <img src="../../static/img/admin/eye.png" alt="morebtn" />
+                    10
+                  </td>
+                </tr>
+                <tr onclick="location.href='adminNoticeDetail.html'">
+                  <td>11</td>
+                  <td>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
+                  <td class="gray-text">2024/10/11</td>
+                  <td class="gray-text">
+                    <img src="../../static/img/admin/eye.png" alt="morebtn" />
+                    10
+                  </td>
+                </tr>
+                <tr onclick="location.href='adminNoticeDetail.html'">
+                  <td>12</td>
+                  <td>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
+                  <td class="gray-text">2024/10/11</td>
+                  <td class="gray-text">
+                    <img src="../../static/img/admin/eye.png" alt="morebtn" />
+                    10
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- 💥추후 페이지네이션 js 구현하기 -->
+            <div class="pagination">
+              <button class="prev">Previous</button>
+              <button class="page active">1</button>
+              <button class="page">2</button>
+              <button class="page">3</button>
+              <button class="next">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    $(function () {
+      $("#adminNavBar").load("adminNavBar.html");
+      $("#adminHeader").load("adminHeader.html");
+    });
+  </script>
+  <script src="../../static/js/admin/adminNoticeList.js"></script>
+</html>
