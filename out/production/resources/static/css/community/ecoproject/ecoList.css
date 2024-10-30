@@ -1,0 +1,408 @@
+* {
+  color: #6a6a6a;
+}
+main {
+  width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+button{
+border: none;
+background-color: white;
+}
+.free-list-wrap{
+width: 700px;
+}
+
+/* 게시판 헤더 */
+.board-header-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0;
+  background-color: white;
+}
+.board-title {
+  color: black;
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.board-description {
+  color: black;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.searchbar {
+  width: 392px;
+  height: 32px;
+  border: 2px solid #CEDD61;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+.searchbar input {
+  height: 30px;
+  border: none;
+  flex-grow: 1; /* input이 버튼을 제외한 나머지 공간을 차지함 */
+  padding-left: 10px;
+  border-radius: 10px 0 0 10px;
+}
+.search-btn {
+  width: 45px;
+  height: 32px;
+  border: none;
+  background-color: #CEDD61;
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.write-btn {
+  width: 392px;
+  height: 32px;
+  border: none;
+  background-color: #999;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* 게시판 전체 영역 */
+.free-board-container {
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+}
+/* 왼쪽 카테고리 영역 */
+.community-category-container {
+  width: 140px;
+  height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  font-size: 17px;
+  overflow: hidden;
+  margin-right: 20px;
+}
+.community-category-container div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.community-category-container img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.community-category-container span {
+  font-weight: bold;
+  color: black;
+}
+.community-category-container li {
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+}
+.community-category-container li:hover {
+  background-color: #CEDD61;
+  color: black;
+}
+/* 자유게시판 영역 */
+.board-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.receipt-list{
+display: flex;
+width: 210px;
+height: 250px;
+flex-direction: column;
+/* justify-content: space-between; */
+}
+.receipe-banner{
+display: flex;
+justify-content: space-evenly;
+margin-bottom: 20px;
+}
+.receipe-box{
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+height: 300px;
+cursor: pointer;
+box-shadow: 6px 0 10px 6px;
+border-radius: 6px;
+padding-bottom: 5px;
+}
+.receipe-another{margin: 0 auto;}
+.receipe-another > span{
+display: flex;
+
+}
+.receipe-time{
+display: flex;
+justify-content: center;
+margin-right: 10px;
+}
+.receipe-like{
+display: flex;
+justify-content: center;
+}
+.receipe-img{
+width: 210px;
+height: 190px;
+}
+.receipe-text{
+font-size: 15px;
+margin: 0 auto;
+}
+/* 게시글 목록 */
+/* .free-list-wrap {
+  min-height: 400px;
+}
+.free-list {
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.post-num {
+  padding: 0 10px;
+  color: black;
+}
+.post-title {
+  width: 410px;
+  padding: 0 10px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  /* 타이틀 영역 넘어가면 말줄임 */
+  /* white-space: nowrap; 
+  overflow: hidden;          
+  text-overflow: ellipsis;
+}
+.user-nickname {
+  width: 150px;
+  padding: 0 10px;
+  color: black;
+}
+.post-info-wrap {
+  display: flex;
+  align-self: self-end;
+  align-items: center;
+  font-size: 14px;
+}
+.post-write-time {
+  margin-right: 8px;
+}
+.post-icon-wrap {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+.post-icon-wrap img {
+  width: 15px;
+  height: 15px;
+  object-fit: fill;
+  margin-right: 2px;
+} */ */
+.pagination{
+  margin-top: 20px;
+  /* border: 1px solid black; */
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+}
+#prev-btn{
+  font-size: 15px;
+}
+#next-btn{
+font-size: 15px;
+}
+.page-numbers{
+margin-right: 5px;
+}
+.page-numbers > a{
+font-size: 15px;
+}
+.content {
+  /* width: 70%; */
+  width: 780px;
+  height: 700px;
+  background-color: #ffffff;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 20px;
+}
+
+/* 토글버튼 css */
+.toggle-btn-container {
+  padding: 8px;
+  padding-left: 20px;
+  border-bottom: 1px solid black;
+}
+#ongoing-eco__button{
+  margin-right: 15px;
+}
+.toggle-btn-container button {
+  margin-right: 10px;
+}
+
+.toggle-btn-container button {
+  color: #6a6a6a;
+  font-size: 20px;
+}
+/* 버튼 활성화 : .active-btn 클래스 붙었을 때 */
+.toggle-btn-container button.active-btn {
+  color: black;
+  font-weight: bold;
+  border-bottom: 3px solid black;
+  padding-bottom: 3px;
+}
+.banner-hidden{
+  display: none;
+}
+/* 에코프로젝트 배너 */
+.banner-box {
+  width: 820px;
+  height: 270px;
+  display: flex;
+  border: 1px solid #e4e1e1;
+  /* gap: 20px; */
+  border-radius: 30px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  position: relative;
+  /* left :200px; */
+}
+
+#ongoing-eco{
+  /* border: 1px solid black; */
+  position: relative;
+}
+.banner-img img {
+  width: 300px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.banner-article {
+display: flex;
+flex-direction: column;
+gap: 15px;
+padding: 10px;
+width: 500px;
+
+position: relative;
+}
+.title-and-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; 
+  width: 550px;
+} 
+.btns{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.title-and-btns button {
+  font-size: 12px;
+  border-radius: 3px;
+  background-color: #6a6a6a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  padding: 10px;
+  color: white;
+  transform: translateX(-50px);
+}
+.title-and-editBtn button img {
+  width: 16px;
+}
+.title-and-editBtn button span {
+  font-size: 15px;
+  color: white;
+}
+.calendar-and-like {
+  font-size: 15px;
+  color: black;
+  display: flex;
+  gap: 20px;
+}
+.calendar {
+  display: flex;
+  gap: 10px;
+}
+.calendar .calendar-icon-wrapper {
+  display: flex;
+  gap:2px;
+}
+.calendar img {
+  width: 15px;
+}
+.like {
+  display: flex;
+  gap:2px;
+}
+.like img {
+  width: 15px;
+}
+.like .like-value {
+  font-size: 15px;
+  color: black;
+}
+.description {
+  margin-bottom: 5px;
+}
+.description-title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom:5px;
+}
+.description-detail {
+  font-size: 15px;
+  line-height: 1.3;
+  width: 500px;
+}
+/* .certi-list {
+} */
+.certi-title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom:5px;
+}
+.certi-detail {
+  font-size: 15px;
+  line-height: 1.3;
+}
+.join-sticker {
+  color: #a1b60a;
+  background-color: #f8fae9;
+  width: 120px;
+  font-size: 15px;
+  padding: 10px;
+
+  position: absolute;
+  top: 210px;
+  left: 370px;
+}

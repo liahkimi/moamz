@@ -1,0 +1,142 @@
+*{
+    color: #6a6a6a;
+}
+body {
+    height: 100%;
+    background-color: #f7f7f7;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chat-room-container {
+    background-color: white;
+    margin: 10px auto;
+    padding: 10px;
+    width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px #6a6a6a6a;
+}
+
+/* 채팅방 상단 */
+.chat-room-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dddddd;
+    padding: 10px;
+}
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.chat-room-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}
+.menu-btn {
+    border: none;
+    background-color: white;
+}
+.menu-btn img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* 채팅방 내용 부분 */
+.chat-room-content {
+    padding: 20px 0;
+    min-height: 500px;
+    max-height: 500px;
+    /* 자동스크롤 */
+    overflow-y: auto;
+}
+.chat-room-content::-webkit-scrollbar {
+    display: none; /* 스크롤바 숨기기 */
+}
+.chat-message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.message-wrap {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.message-time {
+    font-size: 0.75em;
+    color: #999;
+}
+
+/* 받은메시지 */
+.chat-sender {
+    font-size:16px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.received {
+    align-items: flex-start;
+}
+.message-content-receive {
+    background-color: #dddddd;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin-right: 5px;
+}
+/* 보낸매세지 */
+.sent {
+    align-items: flex-end;
+    display: flex;
+}
+.message-content-sent {
+    background-color: #cedd61;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin-left: 5px;
+}
+
+/* 메세지 전송 부분 */
+.chat-room-input {
+    display: flex;
+    padding: 10px;
+}
+.message-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    flex-grow: 1;
+}
+.send-btn {
+    background-color: #cedd61;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* 목록으로 이동 버튼 */
+.move-list-btn {
+    background-color: #ddd;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold; 
+    border-radius: 20px; 
+    cursor: pointer;
+    box-shadow: 0 4px 4px #6a6a6a6a;
+    margin-bottom: 30px;
+}

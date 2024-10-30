@@ -1,0 +1,146 @@
+
+.product-write-container {
+    width: 700px;
+    margin: 20px auto ;
+}
+/* 제목 영역 */
+.title-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.write-title {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.write-description {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+/* 글 작성 영역 */
+.write-content-container {
+    border-radius: 10px;
+    background-color: #EFEBEA;
+    padding: 20px 10px;
+}
+.write-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.write-item input,
+.write-item select {
+    height: 28px;
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+.write-item input:focus {
+    border: 1px solid #9E7E6F;
+}
+.category-wrap,
+.price-wrap,
+.quantity-wrap,
+.weight-wrap {
+    display: flex;
+    align-items: center;
+}
+.category-wrap,
+.quantity-wrap {
+    margin-right: 30px;
+}
+.write-item.product-detail {
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+/* 라벨 설정 */
+.write-label {
+    width: 120px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #9E7E6F;
+}
+.product-date {
+    width: 180px;
+}
+/* textarea */
+textarea { 
+    width: 540px;
+    height: 110px;
+    /* 크기 조절 버튼 지우기 */
+    resize: none; 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 0 10px;
+}
+/* 썸네일 영역 */
+.thumbnail-container {
+    display: flex;
+}
+.write-item.thumbnail {
+    flex-direction: column;
+}
+.write-item.thumbnail p {
+    margin-bottom: 8px;
+}
+.write-label.thumb {
+    width: 100%;
+}
+.thumbnail-wrap {
+    position: relative;
+    /* margin-right: auto; */
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.thumbnail-img {
+    background-image: url("../../../img/mypage/seller/thumbnail.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+}
+.thumbnail-cancle-btn {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    background-image: url("../../../img/mypage/seller/thumbnail_cancle_btn.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
+    right: 5px;
+    top: 5px;
+}
+/* 버튼 영역 */
+.btn-wrap {
+    text-align: right;
+}
+.btn-wrap button {
+    width: 60px;
+    height: 30px;
+    font-size: 17px;
+    border-radius: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+#cancle-btn {
+    border: 1px solid #ddd;
+    background-color: white;
+}
+#write-btn {
+    border: none;
+    background-color: #947160;
+    color: white;
+}

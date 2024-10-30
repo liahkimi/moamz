@@ -1,0 +1,321 @@
+input{
+  border: 1px solid black;
+  padding: 0;
+}
+#signup-container{
+  /* border: 1px solid black; */
+  width: 1000px;
+  height: 1400px;
+  margin: auto;
+}
+#signup-logo{
+  width: 196px;
+  height: 96px;
+  margin: 0 auto;
+}
+#signup-user{
+  text-align: center;
+  margin-top: 50px;
+  font-size: 20px;
+  color: #947160;
+}
+
+
+#singup-profile{
+  /* border: 1px solid black; */
+  width: 60px;
+  height: 50px;
+  margin: 0 auto;
+  margin-top: 8px;
+}
+div.image{
+  background-image: url("../../../img/user/loginprofile.jpg");   /*기본으로 보일 사진*/
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 60px;
+  height: 50px;
+  cursor: pointer;
+  /* border: 1px solid gray; */
+}
+div.cancle{
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  background-image: url("thumbnail_cancle_btn.png"); /*취소버튼 경로이동*/
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0 auto;
+  width: 30px;
+  height: 30px;
+  right: 15px;
+  top: 0;
+}
+
+#signup-wrap{
+  /* border: 1px solid black; */
+  width:600px;
+  height: 1100px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+#signup-email{
+  /* border: 1px solid red; */
+  width: 600px;
+}
+/* input과 button 사이즈가 동일하지 않음 */
+#email-input{
+  width: 500px;
+  height: 40px;
+  border-radius: 8px;
+  /* border-color: #dddddd; */
+}
+#email-btn{
+  background-color: #CEDD61;
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+}
+/* #signup-wrap>#email-btn::placeholder{
+  color: white;
+} */
+#password-input{
+  width: 580px;
+  height: 40px;
+  border-radius: 8px;
+}
+#password-recheck{
+  width: 580px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+#signup-phone{
+  /* border: 1px solid red; */
+  width: 600px;
+  margin-top: 50px;
+  position: relative;
+}
+#name-input{
+  width: 580px;
+  height: 40px;
+  border-radius: 8px;
+}
+#input-phone{
+  width: 500px;
+  height: 40px;
+  border-radius: 8px;
+}
+#phone-btn{
+  background-color: #CEDD61;
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+}
+#recheck-phone{
+  width: 500px;
+  height: 40px;
+  border-radius: 8px;
+}
+#signup-phone>span{
+  position: absolute;
+  right: 110px;
+  top: 95px;
+  color: #6a6a6a;
+  font-size: 15px;
+}
+#recheck-btn{
+  background-color: #CEDD61;
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+}
+
+#signup-nickname{
+  /* border: 1px solid red; */
+  width: 600px;
+  margin-top: 50px;
+}
+#nickname-input{
+  width: 500px;
+  height: 40px;
+  border-radius: 8px;
+  /* border-color: #dddddd; */
+}
+#nickname-btn{
+  background-color: #CEDD61;
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+}
+#birthday-input{
+  width: 580px;
+  height: 40px;
+  border-radius: 8px;
+}
+#signup-nickname>span{
+  color: #555;
+  font-size: 15px;
+}
+#signup-nickname>label{
+  color: #555;
+  font-size: 15px;
+}
+
+#signup-post{
+  /* border: 1px solid red; */
+  width: 600px;
+  margin-top: 50px;
+}
+#post-input{
+  width: 500px;
+  height: 40px;
+  border-radius: 8px;
+  /* border-color: #dddddd; */
+}
+#post-btn{
+  background-color: #CEDD61;
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+}
+#address{
+  width: 580px;
+  height: 40px;
+  border-radius: 8px;
+}
+#detail-address{
+  width: 580px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+#signup-agreement{
+  /* border: 1px solid red; */
+  width: 600px;
+  margin-top: 50px;
+}
+/* ab 테스트용 */
+#info-check, #location-based{
+  width: 580px;
+  height: 40px;
+  border: 1px solid #555;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  /* 수평맞추기 align-items 
+    display: flex;을 사용해야함
+  */
+  font-size: 12px;
+  color: #555;
+  cursor: pointer;
+}
+#info-click{
+  font-size: 13px;
+  color: #6a6a6a;
+  font-weight: bold;
+  font-size: 10px;
+}
+#location-click{
+  font-size: 13px;
+  color: #6a6a6a;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+
+  /* 모달 안의 콘텐츠 */
+  .modal {
+    display: none; 
+    position: fixed; /* 고정 위치 */
+    z-index: 1; /* 다른 내용 위에 표시 */
+    left: 0;
+    top: 0;
+    width: 100%; /* 전체 화면 */
+    height: 100%; /* 전체 화면 */
+    background-color: rgba(0,0,0,0.5); /* 반투명한 배경 */
+  }
+  .modal-content {
+    background-color: white;
+    margin: 15% auto; /* 가운데 정렬 */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 50%; /* 너비 설정 */
+    /* height: 70%; */
+    max-width: 600px;
+    border-radius: 1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align:left;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  .modal-content  h1{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+.custom-select{
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 5px;
+    border: 2px solid #aaa;
+    border-radius: 5px;
+    width: 200px;
+    margin-bottom: 20px;
+  }
+
+  /* 닫기 버튼 */
+  .close {
+    color: #aaa;
+    float: right;
+    position: relative;
+    top: -20px; /* 위로 10px 이동 */
+    right: -10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+#subminBtn, #subminBtn1{
+  width: 50px;
+  height: 20px;
+  background-color: #CEDD61;
+  color: #000;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}  
+
+
+
+
+#signup-box{
+  margin-top: 50px;
+  text-align: center;
+}
+#signup-but{
+  width: 500px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #CEDD61;
+  text-align: center;
+  font-size: 15px;
+  color: #ffffff;
+  border: none;
+}

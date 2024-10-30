@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../static/css/reset2.css" />
+    <link
+      rel="stylesheet"
+      href="../../../static/css/community/socialing/socialingDetail.css"
+    />
+    <script
+      defer
+      src="../../../static/js/community/sharing/sharingDetail.js"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header id="header"></header>
+    <main>
+      <!-- 상단 이미지 영역 -->
+      <!-- ✅여기 그냥 빼자고 건의.. -->
+      <div class="top-img">
+        <img
+          src="../../../static/img/community/socialing/community.png"
+          alt="나눔상세_상단이미지"
+        />
+      </div>
+      <!-- 게시글 영역 -->
+      <div class="post-container">
+        <!-- 게시글 정보 -->
+        <div class="post-info-wrap">
+          <div class="post-title">우리 함께 모여 저녁식사 어때요?</div>
+          <div class="user-info-wrap">
+            <div class="host-box">
+              <img
+                src="../../../static/img/chat/chatProfileImg(hj).PNG"
+                alt="프로필사진"
+              />
+              <span class="user-nickname">역삼동불주먹</span>
+            </div>
+            <div class="socialinginfo-and-chat">
+              <div class="socialing-info-wrap">
+                <div class="socialing-period">
+                  <img
+                    src="../../../static/img/community/socialing/calendar.png"
+                    alt="calendarIcon"
+                  />
+                  <span class="socialing-start-date">2024/10/18</span>-<span
+                    class="socialing-end-date"
+                    >2024/11/15</span
+                  >
+                </div>
+                <div class="socialing-personnel">
+                  <img
+                    src="../../../static/img/community/socialing/people.png"
+                    alt="peopleIcon"
+                  />
+                  <span class="socialing-current-personnel">2</span>/<span
+                    socialing-maximum-personnel
+                    >8</span
+                  >
+                </div>
+                <div class="socialing-marks">
+                  <div class="socialing-age-mark">
+                    <span class="socialing-minimum-age">20</span>-<span
+                      class="socialing-maximum-age"
+                      >30</span
+                    >대
+                  </div>
+                  <div class="socialing-sex">성별무관</div>
+                </div>
+              </div>
+              <button class="chat-btn" onclick="location.href='../../chat/chatRoom.html'">
+                <img
+                  src="../../../static/img/community/socialing/chat.png"
+                  alt="chatBtnImg"
+                />
+                <div class="chat-btn-text">호스트와 채팅하기</div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- 게사글 내용 -->
+        <div class="post-content-wrap">
+          <p>
+            혼자 저녁을 드시는 분 맛집을 좋아하시는 분 모두모두 환영합니다!!
+            <br />
+            부담없이 소소한 얘기 나누면서 맛난 음식과 술 드실 분!! 등산은
+            처음인데 가을산 한번 느껴보고 싶으신분!! 코스가 어렵지 않다고 하니
+            같이 한번 도전해보아요!!<br />
+            많이 먹든 적게 먹든 비용은 결제할때 딱! 1/N로 계산합니다!! 눈치보지
+            말고 먹고 싶은 메뉴 다 시켜봅시당~~ 여러명이 모이면 생각보다
+            저렴하게 다양한 메뉴 먹을 수 있다구요🙋‍♀️
+          </p>
+          <img
+            width="500px"
+            height="400px"
+            src="../../../static/img/community/socialing/dining.webp    "
+          />
+        </div>
+      </div>
+      <!-- 목록으로 이동 버튼 -->
+      <button
+        type="button"
+        class="move-list-btn"
+        onclick="location.href='../../chat/chatRoom.html'"
+      >
+        소셜링 단체채팅 참여하기
+      </button>
+      <button
+      type="button"
+      class="move-list-btn"
+      onclick="location.href='socialingList.html'"
+    >
+      소셜링 목록으로 이동하기
+    </button>
+    </main>
+    <footer id="footer"></footer>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    $(function () {
+      $("#header").load("../../main/fragment/header/userHeaderLogin.html");
+      $("#footer").load("../../main/fragment/footer/userFooter.html");
+    });
+  </script>
+</html>

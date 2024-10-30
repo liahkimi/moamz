@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>에코프로젝트-수정</title>
+    <link rel="stylesheet" href="../../static/css/reset2.css" />
+    <link rel="stylesheet" href="../../static/css/admin/adminEcoModify.css" />
+  </head>
+  <body>
+    <header id="adminHeader"></header>
+    <!-- 네비바 + 메인화면 -->
+    <main>
+      <div class="nav-and-content-box">
+        <nav id="adminNavBar"></nav>
+        <!-- 우측 녹색 메인 화면-->
+        <div class="content-box">
+          <!-- 타이틀 : dashboard -->
+          <div class="page-title-box">
+            <div class="page-title">에코프로젝트 게시글 수정하기</div>
+          </div>
+          <!-- 흰색 게시판 전체 -->
+          <div class="content">
+            <div class="write-wrap">
+              <div class="title-and-file__wrapper">
+                <div class="file-upload-box">
+                    <div class="file-upload-title">📝 대표사진*</div>  
+                    <label for="file">
+                      <div class="file-upload-description">클릭하세요</div>
+                        <img src="../../static/img/admin/fileImg.png">
+                    </label>
+                    <input type="file" id="file"  style="display: none;">
+                    <p>
+                  </div>
+                  <div class="title-box">
+                    <span class="title">📝 에코프로젝트 제목*</span>
+                    <input class="title-value" type="text" placeholder="기존 게시물 제목" disabled/>
+                  </div>
+                  <div class="join-number-box">
+                    <span class="join-number">📝 참여횟수*</span>
+                        <select name="join" id="join">
+                            <option value="dafault">참여횟수를 선택해주세요</option>
+                            <option value="once">한번만 참여 가능</option>
+                            <option value="manytimes">여러번 참여 가능</option>
+                        </select>
+                  </div>
+                  
+              </div>
+              <div class="period">
+                <div class="start-date-box">
+                    <span class="start-date">📝 시작날짜*</span>
+                    <input class="start-date-value"  type="datetime-local">
+                </div>
+                <div class="end-date-box">
+                    <span class="end-date">📝 종료날짜*</span>
+                    <input class="end-date-value"  type="datetime-local">
+                </div>
+              </div>
+              
+              <div class="detail-box">
+                <span class="detail">📝 프로젝트 소개*</span>
+                <textarea name="detail" id="detail" rows="10" cols="100"></textarea>
+              </div>
+              <div class="certify-box">
+                <span class="certify">📝 인증사항*</span>
+                <textarea name="certify" id="certify" rows="4" cols="100"></textarea>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <button class="cancle-btn" id="cancle-btn">취소</button>
+              <button class="register-btn" id="register-btn">등록</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    $(function () {
+      $("#adminNavBar").load("adminNavBar.html");
+      $("#adminHeader").load("adminHeader.html");
+    });
+  </script>
+  <script src="../../static/js/admin/adminEcoModify.js"></script>
+</html>

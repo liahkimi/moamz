@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/reset2.css">
+    <link rel="stylesheet" href="../../../static/css/mypage/seller/sellerInfoModify.css">
+    <script defer src="../../../static/js/mypage/seller/sellerInfoModify.js"></script>
+    <script defer src="../../../static/js/mypage/seller/sellerInfoModify-Phone.js"></script>
+    <title>마이페이지</title>
+</head>
+<body>
+    <header id="header"></header>
+    <main>
+        <div class="product-write-container">
+            <!-- 제목 영역 -->
+            <div class="title-wrap">
+                <div class="write-title">판매자 개인정보 변경</div>
+            </div>
+            <!-- 정보 변경 영역 -->
+            <div class="write-content-container">
+                <form method="post" action="">
+                    <!-- 변경 안되는 영역 -->
+                    <div class="cannot-modify-container">
+                        <div class="modify-item">
+                            <label class="modify-label" for="user-name">이름</label>
+                            <input id="user-name" type="text" value="황진" disabled>
+                        </div>
+                        <div class="modify-item">
+                            <label class="modify-label" for="user-id">아이디</label>
+                            <input id="user-id" type="text" value="seller123" disabled>
+                        </div>
+                        <div class="modify-item">
+                            <label class="modify-label" for="user-name">휴대폰번호</label>
+                            <input id="user-name" type="text" value="01012341234" disabled>
+                        </div>
+                    </div>
+                    <!-- 비밀번호 변경 -->
+                    <div class="password-modify-container">
+                        <div>
+                            <label class="modify-item modify-label" for="inputPw">비밀번호 변경하기</label>
+                            <p class="modify-item" id="available-special-char">사용 가능한 특수문자 : @$!%*?&</p>
+                        </div>
+                        <input id="inputPw" class="modify-item" type="password" placeholder="비밀번호를 입력하세요. (문자, 숫자 포함 8-20자)">
+                        <p id="password-message"></p>
+                        <input id="password-check" class="modify-item" type="password" placeholder="비밀번호를 다시 입력해주세요.">
+                        <p id="confirm-message"></p>
+                        <input type="button" id="pw-modify-btn" value="비밀번호 변경" disabled/>
+                    </div>
+                    <!-- 휴대폰번호 변경 -->
+                    <div class="phone-modify-container">
+                        <label class="modify-item modify-label" for="input-phone-num">휴대폰번호 변경하기</label>
+                        <div class="modify-item">
+                            <input id="input-phone-num" type="number" placeholder="휴대폰번호 입력">
+                            <input type="button" id="msg-submit-btn" value="전송">
+                        </div>
+                        <div class="modify-item">
+                            <input id="certification-num" type="number" placeholder="인증번호 입력">
+                            <input type="button" id="certicifation-num-check-btn" value="확인">
+                        </div>
+                        <p id="success-message">d</p>
+                        <input type="button" id="phone-modify-btn" value="휴대폰번호 변경" disabled/>
+                    </div>
+                </form>
+                <!-- 나가기 버튼 -->
+                <div class="exit-btn-container">
+                    <button type="button" id="cancle-btn" class="move-list-btn">나가기</button>
+                </div>
+                <!-- 회원탈퇴 -->
+                <div class="withdraw-container">
+                    <span>회원 탈퇴를 원하시나요?</span>
+                    <button type="button" id="withdraw-btn" onclick="location.href='sellerWithdraw.html'">탈퇴</button>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("../../main/fragment/header/sellerHeader.html");
+        $("#footer").load("../../main/fragment/footer/sellerFooter.html");
+    });
+</script>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UserMySharing</title>
+  <link rel="stylesheet" href="../../../static/css/mypage/regular/userMySharing.css">
+  <link rel="stylesheet" href="../../../static/css/reset2.css">
+  <script defer src="../../../static/js/mypage/regular/userMySharing.js"></script>
+</head>
+<body>
+  <header id="header"></header>
+  <main>
+    <div class="mypage-list">
+      <div class="mypage-user">
+        <div class="mypage-user-img">
+        </div>
+        <div class="user-name">역삼동 불주먹</div>
+
+        <!-- user 프로필 정보 -->
+        <div class="mypage-user-info">
+          <div class="mypage-user-info-box">
+            <img src="../../../static/img/mypage/regular/mypageUserPointIcon.png" alt="포인트 아이콘">
+            <span>포인트</span>
+            <span class="info-list">1,000</span>
+          </div>
+          <div class="mypage-user-info-box">
+            <img src="../../../static/img/mypage/regular/mypageUserFoodIcon.png" alt="포인트 아이콘">
+            <span>구해준 음식물</span>
+            <span class="info-list">7.333kg</span>
+          </div>
+          <div class="mypage-user-info-box">
+            <img src="../../../static/img/mypage/regular/mypageUserCo2Icon.png" alt="포인트 아이콘">
+            <span>탄소감축량</span>
+            <span class="info-list">18.25kg</span>
+          </div>
+          <div class="mypage-user-info-box">
+            <img src="../../../static/img/mypage/regular/mypageUserTreeIcon.png" alt="포인트 아이콘">
+            <span>내가 심은 나무</span>
+            <span class="info-list-tree">1 그루</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 마이페이지 메뉴 카테고리 -->
+      <div class="mypage-side-category">
+        <ul>
+            <li class="category-list">
+              <a href="userPurchaseHistory.html">● 상품 구매 내역</a>
+            </li>
+            <li class="category-list">
+              <a href="userMySocialing.html">● MY소셜링</a>
+            </li>
+            <li class="category-list">
+              <a href="userMySharing.html" class="clicked">● My나눔</a>
+            </li>
+            <li class="category-list">
+              <a href="userMyReview.html">● MY리뷰</a>
+            </li>
+            <li class="category-list">
+              <a href="userMyLike.html">● MY좋아요</a>
+            </li>
+            <li class="category-list">
+              <a href="userMyPost.html">● MY게시글</a>
+            </li>
+            <li class="category-list">
+              <a href="#">● 회원정보변경</a>
+            </li>
+            <li class="category-list">
+              <a href="#">● 비밀번호변경</a>
+            </li>
+            <li class="category-list">
+              <a href="#">● 관리자 문의</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  
+    <!-- 내 나눔 관리하기 -->
+     <div class="sharing-wrap">
+      <div class="sharing-box">
+        <!-- 나눔 제목 -->
+        <div class="sharing-box-title">
+          <img src="../../../static/img/mypage/regular/mysharingImg.png" alt="내 나눔 관리하기">
+          <span>내 나눔 관리하기</span>
+        </div>
+        <!-- 나눔 카테고리 -->
+        <div class="sharing-category">
+          <div class="category-btn active" id="sharing-possibility-btn">나눔가능</div>
+          <div class="category-btn" id="sharing-reservation-btn">예약중</div>
+          <div class="category-btn" id="sharing-done-btn">나눔완료</div>
+        </div>
+        <!-- 나눔가능 목록 -->
+        <div class="sharing-possibility-list">
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="reservation-state">예약중으로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="reservation-state">예약중으로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="reservation-state">예약중으로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="reservation-state">예약중으로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="reservation-state">예약중으로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="reservation-state">예약중으로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="reservation-state">예약중으로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="reservation-state">예약중으로 변경</button>
+          </div>
+        </div>
+        <!-- 예약중 -->
+        <div class="sharing-reservation-list hidden">
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="sharing-done">나눔완료로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="sharing-done">나눔완료로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="sharing-done">나눔완료로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="sharing-done">나눔완료로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="sharing-done">나눔완료로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="sharing-done">나눔완료로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="sharing-done">나눔완료로 변경</button>
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+            <button class="sharing-done">나눔완료로 변경</button>
+          </div>
+        </div>
+         <!-- 나눔완료 -->
+        <div class="sharing-done-list hidden">
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+          </div>
+          <div class="sharing-info-list">
+            <div class="sharing-info-list-img">
+              <img src="../../../static/img/mypage/regular/mysharingListImg.png" alt="나눔 이미지">
+            </div>
+            <div class="sharing-info-list-text">
+              <p id="sharing-write-title">삼성 55인치 TV 무료 나눔해요</p>
+              <p>2024.10.05  14:45</p>
+              <div id="detail-btn"><a href="../../community/sharing/sharingDetail.html">자세히 보러가기 &gt;</a></div>
+            </div>  
+          </div>
+        </div>
+      </div>
+     </div>
+  </main>
+  <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
+        $("#footer").load("../../main/fragment/footer/userFooter.html");
+    });
+</script>
+</html>

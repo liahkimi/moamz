@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>에코프로젝트</title>
+    <link rel="stylesheet" href="../../static/css/admin/adminEcoList.css" />
+    <link rel="stylesheet" href="../../static/css/reset2.css" />
+  </head>
+  <body>
+    <header id="adminHeader"></header>
+    <main>
+      <nav id="adminNavBar"></nav>
+      <div class="content-box">
+        <div class="page-title-box">
+          <div class="page-title">에코 프로젝트</div>
+          <button onclick="location.href='adminEcoWrite.html'">
+            글 작성하기
+          </button>
+        </div>
+        <!-- 흰색 게시판 전체 -->
+        <div class="content">
+          <div class="toggle-btn-container">
+            <button id="ongoing-eco__btn" class="active-btn">진행중</button>
+            <button id="finished-eco__btn">완료</button>
+          </div>
+          <!-- 진행중인 에코배너 화면 -->
+          <div id="ongoing-eco">
+            <div class="banner-box" onclick="goToDetailPage()">
+              <div class="banner-img">
+                <img src="../../static/img/admin/plogging.jpg" alt="plogging" />
+              </div>
+              <div class="banner-article">
+                <div class="title-and-btns">
+                  <div class="title">환경을 위한 플로깅 프로젝트!</div>
+                  <div class="btns">
+                    <button class="finish-btn" onclick="changeStatus(event)">프로젝트 종료시키기</button>
+                    <button class="edit-btn" onclick="editEco(event)">
+                      <img
+                        src="../../static/img/admin/whitePencil.png"
+                        alt="editBtn"
+                      />
+                      <span>수정</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="calendar-and-like">
+                  <div class="calendar">
+                    <div class="calendar-icon-wrapper">
+                      <img
+                        src="../../static/img/admin/calendar.png"
+                        alt="calendarIcon"
+                      />
+                      <div class="calendar-text">
+                        <span>24/10/10</span>~<span>24/10/17</span>
+                      </div>
+                    </div>
+                    <div class="calendar-period"><span>1</span>주일간</div>
+                  </div>
+                  <div class="like">
+                    <img
+                      src="../../static/img/admin/heart.png"
+                      alt="heartIcon"
+                    />
+                    <div class="like-value">
+                      <span>22</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="description">
+                  <div class="description-title">프로젝트 소개</div>
+                  <p class="description-detail">
+                    플로깅은 스웨덴에서 시작된 환경 운동으로, 조깅을 하면서
+                    동시에 쓰레기를 줍는<br />
+                    활동입니다. 건강과 환경 보호를 동시에 실천할 수 있는 이 멋진
+                    운동은 조깅보다 더<br />
+                    많은 칼로리를 소모할 수 있습니다.
+                  </p>
+                </div>
+                <div class="certi-list">
+                  <div class="certi-title">인증 사항</div>
+                  <p class="certi-detail">
+                    1.플로깅 활동을 하며 주운 쓰레기 사진<br />
+                    2.소감/후기
+                  </p>
+                </div>
+                <div class="join-sticker">한번만 참여 가능</div>
+              </div>
+            </div>
+            <div class="banner-box">
+              <div class="banner-img">
+                <img src="../../static/img/admin/plogging.jpg" alt="plogging" />
+              </div>
+              <div class="banner-article">
+                <div class="title-and-btns">
+                  <div class="title">환경을 위한 플로깅 프로젝트!</div>
+                  <div class="btns">
+                    <button class="finish-btn">프로젝트 종료시키기</button>
+                    <button class="edit-btn" onclick="editEco(event)">
+                      <img
+                        src="../../static/img/admin/whitePencil.png"
+                        alt="editBtn"
+                      />
+                      <span>수정</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="calendar-and-like">
+                  <div class="calendar">
+                    <div class="calendar-icon-wrapper">
+                      <img
+                        src="../../static/img/admin/calendar.png"
+                        alt="calendarIcon"
+                      />
+                      <div class="calendar-text">
+                        <span>24/10/10</span>~<span>24/10/17</span>
+                      </div>
+                    </div>
+                    <div class="calendar-period"><span>1</span>주일간</div>
+                  </div>
+                  <div class="like">
+                    <img
+                      src="../../static/img/admin/heart.png"
+                      alt="heartIcon"
+                    />
+                    <div class="like-value">
+                      <span>22</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="description">
+                  <div class="description-title">프로젝트 소개</div>
+                  <p class="description-detail">
+                    플로깅은 스웨덴에서 시작된 환경 운동으로, 조깅을 하면서
+                    동시에 쓰레기를 줍는<br />
+                    활동입니다. 건강과 환경 보호를 동시에 실천할 수 있는 이 멋진
+                    운동은 조깅보다 더<br />
+                    많은 칼로리를 소모할 수 있습니다.
+                  </p>
+                </div>
+                <div class="certi-list">
+                  <div class="certi-title">인증 사항</div>
+                  <p class="certi-detail">
+                    1.플로깅 활동을 하며 주운 쓰레기 사진<br />
+                    2.소감/후기
+                  </p>
+                </div>
+                <div class="join-sticker">한번만 참여 가능</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 완료된 에코배너 화면 -->
+          <div id="finished-eco" class="banner-hidden">
+            <div class="banner-box">
+              <div class="banner-img">
+                <img src="../../static/img/admin/plogging.jpg" alt="plogging" />
+              </div>
+              <div class="banner-article">
+                <div class="title-and-editBtn">
+                  <div class="title">환경을 위한 플로깅 프로젝트!</div>
+                </div>
+                <div class="calendar-and-like">
+                  <div class="calendar">
+                    <div class="calendar-icon-wrapper">
+                      <img
+                        class="banner-img"
+                        src="../../static/img/admin/calendar.png"
+                        alt="calendarIcon"
+                      />
+                      <div class="calendar-text">
+                        <span>24/10/10</span>~<span>24/10/17</span>
+                      </div>
+                    </div>
+                    <div class="calendar-period"><span>1</span>주일간</div>
+                  </div>
+                  <div class="like">
+                    <img
+                      src="../../static/img/admin/heart.png"
+                      alt="heartIcon"
+                    />
+                    <div class="like-value">
+                      <span>22</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="description">
+                  <div class="description-title">프로젝트 소개</div>
+                  <p class="description-detail">
+                    플로깅은 스웨덴에서 시작된 환경 운동으로, 조깅을 하면서
+                    동시에 쓰레기를 줍는<br />
+                    활동입니다. 건강과 환경 보호를 동시에 실천할 수 있는 이 멋진
+                    운동은 조깅보다 더<br />
+                    많은 칼로리를 소모할 수 있습니다.
+                  </p>
+                </div>
+                <div class="certi-list">
+                  <div class="certi-title">인증 사항</div>
+                  <p class="certi-detail">
+                    1.플로깅 활동을 하며 주운 쓰레기 사진<br />
+                    2.소감/후기
+                  </p>
+                </div>
+                <div class="join-sticker">한번만 참여 가능</div>
+              </div>
+            </div>
+            <div class="banner-box">
+              <div class="banner-img">
+                <img src="../../static/img/admin/plogging.jpg" alt="plogging" />
+              </div>
+              <div class="banner-article">
+                <div class="title-and-editBtn">
+                  <div class="title">환경을 위한 플로깅 프로젝트!</div>
+                </div>
+                <div class="calendar-and-like">
+                  <div class="calendar">
+                    <div class="calendar-icon-wrapper">
+                      <img
+                        src="../../static/img/admin/calendar.png"
+                        alt="calendarIcon"
+                      />
+                      <div class="calendar-text">
+                        <span>24/10/10</span>~<span>24/10/17</span>
+                      </div>
+                    </div>
+                    <div class="calendar-period"><span>1</span>주일간</div>
+                  </div>
+                  <div class="like">
+                    <img
+                      src="../../static/img/admin/heart.png"
+                      alt="heartIcon"
+                    />
+                    <div class="like-value">
+                      <span>22</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="description">
+                  <div class="description-title">프로젝트 소개</div>
+                  <p class="description-detail">
+                    플로깅은 스웨덴에서 시작된 환경 운동으로, 조깅을 하면서
+                    동시에 쓰레기를 줍는<br />
+                    활동입니다. 건강과 환경 보호를 동시에 실천할 수 있는 이 멋진
+                    운동은 조깅보다 더<br />
+                    많은 칼로리를 소모할 수 있습니다.
+                  </p>
+                </div>
+                <div class="certi-list">
+                  <div class="certi-title">인증 사항</div>
+                  <p class="certi-detail">
+                    1.플로깅 활동을 하며 주운 쓰레기 사진<br />
+                    2.소감/후기
+                  </p>
+                </div>
+                <div class="join-sticker">한번만 참여 가능</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <button class="prev">Previous</button>
+          <button class="page active">1</button>
+          <button class="page">2</button>
+          <button class="page">3</button>
+          <button class="next">Next</button>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    $(function () {
+      $("#adminNavBar").load("adminNavBar.html");
+      $("#adminHeader").load("adminHeader.html");
+    });
+  </script>
+  <script src="../../static/js/admin/adminEcoList.js"></script>
+</html>

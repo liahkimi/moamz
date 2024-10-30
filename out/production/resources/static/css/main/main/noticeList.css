@@ -1,0 +1,95 @@
+*{
+  margin:0;
+  padding:0;
+  font-family: "Pretendard-Variable";
+}
+
+main{
+  width: 700px;
+  height: 1000px;
+  margin: auto;
+}
+
+.noticeList-title{
+  width: 700px;
+  height: 200px; 
+  margin: auto;
+  margin-top: 30px;
+}
+
+.noticeList-title>h1{
+  text-align: center;
+  font-size: 50px;
+}
+
+.noticeList-title>p{
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.noticeList-title-search{
+  display: flex;
+}
+
+.noticeList-title-search>input{
+  width: 393px;
+  height: 32px;
+  margin-top: 20px;
+  margin-left: 150px;
+  border-radius: 10px;
+  border: 2.49px solid #CEDD61;
+  background-color: white;
+}
+
+.noticeList-title-search>button{
+  width: 44px;
+  height: 32px;
+  margin-top: 20px;
+  /* margin-left: 10px; */
+  border-radius: 10px;
+  border: 2.49px solid #CEDD61;
+  color: white;
+  background-color: #CEDD61;
+  cursor: pointer;
+}
+
+.noticeList-list-wrap{
+  width: 700px;
+  height: 605px;
+  margin: auto;
+}
+
+.noticeList-list{
+  display: flex;
+  width: 700px;
+  height: 42px;
+  border: 1px solid #dddddd;
+  /* text-align: center; */
+}
+
+.noticeList-list .num{
+  width: 50px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.noticeList-list .title{
+  width: 450px;
+  margin-top: 10px;
+}
+
+.noticeList-list .date{
+  width: 90px;
+  margin-top: 10px;
+}
+
+.noticeList-list .writer{
+  width: 55px;
+  margin-top: 10px;
+}
+
+.noticeList-list .counter{
+  width: 55px;
+  margin-top: 10px;
+}

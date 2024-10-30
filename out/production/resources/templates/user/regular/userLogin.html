@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>userLogin</title>
+  <link rel="stylesheet" href="../../../static/css/user/regular/userLogin.css">
+  <link rel="stylesheet" href="../../../static/css/user/regular/userResetPassword.css">
+  <script defer src="../../../static/js/user/regular/userLogin.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <header id="header"></header>
+
+  <div id="login-user">
+
+    <div id="login-logo_wrap">
+      <div id="login-logo">
+        <img src="../../../static/img/user/logo-green.jpg">
+      </div>
+    </div>
+
+    <div id="login-choice">
+      <button class="login-choice_but" onclick="location.href='../../user/regular/userLogin.html'">일반 로그인</button>
+      <button class="login-choice_but" onclick="location.href='../../user/seller/sellerLogin.html'"> 판매자 로그인</button>
+    </div>
+    <form action="">
+      <div id="login_box">
+        <div id="login_box_text">
+          <input class="login_text" type="email" placeholder="이메일 주소를 입력해 주세요">
+          <input class="login_text" type="password" placeholder="비밀번호">
+        </div>
+        <div id="login-box_btn">
+          <button id="login_but">로그인</button>
+        </div>
+        <div id="kakaologin-box">
+          <div id="kakaologin">  
+            <img src="../../../static/img/user/kakaoLogin.jpg" alt="">
+          </div>
+        </div>
+        <div class="login-a">
+          <div id="id-find">
+            <a href="../regular/userFindId.html">아이디 찾기</a> /
+            <a href="../regular/userFindPassword.html">비밀번호 찾기</a>
+          </div>
+          <div id="sing-up">
+            <a href="../regular/userSignup.html">일반 회원가입</a> /
+            <a href="../seller/sellerSignup.html">판매자 회원가입</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <footer id="footer"></footer>
+</body>
+<script>
+  $(function() {
+      $("#header").load("../../main/fragment/header/userHeaderLogin.html");
+      $("#footer").load("../../main/fragment/footer/userFooter.html");
+  });
+</script>
+</html>  
