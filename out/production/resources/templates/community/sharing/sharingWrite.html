@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/reset2.css">
+    <link rel="stylesheet" href="../../../static/css/community/sharing/sharingWrite.css">
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+    <script defer src="../../../static/js/community/sharing/sharingWrite.js"></script>
+    <title>나눔게시판</title>
+</head>
+<body>
+    <header id="header"></header>
+    <main>
+        <section class="write-header-section">
+            <div class="write-title">나눔 글 작성하기</div>
+            <div class="write-description">나눔 상태는 마이페이지> MY나눔에서 관리 가능합니다.</div>
+        </section>
+        <section class="write-content-section">
+            <form method="post" action="">
+                <div class="title-wrap">
+                    <span class="write-form-title">📝 제목*</span>
+                    <input type="text" placeholder="제목을 작성해주세요." required/>
+                </div>
+                <div class="edit-wrap">
+                    <span class="write-form-title">📝 상세내용*</span>
+                    <textarea id="summernote" name="content"></textarea>
+                </div>
+                <div class="btn-wrap">
+                    <button id="cancle-btn" type="button">취소</button>
+                    <button id="write-btn" type="submit">등록</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <footer id="footer"></footer>
+</body>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+<script>
+    $(function() {
+        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
+        $("#footer").load("../../main/fragment/footer/userFooter.html");
+    });     
+</script>
+
+</html>

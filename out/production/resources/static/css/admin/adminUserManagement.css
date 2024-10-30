@@ -1,0 +1,248 @@
+/* a 태그 기본 스타일 제거 */
+a {
+    color: inherit; /* 링크 색상 제거 */
+    text-decoration: none; /* 밑줄 제거 */
+    background: none; /* 배경색 제거 */
+    outline: none; /* 포커스시 나타나는 외곽선 제거 */
+}
+/* 버튼 reset css */
+button{
+    background: none;      /* 배경 제거 */
+    border: none;          /* 테두리 제거 */
+    padding: 0;            /* 기본 패딩 제거 */
+    margin: 0;             /* 기본 마진 제거 */
+    box-shadow: none;      /* 그림자 제거 */
+    cursor: pointer;       /* 마우스를 올리면 클릭 커서가 나타나도록 설정 */
+    outline: none;         /* 포커스시 나타나는 외곽선 제거 */
+}
+
+header{
+    height: 70px;
+    background-color: #ffffff;
+    align-items: center;/* 높이를 맞춰 중앙 정렬 */
+    box-shadow: 0px 2.49px 7.18px rgba(0, 0, 0, 0.16);  
+    position: relative;
+    display:flex;
+    justify-content: space-between;
+}
+main{
+    /* width: 1000px; */
+    margin: 0 auto;
+    height: 100vh;
+}
+
+/* 로고 */
+header .admin-logo{
+    display: flex;
+    align-items: center;  
+    padding-left: 20px;
+}
+/* 로고 이미지 */
+header .admin-logo img{
+    width: 35px;
+    margin-right: 10px;
+}
+/* 타이틀 */
+ header .admin-logo div{
+    color: #0B3051; 
+    font-weight: bold;
+    font-size: 25px;
+}
+/* 나가기 버튼 box */
+ header .admin-logout__btn{
+    width: 60px;
+    height: 25px;
+    border: 1px solid #0B3051;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 70px;
+}
+/* 나가기 폰트 */
+header .admin-logout__btn a{
+    font-size: 17px; 
+    color:#1B494C;
+}
+header .admin-logout__btn:hover{
+    background-color: #1B494C;
+}
+header .admin-logout__btn a:hover{
+    color:white;
+    background-color: #1B494C;
+}
+
+
+/* 좌측 네비바 */
+nav{
+    background-color: #ffffff;
+}
+/* 네비바 전체 */
+nav ul{
+    padding-top: 30px;
+    padding-left: 13px;
+
+    /* li들간에 위아래 간격 9px주기 */
+    display: flex;
+    flex-direction: column;
+    gap:25px
+}
+nav ul li{
+    display: flex;
+    height: 26px;
+    align-items: center ;
+    margin-right: 10px;
+}
+nav ul li .nav-logo{
+    margin-right: 11.76px;
+}
+
+ nav ul li .nav-logo img{
+    width: 20px;
+}
+ nav ul li .nav-title a{
+    font-size: 20px;
+    color: #5D7285;
+}
+ nav ul li{
+    width: 151px;
+    height: 45px;
+}
+nav ul li:hover{
+    background-color: #F0F6FF;
+    font-weight: bold;
+}
+nav ul li a:hover{
+    background-color: #F0F6FF;
+    font-weight: bold;
+}
+
+/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+
+/* 네비바+메인화면의 부모인 main */
+main{
+    display: flex;
+}
+/* 타이틀 + 카운팅카드뷰 + 에코프젝 + 그래프의 부모 */
+main .content-box{
+    display: flex;
+    flex-direction: column;
+    background-color: #1B494C;
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+/* 타이틀 */
+main .content-box .page-title-box{
+   position: relative;
+   top: 30px;
+   left: 8px;
+   margin-bottom: 30px;
+}
+main .content-box .page-title-box .page-title{
+    font-size:25px;
+    color: #ffffff;
+}
+/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+/* 검색창 */
+.search-input{
+    position: relative;
+    width: 180px;
+    height: 20px;
+    left: 81%;
+    top: -0.5%;
+}
+.search-input input{
+    height: 100%;
+   width: 180px;
+    padding: 1px;
+}
+/* 검색창 placeholder 디자인 */
+.search-input input::placeholder{
+    font-size: 15px;
+    color:#c5bdbd;
+    padding-left:10px;
+}
+/* 검색창 아이콘 */
+.search-input .icon{
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    right: 1px;
+    top: 120%;
+    transform: translateY(-90%);/*해당 요소를 자신의 높이의 50%만큰 위로 수직 이동시킴*/
+
+}
+/* 흰색 게시판 전체 */
+.content{
+    width: 95%;
+    height: 700px;
+    background-color: #FFFFFF;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
+}
+/* 토글버튼 css */
+.toggle-btn-container{
+    padding: 8px;
+    padding-left: 20px;
+}
+.toggle-btn-container button{
+    margin-right: 10px;
+}
+
+.toggle-btn-container button{
+    color:#6A6A6A;
+    font-size: 20px;
+}
+/* 버튼 활성화 : .active-btn 클래스 붙었을 때 */
+.toggle-btn-container button.active-btn{
+    color: black;
+    font-weight: bold;
+    border-bottom: 3px solid black;
+    padding-bottom: 3px;
+}
+
+/* 테이블 css */
+
+table {
+    width: 100%;
+    border-collapse: collapse;/* 테두리 겹치기 */
+}
+.table-hidden{
+    display: none;
+}
+th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 15px;
+    box-sizing: border-box; /*패딩 및 테두리 크기 포함*/
+}
+th {
+    color:#FFFFFF;
+    background-color: black;
+    padding:15px;
+}
+/* 페이지네이션 css */
+.pagination{
+    position: absolute;
+    right: 42%;
+    bottom: 9%;
+}
+.page{
+    color: black;
+    font-size: 12px;
+    /* border: 1px solid black; */
+    padding: 2px 5px;
+    border-radius: 4px;
+    background-color: #E0E0E0;
+}
+.pagination .active{
+    color: #ffffff;
+    background-color: #30595C;
+}
+.prev, .next{
+    font-size: 10px;
+    color: #9E9E9E;
+}

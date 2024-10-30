@@ -1,0 +1,85 @@
+.container{
+  width: 1000px;
+  margin: 0 auto;
+}
+.storeDetailReview-wrap2{ 
+  /* border: 1px solid black; */
+}
+.storeDetailReview-total{
+  /* border: 1px solid red; */
+  font-size: 25px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+.storeDetailReview-total-text{
+  margin-bottom: 5px;
+}
+.storeDetailReview-total-star > span{
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+.storeDetailReview-total-star > span > img{
+  margin-left: 7px;
+}
+.storeDetailReview-detail{
+  /* border: 1px solid black; */
+  margin-top: 30px;
+  padding: 10px;
+}
+.storeDetailReview-detail-box-profile > span{
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+.storeDetailReview-detail-box-profile > span > img{
+  margin-right: 5px;
+}
+.storeDetailReview-detail-box-score{ 
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+.storeDetailReview-detail-box-score-star{
+  /* border: 1px solid black; */
+  padding: 8px;
+  margin-right: 8px
+}
+.storeDetailReview-detail-box-score-star > span{
+  font-weight: bold;
+  display: flex;
+  align-items: c;
+  /* justify-content: center; */
+}
+.storeDetailReview-detail-box-score-star > span > img{
+  margin-left: 5px;
+}
+.storeDetailReview-detail-box-score-date{
+  color: #999999;
+}
+.storeDetailReview-detail-box-text{
+  padding: 8px;
+  font-size: 17px;
+  margin-bottom: 3px
+}
+.storeDetailReview-detail-box-product{
+  padding: 8px;
+}
+.storeDetailReview-detail-box-product > span{
+  border: 1px solid black;
+  padding: 2px 7px 4px 7px;
+  border-radius: 6px;
+  color: white;
+  background-color: gray;
+}
+.storeDetailReview-page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.storeDetailReview-page > a{
+  color: black;
+  margin-right: 5px;
+}

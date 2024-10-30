@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+    <link rel="stylesheet" href="../../static/css/reset2.css" />
+    <link rel="stylesheet" href="../../static/css/admin/adminLogin.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo-wrap">
+        <img src="../../static/img/admin/logo.png" alt="logo" />
+      </div>
+    </header>
+    <main>
+      <div class="loginbox-container">
+        <div class="loginbox-wrap">
+          <div class="loginbox-title">
+            <span>관리자 로그인</span>
+          </div>
+          <!-- 추후 action 값 넣기 -->
+          <form action="#">
+            <p>아이디</p>
+            <input type="text" />
+            <p>비밀번호</p>
+            <input type="password" />
+            <div class="quick-link">
+              <!-- moamz 메인화면 연결시키기 -->
+              <a href="#">
+                <img
+                  src="../../static/img/admin/quicklink.png"
+                  alt="quicklink"
+                />
+                <span  style="cursor: pointer;" onclick="location.href='../main/main/mainPage.html'">사이트 바로가기</span>
+              </a>
+            </div>
+            <input type="submit" value="Sign In" id="submit-btn"/>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script src="../../static/js/admin/adminLogin.js"></script>
+</html>

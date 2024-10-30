@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/reset2.css">
+    <link rel="stylesheet" href="../../../static/css/mypage/seller/sellerSalesHistory.css">
+    <script defer src="../../../static/js/mypage/seller/sellerSalesHistory.js"></script>
+    <title>마이페이지</title>
+</head>
+<body>
+    <header id="header"></header>
+    <main>
+        <section id="side-section"></section>
+
+        <!-- 상품판매내역 영역-->
+        <section class="sales-history-section">
+            <!-- 제목 -->
+            <div class="mypage-title-wrap">
+                <img src="../../../static/img/mypage/seller/shopping_bag_icon.png" alt="쇼핑백아이콘">
+                상품판매내역
+            </div>
+            <!-- 상품상태 카테고리 -->
+            <div class="sales-history-menu">
+                <div id="product-ready-btn" class="menu-btn active">상품준비</div>
+                <div id="product-pickup-btn" class="menu-btn">픽업대기</div>
+                <div id="product-completed-btn" class="menu-btn">픽업완료</div>
+            </div>
+            <!-- 상품준비 목록 -->
+            <div id="product-ready-list" class="sales-history-container">
+                <ul>
+                    <li class="product-list">
+                        <div class="order-info">
+                            <span class="order-time">2024/10/14 11:30</span>
+                            <button type="button" class="ready-complete-btn">상품 준비 완료</button>
+                        </div>
+                        <div class="product-info">
+                            <img src="../../../static/img/mypage/seller/cherry_image.png" alt="상품이미지">
+                            <div class="product-wrap">
+                                <p class="list-title">타트체리 진짜 맛있어요!!</p>
+                                <span>7,000</span>원
+                            </div>
+                            <div class="time_wrap">
+                                <p class="list-title">픽업시간</p>
+                                <p>2024/10/13 22:00</p>
+                            </div>
+                            <div class="nickname-wrap">
+                                <p class="list-title">고객명</p>
+                                <p>역삼동불주먹</p>
+                            </div>
+                            <div class="request-wrap">
+                                <p class="list-title">요청사항</p>
+                                <p>조금 늦을수도 있습니다ㅠㅠ 죄송해욥</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p id="move-to-detail" onclick="location.href='sellerSalesDetail.html'">자세히 보러가기 ></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 픽업대기 목록 -->
+            <div id="product-pickup-list" class="sales-history-container hidden">
+                <ul>
+                    <li class="product-list">
+                        <div class="order-info">
+                            <span class="order-time">2024/10/14 11:30</span>
+                            <button type="button" class="pickup-complete-btn">고객 픽업 완료</button>
+                        </div>
+                        <div class="product-info">
+                            <img src="../../../static/img/mypage/seller/cherry_image.png" alt="상품이미지">
+                            <div class="product-wrap">
+                                <p class="list-title">타트체리 진짜 맛있어요!!</p>
+                                <span>7,000</span>원
+                            </div>
+                            <div class="time_wrap">
+                                <p class="list-title">픽업시간</p>
+                                <p>2024/10/13 22:00</p>
+                            </div>
+                            <div class="nickname-wrap">
+                                <p class="list-title">고객명</p>
+                                <p>역삼동불주먹</p>
+                            </div>
+                            <div class="request-wrap">
+                                <p class="list-title">요청사항</p>
+                                <p>조금 늦을수도 있습니다ㅠㅠ 죄송해욥</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p id="move-to-detail" onclick="location.href='sellerSalesDetail.html'">자세히 보러가기 ></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 픽업완료 목록 -->
+            <div id="product-completed-list" class="sales-history-container hidden">
+                <ul>
+                    <li class="product-list">
+                        <div class="order-info">
+                            <span class="order-time">2024/10/14 11:30</span>
+                        </div>
+                        <div class="product-info">
+                            <img src="../../../static/img/mypage/seller/cherry_image.png" alt="상품이미지">
+                            <div class="product-wrap">
+                                <p class="list-title">타트체리 진짜 맛있어요!!</p>
+                                <span>7,000</span>원
+                            </div>
+                            <div class="time_wrap">
+                                <p class="list-title">픽업시간</p>
+                                <p>2024/10/13 22:00</p>
+                            </div>
+                            <div class="nickname-wrap">
+                                <p class="list-title">고객명</p>
+                                <p>역삼동불주먹</p>
+                            </div>
+                            <div class="request-wrap">
+                                <p class="list-title">요청사항</p>
+                                <p>조금 늦을수도 있습니다ㅠㅠ 죄송해욥</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p id="move-to-detail" onclick="location.href='sellerSalesDetail.htmlx'">자세히 보러가기 ></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer id="footer"></footer>
+
+</body>
+<!-- 원래꺼 -->
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+<!-- summernote 삽입했을때 -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("#side-section").load("sellerMypageSide.html");
+        $("#header").load("../../main/fragment/header/sellerHeader.html");
+        $("#footer").load("../../main/fragment/footer/sellerFooter.html");
+    });
+</script>
+</html>

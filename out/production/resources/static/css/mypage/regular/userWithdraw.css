@@ -1,0 +1,91 @@
+main {
+    font-size: 18px;
+    color: #6a6a6a;
+}
+.user-withdraw-container {
+    width: 700px;
+    min-height: 700px;
+    margin: 30px auto ;
+}
+/* 제목 영역 */
+.title-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid #6a6a6a;
+}
+.write-title {
+    color: black;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+/* 탈퇴 영역 */
+.withdraw-content-container {
+    padding: 10px 0;
+}
+.withdraw-content-container>p {
+    margin-bottom: 30px;
+}
+/* 탈퇴 약관 부분 */
+.withdraw-terms-wrap {
+    border: 1px solid #6a6a6a;
+    border-radius: 10px;
+    padding: 20px 20px 15px;
+    margin-bottom: 5px;
+}
+.withdraw-terms-wrap p,
+.withdraw-terms-wrap li {
+    margin-bottom: 5px;
+}
+.withdraw-label {
+    font-weight: bold;
+    color: black;
+    margin-bottom: 10px;
+}
+#withdraw-checkbox {
+    margin-bottom: 30px;
+}
+/* 아이디, 비밀번호 입력 */
+.auth-item {
+    margin-bottom: 10px;
+}
+.auth-item label{
+    width: 60px;
+    color: #A1B60A;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+.auth-item input {
+    padding: 0 10px;
+    width: 500px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+.auth-item input:focus {
+    border: 1px solid #A1B60A;
+}
+/* 버튼 */
+.btn-wrap {
+    margin-top: 50px;
+    text-align: center;
+}
+.btn-wrap button {
+    width: 100px;
+    height: 40px;
+    box-shadow: 0 4px 4px #6a6a6a6a;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+#cancle-btn {
+    margin-right: 5px;
+    background-color: #ddd;
+}
+#withdraw-btn {
+    background-color: #CEDD61;
+}

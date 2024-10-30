@@ -1,0 +1,117 @@
+*{
+    font-family: "Pretendard Variable";
+    margin: 0;
+    padding: 0;
+    color: #6a6a6a;
+}
+
+body {
+    height: 100%;
+    background-color: #f7f7f7;
+
+}
+main>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* 채팅방 토글 버튼 */
+.toggle-btn-container {
+    margin: 10px auto;
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    border: 2px solid #CEDD61;
+    overflow: hidden;
+}
+
+.toggle-btn-container button {
+    width: 50%;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.toggle-btn-container button.active-btn {
+    background-color: #CEDD61;
+    color: black;
+}
+
+/* 채팅방목록 */
+.chat-list {
+    padding: 10px;
+    background-color: white;
+    width: 600px;
+    min-height: 600px;
+    max-height: 600px;
+    /* 자동스크롤 */
+    overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px #6a6a6a6a;
+    margin-bottom: 20px auto;
+}
+.chat-list::-webkit-scrollbar {
+    display: none; /* 스크롤바 숨기기 */
+}
+.chat-list-hidden {
+    display: none;
+}
+ul {
+    list-style: none;
+}
+li {
+    border-bottom: 1px solid #dddddd;
+    /* margin: 10px 0; */
+    padding: 10px 0;
+}
+li:hover {
+    background-color: #F8FAE9;
+}
+.chat-room {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    cursor: pointer;
+}
+.chat-room img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.chat-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.chat-room-name {
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+}
+.last-message {
+    width: 495px;
+    font-size: 16px;
+    white-space: nowrap;        /* 텍스트가 한 줄에만 표시되도록 설정 */
+    overflow: hidden;           /* 넘치는 텍스트를 숨김 */
+    text-overflow: ellipsis;
+}
+.chat-count {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0 5px;
+    width: 30px; 
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 8px;
+    font-size: 14px;
+}

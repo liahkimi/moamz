@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/reset2.css">
+    <link rel="stylesheet" href="../../../static/css/mypage/seller/sellerStoreModify.css">
+    <script defer src="../../../static/js/mypage/seller/sellerStoreModify.js"></script>
+    <title>마이페이지</title>
+</head>
+<body>
+    <header id="header"></header>
+    <main>
+        <div class="product-write-container">
+            <!-- 제목 영역 -->
+            <div class="title-wrap">
+                <div class="write-title">업체 정보 변경</div>
+            </div>
+            <!-- 정보 변경 영역 -->
+            <div class="write-content-container">
+                <form method="post" action="">
+                    <!-- 변경 안되는 영역 -->
+                    <div class="cannot-modify-container">
+                        <div class="modify-item">
+                            <label class="modify-label" for="store-name">업체명</label>
+                            <input id="store-name" type="text" value="오브제 그린 역삼점" disabled>
+                        </div>
+                        <div class="modify-item">
+                            <label class="modify-label" for="business-num">사업자번호</label>
+                            <input id="business-num" type="text" value="123-45-12345" disabled>
+                        </div>
+                    </div>
+                    <!-- 썸네일 영역 -->
+                    <div class="thumbnail-container">
+                        <div class="modify-label">업체 대표사진</div>
+                        <div class="thumbnail-wrap">
+                            <!--lable을 누르면 input type=file이 실행-->
+                            <label for="attach">
+                                <div class="thumbnail-img"></div>
+                            </label>
+                            <div class="thumbnail-cancle-btn"></div>
+                        </div>
+                        <input type="file" id="attach" style="display: none;"> 
+                    </div>
+
+                    <!-- 업체주소 영역-->
+                    <div class="address-modify-container">
+                        <label class="modify-item modify-label">업체주소</label>
+                        <div class="modify-item">
+                            <input id="address-num" type="text" value="12345" disabled>
+                            <input type="button" id="address-search-btn" value="검색">
+                        </div>
+                        <input id="address-detail-1" class="modify-item" type="text" value="서울특별시 강남구 테헤란로 146" disabled>
+                        <input id="address-detail-2" class="modify-item" type="text" value="현익빌딩 3층, 4층">
+                    </div>
+                    <!-- 업체 대표번호 영역 -->
+                    <div class="store-phone-num-container">
+                        <label class="modify-item modify-label" for="store-phone-num">업체 대표번호</label>
+                        <input id="store-phone-num" class="modify-item" type="number" value="025380021">
+                    </div>
+                    <!-- 영업시간 영역 -->
+                    <div class="store-run-hours-container">
+                        <div>
+                            <label class="modify-item modify-label" for="store-open-time">오픈 시간</label>
+                            <input id="store-open-time" type="time"/>
+                        </div>
+                        <div>
+                            <label class="modify-item modify-label" for="store-close-time">마감 시간</label>
+                            <input id="store-close-time" type="time"/>
+                        </div>
+                    </div>
+                    <!-- 업체 상세정보 -->
+                    <div class="store-detail-container">
+                        <label class="modify-item modify-label" for="store-detail">업체 상세정보</label>
+                        <textarea id="store-detail"></textarea>
+                    </div>
+                </form>
+                <!-- 버튼 -->
+                <div class="btn-container">
+                    <button type="button" id="cancle-btn" >나가기</button>
+                    <button type="button" id="store-modify-btn" >변경하기</button>
+                </div>
+                <!-- 회원탈퇴 -->
+                <div class="withdraw-container">
+                    <span>회원 탈퇴를 원하시나요?</span>
+                    <button type="button" id="withdraw-btn" onclick="location.href='sellerWithdraw.html'">탈퇴</button>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("#header").load("../../main/fragment/header/sellerHeader.html");
+        $("#footer").load("../../main/fragment/footer/sellerFooter.html");
+    });
+</script>
+</html>

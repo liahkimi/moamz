@@ -1,0 +1,249 @@
+a {
+  color: inherit; /* 링크 색상 제거 */
+  text-decoration: none; /* 밑줄 제거 */
+  background: none; /* 배경색 제거 */
+  outline: none; /* 포커스시 나타나는 외곽선 제거 */
+}
+button {
+  background: none; /* 배경 제거 */
+  border: none; /* 테두리 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+  margin: 0; /* 기본 마진 제거 */
+  box-shadow: none; /* 그림자 제거 */
+  cursor: pointer; /* 마우스를 올리면 클릭 커서가 나타나도록 설정 */
+  outline: none; /* 포커스시 나타나는 외곽선 제거 */
+}
+main {
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+}
+main .content-box {
+  display: flex;
+  flex-direction: column;
+  background-color: #1b494c;
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+/* 타이틀 */
+main .content-box .page-title-box {
+  position: relative;
+  top: 30px;
+  left: 8px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+ 
+}
+main .content-box .page-title-box .page-title {
+  font-size: 25px;
+  color: #ffffff;
+}
+main .content-box .page-title-box button{
+  font-size: 15px;
+  border-radius: 3px;
+  background-color: #6a6a6a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 25px;
+  padding: 2px;
+  color: white;
+  transform: translateX(-50px);
+
+}
+/* 흰색 게시판 전체 */
+.content {
+  width: 95%;
+  height: 700px;
+  background-color: #ffffff;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 20px;
+}
+
+/* 토글버튼 css */
+.toggle-btn-container {
+  padding: 8px;
+  padding-left: 20px;
+  border-bottom: 1px solid black;
+}
+#ongoing-eco__button{
+  margin-right: 15px;
+}
+.toggle-btn-container button {
+  margin-right: 10px;
+}
+
+.toggle-btn-container button {
+  color: #6a6a6a;
+  font-size: 20px;
+}
+/* 버튼 활성화 : .active-btn 클래스 붙었을 때 */
+.toggle-btn-container button.active-btn {
+  color: black;
+  font-weight: bold;
+  border-bottom: 3px solid black;
+  padding-bottom: 3px;
+}
+.banner-hidden{
+  display: none;
+}
+/* 에코프로젝트 배너 */
+.banner-box {
+  width: 930px;
+  height: 270px;
+  display: flex;
+  border: 1px solid #e4e1e1;
+  /* gap: 20px; */
+  border-radius: 30px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  position: relative;
+  left :200px;
+}
+
+
+.banner-img img {
+  width: 300px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.banner-article {
+display: flex;
+flex-direction: column;
+gap: 15px;
+padding: 10px;
+
+position: relative;
+}
+.title-and-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; 
+  width: 650px;
+} 
+.btns{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.title-and-btns button {
+  font-size: 12px;
+  border-radius: 3px;
+  background-color: #6a6a6a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  padding: 10px;
+  color: white;
+  transform: translateX(-50px);
+}
+.title-and-editBtn button img {
+  width: 16px;
+}
+.title-and-editBtn button span {
+  font-size: 15px;
+  color: white;
+}
+.calendar-and-like {
+  font-size: 15px;
+  color: black;
+  display: flex;
+  gap: 20px;
+}
+.calendar {
+  display: flex;
+  gap: 10px;
+}
+.calendar .calendar-icon-wrapper {
+  display: flex;
+  gap:2px;
+}
+.calendar img {
+  width: 15px;
+}
+.like {
+  display: flex;
+  gap:2px;
+}
+.like img {
+  width: 15px;
+}
+.like .like-value {
+  font-size: 15px;
+  color: black;
+}
+.description {
+  margin-bottom: 5px;
+}
+.description-title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom:5px;
+}
+.description-detail {
+  font-size: 15px;
+  line-height: 1.3;
+}
+.certi-list {
+}
+.certi-title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom:5px;
+}
+.certi-detail {
+  font-size: 15px;
+  line-height: 1.3;
+}
+.join-sticker {
+  color: #a1b60a;
+  background-color: #f8fae9;
+  width: 100px;
+  font-size: 15px;
+  padding: 10px;
+
+  position: absolute;
+  top: 180px;
+  left: 490px;
+}
+
+/* 페이지네이션 */
+.pagination {
+  position: absolute;
+  right: 42%;
+  bottom: 9%;
+}
+.page {
+  color: black;
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+}
+.pagination .active {
+  color: #ffffff;
+  background-color: #30595c;
+}
+.prev,
+.next {
+  font-size: 10px;
+  color: #9e9e9e;
+}
+
+#finished-eco .banner-box{
+  background-color: #dcdbdb;
+  filter: brightness(50%);
+}

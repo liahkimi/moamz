@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공지사항-상세</title>
+    <link rel="stylesheet" href="../../static/css/reset2.css" />
+    <link
+      rel="stylesheet"
+      href="../../static/css/admin/adminNoticeDetail.css"
+    />
+  </head>
+  <body>
+    <header id="adminHeader">
+    </header>
+    <main>
+      <nav id="adminNavBar">   
+      </nav>
+      <!-- 우측 녹색 메인 화면-->
+      <div class="content-box">
+        <!-- 타이틀 : dashboard -->
+        <div class="page-title-box">
+          <div class="page-title">공지사항</div>
+        </div>
+        <!------<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+        <!-- 흰색 게시판 전체 -->
+        <div class="content">
+          <div class="content-title-box">
+            <div class="content-title">
+              [ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.
+            </div>
+            <div class="content-info">
+              <div class="writer">관리자</div>
+              <div class="text-box">
+                <div class="write-date">작성일</div>
+                <div class="write-date-value">24/10/04 23:53</div>
+              </div>
+              <div class="text-box">
+                <div class="view">조회수</div>
+                <div class="view-value">10</div>
+              </div>
+              <div class="btn-wrapper">
+                <button class="btn" type="button" onclick="location.href='adminNoticeModify.html'"">
+                  <img
+                    src="../../static/img/admin/edit.png"
+                    alt="modifyButton"
+                  />
+                  수정
+                </button>
+                <button class="btn" id="delete-btn">
+                  <img
+                    src="../../static/img/admin/trashcan.png"
+                    alt="deleteButton"
+                  />
+                  삭제
+                </button>
+                <button class="btn" type="button" onclick="location.href='adminNoticeList.html'">목록으로 가기</button>
+              </div>
+            </div>
+          </div>
+          <div class="content-detail-box">
+            <p>동해물과백두산이</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+      $(function() {
+          $("#adminNavBar").load("adminNavBar.html");
+          $("#adminHeader").load("adminHeader.html")
+      });
+  </script>
+  <script defer src="../../static/js/admin/adminNoticeDetail.js"></script>
+</html>

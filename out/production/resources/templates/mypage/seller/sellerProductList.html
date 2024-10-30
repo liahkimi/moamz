@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/reset2.css">
+    <link rel="stylesheet" href="../../../static/css/mypage/seller/sellerProductList.css">
+    <script defer src="../../../static/js/mypage/seller/sellerProductList.js"></script>
+    <title>마이페이지</title>
+</head>
+<body>
+    <header id="header"></header>
+    <main>
+        <section id="side-section"></section>
+        <!-- 등록한 상품 영역-->
+        <section class="product-list-section">
+            <!-- 제목 -->
+            <div class="mypage-title-wrap">
+                <img src="../../../static/img/mypage/seller/shopping_bag_icon.png" alt="쇼핑백아이콘">
+                등록한 상품
+            </div>
+            <!-- 상품상태 카테고리 -->
+            <div class="product-menu">
+                <div id="ongoing-menu" class="menu-btn active">판매중</div>
+                <div id="completed-menu" class="menu-btn">판매완료</div>
+            </div>
+            <!-- 판매중 상품목록 -->
+            <div id="ongoing-list" class="product-list-container">
+                <ul>
+                    <li class="product-list">
+                        <!-- 상품명 -->
+                        <div class="product-title-wrap">
+                            <div class="product-name">타트체리 1kg</div>
+                            <div class="btn-wrap">
+                                <button type="button" class="product-completed-btn">판매완료</button>
+                                <button type="button" class="product-delete-btn">삭제</button>
+                            </div>
+                        </div>
+                        <!-- 상품정보 -->
+                        <div class="product-info-wrap">
+                            <img src="../../../static/img/mypage/seller/cherry_image.png" alt="상품이미지">
+                            <div class="product-detail-wrap">
+                                <div class="product-item">
+                                    <p class="product-label">카테고리</p>
+                                    <p>과일</p>
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">상품가격</p>
+                                    <span>8,000</span>원
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">등록수량</p>
+                                    <span>3</span>
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">중량</p>
+                                    <span>1</span>kg
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">소비기한</p>
+                                    <span>24/10/15</span>까지
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">상품등록일</p>
+                                    <span>24/10/14</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="product-item">
+                                    <p class="product-label">상품상세</p>
+                                    <span class="product-detail">타트체리 맛있어요. 타트체리 맛있어요. 타트체리 맛있어요. 타트체리 맛있어요. 타트체리 맛있어요. 맛있어요. 맛있어요.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 자세히보기 버튼 -->
+                        <div>
+                            <p id="move-to-detail" onclick="location.href='sellerProductDetail.html'">자세히 보러가기 ></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 판매완료 상품목록 -->
+            <div id="completed-list" class="product-list-container hidden">
+                <ul>
+                    <li class="product-list">
+                        <!-- 상품명 -->
+                        <div class="product-title-wrap">
+                            <div class="product-name">타트체리 1kg</div>
+                            <div class="btn-wrap">
+                                <button type="button" class="product-completed-btn hidden">판매완료</button>
+                                <button type="button" class="product-delete-btn">삭제</button>
+                            </div>
+                        </div>
+                        <!-- 상품정보 -->
+                        <div class="product-info-wrap">
+                            <img src="../../../static/img/mypage/seller/cherry_image.png" alt="상품이미지">
+                            <div class="product-detail-wrap">
+                                <div class="product-item">
+                                    <p class="product-label">카테고리</p>
+                                    <p>과일</p>
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">상품가격</p>
+                                    <span>8,000</span>원
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">등록수량</p>
+                                    <span>3</span>
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">중량</p>
+                                    <span>1</span>kg
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">소비기한</p>
+                                    <span>24/10/15</span>까지
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">상품등록일</p>
+                                    <span>24/10/14</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="product-item">
+                                    <p class="product-label">상품상세</p>
+                                    <span class="product-detail">타트체리 맛있어요. 타트체리 맛있어요. 타트체리 맛있어요. 타트체리 맛있어요. 타트체리 맛있어요. 맛있어요. 맛있어요.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 자세히보기 버튼 -->
+                        <div>
+                            <p id="move-to-detail" onclick="location.href='sellerProductDetail.html'">자세히 보러가기 ></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("#side-section").load("sellerMypageSide.html");
+        $("#header").load("../../main/fragment/header/sellerHeader.html");
+        $("#footer").load("../../main/fragment/footer/sellerFooter.html");
+    });
+</script>
+</html>

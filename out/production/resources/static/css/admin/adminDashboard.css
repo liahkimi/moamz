@@ -1,0 +1,323 @@
+/* a 태그 기본 스타일 제거 */
+a {
+    color: inherit; /* 링크 색상 제거 */
+    text-decoration: none; /* 밑줄 제거 */
+    background: none; /* 배경색 제거 */
+    outline: none; /* 포커스시 나타나는 외곽선 제거 */
+}
+
+header{
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;
+    align-items: center;/* 높이를 맞춰 중앙 정렬 */
+    box-shadow: 0px 2.49px 7.18px rgba(0, 0, 0, 0.16);  
+    position: relative;
+    display:flex;
+    justify-content: space-between;
+}
+main{
+    /* width: 1000px; */
+    margin: 0 auto;
+    height: 100vh;
+}
+
+/* 로고 */
+header .admin-logo{
+    display: flex;
+    align-items: center;  
+    padding-left: 20px;
+}
+/* 로고 이미지 */
+header .admin-logo img{
+    width: 35px;
+    margin-right: 10px;
+}
+/* 타이틀 */
+ header .admin-logo div{
+    color: #0B3051; 
+    font-weight: bold;
+    font-size: 25px;
+}
+/* 나가기 버튼 box */
+ header .admin-logout__btn{
+    width: 60px;
+    height: 25px;
+    border: 1px solid #0B3051;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 70px;
+}
+/* 나가기 폰트 */
+header .admin-logout__btn a{
+    font-size: 17px; 
+    color:#1B494C;
+}
+header .admin-logout__btn:hover{
+    background-color: #1B494C;
+}
+header .admin-logout__btn a:hover{
+    color:white;
+    background-color: #1B494C;
+}
+
+/* 좌측 네비바 */
+nav{
+    width: 200px;
+    background-color: #ffffff;
+}
+/* 네비바 전체 */
+nav ul{
+    padding-top: 30px;
+    padding-left: 13px;
+
+    /* li들간에 위아래 간격 9px주기 */
+    display: flex;
+    flex-direction: column;
+    gap:25px
+}
+nav ul li{
+    display: flex;
+    height: 26px;
+    align-items: center ;
+    margin-right: 10px;
+}
+nav ul li .nav-logo{
+    margin-right: 11.76px;
+}
+
+ nav ul li .nav-logo img{
+    width: 20px;
+}
+ nav ul li .nav-title a{
+    font-size: 20px;
+    color: #5D7285;
+}
+ nav ul li{
+    width: 151px;
+    height: 45px;
+}
+nav ul li:hover{
+    background-color: #F0F6FF;
+    font-weight: bold;
+}
+nav ul li a:hover{
+    background-color: #F0F6FF;
+    font-weight: bold;
+}
+
+
+/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+
+/* 네비바+메인화면의 부모인 main */
+main{
+    display: flex;
+    width: 100%;
+}
+/* 타이틀 + 카운팅카드뷰 + 에코프젝 + 그래프의 부모 */
+main .content-box{
+    display: flex;
+    flex-direction: column;
+    background-color: #1B494C;
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+/* 타이틀 */
+main .content-box .page-title-box{
+   position: relative;
+   top: 30px;
+   left: 8px;
+   margin-bottom: 30px;
+}
+main .content-box .page-title-box .page-title{
+    font-size:25px;
+    color: #ffffff;
+}
+/* 카운팅 카드뷰 */
+main .content-box .count-card-wrap{
+    display: flex;
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+/* 카운팅 카드뷰 묶음*/
+main .content-box .count-card-wrap .count-card-box{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+/* 카운팅 카드뷰 1개 */
+main .content-box .count-card-wrap .count-card-box .count-card{
+    width: 230px;
+    height: 25px;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 17px;
+    font-weight: bold;
+    color: #4D5E80;
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    padding: 8px;
+    justify-content: space-between;
+}
+#long-card{
+    width: 300px;
+}
+
+/* 카드뷰 제목 */
+main .content-box .count-card-wrap .count-card-box .count-card .count-card__title{
+  margin-right: 70px;
+}
+/* 카드뷰 값 */
+main .content-box .count-card-wrap .count-card-box .count-card .count-card__value{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #4D5E80;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bold;
+    
+}
+
+/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+/* 에코프로젝트 배너바 */
+
+/* 배너 2개를 감싸는 전체 */
+main .content-box .ecobanner-card-box{
+    display: flex;
+    justify-content: flex-start;
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    justify-content: space-between;
+    
+}
+/* 배너 1개당 설정값 */
+main .content-box .ecobanner-card-box .ecobanner-card{
+    width: 630px;
+    height: 290px;
+    background-color: white;
+    /* 에코글과 top5리스트 분리 */
+     display: flex;
+     border-radius:5px ;
+     position: relative;
+     margin-right: 20px;;
+}
+main .content-box .ecobanner-card-box .ecobanner-card .eco-img{
+    width: 350px;
+    height: 150px;
+}
+main .content-box .ecobanner-card-box .ecobanner-card .eco-img img{
+    border-top-left-radius: 5px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+main .content-box .ecobanner-card-box .ecobanner-card .eco-article{
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    position: absolute;
+    top: 150px;
+    left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* eco project */
+main .content-box .ecobanner-card-box .ecobanner-card .eco-article .subject{
+    font-size: 15px;
+    font-weight: bold;
+    color: #ADB8CC;
+}
+/* 프젝 제목 */
+main .content-box .ecobanner-card-box .ecobanner-card .eco-article .title{
+    font-size: 20px;
+    font-weight: bold;
+    color:#4D5E80;
+}
+/* 좋아요와 참여가능표시 래퍼 */
+main .content-box .ecobanner-card-box .ecobanner-card .eco-article .like-and-sticker-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* 프젝 기간, 좋아요수*/
+main .content-box .ecobanner-card-box .ecobanner-card .eco-article .period,.like{
+    font-size: 15px;
+    color:#4D5E80;
+
+    display: flex;
+    flex-direction: row;
+    gap:4.74px;
+}
+/* 프젝기간, 좋아요 수 이모티콘 */
+main .content-box .ecobanner-card-box .ecobanner-card .eco-article .period img,.like img{
+    width: 15px;
+    height: 15px;
+}
+/* 한번만 참여가능 표시 */
+main .content-box .ecobanner-card-box .ecobanner-card .eco-article .sticker{
+    /* border: 1px solid #4D5E80; */
+    width: 90px;
+    height: 22px;
+    background-color: rgb(229, 241, 210);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+main .content-box .ecobanner-card-box .ecobanner-card .eco-article .sticker div{
+    font-size: 12px;
+    color:#4D5E80;
+}
+
+
+/* top5리스트 중 하나 */
+main .content-box .ecobanner-card-box .ecobanner-card .top-five-list-box{
+    font-size: 20px;
+    position: absolute;
+    left: 400px;
+    top: 10px;
+}
+main .content-box .ecobanner-card-box .ecobanner-card .top-five-list-box .top-five-list-title{
+    color:#4D5E80;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+main .content-box .ecobanner-card-box .ecobanner-card .top-five-list-box .top-five-list ul li{
+    font-size: 17px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+    justify-content: space-between;
+}
+.chart-wrapper{
+    width: 50%; /* 부모 요소의 너비를 화면의 50%로 제한 */
+    /* margin: 0 auto; */
+    display: flex;
+    justify-content: space-between;
+}
+.chart-box {
+    width: 100%; /* 박스가 부모 요소의 너비를 모두 차지하도록 설정 */
+}
+.chart-box canvas{
+    background-color: white;
+    width: 100%; /* 캔버스가 박스 안에서 꽉 차게 */
+    height: auto; /* 높이를 자동으로 설정 */
+}
