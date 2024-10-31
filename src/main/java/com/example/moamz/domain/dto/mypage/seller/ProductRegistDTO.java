@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-public class ProductRegistrationDTO {
+public class ProductRegistDTO {
     //
     // 상품 등록 DTO
     //
