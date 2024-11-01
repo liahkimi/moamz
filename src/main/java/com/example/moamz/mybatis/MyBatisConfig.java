@@ -37,7 +37,7 @@ public class MyBatisConfig {
         sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath*:/mapper/**/**/*.xml"));
         sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:/config/config.xml"));
         sqlSessionFactoryBean.setTypeAliasesPackage("com.example.moamz.domain.dto.chat, com.example.moamz.domain.dto.community, " +
-                "com.example.moamz.domain.dto.mypage, com.example.moamz.domain.dto.user, com.example.moamz.domain.vo, " +
+                "com.example.moamz.domain.dto.mypage, com.example.moamz.domain.dto.mypage.seller, com.example.moamz.domain.dto.user, com.example.moamz.domain.vo, " +
                 "com.example.moamz.domain.vo.chat, com.example.moamz.domain.vo.community, com.example.moamz.domain.vo.mypage, com.example.moamz.domain.vo.user");
 
         SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBean.getObject();

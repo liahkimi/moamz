@@ -7,7 +7,4 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ProductRegistMapper {
     // 상품 등록하기
     void insertProduct(ProductRegistDTO productRegistDTO);
-
-    // 상품 파일 등록하기
-    void insertProductFile(ProductRegistDTO productRegistDTO);
 }
