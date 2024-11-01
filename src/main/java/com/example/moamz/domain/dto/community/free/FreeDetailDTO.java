@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class FreeDetailDTO {
     //
-    // 자유게시판 상세 DTO (댓글X)
+    // 자유게시판 상세 DTO
     //
     
     private Long postId;            // 게시글ID
@@ -23,5 +23,10 @@ public class FreeDetailDTO {
     private int postLikes;          // 좋아요수
     private String postEdit;        // 게시글 수정여부
     private String freeContent;     // 게시글 내용
+
+    private Long userFileId;         // 파일ID
+    private String userFileName;     // 파일명
+    private String userFileRoot;     // 파일경로
+    private String userFileUuid;     // UUID
     
 }
