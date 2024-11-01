@@ -21,6 +21,10 @@ finishedBtn.addEventListener("click", () => {
 function goToDetailPage(){
   window.location.href="adminEcoCertifiList.html";
 }
+//완료된 에코리스트 배너클릭시 해당 인증목록 페이지로 이동
+function goToDetailPageFin(){
+  window.location.href="adminEcoCertifiListFin.html";
+}
 //수정하기버튼만 클릭했을때 배너클릭이랑 안겹치게 만들기
 function editEco(event){
   event.stopPropagation();

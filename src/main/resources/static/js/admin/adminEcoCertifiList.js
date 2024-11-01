@@ -2,6 +2,10 @@
 function goToDetailPage() {
     window.location.href = "adminEcoCertifiDetail.html";  // 상세 페이지 URL로 이동
   }
+
+function goToDetailPageFin() {
+  window.location.href = "adminEcoCertifiDetailFin.html";  // 상세 페이지 URL로 이동
+}
   
   // 모달 열기 함수
   function openModal(event) {

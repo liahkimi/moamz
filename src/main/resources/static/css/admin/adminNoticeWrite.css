@@ -24,37 +24,46 @@ header {
   display: flex;
   justify-content: space-between;
 }
+body{
+  width: 1690px ;
+}
 main {
   margin: 0 auto;
   height: 100vh;
   display: flex;
 }
 
-.nav-and-content-box {
-  display: flex;
-  height: 100vh;
-}
 /* 좌측 네비바 */
 nav {
   width: 20%;
   background-color: #ffffff;
 }
 
-/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+.nav-and-content-box {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
 
+
+/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+main{
+  display: flex;
+  width: 1707px;
+}
 /* 타이틀 + 카운팅카드뷰 + 에코프젝 + 그래프의 부모 */
 main .content-box {
   display: flex;
   flex-direction: column;
   background-color: #1b494c;
-  width: 100%;
+  width: 1707px;
   height: 80px;
 }
 /* 타이틀 */
 main .content-box .page-title-box {
   position: relative;
-  top: 30px;
-  left: 8px;
+  top: 25px;
+  left: 20px;
   margin-bottom: 50px;
 }
 main .content-box .page-title-box .page-title {
@@ -66,7 +75,6 @@ main .content-box .page-title-box .page-title {
   width: 100%;
   height: 100vh;
   background-color: white;
-
   position: relative;
 }
 .edit-wrap{
@@ -77,37 +85,37 @@ main .content-box .page-title-box .page-title {
   margin-bottom: 30px;
 }
 
-.title-box span {
+.write-form-title, .write-form-detail {
   font-size: 20px;
   font-weight: bold;
   margin-right: 15px;
 }
+.write-form-detail{
+  margin-bottom: 15px;
+}
 .write-form-title__value {
-  width: 800px;
+  width: 500px;
+  height: 25px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
   
 }
-.write-form-detail {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 30px; /* 💥마진 안됨!!*/
+/* textarea */
+textarea { 
+  width: 900px;
+  height: 300px;
+  /* 크기 조절 버튼 지우기 */
+  resize: none; 
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
 }
 
-
-.summernote-box {
-  width: 80%;
-  margin-bottom: 50px; /* 💥마진 안됨!!*/
-  /* height: 400px;💥높이 안됨!! */
-}
-
-
-.summernote-box textarea {
-  height: 100%;
-}
 
 .btn-wrap{
     position: absolute;
-    top: 400px;
-    left: 550px;
+    top: 500px;
+    left: 450px;
 }
 .btn-wrap button{
     font-size: 17px;
