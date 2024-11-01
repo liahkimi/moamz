@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.seller.ProductRegistMapper">
+    <!-- 상품 등록하기 -->
+    <insert id="insertProduct" parameterType="ProductRegistDTO">
+        <selectKey keyProperty="productId" resultType="Long" order="BEFORE">
+            SELECT SEQ_PRODUCT.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO FG_PRODUCT (FG_PRODUCT_ID, FG_PRODUCT_NAME, FG_CATEGORY_ID, FG_PRODUCT_PRICE,
+                                FG_PRODUCT_STOCK, FG_PRODUCT_WEIGHT, FG_PRODUCT_EXP_DATE,
+                                FG_PRODUCT_CONTENT, FG_BUSINESS_ID)
+        VALUES (#{productId}, #{productName}, #{productCategoryId}, #{productPrice},
+                #{productStock}, #{productWeight}, TO_DATE(REPLACE(#{productExpDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI'),
+                #{productContent}, #{businessId})
+    </insert>
+
+    <!-- 상품 파일 등록 -->
+    <insert id="insertProductFile" parameterType="ProductRegistDTO">
+        <selectKey keyProperty="productFileId" resultType="Long" order="BEFORE">
+            SELECT SEQ_PRODUCT_FILE.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO FG_PRODUCT_FILE (FG_PRODUCT_FILE_ID, FG_PRODUCT_FILE_NAME, FG_PRODUCT_FILE_ROOT, FG_PRODUCT_FILE_UUID, FG_PRODUCT_ID)
+        VALUES (#{productFileId}, #{productFileName}, #{productFileRoot}, #{productFileUuid}, #{productId})
+    </insert>
+
+</mapper>
