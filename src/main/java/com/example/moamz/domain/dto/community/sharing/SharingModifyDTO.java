@@ -20,8 +20,4 @@ public class SharingModifyDTO {
     private String postTitle;       // 나눔글 제목
     private String sharingContent;  // 나눔글 내용
 
-    private Long postFileId;        // 파일ID
-    private String postFileName;    // 파일명
-    private String postFileRoot;    // 파일경로
-    private String postFileUuid;    // 파일UUID
 }
