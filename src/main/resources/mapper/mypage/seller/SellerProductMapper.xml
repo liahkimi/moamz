@@ -21,16 +21,4 @@
           AND p.FG_PRODUCT_STATUS = '판매종료';
     </select>
 
-
-
-    <!-- 모든 게시글 목록 조회 쿼리 -->
-    <select id="selectAll" resultType="BoardListDTO">
-        SELECT BOARD_ID, TITLE, U.LOGIN_ID
-        FROM TBL_BOARD B JOIN TBL_USER U
-                              ON B.USER_ID = U.USER_ID
-        ORDER BY BOARD_ID DESC
-    </select>
-
-
-
 </mapper>
