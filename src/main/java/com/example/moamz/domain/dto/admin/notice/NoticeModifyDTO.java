@@ -9,7 +9,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class NoticeBoardUpdateDTO {
+public class NoticeModifyDTO {
+//  공지사항 글 수정하기
     private Long postId; // 게시글 ID
     private String postTitle; // 수정할 제목
     private String postContent; // 수정할 내용

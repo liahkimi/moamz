@@ -8,6 +8,8 @@ import lombok.ToString;
 @Getter @Setter @ToString
 @NoArgsConstructor
 public class UserSessionDTO {
+//    관리자 세션 관리
+
     private Long userCode;//회원번호(관리자)
     private String loginId;//로그인ID(관리자)
 }

@@ -9,6 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class NoticeBoardDeleteDTO {
+public class NoticeDeleteDTO {
+//    공지사항 글 삭제하기
     private Long postId; // 게시글 ID
 }

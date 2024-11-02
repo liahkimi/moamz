@@ -10,6 +10,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class DashBoardAggregationDTO {
+//    대시보드 상단 - 4가지 집계 부분
     private int newUserCount;         // 오늘 가입한 사용자 수
     private int totalUserCount;       // 전체 사용자 수
     private int ecoCertPostCount;     // 오늘 작성된 ecoCert 게시글 수

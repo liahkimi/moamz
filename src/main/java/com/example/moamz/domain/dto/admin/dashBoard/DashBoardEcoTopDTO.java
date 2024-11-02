@@ -10,7 +10,9 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class DashBoardEcoTopDTO {
-    // 대표사진
+//    대시보드 중앙 - 에코프로젝트배너 + 에코프로젝트 인증글 좋아요 top5리스트 부분
+
+    // 썸네일 <- 파일처리..어떻게 할지
     private Long   postFileId;           // 파일 ID
     private String postFileRoot;         // 파일 경로
     private String postFileName;         // 파일 이름
@@ -26,5 +28,5 @@ public class DashBoardEcoTopDTO {
 
     // top 좋아요수 list
     private int certPostLikes;        // 에코프젝 인증글 좋아요 수
-    private String normalNickname;    // 작성자의 닉네임
+    private String normalNickname;    // 작성자의 닉네임(일반회원)
 }
