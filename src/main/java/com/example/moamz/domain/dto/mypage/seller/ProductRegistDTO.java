@@ -31,10 +31,4 @@ public class ProductRegistDTO {
     private int productCategoryId;  // 카테고리ID
     private int businessId;         // 업체ID
 
-    private Long productFileId;         // 파일ID
-    private String productFileName;     // 파일명
-    private String productFileRoot;     // 파일경로
-    private String productFileUuid;     // UUID
-    private String productFileTime;     // 파일 생성일
-
 }
