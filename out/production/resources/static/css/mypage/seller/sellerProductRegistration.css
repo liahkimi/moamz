@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 30px 0;
 }
 .write-title {
     font-size: 50px;
@@ -24,6 +25,7 @@
     border-radius: 10px;
     background-color: #EFEBEA;
     padding: 20px 10px;
+    margin-bottom: 100px;
 }
 .write-item {
     display: flex;
@@ -40,6 +42,11 @@
 }
 .write-item input:focus {
     border: 1px solid #9E7E6F;
+}
+/* input type='number' 화살표 없애기 */
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 .category-wrap,
 .price-wrap,
@@ -67,14 +74,18 @@
     width: 180px;
 }
 /* textarea */
-textarea { 
+textarea {
     width: 540px;
     height: 110px;
     /* 크기 조절 버튼 지우기 */
-    resize: none; 
+    resize: none;
     border: 1px solid #ddd;
     border-radius: 10px;
-    padding: 0 10px;
+    padding: 10px;
+    outline: none; /* 포커스 시 기본 아웃라인 제거 */
+}
+textarea:focus {
+    border: 1px solid #9E7E6F;
 }
 /* 썸네일 영역 */
 .thumbnail-container {

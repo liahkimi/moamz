@@ -22,8 +22,8 @@ public class ProductListDTO {
     private int categoryId;                 // 카테고리ID
     private int productPrice;               // 상품가격
     private int productStock;               // 재고
-    private LocalDateTime productExpDate;   // 소비기한
-    private LocalDateTime productTime;      // 상품등록일
+    private String productExpDate;   // 소비기한
+    private String productTime;      // 상품등록일
     private String productContent;          // 상품상세
     private String productStatus;           // 상품 판매상태
 

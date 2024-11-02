@@ -14,13 +14,4 @@
                 #{productContent}, #{businessId})
     </insert>
 
-    <!-- 상품 파일 등록 -->
-    <insert id="insertProductFile" parameterType="ProductRegistDTO">
-        <selectKey keyProperty="productFileId" resultType="Long" order="BEFORE">
-            SELECT SEQ_PRODUCT_FILE.nextVal FROM DUAL
-        </selectKey>
-        INSERT INTO FG_PRODUCT_FILE (FG_PRODUCT_FILE_ID, FG_PRODUCT_FILE_NAME, FG_PRODUCT_FILE_ROOT, FG_PRODUCT_FILE_UUID, FG_PRODUCT_ID)
-        VALUES (#{productFileId}, #{productFileName}, #{productFileRoot}, #{productFileUuid}, #{productId})
-    </insert>
-
 </mapper>
