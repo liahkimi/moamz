@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.seller.SellerSalesMapper">
+    <!-- 판매 목록 (주문 확인중 상태) -->
+    <select id="selectCheckOrder" parameterType="Long" resultType="SalesListDTO">
+        SELECT o.FG_ORDER_DATE AS orderDate, p.FG_PRODUCT_NAME AS productName, o.FG_ORDER_PER_PRICE AS orderPerPrice,
+               pick.FG_PICKUP_SCHEDULE AS pickupSchedule, pick.FG_PICKUP_COMPLETED AS pickupCompleteTime,
+               nu.FG_NORMAL_NICKNAME AS normalNickname, pick.FG_PICKUP_REQUEST AS pickupRequest,
+               pick.FG_PICKUP_STATUS AS pickupStatus
+        FROM FG_ORDER o, FG_PRODUCT p, FG_PRODUCT_FILE pf,  FG_PICKUP pick, FG_NORMAL_USER nu
+        WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
+          AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+          AND o.FG_USER_CODE = nu.FG_USER_CODE
+          AND p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+          AND p.FG_BUSINESS_ID = #{businessId}
+          AND pick.FG_PICKUP_STATUS = '주문확인중'
+    </select>
+
+    <!-- 판매 목록 (픽업 대기중 상태) -->
+    <select id="selectReadyToPickup" parameterType="Long" resultType="SalesListDTO">
+        SELECT o.FG_ORDER_DATE AS orderDate, p.FG_PRODUCT_NAME AS productName, o.FG_ORDER_PER_PRICE AS orderPerPrice,
+               pick.FG_PICKUP_SCHEDULE AS pickupSchedule, pick.FG_PICKUP_COMPLETED AS pickupCompleteTime,
+               nu.FG_NORMAL_NICKNAME AS normalNickname, pick.FG_PICKUP_REQUEST AS pickupRequest,
+               pick.FG_PICKUP_STATUS AS pickupStatus
+        FROM FG_ORDER o, FG_PRODUCT p, FG_PRODUCT_FILE pf,  FG_PICKUP pick, FG_NORMAL_USER nu
+        WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
+          AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+          AND o.FG_USER_CODE = nu.FG_USER_CODE
+          AND p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+          AND p.FG_BUSINESS_ID = #{businessId}
+          AND pick.FG_PICKUP_STATUS = '픽업대기중'
+    </select>
+
+    <!-- 판매 목록 (픽업 완료 상태) -->
+    <select id="selectCompletePickup" parameterType="Long" resultType="SalesListDTO">
+        SELECT o.FG_ORDER_DATE AS orderDate, p.FG_PRODUCT_NAME AS productName, o.FG_ORDER_PER_PRICE AS orderPerPrice,
+               pick.FG_PICKUP_SCHEDULE AS pickupSchedule, pick.FG_PICKUP_COMPLETED AS pickupCompleteTime,
+               nu.FG_NORMAL_NICKNAME AS normalNickname, pick.FG_PICKUP_REQUEST AS pickupRequest,
+               pick.FG_PICKUP_STATUS AS pickupStatus
+        FROM FG_ORDER o, FG_PRODUCT p, FG_PRODUCT_FILE pf,  FG_PICKUP pick, FG_NORMAL_USER nu
+        WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
+          AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+          AND o.FG_USER_CODE = nu.FG_USER_CODE
+          AND p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+          AND p.FG_BUSINESS_ID = #{businessId}
+          AND pick.FG_PICKUP_STATUS = '픽업완료'
+    </select>
+
+    <!-- 픽업 상태 변경 (주문확인중 -> 픽업대기중) -->
+    <update id="modifyStatusReadyToPickup" parameterType="Long">
+        UPDATE FG_PICKUP
+        SET FG_PICKUP_STATUS = '픽업대기중'
+        WHERE FG_ORDER_ID = #{orderId}
+    </update>
+
+    <!-- 픽업 상태 변경 (픽업대기중 -> 픽업완료) -->
+    <update id="modifyStatusCompletePickup" parameterType="Long">
+        UPDATE FG_PICKUP
+        SET FG_PICKUP_STATUS = '픽업완료',
+            FG_PICKUP_COMPLETED = SYSDATE
+        WHERE FG_ORDER_ID = #{orderId}
+    </update>
+
+    <!-- 판매 상세 -->
+    <select id="selectSalesDetail" parameterType="Long" resultType="SalesDetailDTO">
+        SELECT TO_CHAR(o.FG_ORDER_DATE, 'YYYY/MM/DD HH24:MI:SS') AS orderDate,
+               o.FG_ORDER_ID AS orderId, p.FG_PRODUCT_NAME AS productName,
+               p.FG_PRODUCT_PRICE AS productPrice,
+               TO_CHAR(p.FG_PRODUCT_EXP_DATE, 'YY-MM-DD HH24:MI') AS productExpDate,
+               p.FG_PRODUCT_WEIGHT AS productWeight, p.FG_PRODUCT_CONTENT AS productContent,
+               nu.FG_NORMAL_NICKNAME ASnormalNickname, pick.FG_PICKUP_SCHEDULE AS pickupSchedule,
+               pick.FG_PICKUP_REQUEST AS pickupRequest,
+               pick.FG_PICKUP_STATUS AS pickupStatus, pick.FG_PICKUP_COMPLETED AS pickupCompletedTime
+        FROM FG_ORDER o, FG_PRODUCT p, FG_PICKUP pick, FG_NORMAL_USER nu, FG_PRODUCT_FILE pf
+        WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
+          AND o.FG_USER_CODE = nu.FG_USER_CODE
+          AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+          AND p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+          AND o.FG_ORDER_ID = #{orderId}
+    </select>
+
+
+
+
+</mapper>

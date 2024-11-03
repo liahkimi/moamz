@@ -11,7 +11,10 @@ import java.util.Optional;
 
 @Mapper
 public interface SellerInquiryMapper {
-    // 문의글 작성
+    // 문의글 작성(POST)
+    void insertPost(InquiryWriteDTO inquiryWriteDTO);
+
+    // 문의글 작성(inquiry)
     void insertInquiry(InquiryWriteDTO inquiryWriteDTO);
 
     // 문의글 삭제

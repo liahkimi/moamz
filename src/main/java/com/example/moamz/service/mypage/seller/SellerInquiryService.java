@@ -20,9 +20,13 @@ public class SellerInquiryService {
     public final SellerInquiryMapper sellerInquiryMapper;
 
     // 문의글 등록 메서드
-    public void registerInquiry(InquiryWriteDTO inquiryWriteDTO) {
+    public void registInquiry(InquiryWriteDTO inquiryWriteDTO) {
+        // FG_POST에 데이터 삽입
+        sellerInquiryMapper.insertPost(inquiryWriteDTO);
+        // FG_INQUIRY에 데이터 삽입
         sellerInquiryMapper.insertInquiry(inquiryWriteDTO);
     }
+
 
     // 문의글 삭제 메서드
     public void removeInquiry(Long postId) {
