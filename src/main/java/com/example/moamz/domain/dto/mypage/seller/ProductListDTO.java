@@ -19,9 +19,10 @@ public class ProductListDTO {
 
     private Long productId;                 // 상품ID
     private String productName;             // 상품명
-    private int categoryId;                 // 카테고리ID
+    private String categoryId;                 // 카테고리ID
     private int productPrice;               // 상품가격
     private int productStock;               // 재고
+    private int productWeight;              // 중량
     private String productExpDate;   // 소비기한
     private String productTime;      // 상품등록일
     private String productContent;          // 상품상세

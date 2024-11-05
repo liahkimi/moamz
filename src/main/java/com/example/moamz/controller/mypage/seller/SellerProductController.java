@@ -1,15 +1,18 @@
 package com.example.moamz.controller.mypage.seller;
 
+import com.example.moamz.domain.dto.mypage.seller.ProductListDTO;
 import com.example.moamz.domain.dto.mypage.seller.ProductRegistDTO;
 import com.example.moamz.service.mypage.seller.SellerProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/seller/product")
@@ -53,5 +56,21 @@ public class SellerProductController {
 
         // 상품 목록 페이지로 리다이렉트
         return "redirect:/seller/product/list";
+    }
+
+    /**
+     * 상품 목록 열기
+     */
+    @GetMapping("/list")
+    public String productList(Model model) {
+        // ⭐로그인 유저의 businessId 필요
+        Long businessId = 1L;
+
+        List<ProductListDTO> productList = sellerProductService.findOnSales(businessId);
+        // System.out.println("⭐⭐⭐⭐productList : " + productList);
+        // 모델에 목록 추가
+        model.addAttribute("productList", productList);
+
+        return "mypage/seller/sellerProductList";
     }
 }

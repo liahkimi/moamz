@@ -16,13 +16,18 @@
 
     <!-- 등록한 상품 목록(판매중) -->
     <select id="selectOnSales" parameterType="Long" resultType="ProductListDTO">
-        SELECT p.FG_PRODUCT_ID AS productId, p.FG_PRODUCT_NAME AS productName, p.FG_CATEGORY_ID AS categoryId,
-               p.FG_PRODUCT_PRICE AS productPrice, p.FG_PRODUCT_STOCK AS productStock, p.FG_PRODUCT_EXP_DATE AS productExpDate,
-               p.FG_PRODUCT_TIME AS productTime, p.FG_PRODUCT_CONTENT AS productContent
-        FROM FG_PRODUCT p, FG_PRODUCT_FILE pf
-        WHERE p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+        SELECT p.FG_PRODUCT_ID AS productId, p.FG_PRODUCT_NAME AS productName, c.FG_CATEGORY_NAME AS categoryId,
+               p.FG_PRODUCT_PRICE AS productPrice, p.FG_PRODUCT_STOCK AS productStock,
+               p.FG_PRODUCT_WEIGHT AS productWeight, p.FG_PRODUCT_EXP_DATE AS productExpDate,
+               p.FG_PRODUCT_TIME AS productTime, p.FG_PRODUCT_CONTENT AS productContent,
+               pf.FG_PRODUCT_FILE_ID AS productFileId, pf.FG_PRODUCT_FILE_NAME AS productFileName,
+               pf.FG_PRODUCT_FILE_ROOT AS productFileRoot, pf.FG_PRODUCT_FILE_UUID AS productFileUuid
+        FROM FG_PRODUCT p, FG_CATEGORY c, FG_PRODUCT_FILE pf
+        WHERE p.FG_CATEGORY_ID = c.FG_CATEGORY_ID
+          AND p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
           AND p.FG_PRODUCT_STATUS = '판매중'
           AND p.FG_BUSINESS_ID = #{businessId}
+        ORDER BY FG_PRODUCT_TIME DESC
     </select>
 
     <!-- 등록한 상품 목록(판매종료) -->
