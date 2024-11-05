@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./../../static/css/shopping/storeList.css">
-    <link rel="stylesheet" href="./../../static/css/reset2.css">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f79c59b6071fb92267e232c13fea51f&libraries=services"></script>
-    <script defer src="./../../static/js/shopping/storeList.js"></script>
+    <link rel="stylesheet" th:href="@{/css/shopping/storeList.css}">
+    <link rel="stylesheet" th:href="@{/css/reset2.css}">
+    <script defer th:src="@{/js/shopping/storeList.js}"></script>
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c263a566abdc8418b204d2062452eca&libraries=services"></script>
 </head>
 <body>
     <header id="header"></header>
     <div class="container storeList-container">
         <div class="storeList-wrap1">
-            <button class="storeList-button-product" type="button" onclick="location.href='productList.html'">상품</button>
+            <button class="storeList-button-product" type="button" th:onclick="|location.href='@{/shop/list}'|">상품</button>
             <button class="storeList-button-map" type="button">지도</button>
         </div>
        
