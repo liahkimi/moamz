@@ -19,4 +19,7 @@ public class InquiryCommentDTO {
     private String commentContent;  // 댓글 내용
     private String commentEdit;     // 수정 여부 (수정됨 여부)
 
+    // 테스트 코드 위한 생성자
+    public InquiryCommentDTO(String s, String thisIsAComment, String space) {
+    }
 }

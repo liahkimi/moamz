@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.community.free.FreeLikeMapper">
+
+    <!-- 좋아요 추가 -->
+    <insert id="insertLike" parameterType="FreeLikeDTO">
+        <selectKey keyProperty="likeId" resultType="Long" order="BEFORE">
+            SELECT SEQ_LIKE.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO FG_LIKE(FG_LIKE_ID, FG_USER_CODE, FG_POST_ID)
+        VALUES (#{likeId}, #{userCode}, #{postId})
+    </insert>
+
+    <!-- 좋아요 수 증가 -->
+    <update id="increaseLike" parameterType="Long">
+        UPDATE FG_POST
+        SET FG_POST_LIKES = FG_POST_LIKES + 1
+        WHERE FG_POST_ID = #{postId}
+    </update>
+
+    <!-- 좋아요 삭제 -->
+    <delete id="deleteLike" parameterType="Long">
+        DELETE FROM FG_LIKE
+        WHERE FG_USER_CODE = #{userCode}
+          AND FG_POST_ID = #{postId}
+    </delete>
+
+    <!-- 좋아요 수 감소 -->
+    <update id="decreaseLike" parameterType="Long">
+        UPDATE FG_POST
+        SET FG_POST_LIKES = FG_POST_LIKES - 1
+        WHERE FG_POST_ID = #{postId}
+    </update>
+
+    <!-- 좋아요 여부 반환 -->
+    <select id="selectLikeStatus" resultType="String">
+        SELECT
+            CASE
+                WHEN COUNT(*) > 0 THEN 'TRUE'
+                ELSE 'FALSE'
+                END AS isLiked
+        FROM FG_LIKE
+        WHERE FG_USER_CODE = #{userCode}
+          AND FG_POST_ID = #{postId}
+    </select>
+
+    <!-- 특정 게시물의 좋아요 수 반환-->
+    <select id="selectLikeCount" resultType="int">
+        SELECT FG_POST_LIKES
+        FROM FG_POST
+        WHERE FG_POST_ID = #{postId}
+    </select>
+
+
+
+
+
+</mapper>

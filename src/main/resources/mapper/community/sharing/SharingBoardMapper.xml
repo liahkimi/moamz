@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.community.sharing.SharingBoardMapper">
+
+    <!-- 글 작성(post 테이블)-->
+    <insert id="insertPost" parameterType="SharingWriteDTO">
+        <selectKey keyProperty="postId" resultType="Long" order="BEFORE">
+            SELECT SEQ_POST.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO FG_POST(FG_POST_ID, FG_POST_TYPE, FG_POST_TITLE, FG_USER_CODE)
+        VALUES (#{postId}, 'sharing', #{postTitle}, #{userCode})
+    </insert>
+
+    <!-- 글 작성(sharing 테이블) -->
+    <insert id="insertSharing" parameterType="SharingWriteDTO">
+        INSERT INTO FG_FREE(FG_POST_ID, FG_SHARING_CONTENT)
+        VALUES (#{postId}, #{sharingContent})
+    </insert>
+
+    <!--  글 수정(post 테이블)  -->
+    <update id="modifyPost" parameterType="SharingModifyDTO">
+        UPDATE FG_POST
+        SET FG_POST_TITLE = #{postTitle},
+            FG_POST_EDIT = 1
+        WHERE FG_POST_ID = #{postId}
+    </update>
+
+    <!-- 글 수정(sharing 테이블) -->
+    <update id="modifySharing" parameterType="SharingModifyDTO">
+        UPDATE FG_SHARING
+        SET FG_SHARING_CONTENT = #{sharingContent}
+        WHERE FG_POST_ID = #{postId}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deleteSharing" parameterType="Long">
+        DELETE FROM FG_POST
+        WHERE FG_POST_ID = #{postId}
+    </delete>
+
+    <!-- 게시글 목록(나눔가능) -->
+    <select id="selectAvailableList" resultType="SharingListDTO">
+        SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
+               nu.FG_NORMAL_NICKNAME AS normalNickname, s.FG_SHARING_STATUS AS sharingStatus
+        FROM FG_SHARING s, FG_POST p, FG_NORMAL_USER nu
+        WHERE p.FG_POST_ID = s.FG_POST_ID
+          AND p.FG_USER_CODE = nu.FG_USER_CODE
+          AND s.FG_SHARING_STATUS = '나눔가능'
+    </select>
+
+    <!-- 게시글 목록(예약중) -->
+    <select id="selectReservedList" resultType="SharingListDTO">
+        SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
+               nu.FG_NORMAL_NICKNAME AS normalNickname, s.FG_SHARING_STATUS AS sharingStatus
+        FROM FG_SHARING s, FG_POST p, FG_NORMAL_USER nu
+        WHERE p.FG_POST_ID = s.FG_POST_ID
+          AND p.FG_USER_CODE = nu.FG_USER_CODE
+          AND s.FG_SHARING_STATUS = '예약중'
+    </select>
+
+    <!-- 게시글 목록(나눔완료) -->
+    <select id="selectCompletedList" resultType="SharingListDTO">
+        SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
+               nu.FG_NORMAL_NICKNAME AS normalNickname, s.FG_SHARING_STATUS AS sharingStatus
+        FROM FG_SHARING s, FG_POST p, FG_NORMAL_USER nu
+        WHERE p.FG_POST_ID = s.FG_POST_ID
+          AND p.FG_USER_CODE = nu.FG_USER_CODE
+          AND s.FG_SHARING_STATUS = '나눔완료'
+    </select>
+
+    <!-- 게시글 상세 -->
+    <select id="selectSharingDetail" parameterType="Long" resultType="SharingDetailDTO">
+        SELECT p.FG_POST_TITLE AS postTitle, nu.FG_NORMAL_NICKNAME AS normalNickname,
+               p.FG_POST_CREATED_AT AS postCreateAt, p.FG_POST_VIEWS AS postViews,
+               s.FG_SHARING_CONTENT AS sharingContent,
+               CASE p.FG_POST_EDIT
+                   WHEN '0' THEN ' '
+                   WHEN '1' THEN '수정됨'
+                   END AS postEdit
+        FROM FG_POST p, FG_NORMAL_USER nu, FG_SHARING s
+        WHERE p.FG_POST_ID = s.FG_POST_ID
+          AND p.FG_USER_CODE = nu.FG_USER_CODE
+          AND p.FG_POST_ID = #{postId};
+    </select>
+
+
+</mapper>
