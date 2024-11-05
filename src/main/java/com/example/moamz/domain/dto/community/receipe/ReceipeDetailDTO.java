@@ -12,7 +12,7 @@ import lombok.ToString;
 public class ReceipeDetailDTO {
     private Long fgPostid;
     private String fgPostTitle;
-    private Long fgCommonUser;
+    private Long fgUserCode;
     private String fgNormalName;
     private String fgReceipeIngredients;
     private int fgReceipeTime;

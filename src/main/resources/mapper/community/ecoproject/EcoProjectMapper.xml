@@ -1,9 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.moamz.mapper.community.ecoproject.EcoProjectMapper">
-    <select id="testNick" resultType="String">
-        select FG_NORMAL_NICKNAME
-        from FG_NORMAL_USER
-        where FG_USER_CODE = 0
+<!--    프로젝트 리스트-->
+    <select id="ecoProjectList" resultType="EcoProjectDTO">
+        SELECT
+            P.FG_POST_TITLE AS fgPostTitle,
+            E.FG_ECO_START AS fgEcoStart,
+            E.FG_ECO_END AS fgEcoEnd,
+            P.FG_POST_LIKES AS FgPostLikes,
+            E.FG_ECO_INFO AS fgEcoInfo,
+            E.FG_ECO_PARTICIPATION AS fgEcoParticipation,
+            (F.FG_POST_FILE_ROOT || '/' || F.FG_POST_FILE_UUID || '_' || F.FG_POST_FILE_NAME) AS fgFileUrl
+        FROM
+            FG_POST P
+                JOIN
+            FG_ECO E ON P.FG_POST_ID = E.FG_POST_ID
+                LEFT JOIN
+            FG_POST_FILE F ON P.FG_POST_ID = F.FG_POST_ID
+        WHERE
+            P.FG_POST_TYPE = 'eco'
+          AND F.FG_POST_FILE_ID = (
+            SELECT MIN(F2.FG_POST_FILE_ID)
+            FROM FG_POST_FILE F2
+            WHERE F2.FG_POST_ID = P.FG_POST_ID
+        )
+    </select>
+
+<!--    에코 인증글 리스트-->
+    <select id="ecoCertDetail" resultType="EcoCertDetailDTO">
+        SELECT
+            P.FG_POST_TITLE AS fgPostTitle,
+            P.FG_POST_CREATED_AT AS fgPostCreatedAt,
+            EC.FG_CERT_CONTENT AS fgCertContent,
+            NU.FG_NORMAL_NICKNAME AS fgNormalNickname,
+            NU.FG_USER_CODE AS fgUserCode,
+            (SELECT COUNT(*) FROM FG_LIKE L WHERE L.FG_POST_ID = P.FG_POST_ID) AS fgPostLikes
+        FROM
+            FG_ECO_CERT EC
+                JOIN
+            FG_POST P ON EC.FG_POST_ID = P.FG_POST_ID
+                JOIN
+            FG_NORMAL_USER NU ON P.FG_USER_CODE = NU.FG_USER_CODE
+        WHERE
+            P.FG_POST_TYPE = 'ecoCert'
+          AND EC.FG_POST_ID = #{fgPostId}
+    </select>
+
+<!--에코 인증글 리스트-->
+    <select id="ecoCertList" resultType="EcoCertListDTO">
+        SELECT
+            EC.FG_POST_ID AS fgEcoPostId,
+            P.FG_POST_TITLE AS fgPostTitle,
+            P.FG_POST_CREATED_AT AS fgPostCreatedAt,
+            NU.FG_NORMAL_NICKNAME AS fgNormalNickname,
+            P.FG_POST_LIKES as fgPostLikes,
+            (SELECT COUNT(*) FROM FG_COMMENT C WHERE C.FG_POST_ID = P.FG_POST_ID) AS fgCommnetCount,
+            E.FG_ECO_INFO AS ECO_PROJECT_INFO
+        FROM
+            FG_ECO_CERT EC
+                JOIN
+            FG_POST P ON EC.FG_POST_ID = P.FG_POST_ID
+                JOIN
+            FG_NORMAL_USER NU ON P.FG_USER_CODE = NU.FG_USER_CODE
+                JOIN
+            FG_ECO E ON EC.FG_PROJECT_ID = E.FG_POST_ID
+        WHERE
+            P.FG_POST_TYPE = 'ecoCert'
     </select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
