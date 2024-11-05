@@ -53,6 +53,9 @@ public class SellerInquiryController {
         // 😑😑세션 없어서 userCode값에 1 넣음
         inquiryWriteDTO.setUserCode(1L);
 
+        // 서비스 호출 전 dto
+        System.out.println("⭐⭐⭐⭐⭐DTO : " + inquiryWriteDTO);
+
         // 문의글 등록 메서드 호출
         sellerInquiryService.registInquiry(inquiryWriteDTO);
 
