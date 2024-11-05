@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.seller.SellerMyMapper">
+    <!-- 우수업체 여부 반환 -->
+    <select id="select" parameterType="Long" resultType="String">
+        SELECT CASE
+                    WHEN COUNT(*) > 0 THEN 'TRUE'
+                    ELSE 'FALSE'
+                END AS isExcellent
+        FROM (
+            -- 업체별로 음식물 중량 누적 합계를 구하고, 상위 3개 업체를 SELECT
+            SELECT FG_BUSINESS_ID
+            FROM (
+                SELECT p.FG_BUSINESS_ID
+                FROM FG_ORDER o, FG_PRODUCT p
+                WHERE o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+                AND o.FG_PAYMENT_STATUS = '결제완료'
+                GROUP BY p.FG_BUSINESS_ID
+                ORDER BY SUM(o.FG_ORDER_QUANTITY * p.FG_PRODUCT_WEIGHT) DESC
+            )
+            WHERE <![CDATA[ROWNUM <= 3]]>
+        )
+        WHERE FG_BUSINESS_ID = #{businessId}  -- 내 업체 번호
+    </select>
+
+    <!-- 판매자 프로필 -->
+    <select id="selectStoreProfile" parameterType="Long" resultType="SellerProfileDTO">
+        SELECT b.FG_BUSINESS_NAME AS businessName,
+               b.FG_BUSINESS_RATING AS businessRating,
+               SUM(o.FG_ORDER_QUANTITY * p.FG_PRODUCT_WEIGHT) AS totalWeight
+        FROM FG_BUSINESS b, FG_USER_FILE uf, FG_ORDER o, FG_PRODUCT p
+        WHERE b.FG_USER_CODE = uf.FG_USER_CODE
+          AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+          AND p.FG_BUSINESS_ID = b.FG_BUSINESS_ID
+          AND o.FG_PAYMENT_STATUS = '결제완료'
+          AND b.FG_USER_CODE = #{userCode}
+        GROUP BY uf.FG_USER_FILE_ROOT, uf.FG_USER_FILE_NAME, b.FG_BUSINESS_NAME, b.FG_BUSINESS_RATING
+    </select>
+
+    <!-- 업체 리뷰 조회 -->
+    <select id="selectMyStoreRv" parameterType="Long" resultType="StoreReviewDTO">
+        SELECT nu.FG_NORMAL_NICKNAME AS normalNickname, rv.FG_REVIEW_CONTENT AS reviewContent,
+               p.FG_PRODUCT_NAME ASproductName, rv.FG_REVIEW_RATING AS reviewRating,
+               rv.FG_REVIEW_CREATED_AT ASreviewCreatedAt
+        FROM FG_REVIEW rv, FG_NORMAL_USER nu, FG_PRODUCT p, FG_ORDER o
+        WHERE rv.FG_USER_CODE = nu.FG_USER_CODE
+          AND rv.FG_ORDER_ID = o.FG_ORDER_ID
+          AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+          AND rv.FG_BUSINESS_ID = #{businessId}
+    </select>
+
+    <!-- 유저 아이디 반환 -->
+    <select id="selectSellerId" parameterType="Long" resultType="String">
+        SELECT FG_USER_ID
+        FROM FG_COMMON_USER
+        WHERE FG_USER_CODE = ${userCode}
+    </select>
+
+    <!-- 아이디, 비밀번호 확인 -->
+    <select id="selectSellerCode" resultType="Long">
+        SELECT FG_USER_CODE
+        FROM FG_COMMON_USER
+        WHERE FG_USER_ID = #{userId}
+          AND FG_USER_PASSWORD = #{password};
+    </select>
+
+    <!-- 업체 정보 가져오기 -->
+    <select id="selectStoreInfo" parameterType="Long" resultType="SellerInfoDTO">
+        SELECT
+    </select>
+
+    <!-- 업체 정보 변경하기 -->
+    <update id="modifyStoreInfo" parameterType="StoreModifyDTO">
+        UPDATE FG_BUSINESS
+        SET FG_BUSINESS_POSTCODE = #{postcode},
+            FG_BUSINESS_ADDRESS = #{address},
+            FG_BUSINESS_ADDRESS_DETAIL = #{addressDetail},
+            FG_BUSINESS_PHONE = #{businessPhone},
+            FG_BUSINESS_OPEN_TIME = #{openTime},
+            FG_BUSINESS_CLOSE_TIME = #{closeTime},
+            FG_BUSINESS_DETAIL = #{businessDetail}
+        WHERE FG_USER_CODE = #{userCode};
+    </update>
+
+
+</mapper>

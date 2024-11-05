@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.file.UserFileMapper">
+    <!-- 게시물 대표파일 추가하기 -->
+    <insert id="insertFile" parameterType="UserFileDTO">
+        <selectKey keyProperty="userFileId" resultType="Long" order="BEFORE">
+            SELECT SEQ_USER_FILE.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO FG_USER_FILE(FG_USER_FILE_ID, FG_USER_FILE_NAME, FG_USER_FILE_ROOT, FG_USER_FILE_UUID, FG_USER_CODE)
+        VALUES (#{userFileId}, #{userFileName}, #{userFileRoot}, #{userFileUuid}, #{userCode})
+    </insert>
+
+    <!--  게시물 대표파일 삭제하기  -->
+    <delete id="deleteFile" parameterType="Long">
+        DELETE FROM FG_USER_FILE
+        WHERE FG_USER_CODE = #{userCode}
+    </delete>
+
+    <!--  파일 목록 가져오기  -->
+    <select id="selectFileList" parameterType="Long" resultType="UserFileDTO">
+        SELECT FG_USER_FILE_ID, FG_USER_FILE_NAME, FG_USER_FILE_ROOT, FG_USER_FILE_UUID, FG_USER_CODE
+        FROM FG_USER_FILE
+        WHERE FG_USER_CODE = #{userCode}
+    </select>
+</mapper>
