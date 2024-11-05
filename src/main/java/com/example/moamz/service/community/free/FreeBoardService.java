@@ -1,6 +1,7 @@
 package com.example.moamz.service.community.free;
 
 import com.example.moamz.domain.dto.community.free.*;
+import com.example.moamz.mapper.community.free.FreeLikeMapper;
 import com.example.moamz.mapper.community.free.FreeMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FreeBoardService {
     public final FreeMapper freeMapper;
+    public final FreeLikeMapper freeLikeMapper;
 
     // 자유게시판 글 등록 메서드
     public void registFree(FreeWriteDTO freeWriteDTO) {
