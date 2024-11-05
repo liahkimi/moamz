@@ -39,7 +39,7 @@ class MyBatisConfigTest {
     }
 
     @Test
-    public void sqlSessionTest(){
+    public void sqlSessionTest() {
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession(true);
             Connection connection = sqlSession.getConnection();

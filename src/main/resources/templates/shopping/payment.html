@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./../../static/css/reset.css">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f79c59b6071fb92267e232c13fea51f&libraries=services"></script>
-    <script src="./../../static/js/shopping/payment.js"></script>
-    <link rel="stylesheet" href="./../../static/css/shopping/payment.css">
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6c263a566abdc8418b204d2062452eca&libraries=services"></script>
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <script th:src="@{/js/shopping/payment.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/shopping/payment.css}">
 </head>
 <body>
     <header id="header"></header>
   <div class="payment-container container">
     <div class="payment-wrap1">
       <span>
-        <img src="./../../static/img/shopping/cart.png" alt="">
+        <img th:src="@{/img/shopping/cart.png}" alt="">
         상품 결제
       </span>
     </div>
@@ -22,7 +22,7 @@
         <div class="payment-payment">
             <div class="payment-payment-product">
                 <div class="payment-payment-product-img">
-                    <img src="./../../static/img/shopping/abocado.png" alt="">
+                    <img th:src="@{/img/shopping/abocado.png}" alt="">
                 </div>
                 <div class="payment-payment-product-text">
                     <div class="payment-payment-product-text-name">
@@ -31,11 +31,11 @@
                     <div class="payment-payment-product-text-eco">
                         <span>
                             <div class="payment-payment-product-text-eco-calendar">
-                                <img src="./../../static/img/shopping/productListcalendar.png" alt="">
+                                <img th:src="@{/img/shopping/productListcalendar.png}" alt="">
                                 24.10.15
                             </div>
                             <div class="payment-payment-product-text-eco-co2">
-                                <img src="./../../static/img/shopping/productListco2.png" alt="">
+                                <img th:src="@{/img/shopping/productListco2.png}" alt="">
                                 2kg
                             </div>
                         </span>
@@ -45,7 +45,7 @@
                             75,600원
                             <div class="payment-product-count-btn">
                                 <button type="button" id="inc">+</button>
-                                <div class="payment-product-count-num">
+                                <div class="payment-product-count-num" id="counting">
                                     1
                                 </div>
                                 <button type="button" id="dec">-</button>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="payment-payment-payment-final-btn">
                         <button type="button">
-                            <img src="./../../static/img/shopping/kakaopay.png" alt="">
+                            <img th:src="@{/img/shopping/Kakaopay.png}" alt="">
                         </button>
                     </div>
                 </div>

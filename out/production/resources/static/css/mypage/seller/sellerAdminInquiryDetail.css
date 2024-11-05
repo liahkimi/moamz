@@ -2,7 +2,7 @@
 main {
     color: #6a6a6a;
     width: 700px;
-    margin: 0 auto;
+    margin: 40px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,7 +11,7 @@ main {
 .post-container {
     width: 700px;
     min-height: 300px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 /* 게시물 정보 영역 */
@@ -76,6 +76,7 @@ main {
 .comment-list {
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
+    margin-top: 10px;
 }
 .comment-info-wrap {
     font-size: 14px;

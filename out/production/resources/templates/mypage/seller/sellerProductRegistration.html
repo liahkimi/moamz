@@ -19,7 +19,7 @@
         </div>
         <!-- 글 작성 영역 -->
         <div class="write-content-container">
-            <form method="post" th:action="@{/seller/productRegist}" enctype="multipart/form-data">
+            <form method="post" th:action="@{/seller/product/regist}" enctype="multipart/form-data">
                 <div class="write-item">
                     <p class="write-label">📝 상품명*</p>
                     <input type="text" name="productName" required/>
@@ -89,5 +89,5 @@
 </main>
 <footer id="footer" th:replace="~{/main/fragment/footer/sellerFooter}"></footer>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 </html>
