@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.community.free.FreeMapper">
+    <!--
+          자유게시판
+      -->
+
+    <!-- 글 작성(post 테이블) -->
+    <insert id="insertPost" parameterType="FreeWriteDTO">
+        <selectKey keyProperty="postId" resultType="Long" order="BEFORE">
+            SELECT SEQ_POST.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO FG_POST(FG_POST_ID, FG_POST_TYPE, FG_POST_TITLE, FG_USER_CODE)
+        VALUES (#{postId}, 'free', #{postTitle}, #{userCode})
+
+    </insert>
+
+    <!-- 글 작성(free 테이블) -->
+    <insert id="insertFree" parameterType="FreeWriteDTO">
+        INSERT INTO FG_FREE(FG_POST_ID, FG_FREE_CONTENT)
+        VALUES (#{postId}, #{freeContent})
+    </insert>
+
+    <!-- 글 수정(post 테이블) -->
+    <update id="modifyPost" parameterType="FreeModifyDTO">
+        UPDATE FG_POST
+        SET FG_POST_TITLE = #{postTitle},
+            FG_POST_EDIT = 1
+        WHERE FG_POST_ID = #{postId}
+    </update>
+
+    <!-- 글 수정(free 테이블) -->
+    <update id="modifyFree" parameterType="FreeModifyDTO">
+        UPDATE FG_FREE
+        SET FG_FREE_CONTENT = #{freeContent}
+        WHERE FG_POST_ID = #{postId}
+    </update>
+
+    <!-- 글 삭제 -->
+    <delete id="deleteFree" parameterType="Long">
+        DELETE FROM FG_POST
+        WHERE FG_POST_ID = #{postId};
+    </delete>
+
+    <!-- 목록 보여주기 -->
+    <select id="selectFreeList" resultType="FreeListDTO">
+        SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
+               nu.FG_NORMAL_NICKNAME AS normalNickname, p.FG_POST_CREATED_AT AS postCreateAt,
+               p.FG_POST_VIEWS AS postViews, p.FG_POST_LIKES AS postLikes,
+               COUNT(c.FG_COMMENT_ID) AS commentCount
+        FROM FG_POST p, FG_NORMAL_USER nu, FG_COMMENT c
+        WHERE p.FG_USER_CODE = nu.FG_USER_CODE
+          AND p.FG_POST_ID = c.FG_POST_ID(+)
+          AND p.FG_POST_TYPE = 'free'
+        GROUP BY p.FG_POST_TITLE, nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT,
+                 p.FG_POST_VIEWS, p.FG_POST_LIKES
+        ORDER BY p.FG_POST_CREATED_AT DESC;
+    </select>
+
+    <!-- 상세보기 -->
+    <select id="selectFreeDetail" parameterType="Long" resultType="FreeDetailDTO">
+        SELECT p.FG_USER_CODE AS userCode, p.FG_POST_TITLE AS postTitle, nu.FG_NORMAL_NICKNAME AS normalNickname,
+               p.FG_POST_CREATED_AT AS postCreatedAt, p.FG_POST_VIEWS AS postViews,
+               p.FG_POST_LIKES AS postLikes, f.FG_FREE_CONTENT AS freeContent,
+               CASE p.FG_POST_EDIT
+                   WHEN '0' THEN ' '
+                   WHEN '1' THEN '수정됨'
+                   END AS postEdit
+        FROM FG_POST p, FG_NORMAL_USER nu, FG_FREE f
+        WHERE p.FG_USER_CODE = nu.FG_USER_CODE
+          AND p.FG_POST_ID = f.FG_POST_ID
+          AND p.FG_POST_ID = #{postId};
+    </select>
+
+    <!-- 댓글 보여주기 -->
+    <select id="selectFreeComment" parameterType="Long" resultType="FreeCommentDTO">
+        SELECT TO_CHAR(c.FG_COMMENT_DATE, 'YY/MM/DD HH24:MI:SS') AS commentDate,
+            c.FG_COMMENT_CONTENT AS commentContent,
+            CASE c.FG_COMMENT_EDIT
+                WHEN '0' THEN ' '
+                WHEN '1' THEN '수정됨'
+                END AS commentEdit
+        FROM FG_POST p, FG_COMMENT c
+        WHERE p.FG_POST_ID = c.FG_POST_ID
+          AND p.FG_POST_ID = #{postId}
+    </select>
+
+    <!-- 댓글 작성하기 -->
+    <insert id="insertFreeComment" parameterType="FreeCommentDTO">
+        <selectKey keyProperty="commentId" resultType="Long" order="BEFORE">
+            SELECT SEQ_COMMENT.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO FG_COMMENT(FG_COMMENT_ID, FG_COMMENT_CONTENT, FG_USER_CODE, FG_POST_ID)
+        VALUES (#{commentId}, #{commentContent}, #{userCode}, #{postId});
+    </insert>
+
+    <!-- 댓글 수정하기 -->
+    <update id="modifyFreeComment" parameterType="FreeCommentDTO">
+        UPDATE FG_COMMENT
+        SET FG_COMMENT_CONTENT = #{commentContent},
+            FG_COMMENT_EDIT = 1
+        WHERE FG_COMMENT_ID = #{commentId};
+    </update>
+
+    <!-- 댓글 삭제하기 -->
+    <delete id="deleteFreeComment" parameterType="Long">
+        DELETE FROM FG_COMMENT
+        WHERE FG_COMMENT_ID = #{commentId};
+    </delete>
+
+</mapper>

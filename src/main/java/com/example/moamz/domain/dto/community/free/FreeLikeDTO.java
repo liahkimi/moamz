@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-public class LikeDTO {
+public class FreeLikeDTO {
     //
     // 자유게시판 좋아요 DTO
     //

@@ -9,4 +9,11 @@
         INSERT INTO FG_PRODUCT_FILE(FG_PRODUCT_FILE_ID, FG_PRODUCT_FILE_NAME, FG_PRODUCT_FILE_ROOT, FG_PRODUCT_FILE_UUID, FG_PRODUCT_ID)
         VALUES (#{productFileId}, #{productFileName}, #{productFileRoot}, #{productFileUuid}, #{productId})
     </insert>
+
+    <!--  파일 목록 가져오기  -->
+    <select id="selectFileList" parameterType="Long" resultType="ProductFileDTO">
+        SELECT FG_PRODUCT_FILE_ID, FG_PRODUCT_FILE_NAME, FG_PRODUCT_FILE_ROOT, FG_PRODUCT_FILE_UUID, FG_PRODUCT_ID
+        FROM FG_PRODUCT_FILE
+        WHERE FG_PRODUCT_ID = #{productId}
+    </select>
 </mapper>

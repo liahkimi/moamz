@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @ToString
@@ -18,7 +20,7 @@ public class InquiryDetailDTO {
     private Long postId;                // 게시글ID
     private String postTitle;           // 문의글 제목
     private String businessName;        // 업체명(내 업체명)
-    private String postCreateAt;        // 문의글 작성일
+    private String postCreatedAt;        // 문의글 작성일
     private String inquiryContent;      // 문의글 내용
     private Long userCode;              // 회원Code
 
