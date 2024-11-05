@@ -11,5 +11,6 @@ import lombok.ToString;
 @NoArgsConstructor
 public class NoticeDeleteDTO {
 //    공지사항 글 삭제하기
-    private Long postId; // 게시글 ID
+    private Long fgPostId; // 게시글 ID
+    private Long fgUserCode;    // 글 작성자 회원번호
 }

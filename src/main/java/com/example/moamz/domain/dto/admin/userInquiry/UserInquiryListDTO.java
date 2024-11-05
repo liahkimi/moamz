@@ -11,8 +11,11 @@ import lombok.ToString;
 @NoArgsConstructor
 public class UserInquiryListDTO {
 //   일반회원 문의목록 (미확인/답변완료 공통)
-    private String postTitle;   //문의글 제목
-    private String normalNickname;  //일반회원 닉네임
-    private String postCreatedAt;   //글 작성일
-    private String inquiryStatus; // 답변 상태
+    private String fgPostTitle;   //문의글 제목
+    private String fgNormalNickname;  //일반회원 닉네임
+    private String fgPostCreatedAt;   //글 작성일
+
+    private Long fgPostId;                  // 게시글ID
+    private Long fgUserCode;                //  회원번호
+    private String fgInquiryStatus; // 답변 상태
 }

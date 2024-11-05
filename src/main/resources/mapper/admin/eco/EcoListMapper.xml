@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.admin.eco.EcoListMapper">
+
+<!--진행중인 에코프로젝트 목록-->
+    <select id="selectIngEcoList" resultType="EcoListDTO">
+        SELECT DISTINCT PF.FG_POST_FILE_ROOT, PF.FG_POST_FILE_NAME, PF.FG_POST_FILE_UUID,
+                        P.FG_POST_TITLE, P.FG_POST_LIKES,
+                        E.FG_ECO_START, E.FG_ECO_END, E.FG_ECO_POINTS, E.FG_ECO_INFO, E.FG_CERT_INFO, E.FG_ECO_PARTICIPATION
+        FROM FG_POST_FILE PF
+                 JOIN FG_POST P ON PF.FG_POST_ID = P.FG_POST_ID
+                 JOIN FG_ECO E ON P.FG_POST_ID = E.FG_POST_ID
+        WHERE P.FG_POST_TYPE = 'eco' AND E.FG_ECO_STATUS = '1';
+    </select>
+
+<!--종료된 에코프로젝트 목록-->
+    <select id="selectFinEcoList" resultType="EcoLIstDTO">
+        SELECT  DISTINCT PF.FG_POST_FILE_ROOT, PF.FG_POST_FILE_NAME, PF.FG_POST_FILE_UUID,
+                         P.FG_POST_TITLE, P.FG_POST_LIKES,
+                         E.FG_ECO_START, E.FG_ECO_END, E.FG_ECO_POINTS, E.FG_ECO_INFO, E.FG_CERT_INFO, E.FG_ECO_PARTICIPATION
+        FROM FG_POST_FILE PF
+                 JOIN FG_POST P ON PF.FG_POST_ID = P.FG_POST_ID
+                 JOIN FG_ECO E ON P.FG_POST_ID = E.FG_POST_ID
+        WHERE P.FG_POST_TYPE = 'eco' AND E.FG_ECO_STATUS = '0';
+    </select>
+
+</mapper>

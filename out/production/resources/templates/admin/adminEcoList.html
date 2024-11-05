@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -66,6 +67,10 @@
                       <span>22</span>
                     </div>
                   </div>
+                  <div class="point-box">
+                    <img src="../../static/img/admin/point.png" alt="point-icon">
+                    <span>500</span>pt
+                  </div>
                 </div>
                 <div class="description">
                   <div class="description-title">프로젝트 소개</div>
@@ -87,7 +92,7 @@
                 <div class="join-sticker">한번만 참여 가능</div>
               </div>
             </div>
-            <div class="banner-box">
+            <div class="banner-box" onclick="goToDetailPage()">
               <div class="banner-img">
                 <img src="../../static/img/admin/plogging.jpg" alt="plogging" />
               </div>
@@ -95,7 +100,7 @@
                 <div class="title-and-btns">
                   <div class="title">환경을 위한 플로깅 프로젝트!</div>
                   <div class="btns">
-                    <button class="finish-btn">프로젝트 종료시키기</button>
+                    <button class="finish-btn"  onclick="changeStatus(event)">프로젝트 종료시키기</button>
                     <button class="edit-btn" onclick="editEco(event)">
                       <img
                         src="../../static/img/admin/whitePencil.png"
@@ -127,6 +132,10 @@
                       <span>22</span>
                     </div>
                   </div>
+                  <div class="point-box">
+                    <img src="../../static/img/admin/point.png" alt="point-icon">
+                    <span>500</span>pt
+                  </div>
                 </div>
                 <div class="description">
                   <div class="description-title">프로젝트 소개</div>
@@ -152,7 +161,7 @@
 
           <!-- 완료된 에코배너 화면 -->
           <div id="finished-eco" class="banner-hidden">
-            <div class="banner-box">
+            <div class="banner-box" onclick="goToDetailPageFin()">
               <div class="banner-img">
                 <img src="../../static/img/admin/plogging.jpg" alt="plogging" />
               </div>
@@ -183,6 +192,10 @@
                       <span>22</span>
                     </div>
                   </div>
+                  <div class="point-box">
+                    <img src="../../static/img/admin/point.png" alt="point-icon">
+                    <span>500</span>pt
+                  </div>
                 </div>
                 <div class="description">
                   <div class="description-title">프로젝트 소개</div>
@@ -204,7 +217,7 @@
                 <div class="join-sticker">한번만 참여 가능</div>
               </div>
             </div>
-            <div class="banner-box">
+            <div class="banner-box" onclick="goToDetailPageFin()">
               <div class="banner-img">
                 <img src="../../static/img/admin/plogging.jpg" alt="plogging" />
               </div>
@@ -233,6 +246,10 @@
                     <div class="like-value">
                       <span>22</span>
                     </div>
+                  </div>
+                  <div class="point-box">
+                    <img src="../../static/img/admin/point.png" alt="point-icon">
+                    <span>500</span>pt
                   </div>
                 </div>
                 <div class="description">

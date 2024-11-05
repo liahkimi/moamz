@@ -10,7 +10,7 @@ import lombok.ToString;
 public class UserDTO {
 //    관리자 로그인
 
-    private Long userCode; //회원번호(관리자)
-    private String userId; //로그인ID(관리자)
-    private String password; //비밀번호(관리자)
+    private Long fgUserCode; //회원번호(관리자)
+    private String fgUserId; //로그인ID(관리자)
+    private String fgUserPassword; //비밀번호(관리자)
 }

@@ -12,6 +12,8 @@ import lombok.ToString;
 public class InquiryStatusUpdateDTO {
 //    회원/판매자 문의글 답변상태 변경버튼 DTO
 
-    private Long postId;           // 문의글 ID
-    private String inquiryStatus;  // 문의 상태 (미확인->답변완료)
+    private Long fgPostId;           // 문의글 ID
+    private String fgInquiryStatus;  // 문의 상태 (미확인->답변완료)
+
+    private Long fgUserCode;              // 변경버튼 누른 회원번호(관리자)
 }

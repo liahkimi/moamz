@@ -9,7 +9,6 @@ import lombok.ToString;
 @NoArgsConstructor
 public class UserSessionDTO {
 //    관리자 세션 관리
-
-    private Long userCode;//회원번호(관리자)
-    private String loginId;//로그인ID(관리자)
+    private Long fgUserCode;//회원번호(관리자)
+    private String fgUserId;//로그인ID(관리자)
 }
