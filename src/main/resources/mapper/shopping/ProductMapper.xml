@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.shopping.ProductMapper">
+<!--    상품 리스트 mapper-->
+    <select id="productList" resultType="ProductListDTO">
+        select FG_PRODUCT_ID, FG_PRODUCT_NAME, FG_PRODUCT_CONTENT, FG_PRODUCT_EXP_DATE,
+                FG_PRODUCT_STOCK, FG_PRODUCT_PRICE, FG_PRODUCT_WEIGHT, FG_PRODUCT_CONTENT, FG_PRODUCT_TIME,
+                FG_CATEGORY_NAME
+        from FG_PRODUCT p join  FG_CATEGORY c
+        on p.FG_CATEGORY_ID = c.FG_CATEGORY_ID
+    </select>
+
+<!--    주문등록-->
+    <insert id="insertOrder" parameterType="OrderDTO">
+        <selectKey keyProperty="fgOrderId" order="BEFORE">
+            SELECT SEQ_FG_ORDER.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO FG_ORDER (
+        FG_ORDER_ID,
+        FG_PAYMENT_STATUS,
+        FG_ORDER_QUANTITY,
+        FG_ORDER_PER_PRICE,
+        FG_ORDER_TAX,
+        FG_ORDER_USED_POINT,
+        FG_ORDER_AMOUNT,
+        FG_ORDER_DATE,
+        FG_USER_CODE,
+        FG_PRODUCT_ID
+        ) VALUES (
+        #{fgOrderId},
+        #{fgPaymentStatus},
+        #{fgOrderQuantity},
+        #{fgOrderPerPrice},
+        #{fgOrderTax},
+        #{fgOrderUsedPoint},
+        #{fgOrderAmount},
+        SYSDATE,
+        #{fgUserCode},
+        #{fgProductId}
+        )
+    </insert>
+
+    <!-- 결제 상태 업데이트 -->
+    <update id="updateOrderPaymentStatus" parameterType="OrderUpdateDTO">
+        UPDATE FG_ORDER
+        SET
+            FG_PAYMENT_STATUS = #{fgPaymentStatus},
+            FG_ORDER_DATE = SYSDATE
+        WHERE
+            FG_ORDER_ID = #{fgOrderId}
+    </update>
+
+    <!-- 주문 상세 추가 -->
+    <insert id="insertOrderDetail" parameterType="OrderDetailDTO">
+        <selectKey keyProperty="fgOrderDetailId" order="BEFORE">
+            SELECT SEQ_FG_ORDER_DETAIL.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO FG_ORDER_DETAIL (
+        FG_ORDER_DETAIL_ID,
+        FG_TRANSACTION_ID,
+        FG_ORDER_ID,
+        FG_PRODUCT_NAME
+        ) VALUES (
+        #{fgOrderDetailId},
+        #{fgTransactionId},
+        #{fgOrderId},
+        #{fgProductName}
+        )
+    </insert>
+
+    <!-- 픽업 일정 추가 -->
+    <insert id="insertPickup" parameterType="PickupDTO">
+        <selectKey keyProperty="fgPickupId" order="BEFORE">
+            SELECT SEQ_FG_PICKUP.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO FG_PICKUP (
+        FG_PICKUP_ID,
+        FG_PICKUP_SCHEDULE,
+        FG_PICKUP_REQUEST,
+        FG_PICKUP_STATUS,
+        FG_ORDER_ID
+        ) VALUES (
+        #{fgPickupId},
+        #{fgPickupSchedule},
+        #{fgPickupRequest},
+        '주문확인중',
+        #{fgOrderId}
+        )
+    </insert>
+
+    <!-- 제품 이름 조회 -->
+    <select id="selectProductName" parameterType="Long" resultType="String">
+        SELECT FG_PRODUCT_NAME
+        FROM FG_PRODUCT
+        WHERE FG_PRODUCT_ID = #{fgProductId}
+    </select>
+
+    <!-- 주문 ID로 제품 ID 조회 -->
+    <select id="selectOrderProductId" parameterType="Long" resultType="Long">
+        SELECT FG_PRODUCT_ID
+        FROM FG_ORDER
+        WHERE FG_ORDER_ID = #{fgOrderId}
+    </select>
+
+<!--    유저코드로 orderId 찾기-->
+    <select id="selectOrderUserCode" parameterType="Long" resultType="Long">
+        SELECT FG_ORDER_ID FROM FG_ORDER WHERE FG_USER_CODE = #{fgUserCode}
+    </select>
+
+<!--    유저코드로 cartId찾기-->
+    <select id="selectCartUserCode" parameterType="Long" resultType="Long">
+        SELECT FG_CART_ID FROM FG_CART WHERE FG_USER_CODE = #{fgUserCode}
+    </select>
+
+<!--    cartId로 cartDetailId 리스트 찾기-->
+    <select id="selectCartCartDetail" parameterType="Long" resultType="CartDTO">
+        SELECT
+            c.FG_CART_ID AS fgCartId,
+            u.FG_USER_CODE AS fgUserCode,
+            u.FG_NORMAL_NAME AS fgNormalName,
+            d.FG_PRODUCT_ID AS fgProductId,
+            p.FG_PRODUCT_NAME AS fgProductName,
+            p.FG_PRODUCT_PRICE AS fgProductPrice,
+            p.FG_PRODUCT_WEIGHT AS fgProductWeight,
+            p.FG_PRODUCT_EXP_DATE AS fgProductExpTime,
+            f.FG_PRODUCT_FILE_NAME AS fgProductFileName,
+            f.FG_PRODUCT_FILE_ROOT AS fgProductFileRoot,
+            f.FG_PRODUCT_FILE_UUID AS fgProductFileUUID,
+            d.FG_CART_DETAIL_ID as fgCartDetailId
+        FROM
+            FG_CART c
+                JOIN
+            FG_CART_DETAIL d ON c.FG_CART_ID = d.FG_CART_ID
+                JOIN
+            FG_NORMAL_USER u ON c.FG_USER_CODE = u.FG_USER_CODE
+                JOIN
+            FG_PRODUCT p ON d.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+                LEFT JOIN
+            FG_PRODUCT_FILE f ON p.FG_PRODUCT_ID = f.FG_PRODUCT_ID
+        WHERE
+            u.FG_USER_CODE = #{fgUserCode}
+    </select>
+
+<!--    cartDetail에 insert-->
+    <insert id="insertCartDetail" parameterType="CartDetailDTO">
+        <selectKey keyProperty="fgCartDetailId" resultType="Long" order="BEFORE">
+            SELECT SEQ_FG_ORDER_DETAIL.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO FG_CART_DETAIL (FG_CART_DETAIL_ID, FG_CART_DETAIL_QUANTITY, FG_PRODUCT_ID, FG_CART_ID)
+        VALUES(#{fgCartDetailId}, #{fgCartDetailQuantity}, #{fgProductId}, #{fgCartId})
+    </insert>
+
+<!--    cart에서 삭제-->
+    <delete id="deleteCart" parameterType="Long">
+        DELETE  FROM FG_CART_DETAIL WHERE FG_CART_DETAIL_ID = #{fgCartDetailId}
+    </delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

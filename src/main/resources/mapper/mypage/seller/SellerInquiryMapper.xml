@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.seller.SellerInquiryMapper">
+    <!-- 문의글 작성(post 테이블) -->
+    <insert id="insertPost" parameterType="InquiryWriteDTO">
+        <selectKey keyProperty="postId" resultType="Long" order="BEFORE">
+            SELECT SEQ_POST.nextVal FROM DUAL
+        </selectKey>
+
+        INSERT INTO FG_POST (FG_POST_ID, FG_POST_TYPE, FG_POST_TITLE, FG_USER_CODE)
+        VALUES (#{postId}, 'inquiry', #{postTitle}, #{userCode})
+    </insert>
+
+    <!-- 문의글 작성(inquiry 테이블) -->
+    <insert id="insertInquiry" parameterType="InquiryWriteDTO">
+        INSERT INTO FG_INQUIRY (FG_POST_ID, FG_INQUIRY_CONTENT)
+        VALUES (#{postId}, #{inquiryContent})
+    </insert>
+
+    <!-- 문의글 삭제 -->
+    <delete id="deleteInquiry" parameterType="Long">
+        DELETE FROM FG_POST
+        WHERE FG_POST_ID = #{postId}
+    </delete>
+
+    <!-- 문의글 목록 -->
+    <select id="selectInquiryList" parameterType="Long" resultType="InquiryListDTO">
+        SELECT  p.FG_POST_ID AS postId,
+                p.FG_POST_TITLE AS postTitle,
+                TO_CHAR(p.FG_POST_CREATED_AT, 'YY/MM/DD HH24:MI') AS postCreatedAt,
+                CASE i.FG_INQUIRY_STATUS
+                   WHEN '0' THEN '확인중'
+                   WHEN '1' THEN '답변완료'
+                   END AS inquiryStatus
+        FROM FG_POST p, FG_INQUIRY i
+        WHERE p.FG_POST_ID = i.FG_POST_ID
+          AND p.FG_USER_CODE = #{userCode}
+        ORDER BY p.FG_POST_CREATED_AT DESC
+    </select>
+
+    <!-- 문의글 상세 -->
+    <select id="selectInquiryDetail" parameterType="Long" resultType="InquiryDetailDTO">
+        SELECT p.FG_POST_TITLE AS postTitle,
+               b.FG_BUSINESS_NAME AS businessName,
+               TO_CHAR(p.FG_POST_CREATED_AT, 'YY/MM/DD HH24:MI:SS') AS postCreatedAt,
+               i.FG_INQUIRY_CONTENT AS inquiryContent
+        FROM FG_POST p, FG_BUSINESS b, FG_INQUIRY i
+        WHERE p.FG_POST_ID = i.FG_POST_ID
+          AND p.FG_USER_CODE = b.FG_USER_CODE
+          AND p.FG_POST_ID = #{postId}
+    </select>
+
+    <!-- 문의글 댓글 -->
+    <select id="selectInquiryComment" parameterType="Long" resultType="InquiryCommentDTO">
+        SELECT TO_CHAR(c.FG_COMMENT_DATE, 'YY/MM/DD HH24:MI:SS') AS commentDate,
+               c.FG_COMMENT_CONTENT AS commentContent,
+               CASE c.FG_COMMENT_EDIT
+                   WHEN '0' THEN ' '
+                   WHEN '1' THEN '수정됨'
+                   END AS commentEdit
+        FROM FG_POST p, FG_COMMENT c
+        WHERE p.FG_POST_ID = c.FG_POST_ID
+          AND p.FG_POST_ID = #{postId}
+    </select>
+
+
+</mapper>

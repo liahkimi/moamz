@@ -7,6 +7,9 @@ import java.util.List;
 
 @Mapper
 public interface ProductFileMapper {
-    // 상품파일 등록 메서드
+    // 상품 파일 등록
     void insertFile(ProductFileDTO productFileDTO);
+
+    // 상품 파일 목록
+    List<ProductFileDTO> selectFileList(Long productId);
 }
