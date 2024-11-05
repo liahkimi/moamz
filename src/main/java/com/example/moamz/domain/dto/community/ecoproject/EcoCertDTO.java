@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class EcoCertWriteDTO {
+public class EcoCertDTO {
     private Long fgPostId;
     private String fgCertContent;
     private Long fgProjectId;

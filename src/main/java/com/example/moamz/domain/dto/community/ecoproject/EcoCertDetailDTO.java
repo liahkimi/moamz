@@ -16,8 +16,6 @@ public class EcoCertDetailDTO {
     private String fgCertContent;
     private Long fgCommonUserCode;
     private String fgNormalName;
-    private String fgCommentId;
-    private String fgCommentContent;
-    private char fgCommentEdit;
+    private String fgCommentCount;
     private int fgLikes;
 }

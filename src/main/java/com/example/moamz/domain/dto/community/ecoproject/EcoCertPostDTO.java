@@ -11,14 +11,12 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @ToString
-public class EcoCertListDTO {
+public class EcoCertPostDTO {
     private Long fgPostId;
-    private Long fgProjectId;
-    private Long fgCommonUserCode;
-    private String fgNormalName;
+    private String fgPostType;
     private String fgPostTitle;
     private LocalDateTime fgPostCreatedAt;
-    private int fgPostCommentCount;
-    private int fgPostViews;
     private int fgPostLikes;
+    private int fgPostViews;
+    private Long fgUserCode;
 }
