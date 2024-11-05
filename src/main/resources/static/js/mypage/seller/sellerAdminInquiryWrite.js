@@ -30,9 +30,8 @@ writeBtn.addEventListener('click', (e) => {
 
     const isConfirm = confirm('등록하시겠습니까?');
     if (isConfirm) {
-        location.href = 'sellerAdminInquiryDetail.html';
-    } else {
-
+        // form을 직접 제출하여 컨트롤러의 POST 요청을 처리하게 만듭니다.
+        document.querySelector('form').submit();
     }
     
 });

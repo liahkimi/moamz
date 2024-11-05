@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.file.PostFileMapper">
+    <!-- 게시물 대표파일 추가하기 -->
+    <insert id="insertFile" parameterType="PostFileDTO">
+        <selectKey keyProperty="postFileId" resultType="Long" order="BEFORE">
+            SELECT SEQ_POST_FILE.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO FG_POST_FILE(FG_POST_FILE_ID, FG_POST_FILE_NAME, FG_POST_FILE_ROOT, FG_POST_FILE_UUID, FG_POST_ID)
+        VALUES (#{postFileId}, #{postFileName}, #{postFileRoot}, #{postFileUuid}, #{postId})
+    </insert>
+
+    <!--  게시물 대표파일 삭제하기  -->
+    <delete id="deleteFile" parameterType="Long">
+        DELETE FROM FG_POST_FILE
+        WHERE FG_POST_ID = #{boardId}
+    </delete>
+
+    <!--  파일 목록 가져오기  -->
+    <select id="selectFileList" parameterType="Long" resultType="PostFileDTO">
+        SELECT FG_POST_FILE_ID, FG_POST_FILE_NAME, FG_POST_FILE_ROOT, FG_POST_FILE_UUID, FG_POST_ID
+        FROM FG_POST_FILE
+        WHERE FG_POST_ID = #{boardId}
+    </select>
+</mapper>
