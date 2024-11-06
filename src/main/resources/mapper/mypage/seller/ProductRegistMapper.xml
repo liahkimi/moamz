@@ -13,5 +13,4 @@
                 #{productStock}, #{productWeight}, TO_DATE(REPLACE(#{productExpDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI'),
                 #{productContent}, #{businessId})
     </insert>
-
 </mapper>

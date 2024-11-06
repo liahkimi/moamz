@@ -8,7 +8,6 @@ import lombok.ToString;
 @Getter @Setter
 @ToString
 @NoArgsConstructor
-public class NormalCheckedDTO {
+public class SellerCheckedDTO {
     private String fgUserId;
-    private String fgUserNickname;
 }

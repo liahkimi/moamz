@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class NormalFindPassword {
+public class NormalFindPasswordDTO {
     private Long fgUserId;
     private String fgNormalPhone;
 }

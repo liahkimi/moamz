@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>userLogin</title>
-  <link rel="stylesheet" href="../../../static/css/user/regular/userLogin.css">
-  <link rel="stylesheet" href="../../../static/css/user/regular/userResetPassword.css">
-  <script defer src="../../../static/js/user/regular/userLogin.js"></script>
+  <link rel="stylesheet" th:href="@{/css/user/regular/userLogin.css}">
+  <link rel="stylesheet" th:href="@{/css/user/regular/userResetPassword.css}">
+  <script defer th:src="@{/js/user/regular/userLogin.js}"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
