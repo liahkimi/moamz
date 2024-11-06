@@ -14,6 +14,7 @@
 button{
     border: none;
     background-color: #ffffff;
+    cursor: pointer;
 }
 button:hover{
     cursor: pointer;
@@ -70,7 +71,7 @@ input[type='radio']:checked {
 .cart-product{
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+    /*border-bottom: 1px solid rgba(0, 0, 0, 0.6);*/
 }
 .cart-product-top{
     display: flex;
@@ -88,12 +89,26 @@ input[type='radio']:checked {
     margin-left: 5px;
     height: 18px;
 }
-.cart-product-top-btn button[type="button"]{
-    font-size: 20px;
-    background-color: #ffffff;
+.cart-product-top-btn{
+    /*border: 1px solid red;*/
 }
+
 .cart-product-detail{
     /* border: 1px solid red; */
+}
+.cart-product-detail-product{
+    position: relative;
+    border-bottom:  1px solid black;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+.cart-product-top-btn button[type="button"]{
+    position: absolute;
+    right:  50px;
+    font-size: 20px;
+    background-color: #ffffff;
+    cursor: pointer;
+    /*border: 1px solid black;*/
 }
 .cart-product-detail-product > span{
     display: flex;
@@ -102,7 +117,7 @@ input[type='radio']:checked {
     /* border: 1px solid blue; */
     /* justify-content: space-around; */
 }
-.cart-product-detail-product > span > input[type="radio"]{
+.cart-radio{
     position: absolute;
     top: 0px;
     margin-right: 50px;
@@ -133,6 +148,7 @@ input[type='radio']:checked {
     align-items: center;
     background-color: #f0f0f0;
     border-radius: 5px;
+    padding: 8px;
 }
 .cart-product-detail-product-intro-text-img > img{
     margin-right: 8px;

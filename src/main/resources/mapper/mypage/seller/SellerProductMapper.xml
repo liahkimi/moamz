@@ -1,36 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.moamz.mapper.mypage.seller.SellerProductMapper">
+    <!-- 상품 등록하기 -->
+    <insert id="insertProduct" parameterType="ProductRegistDTO">
+        <selectKey keyProperty="productId" resultType="Long" order="BEFORE">
+            SELECT SEQ_PRODUCT.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO FG_PRODUCT (FG_PRODUCT_ID, FG_PRODUCT_NAME, FG_CATEGORY_ID, FG_PRODUCT_PRICE,
+        FG_PRODUCT_STOCK, FG_PRODUCT_WEIGHT, FG_PRODUCT_EXP_DATE,
+        FG_PRODUCT_CONTENT, FG_BUSINESS_ID)
+        VALUES (#{productId}, #{productName}, #{productCategoryId}, #{productPrice},
+        #{productStock}, #{productWeight}, TO_DATE(REPLACE(#{productExpDate}, 'T', ' '), 'YYYY-MM-DD HH24:MI'),
+        #{productContent}, #{businessId})
+    </insert>
+
     <!-- 등록한 상품 목록(판매중) -->
-    <select id="selectOnSales" resultType="ProductListDTO">
+    <select id="selectOnSales" parameterType="Long" resultType="ProductListDTO">
         SELECT p.FG_PRODUCT_ID AS productId, p.FG_PRODUCT_NAME AS productName, p.FG_CATEGORY_ID AS categoryId,
                p.FG_PRODUCT_PRICE AS productPrice, p.FG_PRODUCT_STOCK AS productStock, p.FG_PRODUCT_EXP_DATE AS productExpDate,
                p.FG_PRODUCT_TIME AS productTime, p.FG_PRODUCT_CONTENT AS productContent
         FROM FG_PRODUCT p, FG_PRODUCT_FILE pf
         WHERE p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
-          AND p.FG_PRODUCT_STATUS = '판매중';
+          AND p.FG_PRODUCT_STATUS = '판매중'
+          AND p.FG_BUSINESS_ID = #{businessId}
     </select>
 
     <!-- 등록한 상품 목록(판매종료) -->
-    <select id="selectNotOnSales" resultType="ProductListDTO">
+    <select id="selectNotOnSales" parameterType="Long" resultType="ProductListDTO">
         SELECT p.FG_PRODUCT_ID AS productId, p.FG_PRODUCT_NAME AS productName, p.FG_CATEGORY_ID AS categoryId,
                p.FG_PRODUCT_PRICE AS productPrice, p.FG_PRODUCT_STOCK AS productStock, p.FG_PRODUCT_EXP_DATE AS productExpDate,
                p.FG_PRODUCT_TIME AS productTime, p.FG_PRODUCT_CONTENT AS productContent
         FROM FG_PRODUCT p, FG_PRODUCT_FILE pf
         WHERE p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
-          AND p.FG_PRODUCT_STATUS = '판매종료';
+          AND p.FG_PRODUCT_STATUS = '판매종료'
+          AND p.FG_BUSINESS_ID = #{businessId}
     </select>
 
+    <!-- 상품 판매상태 변경 -->
+    <update id="modifyProductStatus" parameterType="Long">
+        UPDATE FG_PRODUCT
+        SET FG_PRODUCT_STATUS = '판매종료'
+        WHERE FG_PRODUCT_ID = #{productId}
+    </update>
 
-
-<!--    &lt;!&ndash; 모든 게시글 목록 조회 쿼리 &ndash;&gt;-->
-<!--    <select id="selectAll" resultType="BoardListDTO">-->
-<!--        SELECT BOARD_ID, TITLE, U.LOGIN_ID-->
-<!--        FROM TBL_BOARD B JOIN TBL_USER U-->
-<!--                              ON B.USER_ID = U.USER_ID-->
-<!--        ORDER BY BOARD_ID DESC-->
-<!--    </select>-->
-
+    <!--
+            등록한 상품 삭제
+            픽업 상태가 '주문확인중', '픽업대기중'인 상품은 삭제할 수 없다.
+     -->
+    <delete id="deleteProduct" parameterType="Long">
+        DELETE FROM FG_PRODUCT
+        WHERE FG_PRODUCT_ID = #{productId}
+          AND FG_PRODUCT_ID NOT IN (
+            SELECT FG_PRODUCT_ID
+            FROM FG_ORDER o, FG_PICKUP pick
+            WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
+              AND o.FG_PRODUCT_ID = #{productId}
+              AND pick.FG_PICKUP_STATUS IN ('주문확인중', '픽업대기중')
+        )
+    </delete>
+    
+    <!-- 상품 상세 -->
+    <select id="selectProductDetail" parameterType="Long" resultType="ProductDetailDTO">
+        SELECT (p.FG_PRODUCT_WEIGHT * 0.0025) AS carbonReduct, p.FG_PRODUCT_NAME AS productName,
+               p.FG_PRODUCT_WEIGHT AS productWeight, p.FG_PRODUCT_CONTENT AS productContent,
+               b.FG_BUSINESS_NAME AS businessName, b.FG_BUSINESS_ADDRESS || b.FG_BUSINESS_ADDRESS_DETAIL AS businessAddress,
+               b.FG_BUSINESS_OPEN_TIME || ' - ' || b.FG_BUSINESS_CLOSE_TIME AS businessRunTime,
+               b.FG_BUSINESS_PHONE AS businessPhone
+        FROM FG_PRODUCT p, FG_PRODUCT_FILE pf, FG_BUSINESS b
+        WHERE p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+          AND p.FG_BUSINESS_ID = b.FG_BUSINESS_ID
+          AND p.FG_PRODUCT_ID = #{productId}
+    </select>
 
 
 </mapper>

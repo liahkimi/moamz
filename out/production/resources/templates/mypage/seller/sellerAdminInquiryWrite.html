@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../static/css/reset2.css">
-    <link rel="stylesheet" href="../../../static/css/mypage/seller/sellerAdminInquiryWrite.css">
-    <script defer src="../../../static/js/mypage/seller/sellerAdminInquiryWrite.js"></script>
-    <title>마이페이지</title>
+    <link rel="stylesheet" th:href="@{/css/reset2.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/seller/sellerAdminInquiryWrite.css}">
+    <script defer th:src="@{/js/mypage/seller/sellerAdminInquiryWrite.js}"></script>
+    <title>관리자문의</title>
 </head>
 <body>
-    <header id="header"></header>
+    <header id="header" th:replace="~{/main/fragment/header/sellerHeader}"></header>
     <main>
         <div class="product-write-container">
             <!-- 제목 영역 -->
@@ -18,14 +18,14 @@
             </div>
             <!-- 글 작성 영역 -->
             <div class="write-content-container">
-                <form method="post" action="">
+                <form method="post" th:action="@{/seller/inquiry/regist}">
                     <div class="write-item">
                         <p class="write-label">📝 문의제목*</p>
-                        <input type="text" required/>
+                        <input type="text" name="postTitle" required/>
                     </div>
                     <div class="write-item">
                         <p class="write-label">📝 문의내용*</p>
-                        <textarea required></textarea>
+                        <textarea name="inquiryContent" required></textarea>
                     </div>
                     <div class="btn-wrap">
                         <button id="cancle-btn" type="button">취소</button>
@@ -35,13 +35,6 @@
             </div>
         </div>
     </main>
-    <footer id="footer"></footer>
+    <footer id="footer" th:replace="~{/main/fragment/footer/sellerFooter}"></footer>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(function() {
-        $("#header").load("../../main/fragment/header/sellerHeader.html");
-        $("#footer").load("../../main/fragment/footer/sellerFooter.html");
-    });
-</script>
 </html>
