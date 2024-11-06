@@ -18,14 +18,35 @@ import java.util.Optional;
 public class SellerMyService {
     private final SellerMyMapper sellerMyMapper;
 
-    // 우수업체 여부 반환 메서드
-    public String isExcellentStore(Long businessId) {
-        return sellerMyMapper.selectExcellentStore(businessId);
-    }
+    // 판매자 프로필 가져오기 메서드
+    public SellerProfileDTO getSellerProfile(Long businessId, Long userCode) {
+        //businessId = 1L;
+        //userCode = 1L;
 
-    // 판매자 프로필 조회 메서드
-    public SellerProfileDTO findSellerProfile(Long userCode) {
-        return sellerMyMapper.selectSellerProfile(userCode);
+        // 판매자 프로필 조회
+        SellerProfileDTO sellerProfileDTO = sellerMyMapper.selectStoreProfile(userCode);
+
+        // 우수 업체 여부
+        String isExcellent = sellerMyMapper.selectExcellentStore(businessId);
+
+        // 우수업체인 경우 DTO에 topBusiness값 설정하기
+        if(isExcellent.equals("TRUE")) {
+            sellerProfileDTO.setIsTopBusiness("우수업체");
+        }
+
+        // 구해준 음식물 누적합계 g -> kg으로 변환
+        int totalWeight = sellerProfileDTO.getTotalWeight();
+        sellerProfileDTO.setTotalWeightToKg((double) totalWeight/1000 );
+
+        // 탄소감축량, 나무 수 계산
+        double carbonReduct = totalWeight * 0.0025;
+        double treeCount = carbonReduct / 22;
+
+        // DTO에 탄소감축량, 나무 수 필드값 설정하기
+        sellerProfileDTO.setCarbonReduction(carbonReduct);
+        sellerProfileDTO.setTreeCount(treeCount);
+
+        return sellerProfileDTO;
     }
 
     // 업체 리뷰 조회 메서드

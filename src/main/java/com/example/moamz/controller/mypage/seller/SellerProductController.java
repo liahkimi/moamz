@@ -2,6 +2,8 @@ package com.example.moamz.controller.mypage.seller;
 
 import com.example.moamz.domain.dto.mypage.seller.ProductListDTO;
 import com.example.moamz.domain.dto.mypage.seller.ProductRegistDTO;
+import com.example.moamz.domain.dto.mypage.seller.info.SellerProfileDTO;
+import com.example.moamz.service.mypage.seller.SellerMyService;
 import com.example.moamz.service.mypage.seller.SellerProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/seller/product")
@@ -20,6 +25,7 @@ import java.util.List;
 @Slf4j
 public class SellerProductController {
     public final SellerProductService sellerProductService;
+    public final SellerMyService sellerMyService;
 
     // 상품 등록 페이지 열기
     // 로그인 기능 완료되면 세션 추가해줘야 함
@@ -58,19 +64,23 @@ public class SellerProductController {
         return "redirect:/seller/product/list";
     }
 
-    /**
-     * 상품 목록 열기
-     */
+
+    // 등록한 상품 목록 페이지 열기
+    // 상품 목록은 RestController에서 비동기처리를 하기 때문에 여기서는 프로필 정보만 넘겨준다.
     @GetMapping("/list")
     public String productList(Model model) {
         // ⭐로그인 유저의 businessId 필요
         Long businessId = 1L;
+        Long userCode = 1L;
 
-        List<ProductListDTO> productList = sellerProductService.findOnSales(businessId);
-        // System.out.println("⭐⭐⭐⭐productList : " + productList);
-        // 모델에 목록 추가
-        model.addAttribute("productList", productList);
+        // 판매자 프로필 가져오기
+        SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(businessId, userCode);
+
+        // 모델에 추가
+        model.addAttribute("sellerProfileDTO", sellerProfileDTO);
 
         return "mypage/seller/sellerProductList";
     }
+
+
 }

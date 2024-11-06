@@ -15,7 +15,7 @@ public interface SellerMyMapper {
     String selectExcellentStore(Long businessId);
 
     // 판매자 프로필 조회
-    SellerProfileDTO selectSellerProfile(Long userCode);
+    SellerProfileDTO selectStoreProfile(Long userCode);
 
     // 업체 리뷰 조회
     List<StoreReviewDTO> selectMyStoreRv(Long businessId);

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../static/css/reset2.css">
-    <link rel="stylesheet" href="../../../static/css/mypage/seller/sellerMypageSide.css">
-    <script src="../../../static/js/mypage/seller/sellerMypageSide.js"></script>
+    <link rel="stylesheet" th:href="@{/css/reset2.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/seller/sellerMypageSide.css}">
+    <script defer th:src="@{/js/mypage/seller/sellerMypageSide.js}"></script>
     <title>Document</title>
 </head>
 <body>
@@ -13,35 +13,36 @@
         <!-- 프로필 영역 -->
         <div class="profile-container">
             <!-- 프로필 사진 -->
-            <div class="profile-img-wrap">
-                <img src="../../../static/img/mypage/seller/store_profile_img.png" alt="업체이미지">
+            <div class="profile-img-wrap"
+                 th:style="'background-image: url(/upload_moamz/' + ${sellerProfileDTO.userFileRoot}
+                                + '/' +  ${sellerProfileDTO.userFileUuid} + '_' + ${sellerProfileDTO.userFileName} + ')' ">
             </div>
             <!-- 이름, 우수업체 표시 -->
             <div class="store-name-wrap">
-                <div class="best-store">우수업체</div>
-                <div class="store-name">오브제 그린 역삼점</div>
-            </div> 
+                <div class="best-store" th:text="${sellerProfileDTO.isTopBusiness}">우수업체</div>
+                <div class="store-name" th:text="${sellerProfileDTO.businessName}">업체명</div>
+            </div>
             <!-- 프로필 정보 -->
             <div class="store-info-wrap">
                 <div class="store-info-box">
-                    <img src="../../../static/img/mypage/seller/review_icon.png" alt="리뷰아이콘">
+                    <img th:src="@{/img/mypage/seller/review_icon.png}" alt="리뷰아이콘">
                     <span>업체평점</span>
-                    <span>5.0</span>
+                    <span th:text="${sellerProfileDTO.businessRating}">5.0</span>
                 </div>
                 <div class="store-info-box">
-                    <img src="../../../static/img/mypage/seller/trash_icon.png" alt="음쓰아이콘">
+                    <img th:src="@{/img/mypage/seller/trash_icon.png}" alt="음쓰아이콘">
                     <span>구해준 음식물</span>
-                    <span>7.333</span>kg
+                    <span th:text="${#numbers.formatDecimal(sellerProfileDTO.totalWeightToKg, 1, 2)}">음식물 중량 누적</span>kg
                 </div>
                 <div class="store-info-box">
-                    <img src="../../../static/img/mypage/seller/carbon_icon.png" alt="탄소아이콘">
+                    <img th:src="@{/img/mypage/seller/carbon_icon.png}" alt="탄소아이콘">
                     <span>탄소감축량</span>
-                    <span>18.25</span>kg
+                    <span th:text="${#numbers.formatDecimal(sellerProfileDTO.carbonReduction, 1, 2)}">탄소감축량 누적</span>kg
                 </div>
                 <div class="store-info-box">
-                    <img src="../../../static/img/mypage/seller/tree_icon.png" alt="나무아이콘">
+                    <img th:src="@{/img/mypage/seller/tree_icon.png}" alt="나무아이콘">
                     <span>내가 심은 나무</span>
-                    <span>1</span>그루
+                    <span th:text="${#numbers.formatDecimal(sellerProfileDTO.treeCount, 1, 2)}">1</span>그루
                 </div>
             </div>
         </div>
@@ -50,25 +51,25 @@
         <div class="mypage-menu-container">
             <ul>
                 <li class="menu-item">
-                    <a href="sellerSalesHistory.html">● 상품판매내역</a>
+                    <a th:href="@{seller/sales/list}">● 상품판매내역</a>
                 </li>
                 <li class="menu-item">
-                    <a href="sellerProductList.html">● 등록한 상품</a>
+                    <a th:href="@{/seller/product/list}">● 등록한 상품</a>
                 </li>
                 <li class="menu-item">
-                    <a href="sellerProductRegistration.html">● 상품 등록하기</a>
+                    <a th:href="@{/seller/product/regist}">● 상품 등록하기</a>
                 </li>
                 <li class="menu-item">
-                    <a href="sellerReviewCheck.html">● 업체리뷰 보기</a>
+                    <a th:href="@{/seller/my/storeReview}">● 업체리뷰 보기</a>
                 </li>
                 <li class="menu-item">
-                    <a href="sellerInfoAuth.html">● 업체정보변경</a>
+                    <a th:href="@{/seller/my/infoAuth}">● 업체정보변경</a>
                 </li>
                 <li class="menu-item">
-                    <a href="sellerInfoAuth.html">● 판매자 개인정보 변경</a>
+                    <a th:href="@{/seller/my/infoAuth}">● 판매자 개인정보 변경</a>
                 </li>
                 <li class="menu-item">
-                    <a href="sellerAdminInquiryList.html">● 관리자 문의</a>
+                    <a th:href="@{/seller/inquiry/list}">● 관리자 문의</a>
                 </li>
             </ul>
         </div>
