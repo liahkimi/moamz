@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class NoticeModifyDTO {
+public class AdminNoticeModifyDTO {
 //  공지사항 글 수정하기
 
     //게시글공통테이릅 수정

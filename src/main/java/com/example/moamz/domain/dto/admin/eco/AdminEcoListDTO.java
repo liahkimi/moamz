@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
-public class EcoListDTO {
+public class AdminEcoListDTO {
 //  (진행중/완료된) 에코프로젝트 목록 DTO
 
     // 썸네일 보여주기

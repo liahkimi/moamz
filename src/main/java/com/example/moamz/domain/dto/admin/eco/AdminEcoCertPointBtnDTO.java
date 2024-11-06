@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class EcoCertPointBtnDTO {
+public class AdminEcoCertPointBtnDTO {
 //    좋아요 가장 많은 에코프로젝트 인증글 작성자에게 포인트 지급하기
 
     //포인트를 지급한 사람의 회원번호도 알아야 하나..? => 관리자 회원번호?

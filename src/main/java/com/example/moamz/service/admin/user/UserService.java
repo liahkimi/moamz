@@ -1,10 +1,9 @@
 package com.example.moamz.service.admin.user;
 
-import com.example.moamz.domain.dto.admin.user.UserSessionDTO;
+import com.example.moamz.domain.dto.admin.user.AdminUserSessionDTO;
 import com.example.moamz.mapper.admin.user.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +23,7 @@ public class UserService {
     }
 
     //로그인한 유저 세션 조회 메서드
-    public UserSessionDTO findLoginInfo(String fgUserId, String fgUserPassword){
+    public AdminUserSessionDTO findLoginInfo(String fgUserId, String fgUserPassword){
         log.info("로그인 시도 : {}", fgUserId);
         log.info("입력된 비밀번호 : {}", fgUserPassword); // 비밀번호는 로그에 찍지 않는 것이 좋음
 

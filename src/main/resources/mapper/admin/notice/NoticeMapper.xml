@@ -2,8 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.moamz.mapper.admin.notice.NoticeMapper">
     <!-- 공지사항 상세보기 -->
-    <select id="selectNoticeById" parameterType="Long" resultType="NoticeDetailDTO">
-        SELECT p.FG_POST_ID, p.FG_POST_TITLE, cu.FG_USER_TYPE, p.FG_POST_CREATED_AT, n.FG_NOTICE_CONTENT
+    <select id="selectNoticeById" parameterType="Long" resultType="AdminNoticeDetailDTO">
+        SELECT p.FG_POST_ID, p.FG_POST_TITLE, cu.FG_USER_TYPE,
+               TO_CHAR(p.FG_POST_CREATED_AT, 'YY/MM/DD HH24:MI') AS fgPostCreatedAt,
+               n.FG_NOTICE_CONTENT, p.FG_POST_VIEWS
         FROM FG_POST p
                  JOIN FG_NOTICE n ON p.FG_POST_ID = n.FG_POST_ID
                  JOIN FG_COMMON_USER cu ON p.FG_USER_CODE = cu.FG_USER_CODE
@@ -11,14 +13,16 @@
     </select>
 
     <!-- 공지사항 게시판 보기 -->
-    <select id="selectNoticeAll" resultType="NoticeListDTO">
-        SELECT DISTINCT p.FG_POST_TITLE, p.FG_POST_CREATED_AT, p.FG_POST_VIEWS
+    <select id="selectNoticeAll" resultType="AdminNoticeListDTO">
+        SELECT DISTINCT p.FG_POST_ID,p.FG_POST_TITLE,
+                        TO_CHAR(p.FG_POST_CREATED_AT, 'YY/MM/DD HH24:MI') AS fgPostCreatedAt,
+                        p.FG_POST_VIEWS
         FROM FG_NOTICE n
                  JOIN FG_POST p ON n.FG_POST_ID = p.FG_POST_ID
     </select>
 
     <!-- 공지사항 글 작성하기 -->
-    <insert id="insertNoticePost" parameterType="NoticeWriteDTO">
+    <insert id="insertNoticePost" parameterType="AdminNoticeWriteDTO">
         <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
             SELECT SEQ_POST.nextval FROM DUAL
         </selectKey>
@@ -27,19 +31,25 @@
         VALUES (#{fgPostId}, 'notice', #{fgPostTitle}, (SELECT FG_USER_CODE FROM FG_COMMON_USER WHERE FG_USER_ID = '관리자'))
     </insert>
 
-    <insert id="insertNotice" parameterType="NoticeWriteDTO">
+    <insert id="insertNotice" parameterType="AdminNoticeWriteDTO">
         INSERT INTO FG_NOTICE (FG_POST_ID, FG_NOTICE_CONTENT)
         VALUES (#{fgPostId}, #{fgNoticeContent})
     </insert>
 
-    <!-- 공지사항 글 수정하기 -->
-    <update id="modifyNotice" parameterType="NoticeModifyDTO">
+    <!-- 공지사항 글 수정하기 - 공통테이블 수정-->
+    <update id="modifyNotice" parameterType="AdminNoticeModifyDTO">
         UPDATE FG_POST
         SET FG_POST_EDIT = '1',
             FG_POST_TITLE = #{fgPostTitle}
         WHERE FG_POST_ID = #{fgPostId}
     </update>
 
+    <!--공지사항 글 수정하기 - 공지사항 테이블 수정-->
+    <update id="modifyNoticeReal" parameterType="AdminNoticeModifyDTO">
+        UPDATE FG_NOTICE
+        SET FG_NOTICE_CONTENT  = #{fgNoticeContent}
+        WHERE FG_POST_ID = #{fgPostId}
+    </update>
 
     <!--공지사항 글 삭제하기-->
     <delete id="deleteNotice" parameterType="Long">

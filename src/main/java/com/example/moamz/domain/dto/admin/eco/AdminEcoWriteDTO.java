@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class EcoWriteDTO {
+public class AdminEcoWriteDTO {
 //    에코프로젝트 작성하기 insert dto
 
 //    // 썸네일 - 게시글파일관리테이블 isnert <- file>PostFileDTO로 처리 예정

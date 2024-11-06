@@ -1,15 +1,16 @@
 package com.example.moamz.service.admin.notice;
 
-import com.example.moamz.domain.dto.admin.notice.NoticeDetailDTO;
-import com.example.moamz.domain.dto.admin.notice.NoticeListDTO;
-import com.example.moamz.domain.dto.admin.notice.NoticeWriteDTO;
+import com.example.moamz.domain.dto.admin.notice.AdminNoticeDetailDTO;
+import com.example.moamz.domain.dto.admin.notice.AdminNoticeListDTO;
+import com.example.moamz.domain.dto.admin.notice.AdminNoticeModifyDTO;
+import com.example.moamz.domain.dto.admin.notice.AdminNoticeWriteDTO;
 import com.example.moamz.mapper.admin.notice.NoticeMapper;
-import com.example.moamz.mapper.file.PostFileMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -20,21 +21,20 @@ public class NoticeService {
     private final NoticeMapper noticeMapper;
 
     //공지사항 작성하기
-    public void registerNotice(NoticeWriteDTO noticeWriteDTO){
+    public void registerNotice(AdminNoticeWriteDTO adminNoticeWriteDTO){
         //공통 post테이블에 데이터 삽입
-        noticeMapper.insertNoticePost(noticeWriteDTO);
+        noticeMapper.insertNoticePost(adminNoticeWriteDTO);
         //notice테이블에 데이터 삽입
-        noticeMapper.insertNotice(noticeWriteDTO);
-
+        noticeMapper.insertNotice(adminNoticeWriteDTO);
     }
 
     //공지사항 글 상세보기
-    public NoticeDetailDTO findNoticeById(Long fgPostId){
+    public AdminNoticeDetailDTO findNoticeById(Long fgPostId){
         return noticeMapper.selectNoticeById(fgPostId).orElseThrow(() -> new IllegalStateException("유효하지 않은 게시물"));
     }
 
     //공지사항 목록 보기
-    public List<NoticeListDTO> findNoticeAll(){
+    public List<AdminNoticeListDTO> findNoticeAll(){
         return noticeMapper.selectNoticeAll();
     }
 
@@ -42,4 +42,25 @@ public class NoticeService {
     public int findNoticeTotal(){
         return noticeMapper.selectNoticeTotal();
     }
+
+    //공지사항 글 수정하기
+    public void modifyNotice(AdminNoticeModifyDTO adminNoticeModifyDTO)throws IOException {
+        noticeMapper.modifyNotice(adminNoticeModifyDTO);
+        noticeMapper.modifyNoticeReal(adminNoticeModifyDTO);
+        Long fgPostId = adminNoticeModifyDTO.getFgPostId();
+    }
+
+    //공지사항 글 삭제하기
+    public void removeNotice(Long fgPostId){
+        noticeMapper.deleteNotice(fgPostId);
+    }
+
+
+
+
+
+
+
+
+
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.moamz.mapper.admin.sellerInquiry.SellerInquiryMapper">
+<mapper namespace="com.example.moamz.mapper.admin.sellerInquiry.SellerAdminInquiryMapper">
     <!--판매자 미확인 문의글 목록 보여주기-->
-    <select id="selectUncheckedInquiryList" resultType="SellerInquiryListDTO">
+    <select id="selectUncheckedInquiryList" resultType="AdminSellerInquiryListDTO">
         SELECT p.FG_POST_TITLE, cu.FG_USER_ID, b.FG_BUSINESS_NAME,
                p.FG_POST_CREATED_AT
         FROM FG_INQUIRY i
@@ -15,7 +15,7 @@
     </select>
 
     <!--판매자 답변완료 문의글 목록 보여주기-->
-    <select id="selectAnsweredInquiryList" resultType="SellerInquiryListDTO">
+    <select id="selectAnsweredInquiryList" resultType="AdminSellerInquiryListDTO">
         SELECT p.FG_POST_TITLE, cu.FG_USER_ID, b.FG_BUSINESS_NAME,
                p.FG_POST_CREATED_AT,
                CASE
@@ -31,7 +31,7 @@
     </select>
 
     <!--판매자 특정 문의글 상세보기-->
-    <select id="selectUserInquiryDetailById" parameterType="Long" resultType="SellerInquiryDetailDTO">
+    <select id="selectUserInquiryDetailById" parameterType="Long" resultType="AdminSellerInquiryDetailDTO">
         SELECT p.FG_POST_TITLE,
                uf.FG_USER_FILE_ROOT,uf.FG_USER_FILE_NAME,uf.FG_USER_FILE_UUID,
                cu.FG_USER_ID, b.FG_BUSINESS_NAME,

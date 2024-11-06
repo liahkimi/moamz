@@ -1,5 +1,5 @@
 package com.example.moamz.mapper.admin.user;
-import com.example.moamz.domain.dto.admin.user.UserSessionDTO;
+import com.example.moamz.domain.dto.admin.user.AdminUserSessionDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,5 +14,5 @@ public interface UserMapper {
     //구체적인 sql 실행은 myBatis가 자동으로 바인딩 한다.
     Optional<Long> selectUserCode(@Param("fgUserId")String fgUserId, @Param("fgUserPassword")String fgUserPassword);
 //    세션 가져오기
-    Optional<UserSessionDTO> selectLoginInfo(@Param("fgUserId")String fgUserId, @Param("fgUserPassword")String fgUserPassword);
+    Optional<AdminUserSessionDTO> selectLoginInfo(@Param("fgUserId")String fgUserId, @Param("fgUserPassword")String fgUserPassword);
 }

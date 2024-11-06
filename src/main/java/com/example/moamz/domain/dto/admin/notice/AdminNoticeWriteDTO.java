@@ -4,15 +4,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.cglib.core.Local;
-
-import java.time.LocalDate;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-public class NoticeWriteDTO {
+public class AdminNoticeWriteDTO {
 //    공지사항 글 작성하기
 
     //공통게시글테이블 insert
@@ -24,4 +21,7 @@ public class NoticeWriteDTO {
 
     //공지사항테이블 insert
     private String fgNoticeContent; //공지사항 내용
+
+    private String fgUserId;
+
 }

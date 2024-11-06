@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class InquiryStatusUpdateDTO {
+public class AdminInquiryStatusUpdateDTO {
 //    회원/판매자 문의글 답변상태 변경버튼 DTO
 
     private Long fgPostId;           // 문의글 ID

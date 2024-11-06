@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,15 +40,15 @@
                   <th>조회수</th>
                 </tr>
               </thead>
-              <tbody th:each="notice:${noticeListDTO} ">
-                <!-- 💥추후 각 tr클릭시 해당 상세페이지로 이동시키기 -->
-                <tr onclick="location.href='adminNoticeDetail.html'">
-                  <td th:text="">1</td>
+              <tbody>
+                <tr th:each="notice, iterStat :${adminNoticeListDTO}" th:onclick="|location.href='@{/admin/notice/detail(fgPostId=${notice.fgPostId})}'|">
+                  <td th:text="${iterStat.index + 1}">1</td>
                   <td th:text="${notice.fgPostTitle}">[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
-                  <td class="gray-text"th:text="${notice.fgPostCreatedAt}">2024/10/11</td>
-                  <td class="gray-text" th:text="${notice.fgPostViews}">
-                    <img th:src="@{/img/admin/eye.png}" alt="morebtn" />
-                    10
+                  <td class="gray-text" th:text="${notice.fgPostCreatedAt}">2024/10/11</td>
+
+                  <td class="gray-text">
+                    <img th:src="@{/img/admin/eye.png}" alt="view" />
+                    <span th:text="${notice.fgPostViews}">0</span>
                   </td>
                 </tr>
 <!--                <tr onclick="location.href='adminNoticeDetail.html'">-->
@@ -166,12 +165,12 @@
       </div>
     </main>
   </body>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script>
-    $(function () {
-      $("#adminNavBar").load("adminNavBar.html");
-      $("#adminHeader").load("adminHeader.html");
-    });
-  </script>
-  <script th:src="@{js/admin/adminNoticeList.js}"></script>
+<!--  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<!--  <script>-->
+<!--    $(function () {-->
+<!--      $("#adminNavBar").load("adminNavBar.html");-->
+<!--      $("#adminHeader").load("adminHeader.html");-->
+<!--    });-->
+<!--  </script>-->
+  <script th:src="@{/js/admin/adminNoticeList.js}"></script>
 </html>

@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class EcoCertListDTO {
+public class AdminEcoCertListDTO {
 //  (진행중/종료된) 특정 한 에코 프로젝트의 인증글 목록 보기
     private Long fgPostId;                // 게시글 ID
     private Long fgUserCode;              //  회원번호

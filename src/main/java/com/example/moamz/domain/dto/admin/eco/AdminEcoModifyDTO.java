@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class EcoModifyDTO {
+public class AdminEcoModifyDTO {
     
     private Long fgUserCode;      // 작성자 회원번호
     

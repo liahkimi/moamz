@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class NoticeDeleteDTO {
+public class AdminNoticeDeleteDTO {
 //    공지사항 글 삭제하기
     private Long fgPostId; // 게시글 ID
     private Long fgUserCode;    // 글 작성자 회원번호

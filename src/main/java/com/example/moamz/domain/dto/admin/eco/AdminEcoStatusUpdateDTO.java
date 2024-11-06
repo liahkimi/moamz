@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class EcoStatusUpdateDTO {
+public class AdminEcoStatusUpdateDTO {
 //    에코프로젝트 진행중->종료  상태변경 버튼 클릭하기
 
     private Long fgUserCode;      // 버튼 클릭한 회원번호(관리자)

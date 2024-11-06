@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class NoticeListDTO {
+public class AdminNoticeListDTO {
 //    공지사항 목록 보여주기
     private Long fgPostId;//글 번호
     private String fgPostTitle;//글 제목

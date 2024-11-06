@@ -1,6 +1,6 @@
 //package com.example.moamz.controller.admin;
 //
-//import com.example.moamz.domain.dto.admin.user.UserSessionDTO;
+//import com.example.moamz.domain.dto.admin.user.AdminUserSessionDTO;
 //import com.example.moamz.service.admin.user.UserService;
 //import jakarta.servlet.http.HttpSession;
 //import org.junit.jupiter.api.BeforeEach;
@@ -58,7 +58,7 @@
 //    @Test
 //    void testLoginUser() throws Exception { //perform에서 시그니처로 예외처리 가능
 //        //given : userService의 findLoginInfo메소드가 UserSessionDTO를 반환하도록 설정
-//        UserSessionDTO userSessionDTO = new UserSessionDTO(); //로그인하면 세션이 유지되어있는 상태여야해서.
+//        AdminUserSessionDTO userSessionDTO = new AdminUserSessionDTO(); //로그인하면 세션이 유지되어있는 상태여야해서.
 //        userSessionDTO.setFgUserCode(0L);
 //        userSessionDTO.setFgUserId("관리자");
 //        doReturn(userSessionDTO).when(userService).findLoginInfo(any(), any());//Mockito의 stubber메소드중 하나. doReturn()은 스텁이 반환할 객체를 정의함.

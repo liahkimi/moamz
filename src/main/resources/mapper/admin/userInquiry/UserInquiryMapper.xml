@@ -3,7 +3,7 @@
 <mapper namespace="com.example.moamz.mapper.admin.userInquiry.UserInquiryMapper">
 
     <!--일반회원 미확인 문의목록 보여주기-->
-    <select id="selectUncheckedInquiryList" resultType="UserInquiryListDTO">
+    <select id="selectUncheckedInquiryList" resultType="AdminUserInquiryListDTO">
         SELECT DISTINCT p.FG_POST_TITLE, nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT
         FROM FG_INQUIRY i
                  JOIN FG_POST p ON i.FG_POST_ID = p.FG_POST_ID
@@ -14,7 +14,7 @@
     </select>
 
     <!--일반회원 답변완료 문의 목록 보여주기-->
-    <select id="selectAnsweredInquiryList" resultType="UserInquiryListDTO">
+    <select id="selectAnsweredInquiryList" resultType="AdminUserInquiryListDTO">
         SELECT DISTINCT p.FG_POST_TITLE, nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT
         FROM FG_INQUIRY i
                  JOIN FG_POST p ON i.FG_POST_ID = p.FG_POST_ID
@@ -25,7 +25,7 @@
     </select>
 
     <!--일반회원 특정 문의글 상세보기-->
-    <select id="selectUserInquiryDetailById" parameterType="Long" resultType="UserInquiryDetailDTO">
+    <select id="selectUserInquiryDetailById" parameterType="Long" resultType="AdminUserInquiryDetailDTO">
         SELECT p.FG_POST_TITLE ,
                uf.FG_USER_FILE_ROOT,uf.FG_USER_FILE_NAME,uf.FG_USER_FILE_UUID,
                nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT,
