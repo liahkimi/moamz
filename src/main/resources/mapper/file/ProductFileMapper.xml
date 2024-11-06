@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.file.ProductFileMapper">
+    <!-- 상품 파일을 DB에 추가하기 -->
+    <insert id="insertFile" parameterType="ProductFileDTO">
+        <selectKey keyProperty="productFileId" resultType="Long" order="BEFORE">
+            SELECT SEQ_PRODUCT_FILE.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO FG_PRODUCT_FILE(FG_PRODUCT_FILE_ID, FG_PRODUCT_FILE_NAME, FG_PRODUCT_FILE_ROOT, FG_PRODUCT_FILE_UUID, FG_PRODUCT_ID)
+        VALUES (#{productFileId}, #{productFileName}, #{productFileRoot}, #{productFileUuid}, #{productId})
+    </insert>
+
+    <!--  파일 목록 가져오기  -->
+    <select id="selectFileList" parameterType="Long" resultType="ProductFileDTO">
+        SELECT FG_PRODUCT_FILE_ID, FG_PRODUCT_FILE_NAME, FG_PRODUCT_FILE_ROOT, FG_PRODUCT_FILE_UUID, FG_PRODUCT_ID
+        FROM FG_PRODUCT_FILE
+        WHERE FG_PRODUCT_ID = #{productId}
+    </select>
+</mapper>

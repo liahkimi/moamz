@@ -24,9 +24,4 @@ public class FreeDetailDTO {
     private String postEdit;        // 게시글 수정여부
     private String freeContent;     // 게시글 내용
 
-    private Long userFileId;         // 파일ID
-    private String userFileName;     // 파일명
-    private String userFileRoot;     // 파일경로
-    private String userFileUuid;     // UUID
-    
 }
