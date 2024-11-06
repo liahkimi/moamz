@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.normal.MyLikeBusinessMapper">
+    <select id="selectMyLikeBusiness" resultType="MyLikeBusinessDTO">
+        -- MY 좋아요(업체)
+        SELECT uf.FG_USER_FILE_ROOT,uf.FG_USER_FILE_ID, uf.FG_USER_FILE_NAME, uf.FG_USER_FILE_UUID, b.FG_BUSINESS_NAME
+        FROM FG_LIKE l JOIN FG_BUSINESS b
+            ON l.FG_BUSINESS_ID = b.FG_BUSINESS_ID
+        JOIN FG_USER_FILE uf
+            ON l.FG_USER_CODE = uf.FG_USER_CODE
+        WHERE l.FG_USER_CODE = #{fgUserCode}
+    </select>
+
+</mapper>

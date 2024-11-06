@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.normal.inquiry.AdminInquiryListMapper">
+    <select id="selectInquiryList" resultType="AdminInquiryListDTO">
+        -- 관리자 문의내역 조회
+        SELECT p.FG_POST_TITLE , p.FG_POST_CREATED_AT ,
+               CASE i.FG_INQUIRY_STATUS
+                   WHEN '0' THEN '확인중'
+                   WHEN '1' THEN '답변완료'
+                   END AS 답변상태
+        FROM FG_POST p, FG_INQUIRY i
+        WHERE p.FG_POST_ID = i.FG_POST_ID AND p.FG_USER_CODE = #{fgUserCode}
+    </select>
+</mapper>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.normal.info.NormalInfoAuthMapper">
+    <select id="selectInfoAuth" resultType="NormalInfoAuthDTO">
+        SELECT FG_USER_ID, FG_USER_PASSWORD
+        FROM FG_COMMON_USER
+        WHERE FG_USER_ID = #{fgUserId} AND FG_USER_PASSWORD = #{fgUserPassword}
+    </select>
+</mapper>

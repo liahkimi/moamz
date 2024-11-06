@@ -23,13 +23,13 @@
 
 
 
-    <!-- 모든 게시글 목록 조회 쿼리 -->
-    <select id="selectAll" resultType="BoardListDTO">
-        SELECT BOARD_ID, TITLE, U.LOGIN_ID
-        FROM TBL_BOARD B JOIN TBL_USER U
-                              ON B.USER_ID = U.USER_ID
-        ORDER BY BOARD_ID DESC
-    </select>
+<!--    &lt;!&ndash; 모든 게시글 목록 조회 쿼리 &ndash;&gt;-->
+<!--    <select id="selectAll" resultType="BoardListDTO">-->
+<!--        SELECT BOARD_ID, TITLE, U.LOGIN_ID-->
+<!--        FROM TBL_BOARD B JOIN TBL_USER U-->
+<!--                              ON B.USER_ID = U.USER_ID-->
+<!--        ORDER BY BOARD_ID DESC-->
+<!--    </select>-->
 
 
 
