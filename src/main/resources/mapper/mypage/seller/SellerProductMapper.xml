@@ -75,11 +75,14 @@
 
     <!-- 상품 상세 -->
     <select id="selectProductDetail" parameterType="Long" resultType="ProductDetailDTO">
-        SELECT (p.FG_PRODUCT_WEIGHT * 0.0025) AS carbonReduct, p.FG_PRODUCT_NAME AS productName,
+        SELECT p.FG_PRODUCT_ID AS productId, (p.FG_PRODUCT_WEIGHT * 0.0025) AS carbonReduct,
+               p.FG_PRODUCT_NAME AS productName, TO_CHAR(p.FG_PRODUCT_EXP_DATE, 'YYYY/MM/DD HH24:MI') AS productExpDate,
                p.FG_PRODUCT_WEIGHT AS productWeight, p.FG_PRODUCT_CONTENT AS productContent,
-               b.FG_BUSINESS_NAME AS businessName, b.FG_BUSINESS_ADDRESS || b.FG_BUSINESS_ADDRESS_DETAIL AS businessAddress,
+               b.FG_BUSINESS_NAME AS businessName, b.FG_BUSINESS_ADDRESS || ' ' || b.FG_BUSINESS_ADDRESS_DETAIL AS businessAddress,
                b.FG_BUSINESS_OPEN_TIME || ' - ' || b.FG_BUSINESS_CLOSE_TIME AS businessRunTime,
-               b.FG_BUSINESS_PHONE AS businessPhone
+               b.FG_BUSINESS_PHONE AS businessPhone,
+               pf.FG_PRODUCT_FILE_NAME AS productFileName, pf.FG_PRODUCT_FILE_ROOT AS productFileRoot,
+               pf.FG_PRODUCT_FILE_UUID AS productFileUuid
         FROM FG_PRODUCT p, FG_PRODUCT_FILE pf, FG_BUSINESS b
         WHERE p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
           AND p.FG_BUSINESS_ID = b.FG_BUSINESS_ID

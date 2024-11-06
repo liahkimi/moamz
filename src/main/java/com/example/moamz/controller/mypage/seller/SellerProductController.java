@@ -1,5 +1,6 @@
 package com.example.moamz.controller.mypage.seller;
 
+import com.example.moamz.domain.dto.mypage.seller.ProductDetailDTO;
 import com.example.moamz.domain.dto.mypage.seller.ProductListDTO;
 import com.example.moamz.domain.dto.mypage.seller.ProductRegistDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.SellerProfileDTO;
@@ -60,8 +61,8 @@ public class SellerProductController {
             log.warn("오류 : productRegistDTO.getProductId()가 NULL입니다.");
         }
 
-        // 상품 목록 페이지로 리다이렉트
-        return "redirect:/seller/product/list";
+        // 상품 상세 페이지로 리다이렉트
+        return "redirect:/seller/product/detail/" + productRegistDTO.getProductId();
     }
 
 
@@ -80,6 +81,19 @@ public class SellerProductController {
         model.addAttribute("sellerProfileDTO", sellerProfileDTO);
 
         return "mypage/seller/sellerProductList";
+    }
+
+    // 상품 상세보기 페이지
+    @GetMapping("/detail/{productId}")
+    public String productDetail(@PathVariable("productId") Long productId,
+                                Model model) {
+        // 상품 상세정보 가져오기 메서드
+        ProductDetailDTO productDetailDTO = sellerProductService.findProductDetail(productId);
+        log.info("💜💜상세정보 : {}", productDetailDTO);
+
+        // DTO를 뷰로 전달
+        model.addAttribute("productDetailDTO", productDetailDTO);
+        return "mypage/seller/sellerProductDetail";
     }
 
 
