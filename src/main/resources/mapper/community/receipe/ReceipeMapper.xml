@@ -72,20 +72,26 @@
     <!-- FG_RECIPE 테이블 INSERT -->
     <insert id="insertFgRecipe" parameterType="ReceipeWriteDTO">
         INSERT INTO FG_RECIPE (
-            FG_POST_ID,
-            FG_RECIPE_INGREDIENTS,
-            FG_RECIPE_TIME,
-            FG_RECIPE_CONTENT
+        <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
+            select SEQ_FG_POST.currval from dual
+        </selectKey>
+        FG_POST_ID,
+        FG_RECIPE_INGREDIENTS,
+        FG_RECIPE_TIME,
+        FG_RECIPE_CONTENT
         ) VALUES (
-                     #{fgPostId},
-                     #{fgReceipeIngredients},
-                     #{fgReceipeTime},
-                     #{fgReceipeContent}
-                 )
+        #{fgPostId},
+        #{fgReceipeIngredients},
+        #{fgReceipeTime},
+        #{fgReceipeContent}
+        )
     </insert>
 
     <!-- FG_POST_FILE 테이블 INSERT -->
     <insert id="insertFgPostFile" parameterType="PostFileDTO">
+        <selectKey keyProperty="fgPostFileId" resultType="Long" order="BEFORE">
+            select SEQ_FG_POST_FILE.nextval from dual
+        </selectKey>
         INSERT INTO FG_POST_FILE (
             FG_POST_FILE_ID,
             FG_POST_FILE_NAME,

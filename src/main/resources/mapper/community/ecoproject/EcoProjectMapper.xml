@@ -67,8 +67,8 @@
         #{fgPostId}, #{fgCertContent}, #{fgProjectId}
     </insert>
 
-<!--    에코 인증글 글쓰기(2번)-->
-    <insert id="ecoCertPostInsert" parameterType="EcoCertPostDTO">
+<!--    전체 포스트에 insert-->
+    <insert id="ecoCertPostInsert" parameterType="PostDTO">
         <selectKey resultType="Long" keyProperty="fgPostId" order="BEFORE">
             select SEQ_FG_POST.nextval from dual
         </selectKey>
