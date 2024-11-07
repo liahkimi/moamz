@@ -99,8 +99,8 @@ public class SellerProductService {
     }
 
     // 5️⃣ 상품 삭제 메서드
-    public int removeProduct(Long productId) {
-        return sellerProductMapper.deleteProduct(productId);
+    public void removeProduct(Long productId) {
+        sellerProductMapper.deleteProduct(productId);
     }
 
     // 6️⃣ 상품 상세보기

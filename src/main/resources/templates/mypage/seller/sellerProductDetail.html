@@ -73,9 +73,9 @@
                     </div>
                 </div>
                 <!-- 버튼 영역 -->
-                <div class="btn-container">
+                <div class="btn-container" th:attr="data-id=${productDetailDTO.productId}">
                     <button type="button" id="move-to-list" onclick="location.href='/seller/product/list'">상품목록으로</button>
-                    <button type="button" id="sales-complete-btn">판매완료</button>
+                    <button type="button" id="sales-complete-btn" th:if="${productDetailDTO.productStatus == '판매중'}">판매완료</button>
                     <button type="button" id="product-delete-btn">상품삭제</button>
 
                 </div>

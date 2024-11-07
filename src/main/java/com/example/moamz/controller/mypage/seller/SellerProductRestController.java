@@ -65,20 +65,14 @@ public class SellerProductRestController {
 
     // 상품 삭제 메서드
     // 상품 삭제
-    @GetMapping("/delete/{productId}")
+    @DeleteMapping("/delete/{productId}")
     public ResponseEntity<Map<String, String>> deleteProduct(@PathVariable("productId") Long productId) {
         Map<String, String> response = new HashMap<>();
 
         try {
-            int result = sellerProductService.removeProduct(productId);
-
-            if (result > 0) {
-                response.put("message", "상품이 삭제되었습니다.");
-                return ResponseEntity.ok(response);
-            } else {
-                response.put("message", "유효하지 않은 상품입니다.");
-                return ResponseEntity.status(404).body(response);
-            }
+            sellerProductService.removeProduct(productId);
+            response.put("message", "상품이 삭제되었습니다.");
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.put("error", "상품 삭제 실패: " + e.getMessage());
             return ResponseEntity.status(500).body(response);

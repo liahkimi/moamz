@@ -1,105 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../static/css/reset2.css">
-    <link rel="stylesheet" href="../../../static/css/mypage/seller/sellerReviewCheck.css">
-    <script defer src="../../../static/js/mypage/seller/sellerReviewCheck.js"></script>
+    <link rel="stylesheet" th:href="@{/css/reset2.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/seller/sellerReviewCheck.css}">
+    <script defer th:src="@{/js/mypage/seller/sellerReviewCheck.js}"></script>
     <title>마이페이지</title>
 </head>
 <body>
-    <header id="header"></header>
+    <header id="header" th:replace="~{/main/fragment/header/sellerHeader}"></header>
     <main>
-        <section id="side-section"></section>
+        <section id="side-section" th:replace="~{/mypage/seller/sellerMypageSide}"></section>
         <!-- 리뷰 조회내역 영역-->
         <section class="review-section">
             <!-- 제목 -->
             <div class="mypage-title-wrap">
-                <img src="../../../static/img/mypage/seller/review_icon.png" alt="리뷰아이콘">
+                <img src="/img/mypage/seller/review_icon.png" alt="리뷰아이콘">
                 업체 리뷰 조회
             </div>
             <!-- 리뷰목록 -->
             <div class="review-container">
                 <ul>
-                    <li class="review-list">
+                    <li class="review-list" th:each="storeReviewDTO, idx : ${storeReviewDTO}">
                         <!-- 번호목록 -->
-                        <div class="review-num">
-                            <p>1</p>
+                        <div class="review-num" th:text="${idx.index + 1}">
+                            <p>번호</p>
                         </div>
                         <!-- 리뷰내용 -->
                         <div class="review-info-wrap">
                             <div class="review-item">
-                                <p class="client-nickname">역삼동불주먹</p>
+                                <p class="client-nickname" th:text="${storeReviewDTO.normalNickname}">작성자명</p>
                                 <div class="first">
-                                    ⭐<span class="review-rating">5.0</span>
-                                    <p class="review-date">2024/10/15</p>
+                                    ⭐<span class="review-rating" th:text="${storeReviewDTO.reviewRating}">리뷰별점</span>
+                                    <p class="review-date" th:text="${storeReviewDTO.reviewCreatedAt}">리뷰 작성일</p>
                                 </div>
                             </div>
                             <div class="review-item">
-                                <p class="review-content">사장님 대박 친절하시구,, 체리가 넘넘 맛있내요,, 번창하세요~^^</p>
+                                <p class="review-content" th:text="${storeReviewDTO.reviewContent}">리뷰내용</p>
                             </div>
                             <div class="review-item">
-                                <button type="none" class="client-product">타트체리 1kg</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="review-list">
-                        <!-- 번호목록 -->
-                        <div class="review-num">
-                            <p>1</p>
-                        </div>
-                        <!-- 리뷰내용 -->
-                        <div class="review-info-wrap">
-                            <div class="review-item">
-                                <p class="client-nickname">역삼동불주먹</p>
-                                <div class="first">
-                                    ⭐<span class="review-rating">5.0</span>
-                                    <p class="review-date">2024/10/15</p>
-                                </div>
-                            </div>
-                            <div class="review-item">
-                                <p class="review-content">사장님 대박 친절하시구,, 체리가 넘넘 맛있내요,, 번창하세요~^^</p>
-                            </div>
-                            <div class="review-item">
-                                <button type="none" class="client-product">타트체리 1kg</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="review-list">
-                        <!-- 번호목록 -->
-                        <div class="review-num">
-                            <p>1</p>
-                        </div>
-                        <!-- 리뷰내용 -->
-                        <div class="review-info-wrap">
-                            <div class="review-item">
-                                <p class="client-nickname">역삼동불주먹</p>
-                                <div class="first">
-                                    ⭐<span class="review-rating">5.0</span>
-                                    <p class="review-date">2024/10/15</p>
-                                </div>
-                            </div>
-                            <div class="review-item">
-                                <p class="review-content">사장님 대박 친절하시구,, 체리가 넘넘 맛있내요,, 번창하세요~^^</p>
-                            </div>
-                            <div class="review-item">
-                                <button type="none" class="client-product">타트체리 1kg</button>
+                                <button type="none" class="client-product" th:text="${storeReviewDTO.productName}">상품명</button>
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
         </section>
+
     </main>
-    <footer id="footer"></footer>
+    <footer id="footer" th:replace="~{/main/fragment/footer/sellerFooter}"></footer>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(function() {
-        $("#side-section").load("sellerMypageSide.html");
-        $("#header").load("../../main/fragment/header/sellerHeader.html");
-        $("#footer").load("../../main/fragment/footer/sellerFooter.html");
-    });
-</script>
+
 </html>

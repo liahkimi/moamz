@@ -19,7 +19,7 @@
             </div>
             <!-- 이름, 우수업체 표시 -->
             <div class="store-name-wrap">
-                <div class="best-store" th:text="${sellerProfileDTO.isTopBusiness}">우수업체</div>
+                <div class="best-store" th:text="${sellerProfileDTO.isTopBusiness}" th:if="${sellerProfileDTO.isTopBusiness}=='TRUE'">우수업체</div>
                 <div class="store-name" th:text="${sellerProfileDTO.businessName}">업체명</div>
             </div>
             <!-- 프로필 정보 -->
