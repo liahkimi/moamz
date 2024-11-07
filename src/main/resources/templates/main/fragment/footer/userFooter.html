@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UserFooter</title>
-  <link rel="stylesheet" href="/moamz_publishing/static/css/main/fragment/footer/userFooter.css">
+  <link rel="stylesheet" th:href="@{/css/main/fragment/footer/userFooter.css}">
 </head>
 <body>
-  
+  <footer>
     <div class="footer-wrap">
       <div class="company">
         <ul class="company-list">
@@ -33,6 +33,6 @@
         </div>
       </div>
     </div>
- 
+  </footer>
 </body>
 </html>

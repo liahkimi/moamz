@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.normal.WriteReviewInsertMapper">
+    <insert id="insertWriteReviewInsert" parameterType="WriteReviewInsertDTO">
+        <selectKey keyProperty="fgReviewId" resultType="Long" order="BEFORE">
+            SELECT SEQ_REVIEW.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO FG_REVIEW (FG_REVIEW_ID,FG_USER_CODE,FG_BUSINESS_ID,FG_ORDER_ID)
+               VALUES (#{fgReviewId},#{fgUserCode},#{fgBusinessId},#{fgOrderId})
+    </insert>
+</mapper>

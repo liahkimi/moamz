@@ -37,7 +37,7 @@
              FG_NORMAL_USER NU ON P.FG_USER_CODE = NU.FG_USER_CODE
         WHERE P.FG_POST_TYPE = 'ecoCert'
           AND EC.FG_POST_ID =
-        #{fgPostId}
+              #{fgPostId}
     </select>
 
     <!--에코 인증글 리스트-->
@@ -67,7 +67,7 @@
         #{fgPostId}, #{fgCertContent}, #{fgProjectId}
     </insert>
 
-<!--    에코 인증글 글쓰기(2번)-->
+    <!--    에코 인증글 글쓰기(2번)-->
     <insert id="ecoCertPostInsert" parameterType="EcoCertPostDTO">
         <selectKey resultType="Long" keyProperty="fgPostId" order="BEFORE">
             select SEQ_FG_POST.nextval from dual
