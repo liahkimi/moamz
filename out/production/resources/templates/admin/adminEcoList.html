@@ -55,10 +55,10 @@
                         alt="calendarIcon"
                       />
                       <div class="calendar-text">
-                        <span th:text="${ingEco.fgEcoStart}">24/10/10</span>~<span th:text="${ingEco.fgEcoEnd}">24/10/17</span>
+                        <span th:text="${ingEco.fgEcoStartToChar}">24/10/10</span>~<span th:text="${ingEco.fgEcoEndToChar}">24/10/17</span>
                       </div>
                     </div>
-                    <div class="calendar-period"><span th:text="${weeksBetween}">1</span>일간</div>
+                    <div class="calendar-period"><span th:text="${ingEco.fgEcoPeriod}">1</span></div>
                   </div>
                   <div class="like">
                     <img
@@ -66,17 +66,17 @@
                       alt="heartIcon"
                     />
                     <div class="like-value">
-                      <span>22</span>
+                      <span th:text="${ingEco.fgPostLikes}">22</span>
                     </div>
                   </div>
                   <div class="point-box">
                     <img th:src="@{/img/admin/point.png}" alt="point-icon">
-                    <span>500</span>pt
+                    <span th:text="${ingEco.fgEcoPoints}">500</span>pt
                   </div>
                 </div>
                 <div class="description">
                   <div class="description-title">프로젝트 소개</div>
-                  <p class="description-detail">
+                  <p class="description-detail" th:text="${ingEco.fgEcoInfo}">
                     플로깅은 스웨덴에서 시작된 환경 운동으로, 조깅을 하면서
                     동시에 쓰레기를 줍는<br />
                     활동입니다. 건강과 환경 보호를 동시에 실천할 수 있는 이 멋진
@@ -86,12 +86,12 @@
                 </div>
                 <div class="certi-list">
                   <div class="certi-title">인증 사항</div>
-                  <p class="certi-detail">
+                  <p class="certi-detail" th:text="${ingEco.fgCertInfo}">
                     1.플로깅 활동을 하며 주운 쓰레기 사진<br />
                     2.소감/후기
                   </p>
                 </div>
-                <div class="join-sticker">한번만 참여 가능</div>
+                <div class="join-sticker"><span th:text="${ingEco.fgEcoParticipation}">한번만</span> 참여 가능</div>
               </div>
             </div>
 <!--            <div class="banner-box" onclick="goToDetailPage()">-->
