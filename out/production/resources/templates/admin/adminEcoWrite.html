@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>에코프로젝트-작성</title>
-    <link rel="stylesheet" href="../../static/css/reset2.css" />
-    <link rel="stylesheet" href="../../static/css/admin/adminEcoWrite.css" />
+    <link rel="stylesheet" th:href="@{/css/reset2.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin/adminEcoWrite.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminHeader.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminNavBar.css}" />
   </head>
   <body>
-    <header id="adminHeader"></header>
+    <header id="adminHeader" th:replace="~{/admin/adminHeader :: header}"></header>
     <!-- 네비바 + 메인화면 -->
     <main>
       <div class="nav-and-content-box">
-        <nav id="adminNavBar"></nav>
+        <nav id="adminNavBar" th:replace="~{/admin/adminNavBar :: nav}"></nav>
         <!-- 우측 녹색 메인 화면-->
         <div class="content-box">
           <!-- 타이틀 : dashboard -->
@@ -27,11 +29,12 @@
                     <div class="file-upload-title">📝 대표사진*</div>  
                     <label for="file">
                       <div class="file-upload-description">클릭하세요</div>
-                        <img src="../../static/img/admin/fileImg.png">
+                        <img th:src="@{/img/admin/fileImg.png}">
                     </label>
-                    <input type="file" id="file"  style="display: none;">
+                    <input type="file" id="file"  style="display: none;" required>
                     <p>
                   </div>
+                <div>
                   <div class="title-box">
                     <span class="title">📝 에코프로젝트 제목*</span>
                     <input class="title-value" type="text" />
@@ -44,6 +47,7 @@
                             <option value="manytimes">여러번 참여 가능</option>
                         </select>
                   </div>
+                </div>
                   
               </div>
               <div class="period">
@@ -55,6 +59,10 @@
                     <span class="end-date">📝 종료날짜*</span>
                     <input class="end-date-value"  type="datetime-local">
                 </div>
+              </div>
+              <div class="point-box">
+                <span class="point">📝 지급할 포인트*</span>
+                <input class="point-value"  type="number">
               </div>
               
               <div class="detail-box">
@@ -82,5 +90,5 @@
       $("#adminHeader").load("adminHeader.html");
     });
   </script>
-  <script src="../../static/js/admin/adminEcoWrite.js"></script>
+  <script th:src="@{/js/admin/adminEcoWrite.js}"></script>
 </html>

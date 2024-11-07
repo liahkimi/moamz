@@ -29,6 +29,10 @@ a {
     margin: 0 auto;
     height: 100vh;
   }
+  body{
+    width: 1690px ;
+    overflow: hidden;
+  }
   
   /* 로고 */
   header .admin-logo {
@@ -120,22 +124,22 @@ a {
   /* 네비바+메인화면의 부모인 main */
   main {
     display: flex;
+    width: 1707px;
   }
   
   main .content-box {
     display: flex;
     flex-direction: column;
     background-color: #1b494c;
-    width: 100%;
+    width: 1705px;
     /* height: 100vh; */
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
   }
   /* 타이틀 */
   main .content-box .page-title-box {
     position: relative;
-    top: 30px;
-    left: 8px;
+    margin: 20px 0px 20px 0px;
   }
   main .content-box .page-title-box .page-title {
     font-size: 25px;
@@ -151,11 +155,9 @@ a {
     background-color: #ffffff;
   
     position: relative;
-    bottom: -70px;
   }
   /* 공지사항 제목 부분 */
   .content-title-box {
-    width: 95%;
     height: 70px;
     border-top: 1px solid #d7d4d4;
     border-bottom: 1px solid #d7d4d4;

@@ -29,6 +29,10 @@ main {
   margin: 0 auto;
   height: 100vh;
 }
+body{
+  width: 1690px ;
+  overflow: hidden;
+}
 
 /* 로고 */
 header .admin-logo {
@@ -120,16 +124,20 @@ nav ul li a:hover {
 /* 네비바+메인화면의 부모인 main */
 main {
   display: flex;
+  width: 1707px;
 }
 
 main .content-box {
   display: flex;
   flex-direction: column;
   background-color: #1b494c;
-  width: 100%;
+  width: 1705px;
   /* height: 100vh; */
   padding-left: 30px;
   padding-right: 30px;
+  height: 830px;      /* 원하는 높이 */
+  overflow-y: auto;   /* 세로 스크롤바 */
+  overflow-x: hidden; /* 가로 스크롤바 숨기기 */
 }
 /* 타이틀 */
 main .content-box .page-title-box {
