@@ -163,7 +163,7 @@ h4{
   margin-left: 10px;
 }
 
-#eco-box{
+.eco-box{
   width: 88px;
   height: 18px;
   background-color: #F8FAE9;
@@ -171,13 +171,13 @@ h4{
   margin-bottom: 30px;
 }
 
-#eco-box>span{
+.eco-box>span{
   font-size:11px;
   color: #A1B60A;
   margin-bottom: 10px;
 }
 
-.main-receipe{
+.main-recipe{
   width: 1000px;
   height: 392px;
   background-color:white;
@@ -185,23 +185,23 @@ h4{
   /* border: 1px solid black; */
 }
 
-.receipe-title{
+.recipe-title{
   display: flex;
   margin-left: 100px;
 }
 
-.receipe-title>img{
+.recipe-title>img{
   margin-top: 20px;
 }
 
-.receipe-title>span{
+.recipe-title>span{
   color:rgba(0, 0, 0, 0.61);
   font-size: 22px;
   margin-top: 30px;
   /* font-weight: 500; */
 }
 
-.receipe-wrap{
+.recipe-wrap{
   width: 760px;
   height: 226px;
   margin:auto;
@@ -210,14 +210,14 @@ h4{
   display: flex;
 }
 
-.receipe-img>img{
+.recipe-img>img{
   border-radius: 12px;
   width: 375px;
   height: 225px;
   border-color: #dddddd;
 }
 
-.receipe-menu{
+.recipe-menu{
   width: 318px;
   height: 225px;
   /* border: 1px solid black; */
@@ -225,7 +225,7 @@ h4{
   /* display: flex; */
 }
 
-.receipe-menu-list{
+.recipe-menu-list{
   width: 318px;
   height: 55px;
   display: flex;
@@ -233,7 +233,7 @@ h4{
   border-bottom: 1.39px solid #E4E4E4;
 }
 
-.receipe-menu-name{
+.recipe-menu-name{
   width: 180px;
   height: 28px;
   /* border: 1px solid black; */
@@ -241,12 +241,12 @@ h4{
   margin-left: 15px;
 }
 
-.receipe-menu-name>span{
+.recipe-menu-name>span{
   color: #666666;
   font-size:18px;
 }
 
-.receipe-menu-icon{
+.recipe-menu-icon{
   width: 100px;
   height: 28px;
   /* border: 1px solid black; */
@@ -254,13 +254,13 @@ h4{
   margin-top: 25px;
 }
 
-.receipe-menu-icon>span{
+.recipe-menu-icon>span{
   color: #A1B60A;
   font-size:10px;
   margin-bottom: 30px;
 }
 
-#receipe-box{
+#recipe-box{
   width: 318px;
   height: 55px;
   border: 1.39px solid #CEDD61;

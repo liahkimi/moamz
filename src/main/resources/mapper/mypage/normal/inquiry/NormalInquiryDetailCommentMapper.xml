@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.normal.inquiry.NormalInquiryDetailCommentMapper">
+    <select id="selectInquiryDetailComment" resultType="NormalInquiryDetailCommentDTO">
+        SELECT p.FG_USER_CODE,p.FG_POST_TYPE,p.FG_POST_ID,c.FG_COMMENT_DATE,c.FG_COMMENT_CONTENT
+        FROM FG_POST p JOIN FG_COMMENT c
+            ON p.FG_POST_ID = c.FG_POST_ID
+        WHERE p.FG_POST_TYPE = 'inquiry'
+    </select>
+</mapper>

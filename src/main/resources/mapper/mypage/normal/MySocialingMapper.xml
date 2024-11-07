@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.normal.MySocialingMapper">
+    <select id="selectMySocialing" resultType="MySocialingDTO">
+        SELECT pf.FG_POST_FILE_ROOT,p.FG_POST_TITLE,s.FG_SOCIALING_START,s.FG_SOCIALING_END,s.FG_SOCIALING_MAX_PARTICIPANTS,
+            s.FG_SOCIALING_CATEGORY,s.FG_SOCIALING_MINAGE,s.FG_SOCIALING_MAXAGE,s.FG_SOCIALING_GENDER_RES
+        FROM FG_POST p JOIN FG_POST_FILE pf
+            ON p.FG_POST_ID = pf.FG_POST_ID
+        JOIN FG_SOCIALING s
+            ON p.FG_POST_ID = s.FG_POST_ID;
+    </select>
+</mapper>

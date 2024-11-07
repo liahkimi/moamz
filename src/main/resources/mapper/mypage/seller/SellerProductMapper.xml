@@ -89,4 +89,5 @@
           AND p.FG_PRODUCT_ID = #{productId}
     </select>
 
+
 </mapper>
