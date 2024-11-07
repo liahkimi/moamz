@@ -13,7 +13,7 @@
 
     <!-- 글 작성(sharing 테이블) -->
     <insert id="insertSharing" parameterType="SharingWriteDTO">
-        INSERT INTO FG_FREE(FG_POST_ID, FG_SHARING_CONTENT)
+        INSERT INTO FG_SHARING(FG_POST_ID, FG_SHARING_CONTENT)
         VALUES (#{postId}, #{sharingContent})
     </insert>
 
