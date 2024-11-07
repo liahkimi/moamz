@@ -18,7 +18,7 @@
     </div>
     <div id="signup-user"><strong>일반 회원가입</strong></div>
     
-    <form action="">
+    <form th:action="@{/normal/regular/userSignup}" method="post">
       <div id="singup-profile">
         <!-- 이미지 클릭시 첨부파일 이동! -->
         <!--lable을 누르면 input 태그로 연결-->
@@ -28,38 +28,38 @@
           </div>
         </label>
         <div class="cancle"></div>
-        <input type="file" name="" id="attach" style="display: none;">
+        <input type="file" name="fgUserFileName" id="attach" style="display: none;">
       </div>
       <!-- input과 button 붙이고 크기 맞추기 -->
       <div id="signup-wrap">
         <div id="signup-email">
-          <input type="email" id="email-input" placeholder="이메일을 입력해주세요" required>
-          <button id="email-btn">중복확인</button>
+          <input type="email" name="fgUserId" id="email-input" placeholder="이메일을 입력해주세요" required>
+          <button type="button" id="email-btn">중복확인</button>
           <!-- <input type="button" id="email-btn" placeholder="중복확인"> -->
-          <input id="password-input" type="password" placeholder="비밀번호 입력(영문, 숫자, 특수문자 포함8~20)" required>
-          <input id="password-recheck" type="password" placeholder="비밀번호 재확인" required>
+          <input id="password-input" name="fgUserPassword" type="password" placeholder="비밀번호 입력(영문, 숫자, 특수문자 포함8~20)" required>
+          <input id="password-recheck" name="fgUserPassword" type="password" placeholder="비밀번호 재확인" required>
           <!-- js 비밀번호 형식, 비밀번호 재확인 -->
           <p id="check-p"></p>
           <p id="recheck-p"></p>
         </div>
         <div id="signup-phone">
-          <input id="name-input" type="text" placeholder=" 이름" required>
-          <input type="text" id="input-phone" placeholder=" 휴대폰번호" required>
+          <input id="name-input" name="fgNormalName" type="text" placeholder=" 이름" required>
+          <input type="text" name="fgUserPhone" id="input-phone" placeholder=" 휴대폰번호" required>
           <button id="phone-btn">전송</button>
           <input type="text" id="recheck-phone" placeholder=" 인증번호" required>
           <span id="time"></span>
           <button id="recheck-btn">확인</button>
         </div>
         <div id="signup-nickname">
-          <input type="text" id="nickname-input" placeholder=" 닉네임" required>
+          <input type="text" name="fgNormalNickname" id="nickname-input" placeholder=" 닉네임" required>
           <button id="nickname-btn">중복확인</button>
-          <input type="date" id="birthday-input" placeholder=" [선택] 생년월일8자리">
+          <input type="date" name="fgNormalBirth" id="birthday-input" placeholder=" [선택] 생년월일8자리">
           <span>[선택] 성별 : </span>
           <label>남 : <input type="radio" name="gender"></label>
           <label>여 : <input type="radio"name="gender"></label>
         </div>
         <div id="signup-post"> 
-          <input type="text" id="post-input" placeholder=" 우편번호" readonly required>
+          <input type="text" id="post-input" name="fgNormalPostCode" placeholder=" 우편번호" readonly required>
           <button id="post-btn">검색</button>
           <input type="text" id="address" placeholder=" 인증번호" readonly required>
           <input type="text" id="detail-address" placeholder= "도로명 주소" required>

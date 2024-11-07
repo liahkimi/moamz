@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public interface NormalSignupMapper {
     void insertCommonUser(NormalSignupDTO normalSignupDTO);
     void insertNormalUser(NormalSignupDTO normalSignupDTO);
-    void insertUserFile(NormalSignupDTO normalSignupDTO);
-    void insertPoint(NormalSignupDTO normalSignupDTO);
+//    void insertUserFile(NormalSignupDTO normalSignupDTO);
+//    void insertPoint(NormalSignupDTO normalSignupDTO);
 
     //아이디 중복확인
     boolean checkedId(String fgUerId);

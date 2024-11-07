@@ -2,7 +2,13 @@ const emailBtn = document.getElementById("email-btn");
 const nicknameBtn = document.getElementById("nickname-btn");
 
 emailBtn.addEventListener("click", () => {
-  alert("이메일 중복 검사");
+  //alert("이메일 중복 검사");
+
+  // fetch.('중복검사용 controller uri',{
+  //     method : 'POST',
+  //     type : 'Content-Type : application',
+  //     body : //닉네임 json.st
+  // }).then(가지고온 값 => 함수처리).catch()
 });
 
 nicknameBtn.addEventListener("click", () => {

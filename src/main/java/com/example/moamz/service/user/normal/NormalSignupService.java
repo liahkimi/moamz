@@ -22,13 +22,13 @@ public class NormalSignupService {
         normalSignupMapper.insertNormalUser(normalSignupDTO);
     }
 
-    public void insertUserFile(NormalSignupDTO normalSignupDTO) {
-        normalSignupMapper.insertUserFile(normalSignupDTO);
-    }
-
-    public void insertPoint(NormalSignupDTO normalSignupDTO) {
-        normalSignupMapper.insertPoint(normalSignupDTO);
-    }
+//    public void insertUserFile(NormalSignupDTO normalSignupDTO) {
+//        normalSignupMapper.insertUserFile(normalSignupDTO);
+//    }
+//
+//    public void insertPoint(NormalSignupDTO normalSignupDTO) {
+//        normalSignupMapper.insertPoint(normalSignupDTO);
+//    }
 
     // 아이디 중복확인
     public boolean checkedId(String fgUserId) {

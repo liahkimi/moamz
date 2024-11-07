@@ -32,6 +32,6 @@ public class NormalSignupController {
         normalSignupService.insertNormalUser(normalSignupDTO);
         normalSignupService.insertUserFile(normalSignupDTO);
         normalSignupService.insertPoint(normalSignupDTO);
-        return "redirect:/user/regular/userLogin";
+        return "redirect:/normal/regular/userLogin";
     }
 }

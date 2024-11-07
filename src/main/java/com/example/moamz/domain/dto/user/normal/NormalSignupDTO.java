@@ -25,10 +25,10 @@ public class NormalSignupDTO {
     private String fgNormalAddressDetail;
     private String fgNormalLoginType;
     private String fgNormalKakaoId;
-    private Long fgUserFileId;
-    private String fgUserFileRoot;
-    private String fgUserFileName;
-    private LocalDateTime fgUserFileTime;
-    private String fgUserFileUuid;
-    private Long fgPointId;
+//    private Long fgUserFileId;
+//    private String fgUserFileRoot;
+//    private String fgUserFileName;
+//    private LocalDateTime fgUserFileTime;
+//    private String fgUserFileUuid;
+//    private Long fgPointId;
 }

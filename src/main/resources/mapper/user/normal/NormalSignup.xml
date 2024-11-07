@@ -12,6 +12,9 @@
     </insert>
 
     <insert id="insertNormalUser" parameterType="NormalSignupDTO">
+        <selectKey keyProperty="fgUserCode" resultType="Long" order="BEFORE">
+            SELECT SEQ_USER.CURRVAL FROM DUAL
+        </selectKey>
         INSERT INTO FG_NORMAL_USER (FG_USER_CODE, FG_NORMAL_NAME, FG_NORMAL_PHONE, FG_NORMAL_NICKNAME, FG_NORMAL_BIRTH, FG_NORMAL_GENDER, FG_NORMAL_POSTCODE, FG_NORMAL_ADDRESS, FG_NORMAL_ADDRESS_DETAIL, FG_NORMAL_LOGIN_TYPE, FG_KAKAO_ID)
         VALUES (#{fgUserCode}, #{normalName}, #{normalPhone}, #{normalNickname}, #{normalBirth}, #{normalGender}, #{normalPostcode}, #{normalAddress}, #{normalAddressDetail}, #{normalLoginType}, #{KakaoId})
     </insert>
