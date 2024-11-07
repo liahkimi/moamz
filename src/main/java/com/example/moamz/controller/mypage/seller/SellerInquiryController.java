@@ -1,11 +1,13 @@
 package com.example.moamz.controller.mypage.seller;
 
+import com.example.moamz.domain.dto.mypage.seller.info.SellerProfileDTO;
 import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryCommentDTO;
 import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryDetailDTO;
 import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryListDTO;
 import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryWriteDTO;
 import com.example.moamz.mapper.mypage.seller.SellerInquiryMapper;
 import com.example.moamz.service.mypage.seller.SellerInquiryService;
+import com.example.moamz.service.mypage.seller.SellerMyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -24,25 +26,30 @@ import java.util.List;
 @RequestMapping("/seller/inquiry")
 public class SellerInquiryController {
     public final SellerInquiryService sellerInquiryService;
+    public final SellerMyService sellerMyService;
 
     // 문의글 등록 페이지 열기
     @GetMapping("/regist")
     public String regist() {
         return "mypage/seller/sellerAdminInquiryWrite";
-    }
+    }//02 6952 3603
 
     // 문의글 목록 페이지 열기
     @GetMapping("/list")
     public String list(Model model) {
         //😑😑현재 로그인한 사용자 userCode 필요..
         Long userCode = 1L;
+        Long businessCode = 1L;
+
+        // 판매자 프로필 가져오기
+        SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(userCode, businessCode);
 
         // 목록 가져오기 메서드
         List<InquiryListDTO> inquiryList = sellerInquiryService.findInquiryList(userCode);
 
-        // 모델에 목록 추가
+        // 모델에 문의글 목록, 판매자 프로필 추가해서 뷰로 전달
         model.addAttribute("inquiryList", inquiryList);
-
+        model.addAttribute("sellerProfileDTO", sellerProfileDTO);
         return "mypage/seller/sellerAdminInquiryList";
     }
 

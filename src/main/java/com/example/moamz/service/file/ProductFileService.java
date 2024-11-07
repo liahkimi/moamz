@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class ProudctFileService {
+public class ProductFileService {
     private final ProductFileMapper productFileMapper;
 
     // 상품 파일 사진 등록 메서드
