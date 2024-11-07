@@ -23,4 +23,5 @@ public class FreeCommentDTO {
     private String commentContent;      // 댓글 내용
     private String commentEdit;         // 댓글 수정 여부
 
+
 }

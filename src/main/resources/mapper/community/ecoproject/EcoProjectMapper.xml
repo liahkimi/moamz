@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.moamz.mapper.community.ecoproject.EcoProjectMapper">
     <!--    프로젝트 리스트-->
-    <select id="ecoProjectList" resultType="EcoProjectDTO">
+    <select id="ecoProjectList" resultType="EcoProjectListDTO">
         SELECT P.FG_POST_TITLE                                                                   AS fgPostTitle,
                E.FG_ECO_START                                                                    AS fgEcoStart,
                E.FG_ECO_END                                                                      AS fgEcoEnd,

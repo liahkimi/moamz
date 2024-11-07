@@ -1,47 +1,25 @@
-/* 원래 코드 */
-// 메뉴 클릭했을 때 css 고정
+// 현재 페이지 URL 경로를 가져옴
+const currentUrl = window.location.pathname;
+
+// 모든 메뉴 항목을 선택
 const menuItems = document.querySelectorAll('.menu-item a');
 
-menuItems.forEach(item => {
-    item.addEventListener('click', function() {
-        // 나머지 태그에서 clicked 클래스 제거
-        menuItems.forEach(item => {
-            item.classList.remove('clicked');
-        });
-        // 클릭된 태그에 clicked 클래스 추가
-        this.classList.add('clicked');
-    })
-});
+// 각 메뉴 항목을 순회하면서 현재 URL과 일치하는 경우 `active` 클래스를 추가
+menuItems.forEach(link => {
+    // 메뉴 항목의 href 속성값을 가져옴
+    const linkUrl = link.getAttribute('href');
 
-
-
-/*
-// 메뉴 클릭했을 때 css 고정
-const menuItems = document.querySelectorAll('.menu-item a');
-
-// 로컬 스토리지에서 마지막으로 클릭된 메뉴를 불러오기
-const lastClicked = localStorage.getItem('clickedMenu');
-    
-if (lastClicked) {
-    // 로컬 스토리지에 저장된 메뉴에 clicked 클래스 추가
-    const activeMenu = document.querySelector(`.menu-item a[href="${lastClicked}"]`);
-    if (activeMenu) {
-        activeMenu.classList.add('clicked');
+    // 현재 URL이 링크 URL과 일치하면 'active' 클래스를 추가
+    if (currentUrl === linkUrl) {
+        link.parentElement.classList.add('active');
     }
-}
 
+    // 클릭 이벤트 추가
+    link.addEventListener('click', () => {
+        // 모든 메뉴 항목에서 'active' 클래스 제거
+        menuItems.forEach(item => item.parentElement.classList.remove('active'));
 
-menuItems.forEach(item => {
-    item.addEventListener('click', function() {
-        // 모든 메뉴에서 clicked 클래스 제거
-        menuItems.forEach(item => {
-            item.classList.remove('clicked');
-        });
-        // 클릭된 메뉴에 clicked 클래스 추가
-        this.classList.add('clicked');
-        
-        // 로컬 스토리지에 클릭된 메뉴의 href 저장
-        localStorage.setItem('clickedMenu', this.getAttribute('href'));
+        // 클릭한 항목에 'active' 클래스 추가
+        link.parentElement.classList.add('active');
     });
 });
-*/
