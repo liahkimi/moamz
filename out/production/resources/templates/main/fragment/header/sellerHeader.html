@@ -9,19 +9,19 @@
 <body>
   <div class="container">
     <div class="header">
-      <img src="/moamz_publishing/static/img/main/fragment/header/logo.png">
+      <img th:src="@{/img/main/fragment/header/logo.png}">
       <ul class="header-search">
         <li>
-          <a href="#">서비스소개</a>
+          <a th:href="@{main/main/aboutService}">서비스소개</a>
         </li>
         <li>
-          <a href="#">공지사항</a>
+          <a th:href="@{/main/main/noticeList}">공지사항</a>
         </li>
       </ul>
       <div class="header-btn">
-        <div class="btn-img"><img src="/moamz_publishing/static/img/main/fragment/header/user.png"></div>
-        <div class="btn-img"><img src="/moamz_publishing/static/img/main/fragment/header/chat.png"></div>
-        <div class="btn-img"><img src="/moamz_publishing/static/img/main/fragment/header/notification.png"></div>
+        <div class="btn-img"><img th:src="@{/img/main/fragment/header/user.png}"></div>
+        <div class="btn-img"><img th:src="@{/img/main/fragment/header/chat.png}"></div>
+        <div class="btn-img"><img th:src="@{/img/main/fragment/header/notification.png}"></div>
         <button class="login" type="button">로그인</button>
       </div>
       <!-- <button>로그아웃</button> -->

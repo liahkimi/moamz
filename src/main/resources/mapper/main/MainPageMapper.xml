@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.main.MainPageMapper">
+    <!--  업체 좋아요 순(상위 3개)-->
+    <select id="selectMainBusiness" parameterType="Long" resultType="MainPageDTO">
+        SELECT * FROM (
+        SELECT uf.FG_USER_FILE_ROOT, uf.FG_USER_FILE_ID, uf.FG_USER_FILE_NAME, uf.FG_USER_FILE_UUID,
+               b.FG_BUSINESS_NAME,b.FG_BUSINESS_OPEN_TIME,b.FG_BUSINESS_CLOSE_TIME,b.FG_BUSINESS_ADDRESS,
+                b.FG_BUSINESS_ADDRESS_DETAIL,b.FG_BUSINESS_LIKES
+        FROM FG_USER_FILE uf JOIN FG_BUSINESS b
+            ON uf.FG_USER_CODE = b.FG_USER_CODE
+        ORDER BY b.FG_BUSINESS_LIKES DESC
+        ) WHERE <![CDATA[ROWNUM <= 3]]>
+    </select>
+    
+        <!-- 에코프로젝트(상위 2개)-->
+        <select id="selectMainEco" parameterType="Long" resultType="MainPageDTO">
+            SELECT * FROM (
+            SELECT pf.FG_POST_FILE_ROOT,pf.FG_POST_FILE_ID, pf.FG_POST_FILE_NAME, pf.FG_POST_FILE_UUID,p.FG_POST_TITLE,e.FG_ECO_START,e.FG_ECO_END,e.FG_CERT_INFO,p.FG_POST_LIKES
+            FROM FG_POST_FILE pf JOIN FG_POST p
+                ON pf.FG_POST_ID = p.FG_POST_ID
+            JOIN FG_ECO e
+                ON p.FG_POST_ID = e.FG_POST_ID
+            ORDER BY p.FG_POST_LIKES DESC
+            ) WHERE <![CDATA[ROWNUM <= 2]]>
+        </select>
+
+        <!--  레시피  -->
+        <select id="selectMainRecipe" parameterType="Long" resultType="MainPageDTO">
+        SELECT * FROM (
+            SELECT pf.FG_POST_FILE_ROOT,pf.FG_POST_FILE_ID, pf.FG_POST_FILE_NAME, pf.FG_POST_FILE_UUID,
+                   p.FG_POST_TITLE,r.FG_RECIPE_TIME,p.FG_POST_LIKES
+            FROM FG_POST_FILE pf JOIN FG_POST p
+                ON pf.FG_POST_ID = p.FG_POST_ID
+            JOIN FG_RECIPE r
+                ON p.FG_POST_ID = r.FG_POST_ID
+            ORDER BY p.FG_POST_LIKES DESC
+        ) WHERE <![CDATA[ROWNUM <= 4]]>
+        </select>
+
+        <!--소셜링-->
+        <select id="selectMainSocialing" parameterType="Long" resultType="MainPageDTO">
+            SELECT * FROM(
+            SELECT pf.FG_POST_FILE_ROOT,pf.FG_POST_FILE_ID, pf.FG_POST_FILE_NAME, pf.FG_POST_FILE_UUID,
+                   p.FG_POST_TITLE,s.FG_SOCIALING_START,s.FG_SOCIALING_END,s.FG_SOCIALING_MAX_PARTICIPANTS,
+                   s.FG_SOCIALING_MINAGE,s.FG_SOCIALING_MAXAGE,s.FG_SOCIALING_GENDER_RES
+            FROM FG_POST_FILE pf JOIN FG_POST p
+                ON pf.FG_POST_ID = p.FG_POST_ID
+            JOIN FG_SOCIALING s
+                ON p.FG_POST_ID = s.FG_POST_ID
+            ORDER BY p.FG_POST_CREATED_AT DESC
+            ) WHERE <![CDATA[ROWNUM <= 2]]>
+        </select>
+</mapper>
