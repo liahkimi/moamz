@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>공지사항-작성</title>
     <link rel="stylesheet" th:href="@{/css/reset2.css}"  />
     <link rel="stylesheet" th:href="@{/css/admin/adminNoticeWrite.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminHeader.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminNavBar.css}" />
     <!-- include libraries(jQuery, bootstrap) -->
     <!-- <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -20,13 +21,12 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> -->
-    <script defer src="../../static/js/admin/adminNoticeWrite.js"></script>
+    <script defer th:src="@{/js/admin/adminNoticeWrite.js}"></script>
   </head>
   <body>
     <header id="adminHeader" th:replace="~{/admin/adminHeader :: header}"></header>
     <!-- 네비바 + 메인화면 -->
     <main>
-      <div class="nav-and-content-box">
         <nav id="adminNavBar" th:replace="~{/admin/adminNavBar :: nav}"></nav>
         <!-- 우측 녹색 메인 화면-->
         <div class="content-box">

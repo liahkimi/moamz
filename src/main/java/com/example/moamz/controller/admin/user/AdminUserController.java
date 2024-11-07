@@ -2,7 +2,7 @@ package com.example.moamz.controller.admin.user;
 
 
 import com.example.moamz.domain.dto.admin.user.AdminUserSessionDTO;
-import com.example.moamz.service.admin.user.UserService;
+import com.example.moamz.service.admin.user.AdminUserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +18,8 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequiredArgsConstructor
 @RequestMapping("/admin") //contextPath
 
-public class UserController {
-    private final UserService userService;
+public class AdminUserController {
+    private final AdminUserService adminUserService;
 
     //get요청 처리, 로그인 화면 보여주기만
     @GetMapping("login")
@@ -35,7 +35,7 @@ public class UserController {
                               HttpSession session){
         log.info("로그인 시도 : {}", fgUserId);
 
-        AdminUserSessionDTO loginInfo = userService.findLoginInfo(fgUserId, fgUserPassword);
+        AdminUserSessionDTO loginInfo = adminUserService.findLoginInfo(fgUserId, fgUserPassword);
         //서비스, 서비스의 매퍼 , 매퍼xml까지 실행되는 것
         //세션이 브라우저창url에 보이지 않아 log로 확인함.
         if (loginInfo != null) {

@@ -1,7 +1,7 @@
 //package com.example.moamz.controller.admin;
 //
 //import com.example.moamz.domain.dto.admin.user.AdminUserSessionDTO;
-//import com.example.moamz.service.admin.user.UserService;
+//import com.example.moamz.service.admin.user.AdminUserService;
 //import jakarta.servlet.http.HttpSession;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@
 //    //Spring어플리케이션 컨텍스트 내의 다른 빈들과 상호작용 할 수 있다.
 //    //서비스
 //    @MockBean
-//    private UserService userService;
+//    private AdminUserService userService;
 //
 //
 //    //@Mock Mockito를 사용해서 모의객체를 생성

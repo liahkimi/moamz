@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Optional;
 
 @Mapper
-public interface UserMapper {
+public interface AdminUserMapper {
 //    로그인
     //Optional은 NPE null값 처리를 위한 방어하기 위해 사용(예외처리 하려고)
     //@param은 MyBatis에서 SQl쿼리로 전달되는 파라미터에 이름을 지정하기 위해 사용

@@ -14,7 +14,7 @@ package com.example.moamz.mapper.admin.user;
 ////=> insert할 메서드 없을때 직접 sql에 넣는 어노테이션
 //class UserMapperTest {
 //    @Autowired
-//    UserMapper userMapper;
+//    AdminUserMapper userMapper;
 //    AdminUserDTO userDTO;
 //
 //    @BeforeEach

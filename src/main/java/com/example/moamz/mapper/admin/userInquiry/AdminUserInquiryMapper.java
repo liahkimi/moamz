@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Mapper
-public interface UserInquiryMapper {
+public interface AdminUserInquiryMapper {
     //일반회원 미확인 문의목록 보여주기
     List<AdminUserInquiryListDTO> selectUncheckedInquiryList();
 

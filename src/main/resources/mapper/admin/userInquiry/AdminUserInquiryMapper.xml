@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.moamz.mapper.admin.userInquiry.UserInquiryMapper">
+<mapper namespace="com.example.moamz.mapper.admin.userInquiry.AdminUserInquiryMapper">
 
     <!--일반회원 미확인 문의목록 보여주기-->
     <select id="selectUncheckedInquiryList" resultType="AdminUserInquiryListDTO">

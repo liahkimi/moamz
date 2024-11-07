@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 //@Mapper
-//public interface NoticeMapper {
+//public interface AdminNoticeMapper {
 //    // 공지사항 글 작성하기1(공통게시글 테이블)
 //    void insertNoticePost(AdminNoticeWriteDTO noticeWriteDTO);
 //
@@ -36,7 +36,7 @@ import java.util.Optional;
 //
 //}
 @Mapper
-public interface NoticeMapper {
+public interface AdminNoticeMapper {
     // 공지사항 글 작성하기1(공통게시글 테이블)
     void insertNoticePost(AdminNoticeWriteDTO adminNoticeWriteDTO);
 

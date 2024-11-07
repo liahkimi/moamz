@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.moamz.mapper.admin.notice.NoticeMapper">
+<mapper namespace="com.example.moamz.mapper.admin.notice.AdminNoticeMapper">
     <!-- 공지사항 상세보기 -->
     <select id="selectNoticeById" parameterType="Long" resultType="AdminNoticeDetailDTO">
         SELECT p.FG_POST_ID, p.FG_POST_TITLE, cu.FG_USER_TYPE,

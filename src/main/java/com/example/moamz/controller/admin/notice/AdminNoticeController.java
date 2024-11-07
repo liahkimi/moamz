@@ -6,7 +6,7 @@ import com.example.moamz.domain.dto.admin.notice.AdminNoticeModifyDTO;
 import com.example.moamz.domain.dto.admin.notice.AdminNoticeWriteDTO;
 import com.example.moamz.domain.dto.admin.page.Criteria;
 import com.example.moamz.domain.dto.admin.page.Page;
-import com.example.moamz.service.admin.notice.NoticeService;
+import com.example.moamz.service.admin.notice.AdminNoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -21,14 +21,14 @@ import java.util.List;
 @RequestMapping("admin/notice")
 @RequiredArgsConstructor
 @Slf4j
-public class NoticeController {
-    private final NoticeService noticeService;
+public class AdminNoticeController {
+    private final AdminNoticeService adminNoticeService;
 
     // 공지사항 목록 보여주기
     @GetMapping("/list")
     public String noticeList(@SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode, Criteria criteria, Model model) { //Model은 ui로 임포트
-        List<AdminNoticeListDTO> adminNoticeListDTO = noticeService.findNoticeAll();
-        int total = noticeService.findNoticeTotal();
+        List<AdminNoticeListDTO> adminNoticeListDTO = adminNoticeService.findNoticeAll();
+        int total = adminNoticeService.findNoticeTotal();
         Page page = new Page(criteria, total);
 
         model.addAttribute("page", page);
@@ -52,7 +52,7 @@ public class NoticeController {
         System.out.println("서비스 호출 전 adminNoticeWriteDTO : " + adminNoticeWriteDTO);
 
         // 공지사항 글 등록 메서드 호출
-        noticeService.registerNotice(adminNoticeWriteDTO);
+        adminNoticeService.registerNotice(adminNoticeWriteDTO);
         System.out.println("서비스 호출 후 adminNoticeWriteDTO : " + adminNoticeWriteDTO);
 
         //fgPostId가 제대로 설정되었는지 확인
@@ -69,7 +69,7 @@ public class NoticeController {
     @GetMapping("/detail")
     public String noticeDetail(@RequestParam("fgPostId") Long fgPostId, Model model) {
         System.out.println("view 컨트롤러");
-        AdminNoticeDetailDTO adminNoticeDetailDTO = noticeService.findNoticeById(fgPostId);
+        AdminNoticeDetailDTO adminNoticeDetailDTO = adminNoticeService.findNoticeById(fgPostId);
 
         model.addAttribute("adminNoticeDetailDTO", adminNoticeDetailDTO);
         return "/admin/adminNoticeDetail";
@@ -78,7 +78,7 @@ public class NoticeController {
     //공지사항 수정페이지 보여주기
     @GetMapping("/modify")
     public String noticeModify(@RequestParam("fgPostId") Long fgPostId, Model model){
-        AdminNoticeDetailDTO adminNoticeDetailDTO = noticeService.findNoticeById(fgPostId);
+        AdminNoticeDetailDTO adminNoticeDetailDTO = adminNoticeService.findNoticeById(fgPostId);
         model.addAttribute("adminNoticeDetailDTO", adminNoticeDetailDTO);
         return "admin/adminNoticeModify";
     }
@@ -88,7 +88,7 @@ public class NoticeController {
     public String noticeModify(AdminNoticeModifyDTO adminNoticeModifyDTO,
                                RedirectAttributes redirectAttributes){
         try {
-            noticeService.modifyNotice(adminNoticeModifyDTO);
+            adminNoticeService.modifyNotice(adminNoticeModifyDTO);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -99,7 +99,7 @@ public class NoticeController {
 
     @GetMapping("/remove")
     public String noticeRemove(@RequestParam("fgPostId") Long fgPostId){
-        noticeService.removeNotice(fgPostId);
+        adminNoticeService.removeNotice(fgPostId);
         return "redirect:/admin/notice/list";
     }
 
