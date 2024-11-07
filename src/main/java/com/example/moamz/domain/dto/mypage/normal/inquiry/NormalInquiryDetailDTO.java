@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class AdminInquiryDetailDTO {
+public class NormalInquiryDetailDTO {
     private Long fgUserCode;
     private String fgPostTitle;
     private String fgNormalNickname;

@@ -22,6 +22,7 @@ public class MainPageDTO {
     private String postFileName;        // 파일명
     private String postFileRoot;        // 파일경로
     private String postFileUuid;        // 파일UUID
+    private String thumbnailPath;       // 썸네일 경로
 
     private String fgBusinessName;
     private String fgBusinessOpenTime;

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
-public class NoticeDetailDTO {
+public class MainNoticeDetailDTO {
     private Long fgUserCode;
     private String fgPostTitle;              // 공지사항 제목
     private LocalDateTime fgPostCreatedAt;   // 작성일

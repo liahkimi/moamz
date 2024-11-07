@@ -58,7 +58,7 @@
               AND pick.FG_PICKUP_STATUS IN ('주문확인중', '픽업대기중')
         )
     </delete>
-    
+
     <!-- 상품 상세 -->
     <select id="selectProductDetail" parameterType="Long" resultType="ProductDetailDTO">
         SELECT (p.FG_PRODUCT_WEIGHT * 0.0025) AS carbonReduct, p.FG_PRODUCT_NAME AS productName,

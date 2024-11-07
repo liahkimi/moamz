@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class InquiryStatusUpdateDTO {
+public class NormalInquiryStatusUpdateDTO {
 
     // 관리자 문의 내역 답변 상태 변경
 

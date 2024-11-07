@@ -1,5 +1,6 @@
 package com.example.moamz.domain.dto.mypage.normal.inquiry;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,8 +10,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class AdminInquiryListDTO {
+public class NormalInquiryDetailCommentDTO {
     private Long fgUserCode;
-    private String fgPostTitle;
-    private String fgPostCreatedAt;
+    private Long fgCommentId;
+    private String fgCommentDate;
+    private String fgCommentContent;
 }

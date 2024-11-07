@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
-public class NoticeListDTO {
+public class MainNoticeListDTO {
     private Long fgUserCode;
     private Long fgPostId;
     private String fgPostTitle;
