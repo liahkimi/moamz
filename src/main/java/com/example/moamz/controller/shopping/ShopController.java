@@ -65,25 +65,6 @@ public class ShopController {
                     .body("장바구니 추가 실패: " + e.getMessage());
         }
     }
-
-    @RestController
-    @RequestMapping("/shop/cart")
-    public class CartController {
-
-        @DeleteMapping("/delete/{fgCartDetailId}")
-        public ResponseEntity<String> deleteCartItem(@PathVariable Long fgCartDetailId) {
-            try {
-                productService.removeCartDetail(fgCartDetailId);
-                return ResponseEntity.ok("삭제 완료");
-            } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body("삭제 실패: " + e.getMessage());
-            }
-        }
-    }
-
-
-
 }
 
 
