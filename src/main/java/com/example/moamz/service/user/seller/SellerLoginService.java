@@ -1,6 +1,6 @@
 package com.example.moamz.service.user.seller;
 
-import com.example.moamz.domain.dto.user.seller.SellerLoginDTO;
+import com.example.moamz.domain.dto.user.seller.SellerSessionDTO;
 import com.example.moamz.mapper.user.seller.SellerLoginMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,12 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class SellerLoginService {
     private final SellerLoginMapper sellerLoginMapper;
 
-    public long login(String fgUserID, String fgUserPassword) {
+    //유저코드
+    public long findCode(String fgUserID, String fgUserPassword) {
         return sellerLoginMapper.selectId(fgUserID, fgUserPassword)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다"));
     }
 
-    public SellerLoginDTO findLoginInfo(String fgUserID, String fgUserPassword) {
+    public SellerSessionDTO findLoginInfo(String fgUserID, String fgUserPassword) {
         return sellerLoginMapper.selectLoginInfo(fgUserID, fgUserPassword)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다"));
     }

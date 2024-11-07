@@ -30,9 +30,9 @@ class UserNormalMapperTest {
     @BeforeEach
     void setUp() {
         normalLoginDTO = new NormalLoginDTO();
-        normalLoginDTO.setFgUserCode(1L);
-        normalLoginDTO.setFgUserId("user01");
-        normalLoginDTO.setFgUserPassword("password01");
+        normalLoginDTO.setFgUserCode(5L);
+        normalLoginDTO.setFgUserId("user05@gmail.com");
+        normalLoginDTO.setFgUserPassword("password05");
 //        userNormalMapper.insertUser(normalLoginDTO);
 //        log.info("😑😑😑😑😑😑😑😑😑" + normalLoginDTO.toString());
     }
@@ -40,8 +40,8 @@ class UserNormalMapperTest {
     @Test
     void  selectId(){
         //given
-        String fgUserId = "user01";
-        String fgUserPassword = "password01";
+        String fgUserId = "user05@gmail.com";
+        String fgUserPassword = "password05";
 
         //when
         Long fgUserCode = userNormalMapper.selectId(fgUserId, fgUserPassword)

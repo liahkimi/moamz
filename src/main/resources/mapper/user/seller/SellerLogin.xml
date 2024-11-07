@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.moamz.mapper.user.normal.SellerLoginMapper">
-    <select id="selectId" resultType="Long">
+
+    <select id="selectId" resultType="Long" parameterType="SellerLoginDTO">
         SELECT FG_USER_CODE
         FROM FG_COMMENT_USER
         WHERE FG_USER_ID = #{fgUserID} AND FG_USER_PASSWORD = #{fgUserPassword}
     </select>
 
-    <select id="selectLoginInfo" resultType="SellerLoginDTO">
-        SELECT FG_USER_ID, FG_USER_PASSWORD
+    <select id="selectLoginInfo" resultType="SellerSessionDTO" parameterType="SellerLoginDTO">
+        SELECT FG_USER_CODE, FG_USER_ID
         FROM FG_COMMON_USER
         WHERE FG_USER_ID = #{fgUserId} AND FG_USER_PASSWORD = #{fgUserPassword}
     </select>

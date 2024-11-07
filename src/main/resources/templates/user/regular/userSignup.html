@@ -10,7 +10,7 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-  <header id="header"></header>
+<header id="header" th:replace="~{/main/fragment/header/userHeaderLogin.html}"></header>
   <div id="signup-container">
 
     <div id="signup-logo">
@@ -28,7 +28,7 @@
           </div>
         </label>
         <div class="cancle"></div>
-        <input type="file" id="attach" style="display: none;">
+        <input type="file" name="" id="attach" style="display: none;">
       </div>
       <!-- input과 button 붙이고 크기 맞추기 -->
       <div id="signup-wrap">
@@ -43,20 +43,20 @@
           <p id="recheck-p"></p>
         </div>
         <div id="signup-phone">
-          <input id="name-input" type="password" placeholder=" 이름" required>
+          <input id="name-input" type="text" placeholder=" 이름" required>
           <input type="text" id="input-phone" placeholder=" 휴대폰번호" required>
           <button id="phone-btn">전송</button>
-          <input type="email" id="recheck-phone" placeholder=" 인증번호" required>
+          <input type="text" id="recheck-phone" placeholder=" 인증번호" required>
           <span id="time"></span>
           <button id="recheck-btn">확인</button>
         </div>
         <div id="signup-nickname">
           <input type="text" id="nickname-input" placeholder=" 닉네임" required>
           <button id="nickname-btn">중복확인</button>
-          <input type="email" id="birthday-input" placeholder=" [선택] 생년월일8자리">
+          <input type="date" id="birthday-input" placeholder=" [선택] 생년월일8자리">
           <span>[선택] 성별 : </span>
-          <label for="">남 : <input type="radio" name="gender"></label>
-          <label for="">여 : <input type="radio"name="gender"></label>
+          <label>남 : <input type="radio" name="gender"></label>
+          <label>여 : <input type="radio"name="gender"></label>
         </div>
         <div id="signup-post"> 
           <input type="text" id="post-input" placeholder=" 우편번호" readonly required>
@@ -232,12 +232,6 @@
 
     </form>
   </div>
-  <footer id="footer"></footer>
+<footer id="footer" th:replace="~{/main/fragment/footer/userFooter.html}"></footer>
 </body>
-<script>
-  $(function() {
-      $("#header").load("../../main/fragment/header/userHeaderLogin.html");
-      $("#footer").load("../../main/fragment/footer/userFooter.html");
-  });
-</script>
 </html>
