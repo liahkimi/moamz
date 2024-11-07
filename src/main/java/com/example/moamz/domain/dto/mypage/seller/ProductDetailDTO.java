@@ -20,6 +20,7 @@ public class ProductDetailDTO {
     private int productWeight;      // 중량
     private Double carbonReduct;    // 탄소감축량
     private String productName;     // 상품명
+    private String productExpDate;  // 상품 소비기한
     private String productContent;  // 상품 상세
 
     private Long businessId;                // 업체ID
