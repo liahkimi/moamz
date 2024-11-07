@@ -6,7 +6,7 @@
         SELECT CASE
                     WHEN COUNT(*) > 0 THEN 'TRUE'
                     ELSE 'FALSE'
-                END AS isExcellent
+                END AS isTopBusiness
         FROM (
             -- 업체별로 음식물 중량 누적 합계를 구하고, 상위 3개 업체를 SELECT
             SELECT FG_BUSINESS_ID
@@ -25,7 +25,10 @@
 
     <!-- 판매자 프로필 -->
     <select id="selectStoreProfile" parameterType="Long" resultType="SellerProfileDTO">
-        SELECT b.FG_BUSINESS_NAME AS businessName,
+        SELECT uf.FG_USER_FILE_NAME AS userFileName,
+               uf.FG_USER_FILE_ROOT AS userFileRoot,
+               uf.FG_USER_FILE_UUID AS userFileUuid,
+                b.FG_BUSINESS_NAME AS businessName,
                b.FG_BUSINESS_RATING AS businessRating,
                SUM(o.FG_ORDER_QUANTITY * p.FG_PRODUCT_WEIGHT) AS totalWeight
         FROM FG_BUSINESS b, FG_USER_FILE uf, FG_ORDER o, FG_PRODUCT p
@@ -34,7 +37,8 @@
           AND p.FG_BUSINESS_ID = b.FG_BUSINESS_ID
           AND o.FG_PAYMENT_STATUS = '결제완료'
           AND b.FG_USER_CODE = #{userCode}
-        GROUP BY uf.FG_USER_FILE_ROOT, uf.FG_USER_FILE_NAME, b.FG_BUSINESS_NAME, b.FG_BUSINESS_RATING
+        GROUP BY uf.FG_USER_FILE_NAME, uf.FG_USER_FILE_ROOT, uf.FG_USER_FILE_UUID,
+                 b.FG_BUSINESS_NAME, b.FG_BUSINESS_RATING
     </select>
 
     <!-- 업체 리뷰 조회 -->

@@ -15,13 +15,13 @@ public interface SellerMyMapper {
     String selectExcellentStore(Long businessId);
 
     // 판매자 프로필 조회
-    SellerProfileDTO selectSellerProfile(Long userCode);
+    SellerProfileDTO selectStoreProfile(Long userCode);
 
     // 업체 리뷰 조회
     List<StoreReviewDTO> selectMyStoreRv(Long businessId);
 
     // 유저 아이디 반환
-    Optional<String> selectSellerId(Long userCode);
+    String selectSellerId(Long userCode);
 
     // 아이디, 비밀번호 확인해서 userCode 반환
     Optional<Long> selectSellerCode(String userId, String userPassword);
