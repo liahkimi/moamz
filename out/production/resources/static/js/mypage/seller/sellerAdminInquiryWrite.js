@@ -8,7 +8,7 @@ console.log(inputContent);
 cancleBtn.addEventListener('click', () => {
     const isConfirm = confirm('글 작성을 취소하시겠습니까? 작업중인 내용이 저장되지 않습니다.');
     if (isConfirm) {
-        window.location.href = 'sellerAdminInquiryList.html';
+        window.location.href = '/seller/inquiry/list';
     } else {
     }
 });
@@ -30,7 +30,7 @@ writeBtn.addEventListener('click', (e) => {
 
     const isConfirm = confirm('등록하시겠습니까?');
     if (isConfirm) {
-        // form을 직접 제출하여 컨트롤러의 POST 요청을 처리하게 만듭니다.
+        // form을 직접 제출하여 컨트롤러의 POST 요청을 처리하게 만든다.
         document.querySelector('form').submit();
     }
     
