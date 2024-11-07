@@ -17,7 +17,7 @@
       <div class="content-box">
         <div class="page-title-box">
           <div class="page-title">에코 프로젝트</div>
-          <button onclick="location.href='adminEcoWrite.html'">
+          <button th:onclick="|location.href='@{/admin/eco/write}'|">
             글 작성하기
           </button>
         </div>
@@ -29,13 +29,13 @@
           </div>
           <!-- 진행중인 에코배너 화면 -->
           <div id="ongoing-eco">
-            <div class="banner-box" onclick="goToDetailPage()">
+            <div class="banner-box" onclick="goToDetailPage()" th:each="ingEco:${adminEcoListDTO}">
               <div class="banner-img">
-                <img src="../../static/img/admin/plogging.jpg" alt="plogging" />
+                <div th:style=" 'background-image: url(/upload/' + ${ingEco.fgPostFileRoot} + '/' +  ${ingEco.fgPostFileUuid} + '_' + ${ingEco.fgPostFileName} + ')' " alt="plogging" ></div>
               </div>
               <div class="banner-article">
                 <div class="title-and-btns">
-                  <div class="title">환경을 위한 플로깅 프로젝트!</div>
+                  <div class="title" th:text="${ingEco.fgPostTitle}" >환경을 위한 플로깅 프로젝트!</div>
                   <div class="btns">
                     <button class="finish-btn" onclick="changeStatus(event)">프로젝트 종료시키기</button>
                     <button class="edit-btn" onclick="editEco(event)">
@@ -55,10 +55,10 @@
                         alt="calendarIcon"
                       />
                       <div class="calendar-text">
-                        <span>24/10/10</span>~<span>24/10/17</span>
+                        <span th:text="${ingEco.fgEcoStart}">24/10/10</span>~<span th:text="${ingEco.fgEcoEnd}">24/10/17</span>
                       </div>
                     </div>
-                    <div class="calendar-period"><span>1</span>주일간</div>
+                    <div class="calendar-period"><span th:text="${weeksBetween}">1</span>일간</div>
                   </div>
                   <div class="like">
                     <img

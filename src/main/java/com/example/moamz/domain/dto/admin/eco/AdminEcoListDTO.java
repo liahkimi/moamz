@@ -24,6 +24,7 @@ public class AdminEcoListDTO {
     private int fgPostLikes;                // 에코 프로젝트 좋아요 수
     private LocalDateTime fgEcoStart;               // 에코 프로젝트 시작일
     private LocalDateTime fgEcoEnd;                 // 에코 프로젝트 종료일
+    private int fgEcoPeriod;                    //에코 기간(몇일)
     private int fgEcoPoints;                 // 에코 프로젝트 지급될 포인트
     private String fgEcoInfo;                // 에코 프로젝트 소개
     private String fgCertInfo;              // 에코 프로젝트 인증사항
