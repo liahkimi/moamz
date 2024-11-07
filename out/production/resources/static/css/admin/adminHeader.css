@@ -5,7 +5,7 @@ a {
     outline: none; /* 포커스시 나타나는 외곽선 제거 */
 }
 header{
-    width: 100%;
+    width: 1707px;
     height: 70px;
     background-color: #ffffff;
     align-items: center;/* 높이를 맞춰 중앙 정렬 */
