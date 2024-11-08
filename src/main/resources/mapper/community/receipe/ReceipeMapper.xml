@@ -132,6 +132,10 @@
             FG_POST_ID = #{fgPostId}
     </update>
 
+<!--    recipe delete-->
+    <delete id="deleteFgRecipe" parameterType="Long">
+        delete from FG_RECIPE where FG_POST_ID = #{fgPostId}
+    </delete>
 
 
 </mapper>
