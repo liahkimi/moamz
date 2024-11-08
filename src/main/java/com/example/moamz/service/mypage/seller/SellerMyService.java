@@ -29,10 +29,6 @@ public class SellerMyService {
         // 우수 업체 여부
         String isExcellent = sellerMyMapper.selectExcellentStore(businessId);
 
-        //if(sellerProfileDTO.getTotalWeight()  null) {
-
-        //}
-
         // 우수업체인 경우 DTO에 topBusiness값 설정하기
         if(isExcellent.equals("TRUE")) {
             sellerProfileDTO.setIsTopBusiness("우수업체");

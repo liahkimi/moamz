@@ -79,7 +79,9 @@
                p.FG_PRODUCT_WEIGHT AS productWeight, p.FG_PRODUCT_CONTENT AS productContent,
                nu.FG_NORMAL_NICKNAME ASnormalNickname, pick.FG_PICKUP_SCHEDULE AS pickupSchedule,
                pick.FG_PICKUP_REQUEST AS pickupRequest,
-               pick.FG_PICKUP_STATUS AS pickupStatus, pick.FG_PICKUP_COMPLETED AS pickupCompletedTime
+               pick.FG_PICKUP_STATUS AS pickupStatus, pick.FG_PICKUP_COMPLETED AS pickupCompletedTime,
+               pf.FG_PRODUCT_FILE_ROOT AS productFileRoot, pf.FG_PRODUCT_FILE_NAME AS productFileName,
+               pf.FG_PRODUCT_FILE_UUID AS productFileUuid
         FROM FG_ORDER o, FG_PRODUCT p, FG_PICKUP pick, FG_NORMAL_USER nu, FG_PRODUCT_FILE pf
         WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
           AND o.FG_USER_CODE = nu.FG_USER_CODE

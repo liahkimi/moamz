@@ -5,8 +5,9 @@ const productReadyList = document.getElementById('product-ready-list');
 const readyToPickupList = document.getElementById('product-pickup-list');
 const pickupCompleteList = document.getElementById('product-completed-list');
 
-const readyCompleteBtn = document.querySelectorAll('.ready-complete-btn'); // 상품준비완료 버튼
+const readyCompleteBtn = document.querySelectorAll('.ready-complete-btn');   // 상품준비완료 버튼
 const pickupCompleteBtn = document.querySelectorAll('.pickup-complete-btn'); // 고객픽업완료 버튼
+const moveDetailBtn = document.querySelectorAll('.move-to-detail');          // 자세히 보기 버튼
 
 
 /////////////////////////////////////////////////////
@@ -95,5 +96,23 @@ pickupCompleteBtn.forEach(btn => {
         }
     }); // addEventListener 끝
 }); // forEach 끝
+
+
+
+
+/////////////////////////////////////////////////////
+//// 자세히 보기 버튼
+
+moveDetailBtn.forEach(btn => {
+    btn.addEventListener('click', function () {
+        // orderId값 가져오기
+        const orderId = btn.closest('li').getAttribute('data-id');
+        console.log(orderId);
+
+        // 컨트롤러로 get 요청 보내기
+        window.location.href = `/seller/sales/detail/${orderId}`;
+    })
+})
+
 
 // 페이지네이션..

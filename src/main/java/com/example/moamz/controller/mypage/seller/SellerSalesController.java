@@ -76,12 +76,20 @@ public class SellerSalesController {
     @GetMapping("/detail/{orderId}")
     public String salesDetail(@PathVariable("orderId") Long orderId,
                               Model model) {
+        // ⭐로그인 유저의 businessId 필요
+        Long businessId = 1L;
+        Long userCode = 1L;
+
+        // 판매자 프로필 가져오기
+        SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(businessId, userCode);
 
         // 주문 상세보기 내용 가져오기
         SalesDetailDTO salesDetailDTO = sellerSalesService.findSalesDetail(orderId);
+        log.info("💜💜상세정보 : {}", salesDetailDTO);
 
         // 모델에 담기
         model.addAttribute("salesDetailDTO", salesDetailDTO);
+        model.addAttribute("sellerProfileDTO", sellerProfileDTO);
 
         return "mypage/seller/sellerSalesDetail";
     }
