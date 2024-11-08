@@ -4,8 +4,6 @@ import com.example.moamz.domain.dto.file.ProductFileDTO;
 import com.example.moamz.domain.dto.mypage.seller.ProductDetailDTO;
 import com.example.moamz.domain.dto.mypage.seller.ProductListDTO;
 import com.example.moamz.domain.dto.mypage.seller.ProductRegistDTO;
-import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryDetailDTO;
-import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryListDTO;
 import com.example.moamz.mapper.file.ProductFileMapper;
 import com.example.moamz.mapper.mypage.seller.SellerProductMapper;
 import lombok.RequiredArgsConstructor;

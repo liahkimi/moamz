@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.user.normal.NormalSignupMapper">
+
+    <!--일반회원가입-->
+    <insert id="insertCommonUser" parameterType="NormalCommonSignupDTO">
+        <selectKey keyProperty="fgUserCode" resultType="Long" order="BEFORE">
+            SELECT SEQ_USER.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO FG_COMMON_USER (FG_USER_CODE, FG_USER_ID, FG_USER_PASSWORD, FG_USER_JOIN_DATE, FG_USER_TYPE)
+        VALUES (#{fgUserCode}, #{fgUserId}, #{fgUserPassword}, SYSDATE, '일반회원')
+    </insert>
+
+    <insert id="insertNormalUser" parameterType="NormalUserSignupDTO">
+        <selectKey keyProperty="fgUserCode" resultType="Long" order="BEFORE">
+            SELECT SEQ_USER.CURRVAL FROM DUAL
+        </selectKey>
+        INSERT INTO FG_NORMAL_USER (FG_USER_CODE, FG_NORMAL_NAME, FG_NORMAL_PHONE, FG_NORMAL_NICKNAME, FG_NORMAL_BIRTH, FG_NORMAL_GENDER, FG_NORMAL_POSTCODE, FG_NORMAL_ADDRESS, FG_NORMAL_ADDRESS_DETAIL, FG_NORMAL_LOGIN_TYPE, FG_KAKAO_ID)
+        VALUES (#{fgUserCode}, #{fgNormalName}, #{fgNormalPhone}, #{fgNormalNickname}, #{fgNormalBirth}, #{fgNormalGender}, #{fgNormalPostcode}, #{fgNormalAddress}, #{fgNormalAddressDetail}, 'normal', #{fgNormalKaKaoId})
+    </insert>
+
+    <insert id="insertUserFile" parameterType="UserFileDTO">
+        <selectKey keyProperty="userFileId" resultType="Long" order="BEFORE">
+            SELECT SEQ_USER_FILE.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO FG_USER_FILE (FG_USER_FILE_ID, FG_USER_FILE_NAME, FG_USER_FILE_ROOT, FG_USER_FILE_UUID, FG_USER_CODE)
+        VALUES (${userFileId}, #{userFileName}, #{userFileRoot}, #{userFileUuid}, #{userCode})
+    </insert>
+
+    <insert id="insertPoint" parameterType="NormalPointDTO">
+        <selectKey keyProperty="fgPointId" resultType="Long" order="BEFORE">
+            SELECT SEQ_POINT.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO FG_POINT (FG_POINT_ID, FG_USER_CODE)
+        VALUES (#{fgPointId}, #{fgUserCode})
+    </insert>
+
+</mapper>
