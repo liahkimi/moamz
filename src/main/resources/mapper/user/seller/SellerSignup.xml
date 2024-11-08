@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.user.normal.SellerSignupMapper">
+    <insert id="insertCommonUser" parameterType="SellerSignupDTO">
+        <selectKey keyProperty="fgUserCode" resultType="Long" order="BEFORE">
+            SELECT SEQ_USER.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO FG_COMMON_USER (FG_USER_CODE, FG_USER_ID, FG_USER_PASSWORD, FG_USER_JOIN_DATE, FG_USER_TYPE)
+        VALUES (#{fgUserCode}, #{fgUserId}, #{fgUserPassword}, SYSDATE, #{fgUserType})
+    </insert>
+
+    <insert id="insertSeller" parameterType="SellerSignupDTO">
+        INSERT INTO FG_SELLER (FG_USER_CODE, FG_SELLER_NAME, FG_SELLER_PHONE)
+        VALUES (#{fgUserCode}, #{fgSellerName}, #{fgSellerPhone})
+    </insert>
+
+    <insert id="insertBusiness" parameterType="SellerSignupDTO">
+        <selectKey keyProperty="fgBusinessId" resultType="Long" order="BEFORE">
+            SELECT SEQ_BUSINESS.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO FG_BUSINESS (FG_BUSINESS_ID, FG_BUSINESS_OPEN_TIME, FG_BUSINESS_CLOSE_TIME, FG_BUSINESS_DETAIL, FG_BUSINESS_POSTCODE, FG_BUSINESS_ADDRESS, FG_BUSINESS_ADDRESS_DETAIL, FG_BUSINESS_NUMBER, FG_BUSINESS_NAME, FG_BUSINESS_PHONE, FG_USER_CODE)
+        VALUES (#{fgBusinessId}, #{fgBusinessOpenTime}, #{fgBusinessCloseTime}, #{fgBusinessDetail}, #{fgBusinessPostcode}, #{fgBusinessAddress}, #{fgBusinessAddressDetail}, #{fgBusinessNumber}, #{fgBusinessName}, #{fgBusinessPhone}, SEQ_TEST_USER.CURRVAL)
+    </insert>
+
+    <insert id="insertUserFile" parameterType="SellerSignupDTO">
+        <selectKey keyProperty="fgUserFileId" resultType="Long" order="BEFORE">
+            SELECT SEQ_USER_FILE.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO FG_USER_FILE (FG_USER_FILE_ID, FG_USER_FILE_NAME, FG_USER_FILE_ROOT, FG_USER_FILE_UUID, FG_USER_CODE)
+        VALUES (#{fgUserFileId}, #{fgUserFileName}, #{fgUserFileRoot}, #{fgUserFileUuid}, SEQ_TEST_USER.CURRVAL)
+    </insert>
+
+</mapper>
