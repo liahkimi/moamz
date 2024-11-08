@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>userSignup</title>
-  <link rel="stylesheet" href="../../../static/css/reset2.css">
-  <link rel="stylesheet" href="../../../static/css/user/regular/userSignup.css">
-  <script defer src="../../../static/js/user/regular/userSignup.js"></script>
+  <link rel="stylesheet" th:href="@{/css/reset2.css}">
+  <link rel="stylesheet" th:href="@{/css/user/regular/userSignup.css}">
+  <script defer th:src="@{/js/user/regular/userSignup.js}"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-  <header id="header"></header>
+<header id="header" th:replace="~{/main/fragment/header/userHeaderLogin.html}"></header>
   <div id="signup-container">
 
     <div id="signup-logo">
-      <img src="../../../static/img/user/logo-green.jpg">
+      <img th:src="@{/img/user/logo-green.jpg}">
     </div>
     <div id="signup-user"><strong>일반 회원가입</strong></div>
     
-    <form action="">
+    <form th:action="@{/normal/regular/userSignup}" method="post" enctype="multipart/form-data">
       <div id="singup-profile">
         <!-- 이미지 클릭시 첨부파일 이동! -->
         <!--lable을 누르면 input 태그로 연결-->
@@ -28,41 +29,41 @@
           </div>
         </label>
         <div class="cancle"></div>
-        <input type="file" id="attach" style="display: none;">
+        <input type="file" name="file" id="attach" style="display: none;">
       </div>
       <!-- input과 button 붙이고 크기 맞추기 -->
       <div id="signup-wrap">
         <div id="signup-email">
-          <input type="email" id="email-input" placeholder="이메일을 입력해주세요" required>
-          <button id="email-btn">중복확인</button>
+          <input type="email" name="fgUserId" id="email-input" placeholder="이메일을 입력해주세요" required>
+          <button type="button" id="email-btn">중복확인</button>
           <!-- <input type="button" id="email-btn" placeholder="중복확인"> -->
-          <input id="password-input" type="password" placeholder="비밀번호 입력(영문, 숫자, 특수문자 포함8~20)" required>
+          <input id="password-input" name="fgUserPassword" type="password" placeholder="비밀번호 입력(영문, 숫자, 특수문자 포함8~20)" required>
           <input id="password-recheck" type="password" placeholder="비밀번호 재확인" required>
           <!-- js 비밀번호 형식, 비밀번호 재확인 -->
           <p id="check-p"></p>
           <p id="recheck-p"></p>
         </div>
         <div id="signup-phone">
-          <input id="name-input" type="password" placeholder=" 이름" required>
-          <input type="text" id="input-phone" placeholder=" 휴대폰번호" required>
+          <input id="name-input" name="fgNormalName" type="text" placeholder=" 이름" required>
+          <input type="text" name="fgNormalPhone" id="input-phone" placeholder=" 휴대폰번호" required>
           <button id="phone-btn">전송</button>
-          <input type="email" id="recheck-phone" placeholder=" 인증번호" required>
+          <input type="text" id="recheck-phone" placeholder=" 인증번호" required>
           <span id="time"></span>
           <button id="recheck-btn">확인</button>
         </div>
         <div id="signup-nickname">
-          <input type="text" id="nickname-input" placeholder=" 닉네임" required>
+          <input type="text" name="fgNormalNickname" id="nickname-input" placeholder=" 닉네임" required>
           <button id="nickname-btn">중복확인</button>
-          <input type="email" id="birthday-input" placeholder=" [선택] 생년월일8자리">
+          <input type="date" name="fgNormalBirth" id="birthday-input" placeholder=" [선택] 생년월일8자리">
           <span>[선택] 성별 : </span>
-          <label for="">남 : <input type="radio" name="gender"></label>
-          <label for="">여 : <input type="radio"name="gender"></label>
+          <label>남 : <input type="radio" value="M" name="fgNormalGender"></label>
+          <label>여 : <input type="radio" value="F" name="fgNormalGender"></label>
         </div>
         <div id="signup-post"> 
-          <input type="text" id="post-input" placeholder=" 우편번호" readonly required>
-          <button id="post-btn">검색</button>
-          <input type="text" id="address" placeholder=" 인증번호" readonly required>
-          <input type="text" id="detail-address" placeholder= "도로명 주소" required>
+          <input type="text" id="post-input" name="fgNormalPostcode" placeholder=" 우편번호" readonly required>
+          <button id="post-btn" type="button" onclick="findPostCode()">검색</button>
+          <input type="text" name="fgNormalAddress" id="address" placeholder="도로명 주소" readonly required>
+          <input type="text" name="fgNormalAddressDetail" id="detail-address" placeholder= "상세주소" required>
         </div>
 
         <div id="signup-agreement">
@@ -232,12 +233,6 @@
 
     </form>
   </div>
-  <footer id="footer"></footer>
+<footer id="footer" th:replace="~{/main/fragment/footer/userFooter.html}"></footer>
 </body>
-<script>
-  $(function() {
-      $("#header").load("../../main/fragment/header/userHeaderLogin.html");
-      $("#footer").load("../../main/fragment/footer/userFooter.html");
-  });
-</script>
 </html>
