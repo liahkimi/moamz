@@ -30,6 +30,11 @@ main{
     height: 100vh;
 }
 
+body{
+    width: 1690px ;
+    overflow: hidden;
+  }
+
 /* 로고 */
 header .admin-logo{
     display: flex;
@@ -120,22 +125,20 @@ nav ul li a:hover{
 /* 네비바+메인화면의 부모인 main */
 main{
     display: flex;
+    width: 1707px;
 }
 /* 타이틀 + 카운팅카드뷰 + 에코프젝 + 그래프의 부모 */
 main .content-box{
     display: flex;
     flex-direction: column;
     background-color: #1B494C;
-    width: 100%;
-    padding-left: 30px;
-    padding-right: 30px;
+    width: 1705px;
+    padding: 0 80px;
 }
 /* 타이틀 */
 main .content-box .page-title-box{
    position: relative;
-   top: 30px;
-   left: 8px;
-   margin-bottom: 30px;
+   margin: 35px 0px 10px 10px;
 }
 main .content-box .page-title-box .page-title{
     font-size:25px;
@@ -150,26 +153,24 @@ main .content-box .page-title-box .page-title{
     height: 25px;
     background-color: #6A6A6A;
     border-radius: 3px;
+    display: flex;
     position: relative;
-    left: 90%;
-    top: 4%;
-    margin-bottom: 30px;
+    left: 1260px;
+    margin-bottom: 10px;
+
 }
 /* 글작성하기 버튼 */
 .write-btn button{
    width: 100%;
     font-size: 15px;
     color:#FFFFFFFF;
-    transform: translateY(10%);
+    align-items: center;
 }
 /* 흰색 게시판 전체 */
 .content{
-    width: 95%;
+    width: 1360px;
     height: 650px;
     background-color: #FFFFFF;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-top: 20px;
 }
 
 /* 테이블 css */
@@ -203,9 +204,9 @@ tr:hover {
 
 /* 페이지네이션 css */
 .pagination{
-    position: absolute;
-    right: 42%;
-    bottom: 9%;
+position: relative;
+top: 50px;
+left: 550px;
 }
 .page{
     

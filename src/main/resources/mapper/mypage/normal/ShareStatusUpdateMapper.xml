@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.normal.ShareStatusUpdateMapper">
+    <!-- 예약 중으로 변경 버튼  -->
+    <update id="updateShareReservation" parameterType="ShareStatusUpdateDTO">
+        UPDATE FG_SHARING
+        SET FG_SHARING_STATUS = '예약중'
+        WHERE FG_POST_ID = #{fgPostId};
+    </update>
+
+    <!-- 나눔 완료로 변경 버튼  -->
+    <update id="updateShareCompleted" parameterType="ShareStatusUpdateDTO">
+        UPDATE FG_SHARING
+        SET FG_SHARING_STATUS = '나눔완료'
+        WHERE FG_POST_ID = #{fgPostId}
+    </update>
+</mapper>

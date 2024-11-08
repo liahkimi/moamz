@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.normal.PurchaseDetailMapper">
+    <!-- 주문 픽업 시간   -->
+    <select id="selectProductPickup" parameterType="Long" resultType="PurchaseDetailDTO">
+        SELECT o.FG_ORDER_DATE, o.FG_ORDER_ID, p.FG_PICKUP_SCHEDULE, p.FG_PICKUP_COMPLETED,p.FG_PICKUP_REQUEST
+        FROM FG_ORDER o JOIN FG_PICKUP p
+            ON o.FG_ORDER_ID = p.FG_ORDER_ID
+    </select>
+
+    <!-- 업체명  -->
+    <select id="selectProductBusiness" parameterType="Long" resultType="PurchaseDetailDTO">
+        SELECT uf.FG_USER_FILE_ID, uf.FG_USER_FILE_ROOT, uf.FG_USER_FILE_NAME, uf.FG_USER_FILE_UUID, b.FG_BUSINESS_NAME, b.FG_BUSINESS_ADDRESS,
+            b.FG_BUSINESS_ADDRESS_DETAIL, b.FG_BUSINESS_OPEN_TIME, b.FG_BUSINESS_PHONE
+        FROM FG_USER_FILE uf JOIN FG_BUSINESS b
+            ON uf.FG_USER_CODE = b.FG_USER_CODE
+    </select>
+
+    <!-- 상품 정보  -->
+    <select id="selectProduct" parameterType="Long" resultType="PurchaseDetailDTO">
+        SELECT nu.FG_USER_CODE,pf.FG_PRODUCT_FILE_ID, pf.FG_PRODUCT_FILE_NAME, pf.FG_PRODUCT_FILE_UUID, pf.FG_PRODUCT_FILE_ROOT,p.FG_PRODUCT_NAME,p.FG_PRODUCT_EXP_DATE,p.FG_PRODUCT_WEIGHT,
+            p.FG_PRODUCT_STOCK,p.FG_PRODUCT_PRICE
+        FROM FG_PRODUCT p JOIN FG_PRODUCT_FILE pf
+            ON p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+        JOIN FG_NORMAL_USER nu
+            ON p.FG_BUSINESS_ID = nu.FG_USER_CODE
+        WHERE nu.FG_USER_CODE = #{fgUserCode}
+    </select>
+
+    <!-- 상품 가격  -->
+    <select id="selectProductPrice" parameterType="Long" resultType="PurchaseDetailDTO">
+        SELECT FG_USER_CODE, FG_ORDER_PER_PRICE, FG_ORDER_USED_POINT, FG_ORDER_AMOUNT, FG_ORDER_ID
+        FROM FG_ORDER
+        WHERE FG_USER_CODE = #{fgUserCode}
+    </select>
+
+</mapper>

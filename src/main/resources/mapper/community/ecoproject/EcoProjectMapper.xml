@@ -22,11 +22,11 @@
     </select>
 
     <!--    에코 인증글 디테일-->
-    <select id="ecoCertDetail" resultType="EcoCertDetailDTO" parameterType="Long">
+    <select id="ecoCertDetail" resultType="EcoCertDetailDTO">
         SELECT P.FG_POST_TITLE                                                       AS fgPostTitle,
                P.FG_POST_CREATED_AT                                                  AS fgPostCreatedAt,
                EC.FG_CERT_CONTENT                                                    AS fgCertContent,
-               NU.FG_NORMAL_NAME                                                     AS fgNormalName,
+               NU.FG_NORMAL_NAME                                                 AS fgNormalName,
                NU.FG_USER_CODE                                                       AS fgUserCode,
                (SELECT COUNT(*) FROM FG_COMMENT C WHERE C.FG_POST_ID = P.FG_POST_ID) AS fgCommnetCount,
                p.FG_POST_LIKES                                                       as fgPostLike
@@ -41,7 +41,7 @@
     </select>
 
     <!--에코 인증글 리스트-->
-    <select id="ecoCertList" resultType="EcoCertListDTO" parameterType="Long">
+    <select id="ecoCertList" resultType="EcoCertListDTO">
         SELECT EC.FG_POST_ID                                                         AS fgEcoPostId,
                P.FG_POST_TITLE                                                       AS fgPostTitle,
                P.FG_POST_CREATED_AT                                                  AS fgPostCreatedAt,
@@ -55,7 +55,7 @@
              FG_NORMAL_USER NU ON P.FG_USER_CODE = NU.FG_USER_CODE
                  JOIN
              FG_ECO E ON EC.FG_PROJECT_ID = E.FG_POST_ID
-        WHERE P.FG_POST_TYPE = 'ecoCert' AND EC.FG_PROJECT_ID = #{fgProjectId}
+        WHERE P.FG_POST_TYPE = 'ecoCert'
     </select>
 
     <!--    에코 인증글 글쓰기(1번)-->
@@ -67,8 +67,8 @@
         #{fgPostId}, #{fgCertContent}, #{fgProjectId}
     </insert>
 
-<!--    전체 포스트에 insert-->
-    <insert id="ecoCertPostInsert" parameterType="PostDTO">
+    <!--    에코 인증글 글쓰기(2번)-->
+    <insert id="ecoCertPostInsert" parameterType="EcoCertPostDTO">
         <selectKey resultType="Long" keyProperty="fgPostId" order="BEFORE">
             select SEQ_FG_POST.nextval from dual
         </selectKey>
@@ -76,12 +76,6 @@
         fg_post_edit, fg_user_code) VALUES
         #{fgPostId}, #{fgPostType}, #{fgPostTitle}, SYSDATE, 0, 0, 0, #{fgUserCode}
     </insert>
-
-<!--    인증글 삭제-->
-    <delete id="ecoCertDelete" parameterType="Long">
-        DELETE  FROM FG_ECO_CERT
-        WHERE  FG_POST_ID = #{fgPostId}
-    </delete>
 </mapper>
 
 

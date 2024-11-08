@@ -29,6 +29,10 @@ main{
     margin: 0 auto;
     height: 100vh;
 }
+body{
+    width: 1690px ;
+    overflow: hidden;
+  }
 
 /* 로고 */
 header .admin-logo{
@@ -120,13 +124,14 @@ nav ul li a:hover{
 /* 네비바+메인화면의 부모인 main */
 main{
     display: flex;
+    width: 1707px;
 }
 /* 타이틀 + 카운팅카드뷰 + 에코프젝 + 그래프의 부모 */
 main .content-box{
     display: flex;
     flex-direction: column;
     background-color: #1B494C;
-    width: 100%;
+    width: 1705px;
     padding-left: 30px;
     padding-right: 30px;
 }
@@ -144,7 +149,6 @@ main .content-box .page-title-box .page-title{
 
 /* 흰색 게시판 전체 */
 .content{
-    width: 100%;
     height: 100vh;
     background-color: #FFFFFF;
 

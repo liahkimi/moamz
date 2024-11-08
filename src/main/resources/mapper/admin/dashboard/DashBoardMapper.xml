@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.admin.dashboard.DashBoardMapper">
+<!--대시보드 상단 집계부분-->
+    <select id="selectAggregation" resultType="DashBoardAggregationDTO">
+        SELECT
+            COUNT(CASE WHEN TRUNC(FG_USER_JOIN_DATE) = TRUNC(SYSDATE) THEN 1 END) AS newUserCount,
+            COUNT(CASE WHEN c.FG_USER_CODE > 0 THEN 1 END) AS totalUserCount,
+            COUNT(CASE WHEN TRUNC(FG_POST_CREATED_AT) = TRUNC(SYSDATE) AND FG_POST_TYPE = 'ecoCert' THEN 1 END) AS ecoCertPostCount,
+            COUNT(CASE WHEN FG_INQUIRY_STATUS = '0' THEN 1 END) AS pendingInquiryCount
+        FROM
+            FG_COMMON_USER c, FG_POST p,FG_INQUIRY i
+    </select>
+<!--대시보드 중앙 에코프젝부분-->
+    <!--진행중인 에코프젝 배너부분 -->
+    <select id="selectIngEco" resultType="DashBoardEcoTopDTO">
+        SELECT
+            PF.FG_POST_FILE_ROOT, PF.FG_POST_FILE_NAME, PF.FG_POST_FILE_UUID,
+            P.FG_POST_TITLE, P.FG_POST_LIKES,
+            E.FG_ECO_START, E.FG_ECO_END, E.FG_ECO_POINTS, E.FG_ECO_PARTICIPATION
+        FROM FG_POST_FILE PF
+                 JOIN FG_POST P ON PF.FG_POST_ID = P.FG_POST_ID
+                 JOIN FG_ECO E ON P.FG_POST_ID = E.FG_POST_ID
+        WHERE P.FG_POST_TYPE = 'eco'
+          AND E.FG_ECO_STATUS = '1'
+    </select>
+    <!--해당 에코프젝의 인증글 top5 리스트-->
+    <select id="selectEcoTopLikes" parameterType="Long" resultType="DashBoardEcoTopDTO">
+        SELECT FG_POST_LIKES, FG_NORMAL_NICKNAME
+        FROM (
+        SELECT P.FG_POST_LIKES, nu.FG_NORMAL_NICKNAME
+        FROM FG_ECO_CERT ec
+        JOIN FG_POST p ON ec.FG_POST_ID = p.FG_POST_ID
+        JOIN FG_NORMAL_USER nu ON nu.FG_USER_CODE = p.FG_USER_CODE
+        WHERE p.FG_POST_LIKES >= 1 AND ec.FG_PROJECT_ID = #{fgProjectId}
+        ORDER BY p.FG_POST_LIKES DESC
+        )
+        WHERE rownum <![CDATA[ <= ]]>  5  -- ROWNUM을 이용한 제한;
+    </select>
+
+<!--대시보드 하단 그래프부분-->
+    <!--월별 총 구매건수-->
+    <select id="selectMonthlyPurchase" resultType="DashBoardGraphDTO">
+        SELECT
+            EXTRACT(MONTH FROM o.FG_ORDER_DATE) AS order_month,
+            COUNT(p.FG_PRODUCT_ID) AS monthly_total_orders
+        FROM FG_PRODUCT p
+                 JOIN FG_ORDER o ON p.FG_PRODUCT_ID = o.FG_PRODUCT_ID
+        WHERE o.FG_PAYMENT_STATUS = '결제완료'
+          AND EXTRACT(YEAR FROM o.FG_ORDER_DATE) = EXTRACT(YEAR FROM SYSDATE) -- 현재 연도로 필터링
+          AND EXTRACT(MONTH FROM o.FG_ORDER_DATE) BETWEEN EXTRACT(MONTH FROM ADD_MONTHS(SYSDATE, -10)) AND EXTRACT(MONTH FROM SYSDATE) -- 현재 월에서 10개월 전부터 현재 월까지 필터링
+        GROUP BY EXTRACT(MONTH FROM o.FG_ORDER_DATE)
+        ORDER BY order_month  -- 월별로 정렬
+    </select>
+    <!--월별 총 에코프젝 인증글 수-->
+    <select id="selectMonthlyEcoCert" resultType="DashBoardGraphDTO">
+        SELECT
+            EXTRACT(MONTH FROM FG_POST_CREATED_AT) AS post_month,
+            COUNT(FG_POST_ID) AS monthly_eco_cert_posts
+        FROM FG_POST
+        WHERE FG_POST_TYPE = 'ecoCert'  -- FG_POST_TYPE이 'ecoCert'인 것
+          AND (
+            (EXTRACT(YEAR FROM FG_POST_CREATED_AT) = EXTRACT(YEAR FROM SYSDATE) AND EXTRACT(MONTH FROM FG_POST_CREATED_AT) BETWEEN EXTRACT(MONTH FROM ADD_MONTHS(SYSDATE, -10)) AND EXTRACT(MONTH FROM SYSDATE))
+                OR
+            (EXTRACT(YEAR FROM FG_POST_CREATED_AT) = EXTRACT(YEAR FROM SYSDATE) - 1 AND EXTRACT(MONTH FROM FG_POST_CREATED_AT) >= EXTRACT(MONTH FROM ADD_MONTHS(SYSDATE, -10)))
+            )
+        GROUP BY EXTRACT(MONTH FROM FG_POST_CREATED_AT)
+        ORDER BY post_month -- 월별로 정렬
+    </select>
+
+
+</mapper>

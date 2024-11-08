@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.normal.MySharingMapper">
+
+    <!--  MY 나눔 '나눔가능' 상태 조회-->
+    <select id="selectSharingPossible" resultType="MySharingDTO">
+        SELECT p.FG_POST_TITLE,p.FG_POST_CREATED_AT,pf.FG_POST_FILE_ROOT,pf.FG_POST_FILE_ID,pf.FG_POST_FILE_NAME,
+               pf.FG_POST_FILE_UUID,s.FG_SHARING_STATUS
+        FROM FG_POST p JOIN FG_POST_FILE pf
+            ON p.FG_POST_ID = pf.FG_POST_ID
+        JOIN FG_SHARING s
+            ON p.FG_POST_ID = s.FG_POST_ID
+        WHERE s.FG_SHARING_STATUS = '나눔가능';
+    </select>
+
+
+    <!--   MY 나눔 '예약중' 상태 조회-->
+    <select id="selectSharingReservation" resultType="MySharingDTO">
+        SELECT p.FG_POST_TITLE, p.FG_POST_CREATED_AT, pf.FG_POST_FILE_ROOT, pf.FG_POST_FILE_ID,pf.FG_POST_FILE_NAME,
+               pf.FG_POST_FILE_UUID,s.FG_SHARING_STATUS
+        FROM FG_POST p JOIN FG_POST_FILE pf
+            ON p.FG_POST_ID = pf.FG_POST_ID
+        JOIN FG_SHARING s
+            ON p.FG_POST_ID = s.FG_POST_ID
+        WHERE s.FG_SHARING_STATUS = '예약중';
+    </select>
+
+
+    <!--  MY 나눔 '나눔완료' 상태 조회  -->
+    <select id="selectSharingCompleted" resultType="MySharingDTO">
+        SELECT p.FG_POST_TITLE,p.FG_POST_CREATED_AT,pf.FG_POST_FILE_ROOT, pf.FG_POST_FILE_ID,pf.FG_POST_FILE_NAME,
+               pf.FG_POST_FILE_UUID,s.FG_SHARING_STATUS
+        FROM FG_POST p JOIN FG_POST_FILE pf
+            ON p.FG_POST_ID = pf.FG_POST_ID
+        JOIN FG_SHARING s
+            ON p.FG_POST_ID = s.FG_POST_ID
+        WHERE s.FG_SHARING_STATUS = '나눔완료';
+    </select>
+
+</mapper>
