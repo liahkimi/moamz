@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>noticeDetail</title>
-  <link rel="stylesheet" href="../../../static/css/main/main/noticeDetail.css">
-  <!-- <link rel="stylesheet" href="../../../static/css/reset.css"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>noticeDetail</title>
+    <link rel="stylesheet" th:href="@{/css/main/main/noticeDetail.css}">
+    <link rel="stylesheet" th:href="@{/css/reset2.css}">
 </head>
 <body>
-  <header id="header"></header>
-  <main>
+<header id="header" th:replace="~{/main/fragment/header/userHeaderLogin.html}"></header>
+
+<main>
     <div class="noticeDetail-container">
-        <h2>[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</h2>
+        <h2 th:text="'[ 공지 ] ' + ${notice.fgPostTitle != null ? notice.fgPostTitle : '제목 없음'}">[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</h2>
         <div class="noticeDetail-wrap">
-          <div class="noticeDetail-box1">
-            <span>관리자</span>
-          </div>
-          <div class="noticeDetail-box2">
-            <span>작성일  24.10.04 23:53</span>
-          </div>
-          <div class="noticeDetail-box3">
-            <span>조회수 10</span>
-          </div>
+            <div class="noticeDetail-box1">
+                <span th:text="'관리자'">관리자</span>
+            </div>
+            <div class="noticeDetail-box2">
+                <span th:text="${#temporals.format(notice.fgPostCreatedAt, 'yyyy.MM.dd HH:mm')}">작성일  24.10.04 23:53</span>
+            </div>
+            <div class="noticeDetail-box3">
+                <span th:text="${notice.fgPostViews}">조회수 10</span>
+            </div>
         </div>
+
         <div class="noticeDetail-write">
-          <span>동해물과 백두산이 마르고 닳도록</span><br>
-          <span>하느님이 보우하사 우리나라 만세</span><br>
-          <span>무궁화 삼천리 화려강산</span>
+            <span th:text="${notice.fgNoticeContent}">동해물과 백두산이 마르고 닳도록</span><br>
+<!--            <span th:text="${notice.fgNoticeContent}">하느님이 보우하사 우리나라 만세</span><br>-->
+<!--            <span th:text="${notice.fgNoticeContent}">무궁화 삼천리 화려강산</span>-->
         </div>
-        <button type="button"><a href="noticeList.html">공지사항 목록으로 가기</a></button>
+
+        <button type="button">
+            <a th:href="@{/main/noticeList}">공지사항 목록으로 가기</a>
+        </button>
     </div>
-  </main>
-  <footer id="footer"></footer>
+</main>
+
+<footer id="footer" th:replace="~{/main/fragment/footer/userFooter.html}"></footer>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(function() {
-        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
-        $("#footer").load("../../main/fragment/footer/userFooter.html");
-    });
-</script>
 </html>

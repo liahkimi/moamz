@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface MainNoticeListMapper {
-    List<MainNoticeListDTO> selectNoticeList();
+    List<MainNoticeListDTO> selectMainNoticeList();
 }
