@@ -71,6 +71,7 @@ public class AdminNoticeController {
         System.out.println("view 컨트롤러");
         AdminNoticeDetailDTO adminNoticeDetailDTO = adminNoticeService.findNoticeById(fgPostId);
 
+
         model.addAttribute("adminNoticeDetailDTO", adminNoticeDetailDTO);
         return "/admin/adminNoticeDetail";
     }
@@ -96,13 +97,6 @@ public class AdminNoticeController {
         redirectAttributes.addAttribute("fgPostId", adminNoticeModifyDTO.getFgPostId());
         return "redirect:/admin/notice/detail";
     }
-
-    @GetMapping("/remove")
-    public String noticeRemove(@RequestParam("fgPostId") Long fgPostId){
-        adminNoticeService.removeNotice(fgPostId);
-        return "redirect:/admin/notice/list";
-    }
-
 
 
 

@@ -11,8 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
-public class AdminEcoListDTO {
-//  (진행중/완료된) 에코프로젝트 목록 DTO
+public class AdminFinEcoListDTO {
 
     // 썸네일 보여주기
     private Long   fgPostFileId;           // 파일 ID

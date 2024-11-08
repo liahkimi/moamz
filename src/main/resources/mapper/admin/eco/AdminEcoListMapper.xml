@@ -3,12 +3,13 @@
 <mapper namespace="com.example.moamz.mapper.admin.eco.AdminEcoMapper">
 
 <!--진행중인 에코프로젝트 목록 보여주기-->
-    <select id="selectIngEcoList" resultType="AdminEcoListDTO">
+    <select id="selectIngEcoList" resultType="AdminIngEcoListDTO">
         SELECT DISTINCT
             PF.FG_POST_FILE_ROOT,
             PF.FG_POST_FILE_NAME,
             PF.FG_POST_FILE_UUID,
             P.FG_POST_TITLE,
+            P.FG_POST_ID,
             P.FG_POST_LIKES,
             TO_CHAR(E.FG_ECO_START, 'YYYY/MM/DD') AS fgEcoStartToChar,
             TO_CHAR(E.FG_ECO_END, 'YYYY/MM/DD') AS fgEcoEndToChar,
@@ -25,12 +26,12 @@
     </select>
 
 <!--종료된 에코프로젝트 목록 보여주기 -->
-    <select id="selectFinEcoList" resultType="AdminEcoListDTO">
+    <select id="selectFinEcoList" resultType="AdminFinEcoListDTO">
         SELECT DISTINCT
             PF.FG_POST_FILE_ROOT,
             PF.FG_POST_FILE_NAME,
             PF.FG_POST_FILE_UUID,
-
+            P.FG_POST_ID,
             P.FG_POST_TITLE,
             P.FG_POST_LIKES,
             E.FG_ECO_START,
@@ -52,8 +53,8 @@
         <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
             SELECT SEQ_POST.nextval FROM DUAL
         </selectKey>
-        INSERT INTO FG_POST (FG_POST_ID, FG_POST_TYPE, FG_POST_TITLE, FG_POST_CREATED_AT, FG_USER_CODE)
-        VALUES (#{fgPostId}, 'eco', #{fgPostTitle}, SYSDATE, (SELECT FG_USER_CODE FROM FG_COMMON_USER WHERE FG_USER_ID = '관리자'))
+        INSERT INTO FG_POST (FG_POST_ID, FG_POST_TYPE, FG_POST_TITLE,  FG_USER_CODE)
+        VALUES (#{fgPostId}, 'eco', #{fgPostTitle},  #{fgUserCode})
     </insert>
 
 <!--에코프로젝트 글 작성하기 (에코프젝테이블 insert)-->
@@ -61,6 +62,7 @@
         INSERT INTO FG_ECO (FG_POST_ID, FG_ECO_START, FG_ECO_END, FG_ECO_PARTICIPATION, FG_ECO_INFO, FG_CERT_INFO, FG_ECO_POINTS)
         VALUES (#{fgPostId}, #{fgEcoStart}, #{fgEcoEnd}, #{fgEcoParticipation}, #{fgEcoInfo}, #{fgCertInfo}, #{fgEcoPoints})
     </insert>
+
 
 <!--에코프젝 글 작성하기 (썸네일 삽입)-->
 
@@ -87,7 +89,7 @@
 
 
 <!--에코프젝 종료시키기 버튼 클릭시 (처음엔 무조건  FG_ECO_STATUS = '1') -->
-<update id="finishBtn" parameterType="AdminEcoStatusUpdateDTO">
+<update id="finishBtn" parameterType="Long">
     UPDATE FG_ECO
     SET
         FG_ECO_STATUS = '0'

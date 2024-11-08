@@ -12,6 +12,7 @@ cancleBtn.addEventListener('click', ()=>{
     }
 });
 
+
 registerBtn.addEventListener('click',(e)=> {
     e.preventDefault(); //기본 submit동작 막기
 
@@ -55,7 +56,8 @@ else {
     const isConfirm = confirm('등록하시겠습니까?');
     if (isConfirm) {
         // 등록 로직
-        window.location.href = 'adminEcoList.html';
+        e.target.closest('form').submit();
     }
 }
 })
+
