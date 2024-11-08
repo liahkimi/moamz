@@ -160,6 +160,10 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
+# Checksum files
+**/checksum
+**/checksum.*
+
 # Ignore application.properties
 src/main/resources/application.properties
 
