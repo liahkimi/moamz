@@ -2,7 +2,13 @@ const emailBtn = document.getElementById("email-btn");
 const nicknameBtn = document.getElementById("nickname-btn");
 
 emailBtn.addEventListener("click", () => {
-  alert("이메일 중복 검사");
+  //alert("이메일 중복 검사");
+
+  // fetch.('중복검사용 controller uri',{
+  //     method : 'POST',
+  //     type : 'Content-Type : application',
+  //     body : //닉네임 json.st
+  // }).then(가지고온 값 => 함수처리).catch()
 });
 
 nicknameBtn.addEventListener("click", () => {
@@ -20,7 +26,7 @@ nicknameBtn.addEventListener("click", () => {
   //따라서 클릭이벤트를 주게 되면, 업로드 되기 전에 실행되기 때문에 change가 적합하다.
   input.addEventListener("change", (e) => {
       //console.log(e.target.files);
-      
+
       //비구조화 할당
       //업로드된 파일을 가져온다
       //e.target.files는 FileList 자료형이다.
@@ -28,11 +34,11 @@ nicknameBtn.addEventListener("click", () => {
 
       const reader = new FileReader();    //업로드된 파일을 읽을 수 있는 FileReader 객체
       reader.readAsDataURL(file);    //파일의 내용이 아니라 절대경로를 읽겠다는 의미
-      
+
       //경로를 읽어오는 방식이 stream 방식이다.
       //reader객체가 파일을 다 읽어왔다면 load 이벤트를 발생시킨다.
       //이 이벤트가 발생했ㅇ르 때 reader 객체는 인코딩된 절대경로를 가진다.
-      reader.addEventListener("load", (e) => { 
+      reader.addEventListener("load", (e) => {
           //x 버튼이 보이도록 함
           cancle.style.display = "block";
 
@@ -44,7 +50,7 @@ nicknameBtn.addEventListener("click", () => {
           } else {
               thumnail.style.backgroundImage = `url("./")`;
           }
-          
+
       })
   })
 
@@ -69,7 +75,7 @@ const confirmMessage = document.getElementById('recheck-p');
 
 
 // 비밀번호 유효성검사
-const pwValidateCheck = () => { 
+const pwValidateCheck = () => {
     const password = inputPw.value;
     // 정규식
     // (?=.*[a-zA-Z])   => 적어도 하나 이상의 알파벳(대문자 또는 소문자) 포함
@@ -159,7 +165,7 @@ $(document).ready(function() {
 
       updateCountdown();
       // 1초마다 카운트다운 업데이트
-      countdown = setInterval(updateCountdown, 1000); 
+      countdown = setInterval(updateCountdown, 1000);
   });
 });
 
@@ -171,12 +177,12 @@ $(document).ready(function() {
     event.stopPropagation();  // 클릭 이벤트 전파 차단하여 tr 클릭을 방지
     document.getElementById('myModal').style.display = "block";  // 모달 열기
   }
-  
+
   // 모달 닫기 함수
   function closeModal() {
     document.getElementById('myModal').style.display = "none";  // 모달 닫기
   }
-  
+
 //   // 모달 외부를 클릭하면 닫기
 //   window.onclick = function(event) {
 //     const modal = document.getElementById('myModal');
@@ -185,7 +191,7 @@ $(document).ready(function() {
 //     }
 //   }
 
-// 포인트지급하기 버튼에서 적용버튼 누르면 
+// 포인트지급하기 버튼에서 적용버튼 누르면
 // 지급되었다는 알럿뜨고 모달 닫기
 const submitBtn = document.getElementById('subminBtn1');
 submitBtn.addEventListener('click',(e)=>{
@@ -204,12 +210,12 @@ submitBtn.addEventListener('click',(e)=>{
     event.stopPropagation();  // 클릭 이벤트 전파 차단하여 tr 클릭을 방지
     document.getElementById('myModal2').style.display = "block";  // 모달 열기
   }
-  
+
   // 모달 닫기 함수
   function closeModal() {
     document.getElementById('myModal2').style.display = "none";  // 모달 닫기
   }
-  
+
 //   // 모달 외부를 클릭하면 닫기
 //   window.onclick = function(event) {
 //     const modal = document.getElementById('myModal');
@@ -218,7 +224,7 @@ submitBtn.addEventListener('click',(e)=>{
 //     }
 //   }
 
-// 포인트지급하기 버튼에서 적용버튼 누르면 
+// 포인트지급하기 버튼에서 적용버튼 누르면
 // 지급되었다는 알럿뜨고 모달 닫기
 const submitBtn2 = document.getElementById('subminBtn');
 submitBtn2.addEventListener('click',(e)=>{
@@ -241,3 +247,37 @@ BtnSignup.addEventListener("click", () => {
   alert("회원가입 완료")
   location.href="../../../html/main/main/mainPage.html"
 })
+
+//----------------------------------------------------------------------------------
+function findPostCode(){
+    new daum.Postcode({
+        oncomplete:function(data){
+            console.log(data);
+            //팝업창에서 검색결과 항목을 클릭했을 때 실행할 코드를 작성하는 부분
+
+            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다
+            // 내려오는 변수가 값이 없는 경우 공백('')값을 가지므로, 이를 참고하여 분기한다
+            let roadAddr = data.roadAddress; //도로 주소 변수
+            let extraRoadAddr = ''; //참고 항목 변수
+
+            // 법정동명이 있을 경우 추가한다(법정리는 제외)
+            // 법정동의 경우 마지막 문자가 '동/로/가'로 끝난다
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+
+            //건물명이 있고 공동주택일 경우 추가한다
+            if(data.buildingName !== '' && data.apartment === 'Y' ){
+                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다
+            document.getElementById('post-input').value = data.zonecode;
+            document.getElementById("address").value = roadAddr;
+        }
+    }).open();
+}
