@@ -17,6 +17,7 @@ button{
 }
 
 header{
+    width: 100%;
     height: 70px;
     background-color: #ffffff;
     align-items: center;/* 높이를 맞춰 중앙 정렬 */
@@ -30,26 +31,30 @@ main{
     margin: 0 auto;
     height: 100vh;
 }
+body{
+    width: 1690px ;
+    overflow: hidden;
+  }
 
 /* 로고 */
-header .admin-logo{
+/* header .admin-logo{
     display: flex;
     align-items: center;  
     padding-left: 20px;
-}
+} */
 /* 로고 이미지 */
-header .admin-logo img{
+/* header .admin-logo img{
     width: 35px;
     margin-right: 10px;
-}
+} */
 /* 타이틀 */
- header .admin-logo div{
+ /* header .admin-logo div{
     color: #0B3051; 
     font-weight: bold;
     font-size: 25px;
-}
+} */
 /* 나가기 버튼 box */
- header .admin-logout__btn{
+ /* header .admin-logout__btn{
     width: 60px;
     height: 25px;
     border: 1px solid #0B3051;
@@ -58,9 +63,9 @@ header .admin-logo img{
     align-items: center;
     justify-content: center;
     margin-right: 70px;
-}
+} */
 /* 나가기 폰트 */
-header .admin-logout__btn a{
+/* header .admin-logout__btn a{
     font-size: 17px; 
     color:#1B494C;
 }
@@ -70,7 +75,7 @@ header .admin-logout__btn:hover{
 header .admin-logout__btn a:hover{
     color:white;
     background-color: #1B494C;
-}
+} */
 
 
 /* 좌측 네비바 */
@@ -122,22 +127,22 @@ nav ul li a:hover{
 /* 네비바+메인화면의 부모인 main */
 main{
     display: flex;
+    width: 1707px;
 }
 /* 타이틀 + 카운팅카드뷰 + 에코프젝 + 그래프의 부모 */
 main .content-box{
     display: flex;
     flex-direction: column;
     background-color: #1B494C;
-    width: 100%;
-    padding-left: 30px;
-    padding-right: 30px;
+    width: 1705px;
+    padding: 0 80px;
+    /* padding-left: 30px;
+    padding-right: 30px; */
 }
 /* 타이틀 */
 main .content-box .page-title-box{
    position: relative;
-   top: 30px;
-   left: 8px;
-   margin-bottom: 30px;
+   margin: 30px 0px 0px 30px;
 }
 main .content-box .page-title-box .page-title{
     font-size:25px;
@@ -149,8 +154,8 @@ main .content-box .page-title-box .page-title{
     position: relative;
     width: 180px;
     height: 20px;
-    left: 81%;
-    top: -0.5%;
+    left: 83.5%;
+    top: -2%;
 }
 .search-input input{
     height: 100%;

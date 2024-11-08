@@ -1,6 +1,5 @@
 package com.example.moamz.mapper.user.seller;
 
-import com.example.moamz.domain.dto.user.normal.NormalSignupDTO;
 import com.example.moamz.domain.dto.user.seller.SellerSignupDTO;
 import org.apache.ibatis.annotations.Mapper;
 

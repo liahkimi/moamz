@@ -21,7 +21,7 @@ sellerMngBtn.addEventListener('click',function(){
 
 // 상세 페이지로 이동하는 함수
 function goToDetailPage() {
-    window.location.href = "adminUserInquiryDetail.html";  // 상세 페이지 URL로 이동
+    window.location.href = "adminSellerInquiryDetail.html";  // 상세 페이지 URL로 이동
   }
 
 // 답변 상태 바꾸는 함수 => tr의 이벤트 영향 안받게 하기

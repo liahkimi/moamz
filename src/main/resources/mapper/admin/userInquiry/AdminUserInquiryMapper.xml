@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.admin.userInquiry.AdminUserInquiryMapper">
+
+    <!--일반회원 미확인 문의목록 보여주기-->
+    <select id="selectUncheckedInquiryList" resultType="AdminUserInquiryListDTO">
+        SELECT DISTINCT p.FG_POST_TITLE, nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT
+        FROM FG_INQUIRY i
+                 JOIN FG_POST p ON i.FG_POST_ID = p.FG_POST_ID
+                 JOIN FG_COMMON_USER cu ON p.FG_USER_CODE = cu.FG_USER_CODE
+                 JOIN FG_NORMAL_USER nu ON p.FG_USER_CODE = nu.FG_USER_CODE
+        WHERE i.FG_INQUIRY_STATUS = '0'
+        ORDER BY p.FG_POST_CREATED_AT DESC; --최신 문의글 순
+    </select>
+
+    <!--일반회원 답변완료 문의 목록 보여주기-->
+    <select id="selectAnsweredInquiryList" resultType="AdminUserInquiryListDTO">
+        SELECT DISTINCT p.FG_POST_TITLE, nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT
+        FROM FG_INQUIRY i
+                 JOIN FG_POST p ON i.FG_POST_ID = p.FG_POST_ID
+                 JOIN FG_COMMON_USER cu ON p.FG_USER_CODE = cu.FG_USER_CODE
+                 JOIN FG_NORMAL_USER nu ON p.FG_USER_CODE = nu.FG_USER_CODE
+        WHERE i.FG_INQUIRY_STATUS = '1'
+        ORDER BY p.FG_POST_CREATED_AT DESC; --최신 문의글 순
+    </select>
+
+    <!--일반회원 특정 문의글 상세보기-->
+    <select id="selectUserInquiryDetailById" parameterType="Long" resultType="AdminUserInquiryDetailDTO">
+        SELECT p.FG_POST_TITLE ,
+               uf.FG_USER_FILE_ROOT,uf.FG_USER_FILE_NAME,uf.FG_USER_FILE_UUID,
+               nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT,
+               i.FG_INQUIRY_STATUS, i.FG_INQUIRY_CONTENT
+        FROM FG_INQUIRY i
+                 JOIN FG_POST p ON i.FG_POST_ID = p.FG_POST_ID
+                 JOIN FG_COMMON_USER cu ON p.FG_USER_CODE = cu.FG_USER_CODE
+                 JOIN FG_NORMAL_USER nu ON p.FG_USER_CODE = nu.FG_USER_CODE
+                 JOIN FG_USER_FILE uf ON p.FG_USER_CODE = uf.FG_USER_CODE
+        WHERE i.FG_POST_ID =#{fgPostId};
+    </select>
+  <!--일반회원 특정 문의글 상세보기에 있는 댓글 보여주기?????(이렇게 하는게 맞나...???)-->
+    <select id="selectUserInquiryDetailCommentById" parameterType="Long" resultType="adminCommentDTO">
+        SELECT c.FG_POST_ID,cu.FG_USER_TYPE, c.FG_COMMENT_DATE, c.FG_COMMENT_CONTENT,
+               CASE
+                   WHEN c.FG_COMMENT_EDIT = '0' THEN ' '
+                   WHEN c.FG_COMMENT_EDIT = '1' THEN '수정됨'
+                   END AS isEdited
+        FROM FG_COMMENT c, FG_POST p, FG_COMMON_USER cu
+        WHERE c.FG_POST_ID = p.FG_POST_ID
+          AND c.FG_USER_CODE = cu.FG_USER_CODE
+          AND c.FG_POST_ID = #{fgPostId};
+    </select>
+
+
+
+</mapper>

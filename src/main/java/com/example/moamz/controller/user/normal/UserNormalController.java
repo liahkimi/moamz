@@ -41,7 +41,7 @@ public class UserNormalController {
         session.setAttribute("fgUserId", loginInfo.getFgUserId());
         session.setAttribute("fgUserCode", loginInfo.getFgUserCode());
 
-        return new RedirectView("/user/regular/userSignup");
+        return new RedirectView("/main");
         //RedirectView는 클라이언트에게 HTTP 302 Redirect 응답을 보내고 클라이언트 새로운 URL로 이동하게 된다
         //특정 URL로 리다이렉트 시키기 위해 사용되며 주로 컨트롤러 메소드에서 리다이렉트 응답을 만들 때 사용된다
     }

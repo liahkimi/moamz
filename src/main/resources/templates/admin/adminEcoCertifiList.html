@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -173,16 +174,13 @@
                 <span class="close" onclick="closeModal()">&times;</span>
                 <h1>포인트 지급</h1>
                 <form action="#" method="POST">
-                  <div class="point-title">포인트 지급 사유를 선택해주세요</div>
-                  <select name="reason" id="reason" class="custom-select">
-                    <option value="ecoProject">에코프로젝트 참여</option>
-                  </select>
-                  <div class="point-title">포인트 지급</div>
-                  <select name="pointAmount" id="pointAmount" class="custom-select">
+                  <div class="point-title">point : </div>
+                  <input type="number">
+                  <!-- <select name="pointAmount" id="pointAmount" class="custom-select">
                     <option value="100">100</option>
                     <option value="200">200</option>
                     <option value="300">300</option>
-                  </select>
+                  </select> -->
                   <div class="modal-btn">
                     <button type="button" onclick="closeModal()">취소</button>
                     <button type="submit" id="subminBtn">적용</button>

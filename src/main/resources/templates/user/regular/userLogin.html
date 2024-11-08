@@ -16,13 +16,13 @@
 
     <div id="login-logo_wrap">
       <div id="login-logo">
-        <img src="../../../static/img/user/logo-green.jpg">
+        <img th:src="@{/img/user/logo-green.jpg}">
       </div>
     </div>
 
     <div id="login-choice">
-      <button class="login-choice_but" onclick="location.href='../../user/regular/userLogin.html'">일반 로그인</button>
-      <button class="login-choice_but" onclick="location.href='../../user/seller/sellerLogin.html'"> 판매자 로그인</button>
+      <button class="login-choice_but" onclick="location.href='/normal/regular/userLogin'">일반 로그인</button>
+      <button class="login-choice_but" onclick="location.href='/seller/seller/sellerLogin'"> 판매자 로그인</button>
     </div>
     <form th:action="@{/normal/regular/userLogin}" method="post">
       <div id="login_box">
@@ -40,12 +40,12 @@
         </div>
         <div class="login-a">
           <div id="id-find">
-            <a href="../regular/userFindId.html">아이디 찾기</a> /
+            <a href="normal/regular/userFindId">아이디 찾기</a> /
             <a href="../regular/userFindPassword.html">비밀번호 찾기</a>
           </div>
           <div id="sing-up">
-            <a href="../regular/userSignup.html">일반 회원가입</a> /
-            <a href="../seller/sellerSignup.html">판매자 회원가입</a>
+            <a href="/normal/regular/userSignup">일반 회원가입</a> /
+            <a href="seller/seller/sellerSignup">판매자 회원가입</a>
           </div>
         </div>
       </div>

@@ -1,16 +1,17 @@
 package com.example.moamz.mapper.user.normal;
 
-import com.example.moamz.domain.dto.user.normal.NormalLoginDTO;
-import com.example.moamz.domain.dto.user.normal.NormalSignupDTO;
+import com.example.moamz.domain.dto.file.UserFileDTO;
+import com.example.moamz.domain.dto.user.normal.NormalCommonSignupDTO;
+import com.example.moamz.domain.dto.user.normal.NormalPointDTO;
+import com.example.moamz.domain.dto.user.normal.NormalUserSignupDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper
 public interface NormalSignupMapper {
-    void insertCommonUser(NormalSignupDTO normalSignupDTO);
-    void insertNormalUser(NormalSignupDTO normalSignupDTO);
-//    void insertUserFile(NormalSignupDTO normalSignupDTO);
-//    void insertPoint(NormalSignupDTO normalSignupDTO);
+    void insertCommonUser(NormalCommonSignupDTO normalCommonSignupDTO);
+    void insertNormalUser(NormalUserSignupDTO normalUserSignupDTO);
+    void insertUserFile(UserFileDTO userFileDTO);
+    void insertPoint(NormalPointDTO normalPointDTO);
 
     //아이디 중복확인
     boolean checkedId(String fgUerId);
