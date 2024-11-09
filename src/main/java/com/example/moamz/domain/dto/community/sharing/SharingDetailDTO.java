@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.sql.Clob;
+
 @Setter
 @Getter
 @ToString
@@ -15,7 +17,8 @@ public class SharingDetailDTO {
     //
 
     private Long postId;               // 게시글ID
-    private Long userCode;             // 회원CODE
+    private Long writerCode;           // 작성자CODE
+    private boolean isMyPost;          // 내 게시글인지 여부
     private String postTitle;          // 나눔글 제목
     private String normalNickname;     // 작성자 닉네임
     private String postCreateAt;       // 나눔글 작성일

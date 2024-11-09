@@ -70,17 +70,22 @@
 
     <!-- 게시글 상세 -->
     <select id="selectSharingDetail" parameterType="Long" resultType="SharingDetailDTO">
-        SELECT p.FG_POST_TITLE AS postTitle, nu.FG_NORMAL_NICKNAME AS normalNickname,
-               p.FG_POST_CREATED_AT AS postCreateAt, p.FG_POST_VIEWS AS postViews,
+        SELECT p.FG_POST_ID AS postId, nu.FG_USER_CODE AS writerCode,
+               p.FG_POST_TITLE AS postTitle, nu.FG_NORMAL_NICKNAME AS normalNickname,
+               TO_CHAR(p.FG_POST_CREATED_AT, 'YYYY/MM/DD HH24:MI:SS') AS postCreateAt,
+               p.FG_POST_VIEWS AS postViews,
                s.FG_SHARING_CONTENT AS sharingContent,
                CASE p.FG_POST_EDIT
                    WHEN '0' THEN ' '
                    WHEN '1' THEN '수정됨'
-                   END AS postEdit
-        FROM FG_POST p, FG_NORMAL_USER nu, FG_SHARING s
+                   END AS postEdit,
+               uf.FG_USER_FILE_NAME AS userFileName, uf.FG_USER_FILE_ROOT AS userFileRoot,
+               uf.FG_USER_FILE_UUID AS userFileUuid
+        FROM FG_POST p, FG_NORMAL_USER nu, FG_SHARING s, FG_USER_FILE uf
         WHERE p.FG_POST_ID = s.FG_POST_ID
           AND p.FG_USER_CODE = nu.FG_USER_CODE
-          AND p.FG_POST_ID = #{postId};
+          AND p.FG_USER_CODE = uf.FG_USER_CODE
+          AND p.FG_POST_ID = #{postId}
     </select>
 
 

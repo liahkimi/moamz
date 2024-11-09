@@ -1,16 +1,23 @@
-// 썸머노트 삽입
+////////////////////////////////////////////////////////
+///// 썸머노트 삽입
+
 $(document).ready(function() {
-    //여기 아래 부분
     $('#summernote').summernote({
-          height: 400,                 // 에디터 높이
-          minHeight: null,             // 최소 높이
-          maxHeight: null,             // 최대 높이
-          focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-          lang: "ko-KR",					// 한글 설정
+        height: 400,                 // 에디터 높이
+        minHeight: null,             // 최소 높이
+        maxHeight: 400,             // 최대 높이
+        focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+        lang: "ko-KR",					// 한글 설정
     });
 });
 
-// 썸네일
+
+
+
+
+///////////////////////////////////////////////////////
+///// 썸네일
+
 const thumbnailInput = document.getElementById("attach");
 const thumbnailImg = document.querySelector(".thumbnail-img");
 const thumbnailCancleBtn = document.querySelector(".thumbnail-cancle-btn");
@@ -58,15 +65,18 @@ thumbnailCancleBtn.addEventListener("click", (e) => {
     // document.getElementById("fileChanged").value = "true";
 
     //1. 맨 처음 이미지로 변경
-    thumbnailImg.style.backgroundImage = "url(../../../static/img/mypage/seller/thumbnail.png)";
+    thumbnailImg.style.backgroundImage = "url(/img/mypage/seller/thumbnail.png)";
     //2. input 태그의 value 초기화해주기
     thumbnailInput.value="";
     //3. X 버튼 숨기기
     thumbnailCancleBtn.style.display = "none";
 });
 
-//////////////////////////////////////////////////////////////////////////
 
+
+
+///////////////////////////////////////////////////////
+///// 글 작성취소, 등록 버튼 처리
 
 const cancleBtn = document.getElementById('cancle-btn');
 const writeBtn = document.getElementById('write-btn');
