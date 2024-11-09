@@ -11,6 +11,13 @@
 <body>
     <header id="header" th:replace="~{/main/fragment/header/sellerHeader}"></header>
     <main>
+        <!-- alertMessage 처리 -->
+        <div th:if="${Message}">
+            <script>
+                alert("[[${Message}]]");
+            </script>
+        </div>
+
         <section id="side-section" th:replace="~{/mypage/seller/sellerMypageSide}"></section>
 
         <!-- 상품판매내역 영역-->

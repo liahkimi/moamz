@@ -9,6 +9,13 @@
     <title>관리자문의</title>
 </head>
 <body>
+    <!-- alertMessage 처리 -->
+    <div th:if="${Message}">
+        <script>
+            alert("[[${Message}]]");
+        </script>
+    </div>
+
     <header id="header" th:replace="~{/main/fragment/header/sellerHeader}"></header>
     <main>
         <section id="side-section" th:replace="~{/mypage/seller/sellerMypageSide}">
@@ -35,17 +42,6 @@
                             <div th:class="${inquiry.inquiryStatus == '확인중' ? 'inquiry-status unanswered' : 'hidden'}">확인중</div>
                         </div>
                     </li>
-
-<!--                    <li class="inquiry-list">-->
-<!--                        <div class="inquiry-number">1</div>-->
-<!--                        <a href="sellerAdminInquiryDetail.html" class="inquiry-title">고객님이 연락두절 되었는데 어떻게 해야하나요?ㅠㅠ고객님이 연락두절 되었는데 어떻게 해야하나요?ㅠㅠ</a>-->
-<!--                        <div class="inquiry-date">24/10/16</div>-->
-<!--                        &lt;!&ndash; 답변상태 &ndash;&gt;-->
-<!--                        <div class="status-wrap">-->
-<!--                            <div class="inquiry-status completed hidden">답변완료</div>-->
-<!--                            <div class="inquiry-status unanswered">미확인</div>-->
-<!--                        </div>-->
-<!--                    </li>-->
                 </ul>
             </div>
         </section>

@@ -10,10 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +27,15 @@ public class SellerSalesController {
 
     // 판매한 상품 내역 페이지
     @GetMapping("/list")
-    public String salesList(Model model) {
-        // ⭐로그인 유저의 businessId 필요
-        Long businessId = 1L;
-        Long userCode = 1L;
+    public String salesList(@SessionAttribute(value="fgUserCode", required = false) Long userCode,
+                            Model model) {
+        // 세션에 userCode가 null이면 로그인 페이지로 리다이렉트
+        if(userCode == null) {
+            return "redirect:/seller/seller/sellerLogin";
+        }
+
+        // businessId값 가져오기
+        Long businessId = sellerMyService.findBusinessId(userCode);
 
         // 판매자 프로필 가져오기
         SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(businessId, userCode);
@@ -75,24 +78,40 @@ public class SellerSalesController {
     // 상세보기 페이지
     @GetMapping("/detail/{orderId}")
     public String salesDetail(@PathVariable("orderId") Long orderId,
+                              @SessionAttribute(value="fgUserCode", required = false) Long userCode,
+                              RedirectAttributes redirectAttributes,
                               Model model) {
-        // ⭐로그인 유저의 businessId 필요
-        Long businessId = 1L;
-        Long userCode = 1L;
+        // 세션에 userCode가 null이면 로그인 페이지로 리다이렉트
+        if (userCode == null) {
+            return "redirect:/seller/seller/sellerLogin";
+        }
+
+        // businessId값 가져오기
+        Long businessId = sellerMyService.findBusinessId(userCode);
 
         // 판매자 프로필 가져오기
         SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(businessId, userCode);
 
         // 주문 상세보기 내용 가져오기
         SalesDetailDTO salesDetailDTO = sellerSalesService.findSalesDetail(orderId);
-        log.info("💜💜상세정보 : {}", salesDetailDTO);
 
-        // 모델에 담기
-        model.addAttribute("salesDetailDTO", salesDetailDTO);
-        model.addAttribute("sellerProfileDTO", sellerProfileDTO);
+        // 세션의 businessId가 salesDetailDTO의 businessId값과 같은 경우에만 상세페이지에 접근 가능
+        if (businessId.equals(salesDetailDTO.getBusinessId())) {
+            // 모델에 담기
+            model.addAttribute("salesDetailDTO", salesDetailDTO);
+            model.addAttribute("sellerProfileDTO", sellerProfileDTO);
 
-        return "mypage/seller/sellerSalesDetail";
-    }
+            return "mypage/seller/sellerSalesDetail";
+        } else {
+            // 세션의 userCode와 DTO의 userCode값이 다르면 상세글에 접근할 수 없다.
+            // alert 메시지를 추가.. 실제 alert는 리다이렉트된 뷰에서 뜨게 된다.
+            redirectAttributes.addFlashAttribute("Message", "다른 판매자의 판매내역은 조회 불가능합니다.");
+            return "redirect:/seller/sales/list";
+        }
+    } // salesDetail 끝
 
 
-}
+
+
+
+}   // 컨트롤러 끝

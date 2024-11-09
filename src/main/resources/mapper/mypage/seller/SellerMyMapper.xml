@@ -31,6 +31,7 @@
                uf.FG_USER_FILE_UUID AS userFileUuid,
                b.FG_BUSINESS_NAME AS businessName,
                b.FG_BUSINESS_RATING AS businessRating,
+               b.FG_BUSINESS_ID AS businessId,
                COALESCE(SUM(o.FG_ORDER_QUANTITY * p.FG_PRODUCT_WEIGHT), 0) AS totalWeight
         FROM FG_BUSINESS b
             JOIN FG_USER_FILE uf ON b.FG_USER_CODE = uf.FG_USER_CODE
@@ -39,7 +40,7 @@
             AND o.FG_PAYMENT_STATUS = '결제완료'
         WHERE b.FG_USER_CODE = #{userCode}
         GROUP BY uf.FG_USER_FILE_NAME, uf.FG_USER_FILE_ROOT, uf.FG_USER_FILE_UUID,
-                 b.FG_BUSINESS_NAME, b.FG_BUSINESS_RATING
+                 b.FG_BUSINESS_NAME, b.FG_BUSINESS_RATING, b.FG_BUSINESS_ID
     </select>
 
 
@@ -55,6 +56,14 @@
           AND rv.FG_ORDER_ID = o.FG_ORDER_ID
           AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
           AND rv.FG_BUSINESS_ID = #{businessId}
+    </select>
+
+    <!-- 판매자 업체 아이디 반환 -->
+    <select id="selectBusinessId" parameterType="Long" resultType="Long">
+        SELECT FG_BUSINESS_ID
+        FROM FG_BUSINESS b
+        JOIN FG_COMMON_USER cu ON b.FG_USER_CODE = cu.FG_USER_CODE
+        AND b.FG_USER_CODE = ${userCode}
     </select>
 
     <!-- 유저 아이디 반환 -->

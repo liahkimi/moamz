@@ -73,6 +73,7 @@
     <!-- 판매 상세 -->
     <select id="selectSalesDetail" parameterType="Long" resultType="SalesDetailDTO">
         SELECT TO_CHAR(o.FG_ORDER_DATE, 'YYYY/MM/DD HH24:MI:SS') AS orderDate,
+               o.FG_BUSINESS_ID AS businessId,
                o.FG_ORDER_ID AS orderId, p.FG_PRODUCT_NAME AS productName,
                p.FG_PRODUCT_PRICE AS productPrice,
                TO_CHAR(p.FG_PRODUCT_EXP_DATE, 'YY-MM-DD HH24:MI') AS productExpDate,

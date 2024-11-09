@@ -29,21 +29,27 @@ public class SellerProductController {
     public final SellerMyService sellerMyService;
 
     // 상품 등록 페이지 열기
-    // 로그인 기능 완료되면 세션 추가해줘야 함
     @GetMapping("/regist")
-    public String productRegist() {
-        return "mypage/seller/sellerProductRegistration";
+    public String productRegist(@SessionAttribute(value="fgUserCode", required = false) Long userCode) {
+        // 세션에 userCode가 null이면 로그인 페이지로 리다이렉트
+        // null이 아니면 상품 등록 페이지로 연결
+        return userCode==null ? "redirect:/seller/seller/sellerLogin" :
+                    "mypage/seller/sellerProductRegistration";
     }
 
     // 상품 등록 post 요청 처리하기
     @PostMapping("/regist")
     public String productRegister(ProductRegistDTO productRegistDTO,
                                   RedirectAttributes redirectAttributes,
+                                  @SessionAttribute(value="fgUserCode", required = false) Long userCode,
                                   // html에서 input=file 태그의 name속성이 "productFile"이어야 한다.
                                   @RequestParam("productFile") MultipartFile file) {
-        // 세션 없어서 일단 businessId에 1값 넣음
-        productRegistDTO.setBusinessId(1);
-        log.info("🌟🌟🌟상품 등록 요청: {}", productRegistDTO);
+
+        // businessId값 가져오기
+        Long businessId = sellerMyService.findBusinessId(userCode);
+
+        // DTO에 businessId값 설정하기
+        productRegistDTO.setBusinessId(businessId);
 
         try {
             // 상품 및 파일 등록 서비스 호출
@@ -69,10 +75,15 @@ public class SellerProductController {
     // 등록한 상품 목록 페이지 열기
     // 상품 목록은 RestController에서 비동기처리를 하기 때문에 여기서는 프로필 정보만 넘겨준다.
     @GetMapping("/list")
-    public String productList(Model model) {
-        // ⭐로그인 유저의 businessId 필요
-        Long businessId = 1L;
-        Long userCode = 1L;
+    public String productList(@SessionAttribute(value="fgUserCode", required = false) Long userCode,
+                              Model model) {
+        // 세션에 userCode가 null이면 로그인 페이지로 리다이렉트
+        if(userCode == null) {
+            return "redirect:/seller/seller/sellerLogin";
+        }
+
+        // businessId값 가져오기
+        Long businessId = sellerMyService.findBusinessId(userCode);
 
         // 판매자 프로필 가져오기
         SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(businessId, userCode);
@@ -86,7 +97,13 @@ public class SellerProductController {
     // 상품 상세보기 페이지
     @GetMapping("/detail/{productId}")
     public String productDetail(@PathVariable("productId") Long productId,
+                                @SessionAttribute(value="fgUserCode", required = false) Long userCode,
                                 Model model) {
+        // 세션에 userCode가 null이면 로그인 페이지로 리다이렉트
+        if(userCode == null) {
+            return "redirect:/seller/seller/sellerLogin";
+        }
+
         // 상품 상세정보 가져오기 메서드
         ProductDetailDTO productDetailDTO = sellerProductService.findProductDetail(productId);
         log.info("💜💜상세정보 : {}", productDetailDTO);

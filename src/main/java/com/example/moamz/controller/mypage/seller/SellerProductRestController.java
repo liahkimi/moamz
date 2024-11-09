@@ -1,6 +1,7 @@
 package com.example.moamz.controller.mypage.seller;
 
 import com.example.moamz.domain.dto.mypage.seller.ProductListDTO;
+import com.example.moamz.service.mypage.seller.SellerMyService;
 import com.example.moamz.service.mypage.seller.SellerProductService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
@@ -18,20 +19,24 @@ public class SellerProductRestController {
     // 상품 목록 비동기 처리를 위한 RestController
 
     private final SellerProductService sellerProductService;
+    private final SellerMyService sellerMyService;
 
     @Autowired
-    public SellerProductRestController(SellerProductService sellerProductService) {
+    public SellerProductRestController(SellerProductService sellerProductService, SellerMyService sellerMyService) {
         this.sellerProductService = sellerProductService;
+        this.sellerMyService = sellerMyService;
     }
 
     // 상품 목록 비동기로 가져오는 메서드
     @GetMapping("/list")
     public ResponseEntity<List<ProductListDTO>> getProductList(
+            @SessionAttribute(value="fgUserCode", required = false) Long userCode,
             // 쿼리스트링에서 status값을 받아옴
             @RequestParam(name = "status", required = false, defaultValue = "onSale") String status) {
         List<ProductListDTO> productListDTO;
 
-        Long businessId = 1L;
+        // businessId값 가져오기
+        Long businessId = sellerMyService.findBusinessId(userCode);
 
         if ("onSale".equals(status)) {
             productListDTO = sellerProductService.findOnSales(businessId);    // 판매중 상품 목록

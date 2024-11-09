@@ -1,9 +1,24 @@
 const salesCompleteBtn = document.getElementById('sales-complete-btn');
 const productDeleteBtn = document.getElementById('product-delete-btn');
 const productId = document.querySelector('.btn-container').getAttribute('data-id');
-console.log(salesCompleteBtn);
-console.log(productDeleteBtn);
-console.log(productId);
+
+//////////////////////////////////////////////////
+///// 지도
+
+window.onload = function() {
+    var mapContainer = document.getElementById('productDetail-map');
+    if (mapContainer) {
+        var mapOption = {
+            center: new kakao.maps.LatLng(37.497, 127.036),
+            level: 3
+        };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+    } else {
+        console.error('지도 없어요');
+    }
+};
+
 
 //////////////////////////////////////////////////
 ///// 판매완료 처리 버튼

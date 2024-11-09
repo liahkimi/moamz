@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/reset2.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/seller/sellerProductDetail.css}">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f79c59b6071fb92267e232c13fea51f&libraries=services"></script>
     <script defer th:src="@{/js/mypage/seller/sellerProductDetail.js}"></script>
     <title>마이페이지</title>
 </head>
@@ -68,7 +69,7 @@
                         <span th:text="${productDetailDTO.businessPhone}">대표번호</span>
                     </div>
                     <!-- 업체지도 -->
-                    <div class="store-map">
+                    <div class="store-map" id="productDetail-map">
 
                     </div>
                 </div>
