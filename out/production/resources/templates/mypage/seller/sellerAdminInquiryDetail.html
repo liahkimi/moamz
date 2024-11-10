@@ -14,7 +14,7 @@
         <!-- 게시글 영역 -->
         <div class="post-container">
             <!-- 게시글 정보 -->
-            <div class="post-info-wrap">
+            <div class="post-info-wrap" th:attr="data-id=${inquiryDetailDTO.postId}">
                 <div class="post-title" th:text="${inquiryDetailDTO.postTitle}">문의글제목</div>
                 <div class="user-info-wrap">
                     <span class="user-nickname" th:text="${inquiryDetailDTO.businessName}">업체명</span>

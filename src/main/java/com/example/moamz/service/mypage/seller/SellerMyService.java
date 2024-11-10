@@ -54,6 +54,12 @@ public class SellerMyService {
         return sellerMyMapper.selectMyStoreRv(businessId);
     }
 
+    // 판매자 업체 번호 반환 메서드
+    public Long findBusinessId(Long userCode) {
+        return sellerMyMapper.selectBusinessId(userCode).
+                orElseThrow(() -> new IllegalStateException("❌❌❌존재하지 않는 업체"));
+    }
+
     // 유저 아이디 반환 메서드
     public String findSellerId(Long userCode) {
         return sellerMyMapper.selectSellerId(userCode);

@@ -64,13 +64,6 @@
     <delete id="deleteProduct" parameterType="Long">
         DELETE FROM FG_PRODUCT
         WHERE FG_PRODUCT_ID = #{productId}
-          AND FG_PRODUCT_ID NOT IN (
-            SELECT FG_PRODUCT_ID
-            FROM FG_ORDER o, FG_PICKUP pick
-            WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
-              AND o.FG_PRODUCT_ID = #{productId}
-              AND pick.FG_PICKUP_STATUS IN ('주문확인중', '픽업대기중')
-        )
     </delete>
 
     <!-- 상품 상세 -->
@@ -78,6 +71,7 @@
         SELECT p.FG_PRODUCT_ID AS productId, (p.FG_PRODUCT_WEIGHT * 0.0025) AS carbonReduct,
                p.FG_PRODUCT_NAME AS productName, TO_CHAR(p.FG_PRODUCT_EXP_DATE, 'YYYY/MM/DD HH24:MI') AS productExpDate,
                p.FG_PRODUCT_WEIGHT AS productWeight, p.FG_PRODUCT_CONTENT AS productContent,
+               p.FG_PRODUCT_STATUS AS productStatus,
                b.FG_BUSINESS_NAME AS businessName, b.FG_BUSINESS_ADDRESS || ' ' || b.FG_BUSINESS_ADDRESS_DETAIL AS businessAddress,
                b.FG_BUSINESS_OPEN_TIME || ' - ' || b.FG_BUSINESS_CLOSE_TIME AS businessRunTime,
                b.FG_BUSINESS_PHONE AS businessPhone,

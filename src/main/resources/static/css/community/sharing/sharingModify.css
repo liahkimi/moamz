@@ -1,7 +1,7 @@
 * {
-    color: #6a6a6a;
 }
 main {
+    color: #6a6a6a;
     width: 700px;
     margin: 0 auto;
 }
@@ -47,6 +47,7 @@ main {
 .title-wrap input {
     height: 28px;
     flex-grow: 1;
+    padding: 0 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
@@ -76,6 +77,7 @@ main {
 /* 썸네일 영역 */
 .thumbnail-container {
     display: flex;
+    margin: 0 0 20px;
 }
 .write-item.thumbnail {
     flex-direction: column;

@@ -40,7 +40,9 @@
 
     <!-- 문의글 상세 -->
     <select id="selectInquiryDetail" parameterType="Long" resultType="InquiryDetailDTO">
-        SELECT p.FG_POST_TITLE AS postTitle,
+        SELECT p.FG_USER_CODE AS userCode,
+               p.FG_POST_ID AS postId,
+               p.FG_POST_TITLE AS postTitle,
                b.FG_BUSINESS_NAME AS businessName,
                TO_CHAR(p.FG_POST_CREATED_AT, 'YY/MM/DD HH24:MI:SS') AS postCreatedAt,
                i.FG_INQUIRY_CONTENT AS inquiryContent

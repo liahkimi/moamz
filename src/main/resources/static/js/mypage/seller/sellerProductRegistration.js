@@ -54,7 +54,7 @@ thumbnailCancleBtn.addEventListener("click", (e) => {
 cancleBtn.addEventListener('click', () => {
     const isConfirm = confirm('글 작성을 취소하시겠습니까? 작업중인 내용이 저장되지 않습니다.');
     if (isConfirm) {
-        window.location.href = 'sellerProductList.html';
+        window.location.href = '/seller/product/list';
     } else {
     }
 });

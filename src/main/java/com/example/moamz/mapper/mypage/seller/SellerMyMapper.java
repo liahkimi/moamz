@@ -20,6 +20,9 @@ public interface SellerMyMapper {
     // 업체 리뷰 조회
     List<StoreReviewDTO> selectMyStoreRv(Long businessId);
 
+    // 업체 아이디 반환
+    Optional<Long> selectBusinessId(Long userCode);
+
     // 유저 아이디 반환
     String selectSellerId(Long userCode);
 
