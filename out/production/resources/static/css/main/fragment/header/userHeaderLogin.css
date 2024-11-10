@@ -1,7 +1,6 @@
 *{
   margin: 0;
   padding: 0;
-  font-family: "Pretendard-Variable";
 }
 
 .container{
@@ -174,6 +173,18 @@
   flex-direction: column;
   gap:5px; */
 }
+
+/* 알림창이 보일 때 display: block; */
+.btn-img:hover .notification-dropdown {
+  display: block;
+}
+
+/* 클릭 시 내부 아이템을 클릭할 수 있도록 z-index 설정 */
+.notification-dropdown.active {
+  display: block;
+  pointer-events: auto;
+}
+
 
 /* 알림창 드롭박스 말풍선 */
 .notification-dropdown:after {

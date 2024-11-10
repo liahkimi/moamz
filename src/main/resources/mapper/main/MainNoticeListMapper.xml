@@ -3,9 +3,10 @@
 <mapper namespace="com.example.moamz.mapper.main.MainNoticeListMapper">
     <select id="selectMainNoticeList" resultType="MainNoticeListDTO">
         -- 공지사항 목록
-        SELECT p.FG_POST_TITLE, p.FG_POST_CREATED_AT, p.FG_POST_VIEWS
+        SELECT p.FG_POST_TITLE, p.FG_POST_CREATED_AT, p.FG_POST_VIEWS, p.FG_POST_ID
         FROM FG_POST p JOIN FG_NOTICE n
             ON p.FG_POST_ID = n.FG_POST_ID
         where FG_POST_TYPE = 'notice'
+
     </select>
 </mapper>

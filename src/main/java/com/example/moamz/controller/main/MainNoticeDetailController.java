@@ -18,16 +18,21 @@ import java.util.List;
 public class MainNoticeDetailController {
     private final MainNoticeDetailService mainNoticeDetailService;
 
-    @GetMapping("/noticeDetail/${fgPostId}")
-    public String noticeDetail(Model model, @PathVariable("/fgPostId") Long fgPostId) {
-//        MainNoticeDetailDTO mainNoticeDetailDTO = MainNoticeDetailService.selectMainNoticeDetail(fgPostId);
-        List<MainNoticeDetailDTO> noticeDetail = mainNoticeDetailService.getMainNoticeDetail();
-        model.addAttribute("noticeDetail", noticeDetail);
-        System.out.println("noticeDetail = " + noticeDetail);
+    @GetMapping("/noticeDetail/{fgPostId}")
+    public String noticeDetail(Model model, @PathVariable("fgPostId") Long fgPostId) {
+        MainNoticeDetailDTO mainNoticeDetailDTO = mainNoticeDetailService.getNoticeDetail(fgPostId);
+//        List<MainNoticeDetailDTO> noticeDetail = mainNoticeDetailService.getNoticeDetail(fgPostId);
+        model.addAttribute("noticeDetail", mainNoticeDetailDTO);
 
-        return "main/main/noticeDetail/{fgPostId}";
+        System.out.println("noticeDetail = " + mainNoticeDetailDTO);
+
+//        return "main/main/noticeDetail/{fgPostId}";
+        return "main/main/noticeDetail";
     }
 
 
 
 }
+
+
+

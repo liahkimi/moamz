@@ -4,7 +4,7 @@
     <select id="selectMainNoticeDetail" resultType="MainNoticeDetailDTO" parameterType="Long">
         -- 공지사항 상세
         SELECT p.FG_POST_TITLE,c.FG_USER_TYPE,p.FG_POST_CREATED_AT,
-            p.FG_POST_VIEWS,n.FG_NOTICE_CONTENT
+            p.FG_POST_VIEWS,n.FG_NOTICE_CONTENT, p.FG_POST_ID
         FROM FG_POST p JOIN FG_NOTICE n
             ON p.FG_POST_ID = n.FG_POST_ID
         JOIN FG_COMMON_USER c

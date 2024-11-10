@@ -22,8 +22,8 @@ public class MySocialingDTO {
 
 
     // 소셜링 사진 파일
-    private Long postFileId;
-    private String postFileName;
-    private String postFileRoot;
-    private String postFileUuid;
+    private Long fgPostFileId;            // 파일ID
+    private String fgPostFileName;        // 파일명
+    private String fgPostFileRoot;        // 파일경로
+    private String fgPostFileUuid;        // 파일UUID
 }

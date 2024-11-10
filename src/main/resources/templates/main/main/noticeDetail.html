@@ -12,21 +12,21 @@
 
 <main>
     <div class="noticeDetail-container">
-        <h2 th:text="'[ 공지 ] ' + ${notice.fgPostTitle != null ? notice.fgPostTitle : '제목 없음'}">[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</h2>
+        <h2 th:text="'[ 공지 ] ' + ${noticeDetail.fgPostTitle}">[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</h2>
         <div class="noticeDetail-wrap">
             <div class="noticeDetail-box1">
                 <span th:text="'관리자'">관리자</span>
             </div>
             <div class="noticeDetail-box2">
-                <span th:text="${#temporals.format(notice.fgPostCreatedAt, 'yyyy.MM.dd HH:mm')}">작성일  24.10.04 23:53</span>
+                <span th:text="${#temporals.format(noticeDetail.fgPostCreatedAt, 'yyyy.MM.dd HH:mm')}">작성일  24.10.04 23:53</span>
             </div>
             <div class="noticeDetail-box3">
-                <span th:text="${notice.fgPostViews}">조회수 10</span>
+                <span th:text="${noticeDetail.fgPostViews}">조회수 10</span>
             </div>
         </div>
 
         <div class="noticeDetail-write">
-            <span th:text="${notice.fgNoticeContent}">동해물과 백두산이 마르고 닳도록</span><br>
+            <span th:text="${noticeDetail.fgNoticeContent}">동해물과 백두산이 마르고 닳도록</span><br>
 <!--            <span th:text="${notice.fgNoticeContent}">하느님이 보우하사 우리나라 만세</span><br>-->
 <!--            <span th:text="${notice.fgNoticeContent}">무궁화 삼천리 화려강산</span>-->
         </div>

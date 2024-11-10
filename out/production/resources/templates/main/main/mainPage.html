@@ -6,19 +6,25 @@
   <title>MainPage</title>
   <link rel="stylesheet" th:href="@{/css/main/main/mainPage.css}">
   <link rel="stylesheet" th:href="@{/css/reset2.css}">
-  <script defer th:src="@{/js/main/fragment/header/main.js}"></script>
+  <script defer th:src="@{/js/main/main/mainPage.js}"></script>
 </head>
 <body>
 <header id="header" th:replace="~{/main/fragment/header/userHeaderLogin.html}"></header>
 <main>
   <div class="main-container">
-    <div class="main-slider">
-      <img th:src="@{/img/main/main/mainPage.png}" alt="메인 화면">
-<!--      <img th:src="@{/img/main/main/mainPage2.png}" alt="메인 화면 2">-->
+    <div class="main-slider-container">
+      <div class="main-slider">
+        <img th:src="@{/img/main/main/mainPage.png}" alt="메인 화면">
+        <img th:src="@{/img/main/main/mainPage2.png}" alt="메인 화면 2">
+      </div>
+      <!-- 왼쪽 버튼   -->
+      <button class="slide-btn left" onclick="prevSlide()">&#10094;</button>
+      <!--  오른쪽 버튼  -->
+      <button class="slide-btn right" onclick="nextSlide()">&#10095;</button>
+
+      <!-- 텍스트 버튼 -->
+      <button class="main-btn" id="mainBtn" type="button" onclick="handleButtonClick()">우리 동네 상품 보러가기 →</button>
     </div>
-<!--      <button class="prev-btn" onclick="moveToPreviousSlide()">&#10094;</button>-->
-<!--      <button class="next-btn" onclick="moveToNextSlide()">&#10095;</button>-->
-    <button class="main-btn" type="button" onclick="location.href='/shop/list'">우리 동네 상품 보러가기 →</button>
   </div>
   <div class="main-seller">
     <div class="seller-title">
@@ -28,7 +34,8 @@
     <div class="seller-card" >
       <div class="seller-shop" th:each="shop : ${mainBusinessList}">
         <div class="shop-img">
-          <a href="#"><img th:src="@{/img/main/main/seller-img.jpg}" alt="한살림"></a>
+<!--          <a href="#"><img th:src="@{/img/main/main/seller-img.jpg}" alt="한살림"></a>-->
+          <img th:src="'/upload_moamz/' + ${shop.fgUserFileRoot} + '/' + ${shop.fgUserFileUuid} + '_' + ${shop.fgUserFileName}" alt="업체 사진"/>
         </div>
         <h3 th:text="${shop.fgBusinessName}">한살림 서초매장</h3>
         <p th:text="'운영시간 | ' + ${shop.fgBusinessOpenTime} + ' ~ ' + ${shop.fgBusinessCloseTime}">운영시간 | 10:00 ~ 20:00</p>
@@ -45,7 +52,8 @@
     <div class="eco-project" >
       <div class="eco-card" th:each="eco : ${mainEcoList}" onclick="location.href=`/ecoproject/ecoCertList`">
         <div class="eco-img">
-          <img th:src="@{/img/main/main/eco-img.png}" alt="에코 프로젝트">
+<!--          <img th:src="@{/img/main/main/eco-img.png}" alt="에코 프로젝트">-->
+          <img th:src="'/upload_moamz/' + ${eco.fgPostFileRoot} + '/' + ${eco.fgPostFileUuid} + '_' + ${eco.fgPostFileName}" alt="에코 프로젝트 사진"/>
         </div>
         <div class="eco-info">
           <h4 th:text="${eco.fgPostTitle}" >건강도! 환경도! 모두 챙기는 <br>
@@ -68,25 +76,27 @@
 
   <div class="main-recipe">
     <div class="recipe-title">
-      <img th:src="@{/img/main/main/main-receipe.png}" alt="요리사">
+      <img th:src="@{/img/main/main/main-recipe.png}" alt="요리사">
       <span><a th:href="@{/community/receipe/receipeList.html}">나도 자취왕! 인기 레시피</a></span>
     </div>
-    <div class="recipe-wrap">
+    <div class="recipe-wrap" >
       <div class="recipe-card">
         <div class="recipe-img">
-          <img th:src="@{/img/main/main/receipe-img.png}" alt="레시피 카드뷰">
-        </div>
+          <img th:src="@{/img/main/main/recipe-img.png}" alt="레시피 카드뷰">
+
+<!--          <img th:src="'/upload_moamz/' + ${recipe.fgPostFileRoot} + '/' + ${recipe.fgPostFileUuid} + '_' + ${recipe.fgPostFileName}" alt="레시피 사진"/>-->
+          </div>
       </div>
       <div class="recipe-menu">
-        <div class="recipe-menu-list" th:each="menu : ${mainRecipeList}">
+        <div class="recipe-menu-list" th:each="recipe : ${mainRecipeList}">
           <div class="recipe-menu-name">
-            <span th:text="${menu.fgPostTitle}">원팬 오므라이스</span>
+            <span th:text="${recipe.fgPostTitle}">원팬 오므라이스</span>
           </div>
           <div class="recipe-menu-icon">
             <img th:src="@{/img/main/main/menuClockIcon.png}" alt="메뉴 알람 아이콘">
-            <span th:text="${menu.fgRecipeTime}">15분</span>
+            <span th:text="${recipe.fgRecipeTime}">15분</span>
             <img th:src="@{/img/main/main/menuHeartIcon.png}" alt="메뉴 좋아요 아이콘">
-            <span th:text="${menu.fgPostLikes}">34</span>
+            <span th:text="${recipe.fgPostLikes}">34</span>
           </div>
         </div>
       </div>
@@ -101,7 +111,8 @@
     <div class="socialing-wrap" >
       <div class="socialing-card" th:each="socialing : ${mainSocialingList}">
         <div class="socialing-card-img">
-          <img th:src="@{/img/main/main/socialingCardImg.png}" alt="소셜링 카드 이미지">
+<!--          <img th:src="@{/img/main/main/socialingCardImg.png}" alt="소셜링 카드 이미지">-->
+          <img th:src="'/upload_moamz/' + ${socialing.fgPostFileRoot} + '/' + ${socialing.fgPostFileUuid} + '_' + ${socialing.fgPostFileName}" alt="소셜링 사진"/>
         </div>
         <div class="socialing-info">
           <h5 th:text="${socialing.fgPostTitle}">함께 떠들어요^^</h5>

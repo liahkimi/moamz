@@ -1,32 +1,21 @@
-//package com.example.moamz.service.main.HeaderNoticeService;
-//
-//import java.util.List;
-//
-//import com.example.moamz.mapper.file.ProductFileMapper;
-//import com.example.moamz.mapper.main.fragment.header.HeaderNoticeMapper;
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.stereotype.Service;
-//
-//@RequiredArgsConstructor
-//@Service
-//public class HeaderNoticeService {
-//
-//    private final HeaderNoticeMapper headerNoticeMapper;
-//    private final ProductFileMapper productFileMapper;
-//
-//    public List<HeaderNoticeResponse> getHeaderNotice(HeaderNoticeRequest headerNoticeRequest) {
-//        String userCode = headerNoticeRequest.userCode();
-//
-//        List<HeaderNotice> headerNotices = headerNoticeRepository.findAllByUserCode(userCode);
-//
-//        return headerNotices.stream()
-//                .map(headerNotice -> new HeaderNoticeResponse(
-//                        headerNotice.getProductName(),
-//                        headerNotice.getFileId(),
-//                        headerNotice.getFileName(),
-//                        headerNotice.getFileRoot(),
-//                        headerNotice.getFileUuid()
-//                ))
-//                .toList();
-//    }
-//}
+package com.example.moamz.service.main;
+
+import com.example.moamz.domain.dto.main.HeaderNoticeDTO;
+import com.example.moamz.mapper.main.HeaderNoticeMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@RequiredArgsConstructor
+@Service
+public class HeaderNoticeService {
+
+    private final HeaderNoticeMapper headerNoticeMapper;
+
+    // HeaderNotice 정보를 조회하는 메서드
+    public List<HeaderNoticeDTO> getHeaderNotices() {
+        // MyBatis 매퍼를 통해 DB에서 알림 정보를 조회
+        return headerNoticeMapper.selectHeaderNotice();
+    }
+}
