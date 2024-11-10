@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,29 +28,30 @@
           </div>
           <!-- 진행중인 에코배너 화면 -->
           <div id="ongoing-eco">
-            <div class="banner-box" onclick="goToDetailPage()" th:each="ingEco:${adminEcoListDTO}">
+            <div class="banner-box" th:onclick="|goToDetailPage(event, '${ingEco.fgPostId}', '${ingEco.fgProjectId}')|" th:each="ingEco:${adminIngEcoListDTO}">
               <div class="banner-img">
-                <div th:style=" 'background-image: url(/upload/' + ${ingEco.fgPostFileRoot} + '/' +  ${ingEco.fgPostFileUuid} + '_' + ${ingEco.fgPostFileName} + ')' " alt="plogging" ></div>
+                <img th:src="'/upload_moamz/' + ${ingEco.fgPostFileRoot} + '/' + ${ingEco.fgPostFileUuid} + '_' + ${ingEco.fgPostFileName}" alt="plogging"/>
               </div>
-              <div class="banner-article">
+                <div class="banner-article">
                 <div class="title-and-btns">
                   <div class="title" th:text="${ingEco.fgPostTitle}" >환경을 위한 플로깅 프로젝트!</div>
                   <div class="btns">
-                    <button class="finish-btn" onclick="changeStatus(event)">프로젝트 종료시키기</button>
-                    <button class="edit-btn" onclick="editEco(event)">
-                      <img
-                        th:src="@{/img/admin/whitePencil.png}"
-                        alt="editBtn"
-                      />
-                      <span>수정</span>
-                    </button>
+                    <button class="finish-btn" th:onclick="|changeStatus(event, ${ingEco.fgPostId})|">프로젝트 종료시키기</button>
+<!--                    <button class="edit-btn"  th:onclick="|editEco(event, ${ingEco.fgPostId})|" >-->
+<!--                      <img-->
+<!--                        src="/img/admin/whitePencil.png"-->
+<!--                        alt="editBtn"-->
+<!--                      />-->
+<!--                      <span>수정</span>-->
+<!--                    </button>-->
+                    <button class="remove-btn"  th:onclick="|deleteEco(event, ${ingEco.fgPostId})|">삭제</button>
                   </div>
                 </div>
                 <div class="calendar-and-like">
                   <div class="calendar">
                     <div class="calendar-icon-wrapper">
                       <img
-                        th:src="@{/img/admin/calendar.png}"
+                        src="/img/admin/calendar.png"
                         alt="calendarIcon"
                       />
                       <div class="calendar-text">
@@ -62,7 +62,7 @@
                   </div>
                   <div class="like">
                     <img
-                      th:src="@{/img/admin/heart.png}"
+                      src="/img/admin/heart.png"
                       alt="heartIcon"
                     />
                     <div class="like-value">
@@ -70,7 +70,7 @@
                     </div>
                   </div>
                   <div class="point-box">
-                    <img th:src="@{/img/admin/point.png}" alt="point-icon">
+                    <img src="/img/admin/point.png" alt="point-icon">
                     <span th:text="${ingEco.fgEcoPoints}">500</span>pt
                   </div>
                 </div>
@@ -94,82 +94,17 @@
                 <div class="join-sticker"><span th:text="${ingEco.fgEcoParticipation}">한번만</span> 참여 가능</div>
               </div>
             </div>
-<!--            <div class="banner-box" onclick="goToDetailPage()">-->
-<!--              <div class="banner-img">-->
-<!--                <img src="../../static/img/admin/plogging.jpg" alt="plogging" />-->
-<!--              </div>-->
-<!--              <div class="banner-article">-->
-<!--                <div class="title-and-btns">-->
-<!--                  <div class="title">환경을 위한 플로깅 프로젝트!</div>-->
-<!--                  <div class="btns">-->
-<!--                    <button class="finish-btn"  onclick="changeStatus(event)">프로젝트 종료시키기</button>-->
-<!--                    <button class="edit-btn" onclick="editEco(event)">-->
-<!--                      <img-->
-<!--                        th:src="@{/img/admin/whitePencil.png}"-->
-<!--                        alt="editBtn"-->
-<!--                      />-->
-<!--                      <span>수정</span>-->
-<!--                    </button>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="calendar-and-like">-->
-<!--                  <div class="calendar">-->
-<!--                    <div class="calendar-icon-wrapper">-->
-<!--                      <img-->
-<!--                        src="../../static/img/admin/calendar.png"-->
-<!--                        alt="calendarIcon"-->
-<!--                      />-->
-<!--                      <div class="calendar-text">-->
-<!--                        <span>24/10/10</span>~<span>24/10/17</span>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                    <div class="calendar-period"><span>1</span>주일간</div>-->
-<!--                  </div>-->
-<!--                  <div class="like">-->
-<!--                    <img-->
-<!--                      src="../../static/img/admin/heart.png"-->
-<!--                      alt="heartIcon"-->
-<!--                    />-->
-<!--                    <div class="like-value">-->
-<!--                      <span>22</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <div class="point-box">-->
-<!--                    <img src="../../static/img/admin/point.png" alt="point-icon">-->
-<!--                    <span>500</span>pt-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="description">-->
-<!--                  <div class="description-title">프로젝트 소개</div>-->
-<!--                  <p class="description-detail">-->
-<!--                    플로깅은 스웨덴에서 시작된 환경 운동으로, 조깅을 하면서-->
-<!--                    동시에 쓰레기를 줍는<br />-->
-<!--                    활동입니다. 건강과 환경 보호를 동시에 실천할 수 있는 이 멋진-->
-<!--                    운동은 조깅보다 더<br />-->
-<!--                    많은 칼로리를 소모할 수 있습니다.-->
-<!--                  </p>-->
-<!--                </div>-->
-<!--                <div class="certi-list">-->
-<!--                  <div class="certi-title">인증 사항</div>-->
-<!--                  <p class="certi-detail">-->
-<!--                    1.플로깅 활동을 하며 주운 쓰레기 사진<br />-->
-<!--                    2.소감/후기-->
-<!--                  </p>-->
-<!--                </div>-->
-<!--                <div class="join-sticker">한번만 참여 가능</div>-->
-<!--              </div>-->
-<!--            </div>-->
           </div>
 
           <!-- 완료된 에코배너 화면 -->
           <div id="finished-eco" class="banner-hidden">
-            <div class="banner-box" onclick="goToDetailPageFin()">
+            <div class="banner-box" onclick="goToDetailPageFin()" th:onclick="|goToDetailPageFin(event, '${finEco.fgPostId}', '${finEco.fgProjectId}')|"   th:each="finEco:${adminFinEcoListDTO}">
               <div class="banner-img">
-                <img src="../../static/img/admin/plogging.jpg" alt="plogging" />
+                <img th:src="'/upload_moamz/' + ${finEco.fgPostFileRoot} + '/' + ${finEco.fgPostFileUuid} + '_' + ${finEco.fgPostFileName}" alt="plogging"/>
               </div>
               <div class="banner-article">
                 <div class="title-and-editBtn">
-                  <div class="title">환경을 위한 플로깅 프로젝트!</div>
+                  <div class="title" th:text="${finEco.fgPostTitle}">환경을 위한 플로깅 프로젝트!</div>
                 </div>
                 <div class="calendar-and-like">
                   <div class="calendar">
@@ -180,10 +115,10 @@
                         alt="calendarIcon"
                       />
                       <div class="calendar-text">
-                        <span>24/10/10</span>~<span>24/10/17</span>
+                        <span th:text="${finEco.fgEcoStartToChar}">24/10/10</span>~<span th:text="${finEco.fgEcoEndToChar}">24/10/17</span>
                       </div>
                     </div>
-                    <div class="calendar-period"><span>1</span>주일간</div>
+                    <div class="calendar-period"><span th:text="${finEco.fgEcoPeriod}">1</span>주일간</div>
                   </div>
                   <div class="like">
                     <img
@@ -191,17 +126,17 @@
                       alt="heartIcon"
                     />
                     <div class="like-value">
-                      <span>22</span>
+                      <span th:text="${finEco.fgPostLikes}">22</span>
                     </div>
                   </div>
                   <div class="point-box">
                     <img src="../../static/img/admin/point.png" alt="point-icon">
-                    <span>500</span>pt
+                    <span th:text="${finEco.fgEcoPoints}">500</span>pt
                   </div>
                 </div>
                 <div class="description">
                   <div class="description-title">프로젝트 소개</div>
-                  <p class="description-detail">
+                  <p class="description-detail" th:text="${finEco.fgEcoInfo}">
                     플로깅은 스웨덴에서 시작된 환경 운동으로, 조깅을 하면서
                     동시에 쓰레기를 줍는<br />
                     활동입니다. 건강과 환경 보호를 동시에 실천할 수 있는 이 멋진
@@ -211,67 +146,12 @@
                 </div>
                 <div class="certi-list">
                   <div class="certi-title">인증 사항</div>
-                  <p class="certi-detail">
+                  <p class="certi-detail" th:text="${finEco.fgCertInfo}">
                     1.플로깅 활동을 하며 주운 쓰레기 사진<br />
                     2.소감/후기
                   </p>
                 </div>
-                <div class="join-sticker">한번만 참여 가능</div>
-              </div>
-            </div>
-            <div class="banner-box" onclick="goToDetailPageFin()">
-              <div class="banner-img">
-                <img src="../../static/img/admin/plogging.jpg" alt="plogging" />
-              </div>
-              <div class="banner-article">
-                <div class="title-and-editBtn">
-                  <div class="title">환경을 위한 플로깅 프로젝트!</div>
-                </div>
-                <div class="calendar-and-like">
-                  <div class="calendar">
-                    <div class="calendar-icon-wrapper">
-                      <img
-                        src="../../static/img/admin/calendar.png"
-                        alt="calendarIcon"
-                      />
-                      <div class="calendar-text">
-                        <span>24/10/10</span>~<span>24/10/17</span>
-                      </div>
-                    </div>
-                    <div class="calendar-period"><span>1</span>주일간</div>
-                  </div>
-                  <div class="like">
-                    <img
-                      src="../../static/img/admin/heart.png"
-                      alt="heartIcon"
-                    />
-                    <div class="like-value">
-                      <span>22</span>
-                    </div>
-                  </div>
-                  <div class="point-box">
-                    <img src="../../static/img/admin/point.png" alt="point-icon">
-                    <span>500</span>pt
-                  </div>
-                </div>
-                <div class="description">
-                  <div class="description-title">프로젝트 소개</div>
-                  <p class="description-detail">
-                    플로깅은 스웨덴에서 시작된 환경 운동으로, 조깅을 하면서
-                    동시에 쓰레기를 줍는<br />
-                    활동입니다. 건강과 환경 보호를 동시에 실천할 수 있는 이 멋진
-                    운동은 조깅보다 더<br />
-                    많은 칼로리를 소모할 수 있습니다.
-                  </p>
-                </div>
-                <div class="certi-list">
-                  <div class="certi-title">인증 사항</div>
-                  <p class="certi-detail">
-                    1.플로깅 활동을 하며 주운 쓰레기 사진<br />
-                    2.소감/후기
-                  </p>
-                </div>
-                <div class="join-sticker">한번만 참여 가능</div>
+                <div class="join-sticker"><span th:text="${finEco.fgEcoParticipation}">한번만</span> 참여 가능</div>
               </div>
             </div>
           </div>
@@ -287,7 +167,7 @@
       </div>
     </main>
   </body>
-<!--  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!--  <script>-->
 <!--    $(function () {-->
 <!--      $("#adminNavBar").load("adminNavBar.html");-->

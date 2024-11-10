@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>공지사항-상세</title>
     <link rel="stylesheet" th:href="@{/css/reset2.css}" />
-    <link
-      rel="stylesheet"
-      th:href="@{/css/admin/adminNoticeDetail.css}"
+    <link rel="stylesheet" th:href="@{/css/admin/adminNoticeDetail.css}"
     />
   </head>
   <body>
@@ -47,7 +45,7 @@
                   />
                   수정
                 </button>
-                <button class="btn" id="delete-btn"  th:data-id="${adminNoticeDetailDTO.fgPostId}">
+                <button class="btn" id="delete-btn"  th:onclick="|deleteNotice(event, ${adminNoticeDetailDTO.fgPostId})|">
                   <img th:src="@{/img/admin/trashcan.png}" alt="deleteButton"
                   />
                   삭제

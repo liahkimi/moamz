@@ -3,12 +3,13 @@
 <mapper namespace="com.example.moamz.mapper.admin.eco.AdminEcoMapper">
 
 <!--진행중인 에코프로젝트 목록 보여주기-->
-    <select id="selectIngEcoList" resultType="AdminEcoListDTO">
+    <select id="selectIngEcoList" resultType="AdminIngEcoListDTO">
         SELECT DISTINCT
             PF.FG_POST_FILE_ROOT,
             PF.FG_POST_FILE_NAME,
             PF.FG_POST_FILE_UUID,
             P.FG_POST_TITLE,
+            P.FG_POST_ID,
             P.FG_POST_LIKES,
             TO_CHAR(E.FG_ECO_START, 'YYYY/MM/DD') AS fgEcoStartToChar,
             TO_CHAR(E.FG_ECO_END, 'YYYY/MM/DD') AS fgEcoEndToChar,
@@ -25,12 +26,12 @@
     </select>
 
 <!--종료된 에코프로젝트 목록 보여주기 -->
-    <select id="selectFinEcoList" resultType="AdminEcoListDTO">
+    <select id="selectFinEcoList" resultType="AdminFinEcoListDTO">
         SELECT DISTINCT
             PF.FG_POST_FILE_ROOT,
             PF.FG_POST_FILE_NAME,
             PF.FG_POST_FILE_UUID,
-
+            P.FG_POST_ID,
             P.FG_POST_TITLE,
             P.FG_POST_LIKES,
             E.FG_ECO_START,
@@ -47,13 +48,14 @@
           AND E.FG_ECO_STATUS = '0'
     </select>
 
+
 <!--에코프로젝트 글 작성하기 (공통게시글테이블 insert)-->
     <insert id="insertEcoPost" parameterType="AdminEcoWriteDTO">
         <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
             SELECT SEQ_POST.nextval FROM DUAL
         </selectKey>
-        INSERT INTO FG_POST (FG_POST_ID, FG_POST_TYPE, FG_POST_TITLE, FG_POST_CREATED_AT, FG_USER_CODE)
-        VALUES (#{fgPostId}, 'eco', #{fgPostTitle}, SYSDATE, (SELECT FG_USER_CODE FROM FG_COMMON_USER WHERE FG_USER_ID = '관리자'))
+        INSERT INTO FG_POST (FG_POST_ID, FG_POST_TYPE, FG_POST_TITLE,  FG_USER_CODE)
+        VALUES (#{fgPostId}, 'eco', #{fgPostTitle},  #{fgUserCode})
     </insert>
 
 <!--에코프로젝트 글 작성하기 (에코프젝테이블 insert)-->
@@ -62,32 +64,33 @@
         VALUES (#{fgPostId}, #{fgEcoStart}, #{fgEcoEnd}, #{fgEcoParticipation}, #{fgEcoInfo}, #{fgCertInfo}, #{fgEcoPoints})
     </insert>
 
+
 <!--에코프젝 글 작성하기 (썸네일 삽입)-->
 
-<!--에코프젝  글 수정하기 (공통게시글테이블 UPDATE / 수정여부 업데이트) -->
-    <update id="modifyEco" parameterType="AdminEcoModifyDTO">
-        UPDATE FG_POST
-        SET  FG_POST_EDIT = '1'
-        WHERE FG_POST_ID = #{fgPostId}
-    </update>
+<!--&lt;!&ndash;에코프젝  글 수정하기 (공통게시글테이블 UPDATE / 수정여부 업데이트) &ndash;&gt;-->
+<!--    <update id="modifyEco" parameterType="AdminEcoModifyDTO">-->
+<!--        UPDATE FG_POST-->
+<!--        SET  FG_POST_EDIT = '1'-->
+<!--        WHERE FG_POST_ID = #{fgPostId}-->
+<!--    </update>-->
 
-<!--에코프젝 글 수정하기 (에코프젝테이블 UPDATE)-->
-    <update id="modifyEcoReal" parameterType="AdminEcoModifyDTO">
-        UPDATE FG_ECO
-        SET
-            FG_ECO_START = #{fgEcoStart},
-            FG_ECO_END = #{fgEcoEnd},
-            FG_ECO_INFO = #{fgEcoInfo},
-            FG_CERT_INFO = #{fgCertInfo}
-        WHERE
-            FG_POST_ID = #{fgPostId}
-    </update>
+<!--&lt;!&ndash;에코프젝 글 수정하기 (에코프젝테이블 UPDATE)&ndash;&gt;-->
+<!--    <update id="modifyEcoReal" parameterType="AdminEcoModifyDTO">-->
+<!--        UPDATE FG_ECO-->
+<!--        SET-->
+<!--            FG_ECO_START = #{fgEcoStart},-->
+<!--            FG_ECO_END = #{fgEcoEnd},-->
+<!--            FG_ECO_INFO = #{fgEcoInfo},-->
+<!--            FG_CERT_INFO = #{fgCertInfo}-->
+<!--        WHERE-->
+<!--            FG_POST_ID = #{fgPostId}-->
+<!--    </update>-->
 
-<!--에코프젝 글 수정하기 (썸네일 수정) -->
+<!--&lt;!&ndash;에코프젝 글 수정하기 (썸네일 수정) &ndash;&gt;-->
 
 
 <!--에코프젝 종료시키기 버튼 클릭시 (처음엔 무조건  FG_ECO_STATUS = '1') -->
-<update id="finishBtn" parameterType="AdminEcoStatusUpdateDTO">
+<update id="finishBtn" parameterType="Long">
     UPDATE FG_ECO
     SET
         FG_ECO_STATUS = '0'
@@ -95,7 +98,16 @@
         FG_POST_ID = #{fgPostId}
 </update>
 
-<!--(진행중/종료된) 특정 한 에코 프로젝트의 인증글 목록보기-->
+
+<!--진행중인 에코프로젝트 삭제하기-->
+    <delete id="deleteEcoProject" parameterType="Long">
+        DELETE FROM FG_POST
+        WHERE FG_POST_ID = #{fgPostId}
+    </delete>
+
+
+
+    <!--(진행중/종료된) 특정 한 에코 프로젝트의 인증글 목록보기-->
 <select id="selectEcoCertList" parameterType="Long" resultType="AdminEcoCertListDTO">
     SELECT DISTINCT p.FG_POST_ID, ec.FG_PROJECT_ID , p.FG_POST_TITLE, nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT,p.FG_POST_LIKES
     FROM FG_POST p
@@ -106,7 +118,37 @@
     ORDER BY p.FG_POST_LIKES DESC
 </select>
 
-<!--에코프젝 인증글 상세 보기-->
+<!--특정 에코프젝 1개만 조회하기-->
+    <select id="selectEcoProjectById" parameterType="java.lang.Long" resultType="AdminIngEcoListDTO">
+        SELECT e.FG_ECO_START,
+               TO_CHAR(e.FG_ECO_START, 'YYYY-MM-DD') AS fgEcoStartToChar,
+               e.FG_ECO_END,
+               TO_CHAR(e.FG_ECO_END, 'YYYY-MM-DD') AS fgEcoEndToChar,
+               (TRUNC(e.FG_ECO_END) - TRUNC(e.FG_ECO_START)) AS fgEcoPeriod, -- 에코 기간 (일 수 차이)
+               e.FG_ECO_PARTICIPATION,
+               e.FG_ECO_INFO,
+               e.FG_CERT_INFO,
+               e.FG_ECO_POINTS,
+               e.FG_ECO_STATUS,
+               p.FG_POST_ID,
+               p.FG_POST_TYPE,
+               p.FG_POST_TITLE,
+               TO_CHAR(p.FG_POST_CREATED_AT, 'YYYY-MM-DD HH24:MI:SS') AS fgPostCreatedAt,
+               p.FG_USER_CODE,
+               fpf.FG_POST_FILE_ID,
+               fpf.FG_POST_FILE_NAME,
+               fpf.FG_POST_FILE_ROOT,
+               fpf.FG_POST_FILE_UUID
+        FROM FG_ECO e
+                 JOIN FG_POST p ON e.FG_POST_ID = p.FG_POST_ID
+                 JOIN FG_POST_FILE fpf ON e.FG_POST_ID = fpf.FG_POST_ID
+        WHERE e.FG_POST_ID = #{fgPostId}
+    </select>
+
+
+
+
+    <!--에코프젝 인증글 상세 보기-->
 <select id="selectEcoCertDetail" parameterType="Long" resultType="AdminEcoCertDetailDTO">
     SELECT p.FG_POST_TITLE,
            uf.FG_USER_FILE_ROOT,uf.FG_USER_FILE_NAME,uf.FG_USER_FILE_UUID,
@@ -156,7 +198,6 @@
                                                         WHERE EC.FG_POST_ID = #{fgPostId}))
            )
 </insert>
-
 
 
 

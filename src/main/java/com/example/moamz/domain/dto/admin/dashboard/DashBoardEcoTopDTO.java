@@ -26,7 +26,7 @@ public class DashBoardEcoTopDTO {
     private String fgEcoStart;             // 에코 프로젝트 시작일
     private String fgEcoEnd;               // 에코 프로젝트 종료일
     private int fgEcoPoints;               // 에코 프로젝트 포인트
-    private int fgEcoParticipation;        // 에코 프로젝트 참여 수
+    private String fgEcoParticipation;        // 에코 프로젝트 참여 수
     
     private Long fgPostId;              //게시글 번호
     private String fgPostType;          //게시글 종류

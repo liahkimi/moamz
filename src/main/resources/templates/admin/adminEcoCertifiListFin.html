@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>에코-인증글 목록</title>
-    <link rel="stylesheet" href="../../static/css/reset2.css" />
+    <link rel="stylesheet" th:href="@{/css/reset2.css}" />
     <link
       rel="stylesheet"
-      href="../../static/css/admin/adminEcoCertifiList.css"
+      th:href="@{/css/admin/adminEcoCertifiList.css}"
     />
+    <link rel="stylesheet" th:href="@{/css/admin/adminHeader.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminNavBar.css}" />
   </head>
   <body>
-    <header id="adminHeader"></header>
+    <header id="adminHeader" th:replace="~{/admin/adminHeader :: header}"></header>
     <main>
-      <nav id="adminNavBar"></nav>
+      <nav id="adminNavBar" th:replace="~{/admin/adminNavBar :: nav}"></nav>
       <!-- 우측 녹색 메인 화면-->
       <div class="content-box">
         <!-- 타이틀 : dashboard -->
@@ -44,126 +45,126 @@
               </thead>
               <tbody>
                 <!-- 💥추후 각 tr클릭시 해당 상세페이지로 이동시키기 -->
-                <tr onclick="goToDetailPageFin()">
-                  <td>1</td>
-                  <td>오늘 플로깅 인증합니다!</td>
-                  <td>user1</td>
-                  <td>2022/10/11</td>
-                  <td>10</td>
+                <tr  th:onclick="|goToDetailPage(event,${certList.fgPostId},${certList.fgProjectId})|" th:each ="certList, iterStat :${adminEcoCertListDTO}">
+                  <td th:text="${iterStat.index + 1}">1</td>
+                  <td th:text="${certList.fgPostTitle}">오늘 플로깅 인증합니다!</td>
+                  <td th:text="${certList.fgNormalNickname}">user1</td>
+                  <td th:text="${certList.fgPostCreatedAt}">2022/10/11</td>
+                  <td th:text="${certList.fgPostLikes}">10</td>
                   <td>
                     <!-- <button onclick="openModal(event)">포인트 지급하기</button> -->
                   </td>
                 </tr>
-                <tr onclick="goToDetailPageFin()">
-                    <td>2</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <!-- <button onclick="openModal(event)">포인트 지급하기</button> -->
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPageFin()">
-                    <td>3</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <!-- <button onclick="openModal(event)">포인트 지급하기</button> -->
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPageFin()">
-                    <td>4</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <!-- <button onclick="openModal(event)">포인트 지급하기</button> -->
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPageFin()">
-                    <td>5</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <!-- <button onclick="openModal(event)">포인트 지급하기</button> -->
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPageFin()">
-                    <td>6</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <!-- <button onclick="openModal(event)">포인트 지급하기</button> -->
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPageFin()">
-                    <td>7</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <!-- <button onclick="openModal(event)">포인트 지급하기</button> -->
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPageFin()">
-                    <td>8</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <!-- <button onclick="openModal(event)">포인트 지급하기</button> -->
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPageFin()">
-                    <td>9</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <!-- <button onclick="openModal(event)">포인트 지급하기</button> -->
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPageFin()">
-                    <td>10</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <!-- <button onclick="openModal(event)">포인트 지급하기</button> -->
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPageFin()">
-                    <td>11</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <!-- <button onclick="openModal(event)">포인트 지급하기</button> -->
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPageFin()">
-                    <td>12</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <!-- <button onclick="openModal(event)">포인트 지급하기</button> -->
-                    </td>
-                  </tr>
+<!--                <tr onclick="goToDetailPageFin()">-->
+<!--                    <td>2</td>-->
+<!--                    <td>오늘 플로깅 인증합니다!</td>-->
+<!--                    <td>user1</td>-->
+<!--                    <td>2024/10/11</td>-->
+<!--                    <td>10</td>-->
+<!--                    <td>-->
+<!--                      &lt;!&ndash; <button onclick="openModal(event)">포인트 지급하기</button> &ndash;&gt;-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--                  <tr onclick="goToDetailPageFin()">-->
+<!--                    <td>3</td>-->
+<!--                    <td>오늘 플로깅 인증합니다!</td>-->
+<!--                    <td>user1</td>-->
+<!--                    <td>2024/10/11</td>-->
+<!--                    <td>10</td>-->
+<!--                    <td>-->
+<!--                      &lt;!&ndash; <button onclick="openModal(event)">포인트 지급하기</button> &ndash;&gt;-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--                  <tr onclick="goToDetailPageFin()">-->
+<!--                    <td>4</td>-->
+<!--                    <td>오늘 플로깅 인증합니다!</td>-->
+<!--                    <td>user1</td>-->
+<!--                    <td>2024/10/11</td>-->
+<!--                    <td>10</td>-->
+<!--                    <td>-->
+<!--                      &lt;!&ndash; <button onclick="openModal(event)">포인트 지급하기</button> &ndash;&gt;-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--                  <tr onclick="goToDetailPageFin()">-->
+<!--                    <td>5</td>-->
+<!--                    <td>오늘 플로깅 인증합니다!</td>-->
+<!--                    <td>user1</td>-->
+<!--                    <td>2024/10/11</td>-->
+<!--                    <td>10</td>-->
+<!--                    <td>-->
+<!--                      &lt;!&ndash; <button onclick="openModal(event)">포인트 지급하기</button> &ndash;&gt;-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--                  <tr onclick="goToDetailPageFin()">-->
+<!--                    <td>6</td>-->
+<!--                    <td>오늘 플로깅 인증합니다!</td>-->
+<!--                    <td>user1</td>-->
+<!--                    <td>2024/10/11</td>-->
+<!--                    <td>10</td>-->
+<!--                    <td>-->
+<!--                      &lt;!&ndash; <button onclick="openModal(event)">포인트 지급하기</button> &ndash;&gt;-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--                  <tr onclick="goToDetailPageFin()">-->
+<!--                    <td>7</td>-->
+<!--                    <td>오늘 플로깅 인증합니다!</td>-->
+<!--                    <td>user1</td>-->
+<!--                    <td>2024/10/11</td>-->
+<!--                    <td>10</td>-->
+<!--                    <td>-->
+<!--                      &lt;!&ndash; <button onclick="openModal(event)">포인트 지급하기</button> &ndash;&gt;-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--                  <tr onclick="goToDetailPageFin()">-->
+<!--                    <td>8</td>-->
+<!--                    <td>오늘 플로깅 인증합니다!</td>-->
+<!--                    <td>user1</td>-->
+<!--                    <td>2024/10/11</td>-->
+<!--                    <td>10</td>-->
+<!--                    <td>-->
+<!--                      &lt;!&ndash; <button onclick="openModal(event)">포인트 지급하기</button> &ndash;&gt;-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--                  <tr onclick="goToDetailPageFin()">-->
+<!--                    <td>9</td>-->
+<!--                    <td>오늘 플로깅 인증합니다!</td>-->
+<!--                    <td>user1</td>-->
+<!--                    <td>2024/10/11</td>-->
+<!--                    <td>10</td>-->
+<!--                    <td>-->
+<!--                      &lt;!&ndash; <button onclick="openModal(event)">포인트 지급하기</button> &ndash;&gt;-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--                  <tr onclick="goToDetailPageFin()">-->
+<!--                    <td>10</td>-->
+<!--                    <td>오늘 플로깅 인증합니다!</td>-->
+<!--                    <td>user1</td>-->
+<!--                    <td>2024/10/11</td>-->
+<!--                    <td>10</td>-->
+<!--                    <td>-->
+<!--                      &lt;!&ndash; <button onclick="openModal(event)">포인트 지급하기</button> &ndash;&gt;-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--                  <tr onclick="goToDetailPageFin()">-->
+<!--                    <td>11</td>-->
+<!--                    <td>오늘 플로깅 인증합니다!</td>-->
+<!--                    <td>user1</td>-->
+<!--                    <td>2024/10/11</td>-->
+<!--                    <td>10</td>-->
+<!--                    <td>-->
+<!--                      &lt;!&ndash; <button onclick="openModal(event)">포인트 지급하기</button> &ndash;&gt;-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--                  <tr onclick="goToDetailPageFin()">-->
+<!--                    <td>12</td>-->
+<!--                    <td>오늘 플로깅 인증합니다!</td>-->
+<!--                    <td>user1</td>-->
+<!--                    <td>2024/10/11</td>-->
+<!--                    <td>10</td>-->
+<!--                    <td>-->
+<!--                      &lt;!&ndash; <button onclick="openModal(event)">포인트 지급하기</button> &ndash;&gt;-->
+<!--                    </td>-->
+<!--                  </tr>-->
               </tbody>
             </table>
 
@@ -203,12 +204,12 @@
       </div>
     </main>
   </body>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script>
-    $(function () {
-      $("#adminNavBar").load("adminNavBar.html");
-      $("#adminHeader").load("adminHeader.html");
-    });
-  </script>
-  <script src="../../static/js/admin/adminEcoCertifiList.js"></script>
+<!--  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<!--  <script>-->
+<!--    $(function () {-->
+<!--      $("#adminNavBar").load("adminNavBar.html");-->
+<!--      $("#adminHeader").load("adminHeader.html");-->
+<!--    });-->
+<!--  </script>-->
+  <script th:src="@{/js/admin/adminEcoCertifiListFin.js}"></script>
 </html>
