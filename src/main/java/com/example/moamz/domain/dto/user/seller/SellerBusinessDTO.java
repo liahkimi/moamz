@@ -9,15 +9,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class SellerSignupDTO {
-    private Long fgUserCode;
-    private String fgUserId;
-    private String fgUserPassword;
-    private String fgUserJoinDate;
-    private String fgUserType;
-    private String fgSellerName;
-    private String fgSellerPhone;
-    private Long fgBusinessID;
+public class SellerBusinessDTO {
+    private Long fgBusinessId;
     private String fgBusinessOpenTime;
     private String fgBusinessCloseTime;
     private String fgBusinessDetail;
@@ -27,6 +20,5 @@ public class SellerSignupDTO {
     private String fgBusinessNumber;
     private String fgBusinessName;
     private String fgBusinessPhone;
-    private String fgBusinessRating;
-    private String fgBusinessLikes;
+    private Long fgUserCode;
 }
