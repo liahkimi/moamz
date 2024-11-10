@@ -21,13 +21,25 @@ $(document).ready(function() {
 const thumbnailInput = document.getElementById("attach");
 const thumbnailImg = document.querySelector(".thumbnail-img");
 const thumbnailCancleBtn = document.querySelector(".thumbnail-cancle-btn");
+// 원본 파일 여부 변수
+let originalExist = document.getElementById('originalFileExists').value;
+// 파일 변경 감지 변수
+let fileChanged = document.getElementById("fileChanged").value;
+
+// 게시글 수정은 x 버튼이 처음부터 보여야 함
+thumbnailCancleBtn.style.display = "block";
 
 //업로드한 파일 정보가 input 태그의 value에 들어간다.
 //파일이 업로드 될 때 value가 변화된다.
 //따라서 클릭이벤트를 주게 되면, 업로드 되기 전에 실행되기 때문에 change가 적합하다.
 thumbnailInput.addEventListener("change", (e) => {
-    // 파일 변경 감지
-    document.getElementById("fileChanged").value = "true";
+    // 파일을 변경하게 되면
+    // fileChanged = true, originalExist = false로 변경한다.
+    fileChanged = 'true';
+    originalExist = 'false';
+    console.log(`💛💛fileChanged 변경 ${fileChanged}`);
+    // 🤯🤯🤯🤯🤯js에서 변경된 파일 변경 감지 변수가 컨트롤러로 안넘어감!!
+
 
     //console.log(e.target.files);
 
@@ -60,9 +72,10 @@ thumbnailInput.addEventListener("change", (e) => {
 
 // 썸네일 취소 버튼
 thumbnailCancleBtn.addEventListener("click", (e) => {
-    // 썸네일 취소 버튼 클릭 시 hidden input을 업데이트
-    // 어차피 썸네일 무조건 등록해야 하니까 필요없을듯?
-    // document.getElementById("fileChanged").value = "true";
+    // 썸네일 취소 버튼을 누르면
+    // fileChanged = false, originalExist = false 상태이다.
+    fileChanged = 'false';
+    originalExist = 'false';
 
     //1. 맨 처음 이미지로 변경
     thumbnailImg.style.backgroundImage = "url(/img/mypage/seller/thumbnail.png)";
@@ -80,31 +93,56 @@ thumbnailCancleBtn.addEventListener("click", (e) => {
 
 const cancleBtn = document.getElementById('cancle-btn');
 const writeBtn = document.getElementById('write-btn');
+const postId = document.querySelector('form').getAttribute('data-id');
 
-//취소버튼
+// 취소버튼
 cancleBtn.addEventListener('click', () => {
     const isConfirm = confirm('글 작성을 취소하시겠습니까? 작업중인 내용이 저장되지 않습니다.');
     if (isConfirm) {
-        window.location.href = 'sharingList.html';
-    } else {
+        // 게시글 상세 페이지로 이동한다.
+        window.location.href = `/sharing/detail/${postId}`;
     }
 });
 
-//등록버튼 -> 모든 폼 요소가 입력되었을 때만 confirm창이 떠야함
-writeBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // 기본 submit 동작 막기
 
-    const titleInput = document.querySelector('input[type="text"]');
+// 등록버튼 -> 모든 폼 요소가 입력되었을 때만 confirm창이 떠야함
+writeBtn.addEventListener('click', (e) => {
+    // 기본 submit 막기
+    e.preventDefault();
+
+    const titleInput = document.getElementById('postTitle');
+    const thumbnail = thumbnailInput.value;
     const contentInput = $('#summernote').val();
 
-    if (titleInput.value.trim() === '') {
+    if (!titleInput.value.trim()) {
         alert('제목을 입력해주세요.');
-    } else if (contentInput.trim() === '') {
-        alert('상세내용을 입력해주세요.');
-    } else {
-        const isConfirm = confirm('등록하시겠습니까?');
-        if (isConfirm) {
-            window.location.href = 'sharingDetail.html';
-        }
+        titleInput.focus();
+        return;
     }
+
+    // 사용자가 아무 처리도 안한 경우  ->  alert 없음
+    // original = true, changed = false, !썸네일
+
+    // 사용자가 새로운 파일을 등록한 경우 -> alert 없음.. 새로운 파일로 처리
+    // 썸네일o, original = false로 바꿔주고, changed= true로 바꿔주기
+
+    // 사용자가 새로운 파일 등록했다가 삭제한 경우
+    // !썸네일, original = false, changed=false인 경우 -> alert!!
+    if (!thumbnail && fileChanged === "false" && originalExist === "false") {
+        alert('대표 사진을 등록해주세요.');
+        return;
+    }
+    if (contentInput.trim() === '') {
+        alert('상세내용을 입력해주세요.');
+        return;
+    }
+
+    // fileChanged 값을 hidden input에 반영
+    document.getElementById('fileChanged').value = fileChanged;
+
+    const isConfirm = confirm('등록하시겠습니까?');
+    if (isConfirm) {
+        document.querySelector('form').submit();
+    }
+
 });

@@ -26,9 +26,16 @@ public class SharingDetailDTO {
     private String sharingContent;     // 나눔글 내용
     private String postEdit;           // 게시글 수정여부
 
+    // 게시글 작성자 파일
     private Long userFileId;         // 파일ID
     private String userFileName;     // 파일명
     private String userFileRoot;     // 파일경로
     private String userFileUuid;     // UUID
+
+    // 게시글 대표파일
+    private Long postFileId;        // 파일ID
+    private String postFileName;    // 파일명
+    private String postFileRoot;     // 파일경로
+    private String postFileUuid;     // UUID
 
 }

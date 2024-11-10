@@ -23,27 +23,35 @@
             <div class="write-description">나눔 상태는 마이페이지> MY나눔에서 관리 가능합니다.</div>
         </section>
         <section class="write-content-section">
-            <form method="" action="">
+            <form method="post" action="/sharing/update" name="postId" th:attr="data-id=${sharingDetailDTO.postId}" enctype="multipart/form-data">
+                <input type="hidden" name="postId" th:value="${sharingDetailDTO.postId}"/>
                 <div class="title-wrap">
                     <span class="write-form-title">📝 제목*</span>
-                    <input type="text" placeholder="제목을 작성해주세요." required/>
+                    <input type="text" id="postTitle" name="postTitle" th:value="${sharingDetailDTO.postTitle}" placeholder="제목을 작성해주세요." required/>
                 </div>
                 <div class="thumbnail-container">
                     <span class="write-form-title">📝 대표사진*</span>
                     <div class="thumbnail-wrap">
                         <!--lable을 누르면 input type=file이 실행-->
                         <label for="attach">
-                            <div class="thumbnail-img"></div>
+                            <!-- DB에 저장되어 있는 대표 사진을 배경에 뿌리기 -->
+                            <div class="thumbnail-img"
+                                 th:style="'background-image: url(/upload_moamz/' + ${sharingDetailDTO.postFileRoot}
+                                + '/' +  ${sharingDetailDTO.postFileUuid} + '_' + ${sharingDetailDTO.postFileName} + ')' "></div>
                         </label>
                         <div class="thumbnail-cancle-btn"></div>
                     </div>
                     <input type="file" id="attach" name="postFile" style="display: none;">
+                    <!-- 기존 파일 정보를 전달하기 위한 태그 -->
+                    <!-- 기존 파일이 있으면 originalFileExists는 true이다. -->
+<!--                    <input type="hidden" id="originalFileExists" name="originalFileExists" th:value="${sharingDetailDTO.postFileName != null}">-->
+                    <input type="hidden" id="originalFileExists" name="originalFileExists" value="true">
                     <!-- 파일이 변경되었는지 감지하는 태그 -->
                     <input type="hidden" id="fileChanged" name="fileChanged" value="false">
                 </div>
                 <div class="edit-wrap">
                     <span class="write-form-title">📝 상세내용*</span>
-                    <textarea id="summernote" name="content"></textarea>
+                    <textarea id="summernote" name="sharingContent" th:text="${sharingDetailDTO.sharingContent}"></textarea>
                 </div>
                 <div class="btn-wrap">
                     <button id="cancle-btn" type="button">취소</button>

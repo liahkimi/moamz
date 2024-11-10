@@ -80,11 +80,13 @@
                    WHEN '1' THEN '수정됨'
                    END AS postEdit,
                uf.FG_USER_FILE_NAME AS userFileName, uf.FG_USER_FILE_ROOT AS userFileRoot,
-               uf.FG_USER_FILE_UUID AS userFileUuid
-        FROM FG_POST p, FG_NORMAL_USER nu, FG_SHARING s, FG_USER_FILE uf
+               uf.FG_USER_FILE_UUID AS userFileUuid, pf.FG_POST_FILE_NAME AS postFileName,
+               pf.FG_POST_FILE_ROOT AS postFileRoot, pf.FG_POST_FILE_UUID AS postFileUuid
+        FROM FG_POST p, FG_NORMAL_USER nu, FG_SHARING s, FG_USER_FILE uf, FG_POST_FILE pf
         WHERE p.FG_POST_ID = s.FG_POST_ID
           AND p.FG_USER_CODE = nu.FG_USER_CODE
           AND p.FG_USER_CODE = uf.FG_USER_CODE
+          AND p.FG_POST_ID = pf.FG_POST_ID
           AND p.FG_POST_ID = #{postId}
     </select>
 

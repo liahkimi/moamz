@@ -1,6 +1,7 @@
 package com.example.moamz.controller.community.sharing;
 
 import com.example.moamz.domain.dto.community.sharing.SharingDetailDTO;
+import com.example.moamz.domain.dto.community.sharing.SharingModifyDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingWriteDTO;
 import com.example.moamz.service.community.sharing.SharingBoardService;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,7 +22,9 @@ import java.io.IOException;
 public class SharingController {
     private final SharingBoardService sharingBoardService;
 
-    // 게시글 등록하기
+    //
+    // 게시글 등록하기 <GET>
+    //
     @GetMapping("/regist")
     public String registSharing(@SessionAttribute(value="fgUserCode") Long userCode) {
         // 세션에 userCode가 있는 경우 게시글 등록 페이지로 이동
@@ -27,7 +32,9 @@ public class SharingController {
         return userCode==null ? "/normal/regular/userLogin" : "/community/sharing/sharingWrite";
     }
 
-    // 게시글 등록하기
+    //
+    // 게시글 등록하기 <POST>
+    //
     @PostMapping("/regist")
     public String registSharing(@SessionAttribute(value="fgUserCode", required = false) Long userCode,
                                 @RequestParam("postFile") MultipartFile file,
@@ -44,17 +51,55 @@ public class SharingController {
     }
 
     //
-    // 게시글 수정
+    // 게시글 수정 <GET>
     //
     @GetMapping("/update")
-    public String updateSharing(@SessionAttribute(value="fgUserCode") Long userCode) {
-        // 세션에 userCode가 있는 경우 게시글 수정 페이지로 이동
-        // 없는 경우 로그인 페이지로 이동
-        return userCode==null ? "/normal/regular/userLogin" : "/community/sharing/sharingModify";
+    public String updateSharing(@SessionAttribute(value="fgUserCode") Long userCode,
+                                @RequestParam("postId") Long postId,
+                                RedirectAttributes redirectAttributes,
+                                Model model) {
+        // 세션의 userCode가 null이면 로그인 화면으로 리다이렉트
+        if(userCode == null) {
+            return "redirect:/normal/regular/userLogin";
+        }
+
+        // 수정할 게시글의 상세dto 가져오기
+        SharingDetailDTO sharingDetailDTO = sharingBoardService.findSharingDetail(postId);
+
+        if(sharingDetailDTO.getWriterCode().equals(userCode)) {
+            // 게시글의 작성자CODE와 세션의 userCode가 같은 경우에만 글 수정 가능
+            model.addAttribute("sharingDetailDTO", sharingDetailDTO);
+            return "/community/sharing/sharingModify";
+        } else {
+            // 세션의 userCode와 DTO의 userCode값이 다르면 상세글에 접근할 수 없다.
+            // alert 메시지를 추가.. 실제 alert는 리다이렉트된 뷰에서 뜨게 된다.
+            redirectAttributes.addFlashAttribute("Message", "본인이 작성한 게시글만 수정할 수 있습니다!");
+            return "redirect:/sharing/detail/" + postId;
+        }
     }
 
     //
-    // 게시글 목록
+    // 게시글 수정 <POST>
+    //
+    @PostMapping("/update")
+    public String updateSharing(SharingModifyDTO sharingModifyDTO,
+                                @RequestParam("postFile") MultipartFile file,
+                                @RequestParam("fileChanged") boolean fileChanged,
+                                RedirectAttributes redirectAttributes) {
+        try {
+            sharingBoardService.updateSharing(sharingModifyDTO, file, fileChanged);
+            log.info("💛💛💛💛💛 컨트롤러에서 fileChanged : {}", fileChanged);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Long postId = sharingModifyDTO.getPostId();
+        return "redirect:/sharing/detail/" + postId;
+    }
+
+    //
+    // 게시글 목록 <GET>
     //
     @GetMapping("/list")
     public String sharingList() {

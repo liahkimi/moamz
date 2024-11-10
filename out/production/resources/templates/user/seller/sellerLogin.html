@@ -21,8 +21,8 @@
     </div>
 
     <div id="login-choice">
-      <button class="login-choice_but" onclick="location.href='../../user/regular/userLogin.html'">일반 로그인</button>
-      <button id="target-btn" class="login-choice_but" onclick="location.href='../../user/seller/sellerLogin.html'"> 판매자 로그인</button>
+      <button class="login-choice_but" onclick="location.href='/normal/regular/userLogin'">일반 로그인</button>
+      <button id="target-btn" class="login-choice_but" onclick="location.href='/seller/seller/sellerLogin'"> 판매자 로그인</button>
     </div>
     <form th:action="@{/seller/seller/sellerLogin}" method="post">
     <div id="login_box">
@@ -37,8 +37,8 @@
           <a href="../seller/sellerFindPassword.html">비밀번호 찾기</a>
         </div>
         <div id="sing-a">
-          <a href="../regular/userSignup.html">일반 회원가입</a> /
-          <a href="../seller/sellerSignup.html">판매자 회원가입</a>
+          <a href="/normal/regular/userSignup">일반 회원가입</a> /
+          <a href="/seller/seller/sellerSignup">판매자 회원가입</a>
         </div>
       </div>
     </div>

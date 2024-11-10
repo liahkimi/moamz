@@ -11,6 +11,13 @@
 <body>
     <header id="header" th:replace="~{/main/fragment/header/userHeaderLogin}"></header>
     <main>
+        <!-- alertMessage 처리 -->
+        <div th:if="${Message}">
+            <script>
+                alert("[[${Message}]]");
+            </script>
+        </div>
+
         <!-- 게시글 영역 -->
         <div class="post-container" th:attr="data-id=${sharingDetailDTO.postId}">
             <!-- 게시글 정보 -->
@@ -35,7 +42,7 @@
                         </div>
                         <!-- 내가 쓴 글일 때 보이는 버튼 -->
                         <div class="btn-writer" th:if="${sharingDetailDTO.isMyPost() == true}">
-                            <button type="button" id="modify-btn" onclick="location.href='/sharing/update'">수정</button>
+                            <button type="button" id="modify-btn">수정</button>
                             <button type="button" id="delete-btn">삭제</button>
                         </div>
                     </div>
@@ -48,7 +55,7 @@
 
         </div>
         <!-- 목록으로 이동 버튼 -->
-        <button type="button" class="move-list-btn" onclick="location.href='sharing/list'">나눔게시판 목록으로 이동</button>
+        <button type="button" class="move-list-btn" onclick="location.href='/sharing/list'">나눔게시판 목록으로 이동</button>
         
 
     </main>

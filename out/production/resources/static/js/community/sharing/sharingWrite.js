@@ -104,7 +104,7 @@ writeBtn.addEventListener('click', (e) => {
         return;
     }
     if (!thumbnail) {
-        alert('상품 사진을 등록해주세요.');
+        alert('대표 사진을 등록해주세요.');
         return;
     }
     if (contentInput.trim() === '') {
