@@ -42,18 +42,18 @@
           <a>공지사항</a>
         </div>
       </li>
-      <li onclick="location.href='adminEcoList.html'" class="nav-link">
+      <li th:onclick="|location.href='@{/admin/eco/list}'|" class="nav-link">
         <div class="nav-logo">
           <img
             th:src="@{/img/admin/ecoBoard.png}"
             alt="dashboardLogo"
           />
         </div>
-        <div class="nav-title">
-          <a href="#">에코프로젝트</a>
+        <div class="nav-title" >
+          <a>에코프로젝트</a>
         </div>
       </li>
-      <li  onclick="location.href='adminUserInquiryList.html'" class="nav-link">
+      <li  th:onclick="|location.href='@{/admin/userInquiry/list}'|"  class="nav-link">
         <div class="nav-logo">
           <img
             th:src="@{/img/admin/inquiry.png}"
@@ -61,7 +61,7 @@
           />
         </div>
         <div class="nav-title">
-          <a href="#">일반회원 문의</a>
+          <a >일반회원 문의</a>
         </div>
       </li>
       <li  onclick="location.href='adminSellerInquiryList.html'" class="nav-link">

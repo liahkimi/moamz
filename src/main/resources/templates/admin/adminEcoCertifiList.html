@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>에코-인증글 목록</title>
-    <link rel="stylesheet" href="../../static/css/reset2.css" />
-    <link
-      rel="stylesheet"
-      href="../../static/css/admin/adminEcoCertifiList.css"
-    />
+    <link rel="stylesheet" th:href="@{/css/reset2.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminEcoCertifiList.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin/adminHeader.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminNavBar.css}" />
   </head>
   <body>
-    <header id="adminHeader"></header>
+    <header id="adminHeader" th:replace="~{/admin/adminHeader :: header}"></header>
     <main>
-      <nav id="adminNavBar"></nav>
+      <nav id="adminNavBar" th:replace="~{/admin/adminNavBar :: nav}"></nav>
       <!-- 우측 녹색 메인 화면-->
       <div class="content-box">
         <!-- 타이틀 : dashboard -->
@@ -23,7 +21,7 @@
             <div class="page-title">에코프로젝트 인증글 목록</div>
           </div>
           <div class="go-list-btn">
-            <button type="button" onclick="location.href='adminEcoList.html'">
+            <button type="button" th:onclick="|location.href='@{/admin/eco/list}'|">
               에코프로젝트 목록으로
             </button>
           </div>
@@ -44,126 +42,17 @@
               </thead>
               <tbody>
                 <!-- 💥추후 각 tr클릭시 해당 상세페이지로 이동시키기 -->
-                <tr onclick="goToDetailPage()">
-                  <td>1</td>
-                  <td>오늘 플로깅 인증합니다!</td>
-                  <td>user1</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
+                <tr onclick="goToDetailPage()"  th:onclick="|goToDetailPage(event,${certList.fgPostId},${certList.fgProjectId})|" th:each ="certList, iterStat :${adminEcoCertListDTO}">
+                  <td th:text="${iterStat.index + 1}">1</td>
+                  <td th:text="${certList.fgPostTitle}">오늘 플로깅 인증합니다!</td>
+                  <td th:text="${certList.fgNormalNickname}">user1</td>
+                  <td th:text="${certList.fgPostCreatedAt}">2024/10/11</td>
+                  <td th:text="${certList.fgPostLikes}">10</td>
                   <td>
                     <button onclick="openModal(event)">포인트 지급하기</button>
                   </td>
                 </tr>
-                <tr onclick="goToDetailPage()">
-                    <td>2</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <button onclick="openModal(event)">포인트 지급하기</button>
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPage()">
-                    <td>3</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <button onclick="openModal(event)">포인트 지급하기</button>
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPage()">
-                    <td>4</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <button onclick="openModal(event)">포인트 지급하기</button>
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPage()">
-                    <td>5</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <button onclick="openModal(event)">포인트 지급하기</button>
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPage()">
-                    <td>6</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <button onclick="openModal(event)">포인트 지급하기</button>
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPage()">
-                    <td>7</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <button onclick="openModal(event)">포인트 지급하기</button>
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPage()">
-                    <td>8</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <button onclick="openModal(event)">포인트 지급하기</button>
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPage()">
-                    <td>9</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <button onclick="openModal(event)">포인트 지급하기</button>
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPage()">
-                    <td>10</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <button onclick="openModal(event)">포인트 지급하기</button>
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPage()">
-                    <td>11</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <button onclick="openModal(event)">포인트 지급하기</button>
-                    </td>
-                  </tr>
-                  <tr onclick="goToDetailPage()">
-                    <td>12</td>
-                    <td>오늘 플로깅 인증합니다!</td>
-                    <td>user1</td>
-                    <td>2024/10/11</td>
-                    <td>10</td>
-                    <td>
-                      <button onclick="openModal(event)">포인트 지급하기</button>
-                    </td>
-                  </tr>
+
               </tbody>
             </table>
 
@@ -203,12 +92,12 @@
       </div>
     </main>
   </body>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script>
-    $(function () {
-      $("#adminNavBar").load("adminNavBar.html");
-      $("#adminHeader").load("adminHeader.html");
-    });
-  </script>
-  <script src="../../static/js/admin/adminEcoCertifiList.js"></script>
+<!--  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<!--  <script>-->
+<!--    $(function () {-->
+<!--      $("#adminNavBar").load("adminNavBar.html");-->
+<!--      $("#adminHeader").load("adminHeader.html");-->
+<!--    });-->
+<!--  </script>-->
+  <script th:src="@{/js/admin/adminEcoCertifiList.js}"></script>
 </html>

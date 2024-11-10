@@ -18,7 +18,7 @@ public class AdminEcoCertDetailDTO {
     private String fgPostType; //글 종류
     private Long fgProjectId;    //에코프로젝트 번호
 
-    // 회원 대표 사진
+    // 상세보기 이미지
     private Long   fgPostFileId;           // 파일 ID
     private String fgPostFileRoot;         // 파일 경로
     private String fgPostFileName;        // 파일 이름
@@ -29,4 +29,10 @@ public class AdminEcoCertDetailDTO {
     private int fgPostLikes;            //글 좋아요 수
     private String fgCertContent;       //인증글 내용 (글내용에 사진 포함해서 올 수 있음)
 
+
+    // 작성자 프로필 이미지
+    private Long fgUserFileId; //파일IO
+    private String fgUserFileRoot; //파일경로
+    private String fgUserFileName; //파일이름
+    private String fgUserFileUuid; //파일 uuid
 }
