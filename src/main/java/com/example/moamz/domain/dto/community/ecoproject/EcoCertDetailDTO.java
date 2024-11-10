@@ -14,8 +14,10 @@ public class EcoCertDetailDTO {
     private String fgPostTitle;
     private LocalDateTime fgPostCreatedAt;
     private String fgCertContent;
+    private int fgPostViews;
     private Long fgCommonUserCode;
     private String fgNormalName;
     private String fgCommentCount;
+    private String fgUserProfile;
     private int fgLikes;
 }

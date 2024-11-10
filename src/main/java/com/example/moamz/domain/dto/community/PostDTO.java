@@ -12,12 +12,12 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 public class PostDTO {
-    private Long postId;
-    private String postType;
-    private String postTitle;
-    private LocalDateTime createdAt;
-    private int likes;
-    private int views;
-    private boolean isEdited;
-    private Long userCode;
+    private Long fgPostId;
+    private String fgPostType;
+    private String fgPostTitle;
+    private LocalDateTime fgPostcreatedAt;
+    private int fgPostlikes;
+    private int fgPostviews;
+    private char fgPostEdit;
+    private Long fgUserCode;
 }

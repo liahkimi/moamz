@@ -46,29 +46,6 @@
     </select>
 
 
-    <!-- FG_POST 테이블 INSERT -->
-    <insert id="insertFgPost" parameterType="PostDTO">
-        INSERT INTO FG_POST (
-            FG_POST_ID,
-            FG_POST_TYPE,
-            FG_POST_TITLE,
-            FG_POST_CREATED_AT,
-            FG_POST_LIKES,
-            FG_POST_VIEWS,
-            FG_POST_EDIT,
-            FG_USER_CODE
-        ) VALUES (
-                     #{fgPostId},
-                     #{fgPostType},
-                     #{fgPostTitle},
-                     SYSDATE,
-                     #{fgLikes},
-                     0,
-                     '0',
-                     #{fgUserCode}
-                 )
-    </insert>
-
     <!-- FG_RECIPE 테이블 INSERT -->
     <insert id="insertFgRecipe" parameterType="ReceipeWriteDTO">
         INSERT INTO FG_RECIPE (
@@ -111,15 +88,7 @@
 
 
 
-    <!-- FG_POST 테이블 제목 및 수정 여부 업데이트 -->
-    <update id="updateFgPostTitleAndEdit" parameterType="PostModifyDTO">
-        UPDATE FG_POST
-        SET
-            FG_POST_TITLE = #{fgPostTitle},
-            FG_POST_EDIT = '1'
-        WHERE
-            FG_POST_ID = #{fgPostId}
-    </update>
+
 
     <!-- FG_RECIPE 테이블 재료, 조리 시간, 컨텐츠 업데이트 -->
     <update id="updateFgRecipeDetails" parameterType="ReceipeModifyDTO">

@@ -56,28 +56,6 @@
             P.FG_POST_TYPE = 'socialing';
     </select>
 
-    <insert id="insertFgPost" parameterType="PostDTO">
-        INSERT INTO FG_POST (
-            FG_POST_ID,
-            FG_POST_TYPE,
-            FG_POST_TITLE,
-            FG_POST_CREATED_AT,
-            FG_POST_LIKES,
-            FG_POST_VIEWS,
-            FG_POST_EDIT,
-            FG_USER_CODE
-        ) VALUES (
-                     #{fgPostId},
-                     #{fgPostType},
-                     #{fgPostTitle},
-                     SYSDATE,
-                     0,
-                     0,
-                     '0',
-                     #{fgUserCode}
-                 )
-    </insert>
-
     <!-- FG_SOCIALING 테이블 INSERT -->
     <insert id="insertFgSocialing" parameterType="SocialingWriteDTO">
         <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">

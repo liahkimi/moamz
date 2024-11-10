@@ -12,8 +12,11 @@ import java.util.List;
 @Mapper
 public interface EcoProjectMapper {
     
-    // 프로젝트 리스트
+    // 프로젝트 진행중 리스트
     List<EcoProjectListDTO> ecoProjectList();
+
+//    완료 프로젝트
+    List<EcoProjectListDTO> ecoProjectEndList();
 
     // 인증글 디테일
     EcoCertDetailDTO ecoCertDetail(Long fgPostId);
@@ -23,9 +26,6 @@ public interface EcoProjectMapper {
 
      // 인증글에 insert
     void ecoCertInsert(EcoCertWriteDTO ecoCertWriteDTO);
-
-    // post에 insert(eco 인증)
-    void ecoCertPostInsert(PostDTO postDTO);
 
     // 인증글 삭제
     void ecoCertDelete(Long fgPostId);

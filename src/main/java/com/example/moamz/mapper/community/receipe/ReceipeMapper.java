@@ -17,14 +17,13 @@ public interface ReceipeMapper {
 //    레시피 리스트
     List<ReceipeListDTO> selectRecipePostList();
 
-//    fg_post에 insert
-    void insertFgPost(PostDTO postDTO);
-
     // recipe에 insert
     void insertFgPostRecipe(ReceipeWriteDTO writeDTO);
 
     // recipe update
     void updateFgRecipeDetails(ReceipeModifyDTO modifyDTO);
 
+    // receipe delete
+    void deleteFgRecipe(Long fgPostId);
 
 }

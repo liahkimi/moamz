@@ -20,6 +20,10 @@ public class EcoProjectListDTO {
     private LocalDateTime fgEcoEnd;
     private String fgEcoParticipation;
     private String fgCertInfo;
+    private int fgPostLikes;
     private int fgEcoPoints;
     private char fgEcoStatus;
+    private String formattedEcoStart;
+    private String formattedEcoEnd;
+    private int fgEcoDaysElapsed;
 }

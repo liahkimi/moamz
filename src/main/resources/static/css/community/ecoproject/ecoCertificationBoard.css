@@ -82,7 +82,7 @@ button{
 }
 /* 왼쪽 카테고리 영역 */
 .community-category-container {
-  width: 140px;
+  width: 21%;
   height: 100%;
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -93,6 +93,7 @@ button{
   margin-right: 20px;
 }
 .community-category-container div {
+  width: 160px;
   display: flex;
   align-items: center;
   margin-bottom: 15px;
@@ -123,6 +124,7 @@ button{
 }
 /* 게시글 목록 */
 .free-list-wrap {
+  width: 500px;
   min-height: 400px;
   display: flex;
   align-items: center;
