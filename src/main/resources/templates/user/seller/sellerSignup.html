@@ -4,21 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>sellerSignup</title>
-  <link rel="stylesheet" href="../../../static/css/reset2.css">
-  <link rel="stylesheet" href="../../../static/css/user/seller/sellerSignup.css">
+  <link rel="stylesheet" th:href="@{/css/reset2.css}">
+  <link rel="stylesheet" th:href="@{/css/user/seller/sellerSignup.css}">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script defer src="../../../static/js/user/seller/sellerSignup.js"></script>
+  <script defer th:src="@{/js/user/seller/sellerSignup.js}"></script>
 </head>
 <body>
   <header id="header"></header>
   <div id="signup-container">
 
     <div id="signup-logo">
-      <img src="../../../static/img/user/logo-green.jpg">
+      <img th:src="@{/img/user/logo-green.jpg}">
     </div>
     <div id="signup-user"><strong>판매자 회원가입</strong></div>
     
-    <form action="">
+    <form th:action="@{/seller/seller/sellerSignup}" method="post" enctype="multipart/form-data">
       <div id="singup-profile">
         <!-- 이미지 클릭시 첨부파일 이동! -->
         <!--lable을 누르면 input 태그로 연결-->
@@ -28,40 +29,40 @@
           </div>
         </label>
         <div class="cancle"></div>
-        <input type="file" id="attach" style="display: none;" required>
+        <input type="file" name="file" id="attach" style="display: none;" required>
       </div>
       
       <div id="signup-wrap">
         <div id="signup-email">
-          <input type="text" id="email-input" placeholder="아이디 입력(6~20 자리)">
-          <button id="email-btn">중복확인</button>
+          <input type="text" id="email-input" name="fgUserId" placeholder="아이디 입력(6~20 자리)">
+          <button id="email-btn" type="button">중복확인</button>
           <!-- <input type="button" id="email-btn" placeholder="중복확인"> -->
-          <input id="password-input" type="password" placeholder="비밀번호 입력(영문, 숫자, 특수문자 포함8~20)" required>
+          <input id="password-input" name="fgUserPassword" type="password" placeholder="비밀번호 입력(영문, 숫자, 특수문자 포함8~20)" required>
           <input id="password-recheck" type="password" placeholder="비밀번호 재확인" required>
           <!-- js 비밀번호 형식, 비밀번호 재확인 -->
           <p id="check-p"></p>
           <p id="recheck-p"></p>
         </div>
         <div id="signup-phone">
-          <input id="name-input" type="password" placeholder="이름" required>
-          <input type="email" id="input-phone" placeholder="휴대폰번호" required>
-          <button id="phone-btn">중복확인</button>
-          <input type="email" id="recheck-phone" placeholder="인증번호" required>
+          <input id="name-input" name="fgSellerName" type="text" placeholder="이름" required>
+          <input type="text" id="input-phone" name="fgSellerPhone" placeholder="휴대폰번호" required>
+          <button id="phone-btn" type="button">중복확인</button>
+          <input type="text" id="recheck-phone" placeholder="인증번호" required>
           <span id="time"></span>
           <button id="recheck-btn">확인</button>
         </div>
         <div id="signup-post"> 
           <h2>업체주소</h2>
-          <input type="text" id="post-input" placeholder=" 우편번호" readonly required>
-          <button id="post-btn">중복확인</button>
-          <input type="text" id="address" placeholder=" 도로명 주소" readonly required>
-          <input type="text" id="detail-address" placeholder= "상세주소">
+          <input type="text" id="post-input" name="fgBusinessPostcode" placeholder=" 우편번호" readonly required>
+          <button id="post-btn" type="button" onclick="findPostCode()">우편검색</button>
+          <input type="text" id="address" name="fgBusinessAddress" placeholder=" 도로명 주소" readonly required>
+          <input type="text" id="detail-address" name="fgBusinessAddressDetail" placeholder= "상세주소">
         </div>
         <div id="signup-business"> 
-          <input type="text" id="business-input" placeholder="사업자번호" required>
-          <button id="business-btn">중복확인</button>
-          <input type="text" id="business-name" placeholder="업체명" required>
-          <input type="text" id="business-phone" placeholder= "업체 전화번호" required>
+          <input type="text" id="business-input" name="fgBusinessNumber" placeholder="사업자번호" required>
+          <button id="business-btn" type="button">업체확인</button>
+          <input type="text" id="business-name" name="fgBusinessName" placeholder="업체명" required>
+          <input type="text" id="business-phone" name="fgBusinessPhone" placeholder= "업체 전화번호" required>
         </div>
 
         <div id="signup-agreement">
@@ -158,10 +159,4 @@
   </div>
   <footer id="footer"></footer>
 </body>
-<script>
-  $(function() {
-      $("#header").load("../../main/fragment/header/userHeaderLogin.html");
-      $("#footer").load("../../main/fragment/footer/userFooter.html");
-  });
-</script>
 </html>
