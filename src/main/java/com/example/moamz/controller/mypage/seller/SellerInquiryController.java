@@ -12,13 +12,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,16 +28,24 @@ public class SellerInquiryController {
 
     // 문의글 등록 페이지 열기
     @GetMapping("/regist")
-    public String regist() {
-        return "mypage/seller/sellerAdminInquiryWrite";
-    }//02 6952 3603
+    public String regist(@SessionAttribute(value="fgUserCode", required=false) Long userCode) {
+        // 세션에 userCode가 null이면 로그인 페이지로 리다이렉트
+        // null이 아니면 문의글 등록 페이지로 연결
+        return userCode==null ? "redirect:/seller/seller/sellerLogin" :
+                "mypage/seller/sellerAdminInquiryWrite";
+    }
 
     // 문의글 목록 페이지 열기
     @GetMapping("/list")
-    public String list(Model model) {
-        //😑😑현재 로그인한 사용자 userCode 필요..
-        Long userCode = 1L;
-        Long businessCode = 1L;
+    public String list(@SessionAttribute(value="fgUserCode", required=false) Long userCode,
+                        Model model) {
+        // 세션에 userCode가 null이면 로그인 페이지로 리다이렉트
+        if(userCode == null) {
+            return "redirect:/seller/seller/sellerLogin";
+        }
+
+        // 현재 로그인한 판매자의 businessId값 찾기
+        Long businessCode = sellerMyService.findBusinessId(userCode);
 
         // 판매자 프로필 가져오기
         SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(userCode, businessCode);
@@ -50,18 +56,18 @@ public class SellerInquiryController {
         // 모델에 문의글 목록, 판매자 프로필 추가해서 뷰로 전달
         model.addAttribute("inquiryList", inquiryList);
         model.addAttribute("sellerProfileDTO", sellerProfileDTO);
-        return "mypage/seller/sellerAdminInquiryList";
+
+        return userCode==null ? "redirect:/seller/seller/sellerLogin" :
+                "mypage/seller/sellerAdminInquiryList";
     }
 
     // 문의글 등록 post 요청 처리
     @PostMapping("/regist")
     public String regist(InquiryWriteDTO inquiryWriteDTO,
+                         @SessionAttribute(value="fgUserCode", required = false) Long userCode,
                          RedirectAttributes redirectAttributes) {
-        // 😑😑세션 없어서 userCode값에 1 넣음
-        inquiryWriteDTO.setUserCode(1L);
-
-        // 서비스 호출 전 dto
-        System.out.println("⭐⭐⭐⭐⭐DTO : " + inquiryWriteDTO);
+        // 세션의 userCode를 DTO에 넣어주기
+        inquiryWriteDTO.setUserCode(userCode);
 
         // 문의글 등록 메서드 호출
         sellerInquiryService.registInquiry(inquiryWriteDTO);
@@ -80,23 +86,51 @@ public class SellerInquiryController {
 
     // 문의글 상세보기 페이지 열기
     @GetMapping("/detail/{postId}")
-    public String detail(@PathVariable("postId") Long postId, Model model) {
+    public String detail(@PathVariable("postId") Long postId,
+                         @SessionAttribute(value="fgUserCode", required=false) Long userCode,
+                         RedirectAttributes redirectAttributes,
+                         Model model) {
+        // 세션에 userCode가 null이면 로그인 페이지로 리다이렉트
+        if(userCode == null) {
+            return "redirect:/seller/seller/sellerLogin";
+        }
+
         // 문의글 상세정보 가져오는 메서드
         InquiryDetailDTO inquiryDetailDTO = sellerInquiryService.findInquiryDetail(postId);
-        log.info("🌟🌟🌟🌟🌟inquiryDetailDTO : {}", inquiryDetailDTO);
-        // 상세 문의글 DTO를 모델에 담아서 뷰로 전달
-        model.addAttribute("inquiryDetailDTO", inquiryDetailDTO);
-        log.info("🌟🌟🌟🌟🌟model : {}", model);
 
+        log.info("💛💛💛dto의 userCode : {}", inquiryDetailDTO.getUserCode());
+        log.info("💛💛💛세션의 userCode : {}", userCode);
 
-        // 댓글 리스트 가져오는 메서드
-        List<InquiryCommentDTO> commentList = sellerInquiryService.findInquiryComment(postId);
-        log.info("🌟🌟🌟🌟postId : {}", postId);
-        log.info("🌟🌟🌟🌟🌟commentList : " + commentList);
-        // 댓글 DTO 모델에 담아서 뷰로 전달달
-        model.addAttribute("commentList", commentList);
+        if (userCode.equals(inquiryDetailDTO.getUserCode())) {
+            // 상세 문의글 DTO를 모델에 담아서 뷰로 전달
+            model.addAttribute("inquiryDetailDTO", inquiryDetailDTO);
 
-        return "mypage/seller/sellerAdminInquiryDetail";
+            // 댓글 리스트 가져오는 메서드
+            List<InquiryCommentDTO> commentList = sellerInquiryService.findInquiryComment(postId);
+
+            // 댓글 DTO 모델에 담아서 뷰로 전달달
+            model.addAttribute("commentList", commentList);
+
+            return "mypage/seller/sellerAdminInquiryDetail";
+        } else {
+            // 세션의 userCode와 DTO의 userCode값이 다르면 상세글에 접근할 수 없다.
+            // alert 메시지를 추가.. 실제 alert는 리다이렉트된 뷰에서 뜨게 된다.
+            redirectAttributes.addFlashAttribute("Message", "본인이 작성하지 않은 문의글은 조회할 수 없습니다.");
+            return "redirect:/seller/inquiry/list";
+        }
+    }
+
+    // 게시글 삭제하기
+    @GetMapping("/removeInquiry/{postId}")
+    public String deletePost(@PathVariable("postId") Long postId,
+                             RedirectAttributes redirectAttributes) {
+        // 게시글 삭제하기
+        sellerInquiryService.removeInquiry(postId);
+
+        // view에 alert Message 전달하기
+        redirectAttributes.addFlashAttribute("Message", "삭제되었습니다.");
+
+        return "redirect:/seller/inquiry/list";
     }
 
 }

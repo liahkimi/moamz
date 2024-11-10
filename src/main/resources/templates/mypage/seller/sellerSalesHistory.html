@@ -11,6 +11,13 @@
 <body>
     <header id="header" th:replace="~{/main/fragment/header/sellerHeader}"></header>
     <main>
+        <!-- alertMessage 처리 -->
+        <div th:if="${Message}">
+            <script>
+                alert("[[${Message}]]");
+            </script>
+        </div>
+
         <section id="side-section" th:replace="~{/mypage/seller/sellerMypageSide}"></section>
 
         <!-- 상품판매내역 영역-->
@@ -22,14 +29,14 @@
             </div>
             <!-- 상품상태 카테고리 -->
             <div class="sales-history-menu">
-                <div id="product-ready-btn" class="menu-btn active">상품준비</div>
-                <div id="product-pickup-btn" class="menu-btn">픽업대기</div>
-                <div id="product-completed-btn" class="menu-btn">픽업완료</div>
+                <div id="product-ready-btn" class="menu-btn active" onclick="showList('ready')">상품준비</div>
+                <div id="product-pickup-btn" class="menu-btn" onclick="showList('pickup')">픽업대기</div>
+                <div id="product-completed-btn" class="menu-btn" onclick="showList('completed')">픽업완료</div>
             </div>
             <!-- 상품준비 목록 -->
             <div id="product-ready-list" class="sales-history-container">
                 <ul id="sales-product-ready-list">
-                    <li class="product-list" th:each="salesListDTO : ${salesListDTO}">
+                    <li class="product-list" th:each="salesListDTO : ${readyList}" th:data-id="${salesListDTO.orderId}">
                         <div class="order-info">
                             <span class="order-time" th:text="${salesListDTO.orderDate}">주문시간</span>
                             <button type="button" class="ready-complete-btn">상품 준비 완료</button>
@@ -37,8 +44,8 @@
                         <div class="product-info">
                             <!-- 상품이미지 -->
                             <div class="product-item-img"
-                                 th:style="'background-image: url(/upload_moamz/' + ${product.productFileRoot}
-                                + '/' +  ${product.productFileUuid} + '_' + ${product.productFileName} + ')' ">
+                                     th:style="'background-image: url(/upload_moamz/' + ${salesListDTO.productFileRoot}
+                                    + '/' +  ${salesListDTO.productFileUuid} + '_' + ${salesListDTO.productFileName} + ')' ">
                             </div>
                             <div class="product-wrap">
                                 <p class="list-title" th:text="${salesListDTO.productName}">상품명</p>
@@ -58,7 +65,7 @@
                             </div>
                         </div>
                         <div>
-                            <p class="move-to-detail" onclick="location.href=`seller/sales/detail/${salesListDTO.orderId}`">자세히 보러가기 ></p>
+                            <p class="move-to-detail">자세히 보러가기 ></p>
                         </div>
                     </li>
                 </ul>
@@ -66,7 +73,7 @@
             <!-- 픽업대기 목록 -->
             <div id="product-pickup-list" class="sales-history-container hidden">
                 <ul id="sales-pickup-ready-list">
-                    <li class="product-list" th:each="salesListDTO : ${salesListDTO}">
+                    <li class="product-list" th:each="salesListDTO : ${pickupList}" th:data-id="${salesListDTO.orderId}">
                         <div class="order-info">
                             <span class="order-time" th:text="${salesListDTO.orderDate}">주문시간</span>
                             <button type="button" class="pickup-complete-btn">고객 픽업 완료</button>
@@ -74,8 +81,8 @@
                         <div class="product-info">
                             <!-- 상품이미지 -->
                             <div class="product-item-img"
-                                 th:style="'background-image: url(/upload_moamz/' + ${product.productFileRoot}
-                                + '/' +  ${product.productFileUuid} + '_' + ${product.productFileName} + ')' ">
+                                 th:style="'background-image: url(/upload_moamz/' + ${salesListDTO.productFileRoot}
+                                + '/' +  ${salesListDTO.productFileUuid} + '_' + ${salesListDTO.productFileName} + ')' ">
                             </div>
                             <div class="product-wrap">
                                 <p class="list-title" th:text="${salesListDTO.productName}">상품명</p>
@@ -95,7 +102,7 @@
                             </div>
                         </div>
                         <div>
-                            <p class="move-to-detail" onclick="location.href=`seller/sales/detail/${salesListDTO.orderId}`">자세히 보러가기 ></p>
+                            <p class="move-to-detail" onclick="location.href=`/seller/sales/detail/${salesListDTO.orderId}`">자세히 보러가기 ></p>
                         </div>
                     </li>
                 </ul>
@@ -103,15 +110,15 @@
             <!-- 픽업완료 목록 -->
             <div id="product-completed-list" class="sales-history-container hidden">
                 <ul id="sales-completed-list">
-                    <li class="product-list" th:each="salesListDTO : ${salesListDTO}">
+                    <li class="product-list" th:each="salesListDTO : ${completedList}" th:data-id="${salesListDTO.orderId}">
                         <div class="order-info">
                             <span class="order-time" th:text="${salesListDTO.orderDate}">주문시간</span>
                         </div>
                         <div class="product-info">
                             <!-- 상품이미지 -->
                             <div class="product-item-img"
-                                 th:style="'background-image: url(/upload_moamz/' + ${product.productFileRoot}
-                                + '/' +  ${product.productFileUuid} + '_' + ${product.productFileName} + ')' ">
+                                 th:style="'background-image: url(/upload_moamz/' + ${salesListDTO.productFileRoot}
+                                + '/' +  ${salesListDTO.productFileUuid} + '_' + ${salesListDTO.productFileName} + ')' ">
                             </div>
                             <div class="product-wrap">
                                 <p class="list-title" th:text="${salesListDTO.productName}">상품제목</p>
@@ -131,7 +138,7 @@
                             </div>
                         </div>
                         <div>
-                            <p class="move-to-detail" onclick="location.href=`seller/sales/detail/${salesListDTO.orderId}`">자세히 보러가기 ></p>
+                            <p class="move-to-detail" onclick="location.href=`/seller/sales/detail/${salesListDTO.orderId}`">자세히 보러가기 ></p>
                         </div>
                     </li>
                 </ul>

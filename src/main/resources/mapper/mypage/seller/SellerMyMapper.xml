@@ -24,33 +24,46 @@
     </select>
 
     <!-- 판매자 프로필 -->
+
     <select id="selectStoreProfile" parameterType="Long" resultType="SellerProfileDTO">
         SELECT uf.FG_USER_FILE_NAME AS userFileName,
                uf.FG_USER_FILE_ROOT AS userFileRoot,
                uf.FG_USER_FILE_UUID AS userFileUuid,
-                b.FG_BUSINESS_NAME AS businessName,
+               b.FG_BUSINESS_NAME AS businessName,
                b.FG_BUSINESS_RATING AS businessRating,
-               SUM(o.FG_ORDER_QUANTITY * p.FG_PRODUCT_WEIGHT) AS totalWeight
-        FROM FG_BUSINESS b, FG_USER_FILE uf, FG_ORDER o, FG_PRODUCT p
-        WHERE b.FG_USER_CODE = uf.FG_USER_CODE
-          AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
-          AND p.FG_BUSINESS_ID = b.FG_BUSINESS_ID
-          AND o.FG_PAYMENT_STATUS = '결제완료'
-          AND b.FG_USER_CODE = #{userCode}
+               b.FG_BUSINESS_ID AS businessId,
+               COALESCE(SUM(o.FG_ORDER_QUANTITY * p.FG_PRODUCT_WEIGHT), 0) AS totalWeight
+        FROM FG_BUSINESS b
+            JOIN FG_USER_FILE uf ON b.FG_USER_CODE = uf.FG_USER_CODE
+            LEFT JOIN FG_PRODUCT p ON p.FG_BUSINESS_ID = b.FG_BUSINESS_ID
+            LEFT JOIN FG_ORDER o ON o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+            AND o.FG_PAYMENT_STATUS = '결제완료'
+        WHERE b.FG_USER_CODE = #{userCode}
         GROUP BY uf.FG_USER_FILE_NAME, uf.FG_USER_FILE_ROOT, uf.FG_USER_FILE_UUID,
-                 b.FG_BUSINESS_NAME, b.FG_BUSINESS_RATING
+                 b.FG_BUSINESS_NAME, b.FG_BUSINESS_RATING, b.FG_BUSINESS_ID
     </select>
+
 
     <!-- 업체 리뷰 조회 -->
     <select id="selectMyStoreRv" parameterType="Long" resultType="StoreReviewDTO">
-        SELECT nu.FG_NORMAL_NICKNAME AS normalNickname, rv.FG_REVIEW_CONTENT AS reviewContent,
-               p.FG_PRODUCT_NAME ASproductName, rv.FG_REVIEW_RATING AS reviewRating,
-               rv.FG_REVIEW_CREATED_AT ASreviewCreatedAt
+        SELECT nu.FG_NORMAL_NICKNAME AS normalNickname,
+               rv.FG_REVIEW_CONTENT AS reviewContent,
+               p.FG_PRODUCT_NAME AS productName,
+               rv.FG_REVIEW_RATING AS reviewRating,
+               TO_CHAR(rv.FG_REVIEW_CREATED_AT, 'YYYY/MM/DD') AS reviewCreatedAt
         FROM FG_REVIEW rv, FG_NORMAL_USER nu, FG_PRODUCT p, FG_ORDER o
         WHERE rv.FG_USER_CODE = nu.FG_USER_CODE
           AND rv.FG_ORDER_ID = o.FG_ORDER_ID
           AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
           AND rv.FG_BUSINESS_ID = #{businessId}
+    </select>
+
+    <!-- 판매자 업체 아이디 반환 -->
+    <select id="selectBusinessId" parameterType="Long" resultType="Long">
+        SELECT FG_BUSINESS_ID
+        FROM FG_BUSINESS b
+        JOIN FG_COMMON_USER cu ON b.FG_USER_CODE = cu.FG_USER_CODE
+        AND b.FG_USER_CODE = ${userCode}
     </select>
 
     <!-- 유저 아이디 반환 -->
@@ -125,5 +138,21 @@
         WHERE FG_USER_CODE = #{userCode}
     </delete>
 
+    <!-- 판매자 프로필 쿼리 -->
+    <!--         SELECT uf.FG_USER_FILE_NAME AS userFileName,
+               uf.FG_USER_FILE_ROOT AS userFileRoot,
+               uf.FG_USER_FILE_UUID AS userFileUuid,
+                b.FG_BUSINESS_NAME AS businessName,
+               b.FG_BUSINESS_RATING AS businessRating,
+               COALESCE(SUM(o.FG_ORDER_QUANTITY * p.FG_PRODUCT_WEIGHT), 0) AS totalWeight
+        FROM FG_BUSINESS b, FG_USER_FILE uf, FG_ORDER o, FG_PRODUCT p
+        WHERE b.FG_USER_CODE = uf.FG_USER_CODE
+          AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID(+)
+          AND p.FG_BUSINESS_ID = b.FG_BUSINESS_ID(+)
+          AND o.FG_PAYMENT_STATUS = '결제완료'
+          AND b.FG_USER_CODE = #{userCode}
+        GROUP BY uf.FG_USER_FILE_NAME, uf.FG_USER_FILE_ROOT, uf.FG_USER_FILE_UUID,
+                 b.FG_BUSINESS_NAME, b.FG_BUSINESS_RATING
+     -->
 
 </mapper>
