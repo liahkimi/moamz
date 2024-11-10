@@ -66,7 +66,7 @@ main {
     background-color: white;
     display: flex;
     flex-direction: column;
-    padding: 10px 10px 5px;
+    padding: 10px 10px;
 }
 .product-list>div {
     margin-bottom: 10px;
@@ -96,16 +96,22 @@ main {
 .product-item-img {
     width: 45px;
     height: 45px;
-    border-radius: 50%;
+    border-radius: 10px;
     margin-right: 5px;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
 }
-.product-info>div {
+/*.product-info>div {*/
+.product-wrap {
     margin-right: 5px;
-    width: 170px;
+    width: 150px;
 }
-.product-info div:nth-child(2) {
+.nickname-wrap {
+    margin-left: 10px;
+    width: 100px;
+}
+/*.product-info div:nth-child(2) {*/
+.request-wrap {
     width: 200px;
 }
 .list-title {

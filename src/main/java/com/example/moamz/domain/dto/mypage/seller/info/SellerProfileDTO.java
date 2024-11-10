@@ -14,6 +14,7 @@ public class SellerProfileDTO {
     // 판매자 회원 프로필 DTO
     //
 
+    private Long businessId;
     private String isTopBusiness;      // 우수 업체 여부
     private String businessName;        // 업체명
     private Double businessRating;      // 업체 평점

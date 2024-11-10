@@ -22,6 +22,7 @@ public class ProductDetailDTO {
     private String productName;     // 상품명
     private String productExpDate;  // 상품 소비기한
     private String productContent;  // 상품 상세
+    private String productStatus;
 
     private Long businessId;                // 업체ID
     private String businessName;            // 업체명

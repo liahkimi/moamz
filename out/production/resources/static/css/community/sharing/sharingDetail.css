@@ -1,7 +1,7 @@
 * {
-    color: #6a6a6a;
 }
 main {
+    color: #6a6a6a;
     width: 1000px;
     margin: 0 auto;
     display: flex;
@@ -12,7 +12,7 @@ main {
 .post-container {
     width: 700px;
     min-height: 600px;
-    margin-bottom: 20px;
+    padding: 40px 0;
 }
 /* 게시물 정보 영역 */
 .post-info-wrap {
@@ -24,7 +24,7 @@ main {
     color: black;
     font-weight: bold;
     font-size: 25px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 .user-info-wrap {
     display: flex;
@@ -40,9 +40,13 @@ main {
     width: 160px;
     font-size: 16px;
     font-weight: bold;
+    color: black;
 }
 .post-write-time-wrap {
-    margin-right: 10px;
+    margin-right: 20px;
+}
+#is-edit {
+    font-size: 14px;
 }
 .post-view-count-wrap {
     margin-right: 10px;
@@ -50,7 +54,7 @@ main {
 .btn-wrap {
     margin-left: auto;
     margin-right: 5px;
-    width: 200px;
+    width: 130px;
 }
 /* 다른사람이 쓴 글일 때 보이는 버튼 */
 .btn-others {
@@ -61,6 +65,7 @@ main {
     width: 149px;
     height: 25px;
     cursor: pointer;
+    color: #6a6a6a;
 }
 /* 내가 쓴 글일때 보이는 버튼 */
 .btn-writer {
@@ -74,6 +79,7 @@ main {
     background-color: white;
     border-radius: 10px;
     cursor: pointer;
+    color: #6a6a6a;
 }
 .hidden {
     display: none;
@@ -93,5 +99,5 @@ main {
     border-radius: 20px; 
     cursor: pointer;
     box-shadow: 0 4px 4px #6a6a6a6a;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }

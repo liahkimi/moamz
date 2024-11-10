@@ -1,26 +1,85 @@
 const salesCompleteBtn = document.getElementById('sales-complete-btn');
 const productDeleteBtn = document.getElementById('product-delete-btn');
+const productId = document.querySelector('.btn-container').getAttribute('data-id');
 
-// 판매완료 버튼
-salesCompleteBtn.addEventListener('click', () => {
-    const isConfirm = confirm("'판매완료' 상태로 변경하시겠습니까?");
-    if (isConfirm) {
-        //상태변경
-        alert('변경되었습니다.');
-    } else {
-    }
-});
+//////////////////////////////////////////////////
+///// 지도
 
-// 상품 삭제버튼
-productDeleteBtn.addEventListener('click', () => {
-    const isConfirm = confirm("상품을 삭제하시겠습니까?");
-    if (isConfirm) {
-        //삭제
-        alert('삭제되었습니다.');
-        location.href='sellerProductList.html';
+window.onload = function() {
+    var mapContainer = document.getElementById('productDetail-map');
+    if (mapContainer) {
+        var mapOption = {
+            center: new kakao.maps.LatLng(37.497, 127.036),
+            level: 3
+        };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption);
     } else {
+        console.error('지도 없어요');
     }
-});
-    
+};
+
+
+//////////////////////////////////////////////////
+///// 판매완료 처리 버튼
+
+if(salesCompleteBtn) {
+    salesCompleteBtn.addEventListener('click', () => {
+        const isConfirm = confirm("'판매완료' 상태로 변경하시겠습니까?");
+        if (isConfirm) {
+
+            // 상품 상태 변경 요청
+            // 일부만 업데이트 하는 경우 PATCH 요청
+            fetch(`/api/seller/product/status/${productId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert("판매 종료되었습니다.");
+                    // PATCH 요청이 수행되면 현재 화면을 새로고침 한다.
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('상품 상태 변경 실패:', error);
+                    alert(`상품 상태 변경 실패: ${error.message}`);
+                });
+
+
+        }
+    });
+}
+
+//////////////////////////////////////////////////
+///// 상품 삭제 버튼
+
+if(productDeleteBtn) {
+    productDeleteBtn.addEventListener('click', () => {
+        const isConfirm = confirm("상품을 삭제하시겠습니까?");
+        if (isConfirm) {
+            // 상품 삭제 (DELETE 요청)
+            fetch(`/api/seller/product/delete/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert("삭제되었습니다.");
+                    // 상품 삭제 후 상품 목록으로 이동
+                    location.href='/seller/product/list';
+                })
+                .catch(error => {
+                    console.error('상품 상태 변경 실패:', error);
+                    alert(`상품 상태 변경 실패: ${error.message}`);
+                });
+
+        }
+    });
+}
+
     
     

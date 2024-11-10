@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/reset2.css}">
     <link rel="stylesheet" th:href="@{/css/mypage/seller/sellerProductDetail.css}">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f79c59b6071fb92267e232c13fea51f&libraries=services"></script>
     <script defer th:src="@{/js/mypage/seller/sellerProductDetail.js}"></script>
     <title>마이페이지</title>
 </head>
@@ -68,14 +69,14 @@
                         <span th:text="${productDetailDTO.businessPhone}">대표번호</span>
                     </div>
                     <!-- 업체지도 -->
-                    <div class="store-map">
+                    <div class="store-map" id="productDetail-map">
 
                     </div>
                 </div>
                 <!-- 버튼 영역 -->
-                <div class="btn-container">
+                <div class="btn-container" th:attr="data-id=${productDetailDTO.productId}">
                     <button type="button" id="move-to-list" onclick="location.href='/seller/product/list'">상품목록으로</button>
-                    <button type="button" id="sales-complete-btn">판매완료</button>
+                    <button type="button" id="sales-complete-btn" th:if="${productDetailDTO.productStatus == '판매중'}">판매완료</button>
                     <button type="button" id="product-delete-btn">상품삭제</button>
 
                 </div>

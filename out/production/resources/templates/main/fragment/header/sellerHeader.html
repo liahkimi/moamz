@@ -9,7 +9,7 @@
 <body>
   <div class="container">
     <div class="header">
-      <img th:src="@{/img/main/fragment/header/logo.png}" onclick="location.href=`/main`">
+      <img th:src="@{/img/main/fragment/header/logo.png}" onclick="location.href=`/seller/sales/list`">
       <ul class="header-search">
         <li>
           <a th:href="@{main/main/aboutService}">서비스소개</a>
@@ -22,7 +22,7 @@
         <div class="btn-img"><img th:src="@{/img/main/fragment/header/user.png}"></div>
         <div class="btn-img"><img th:src="@{/img/main/fragment/header/chat.png}"></div>
         <div class="btn-img"><img th:src="@{/img/main/fragment/header/notification.png}"></div>
-        <button class="login" type="button">로그인</button>
+        <button class="login" type="button" onclick="location.href='/seller/logout'">로그아웃</button>
       </div>
       <!-- <button>로그아웃</button> -->
     </div>

@@ -23,8 +23,7 @@ public interface SellerProductMapper {
     void modifyProductStatus(Long productId);
 
     // 상품 삭제
-    // 몇개 행이 삭제되었는지 알아야 해서 반환타입 int
-    int deleteProduct(Long productId);
+    void deleteProduct(Long productId);
 
     // 상품 상세보기
     Optional<ProductDetailDTO> selectProductDetail(Long productId);

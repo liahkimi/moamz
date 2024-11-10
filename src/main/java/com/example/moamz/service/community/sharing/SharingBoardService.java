@@ -26,6 +26,7 @@ import java.util.UUID;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class SharingBoardService {
     private final SharingBoardMapper sharingBoardMapper;
     private final PostFileMapper postFileMapper;
@@ -98,8 +99,11 @@ public class SharingBoardService {
         // postId값 변수에 저장
         Long postId = sharingModifyDTO.getPostId();
 
+        log.info("💛💛💛 파일 수정여부 {}", fileChanged);
+
         // 이미지 파일이 변경되었을 때만 파일 삭제 후 재등록 한다.
         if (fileChanged) {
+            System.out.println("💛💛💛 여기 실행됨???");
             postFileMapper.deleteFile(postId);  // 기존 파일 삭제
 
             if (!file.isEmpty()) {              // 새 파일이 있을 때만 삽입
@@ -109,15 +113,6 @@ public class SharingBoardService {
             }
         }
 
-
-        /* 컨트롤러 처리..
-        public String updateSharing(
-        SharingModifyDTO sharingModifyDTO,
-        @RequestParam("file") MultipartFile file,
-        @RequestParam("fileChanged") boolean fileChanged) throws IOException {
-
-        sharingBoardService.updateSharing(sharingModifyDTO, file, fileChanged);
-         */
 
     }// updateSharing 메서드 끝
 

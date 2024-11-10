@@ -28,7 +28,7 @@ public class ProductRegistDTO {
     private String productContent;  // 상품 상세내용
     private String productTime;     // 상품 등록일
     private String productStatus;   // 상품 판매상태
-    private int productCategoryId;  // 카테고리ID
-    private int businessId;         // 업체ID
+    private Long productCategoryId;  // 카테고리ID
+    private Long businessId;         // 업체ID
 
 }

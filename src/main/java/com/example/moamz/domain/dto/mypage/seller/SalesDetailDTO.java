@@ -17,6 +17,7 @@ public class SalesDetailDTO {
     // 주문 관련 정보
     private Long orderId;                // 주문ID
     private String orderDate;            // 주문일시 (YYYY/MM/DD HH24:MI:SS 형식)
+    private Long businessId;             // 업체ID
 
     // 상품 정보
     private Long productId;             // 상품ID
