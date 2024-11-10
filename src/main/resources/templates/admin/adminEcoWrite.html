@@ -25,28 +25,14 @@
           <form class="content" th:action="@{/admin/eco/write}" method="post" enctype="multipart/form-data">
             <div class="write-wrap">
               <div class="title-and-file__wrapper">
-                  <div class="file-upload-title">📝 대표사진*</div>
-                  <div class="form-group">
-                      <ul class="file-wrap">
-                          <li>
-                              <input type="file" id="post-image" name="boardFile" accept="image/*" multiple />
-                          </li>
-                          <li class="img-list"></li>
-                      </ul>
+                <div class="file-upload-box">
+                    <div class="file-upload-title">📝 대표사진*</div>
+                    <label for="post-image">
+                      <div class="file-upload-description">클릭하세요</div>
+                        <img th:src="@{/img/admin/fileImg.png}">
+                    </label>
+                    <input type="file" id="post-image" style="display: none;" name="postFile" accept="image/*" multiple required>
                   </div>
-<!--                <div class="file-upload-box">-->
-<!--                    <div class="file-upload-title">📝 대표사진*</div>  -->
-<!--                    <ul>-->
-<!--&lt;!&ndash;                      <div class="file-upload-description">클릭하세요</div>&ndash;&gt;-->
-<!--                        <li>-->
-<!--                            <input type="file" id="post-image" style="display: none;" name="postFile" accept="image/*"  multiple required>-->
-<!--                        </li>-->
-<!--                        <li class="img-list"></li>-->
-<!--                    </ul>-->
-<!--&lt;!&ndash;                    <input type="file" id="post-image" style="display: none;" name="postFile" accept="image/*" multiple required>&ndash;&gt;-->
-<!--                    <p>-->
-<!--                  </div>-->
-                <div>
                   <div class="title-box">
                     <span class="title">📝 에코프로젝트 제목*</span>
                     <input class="title-value" type="text" name="fgPostTitle"/>
@@ -54,14 +40,12 @@
                   <div class="join-number-box">
                     <span class="join-number">📝 참여횟수*</span>
                         <select  id="join" name="fgEcoParticipation">
-<!--                            <option value="" disabled selected>참여횟수를 선택해주세요</option>-->
+                            <option value="" disabled selected>참여횟수를 선택해주세요</option>
                             <option value="한번만">한번만</option>
                             <option value="여러번">여러번</option>
                         </select>
                   </div>
                 </div>
-                  
-              </div>
               <div class="period">
                 <div class="start-date-box">
                     <span class="start-date">📝 시작날짜*</span>
@@ -76,7 +60,7 @@
                 <span class="point">📝 지급할 포인트*</span>
                 <input class="point-value"  type="number" name="fgEcoPoints">
               </div>
-              
+
               <div class="detail-box">
                 <span class="detail">📝 프로젝트 소개*</span>
                 <textarea  id="detail" rows="10" cols="100" name="fgEcoInfo"></textarea>
