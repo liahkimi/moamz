@@ -4,21 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>aboutService</title>
-  <link rel="stylesheet" href="../../../static/css/main/main/aboutService.css">
+  <link rel="stylesheet" th:href="@{/css/main/main/aboutService.css}">
   <!-- <link rel="stylesheet" href="../../.."> -->
 </head>
 <body>
-  <header id="header"></header>
+  <header id="header" th:replace="~{/main/fragment/header/userHeaderLogin.html}"></header>
   <div id="service-container">
-    <img src="../../../static/img/main/main/aboutService.jpg">
+    <img th:src="@{/img/main/main/aboutService.jpg}">
   </div>
-  <footer id="footer"></footer>
+  <footer id="footer" th:replace="~{/main/fragment/footer/userFooter.html}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(function() {
-        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
-        $("#footer").load("../../main/fragment/footer/userFooter.html");
-    });
-</script>
 </html>

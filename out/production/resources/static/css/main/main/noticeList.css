@@ -66,6 +66,7 @@ main{
   height: 42px;
   border: 1px solid #dddddd;
   /* text-align: center; */
+  cursor: pointer;
 }
 
 .noticeList-list .num{
