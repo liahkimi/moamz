@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface MainNoticeDetailMapper {
-    List<MainNoticeDetailDTO> selectNoticeDetail();
+    MainNoticeDetailDTO selectMainNoticeDetail(Long fgPostId);
 }

@@ -10,20 +10,20 @@
 <body>
 <div class="container">
   <div class="header">
-    <img th:src="@{/img/main/fragment/header/logo.png}" onclick="location.href='/main/main/mainPage.html'">
+    <img th:src="@{/img/main/fragment/header/logo.png}" onclick="location.href='/main'">
     <ul class="header-search">
       <li>
-        <a th:href="@{main/main/aboutService}">서비스소개</a>
+        <a th:href="@{main/aboutService}">서비스소개</a>
       </li>
       <li>
-        <a th:href="@{shop/productList}">쇼핑</a>
+        <a th:href="@{shop/list}">쇼핑</a>
       </li>
       <li>
         <!-- <div class="community-dropdown-box"> -->
         <a href="#">커뮤니티</a>
         <!-- <img src="../../../../static/img/main/fragment/header/communityDropdownIcon.png" class="dropdown-icon" alt="드롭다운 아이콘"> -->
         <div class="dropdown-content">
-          <a th:href="@{/community/ecoproject/ecoList.html}">에코프로젝트</a>
+          <a th:href="@{/ecoproject/projectList}">에코프로젝트</a>
           <a th:href="@{/community/socialing/socialingList.html}">소셜링</a>
           <a th:href="@{/community/receipe/receipeList.html}">레시피</a>
           <a th:href="@{/post/sharing/list}">나눔게시판</a>
@@ -32,7 +32,7 @@
         <!-- </div> -->
       </li>
       <li>
-        <a th:href="@{/main/main/noticeList.html}">공지사항</a>
+        <a th:href="@{/main/noticeList}">공지사항</a>
       </li>
     </ul>
     <!-- 검색창 -->
@@ -43,9 +43,9 @@
 
     <!-- 회원서비스 버튼 -->
     <div class="header-btn">
-      <div class="btn-img"><img th:src="@{/img/main/fragment/header/user.png}" onclick="location.href=``"></div>
-      <div class="btn-img"><img th:src="@{/img/main/fragment/header/chat.png}" onclick="location.href=``"></div>
-      <div class="btn-img"><img th:src="@{/img/main/fragment/header/cart.png}" onclick="location.href=``"></div>
+      <div class="btn-img"><img th:src="@{/img/main/fragment/header/user.png}" onclick="location.href=``" alt="마이페이지 이동"></div>
+      <div class="btn-img"><img th:src="@{/img/main/fragment/header/chat.png}" onclick="location.href=``" alt="채팅페이지 이동"></div>
+      <div class="btn-img"><img th:src="@{/img/main/fragment/header/cart.png}" onclick="location.href=`/shop/cart`" alt="장바구니 이동"></div>
       <div class="btn-img">
         <img th:src="@{/img/main/fragment/header/notification.png}">
         <div class="notification-dropdown">
@@ -81,9 +81,30 @@
           </div>
         </div>
       </div>
-      <button class="login" type="button" onclick="location.href=``">로그인</button>
+      <button class="login" type="button" onclick="location.href=``">로그아웃</button>
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const notificationIcon = document.querySelector('.btn-img:nth-child(4) img'); // 알림 아이콘
+    const notificationDropdown = document.querySelector('.notification-dropdown'); // 알림창
+
+    // 알림 아이콘을 클릭할 때 알림창 토글
+    notificationIcon.addEventListener('click', function (event) {
+      event.stopPropagation(); // 클릭 이벤트 전파를 막아서 알림창이 닫히지 않게 함
+      notificationDropdown.classList.toggle('active');
+    });
+
+    // 알림창 외부를 클릭하면 알림창 닫기
+    document.addEventListener('click', function (event) {
+      if (!notificationDropdown.contains(event.target) && !notificationIcon.contains(event.target)) {
+        notificationDropdown.classList.remove('active');
+      }
+    });
+  });
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </body>
 </html>

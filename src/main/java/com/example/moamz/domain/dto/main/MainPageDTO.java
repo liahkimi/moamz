@@ -18,10 +18,17 @@ public class MainPageDTO {
     // 업체 상세 페이지
     private Long fgPostId;
     // 업체 사진 파일
-    private Long postFileId;            // 파일ID
-    private String postFileName;        // 파일명
-    private String postFileRoot;        // 파일경로
-    private String postFileUuid;        // 파일UUID
+    private Long fgUserFileId;            // 파일ID
+    private String fgUserFileName;        // 파일명
+    private String fgUserFileRoot;        // 파일경로
+    private String fgUserFileUuid;        // 파일UUID
+
+
+    // 에코, 레시피, 소셜링 이미지 파일
+    private Long fgPostFileId;            // 파일ID
+    private String fgPostFileName;        // 파일명
+    private String fgPostFileRoot;        // 파일경로
+    private String fgPostFileUuid;        // 파일UUID
     private String thumbnailPath;       // 썸네일 경로
 
     private String fgBusinessName;

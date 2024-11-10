@@ -1,4 +1,4 @@
-package com.example.moamz.mapper.main.fragment.header;
+package com.example.moamz.mapper.main;
 
 import com.example.moamz.domain.dto.main.HeaderNoticeDTO;
 import org.apache.ibatis.annotations.Mapper;
