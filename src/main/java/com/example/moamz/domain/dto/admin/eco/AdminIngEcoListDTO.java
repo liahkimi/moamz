@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
-public class AdminEcoListDTO {
-//  (진행중/완료된) 에코프로젝트 목록 DTO
+public class AdminIngEcoListDTO {
+//  (진행중) 에코프로젝트 목록 DTO
 
     // 썸네일 보여주기
     private Long   fgPostFileId;           // 파일 ID
@@ -23,7 +23,7 @@ public class AdminEcoListDTO {
     private String fgPostTitle;            // 에코 프로젝트 제목
     private int fgPostLikes;                // 에코 프로젝트 좋아요 수
     private LocalDateTime fgEcoStart;               // 에코 프로젝트 시작일
-    private String fgEcoStartToChar;  // 에코 프젝 시작일 변홥버전
+    private String fgEcoStartToChar;  // 에코 프젝 시작일 변환버전
     private LocalDateTime fgEcoEnd;                 // 에코 프로젝트 종료일
     private String fgEcoEndToChar;    // 에코 프젝 종료일 변화버전
     private String fgEcoPeriod;                    //에코 기간(몇일)
@@ -34,7 +34,13 @@ public class AdminEcoListDTO {
 
     private String fgEcoStatus;             // 에코 프로젝트 종료 여부 (진행중: 1 / 종료: 0)
     private Long fgPostId;                  // 게시글 ID
+    private Long fgProjectId;               //프로젝트ID
     private String fgPostType; //글 종류
+    private String fgPostCreatedAt; //글 작성시간
+    private Long fgUserCode; //작성자 회원번호
+
+
+
 
 
 }

@@ -3,14 +3,10 @@
 //인증글 상세페이지로 이동
 function goToDetailPage(event, fgPostId, fgProjectId) {
     event.preventDefault();
-    const url = `/admin/eco/ecoCertDetail/${fgPostId}/${fgProjectId}`;
+    const url = `/admin/eco/finEcoCertDetail/${fgPostId}/${fgProjectId}`;
     window.location.href = url;
 }
 
-
-function goToDetailPageFin() {
-  window.location.href = "adminEcoCertifiDetailFin.html";  // 상세 페이지 URL로 이동
-}
   
   // 모달 열기 함수
   function openModal(event) {

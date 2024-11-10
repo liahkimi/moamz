@@ -34,6 +34,7 @@ public class AdminEcoService {
     // MultipartFile: 업로드된 파이를 처리할때 사용하는 인터페이스
     public void registerEco(AdminEcoWriteDTO adminEcoWriteDTO, List<MultipartFile> files) throws IOException {
         adminEcoMapper.insertEcoPost(adminEcoWriteDTO);//공통게시글테이블 insert
+        adminEcoMapper.insertEcoReal(adminEcoWriteDTO);//에코게시글테이블 insert
         Long fgPostId = adminEcoWriteDTO.getFgPostId(); //공통게시글테이블에 insert된 게시글번호
 
         for(MultipartFile file : files){
@@ -44,7 +45,7 @@ public class AdminEcoService {
             postFileDTO.setPostId(fgPostId);
             postFileMapper.insertFile(postFileDTO);
         }
-        adminEcoMapper.insertEcoReal(adminEcoWriteDTO);//에코게시글테이블 insert
+
     }
     
     //파일을 저장하는 메소드
@@ -73,13 +74,24 @@ public class AdminEcoService {
     }
 
     //      진행중인 에코프로젝트 목록 가져오기
-    public List<AdminEcoListDTO> findIngEcoList(){
+    public List<AdminIngEcoListDTO> findIngEcoList(){
         return adminEcoMapper.selectIngEcoList();
     }
 
     //    종료된 에코프로젝트 목록 가져오기
-    public List<AdminEcoListDTO> findIngFinList(){
+    public List<AdminFinEcoListDTO> findFinEcoList(){
         return adminEcoMapper.selectFinEcoList();
+    }
+
+    // 특정 에코프로젝트 1개만 조회하기
+    public AdminIngEcoListDTO findEcoProjectById(Long fgPostId){
+        return adminEcoMapper.selectEcoProjectById(fgPostId)
+                .orElseThrow(() -> new IllegalStateException("유효하지 않은 게시물"));
+    }
+
+    // 특정 한 에코프로젝트만 삭제하기
+    public void removeEcoProject(Long fgPostId){
+        adminEcoMapper.deleteEcoProject(fgPostId);
     }
 
     //    에코프젝  글 수정하기
@@ -103,8 +115,9 @@ public class AdminEcoService {
 
 
     //   에코프젝 종료시키기 버튼
-    public void changeStatusBtn(AdminEcoStatusUpdateDTO adminEcoStatusUpdateDTO){
-        adminEcoMapper.finishBtn(adminEcoStatusUpdateDTO);
+    public void changeStatusBtn(Long fgPostId){
+        adminEcoMapper.finishBtn(fgPostId);
+
     }
 
 

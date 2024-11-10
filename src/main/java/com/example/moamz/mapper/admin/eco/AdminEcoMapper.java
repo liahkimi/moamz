@@ -10,10 +10,16 @@ import java.util.Optional;
 @Mapper
 public interface AdminEcoMapper {
 //    진행중인 에코프로젝트 목록 가져오기
-    List<AdminEcoListDTO> selectIngEcoList();
+    List<AdminIngEcoListDTO> selectIngEcoList();
 
 //    종료된 에코프로젝트 목록 가져오기
-    List<AdminEcoListDTO> selectFinEcoList();
+    List<AdminFinEcoListDTO> selectFinEcoList();
+
+//    특정 한 에코프로젝트만 조회하기
+    Optional<AdminIngEcoListDTO> selectEcoProjectById(@Param("fgPostId") Long fgPostId);
+
+//    특정 한 에코프로젝트 삭제하기
+    void deleteEcoProject(@Param("fgPostId") Long fgPostId);
 
 //    에코프로젝트 글 작성하기 (공통게시글테이블 insert)
     void insertEcoPost(AdminEcoWriteDTO adminEcoWriteDTO);
@@ -28,7 +34,7 @@ public interface AdminEcoMapper {
     void modifyEcoReal(AdminEcoModifyDTO adminEcoModifyDTO);
 
 //   에코프젝 종료시키기 버튼 클릭시 (처음엔 무조건  FG_ECO_STATUS = '0')
-    void finishBtn(AdminEcoStatusUpdateDTO adminEcoStatusUpdateDTO);
+    void finishBtn(@Param("fgPostId") Long fgPostId);
 
 //    (진행중/종료된) 특정 한 에코 프로젝트의 인증글 목록보기
     List<AdminEcoCertListDTO> selectEcoCertList(@Param("fgProjectId") Long fgProjectId);
