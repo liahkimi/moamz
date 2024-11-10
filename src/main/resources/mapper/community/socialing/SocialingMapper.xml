@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.community.socialing.SocialingMapper">
+
+<!--    소셜링 리스트-->
+    <select id="socialingList" resultType="SocialingListDTO">
+        SELECT
+            P.FG_POST_ID AS fgPostId,
+            P.FG_POST_TYPE AS fgPostType,
+            P.FG_POST_TITLE AS fgPostTitle,
+            S.FG_SOCIALING_CONTENT AS fgSocialingContent,
+            S.FG_SOCIALING_CATEGORY AS fgSocialingCategory,
+            S.FG_SOCIALING_MAX_PARTICIPANTS AS fgSocialingMaxParticipants,
+            TO_CHAR(S.FG_SOCIALING_START, 'YYYY-MM-DD') AS fgSocialingStart,
+            TO_CHAR(S.FG_SOCIALING_END, 'YYYY-MM-DD') AS fgSocialingEnd,
+            S.FG_SOCIALING_LOCATION AS fgSocialingLocation,
+            S.FG_SOCIALING_MINAGE AS fgSocialingMinage,
+            S.FG_SOCIALING_MAXAGE AS fgSocialingMaxage,
+            U.FG_USER_CODE AS fgUserCode,
+            U.FG_NORMAL_NAME AS fgNormalName
+        FROM
+            FG_POST P
+                JOIN
+            FG_SOCIALING S ON P.FG_POST_ID = S.FG_POST_ID
+                JOIN
+            FG_NORMAL_USER U ON P.FG_USER_CODE = U.FG_USER_CODE
+        WHERE
+            P.FG_POST_TYPE = 'socialing'
+    </select>
+
+<!--    소셜링 디테일-->
+    <select id="socialingDetail" parameterType="Long" resultType="SocialingDetailDTO">
+        SELECT
+            P.FG_POST_ID AS fgPostId,
+            P.FG_POST_TYPE AS fgPostType,
+            P.FG_POST_TITLE AS fgPostTitle,
+            S.FG_SOCIALING_CONTENT AS fgSocialingContent,
+            S.FG_SOCIALING_CATEGORY AS fgSocialingCategory,
+            S.FG_SOCIALING_MAX_PARTICIPANTS AS fgSocialingMaxParticipants,
+            TO_CHAR(S.FG_SOCIALING_START, 'YYYY-MM-DD') AS fgSocialingStart,
+            TO_CHAR(S.FG_SOCIALING_END, 'YYYY-MM-DD') AS fgSocialingEnd,
+            S.FG_SOCIALING_LOCATION AS fgSocialingLocation,
+            S.FG_SOCIALING_MINAGE AS fgSocialingMinage,
+            S.FG_SOCIALING_MAXAGE AS fgSocialingMaxage,
+            U.FG_USER_CODE AS fgUserCode,
+            U.FG_NORMAL_NAME AS fgNormalName
+        FROM
+            FG_POST P
+                JOIN
+            FG_SOCIALING S ON P.FG_POST_ID = S.FG_POST_ID
+                JOIN
+            FG_NORMAL_USER U ON P.FG_USER_CODE = U.FG_USER_CODE
+        WHERE
+            P.FG_POST_ID = #{fgPostId}
+          AND
+            P.FG_POST_TYPE = 'socialing';
+    </select>
+
+    <!-- FG_SOCIALING 테이블 INSERT -->
+    <insert id="insertFgSocialing" parameterType="SocialingWriteDTO">
+        <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
+            select SEQ_FG_POST.currval from dual
+        </selectKey>
+        INSERT INTO FG_SOCIALING (
+        FG_POST_ID,
+        FG_SOCIALING_CATEGORY,
+        FG_SOCIALING_MAX_PARTICIPANTS,
+        FG_SOCIALING_START,
+        FG_SOCIALING_END,
+        FG_SOCIALING_LOCATION,
+        FG_SOCIALING_GENDER_RES,
+        FG_SOCIALING_MINAGE,
+        FG_SOCIALING_MAXAGE,
+        FG_SOCIALING_CONTENT
+        ) VALUES (
+        #{fgPostId},
+        #{fgSocialingCategory},
+        #{fgSocialingMaxParticipants},
+        TO_DATE(#{fgSocialingStart}, 'YYYY-MM-DD HH24:MI:SS'),
+        TO_DATE(#{fgSocialingEnd}, 'YYYY-MM-DD HH24:MI:SS'),
+        #{fgSocialingLocation},
+        '제한없음',
+        #{fgSocialingMinage},
+        #{fgSocialingMaxage},
+        #{fgSocialingContent}
+        )
+    </insert>
+
+    <!-- FG_POST_FILE 테이블 INSERT -->
+    <insert id="insertFgPostFile" parameterType="PostFileDTO">
+        INSERT INTO FG_POST_FILE (
+            FG_POST_FILE_ID,
+            FG_POST_FILE_NAME,
+            FG_POST_FILE_ROOT,
+            FG_POST_FILE_UUID,
+            FG_POST_FILE_TIME,
+            FG_POST_ID
+        ) VALUES (
+                     #{fgPostFileId},
+                     #{fgPostFileName},
+                     #{fgPostFileRoot},
+                     #{fgPostFileUUID},
+                     SYSDATE,
+                     #{fgPostId}
+                 )
+    </insert>
+</mapper>

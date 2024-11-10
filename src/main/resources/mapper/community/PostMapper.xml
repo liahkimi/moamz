@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.community.PostMapper">
+
+<!--    post에 insert-->
+    <insert id="insertFgPost" parameterType="PostDTO">
+    <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
+        SELECT SEQ_FG_POST.nextval from DUAL
+    </selectKey>
+        INSERT INTO FG_POST (
+            FG_POST_ID,
+            FG_POST_TYPE,
+            FG_POST_TITLE,
+            FG_POST_CREATED_AT,
+            FG_POST_LIKES,
+            FG_POST_VIEWS,
+            FG_POST_EDIT,
+            FG_USER_CODE
+        ) VALUES (
+                     #{fgPostId},
+                     #{fgPostType},
+                     #{fgPostTitle},
+                     SYSDATE,
+                     0,
+                     0,
+                     '0',
+                     #{fgUserCode}
+                 )
+    </insert>
+
+    <!-- FG_POST 테이블 제목 및 수정 여부 업데이트 -->
+    <update id="updateFgPostTitleAndEdit" parameterType="PostModifyDTO">
+        UPDATE FG_POST
+        SET
+            FG_POST_TITLE = #{fgPostTitle},
+            FG_POST_EDIT = '1'
+        WHERE
+            FG_POST_ID = #{fgPostId}
+    </update>
+</mapper>

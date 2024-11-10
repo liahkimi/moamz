@@ -17,8 +17,9 @@
             <div class="board-title">건강도! 환경도! 모두 챙기는 매일매일 달리기, 걷기 프로젝트</div>
             <!-- <div class="board-description">자유롭게 소통하고 새로운 정보를 공유해주세요!</div> -->
             <div class="btn-wrap">
-                <button type="button" class="write-btn"  onclick="location.href='ecoList.html'">프로젝트 목록으로</button>
-                <button type="button" class="write-btn" onclick="location.href='ecoCertificationWrite.html'">글 작성하기</button>
+                <button type="button" class="write-btn" onclick="window.location.href='/ecoproject/projectList'">프로젝트 목록으로</button>
+                <button type="button" class="write-btn"
+                        th:onclick="|window.location.href='/ecoproject/ecoCertWrite/${fgPostId}'|">글 작성하기</button>
             </div>
         </section>
 
@@ -43,26 +44,28 @@
                 <!-- 게시글 목록 -->
                 <div class="free-list-wrap">
                     <ul>
+                        <a  th:each="ecoCertLists:${ecoCerts}"  th:href="@{/ecoproject/ecoCertDetail/{fgPostId}(fgPostId=${ecoCertLists.fgPostId})}" style="text-decoration: none">
                         <li class="free-list">
-                            <span class="post-num">1</span>
-                            <span class="post-title" onclick="location.href='ecoCertificationDetatil.html'">우리집 강아지 보실분?우리집 강아지 보실분?우리집 강아지 보실분?</span>
-                            <span class="user-nickname">역삼동불주먹</span>
+                            <span class="post-num" th:text="${ecoCertLists.fgPostId}">1</span>
+                            <span class="post-title" th:text="${ecoCertLists.fgPostTitle}">우리집 강아지 보실분?우리집 강아지 보실분?우리집 강아지 보실분?</span>
+                            <span class="user-nickname" th:text="${ecoCertLists.fgNormalName}">역삼동불주먹</span>
                             <div class="post-info-wrap">
-                                <span class="post-write-time">24/10/13</span>
+                                <span th:text="${#temporals.format(ecoCertLists.fgPostCreatedAt, 'yy.MM.dd')}"></span>
                                 <div class="post-icon-wrap">
                                     <img th:src="@{/img/community/view_count_icon.png}" alt="조회수_아이콘">
-                                    <span class="post-view-count">10</span>
+                                    <span class="post-view-count" th:text="${ecoCertLists.fgPostViews}">10</span>
                                 </div>
                                 <div class="post-icon-wrap">
                                     <img th:src="@{/img/community/like_icon.png}" alt="좋아요_아이콘">
-                                    <span class="post-like-count">10</span>
+                                    <span class="post-like-count" th:text="${ecoCertLists.fgPostLikes}">10</span>
                                 </div>
                                 <div class="post-icon-wrap">
                                     <img th:src="@{/img/community/comment_icon.png}" alt="댓글_아이콘">
-                                    <span class="post-comment-count">10</span>
+                                    <span class="post-comment-count" th:text="${ecoCertLists.fgPostCommentCount}">10</span>
                                 </div>
                             </div>
                         </li>
+                        </a>
 <!--                        <li class="free-list">-->
 <!--                            <span class="post-num">1</span>-->
 <!--                            <span class="post-title" onclick="location.href='ecoCertificationDetatil.html'">우리집 강아지 보실분?우리집 강아지 보실분?우리집 강아지 보실분?</span>-->
