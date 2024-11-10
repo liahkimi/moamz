@@ -27,7 +27,6 @@ import java.util.UUID;
 @Slf4j
 public class NormalSignupService {
     private final NormalSignupMapper normalSignupMapper;
-    private final UserNormalService userNormalService;
 
     @Value("C:/upload_moamz/")
     private String fileDir;
