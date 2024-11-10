@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,24 +28,23 @@
           </div>
           <!-- 진행중인 에코배너 화면 -->
           <div id="ongoing-eco">
-            <div class="banner-box" onclick="goToDetailPage()" th:each="ingEco:${adminIngEcoListDTO}">
+            <div class="banner-box" th:onclick="|goToDetailPage(event, '${ingEco.fgPostId}', '${ingEco.fgProjectId}')|" th:each="ingEco:${adminIngEcoListDTO}">
               <div class="banner-img">
                 <img th:src="'/upload_moamz/' + ${ingEco.fgPostFileRoot} + '/' + ${ingEco.fgPostFileUuid} + '_' + ${ingEco.fgPostFileName}" alt="plogging"/>
               </div>
                 <div class="banner-article">
                 <div class="title-and-btns">
-                  <div class="title" th:text="${ingEco.fgPostId}" >환경을 위한 플로깅 프로젝트!</div>
+                  <div class="title" th:text="${ingEco.fgPostTitle}" >환경을 위한 플로깅 프로젝트!</div>
                   <div class="btns">
-<!--                    iterStat :${adminNoticeListDTO}" th:onclick="|location.href='@{/admin/notice/detail(fgPostId=${notice.fgPostId})}'|"-->
-<!--                    <button class="finish-btn" iterStat :${adminIngEcoListDTO} th:onclick="|changeStatus(event, ${ingEco.fgPostId})|">프로젝트 종료시키기</button>-->
                     <button class="finish-btn" th:onclick="|changeStatus(event, ${ingEco.fgPostId})|">프로젝트 종료시키기</button>
-                    <button class="edit-btn" onclick="editEco(event)">
-                      <img
-                        src="/img/admin/whitePencil.png"
-                        alt="editBtn"
-                      />
-                      <span>수정</span>
-                    </button>
+<!--                    <button class="edit-btn"  th:onclick="|editEco(event, ${ingEco.fgPostId})|" >-->
+<!--                      <img-->
+<!--                        src="/img/admin/whitePencil.png"-->
+<!--                        alt="editBtn"-->
+<!--                      />-->
+<!--                      <span>수정</span>-->
+<!--                    </button>-->
+                    <button class="remove-btn"  th:onclick="|deleteEco(event, ${ingEco.fgPostId})|">삭제</button>
                   </div>
                 </div>
                 <div class="calendar-and-like">
@@ -100,7 +98,7 @@
 
           <!-- 완료된 에코배너 화면 -->
           <div id="finished-eco" class="banner-hidden">
-            <div class="banner-box" onclick="goToDetailPageFin()" th:each="finEco:${adminFinEcoListDTO}">
+            <div class="banner-box" onclick="goToDetailPageFin()" th:onclick="|goToDetailPageFin(event, '${finEco.fgPostId}', '${finEco.fgProjectId}')|"   th:each="finEco:${adminFinEcoListDTO}">
               <div class="banner-img">
                 <img th:src="'/upload_moamz/' + ${finEco.fgPostFileRoot} + '/' + ${finEco.fgPostFileUuid} + '_' + ${finEco.fgPostFileName}" alt="plogging"/>
               </div>

@@ -33,6 +33,7 @@ public class AdminFinEcoListDTO {
 
     private String fgEcoStatus;             // 에코 프로젝트 종료 여부 (진행중: 1 / 종료: 0)
     private Long fgPostId;                  // 게시글 ID
+    private Long fgProjectId;
     private String fgPostType; //글 종류
 
 

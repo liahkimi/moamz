@@ -83,6 +83,17 @@ public class AdminEcoService {
         return adminEcoMapper.selectFinEcoList();
     }
 
+    // 특정 에코프로젝트 1개만 조회하기
+    public AdminIngEcoListDTO findEcoProjectById(Long fgPostId){
+        return adminEcoMapper.selectEcoProjectById(fgPostId)
+                .orElseThrow(() -> new IllegalStateException("유효하지 않은 게시물"));
+    }
+
+    // 특정 한 에코프로젝트만 삭제하기
+    public void removeEcoProject(Long fgPostId){
+        adminEcoMapper.deleteEcoProject(fgPostId);
+    }
+
     //    에코프젝  글 수정하기
     public void updateEco(AdminEcoModifyDTO adminEcoModifyDTO ,List<MultipartFile> files)throws IOException{
         adminEcoMapper.modifyEco(adminEcoModifyDTO); //공통게시글테이블 update

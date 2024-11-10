@@ -98,7 +98,12 @@ public class AdminNoticeController {
         return "redirect:/admin/notice/detail";
     }
 
-
+    //공지사항 게시글 삭제하기
+    @GetMapping("/remove/{fgPostId}")
+    public String noticeRemove(@PathVariable("fgPostId") Long fgPostId){
+        adminNoticeService.removeNotice(fgPostId);
+        return "redirect:/admin/notice/list";
+    }
 
 
 

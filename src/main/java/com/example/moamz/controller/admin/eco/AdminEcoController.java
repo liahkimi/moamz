@@ -1,10 +1,8 @@
 package com.example.moamz.controller.admin.eco;
 
-import com.example.moamz.domain.dto.admin.eco.AdminEcoStatusUpdateDTO;
-import com.example.moamz.domain.dto.admin.eco.AdminFinEcoListDTO;
-import com.example.moamz.domain.dto.admin.eco.AdminIngEcoListDTO;
-import com.example.moamz.domain.dto.admin.eco.AdminEcoWriteDTO;
+import com.example.moamz.domain.dto.admin.eco.*;
 import com.example.moamz.domain.dto.admin.notice.AdminNoticeModifyDTO;
+import com.example.moamz.mapper.admin.eco.AdminEcoMapper;
 import com.example.moamz.service.admin.eco.AdminEcoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +22,7 @@ import java.util.List;
 public class AdminEcoController {
     private final AdminEcoService adminEcoService;
 
-    //진행OR종료된 에코프로젝트 목록 보여주기
+    //진행 OR 종료된 에코프로젝트 목록 보여주기
     @GetMapping("/list")
     public String ingEcoList(Model model, @SessionAttribute(value="fgUserCode", required = false) Long fgUserCode){
 
@@ -70,26 +68,80 @@ public class AdminEcoController {
         } else {
             System.out.println("오류 : adminEcoWriteDTO.getFgPostId가 서비스 호출 후 null입니다.");
         }
-
         return "redirect:/admin/eco/list";
     }
 
-    //에코프젝 상태 버튼클릭으로 변경하기
+    //에코프젝 상태 버튼클릭으로 변경하기 post
     @PostMapping("/list/modifyEcoStatus/{fgPostId}")
     public String modifyEcoStatusPost(@PathVariable("fgPostId") Long fgPostId){
         adminEcoService.changeStatusBtn(fgPostId);
-//        redirectAttributes.addAttribute("fgPostId", fgPostId);
         return "redirect:/admin/eco/list";
     }
 
-    @GetMapping("/list/modifyEcoStatus/{fgPostId}")
-    public String modifyEcoStatusGet(){
+    
+    
+    // 진행중인 에코프로젝트 인증글목록 불러오기
+    @GetMapping("/ecoCertList/{fgPostId}")
+    public String ecoCertList(@PathVariable("fgPostId") Long fgPostId, Model model ,@SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode){
+        List<AdminEcoCertListDTO> adminEcoCertListDTO = adminEcoService.findEcoCertList(fgPostId);
+        model.addAttribute("adminEcoCertListDTO", adminEcoCertListDTO);
+
+        System.out.println("adminEcoCertListDTO = " + adminEcoCertListDTO);
+        return "admin/adminEcoCertifiList";
+    }
+
+    // 진행중인 에코프로젝트 인증글 상세보기 페이지
+    @GetMapping("/ecoCertDetail/{fgPostId}/{fgProjectId}")
+    public String ecoCertDetail(@SessionAttribute(value="fgUserCode", required=false) Long fgUserCode,
+                                @PathVariable("fgPostId") Long fgPostId,
+                                @PathVariable("fgProjectId") Long fgProjectId, Model model){
+        AdminEcoCertDetailDTO adminEcoCertDetailDTO = adminEcoService.findEcoCertDetail(fgPostId,fgProjectId);
+        adminEcoCertDetailDTO.setFgProjectId(fgProjectId);
+        model.addAttribute("adminEcoCertDetailDTO", adminEcoCertDetailDTO);
+        return "/admin/adminEcoCertifiDetail";
+    }
+
+
+    // 완료된 에코프로젝트 인증글목록 불러오기
+    @GetMapping("/finEcoCertList/{fgPostId}")
+    public String finEcoCertList(@PathVariable("fgPostId") Long fgPostId, Model model ,@SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode){
+        List<AdminEcoCertListDTO> adminEcoCertListDTO = adminEcoService.findEcoCertList(fgPostId);
+        model.addAttribute("adminEcoCertListDTO", adminEcoCertListDTO);
+
+        System.out.println("adminEcoCertListDTO = " + adminEcoCertListDTO);
+        return "admin/adminEcoCertifiListFin";
+    }
+
+    //완료된 에코프로젝트 인증글 상세보기 보여주기
+    @GetMapping("/finEcoCertDetail/{fgPostId}/{fgProjectId}")
+    public String finEcoCertDetail(@SessionAttribute(value="fgUserCode", required=false) Long fgUserCode,
+                                @PathVariable("fgPostId") Long fgPostId,
+                                @PathVariable("fgProjectId") Long fgProjectId, Model model){
+        AdminEcoCertDetailDTO adminEcoCertDetailDTO = adminEcoService.findEcoCertDetail(fgPostId,fgProjectId);
+        adminEcoCertDetailDTO.setFgProjectId(fgProjectId);
+        model.addAttribute("adminEcoCertDetailDTO", adminEcoCertDetailDTO);
+        return "/admin/adminEcoCertifiDetailFin";
+    }
+
+
+//    //진행중인 에코프로젝트 수정하기 페이지 보여주기
+//    @GetMapping("/modify/{fgPostId}")
+//    public String ecoModify(@PathVariable("fgPostId") Long fgPostId, Model model){
+//        AdminIngEcoListDTO adminIngEcoListDTO = adminEcoService.findEcoProjectById(fgPostId);
+//        model.addAttribute("adminIngEcoListDTO", adminIngEcoListDTO);
+//        return "/admin/adminEcoModify";
+//    }
+//
+    //특정 에코프로젝트 삭제하기
+    @GetMapping("/remove/{fgPostId}")
+    public String ecoRemove(@PathVariable("fgPostId") Long fgPostId){
+        adminEcoService.removeEcoProject(fgPostId);
         return "redirect:/admin/eco/list";
     }
 
 
 
-    }
+}
 
 
 

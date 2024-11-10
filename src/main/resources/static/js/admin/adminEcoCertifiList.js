@@ -1,7 +1,12 @@
-// 상세 페이지로 이동하는 함수
-function goToDetailPage() {
-    window.location.href = "adminEcoCertifiDetail.html";  // 상세 페이지 URL로 이동
-  }
+
+
+//인증글 상세페이지로 이동
+function goToDetailPage(event, fgPostId, fgProjectId) {
+    event.preventDefault();
+    const url = `/admin/eco/ecoCertDetail/${fgPostId}/${fgProjectId}`;
+    window.location.href = url;
+}
+
 
 function goToDetailPageFin() {
   window.location.href = "adminEcoCertifiDetailFin.html";  // 상세 페이지 URL로 이동
