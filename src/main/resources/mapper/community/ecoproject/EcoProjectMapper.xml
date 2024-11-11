@@ -94,8 +94,8 @@
         <selectKey resultType="Long" keyProperty="fgPostId" order="BEFORE">
             select SEQ_FG_POST.currval from dual
         </selectKey>
-        INSERT INTO FG_ECO_CERT(fg_post_id, fg_cert_content, fg_project_id) VALUES
-        #{fgPostId}, #{fgCertContent}, #{fgProjectId}
+        INSERT INTO FG_ECO_CERT(fg_post_id, fg_cert_content, fg_project_id) VALUES(
+        #{fgPostId}, #{fgCertContent}, #{fgProjectId})
     </insert>
 </mapper>
 

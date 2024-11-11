@@ -8,6 +8,8 @@ onGoingBtn.addEventListener('click', () => {
     endDiv.style.display = 'none';
     onGoingBtn.classList.add('active-btn');
     endBtn.classList.remove('active-btn');
+    onGoingDiv.classList.remove('banner-hidden');
+    endDiv.classList.add('banner-hidden');
     console.log('asdas');
 });
 
@@ -15,5 +17,7 @@ endBtn.addEventListener('click', () =>{
     onGoingDiv.style.display = 'none';
     endDiv.style.display = 'block';
     endBtn.classList.add('active-btn');
-    onGoingBtn.classList.remove('active-btn');
+    endDiv.classList.remove('banner-hidden');
+    onGoingBtn.classList.remove('active-btn')
+    onGoingDiv.classList.add('banner-hidden');
 })

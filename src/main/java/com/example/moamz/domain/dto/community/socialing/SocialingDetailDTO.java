@@ -21,6 +21,7 @@ public class SocialingDetailDTO {
     private String fgSocialingLocation;
     private int fgSocialingMinage;
     private int fgSocialingMaxage;
+    private String fgSocialingGenderRes;
     private Long fgUserCode;
     private String fgNormalName;
 }

@@ -4,7 +4,7 @@ import com.example.moamz.domain.dto.community.PostDTO;
 import com.example.moamz.domain.dto.community.PostModifyDTO;
 
 public interface PostMapper {
-    void insertPost(PostDTO postDTO);
+    void insertFgPost(PostDTO postDTO);
 
     void updateFgPostTitleAndEdit(PostModifyDTO postModifyDTO);
 }

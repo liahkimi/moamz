@@ -11,11 +11,12 @@
             S.FG_SOCIALING_CONTENT AS fgSocialingContent,
             S.FG_SOCIALING_CATEGORY AS fgSocialingCategory,
             S.FG_SOCIALING_MAX_PARTICIPANTS AS fgSocialingMaxParticipants,
-            TO_CHAR(S.FG_SOCIALING_START, 'YYYY-MM-DD') AS fgSocialingStart,
-            TO_CHAR(S.FG_SOCIALING_END, 'YYYY-MM-DD') AS fgSocialingEnd,
+            S.FG_SOCIALING_START AS fgSocialingStart,
+            S.FG_SOCIALING_END AS fgSocialingEnd,
             S.FG_SOCIALING_LOCATION AS fgSocialingLocation,
             S.FG_SOCIALING_MINAGE AS fgSocialingMinage,
             S.FG_SOCIALING_MAXAGE AS fgSocialingMaxage,
+            S.FG_SOCIALING_GENDER_RES AS fgSocialingGenderRes,
             U.FG_USER_CODE AS fgUserCode,
             U.FG_NORMAL_NAME AS fgNormalName
         FROM
@@ -28,6 +29,8 @@
             P.FG_POST_TYPE = 'socialing'
     </select>
 
+
+
 <!--    소셜링 디테일-->
     <select id="socialingDetail" parameterType="Long" resultType="SocialingDetailDTO">
         SELECT
@@ -37,11 +40,12 @@
             S.FG_SOCIALING_CONTENT AS fgSocialingContent,
             S.FG_SOCIALING_CATEGORY AS fgSocialingCategory,
             S.FG_SOCIALING_MAX_PARTICIPANTS AS fgSocialingMaxParticipants,
-            TO_CHAR(S.FG_SOCIALING_START, 'YYYY-MM-DD') AS fgSocialingStart,
-            TO_CHAR(S.FG_SOCIALING_END, 'YYYY-MM-DD') AS fgSocialingEnd,
+            S.FG_SOCIALING_START AS fgSocialingStart,
+            S.FG_SOCIALING_END AS fgSocialingEnd,
             S.FG_SOCIALING_LOCATION AS fgSocialingLocation,
             S.FG_SOCIALING_MINAGE AS fgSocialingMinage,
             S.FG_SOCIALING_MAXAGE AS fgSocialingMaxage,
+            S.FG_SOCIALING_GENDER_RES AS fgSocialingGenderRes,
             U.FG_USER_CODE AS fgUserCode,
             U.FG_NORMAL_NAME AS fgNormalName
         FROM
@@ -76,8 +80,8 @@
         #{fgPostId},
         #{fgSocialingCategory},
         #{fgSocialingMaxParticipants},
-        TO_DATE(#{fgSocialingStart}, 'YYYY-MM-DD HH24:MI:SS'),
-        TO_DATE(#{fgSocialingEnd}, 'YYYY-MM-DD HH24:MI:SS'),
+        #{fgSocialingStart},
+        #{fgSocialingEnd},
         #{fgSocialingLocation},
         '제한없음',
         #{fgSocialingMinage},
