@@ -7,3 +7,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/recipe")
 public class ReceipeController {
 }
+
