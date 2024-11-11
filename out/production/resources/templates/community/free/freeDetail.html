@@ -64,25 +64,27 @@
         <div class="comment-container">
             <div class="comment-title">💬댓글</div>
             <div class="comment-wrap">
+                <!-- 댓글 작성란 -->
                 <div class="comment-input-wrap">
                     <input type="text" id="comment-input" placeholder="댓글 내용을 입력하세요.">
                     <button type="button" id="comment-input-btn">작성완료</button>
                 </div>
+                <!-- 댓글 목록 (li태그 비동기로 뿌리기) -->
                 <div class="comment-content-wrap">
                     <ul>
-                        <li class="comment-list">
+                        <li class="comment-list" data-id="${comment.commentId}">
                             <div>
                                 <div class="comment-info-wrap">
-                                    <span class="user-nickname">user1</span>
-                                    <span class="comment-write-time">24/10/13</span>
-                                    <span class="comment-modified">수정됨</span>
+                                    <span class="user-nickname">${comment.normalNickname}</span>
+                                    <span class="comment-write-time">${comment.commentDate}</span>
+                                    <span class="comment-modified">${comment.commentEdit}</span>
                                 </div>
                                 <div class="comment-btn-wrap">
-                                    <button type="button" id="comment-modify-btn">수정</button>
-                                    <button type="button" id="comment-delete-btn">삭제</button>
+                                    <button type="button" class="comment-modify-btn">수정</button>
+                                    <button type="button" class="comment-delete-btn">삭제</button>
                                 </div>
                             </div>
-                            <p class="comment-content">댓글내용용용댓글내용용용댓글내용용용댓글내용용용댓글내용용용댓글내용용용댓글내용용용댓글내용용용댓글내용용용댓글내용용용댓글내용용용댓글내용</p>
+                            <p class="comment-content">${comment.commentContent}</p>
                         </li>
                     </ul>
                 </div>

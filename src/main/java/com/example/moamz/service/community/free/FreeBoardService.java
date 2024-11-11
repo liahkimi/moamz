@@ -67,23 +67,5 @@ public class FreeBoardService {
                 .orElseThrow(() -> new IllegalStateException("❌❌❌유효하지 않은 게시글입니다."));
     }
 
-    // 댓글 가져오기 메서드
-    public List<FreeCommentDTO> findFreeComment(Long postId) {
-        return freeMapper.selectFreeComment(postId);
-    }
 
-    // 댓글 등록 메서드
-    public void registFreeComment(FreeCommentDTO freeCommentDTO) {
-        freeMapper.insertFreeComment(freeCommentDTO);
-    }
-
-    // 댓글 수정 메서드
-    public void updateFreeComment(FreeCommentDTO freeCommentDTO) {
-        freeMapper.modifyFreeComment(freeCommentDTO);
-    }
-
-    // 댓글 삭제 메서드
-    public void removeFreeComment(Long postId) {
-        freeMapper.deleteFreeComment(postId);
-    }
 }

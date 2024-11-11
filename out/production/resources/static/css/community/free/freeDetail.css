@@ -135,7 +135,7 @@ main {
     background-color: #f7f7f7;
     padding: 20px;;
 }
-/* 댓글 input 부분 */
+/* 댓글 작성칸 부분 */
 .comment-input-wrap {
     display: flex;
     justify-content: space-between;
@@ -151,6 +151,7 @@ main {
 .comment-input-wrap input:focus {
     border: 1px solid #A2B541;
 }
+/* 댓글 작성 완료 버튼 */
 .comment-input-wrap button {
     width: 70px;
     height: 28px;
@@ -161,7 +162,7 @@ main {
     font-weight: 500;
     cursor: pointer;
 }
-/* 댓글 정보 부분 */
+/* 댓글 목록 부분 */
 .comment-list {
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
@@ -172,6 +173,7 @@ main {
     align-items: center;
     margin-bottom: 8px;
 }
+/* 댓글 정보 영역 */
 .comment-info-wrap {
     font-size: 14px;
     display: flex;
@@ -183,6 +185,7 @@ main {
 .comment-write-time {
     margin-right: 10px;
 }
+/* 댓글 수정, 삭제 버튼 영역 */
 .comment-btn-wrap button {
     border: none;
     background-color: transparent;

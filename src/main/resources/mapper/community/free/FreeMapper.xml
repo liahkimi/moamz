@@ -74,40 +74,4 @@
           AND p.FG_POST_ID = #{postId}
     </select>
 
-    <!-- 댓글 보여주기 -->
-    <select id="selectFreeComment" parameterType="Long" resultType="FreeCommentDTO">
-        SELECT TO_CHAR(c.FG_COMMENT_DATE, 'YY/MM/DD HH24:MI:SS') AS commentDate,
-            c.FG_COMMENT_CONTENT AS commentContent,
-            CASE c.FG_COMMENT_EDIT
-                WHEN '0' THEN ' '
-                WHEN '1' THEN '수정됨'
-                END AS commentEdit
-        FROM FG_POST p, FG_COMMENT c
-        WHERE p.FG_POST_ID = c.FG_POST_ID
-          AND p.FG_POST_ID = #{postId}
-    </select>
-
-    <!-- 댓글 작성하기 -->
-    <insert id="insertFreeComment" parameterType="FreeCommentDTO">
-        <selectKey keyProperty="commentId" resultType="Long" order="BEFORE">
-            SELECT SEQ_COMMENT.nextVal FROM DUAL
-        </selectKey>
-        INSERT INTO FG_COMMENT(FG_COMMENT_ID, FG_COMMENT_CONTENT, FG_USER_CODE, FG_POST_ID)
-        VALUES (#{commentId}, #{commentContent}, #{userCode}, #{postId})
-    </insert>
-
-    <!-- 댓글 수정하기 -->
-    <update id="modifyFreeComment" parameterType="FreeCommentDTO">
-        UPDATE FG_COMMENT
-        SET FG_COMMENT_CONTENT = #{commentContent},
-            FG_COMMENT_EDIT = 1
-        WHERE FG_COMMENT_ID = #{commentId}
-    </update>
-
-    <!-- 댓글 삭제하기 -->
-    <delete id="deleteFreeComment" parameterType="Long">
-        DELETE FROM FG_COMMENT
-        WHERE FG_COMMENT_ID = #{commentId}
-    </delete>
-
 </mapper>
