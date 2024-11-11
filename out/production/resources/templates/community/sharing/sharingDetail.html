@@ -22,28 +22,48 @@
         <div class="post-container" th:attr="data-id=${sharingDetailDTO.postId}">
             <!-- 게시글 정보 -->
             <div class="post-info-wrap">
-                <div class="post-title" th:text="${sharingDetailDTO.postTitle}">게시글 제목</div>
-                <div class="user-info-wrap">
-                    <img th:src="'/upload_moamz/' + ${sharingDetailDTO.userFileRoot} + '/' + ${sharingDetailDTO.userFileUuid} + '_' + ${sharingDetailDTO.userFileName}" alt="프로필사진">
-                    <span class="user-nickname" th:text="${sharingDetailDTO.normalNickname}">작성자 닉네임</span>
-                    <div class="post-write-time-wrap">
-                        <span>작성일</span>
-                        <span id="post-write-time" th:text="${sharingDetailDTO.postCreateAt}">작성일</span>
-                        <span id="is-edit" th:text="${sharingDetailDTO.postEdit}">수정여부</span>
-                    </div>
-                    <div class="post-view-count-wrap">
-                        <span>조회수</span>
-                        <span id="post-view-count" th:text="${sharingDetailDTO.postViews}">조회수</span>
-                    </div>
-                    <div class="btn-wrap">
-                        <!-- 다른 사람이 쓴 글일 때 버튼 -->
-                        <div class="btn-others" th:if="${sharingDetailDTO.isMyPost() == false}">
-                            <img src="/img/community/chatToWriter.png" alt="작성자와_채팅하기" class="chat-to-writer-btn">
+                <!-- 대표사진 영역 -->
+                <div class="thumbnail-wrap">
+                    <img th:src="'/upload_moamz/' + ${sharingDetailDTO.postFileRoot} + '/' + ${sharingDetailDTO.postFileUuid} + '_' + ${sharingDetailDTO.postFileName}" alt="대표사진">
+                </div>
+                <!-- post 정보-->
+                <div class="post-user-info-wrap">
+                    <!-- 제목 -->
+                    <div class="title-wrap">
+                        <div class="status-btn" th:text="${sharingDetailDTO.sharingStatus}" th:unless="${sharingDetailDTO.sharingStatus == '나눔완료'}">나눔상태</div>
+                        <div class="status-btn completed" th:text="${sharingDetailDTO.sharingStatus}" th:if="${sharingDetailDTO.sharingStatus == '나눔완료'}">나눔상태</div>
+                        <div class="post-title" th:text="${sharingDetailDTO.postTitle}">
+                            게시글 제목
                         </div>
-                        <!-- 내가 쓴 글일 때 보이는 버튼 -->
-                        <div class="btn-writer" th:if="${sharingDetailDTO.isMyPost() == true}">
-                            <button type="button" id="modify-btn">수정</button>
-                            <button type="button" id="delete-btn">삭제</button>
+                    </div>
+                    <!-- 작성자, 서비스버튼 -->
+                    <div class="user-info-btn-wrap">
+                        <div class="user-info-wrap">
+                            <img th:src="'/upload_moamz/' + ${sharingDetailDTO.userFileRoot} + '/' + ${sharingDetailDTO.userFileUuid} + '_' + ${sharingDetailDTO.userFileName}" alt="프로필사진">
+                            <span class="user-nickname" th:text="${sharingDetailDTO.normalNickname}">작성자 닉네임</span>
+                        </div>
+                        <div class="btn-wrap">
+                            <!-- 다른 사람이 쓴 글일 때 버튼 -->
+                            <div class="btn-others" th:if="${sharingDetailDTO.isMyPost() == false}">
+                                <img src="/img/community/chatToWriter.png" alt="작성자와_채팅하기" class="chat-to-writer-btn">
+                            </div>
+                            <!-- 내가 쓴 글일 때 보이는 버튼 -->
+                            <div class="btn-writer" th:if="${sharingDetailDTO.isMyPost() == true}">
+                                <button type="button" id="modify-btn">수정</button>
+                                <button type="button" id="delete-btn">삭제</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 작성일, 조회수 -->
+                    <div class="post-time-view-wrap">
+                        <div class="post-write-time-wrap">
+                            <span class="label">작성일</span>
+                            <span id="post-write-time" th:text="${sharingDetailDTO.postCreateAt}">작성일</span>
+                            <span id="is-edit" th:text="${sharingDetailDTO.postEdit}">수정여부</span>
+                        </div>
+                        <div class="post-view-count-wrap">
+                            <span class="label">조회수</span>
+                            <span id="post-view-count" th:text="${sharingDetailDTO.postViews}">조회수</span>
                         </div>
                     </div>
                 </div>
