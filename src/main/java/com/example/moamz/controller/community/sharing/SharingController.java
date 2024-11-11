@@ -27,10 +27,10 @@ public class SharingController {
     // 게시글 등록하기 <GET>
     //
     @GetMapping("/regist")
-    public String registSharing(@SessionAttribute(value="fgUserCode") Long userCode) {
+    public String registSharing(@SessionAttribute(value="fgUserCode", required = false) Long userCode) {
         // 세션에 userCode가 있는 경우 게시글 등록 페이지로 이동
         // 없는 경우 로그인 페이지로 이동
-        return userCode==null ? "/normal/regular/userLogin" : "/community/sharing/sharingWrite";
+        return userCode==null ? "redirect:/normal/regular/userLogin" : "/community/sharing/sharingWrite";
     }
 
     //
