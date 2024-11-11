@@ -1,9 +1,9 @@
 * {
-    color: #6a6a6a;
 }
 main {
+    color: #6a6a6a;
     width: 1000px;
-    margin: 0 auto;
+    margin: 30px auto;
 }
 /* 게시판 헤더 */
 .board-header-container {
@@ -100,7 +100,8 @@ main {
     border-radius: 5px;
     cursor: pointer;
 }
-.community-category-container li:hover {
+.community-category-container li:hover,
+.community-category-container li.active {
     background-color: #CEDD61;
     color: black;
 }
@@ -142,6 +143,7 @@ main {
 /* 카드뷰 표시 */
 .sharing-list-container {
     min-height: 500px;
+    margin-bottom: 30px;
 }
 .sharing-list-container ul {
     display: flex;
@@ -185,18 +187,9 @@ main {
 .sharing-nickname {
     font-size: 15px;
 }
-.sharing-status.available {
-    width:70px;
-    height: 20px;
-    background-color: #F8FAE9;
-    border-radius: 5px;
-    color: #A1B60A;
-    font-size: 15px;
-    text-align: center;
-    line-height: 20px;
-}
+.sharing-status.available,
 .sharing-status.reserved{
-    width: 70px;
+    width:70px;
     height: 20px;
     background-color: #F8FAE9;
     border-radius: 5px;
