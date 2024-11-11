@@ -75,9 +75,9 @@
                             <div class="socialing-title" th:text="${socialEat.fgPostTitle}">우리 함께 모여 저녁식사 어때요?</div>
                             <div class="socialing-period">
                                 <img th:src="@{/img/community/socialing/calendar.png}" alt="yogaPic"/>
-                                <span class="socialing-start-date" th:text="${#dates.format(socialEat.fgSocialingStart, 'yy.MM.dd')}">2024/10/18</span>
-                                -
-                                <span class="socialing-end-date" th:text="${#dates.format(socialEat.fgSocialingEnd, 'yy.MM.dd')}">2024/11/15</span>
+                                <span class="socialing-start-date" th:text="${#temporals.format(socialEat.fgSocialingStart, 'yy.MM.dd')}"></span> -
+                                <span class="socialing-end-date" th:text="${#temporals.format(socialEat.fgSocialingEnd, 'yy.MM.dd')}"></span>
+
                             </div>
                             <div class="socialing-personnel">
                                 <img
