@@ -35,4 +35,13 @@ public class AdminUserInquiryService {
 
 
 
+    //일반회원 문의글 답변상태 변경시키기
+    public void updateStatusBtn(Long fgPostId){
+        adminUserInquiryMapper.changeStatusBtn(fgPostId);
+    }
+
+
+
+
+
 }

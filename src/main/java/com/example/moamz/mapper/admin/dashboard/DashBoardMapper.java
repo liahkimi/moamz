@@ -3,6 +3,7 @@ package com.example.moamz.mapper.admin.dashboard;
 import com.example.moamz.domain.dto.admin.dashboard.DashBoardAggregationDTO;
 import com.example.moamz.domain.dto.admin.dashboard.DashBoardEcoTopDTO;
 import com.example.moamz.domain.dto.admin.dashboard.DashBoardGraphDTO;
+import com.example.moamz.domain.dto.admin.eco.AdminIngEcoListDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,6 +21,11 @@ public interface DashBoardMapper {
 
     // 해당 에코 프로젝트의 인증글 top5 리스트
     List<DashBoardEcoTopDTO> selectEcoTopLikes(@Param("fgProjectId") Long fgProjectId); // 매개변수 추가
+
+
+    //    특정 한 에코프로젝트만 조회하기
+    Optional<DashBoardEcoTopDTO> selectEcoProjectById(@Param("fgPostId") Long fgPostId);
+
 
     // 대시보드 하단 월별 총 구매건수
     List<DashBoardGraphDTO> selectMonthlyPurchase();

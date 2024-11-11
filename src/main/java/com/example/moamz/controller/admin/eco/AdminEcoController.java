@@ -73,7 +73,8 @@ public class AdminEcoController {
 
     //에코프젝 상태 버튼클릭으로 변경하기 post
     @PostMapping("/list/modifyEcoStatus/{fgPostId}")
-    public String modifyEcoStatusPost(@PathVariable("fgPostId") Long fgPostId){
+    public String modifyEcoStatusPost(@PathVariable("fgPostId") Long fgPostId ,
+                                      @SessionAttribute(value="fgUserCode",required=false) Long fgUserCode){
         adminEcoService.changeStatusBtn(fgPostId);
         return "redirect:/admin/eco/list";
     }
@@ -138,6 +139,10 @@ public class AdminEcoController {
         adminEcoService.removeEcoProject(fgPostId);
         return "redirect:/admin/eco/list";
     }
+
+
+    // 특정 에코프로젝트 인증글 작성자에게 포인트 지급해주기
+
 
 
 

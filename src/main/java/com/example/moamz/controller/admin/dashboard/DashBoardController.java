@@ -28,25 +28,26 @@ public class DashBoardController {
         Optional<DashBoardAggregationDTO> dashBoardAggregationDTO = dashBoardService.findDashBoardAggregation();
         dashBoardAggregationDTO.ifPresent(dto -> model.addAttribute("dashBoardAggregationDTO", dto));
 
-//        //진행중인 에코프로젝트들
-//        List<DashBoardEcoTopDTO> dashBoardEcoTopDTO = dashBoardService.findDashBoardIngEco();
-//        model.addAttribute("dashBoardEcoTopDTO", dashBoardEcoTopDTO);
+        //진행중인 에코프로젝트들
+        List<DashBoardEcoTopDTO> dashBoardEcoTopDTO = dashBoardService.findDashBoardIngEco();
+        model.addAttribute("dashBoardEcoTopDTO", dashBoardEcoTopDTO);
+
+        //해당 에코프로젝트의 좋아요top5 인증글
+        //어떻게 특정 프로젝트의 id를 매개변수로 넣지..?
+//        List<DashBoardEcoTopDTO> dashBoardEcoTopDTOLikes = dashBoardService.findDashBoardEcoTopLikes(fgProjectId);
+
 //
-//        //해당 에코프로젝트의 좋아요top5 인증글
-
-
-
-
-
-//        // 진행 중인 에코 프로젝트 리스트
-//        List<DashBoardEcoTopDTO> ongoingEcoProjects = dashBoardService.findDashBoardIngEco();
-//        model.addAttribute("ongoingEcoProjects", ongoingEcoProjects);
+//        // 첫 번째 에코프로젝트의 projectId를 가져오기 (필요에 따라 다른 방식으로 선택 가능)
+//        if (!dashBoardEcoTopDTO.isEmpty()) {
+//            Long fgProjectId = dashBoardEcoTopDTO.get(0).getFgProjectId();  // 첫 번째 프로젝트의 ID를 가져옴
 //
-//        // 각 프로젝트에 대해 TOP 5 인증글 좋아요 수를 가져오기
-//        for (DashBoardEcoTopDTO ecoProject : ongoingEcoProjects) {
-//            List<DashBoardEcoTopDTO> topLikes = dashBoardService.findDashBoardEcoTopLikes(ecoProject.getFgProjectId());
-//            ecoProject.setTopLikes(topLikes); // TOP 5 좋아요 수를 설정
+//            // 해당 에코프로젝트의 좋아요 top5 인증글
+//            List<DashBoardEcoTopDTO> dashBoardEcoTopDTOLikes = dashBoardService.findDashBoardEcoTopLikes(fgProjectId);
+//            model.addAttribute("dashBoardEcoTopDTOLikes", dashBoardEcoTopDTOLikes);
 //        }
+
+
+
 
         return "admin/adminDashboard";
     }

@@ -4,19 +4,19 @@ const userList = document.getElementById('user-table-container');
 const sellerList = document.getElementById('seller-table-container');
 
 
-userMngBtn.addEventListener('click',function(){
-    this.classList.add('active-btn');
-    sellerMngBtn.classList.remove('active-btn');
-    userList.classList.remove('table-hidden');
-    sellerList.classList.add('table-hidden');
-})
-sellerMngBtn.addEventListener('click',function(){
-    this.classList.add('active-btn');
-    userMngBtn.classList.remove('active-btn');
-    sellerList.classList.remove('table-hidden');
-    userList.classList.add('table-hidden');
-
-})
+// userMngBtn.addEventListener('click',function(){
+//     this.classList.add('active-btn');
+//     sellerMngBtn.classList.remove('active-btn');
+//     userList.classList.remove('table-hidden');
+//     sellerList.classList.add('table-hidden');
+// })
+// sellerMngBtn.addEventListener('click',function(){
+//     this.classList.add('active-btn');
+//     userMngBtn.classList.remove('active-btn');
+//     sellerList.classList.remove('table-hidden');
+//     userList.classList.add('table-hidden');
+//
+// })
 
 // 상세 페이지로 이동하는 함수
 function goToDetailPage(event, fgPostId) {

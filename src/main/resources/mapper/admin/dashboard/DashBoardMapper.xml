@@ -44,7 +44,35 @@ FROM dual
         WHERE rownum <![CDATA[ <= ]]>  5  -- ROWNUM을 이용한 제한;
     </select>
 
-<!--대시보드 하단 그래프부분-->
+    <!--특정 에코프젝 1개만 조회하기-->
+    <select id="selectEcoProjectById" parameterType="java.lang.Long" resultType="DashBoardEcoTopDTO">
+        SELECT e.FG_ECO_START,
+               TO_CHAR(e.FG_ECO_START, 'YYYY-MM-DD') AS fgEcoStartToChar,
+               e.FG_ECO_END,
+               TO_CHAR(e.FG_ECO_END, 'YYYY-MM-DD') AS fgEcoEndToChar,
+               (TRUNC(e.FG_ECO_END) - TRUNC(e.FG_ECO_START)) AS fgEcoPeriod, -- 에코 기간 (일 수 차이)
+               e.FG_ECO_PARTICIPATION,
+               e.FG_ECO_INFO,
+               e.FG_CERT_INFO,
+               e.FG_ECO_POINTS,
+               e.FG_ECO_STATUS,
+               p.FG_POST_ID,
+               p.FG_POST_TYPE,
+               p.FG_POST_TITLE,
+               TO_CHAR(p.FG_POST_CREATED_AT, 'YYYY-MM-DD HH24:MI:SS') AS fgPostCreatedAt,
+               p.FG_USER_CODE,
+               fpf.FG_POST_FILE_ID,
+               fpf.FG_POST_FILE_NAME,
+               fpf.FG_POST_FILE_ROOT,
+               fpf.FG_POST_FILE_UUID
+        FROM FG_ECO e
+                 JOIN FG_POST p ON e.FG_POST_ID = p.FG_POST_ID
+                 JOIN FG_POST_FILE fpf ON e.FG_POST_ID = fpf.FG_POST_ID
+        WHERE e.FG_POST_ID = #{fgPostId}
+    </select>
+
+
+    <!--대시보드 하단 그래프부분-->
     <!--월별 총 구매건수-->
     <select id="selectMonthlyPurchase" resultType="DashBoardGraphDTO">
         SELECT

@@ -3,6 +3,7 @@ package com.example.moamz.service.admin.dashboard;
 import com.example.moamz.domain.dto.admin.dashboard.DashBoardAggregationDTO;
 import com.example.moamz.domain.dto.admin.dashboard.DashBoardEcoTopDTO;
 import com.example.moamz.domain.dto.admin.dashboard.DashBoardGraphDTO;
+import com.example.moamz.domain.dto.admin.eco.AdminEcoCertListDTO;
 import com.example.moamz.mapper.admin.dashboard.DashBoardMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,11 @@ public class DashBoardService {
     //대시보드 중앙 보여주기 - 인증글 TOP 5 리스트 보여주기
     public List<DashBoardEcoTopDTO> findDashBoardEcoTopLikes(Long fgProjectId){
         return dashBoardMapper.selectEcoTopLikes(fgProjectId);
+    }
+
+    //    (진행중/종료된) 특정 한 에코 프로젝트의 인증글 목록보기
+    public Optional<DashBoardEcoTopDTO> findEcoProjectById(Long fgPostId ){
+        return dashBoardMapper.selectEcoProjectById(fgPostId);
     }
 
     //대시보드 하단 보여주기 - 월별 총 구매건수
