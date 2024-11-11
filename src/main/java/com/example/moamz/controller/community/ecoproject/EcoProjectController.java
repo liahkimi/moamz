@@ -65,8 +65,8 @@ public class EcoProjectController {
     @PostMapping("/ecoCertWrite/{fgPostId}")
     public String ecoCertWrite(@PathVariable("fgPostId") Long fgPostId,
                                @ModelAttribute EcoCertWriteDTO ecoCertWriteDTO,
-                               @RequestParam String fgPostTitle,
-                               @RequestParam Long fgUserCode,
+                               @RequestParam("fgCertContent") String fgCertContent,
+                               @RequestParam("fgPostTitle") String fgPostTitle,
                                Model model) {
 
         model.addAttribute("fgPostId", fgPostId);
@@ -80,15 +80,17 @@ public class EcoProjectController {
         postDTO.setFgPostlikes(0);
         postDTO.setFgPostviews(0);
         postDTO.setFgPostEdit('0');
-        postDTO.setFgUserCode(fgUserCode);
+//        임시
+        postDTO.setFgUserCode(1L);
 
-        ecoCertWriteDTO.setFgCertContent(ecoCertWriteDTO.getFgCertContent());
+        ecoCertWriteDTO.setFgCertContent(fgCertContent);
+        ecoCertWriteDTO.setFgProjectId(fgPostId);
 
         postService.writePost(postDTO); // 글 저장
         ecoProjectService.writeCert(ecoCertWriteDTO); // 인증 저장
 
         // 상세 페이지로 리다이렉트
-        return "redirect:/ecoCertDetail/" + ecoCertWriteDTO.getFgPostId();
+        return "redirect:/ecoproject/ecoCertDetail/" + ecoCertWriteDTO.getFgPostId();
     }
 
 

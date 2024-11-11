@@ -28,6 +28,8 @@
             P.FG_POST_TYPE = 'socialing'
     </select>
 
+
+
 <!--    소셜링 디테일-->
     <select id="socialingDetail" parameterType="Long" resultType="SocialingDetailDTO">
         SELECT
