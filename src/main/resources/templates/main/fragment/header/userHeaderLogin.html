@@ -6,6 +6,7 @@
   <title>UserHeaderLogin</title>
   <link rel="stylesheet" th:href="@{/css/reset2.css}">
   <link rel="stylesheet" th:href="@{/css/main/fragment/header/userHeaderLogin.css}">
+  <script defer th:src="@{/js/main/fragment/header/userHeaderLogin.js}"></script>
 </head>
 <body>
 <div class="container">
@@ -26,8 +27,8 @@
           <a th:href="@{/ecoproject/projectList}">에코프로젝트</a>
           <a th:href="@{/community/socialing/socialingList.html}">소셜링</a>
           <a th:href="@{/community/receipe/receipeList.html}">레시피</a>
-          <a th:href="@{/post/sharing/list}">나눔게시판</a>
-          <a th:href="@{/post/free/list}">자유게시판</a>
+          <a th:href="@{/sharing/list}">나눔게시판</a>
+          <a th:href="@{/free/list}">자유게시판</a>
         </div>
         <!-- </div> -->
       </li>
@@ -41,8 +42,8 @@
       <img th:src="@{/img/main/fragment/header/search.jpg}" id="search-icon">
     </div>
 
-    <!-- 회원서비스 버튼 -->
-    <div class="header-btn">
+    <!-- 로그인 유저 서비스 버튼 -->
+    <div class="header-btn"  th:unless="${session.fgUserCode == null}">
       <div class="btn-img"><img th:src="@{/img/main/fragment/header/user.png}" onclick="location.href=``" alt="마이페이지 이동"></div>
       <div class="btn-img"><img th:src="@{/img/main/fragment/header/chat.png}" onclick="location.href=``" alt="채팅페이지 이동"></div>
       <div class="btn-img"><img th:src="@{/img/main/fragment/header/cart.png}" onclick="location.href=`/shop/cart`" alt="장바구니 이동"></div>
@@ -81,30 +82,16 @@
           </div>
         </div>
       </div>
-      <button class="login" type="button" onclick="location.href=``">로그아웃</button>
+      <button class="logout" id="logout" type="button" onclick="location.href=`/normal/logout`">로그아웃</button>
+    </div>
+    <!-- 비회원 서비스 아이콘 -->
+    <div class="non-user-header-btn" th:if="${session.fgUserCode == null}">
+      <button class="login" type="button" onclick="location.href=`/normal/regular/userLogin`">로그인</button>
     </div>
   </div>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const notificationIcon = document.querySelector('.btn-img:nth-child(4) img'); // 알림 아이콘
-    const notificationDropdown = document.querySelector('.notification-dropdown'); // 알림창
 
-    // 알림 아이콘을 클릭할 때 알림창 토글
-    notificationIcon.addEventListener('click', function (event) {
-      event.stopPropagation(); // 클릭 이벤트 전파를 막아서 알림창이 닫히지 않게 함
-      notificationDropdown.classList.toggle('active');
-    });
-
-    // 알림창 외부를 클릭하면 알림창 닫기
-    document.addEventListener('click', function (event) {
-      if (!notificationDropdown.contains(event.target) && !notificationIcon.contains(event.target)) {
-        notificationDropdown.classList.remove('active');
-      }
-    });
-  });
-</script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </body>
 </html>
