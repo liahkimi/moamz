@@ -38,12 +38,22 @@
         WHERE FG_POST_ID = #{postId}
     </delete>
 
+    <!-- postId로 작성자 조회 -->
+    <select id="selectWriter" parameterType="Long" resultType="Long">
+        SELECT FG_USER_CODE
+        FROM FG_POST
+        WHERE FG_POST_ID = #{postId}
+    </select>
+
     <!-- 게시글 목록(나눔가능) -->
     <select id="selectAvailableList" resultType="SharingListDTO">
         SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
-               nu.FG_NORMAL_NICKNAME AS normalNickname, s.FG_SHARING_STATUS AS sharingStatus
-        FROM FG_SHARING s, FG_POST p, FG_NORMAL_USER nu
+               nu.FG_NORMAL_NICKNAME AS normalNickname, s.FG_SHARING_STATUS AS sharingStatus,
+               pf.FG_POST_FILE_ROOT AS postFileRoot, pf.FG_POST_FILE_UUID AS postFileUuid,
+               pf.FG_POST_FILE_NAME AS postFileName
+        FROM FG_SHARING s, FG_POST p, FG_NORMAL_USER nu, FG_POST_FILE pf
         WHERE p.FG_POST_ID = s.FG_POST_ID
+          AND p.FG_POST_ID = pf.FG_POST_ID
           AND p.FG_USER_CODE = nu.FG_USER_CODE
           AND s.FG_SHARING_STATUS = '나눔가능'
     </select>
@@ -51,9 +61,12 @@
     <!-- 게시글 목록(예약중) -->
     <select id="selectReservedList" resultType="SharingListDTO">
         SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
-               nu.FG_NORMAL_NICKNAME AS normalNickname, s.FG_SHARING_STATUS AS sharingStatus
-        FROM FG_SHARING s, FG_POST p, FG_NORMAL_USER nu
+               nu.FG_NORMAL_NICKNAME AS normalNickname, s.FG_SHARING_STATUS AS sharingStatus,
+               pf.FG_POST_FILE_ROOT AS postFileRoot, pf.FG_POST_FILE_UUID AS postFileUuid,
+               pf.FG_POST_FILE_NAME AS postFileName
+        FROM FG_SHARING s, FG_POST p, FG_NORMAL_USER nu, FG_POST_FILE pf
         WHERE p.FG_POST_ID = s.FG_POST_ID
+          AND p.FG_POST_ID = pf.FG_POST_ID
           AND p.FG_USER_CODE = nu.FG_USER_CODE
           AND s.FG_SHARING_STATUS = '예약중'
     </select>
@@ -61,9 +74,12 @@
     <!-- 게시글 목록(나눔완료) -->
     <select id="selectCompletedList" resultType="SharingListDTO">
         SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
-               nu.FG_NORMAL_NICKNAME AS normalNickname, s.FG_SHARING_STATUS AS sharingStatus
-        FROM FG_SHARING s, FG_POST p, FG_NORMAL_USER nu
+               nu.FG_NORMAL_NICKNAME AS normalNickname, s.FG_SHARING_STATUS AS sharingStatus,
+               pf.FG_POST_FILE_ROOT AS postFileRoot, pf.FG_POST_FILE_UUID AS postFileUuid,
+               pf.FG_POST_FILE_NAME AS postFileName
+        FROM FG_SHARING s, FG_POST p, FG_NORMAL_USER nu, FG_POST_FILE pf
         WHERE p.FG_POST_ID = s.FG_POST_ID
+          AND p.FG_POST_ID = pf.FG_POST_ID
           AND p.FG_USER_CODE = nu.FG_USER_CODE
           AND s.FG_SHARING_STATUS = '나눔완료'
     </select>

@@ -22,6 +22,7 @@ public interface SharingBoardMapper {
 
     // 게시글 삭제
     void deleteSharing(Long postId);
+    Long selectWriter(Long postId);
 
     // 게시글 목록 가져오기
     List<SharingListDTO> selectAvailableList();

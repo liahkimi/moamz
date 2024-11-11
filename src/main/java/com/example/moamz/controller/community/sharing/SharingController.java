@@ -1,6 +1,7 @@
 package com.example.moamz.controller.community.sharing;
 
 import com.example.moamz.domain.dto.community.sharing.SharingDetailDTO;
+import com.example.moamz.domain.dto.community.sharing.SharingListDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingModifyDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingWriteDTO;
 import com.example.moamz.service.community.sharing.SharingBoardService;
@@ -99,10 +100,40 @@ public class SharingController {
     }
 
     //
+    // 게시글 삭제 <GET>
+    //
+    @GetMapping("delete")
+    public String deleteSharing(@SessionAttribute(value="fgUserCode", required = false) Long userCode,
+                                @RequestParam("postId") Long postId,
+                                RedirectAttributes redirectAttributes) {
+        // 게시글 삭제 메서드
+        Boolean isDelete =  sharingBoardService.removeSharing(userCode, postId);
+
+        if(isDelete) {
+            redirectAttributes.addFlashAttribute("Message", "삭제되었습니다.");
+            return "redirect:/sharing/list";
+        } else {
+            redirectAttributes.addFlashAttribute("Message", "본인의 게시글만 삭제할 수 있습니다.");
+            return "redirect:/sharing/detail/" + postId;
+        }
+    }
+
+    //
     // 게시글 목록 <GET>
     //
     @GetMapping("/list")
-    public String sharingList() {
+    public String sharingList(Model model) {
+
+        // 나눔 상태별 게시글 목록 가져오기
+        List<SharingListDTO> availableList = sharingBoardService.findAvailableList();
+        List<SharingListDTO> reservedList = sharingBoardService.findReservedList();
+        List<SharingListDTO> completedList = sharingBoardService.findCompletedList();
+
+        // 모델에 추가
+        model.addAttribute("availableList", availableList);
+        model.addAttribute("reservedList", reservedList);
+        model.addAttribute("completedList", completedList);
+
         return "/community/sharing/sharingList";
     }
 
