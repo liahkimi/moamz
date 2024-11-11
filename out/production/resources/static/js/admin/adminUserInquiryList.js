@@ -19,25 +19,28 @@ sellerMngBtn.addEventListener('click',function(){
 })
 
 // 상세 페이지로 이동하는 함수
-function goToDetailPage() {
+function goToDetailPage(event, fgPostId) {
     window.location.href = "adminUserInquiryDetail.html";  // 상세 페이지 URL로 이동
   }
 
-// // 답변 상태 바꾸는 함수 => tr의 이벤트 영향 안받게 하기
-//  function changeStatus(event, fgPostId) {
-//      event.stopPropagation();  // 이벤트 전파 막기
-//     if(confirm("답변완료로 변경하시겠습니까?")){
-//         fetch(`http://localhost:9999/admin/userInquiry/list/modifyEcoStatus/${fgPostId}`,{
-//             method: 'post'
-//         }).then(response: => {
-//             if(response.ok){
-//                 location.reload()
-//             }else{
-//                 alert("ㅠㅠ");
-//             }
-//         })
-//     }else{
-//
-//     }
-//
-//   }
+// 답변 상태 바꾸는 함수 => tr의 이벤트 영향 안받게 하기
+ function changeStatus(event, fgPostId) {
+     event.stopPropagation();  // 이벤트 전파 막기
+     event.preventDefault();
+
+    if(confirm("답변완료로 변경하시겠습니까?")){
+        console.log(fgPostId);
+        fetch(`http://localhost:9999/admin/userInquiry/list/modifyEcoStatus/${fgPostId}`,{
+            method: 'post'
+        }).then(response => {
+            if(response.ok){
+                location.reload()
+            }else{
+                alert("ㅠㅠ");
+            }
+        })
+    }else{
+
+    }
+
+  }

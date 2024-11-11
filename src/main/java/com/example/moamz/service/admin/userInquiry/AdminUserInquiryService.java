@@ -32,4 +32,7 @@ public class AdminUserInquiryService {
 
     //일반회원 특정 문의글 상세보기에 있는 댓글 보기
 
+
+
+
 }
