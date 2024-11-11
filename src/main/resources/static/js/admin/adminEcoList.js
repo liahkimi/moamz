@@ -36,7 +36,10 @@ function goToDetailPageFin(event, fgPostId) {
 function deleteEco(event, fgPostId) {
     event.stopPropagation();
     event.preventDefault();
-    window.location.href = `/admin/eco/remove/${fgPostId}`;
+    if(confirm("해당 에코프로젝트를 삭제하시겠습니까?")){
+        window.location.href = `/admin/eco/remove/${fgPostId}`;
+    }
+
 }
 
 // 배너의 종료시키기 버튼 클릭시 이벤트

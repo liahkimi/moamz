@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>대쉬보드</title>
     <link rel="stylesheet" th:href="@{/css/reset2.css}" />
     <link rel="stylesheet" th:href="@{/css/admin/adminDashboard.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminHeader.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminNavBar.css}" />
   </head>
   <body>
   <header id="adminHeader" th:replace="~{/admin/adminHeader :: header}"></header>
@@ -23,21 +24,20 @@
         <div class="count-card-wrap">
           <div class="count-card-box">
             <div class="count-card">
-              <div class="count-card__title">오늘 가입한 회원 수</div>
-              <div class="count-card__value">5</div>
-              <!-- <div class="circle"></div> -->
+              <div class="count-card__title" >오늘 가입한 회원 수</div>
+              <div class="count-card__value" th:text="${dashBoardAggregationDTO.newUserCount}">5</div>
             </div>
             <div class="count-card">
               <div class="count-card__title">총 회원 수</div>
-              <div class="count-card__value">136</div>
+              <div class="count-card__value" th:text="${dashBoardAggregationDTO.totalUserCount}">130</div>
             </div>
             <div class="count-card" id="long-card" >
               <div class="count-card__title">오늘 에코프로젝트 인증글 수</div>
-              <div class="count-card__value">3</div>
+              <div class="count-card__value" th:text="${dashBoardAggregationDTO.ecoCertPostCount}">3</div>
             </div>
             <div class="count-card">
               <div class="count-card__title">미해결된 문의글 수</div>
-              <div class="count-card__value">1</div>
+              <div class="count-card__value" th:text="${dashBoardAggregationDTO.pendingInquiryCount}">1</div>
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@
                 <div class="title">환경을 위한 플로깅 프로젝트!</div>
                 <div class="period">
                   <img
-                    src="../../static/img/admin/calendar.png"
+                    th:src="@{/img/admin/calendar.png}"
                     alt="calendar"
                   />
                   <div>24/10/10 ~ 24/10/17</div>
@@ -68,13 +68,13 @@
                 <div class="like-and-sticker-box">
                   <div class="like">
                     <img
-                      src="../../static/img/admin/heart.png"
+                      th:src="@{/img/admin/heart.png}"
                       alt="like-btn"
                     />
                     <div>22</div>
                   </div>
                   <div class="point-box">
-                    <img src="../../static/img/admin/point.png" alt="point-icon">
+                    <img th:src="@{/img/admin/point.png}" alt="point-icon">
                     <span>500</span>pt
                   </div>
                   <div class="sticker">
@@ -97,7 +97,7 @@
                     <div class="like-box">
                       <div class="like">
                         <img
-                          src="../../static/img/admin/heart.png"
+                          th:src="@{/img/admin/heart.png}"
                           alt="likeBtn"
                         />
                         <div>35</div>
@@ -111,7 +111,7 @@
                     <div class="like-box">
                       <div class="like">
                         <img
-                          src="../../static/img/admin/heart.png"
+                                th:src="@{/img/admin/heart.png}"
                           alt="likeBtn"
                         />
                         <div>35</div>
@@ -125,7 +125,7 @@
                     <div class="like-box">
                       <div class="like">
                         <img
-                          src="../../static/img/admin/heart.png"
+                                th:src="@{/img/admin/heart.png}"
                           alt="likeBtn"
                         />
                         <div>35</div>
@@ -139,7 +139,7 @@
                     <div class="like-box">
                       <div class="like">
                         <img
-                          src="../../static/img/admin/heart.png"
+                                th:src="@{/img/admin/heart.png}"
                           alt="likeBtn"
                         />
                         <div>35</div>
@@ -153,7 +153,7 @@
                     <div class="like-box">
                       <div class="like">
                         <img
-                          src="../../static/img/admin/heart.png"
+                                th:src="@{/img/admin/heart.png}"
                           alt="likeBtn"
                         />
                         <div>35</div>
@@ -174,7 +174,7 @@
                   alt="bannerImg"
                 />
               </div>
-              <!-- 에코프젝 글 내용 -->
+<!--               에코프젝 글 내용-->
               <div class="eco-article">
                 <div class="subject">eco project</div>
                 <div class="title">환경을 위한 플로깅 프로젝트!</div>
@@ -203,7 +203,7 @@
                 </div>
               </div>
             </div>
-            <!-- 인증글 탑5 리스트 -->
+<!--             인증글 탑5 리스트-->
             <div class="top-five-list-box">
               <!-- 타이틀 -->
               <div class="top-five-list-title">좋아요 TOP5 참여자</div>
@@ -294,15 +294,16 @@
           </div>
         </div>
       </div>
+      </div>
     </main>
   </body>
 <!--  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
-<script>
-    $(function() {
-        $("#adminNavBar").load("adminNavBar.html");
-        $("#adminHeader").load("adminHeader.html")
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-<script src="../../static/js/admin/adminDashboard.js"></script>
+<!--<script>-->
+<!--    $(function() {-->
+<!--        $("#adminNavBar").load("adminNavBar.html");-->
+<!--        $("#adminHeader").load("adminHeader.html")-->
+<!--    });-->
+<!--</script>-->
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js}"></script>
+<script th:src="@{/js/admin/adminDashboard.js}"></script>
 </html>

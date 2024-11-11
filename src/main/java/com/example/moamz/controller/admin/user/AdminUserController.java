@@ -60,6 +60,7 @@ public class AdminUserController {
     @GetMapping("/logout")
     public RedirectView logout(HttpSession session){
         session.invalidate();
+        log.info("🥲🥲🥲🥲세션종료됨:{}",session.getId());
         return new RedirectView("/admin/login"); //로그인 페이지 반환
     }
 
