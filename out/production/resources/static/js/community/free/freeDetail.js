@@ -1,10 +1,42 @@
-const deleteBtn = document.getElementById('delete-btn');
-const likeBtns = document.querySelectorAll('.like-btn');
-const commentInput = document.getElementById('comment-input');
-const commentInputBtn = document.getElementById('comment-input-btn');
-const commentList = document.querySelector('.comment-content-wrap ul');
 
-// 좋아요 버튼 토글
+////////////////////////////////////////////////////////
+///// 게시글 수정, 삭제버튼 처리
+
+const postUpdateBtn = document.getElementById('modify-btn');
+const postDeleteBtn = document.getElementById('delete-btn');
+const postId = document.querySelector('.post-info-wrap').getAttribute('data-id');
+//console.log(postId);
+
+
+// 게시글 수정버튼
+postUpdateBtn.addEventListener('click', () => {
+   const isConfirm = confirm('글을 수정하시겠습니까?');
+
+   if(isConfirm) {
+       location.href = '/free/update?postId=' + postId;
+   }
+});
+
+
+// 게시글 삭제버튼
+postDeleteBtn.addEventListener('click', () => {
+    const isConfirm = confirm('해당 글을 삭제하시겠습니까?');
+
+    if (isConfirm) {
+        location.href = '/free/delete?postId=' + postId;
+    }
+});
+
+
+
+
+
+////////////////////////////////////////////////////////
+///// 좋아요
+
+const likeBtns = document.querySelectorAll('.like-btn');
+
+
 likeBtns.forEach((btn) => {
     btn.addEventListener('click', function () {
         // 클릭하면 active 적용
@@ -20,14 +52,15 @@ likeBtns.forEach((btn) => {
     });
 });
 
-// 게시글 삭제버튼
-deleteBtn.addEventListener('click', () => {
-    const isConfirm = confirm('해당 글을 삭제하시겠습니까?');
-    if (isConfirm) {
-        window.location.href = 'freeList.html';
-    } else {
-    }
-});
+
+
+
+////////////////////////////////////////////////////////
+///// 댓글 비동기
+
+const commentInput = document.getElementById('comment-input');
+const commentInputBtn = document.getElementById('comment-input-btn');
+const commentList = document.querySelector('.comment-content-wrap ul');
 
 // 댓글
 // 댓글 처리를 비동기로 해야하는 이유?

@@ -88,8 +88,8 @@ public class SharingController {
                                 @RequestParam("fileChanged") boolean fileChanged,
                                 RedirectAttributes redirectAttributes) {
         try {
+            // 나눔글, 파일 수정 메서드 호출
             sharingBoardService.updateSharing(sharingModifyDTO, file, fileChanged);
-            log.info("💛💛💛💛💛 컨트롤러에서 fileChanged : {}", fileChanged);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

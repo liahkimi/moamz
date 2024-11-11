@@ -124,8 +124,9 @@ main {
     padding: 10px;
 }
 .post-num {
-    padding: 0 10px;
+    width: 40px;
     color: black;
+    text-align: center;
 }
 .post-title {
     width: 410px;

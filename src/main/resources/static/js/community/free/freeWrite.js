@@ -14,6 +14,7 @@ $(document).ready(function() {
 
 
 
+
 ///////////////////////////////////////////////////////
 ///// 글 작성취소, 등록 버튼 처리
 
@@ -33,7 +34,7 @@ cancleBtn.addEventListener('click', () => {
 writeBtn.addEventListener('click', (e) => {
     e.preventDefault(); // 기본 submit 동작 막기
 
-    const titleInput = document.querySelector('input[type="text"]');
+    const titleInput = document.getElementById('postTitle');
     const contentInput = $('#summernote').val();
 
     if (titleInput.value.trim() === '') {
