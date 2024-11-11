@@ -74,6 +74,7 @@
     </div>
   </div>
 
+
   <div class="main-recipe">
     <div class="recipe-title">
       <img th:src="@{/img/main/main/main-recipe.png}" alt="요리사">
@@ -84,8 +85,8 @@
         <div class="recipe-img">
           <img th:src="@{/img/main/main/recipe-img.png}" alt="레시피 카드뷰">
 
-<!--          <img th:src="'/upload_moamz/' + ${recipe.fgPostFileRoot} + '/' + ${recipe.fgPostFileUuid} + '_' + ${recipe.fgPostFileName}" alt="레시피 사진"/>-->
-          </div>
+          <!--          <img th:src="'/upload_moamz/' + ${recipe.fgPostFileRoot} + '/' + ${recipe.fgPostFileUuid} + '_' + ${recipe.fgPostFileName}" alt="레시피 사진"/>-->
+        </div>
       </div>
       <div class="recipe-menu">
         <div class="recipe-menu-list" th:each="recipe : ${mainRecipeList}">
@@ -102,6 +103,7 @@
       </div>
     </div>
   </div>
+
 
   <div class="main-socialing">
     <div class="socialing-title">
