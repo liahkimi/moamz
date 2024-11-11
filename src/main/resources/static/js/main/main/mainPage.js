@@ -50,3 +50,9 @@ function handleButtonClick() {
 document.addEventListener('DOMContentLoaded', function() {
     changeSlide();
 });
+
+
+
+
+
+// 레시피
