@@ -44,11 +44,38 @@ main {
     flex-direction: column;
     padding: 10px 0;
 }
+/* 나눔상태, 제목 */
+.title-wrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+}
+.status-btn {
+    width:70px;
+    height: 20px;
+    background-color: #F8FAE9;
+    border-radius: 5px;
+    color: #A1B60A;
+    font-size: 15px;
+    text-align: center;
+    line-height: 20px;
+    margin-right: 10px;
+}
+.status-btn.completed{
+    width: 70px;
+    height: 20px;
+    background-color: #ddd;
+    color: #6a6a6a;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    line-height: 20px;
+}
 .post-title {
     color: black;
     font-weight: bold;
     font-size: 25px;
-    margin-bottom: 15px;
     /* 영역 넘어가면 텍스트 숨김 */
     white-space: nowrap;
     overflow: hidden;

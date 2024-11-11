@@ -72,7 +72,7 @@
                  <!-- 예약중 -->
                  <div id="sharing-reserved-list" class="sharing-list-container hidden">
                     <ul>
-                        <li class="sharing-card-view" th:each="reservedList : ${reservedList}" th:onclick="|location.href='sharing/detail/' + ${reservedList.postId}|">
+                        <li class="sharing-card-view" th:each="reservedList : ${reservedList}" th:onclick="|location.href='/sharing/detail/' + ${reservedList.postId}|">
                             <img th:src="@{'/upload_moamz/' + ${reservedList.postFileRoot} + '/' + ${reservedList.postFileUuid}
                                                 + '_' + ${reservedList.postFileName}}" alt="나눔물품 이미지">
                             <div class="sharing-title" th:text="${reservedList.postTitle}">나눔글 제목</div>
@@ -87,7 +87,7 @@
                 <!-- 나눔완료 -->
                 <div id="sharing-completed-list" class="sharing-list-container hidden">
                     <ul>
-                        <li class="sharing-card-view" th:each="completedList : ${completedList}" th:onclick="|location.href='sharing/detail/' + ${completedList.postId}|">
+                        <li class="sharing-card-view" th:each="completedList : ${completedList}" th:onclick="|location.href='/sharing/detail/' + ${completedList.postId}|">
                             <img th:src="@{'/upload_moamz/' + ${completedList.postFileRoot} + '/' + ${completedList.postFileUuid}
                                                 + '_' + ${completedList.postFileName}}" alt="나눔물품 이미지">
                             <div class="sharing-title" th:text="${completedList.postTitle}">제목</div>

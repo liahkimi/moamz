@@ -65,7 +65,7 @@ public class SharingController {
         }
 
         // 수정할 게시글의 상세dto 가져오기
-        SharingDetailDTO sharingDetailDTO = sharingBoardService.findSharingDetail(postId);
+        SharingDetailDTO sharingDetailDTO = sharingBoardService.findSharingDetail(postId, userCode);
 
         if(sharingDetailDTO.getWriterCode().equals(userCode)) {
             // 게시글의 작성자CODE와 세션의 userCode가 같은 경우에만 글 수정 가능
@@ -150,7 +150,7 @@ public class SharingController {
         }
 
         // 상세보기 메서드 호출
-        SharingDetailDTO sharingDetailDTO = sharingBoardService.findSharingDetail(postId);
+        SharingDetailDTO sharingDetailDTO = sharingBoardService.findSharingDetail(postId, userCode);
 
         if(userCode.equals(sharingDetailDTO.getWriterCode())) {
             // 내 게시글이면 isMyPost = true

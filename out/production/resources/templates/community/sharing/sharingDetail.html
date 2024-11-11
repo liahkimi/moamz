@@ -29,7 +29,13 @@
                 <!-- post 정보-->
                 <div class="post-user-info-wrap">
                     <!-- 제목 -->
-                    <div class="post-title" th:text="${sharingDetailDTO.postTitle}">게시글 제목</div>
+                    <div class="title-wrap">
+                        <div class="status-btn" th:text="${sharingDetailDTO.sharingStatus}" th:unless="${sharingDetailDTO.sharingStatus == '나눔완료'}">나눔상태</div>
+                        <div class="status-btn completed" th:text="${sharingDetailDTO.sharingStatus}" th:if="${sharingDetailDTO.sharingStatus == '나눔완료'}">나눔상태</div>
+                        <div class="post-title" th:text="${sharingDetailDTO.postTitle}">
+                            게시글 제목
+                        </div>
+                    </div>
                     <!-- 작성자, 서비스버튼 -->
                     <div class="user-info-btn-wrap">
                         <div class="user-info-wrap">

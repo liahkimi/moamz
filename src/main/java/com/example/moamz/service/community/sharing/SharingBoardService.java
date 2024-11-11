@@ -144,7 +144,16 @@ public class SharingBoardService {
     }
 
     // 5️⃣ 게시글 상세보기 메서드
-    public SharingDetailDTO findSharingDetail(Long postId) {
+    public SharingDetailDTO findSharingDetail(Long postId, Long userCode) {
+
+        // 작성자 Code
+        Long writerCode = sharingBoardMapper.selectWriter(postId);
+
+        // 작성자 Code랑 userCode 다를때 조회수 +1
+        if(!writerCode.equals(userCode)) {
+            sharingBoardMapper.updateViewCount(postId);
+        }
+
         return sharingBoardMapper.selectSharingDetail(postId)
                 .orElseThrow(() -> new IllegalStateException("❌❌❌유효하지 않은 게시글입니다."));
     }
