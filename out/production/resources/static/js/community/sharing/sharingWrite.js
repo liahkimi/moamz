@@ -26,9 +26,6 @@ const thumbnailCancleBtn = document.querySelector(".thumbnail-cancle-btn");
 //파일이 업로드 될 때 value가 변화된다.
 //따라서 클릭이벤트를 주게 되면, 업로드 되기 전에 실행되기 때문에 change가 적합하다.
 thumbnailInput.addEventListener("change", (e) => {
-    // 파일 변경 감지
-    document.getElementById("fileChanged").value = "true";
-
     //console.log(e.target.files);
 
     //비구조화 할당
@@ -85,7 +82,7 @@ const writeBtn = document.getElementById('write-btn');
 cancleBtn.addEventListener('click', () => {
     const isConfirm = confirm('글 작성을 취소하시겠습니까? 작업중인 내용이 저장되지 않습니다.');
     if (isConfirm) {
-        window.location.href = 'sharingList.html';
+        window.location.href = '/sharing/list';
     } else {
     }
 });

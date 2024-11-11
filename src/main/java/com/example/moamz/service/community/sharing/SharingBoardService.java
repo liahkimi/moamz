@@ -118,8 +118,18 @@ public class SharingBoardService {
 
 
     // 3️⃣ 게시글 삭제 메서드
-    public void removeSharing(Long postId) {
-        sharingBoardMapper.deleteSharing(postId);
+    public Boolean removeSharing(Long userCode, Long postId) {
+
+        // 게시글 작성자
+        Long postWriter = sharingBoardMapper.selectWriter(postId);
+
+        // 삭제를 요청한 userCode와 게시글 작성자 userCode가 일치할 때만 삭제 가능
+        if(postWriter.equals(userCode)) {
+            sharingBoardMapper.deleteSharing(postId);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // 4️⃣ 게시글 목록 가져오기 메서드
@@ -134,7 +144,16 @@ public class SharingBoardService {
     }
 
     // 5️⃣ 게시글 상세보기 메서드
-    public SharingDetailDTO findSharingDetail(Long postId) {
+    public SharingDetailDTO findSharingDetail(Long postId, Long userCode) {
+
+        // 작성자 Code
+        Long writerCode = sharingBoardMapper.selectWriter(postId);
+
+        // 작성자 Code랑 userCode 다를때 조회수 +1
+        if(!writerCode.equals(userCode)) {
+            sharingBoardMapper.updateViewCount(postId);
+        }
+
         return sharingBoardMapper.selectSharingDetail(postId)
                 .orElseThrow(() -> new IllegalStateException("❌❌❌유효하지 않은 게시글입니다."));
     }

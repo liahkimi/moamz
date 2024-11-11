@@ -120,7 +120,7 @@ writeBtn.addEventListener('click', (e) => {
         return;
     }
 
-    // 사용자가 아무 처리도 안한 경우  ->  alert 없음
+    // 사용자가 아무 처리도 안한 경우  ->  alert 없음.. 기존 파일로 처리
     // original = true, changed = false, !썸네일
 
     // 사용자가 새로운 파일을 등록한 경우 -> alert 없음.. 새로운 파일로 처리
