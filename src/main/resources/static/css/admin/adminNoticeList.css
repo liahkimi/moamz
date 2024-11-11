@@ -205,8 +205,8 @@ tr:hover {
 /* 페이지네이션 css */
 .pagination{
 position: relative;
-top: 50px;
-left: 550px;
+top: 500px;
+left: 600px;
 }
 .page{
     
