@@ -67,7 +67,9 @@
             <!-- 함께 먹어요 -->
             <div id="eat-together-list" class="sharing-list-container">
                 <ul>
-                    <li class="socialing-card-view" onclick="location.href='socialingDetail.html'" th:each="socialEat:${socialList}" th:if="${socialEat.fgSocialingCategory == '문화'}">
+
+                    <li class="socialing-card-view" th:each="socialEat:${socialList}" th:if="${socialEat.fgSocialingCategory == '문화'}"
+                        th:onclick="|location.href='@{/socialing/socialingDetail/{fgPostId}(fgPostId=${socialEat.fgPostId})}'|">
                         <div class="socialing-img">
                             <img th:src="@{/img/community/socialing/dining.webp}" alt="yogaPic"/>
                         </div>
@@ -86,7 +88,7 @@
                             </div>
                             <div class="socialing-marks">
                                 <div class="socialing-age-mark">
-                                    <span class="socialing-minimum-age" th:text="${socialEat.fgSocialingMinage}">20</span>-<span class="socialing-maximum-age" th:text="${socialEat.fgSocialingMinage}">30</span>대
+                                    <span class="socialing-minimum-age" th:text="${socialEat.fgSocialingMinage}">20</span>-<span class="socialing-maximum-age" th:text="${socialEat.fgSocialingMinage}">30</span>살
                                 </div>
                                 <div class="socialing-sex" th:text="${socialEat.fgSocialingGenderRes}">성별무관</div>
                             </div>

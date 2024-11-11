@@ -57,7 +57,7 @@
         WHERE
             P.FG_POST_ID = #{fgPostId}
           AND
-            P.FG_POST_TYPE = 'socialing';
+            P.FG_POST_TYPE = 'socialing'
     </select>
 
     <!-- FG_SOCIALING 테이블 INSERT -->
