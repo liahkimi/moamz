@@ -19,6 +19,7 @@ public class SocialingListDTO {
     private String fgSocialingStart;
     private String fgSocialingEnd;
     private String fgSocialingLocation;
+    private String fgSocialingGenderRes;
     private int fgSocialingMinage;
     private int fgSocialingMaxage;
 }

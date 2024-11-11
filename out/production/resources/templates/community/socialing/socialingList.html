@@ -65,48 +65,30 @@
                 <div id="challenge-btn" class="sharing-category-btn">챌린지</div>
             </div>
             <!-- 함께 먹어요 -->
-            <div id="eat-together-list" class="sharing-list-container  ">
+            <div id="eat-together-list" class="sharing-list-container">
                 <ul>
-                    <li class="socialing-card-view" onclick="location.href='socialingDetail.html'" th:each="socaialEat:${socialList}" th:if="${socaialEat.fgSocialingCategory == '문화'}">
+                    <li class="socialing-card-view" onclick="location.href='socialingDetail.html'" th:each="socialEat:${socialList}" th:if="${socialEat.fgSocialingCategory == '문화'}">
                         <div class="socialing-img">
-                            <img
-                                    th:src="@{/img/community/socialing/dining.webp}"
-                                    alt="yogaPic"
-                            />
-
+                            <img th:src="@{/img/community/socialing/dining.webp}" alt="yogaPic"/>
                         </div>
                         <div class="socialing-description">
-                            <div class="socialing-title">우리 함께 모여 저녁식사 어때요?</div>
+                            <div class="socialing-title" th:text="${socialEat.fgPostTitle}">우리 함께 모여 저녁식사 어때요?</div>
                             <div class="socialing-period">
-                                <img
-                                        th:src="@{/img/community/socialing/calendar.png}"
-                                        alt="yogaPic"
-                                />
-
-                                <span class="socialing-start-date">2024/10/18</span>-<span
-                                    class="socialing-end-date"
-                            >2024/11/15</span
-                            >
+                                <img th:src="@{/img/community/socialing/calendar.png}" alt="yogaPic"/>
+                                <span class="socialing-start-date" th:text="${#temporals.format(socialEat.fgSocialingStart, 'yy.MM.dd')}">2024/10/18</span>
+                                -
+                                <span class="socialing-end-date" th:text="${#temporals.format(socialEat.fgSocialingEnd, 'yy.MM.dd')}">2024/11/15</span>
                             </div>
                             <div class="socialing-personnel">
                                 <img
-                                        th:src="@{/img/community/socialing/people.png}"
-                                        alt="yogaPic"
-                                />
-
-                                <span class="socialing-current-personnel">2</span>/<span
-                                    socialing-maximum-personnel
-                            >8</span
-                            >
+                                        th:src="@{/img/community/socialing/people.png}" alt="yogaPic"/>
+                                <span class="socialing-current-personnel">2</span>/<span class= "socialing-maximum-personnel">8</span>
                             </div>
                             <div class="socialing-marks">
                                 <div class="socialing-age-mark">
-                                    <span class="socialing-minimum-age">20</span>-<span
-                                        class="socialing-maximum-age"
-                                >30</span
-                                >대
+                                    <span class="socialing-minimum-age" th:text="${socialEat.fgSocialingMinage}">20</span>-<span class="socialing-maximum-age" th:text="${socialEat.fgSocialingMinage}">30</span>대
                                 </div>
-                                <div class="socialing-sex">성별무관</div>
+                                <div class="socialing-sex" th:text="${socialEat.fgSocialingGenderRes}">성별무관</div>
                             </div>
                         </div>
                     </li>

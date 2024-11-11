@@ -16,6 +16,7 @@
             S.FG_SOCIALING_LOCATION AS fgSocialingLocation,
             S.FG_SOCIALING_MINAGE AS fgSocialingMinage,
             S.FG_SOCIALING_MAXAGE AS fgSocialingMaxage,
+            S.FG_SOCIALING_GENDER_RES AS fgSocialingGenderRes,
             U.FG_USER_CODE AS fgUserCode,
             U.FG_NORMAL_NAME AS fgNormalName
         FROM
@@ -44,6 +45,7 @@
             S.FG_SOCIALING_LOCATION AS fgSocialingLocation,
             S.FG_SOCIALING_MINAGE AS fgSocialingMinage,
             S.FG_SOCIALING_MAXAGE AS fgSocialingMaxage,
+            S.FG_SOCIALING_GENDER_RES AS fgSocialingGenderRes,
             U.FG_USER_CODE AS fgUserCode,
             U.FG_NORMAL_NAME AS fgNormalName
         FROM
