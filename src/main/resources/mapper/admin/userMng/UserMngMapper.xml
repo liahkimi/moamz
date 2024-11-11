@@ -3,32 +3,31 @@
 <mapper namespace="com.example.moamz.mapper.admin.userMng.UserMngMapper">
     <!--일반회원 관리목록-->
     <select id="selectUserMngList" resultType="UserMngListDTO" >
-        SELECT nu.FG_USER_CODE, nu.FG_NORMAL_NICKNAME,
-               cu.FG_USER_ID, cu.FG_USER_JOIN_DATE,
+        SELECT nu.FG_USER_CODE, nu.FG_NORMAL_NICKNAME,cu.FG_USER_ID, cu.FG_USER_JOIN_DATE,
                NVL(pt.FG_POINT_TOTAL, 0),
-               COUNT(ps.FG_POST_ID),
-               COUNT(CASE WHEN o.FG_PAYMENT_STATUS='결제완료' THEN o.FG_ORDER_ID END) --주문테이블에서 결제상테가 결제완료인것만 구매한 것으로 간주하기로 함.
-        FROM FG_NORMAL_USER nu
-                 JOIN FG_COMMON_USER cu ON nu.FG_USER_CODE = cu.FG_USER_CODE
-                 LEFT JOIN FG_POINT pt ON nu.FG_USER_CODE = pt.FG_USER_CODE
-                 LEFT JOIN FG_POST ps ON nu.FG_USER_CODE = ps.FG_USER_CODE
-                 LEFT JOIN FG_ORDER o ON nu.FG_USER_CODE = o.FG_USER_CODE
-        GROUP BY --각 항목별 그룹으로 묶어줘야 행단위로 게시글 수를 구할 수 있음
-                 nu.FG_USER_CODE,
-                 nu.FG_NORMAL_NICKNAME,
-                 cu.FG_USER_ID,
-                 cu.FG_USER_JOIN_DATE,
-                 pt.FG_POINT_TOTAL
-        ORDER BY FG_USER_CODE;
+               COUNT(DISTINCT ps.FG_POST_ID) AS FG_POST_COUNT,  -- 중복 게시글 수 계산
+               COUNT(DISTINCT CASE WHEN o.FG_PAYMENT_STATUS = '결제완료' THEN o.FG_ORDER_ID END) AS FG_PURCHASE_COUNT-- 결제완료 주문 건수
+        FROM  FG_NORMAL_USER nu
+                  JOIN FG_COMMON_USER cu ON nu.FG_USER_CODE = cu.FG_USER_CODE
+                  LEFT JOIN FG_POINT pt ON nu.FG_USER_CODE = pt.FG_USER_CODE
+                  LEFT JOIN FG_POST ps ON nu.FG_USER_CODE = ps.FG_USER_CODE
+                  LEFT JOIN FG_ORDER o ON nu.FG_USER_CODE = o.FG_USER_CODE
+        GROUP BY
+            nu.FG_USER_CODE,
+            nu.FG_NORMAL_NICKNAME,
+            cu.FG_USER_ID,
+            cu.FG_USER_JOIN_DATE,
+            pt.FG_POINT_TOTAL
+        ORDER BY  nu.FG_USER_CODE
     </select>
 
     <!--판매자회원 관리목록-->
     <select id="selectSellerMngList" resultType="SellerMngListDTO">
         SELECT s.FG_USER_CODE, cu.FG_USER_ID, cu.FG_USER_JOIN_DATE,
-               NVL(AVG(r.FG_REVIEW_RATING), 0), --업체평점
-               COUNT(DISTINCT l.FG_LIKE_ID), --좋아요수
-               COUNT(p.FG_PRODUCT_ID), --상품수
-               COUNT(CASE WHEN o.FG_PAYMENT_STATUS = '결제완료' THEN o.FG_PRODUCT_ID END) --판매건수
+               NVL(AVG(r.FG_REVIEW_RATING), 0) AS FG_AVERAGE_REVIEW_RATING, --업체평점
+               COUNT(DISTINCT l.FG_LIKE_ID) AS FG_LIKE_COUNT, --좋아요수
+               SUM(p.FG_PRODUCT_ID) AS FG_PRODUCT_COUNT, --상품수
+               COUNT(CASE WHEN o.FG_PAYMENT_STATUS = '결제완료' THEN o.FG_PRODUCT_ID END) AS FG_SALES_COUNT--판매건수
         FROM FG_SELLER s
                  JOIN FG_COMMON_USER cu ON s.FG_USER_CODE = cu.FG_USER_CODE
                  JOIN FG_BUSINESS b ON s.FG_USER_CODE = b.FG_USER_CODE
@@ -40,7 +39,7 @@
             s.FG_USER_CODE,
             cu.FG_USER_ID,
             cu.FG_USER_JOIN_DATE
-        ORDER BY FG_USER_CODE;
+        ORDER BY FG_USER_CODE
 
     </select>
 </mapper>

@@ -3,13 +3,19 @@
 <mapper namespace="com.example.moamz.mapper.admin.dashboard.DashBoardMapper">
 <!--대시보드 상단 집계부분-->
     <select id="selectAggregation" resultType="DashBoardAggregationDTO">
-        SELECT
-            COUNT(CASE WHEN TRUNC(FG_USER_JOIN_DATE) = TRUNC(SYSDATE) THEN 1 END) AS newUserCount,
-            COUNT(CASE WHEN c.FG_USER_CODE > 0 THEN 1 END) AS totalUserCount,
-            COUNT(CASE WHEN TRUNC(FG_POST_CREATED_AT) = TRUNC(SYSDATE) AND FG_POST_TYPE = 'ecoCert' THEN 1 END) AS ecoCertPostCount,
-            COUNT(CASE WHEN FG_INQUIRY_STATUS = '0' THEN 1 END) AS pendingInquiryCount
-        FROM
-            FG_COMMON_USER c, FG_POST p,FG_INQUIRY i
+--         SELECT
+--             COUNT(CASE WHEN TRUNC(FG_USER_JOIN_DATE) = TRUNC(SYSDATE) THEN 1 END) AS newUserCount,
+--             COUNT(CASE WHEN c.FG_USER_CODE > 0 THEN 1 END) AS totalUserCount,
+--             COUNT(CASE WHEN TRUNC(FG_POST_CREATED_AT) = TRUNC(SYSDATE) AND FG_POST_TYPE = 'ecoCert' THEN 1 END) AS ecoCertPostCount,
+--             COUNT(CASE WHEN FG_INQUIRY_STATUS = '0' THEN 1 END) AS pendingInquiryCount
+--         FROM
+--             FG_COMMON_USER c, FG_POST p,FG_INQUIRY i
+SELECT
+    (SELECT COUNT(*) FROM FG_COMMON_USER WHERE TRUNC(FG_USER_JOIN_DATE) = TRUNC(SYSDATE)) AS newUserCount,
+    (SELECT COUNT(*) FROM FG_COMMON_USER WHERE FG_USER_CODE > 0) AS totalUserCount,
+    (SELECT COUNT(*) FROM FG_POST WHERE TRUNC(FG_POST_CREATED_AT) = TRUNC(SYSDATE) AND FG_POST_TYPE = 'ecoCert') AS ecoCertPostCount,
+    (SELECT COUNT(*) FROM FG_INQUIRY WHERE FG_INQUIRY_STATUS = '0') AS pendingInquiryCount
+FROM dual
     </select>
 <!--대시보드 중앙 에코프젝부분-->
     <!--진행중인 에코프젝 배너부분 -->
