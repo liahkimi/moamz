@@ -19,7 +19,7 @@ public class AdminUserInquiryDetailDTO {
     private Long fgUserFileId;            // 작성자 플필사진 id
     private String fgUserFileRoot;          // 작성자 플필사진 파일경로
     private String fgUserFileName;          // 작성자 플필사진 파일이름
-    private String fgUserFileUUID;          // 작성자 플필사진 파일UUID
+    private String fgUserFileUuid;          // 작성자 플필사진 파일UUID
     private String fgNormalNickname;         // 작성자 닉네임(일반회원)
     private String fgPostCreatedAt;           // 작성일
     private String fgInquiryStatus;          // 문의글 상태 (미확인/답변완료)

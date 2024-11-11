@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원관리</title>
-    <link rel="stylesheet" href="../../static/css/reset2.css" />
+    <link rel="stylesheet" th:href="@{/css/reset2.css}" />
     <link
       rel="stylesheet"
-      href="../../static/css/admin/adminUserManagement.css"
+      th:href="@{/css/admin/adminUserManagement.css}"
     />
+    <link rel="stylesheet" th:href="@{/css/admin/adminHeader.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminNavBar.css}" />
   </head>
   <body>
-    <header id="adminHeader">
+    <header id="adminHeader" th:replace="~{/admin/adminHeader :: header}">
     </header>
     <main>
-      <nav id="adminNavBar">   
+      <nav id="adminNavBar" th:replace="~{/admin/adminNavBar :: nav}" >
       </nav>
       <!-- 우측 녹색 메인 화면-->
       <div class="content-box">
@@ -30,7 +31,7 @@
           <button>
             <img
               class="icon"
-              src="../../static/img/admin/search.png"
+              th:src="@{/img/admin/search.png}"
               alt="search"
             />
           </button>
@@ -59,205 +60,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>nickname</td>
-                  <td>idididididi@gmail.com</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
-                  <td>15</td>
-                  <td>30</td>
+                <tr th:each="userMngInfo, iterStat :${userMngListDTO}">
+                  <td th:text="${iterStat.index + 1}">1</td>
+                  <td th:text="${userMngInfo.fgNormalNickname}">nickname</td>
+                  <td th:text="${userMngInfo.fgUserId}">idididididi@gmail.com</td>
+                  <td th:text="${userMngInfo.fgUserJoinDate}">2024/10/11</td>
+                  <td th:text="${userMngInfo.fgPointTotal}">10</td>
+                  <td th:text="${userMngInfo.fgPostCount}">15</td>
+                  <td th:text="${userMngInfo.fgPurchaseCount}">30</td>
                   <td>
                     <button>
                       <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>nickname</td>
-                  <td>idididididi@gmail.com</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
-                  <td>15</td>
-                  <td>30</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>nickname</td>
-                  <td>idididididi@gmail.com</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
-                  <td>15</td>
-                  <td>30</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>nickname</td>
-                  <td>idididididi@gmail.com</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
-                  <td>15</td>
-                  <td>30</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>nickname</td>
-                  <td>idididididi@gmail.com</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
-                  <td>15</td>
-                  <td>30</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>nickname</td>
-                  <td>idididididi@gmail.com</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
-                  <td>15</td>
-                  <td>30</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>nickname</td>
-                  <td>idididididi@gmail.com</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
-                  <td>15</td>
-                  <td>30</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>nickname</td>
-                  <td>idididididi@gmail.com</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
-                  <td>15</td>
-                  <td>30</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>nickname</td>
-                  <td>idididididi@gmail.com</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
-                  <td>15</td>
-                  <td>30</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>nickname</td>
-                  <td>idididididi@gmail.com</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
-                  <td>15</td>
-                  <td>30</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>11</td>
-                  <td>nickname</td>
-                  <td>idididididi@gmail.com</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
-                  <td>15</td>
-                  <td>30</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>12</td>
-                  <td>nickname</td>
-                  <td>idididididi@gmail.com</td>
-                  <td>2024/10/11</td>
-                  <td>10</td>
-                  <td>15</td>
-                  <td>30</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
+                        th:src="@{/img/admin/more-horizontal.png}"
                         alt="morebtn"
                       />
                     </button>
@@ -277,7 +91,7 @@
           <div id="seller-table-container" class="table-hidden">
             <table>
               <thead>
-                <tr>
+                <tr >
                   <th>회원번호</th>
                   <th>아이디</th>
                   <th>업체명</th>
@@ -289,205 +103,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>idididididi</td>
-                  <td>바나프레소오오오오오오</td>
-                  <td>2024/10/11</td>
-                  <td>⭐5.0(10)</td>
-                  <td>60</td>
-                  <td>58</td>
+                <tr th:each="sellerMngInfo, iterStat :${sellerMngListDTO}">
+                  <td th:text="${iterStat.index + 1}">1</td>
+                  <td th:text="${sellerMngInfo.fgUserId}">idididididi</td>
+                  <td th:text="${sellerMngInfo.fgBusinessId}">바나프레소오오오오오오</td>
+                  <td th:text="${sellerMngInfo.fgUserJoinDate}">2024/10/11</td>
+                  <td >⭐<span th:text="${sellerMngInfo.fgAverageReviewRating}">5.0</span>(<span th:text="${sellerMngInfo.fgLikeCount}">10</span>)</td>
+                  <td th:text="${sellerMngInfo.fgProductCount}">60</td>
+                  <td th:text="${sellerMngInfo.fgSalesCount}">58</td>
                   <td>
                     <button>
                       <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>idididididi</td>
-                  <td>바나프레소오오오오오오</td>
-                  <td>2024/10/11</td>
-                  <td>⭐5.0(10)</td>
-                  <td>60</td>
-                  <td>58</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>idididididi</td>
-                  <td>바나프레소오오오오오오</td>
-                  <td>2024/10/11</td>
-                  <td>⭐5.0(10)</td>
-                  <td>60</td>
-                  <td>58</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>idididididi</td>
-                  <td>바나프레소오오오오오오</td>
-                  <td>2024/10/11</td>
-                  <td>⭐5.0(10)</td>
-                  <td>60</td>
-                  <td>58</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>idididididi</td>
-                  <td>바나프레소오오오오오오</td>
-                  <td>2024/10/11</td>
-                  <td>⭐5.0(10)</td>
-                  <td>60</td>
-                  <td>58</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>idididididi</td>
-                  <td>바나프레소오오오오오오</td>
-                  <td>2024/10/11</td>
-                  <td>⭐5.0(10)</td>
-                  <td>60</td>
-                  <td>58</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>idididididi</td>
-                  <td>바나프레소오오오오오오</td>
-                  <td>2024/10/11</td>
-                  <td>⭐5.0(10)</td>
-                  <td>60</td>
-                  <td>58</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>idididididi</td>
-                  <td>바나프레소오오오오오오</td>
-                  <td>2024/10/11</td>
-                  <td>⭐5.0(10)</td>
-                  <td>60</td>
-                  <td>58</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>idididididi</td>
-                  <td>바나프레소오오오오오오</td>
-                  <td>2024/10/11</td>
-                  <td>⭐5.0(10)</td>
-                  <td>60</td>
-                  <td>58</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>idididididi</td>
-                  <td>바나프레소오오오오오오</td>
-                  <td>2024/10/11</td>
-                  <td>⭐5.0(10)</td>
-                  <td>60</td>
-                  <td>58</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>11</td>
-                  <td>idididididi</td>
-                  <td>바나프레소오오오오오오</td>
-                  <td>2024/10/11</td>
-                  <td>⭐5.0(10)</td>
-                  <td>60</td>
-                  <td>58</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
-                        alt="morebtn"
-                      />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>12</td>
-                  <td>idididididi</td>
-                  <td>바나프레소오오오오오오</td>
-                  <td>2024/10/11</td>
-                  <td>⭐5.0(10)</td>
-                  <td>60</td>
-                  <td>58</td>
-                  <td>
-                    <button>
-                      <img
-                        src="../../static/img/admin/more-horizontal.png"
+                        th:src="@{/img/admin/more-horizontal.png}"
                         alt="morebtn"
                       />
                     </button>
@@ -507,12 +134,12 @@
       </div>
     </main>
   </body>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script>
-      $(function() {
-          $("#adminNavBar").load("adminNavBar.html");
-          $("#adminHeader").load("adminHeader.html")
-      });
-  </script>
-  <script src="../../static/js/admin/adminUserManagement.js"></script>
+<!--  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<!--  <script>-->
+<!--      $(function() {-->
+<!--          $("#adminNavBar").load("adminNavBar.html");-->
+<!--          $("#adminHeader").load("adminHeader.html")-->
+<!--      });-->
+<!--  </script>-->
+  <script th:src="@{/js/admin/adminUserManagement.js}"></script>
 </html>
