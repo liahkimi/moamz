@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.moamz.mapper.community.free.FreeMapper">
-    <!--
-          자유게시판
-      -->
 
     <!-- 글 작성(post 테이블) -->
     <insert id="insertPost" parameterType="FreeWriteDTO">
@@ -39,7 +36,7 @@
     <!-- 글 삭제 -->
     <delete id="deleteFree" parameterType="Long">
         DELETE FROM FG_POST
-        WHERE FG_POST_ID = #{postId};
+        WHERE FG_POST_ID = #{postId}
     </delete>
 
     <!-- 목록 보여주기 -->
@@ -52,9 +49,9 @@
         WHERE p.FG_USER_CODE = nu.FG_USER_CODE
           AND p.FG_POST_ID = c.FG_POST_ID(+)
           AND p.FG_POST_TYPE = 'free'
-        GROUP BY p.FG_POST_TITLE, nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT,
+        GROUP BY p.FG_POST_ID, p.FG_POST_TITLE, nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT,
                  p.FG_POST_VIEWS, p.FG_POST_LIKES
-        ORDER BY p.FG_POST_CREATED_AT DESC;
+        ORDER BY p.FG_POST_CREATED_AT DESC
     </select>
 
     <!-- 상세보기 -->
@@ -69,7 +66,7 @@
         FROM FG_POST p, FG_NORMAL_USER nu, FG_FREE f
         WHERE p.FG_USER_CODE = nu.FG_USER_CODE
           AND p.FG_POST_ID = f.FG_POST_ID
-          AND p.FG_POST_ID = #{postId};
+          AND p.FG_POST_ID = #{postId}
     </select>
 
     <!-- 댓글 보여주기 -->
@@ -91,7 +88,7 @@
             SELECT SEQ_COMMENT.nextVal FROM DUAL
         </selectKey>
         INSERT INTO FG_COMMENT(FG_COMMENT_ID, FG_COMMENT_CONTENT, FG_USER_CODE, FG_POST_ID)
-        VALUES (#{commentId}, #{commentContent}, #{userCode}, #{postId});
+        VALUES (#{commentId}, #{commentContent}, #{userCode}, #{postId})
     </insert>
 
     <!-- 댓글 수정하기 -->
@@ -99,13 +96,13 @@
         UPDATE FG_COMMENT
         SET FG_COMMENT_CONTENT = #{commentContent},
             FG_COMMENT_EDIT = 1
-        WHERE FG_COMMENT_ID = #{commentId};
+        WHERE FG_COMMENT_ID = #{commentId}
     </update>
 
     <!-- 댓글 삭제하기 -->
     <delete id="deleteFreeComment" parameterType="Long">
         DELETE FROM FG_COMMENT
-        WHERE FG_COMMENT_ID = #{commentId};
+        WHERE FG_COMMENT_ID = #{commentId}
     </delete>
 
 </mapper>

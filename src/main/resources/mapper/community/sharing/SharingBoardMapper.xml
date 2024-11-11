@@ -56,6 +56,7 @@
           AND p.FG_POST_ID = pf.FG_POST_ID
           AND p.FG_USER_CODE = nu.FG_USER_CODE
           AND s.FG_SHARING_STATUS = '나눔가능'
+        ORDER BY FG_POST_CREATED_AT DESC
     </select>
 
     <!-- 게시글 목록(예약중) -->
@@ -69,6 +70,7 @@
           AND p.FG_POST_ID = pf.FG_POST_ID
           AND p.FG_USER_CODE = nu.FG_USER_CODE
           AND s.FG_SHARING_STATUS = '예약중'
+        ORDER BY FG_POST_CREATED_AT DESC
     </select>
 
     <!-- 게시글 목록(나눔완료) -->
@@ -82,6 +84,7 @@
           AND p.FG_POST_ID = pf.FG_POST_ID
           AND p.FG_USER_CODE = nu.FG_USER_CODE
           AND s.FG_SHARING_STATUS = '나눔완료'
+        ORDER BY FG_POST_CREATED_AT DESC
     </select>
 
     <!-- 게시글 상세 -->
