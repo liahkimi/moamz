@@ -82,13 +82,17 @@ a {
     margin-right: 15px;
   }
   .write-form-title__value {
-    width: 800px;
+    width: 500px;
+    height: 25px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     
   }
   .write-form-detail {
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 30px; /* 💥마진 안됨!!*/
+    display: block;
+   margin-bottom: 15px;
   }
   
   
@@ -102,13 +106,19 @@ a {
   }
   
   .summernote-box textarea {
-    height: 100%;
+    width: 900px;
+    height: 300px;
+    /* 크기 조절 버튼 지우기 */
+    resize: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
   }
   
   .btn-wrap{
       position: absolute;
-      top: 400px;
-      left: 550px;
+      top: 500px;
+      left: 450px;
   }
   .btn-wrap button{
       font-size: 17px;

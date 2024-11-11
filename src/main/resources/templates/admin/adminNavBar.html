@@ -20,7 +20,7 @@
           <a>대시보드</a>
         </div>
       </li>
-      <li onclick="location.href='adminUserManagement.html'" class="nav-link">
+      <li th:onclick="|location.href='@{/admin/userMng/list}'|" class="nav-link">
         <div class="nav-logo">
           <img
             th:src="@{/img/admin/userManage.png}"
@@ -64,7 +64,7 @@
           <a >일반회원 문의</a>
         </div>
       </li>
-      <li  onclick="location.href='adminSellerInquiryList.html'" class="nav-link">
+      <li  th:onclick="|location.href='@{/admin/sellerInquiry/list}'|" class="nav-link">
         <div class="nav-logo">
           <img
             th:src="@{/img/admin/inquiry.png}"

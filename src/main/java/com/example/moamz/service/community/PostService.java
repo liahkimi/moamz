@@ -15,7 +15,7 @@ public class PostService {
 
 
     public void writePost(PostDTO postDTO) {
-        postMapper.insertPost(postDTO);
+        postMapper.insertFgPost(postDTO);
     }
 
     public void modifyPost(PostModifyDTO postModifyDTO) {

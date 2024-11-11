@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
@@ -16,9 +18,10 @@ public class SocialingListDTO {
     private String fgSocialingContent;
     private String fgSocialingCategory;
     private int fgSocialingMaxParticipants;
-    private String fgSocialingStart;
-    private String fgSocialingEnd;
+    private LocalDateTime fgSocialingStart;
+    private LocalDateTime fgSocialingEnd;
     private String fgSocialingLocation;
+    private String fgSocialingGenderRes;
     private int fgSocialingMinage;
     private int fgSocialingMaxage;
 }

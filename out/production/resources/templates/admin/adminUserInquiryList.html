@@ -52,7 +52,8 @@
                   <td th:text="${inquiry.fgPostCreatedAt}">2024/10/11 13:00</td>
                   <td>
 <!--                    <button onclick="changeStatusBtn(event)" th:text="${inquiry.fgInquiryStatus}">미확인</button>-->
-                    <button onclick="changeStatusBtn(event)" th:text="${inquiry.fgInquiryStatus == '0' ? '미확인' : '답변완료'}">
+                    <button  th:text="${inquiry.fgInquiryStatus == '0' ? '미확인' : '답변완료'}"
+                            th:onclick="|changeStatus(event, ${inquiry.fgPostId})|">
                     </button>
                   </td>
                 </tr>

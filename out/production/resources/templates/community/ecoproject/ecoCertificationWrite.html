@@ -23,7 +23,7 @@
             <div class="write-title">프로젝트 인증글</div>
         </section>
         <section class="write-content-section">
-            <form method="post" action="@{/ecoCertWrite/{fgPostId}(fgPostId=${fgPostId})}">
+            <form method="post" th:action="@{/ecoproject/ecoCertWrite/{fgPostId}(fgPostId=${fgPostId})}">
                 <div class="title-wrap">
                     <span class="write-form-title">📝 제목*</span>
                     <input name="fgPostTitle" type="text" placeholder="제목을 작성해주세요." required/>
