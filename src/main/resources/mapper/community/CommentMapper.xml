@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.community.CommentMapper">
+
+    <!-- 댓글 보여주기 -->
+    <select id="selectComment" parameterType="Long" resultType="CommentDTO">
+        SELECT c.FG_COMMENT_ID, nu.FG_NORMAL_NICKNAME, c.FG_COMMENT_CONTENT,
+               TO_CHAR(c.FG_COMMENT_DATE, 'YY/MM/DD HH24:MI') AS fgCommentDate,
+               CASE c.FG_COMMENT_EDIT
+                   WHEN '0' THEN ' '
+                   WHEN '1' THEN '수정됨'
+                   END AS fgCommentEdit
+        FROM FG_POST p, FG_COMMENT c, FG_NORMAL_USER nu
+        WHERE p.FG_POST_ID = c.FG_POST_ID
+          AND p.FG_USER_CODE = nu.FG_USER_CODE
+          AND p.FG_POST_ID = #{postId}
+        ORDER BY FG_COMMENT_DATE DESC
+    </select>
+
+    <!-- 댓글 작성하기 -->
+    <insert id="insertComment" parameterType="CommentDTO">
+        <selectKey keyProperty="fgCommentId" resultType="Long" order="BEFORE">
+            SELECT SEQ_COMMENT.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO FG_COMMENT(FG_COMMENT_ID, FG_COMMENT_CONTENT, FG_USER_CODE, FG_POST_ID)
+        VALUES (#{fgCommentId}, #{fgCommentContent}, #{fgUserCode}, #{fgPostId})
+    </insert>
+
+    <!-- 댓글 수정하기 -->
+    <update id="modifyComment" parameterType="CommentDTO">
+        UPDATE FG_COMMENT
+        SET FG_COMMENT_CONTENT = #{fgCommentContent},
+            FG_COMMENT_EDIT = 1
+        WHERE FG_COMMENT_ID = #{fgCommentId}
+    </update>
+
+    <!-- 댓글 삭제하기 -->
+    <delete id="deleteComment" parameterType="Long">
+        DELETE FROM FG_COMMENT
+        WHERE FG_COMMENT_ID = #{fgCommentId}
+    </delete>
+
+</mapper>

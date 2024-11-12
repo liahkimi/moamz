@@ -29,10 +29,5 @@ public interface FreeMapper {
     // 게시글 상세보기
     Optional<FreeDetailDTO> selectFreeDetail(Long postId);
 
-    // 댓글 목록, 작성, 수정, 삭제
-    List<FreeCommentDTO> selectFreeComment(Long postId);
-    void insertFreeComment(FreeCommentDTO freeCommentDTO);
-    void modifyFreeComment(FreeCommentDTO freeCommentDTO);
-    void deleteFreeComment(Long commentId);
 
 }
