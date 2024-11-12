@@ -92,10 +92,8 @@
 <!--에코프젝 종료시키기 버튼 클릭시 (처음엔 무조건  FG_ECO_STATUS = '1') -->
 <update id="finishBtn" parameterType="Long">
     UPDATE FG_ECO
-    SET
-        FG_ECO_STATUS = '0'
-    WHERE
-        FG_POST_ID = #{fgPostId}
+    SET FG_ECO_STATUS = '0'
+    WHERE FG_POST_ID = #{fgPostId}
 </update>
 
 

@@ -1,10 +1,10 @@
 package com.example.moamz.controller.admin.dashboard;
 
-import com.example.moamz.domain.dto.admin.dashboard.DashBoardAggregationDTO;
-import com.example.moamz.domain.dto.admin.dashboard.DashBoardEcoTopDTO;
+import com.example.moamz.domain.dto.admin.dashboard.*;
 import com.example.moamz.domain.dto.admin.eco.AdminIngEcoListDTO;
 import com.example.moamz.service.admin.dashboard.DashBoardService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +17,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin/dashboard")
 @RequiredArgsConstructor
+@Slf4j
 public class DashBoardController {
     private final DashBoardService dashBoardService;
 
@@ -28,25 +29,37 @@ public class DashBoardController {
         Optional<DashBoardAggregationDTO> dashBoardAggregationDTO = dashBoardService.findDashBoardAggregation();
         dashBoardAggregationDTO.ifPresent(dto -> model.addAttribute("dashBoardAggregationDTO", dto));
 
-//        //진행중인 에코프로젝트들
-//        List<DashBoardEcoTopDTO> dashBoardEcoTopDTO = dashBoardService.findDashBoardIngEco();
+        //-최근 생성된 에코프젝 중 가장 최근 인 것
+      Optional<DashBoardEcoTopDTO> dashBoardEcoTopDTO = dashBoardService.findDashBoardIngEco();
+        dashBoardEcoTopDTO.ifPresent(dto -> model.addAttribute("dashBoardEcoTopDTO", dto));
 //        model.addAttribute("dashBoardEcoTopDTO", dashBoardEcoTopDTO);
-//
-//        //해당 에코프로젝트의 좋아요top5 인증글
+        log.info("💥💥💥💥💥💥💥💥dashBoardEcoTopDTO {}", dashBoardEcoTopDTO);
 
 
+        //최근 생성된 에코프젝 중 두번쨰로 최근인 것
+        Optional<DashBoardEcoTop2DTO> dashBoardEcoTop2DTO = dashBoardService.findDashBoardIngEco2();
+        dashBoardEcoTop2DTO.ifPresent(dto -> model.addAttribute("dashBoardEcoTop2DTO", dto));
+//        model.addAttribute("dashBoardEcoTop2DTO", dashBoardEcoTop2DTO);
+        log.info("💥💥💥💥💥💥💥💥dashBoardEcoTop2DTO {}", dashBoardEcoTopDTO);
 
+        // 첫 번째와 두 번째 에코프로젝트의 projectId 가져오기
+        if (dashBoardEcoTopDTO.isPresent()) {
+            Long fgProjectId1 = dashBoardEcoTopDTO.get().getFgProjectId();
+            log.info("First Eco Project ID: {}", fgProjectId1);
 
+            // 첫 번째 에코 프로젝트의 좋아요 top5 인증글
+            List<DashBoardEcoTopLikes1DTO> dashBoardEcoTopLikes1DTO = dashBoardService.findDashBoardEcoTopLikes1(fgProjectId1);
+            model.addAttribute("dashBoardEcoTopLikes1DTO", dashBoardEcoTopLikes1DTO);
+        }
 
-//        // 진행 중인 에코 프로젝트 리스트
-//        List<DashBoardEcoTopDTO> ongoingEcoProjects = dashBoardService.findDashBoardIngEco();
-//        model.addAttribute("ongoingEcoProjects", ongoingEcoProjects);
-//
-//        // 각 프로젝트에 대해 TOP 5 인증글 좋아요 수를 가져오기
-//        for (DashBoardEcoTopDTO ecoProject : ongoingEcoProjects) {
-//            List<DashBoardEcoTopDTO> topLikes = dashBoardService.findDashBoardEcoTopLikes(ecoProject.getFgProjectId());
-//            ecoProject.setTopLikes(topLikes); // TOP 5 좋아요 수를 설정
-//        }
+        if (dashBoardEcoTop2DTO.isPresent()) {
+            Long fgProjectId2 = dashBoardEcoTop2DTO.get().getFgProjectId();
+            log.info("Second Eco Project ID: {}", fgProjectId2);
+
+            // 두 번째 에코 프로젝트의 좋아요 top5 인증글
+            List<DashBoardEcoTopLikes2DTO> dashBoardEcoTopLikes2DTO = dashBoardService.findDashBoardEcoTopLikes2(fgProjectId2);
+            model.addAttribute("dashBoardEcoTopLikes2DTO", dashBoardEcoTopLikes2DTO);
+        }
 
         return "admin/adminDashboard";
     }

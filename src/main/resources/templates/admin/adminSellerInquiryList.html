@@ -56,8 +56,14 @@
                   <td th:text="${inquiry.fgUserId}">bossbabay</td>
                   <td th:text="${inquiry.fgPostCreatedAt}">2024/10/11 13:00</td>
                   <td>
-                    <button onclick="changeStatusBtn(event)"
-                            th:text="${inquiry.fgInquiryStatus == '0' ? '미확인' : '답변완료'}">미확인</button>
+                    <button type="button"
+                            th:if="${inquiry.fgInquiryStatus == '0'}"
+                            th:text="'미확인'"
+                            th:onclick="|changeStatus(event, ${inquiry.fgPostId})|">
+                    </button>
+                    <div th:unless="${inquiry.fgInquiryStatus == '0'}"
+                         th:text="'답변완료'">
+                    </div>
                   </td>
                 </tr>
 <!--                <tr style="cursor: pointer;" onclick=goToDetailPage()>-->

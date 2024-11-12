@@ -63,4 +63,35 @@
         FROM FG_POST
         WHERE FG_POST_TYPE ='notice'
     </select>
+
+    <!-- 모든 공지사항 페이지 목록 보기 -->
+    <select id="selectAllNoticePage" parameterType="Criteria" resultType="AdminNoticeListDTO">
+    <![CDATA[
+        SELECT FG_POST_ID, FG_POST_TITLE, fgPostCreatedAt, FG_POST_VIEWS
+        FROM (
+                 SELECT ROWNUM AS RNUM, FG_POST_ID, FG_POST_TITLE, fgPostCreatedAt, FG_POST_VIEWS
+                 FROM (
+                          SELECT DISTINCT p.FG_POST_ID, p.FG_POST_TITLE,
+                                          TO_CHAR(p.FG_POST_CREATED_AT, 'YY/MM/DD HH24:MI') AS fgPostCreatedAt,
+                                          p.FG_POST_VIEWS
+                          FROM FG_NOTICE n
+                                   JOIN FG_POST p ON n.FG_POST_ID = p.FG_POST_ID
+                          ORDER BY p.FG_POST_ID DESC
+                      )
+                 WHERE ROWNUM <= #{page} * #{amount}
+             )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+        ]]>
+</select>
+
+
+
+
+
+
+
+
+
+
+
 </mapper>

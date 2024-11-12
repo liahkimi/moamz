@@ -27,8 +27,8 @@ public class AdminNoticeController {
     // 공지사항 목록 보여주기
     @GetMapping("/list")
     public String noticeList(@SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode, Criteria criteria, Model model) { //Model은 ui로 임포트
-        List<AdminNoticeListDTO> adminNoticeListDTO = adminNoticeService.findNoticeAll();
-        int total = adminNoticeService.findNoticeTotal();
+        List<AdminNoticeListDTO> adminNoticeListDTO = adminNoticeService.findAllNoticePage(criteria);
+        int total = adminNoticeService.findNoticeTotal(); //공지사항 글 총갯수
         Page page = new Page(criteria, total);
 
         model.addAttribute("page", page);

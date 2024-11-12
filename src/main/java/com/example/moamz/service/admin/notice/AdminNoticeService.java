@@ -4,6 +4,7 @@ import com.example.moamz.domain.dto.admin.notice.AdminNoticeDetailDTO;
 import com.example.moamz.domain.dto.admin.notice.AdminNoticeListDTO;
 import com.example.moamz.domain.dto.admin.notice.AdminNoticeModifyDTO;
 import com.example.moamz.domain.dto.admin.notice.AdminNoticeWriteDTO;
+import com.example.moamz.domain.dto.admin.page.Criteria;
 import com.example.moamz.mapper.admin.notice.AdminNoticeMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -56,6 +57,10 @@ public class AdminNoticeService {
     }
 
 
+    //모든 공지사항 페이지 목록 보기
+    public List<AdminNoticeListDTO> findAllNoticePage(Criteria criteria){
+        return adminNoticeMapper.selectAllNoticePage(criteria);
+    }
 
 
 

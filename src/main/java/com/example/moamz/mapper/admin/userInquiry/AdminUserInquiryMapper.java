@@ -22,4 +22,10 @@ public interface AdminUserInquiryMapper {
 
     //일반회원 특정 문의글 상세보기에 있는 댓글 보기
     Optional<adminCommentDTO> selectUserInquiryDetailCommentById(@Param("fgPostId") Long fgPostId);
+
+
+    // 일반회원 답변상태 변경시키기
+    void changeStatusBtn(@Param("fgPostId") Long fgPostId);
+
+
 }
