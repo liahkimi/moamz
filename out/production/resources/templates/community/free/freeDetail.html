@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/reset2.css}">
     <link rel="stylesheet" th:href="@{/css/community/free/freeDetail.css}">
-    <script defer th:src="@{/js/community/free/freeDetail.js}"></script>
+    <script defer type="module" th:src="@{/js/community/free/freeDetail.js}"></script>
     <title>자유게시판</title>
 </head>
 <body>
@@ -69,23 +69,28 @@
                     <input type="text" id="comment-input" placeholder="댓글 내용을 입력하세요.">
                     <button type="button" id="comment-input-btn">작성완료</button>
                 </div>
-                <!-- 댓글 목록 (li태그 비동기로 뿌리기) -->
+                <!-- 댓글 목록 (li태그 비동기로 뿌려짐) -->
                 <div class="comment-content-wrap">
                     <ul>
-                        <li class="comment-list" data-id="${comment.commentId}">
-                            <div>
-                                <div class="comment-info-wrap">
-                                    <span class="user-nickname">${comment.normalNickname}</span>
-                                    <span class="comment-write-time">${comment.commentDate}</span>
-                                    <span class="comment-modified">${comment.commentEdit}</span>
-                                </div>
-                                <div class="comment-btn-wrap">
-                                    <button type="button" class="comment-modify-btn">수정</button>
-                                    <button type="button" class="comment-delete-btn">삭제</button>
-                                </div>
-                            </div>
-                            <p class="comment-content">${comment.commentContent}</p>
-                        </li>
+<!--                        <li class="comment-list" data-id="${comment.commentId}">-->
+<!--                            <div>-->
+<!--                                <div class="comment-info-wrap">-->
+<!--                                    <span class="user-nickname">${comment.normalNickname}</span>-->
+<!--                                    <span class="comment-write-time">${comment.commentDate}</span>-->
+<!--                                    <span class="comment-modified">${comment.commentEdit}</span>-->
+<!--                                </div>-->
+<!--                                <div class="comment-btn-wrap">-->
+<!--                                    <button type="button" class="comment-modify-btn">수정</button>-->
+<!--                                    <button type="button" class="comment-delete-btn">삭제</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <p class="comment-content">
+                                    ${comment.commentContent}</p>-->
+        <!--                        <div class="comment-modify-box">-->
+        <!--                            <textarea class="modify-content">${oldComment}</textarea>-->
+        <!--                            <button type="button" class="modify-content-btn">수정완료</button>-->
+        <!--                        </div>-->
+<!--                        </li>-->
                     </ul>
                 </div>
             </div>

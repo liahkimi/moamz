@@ -56,7 +56,6 @@ public class freeController {
             freeDetailDTO.setMyPost(false);
         }
 
-        log.info("🤯🤯🤯freeDetailDTO : {}", freeDetailDTO);
         // 모델에 담아서 뷰로 전달
         model.addAttribute("freeDetailDTO", freeDetailDTO);
         return "/community/free/freeDetail";
