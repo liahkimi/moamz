@@ -7,6 +7,7 @@ import com.example.moamz.domain.dto.community.sharing.SharingWriteDTO;
 import com.example.moamz.domain.dto.file.PostFileDTO;
 import com.example.moamz.domain.dto.file.ProductFileDTO;
 import com.example.moamz.domain.dto.mypage.seller.ProductRegistDTO;
+import com.example.moamz.mapper.community.PostMapper;
 import com.example.moamz.mapper.community.sharing.SharingBoardMapper;
 import com.example.moamz.mapper.file.PostFileMapper;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ import java.util.UUID;
 public class SharingBoardService {
     private final SharingBoardMapper sharingBoardMapper;
     private final PostFileMapper postFileMapper;
+    private final PostMapper postMapper;
 
     // fileDir 필드에 application.properties에 저장해둔 file.dir 프로퍼티 값 넣어줌
     @Value("C:/upload_moamz/")
@@ -121,7 +123,7 @@ public class SharingBoardService {
     public Boolean removeSharing(Long userCode, Long postId) {
 
         // 게시글 작성자
-        Long postWriter = sharingBoardMapper.selectWriter(postId);
+        Long postWriter = postMapper.selectWriterCode(postId);
 
         // 삭제를 요청한 userCode와 게시글 작성자 userCode가 일치할 때만 삭제 가능
         if(postWriter.equals(userCode)) {
@@ -147,11 +149,11 @@ public class SharingBoardService {
     public SharingDetailDTO findSharingDetail(Long postId, Long userCode) {
 
         // 작성자 Code
-        Long writerCode = sharingBoardMapper.selectWriter(postId);
+        Long writerCode = postMapper.selectWriterCode(postId);
 
-        // 작성자 Code랑 userCode 다를때 조회수 +1
+        // 작성자 Code랑 세션의 userCode 다를때 조회수 +1
         if(!writerCode.equals(userCode)) {
-            sharingBoardMapper.updateViewCount(postId);
+            postMapper.updateViewCount(postId);
         }
 
         return sharingBoardMapper.selectSharingDetail(postId)
