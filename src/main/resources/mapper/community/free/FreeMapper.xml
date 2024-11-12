@@ -42,7 +42,8 @@
     <!-- 목록 보여주기 -->
     <select id="selectFreeList" resultType="FreeListDTO">
         SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
-               nu.FG_NORMAL_NICKNAME AS normalNickname, p.FG_POST_CREATED_AT AS postCreateAt,
+               nu.FG_NORMAL_NICKNAME AS normalNickname,
+               TO_CHAR(p.FG_POST_CREATED_AT, 'YYYY/MM/DD') AS postCreateAt,
                p.FG_POST_VIEWS AS postViews, p.FG_POST_LIKES AS postLikes,
                COUNT(c.FG_COMMENT_ID) AS commentCount
         FROM FG_POST p, FG_NORMAL_USER nu, FG_COMMENT c
@@ -56,53 +57,21 @@
 
     <!-- 상세보기 -->
     <select id="selectFreeDetail" parameterType="Long" resultType="FreeDetailDTO">
-        SELECT p.FG_USER_CODE AS userCode, p.FG_POST_TITLE AS postTitle, nu.FG_NORMAL_NICKNAME AS normalNickname,
-               p.FG_POST_CREATED_AT AS postCreatedAt, p.FG_POST_VIEWS AS postViews,
-               p.FG_POST_LIKES AS postLikes, f.FG_FREE_CONTENT AS freeContent,
+        SELECT p.FG_POST_ID AS postId, p.FG_USER_CODE AS writerCode,
+               p.FG_POST_TITLE AS postTitle, nu.FG_NORMAL_NICKNAME AS normalNickname,
+               TO_CHAR(p.FG_POST_CREATED_AT, 'YYYY/MM/DD HH24:MI') AS postCreatedAt,
+               p.FG_POST_VIEWS AS postViews, p.FG_POST_LIKES AS postLikes, f.FG_FREE_CONTENT AS freeContent,
                CASE p.FG_POST_EDIT
                    WHEN '0' THEN ' '
                    WHEN '1' THEN '수정됨'
-                   END AS postEdit
-        FROM FG_POST p, FG_NORMAL_USER nu, FG_FREE f
+                   END AS postEdit,
+               uf.FG_USER_FILE_ROOT AS userFileRoot, uf.FG_USER_FILE_UUID AS userFileUuid,
+               uf.FG_USER_FILE_NAME AS userFileName
+        FROM FG_POST p, FG_NORMAL_USER nu, FG_FREE f, FG_USER_FILE uf
         WHERE p.FG_USER_CODE = nu.FG_USER_CODE
+          AND p.FG_USER_CODE = uf.FG_USER_CODE
           AND p.FG_POST_ID = f.FG_POST_ID
           AND p.FG_POST_ID = #{postId}
     </select>
-
-    <!-- 댓글 보여주기 -->
-    <select id="selectFreeComment" parameterType="Long" resultType="FreeCommentDTO">
-        SELECT TO_CHAR(c.FG_COMMENT_DATE, 'YY/MM/DD HH24:MI:SS') AS commentDate,
-            c.FG_COMMENT_CONTENT AS commentContent,
-            CASE c.FG_COMMENT_EDIT
-                WHEN '0' THEN ' '
-                WHEN '1' THEN '수정됨'
-                END AS commentEdit
-        FROM FG_POST p, FG_COMMENT c
-        WHERE p.FG_POST_ID = c.FG_POST_ID
-          AND p.FG_POST_ID = #{postId}
-    </select>
-
-    <!-- 댓글 작성하기 -->
-    <insert id="insertFreeComment" parameterType="FreeCommentDTO">
-        <selectKey keyProperty="commentId" resultType="Long" order="BEFORE">
-            SELECT SEQ_COMMENT.nextVal FROM DUAL
-        </selectKey>
-        INSERT INTO FG_COMMENT(FG_COMMENT_ID, FG_COMMENT_CONTENT, FG_USER_CODE, FG_POST_ID)
-        VALUES (#{commentId}, #{commentContent}, #{userCode}, #{postId})
-    </insert>
-
-    <!-- 댓글 수정하기 -->
-    <update id="modifyFreeComment" parameterType="FreeCommentDTO">
-        UPDATE FG_COMMENT
-        SET FG_COMMENT_CONTENT = #{commentContent},
-            FG_COMMENT_EDIT = 1
-        WHERE FG_COMMENT_ID = #{commentId}
-    </update>
-
-    <!-- 댓글 삭제하기 -->
-    <delete id="deleteFreeComment" parameterType="Long">
-        DELETE FROM FG_COMMENT
-        WHERE FG_COMMENT_ID = #{commentId}
-    </delete>
 
 </mapper>

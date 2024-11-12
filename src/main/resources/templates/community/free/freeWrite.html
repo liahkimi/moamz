@@ -20,14 +20,14 @@
             <p>자유롭게 소통하고 새로운 정보를 공유해주세요!</p>
         </section>
         <section class="write-content-section">
-            <form method="post" action="">
+            <form method="post" action="/free/regist">
                 <div class="title-wrap">
                     <span class="write-form-title">📝 제목*</span>
-                    <input type="text" placeholder="제목을 작성해주세요." required/>
+                    <input type="text" id="postTitle" name="postTitle" placeholder="제목을 작성해주세요." required/>
                 </div>
                 <div class="edit-wrap">
                     <span class="write-form-title">📝 상세내용*</span>
-                    <textarea id="summernote" name="content"></textarea>
+                    <textarea id="summernote" name="freeContent"></textarea>
                 </div>
                 <div class="btn-wrap">
                     <button id="cancle-btn" type="button">취소</button>
