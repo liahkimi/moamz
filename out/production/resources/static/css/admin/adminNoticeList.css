@@ -205,8 +205,8 @@ tr:hover {
 /* 페이지네이션 css */
 .pagination{
 position: relative;
-top: 500px;
-left: 600px;
+top: 50px;
+left: 40px;
 }
 .page{
     
@@ -224,4 +224,37 @@ left: 600px;
 .prev, .next{
     font-size: 10px;
     color: #9E9E9E;
+}
+/*********************************/
+
+/* 페이징 */
+.page-a {
+    text-decoration: none;
+    color: #00c7ae;
+}
+
+.page-box {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-num {
+    border: 1px solid ;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    margin: 0 10px;
+    text-align: center;
+    align-items: center;
+    line-height: 28px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.active,
+.page-num:hover {
+    background-color: black;
+    color: white;
 }

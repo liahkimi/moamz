@@ -32,4 +32,16 @@ public class AdminUserInquiryService {
 
     //일반회원 특정 문의글 상세보기에 있는 댓글 보기
 
+
+
+
+    //일반회원 문의글 답변상태 변경시키기
+    public void updateStatusBtn(Long fgPostId){
+        adminUserInquiryMapper.changeStatusBtn(fgPostId);
+    }
+
+
+
+
+
 }

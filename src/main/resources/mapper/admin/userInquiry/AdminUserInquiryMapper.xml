@@ -4,7 +4,7 @@
 
     <!--일반회원 문의목록 보여주기-->
     <select id="selectInquiryList" resultType="AdminUserInquiryListDTO">
-        SELECT DISTINCT p.FG_POST_ID,p.FG_POST_TITLE, nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT
+        SELECT DISTINCT i.FG_INQUIRY_STATUS,p.FG_POST_ID,p.FG_POST_TITLE, nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT
         FROM FG_INQUIRY i
                  JOIN FG_POST p ON i.FG_POST_ID = p.FG_POST_ID
                  JOIN FG_COMMON_USER cu ON p.FG_USER_CODE = cu.FG_USER_CODE
@@ -49,6 +49,12 @@
           AND c.FG_POST_ID = #{fgPostId}
     </select>
 
+    <!--답변상태 변경하기 (처음엔 무조건 FG_INQUIRY_STATUS = '0')-->
+    <update id="changeStatusBtn" parameterType="Long">
+        UPDATE FG_INQUIRY
+        SET FG_INQUIRY_STATUS = '1'
+        WHERE FG_POST_ID = ${fgPostId}
+    </update>
 
 
 </mapper>

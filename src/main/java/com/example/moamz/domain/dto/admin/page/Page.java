@@ -10,10 +10,10 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class Page {
     //페이지 세트 당 표시될 수
-    private int pageCount;
+    private int pageCount; //3
 
     //페이지 세트의 시작 숫자
-    private int startPage;
+    private int startPage;  //1,4,7..
 
     //페이지 세트의 마지막 숫자
     private int endPage;
@@ -33,10 +33,11 @@ public class Page {
     //화면에서 전달받은 page, amount를 저장하는 객체
     private Criteria criteria;
 
+    // 생성자 직접 만든다.
     public Page(Criteria criteria, int total) {
-        this(criteria, total, 3);
+        this(criteria, total, 5);
     }
-
+    // 오버로딩
     public Page(Criteria criteria, int total, int pageCount) {
         this.criteria = criteria;//화면에서 현재 페이지와 페이지당 게시글수( amount)를 받는 객체
         this.total = total; //전체 게시글 수 
