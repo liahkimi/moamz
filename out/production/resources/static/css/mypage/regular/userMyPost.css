@@ -191,7 +191,7 @@ a{
   font-weight: bold;
 }
 
-#detail-btn{
+.detail-btn{
   margin-left: 400px;
   margin-top: 30px;
   font-size: 13px;

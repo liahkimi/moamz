@@ -49,10 +49,8 @@ public class UserNormalController {
     @GetMapping("/logout")
     public RedirectView logout(HttpSession session){
         session.invalidate();
-<<<<<<< HEAD
-        return new RedirectView("/main");
-=======
+
         return new RedirectView("/main");   
->>>>>>> main
+
     }
 }

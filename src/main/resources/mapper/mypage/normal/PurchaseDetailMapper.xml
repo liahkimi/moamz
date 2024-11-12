@@ -34,4 +34,8 @@
         WHERE FG_USER_CODE = #{fgUserCode}
     </select>
 
+<!--    <select id="selectPurchaseHistory" resultType="PurchaseHistory">-->
+<!--        SELECT * FROM purchase_history WHERE user_id = #{userId}-->
+<!--    </select>-->
+
 </mapper>
