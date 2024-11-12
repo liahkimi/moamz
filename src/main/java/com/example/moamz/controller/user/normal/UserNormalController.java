@@ -51,5 +51,6 @@ public class UserNormalController {
         session.invalidate();
 
         return new RedirectView("/main");
+
     }
 }
