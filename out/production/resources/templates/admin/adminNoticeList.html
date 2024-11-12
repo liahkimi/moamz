@@ -57,12 +57,30 @@
               </tbody>
             </table>
             <!-- 💥추후 페이지네이션 js 구현하기 -->
+<!--            <div class="pagination">-->
+<!--              <button class="prev">Previous</button>-->
+<!--              <button class="page active">1</button>-->
+<!--              <button class="page">2</button>-->
+<!--              <button class="page">3</button>-->
+<!--              <button class="next">Next</button>-->
+<!--            </div>-->
             <div class="pagination">
-              <button class="prev">Previous</button>
-              <button class="page active">1</button>
-              <button class="page">2</button>
-              <button class="page">3</button>
-              <button class="next">Next</button>
+              <ul class="page-box">
+                <a th:href="@{/admin/notice/list(page=${page.startPage - 1})}" class="page-a" th:if="${page.prev}">
+                  <li class="page-num prev">&lt</li>
+                </a>
+                <!--        th:block은 화면에 영향을 주지않는 가짜 태그
+                            타임리프 문법을 사용하기 위해 만들어 쓴다.
+                -->
+                <th:block th:each="i : ${#numbers.sequence(page.startPage, page.endPage)}">
+                  <a th:href="@{/admin/notice/list(page=${i})}" class="page-a">
+                    <li class="page-num" th:classappend="${i == page.criteria.page ? 'active' : ''}" th:text="${i}"></li>
+                  </a>
+                </th:block>
+                <a th:href="@{/admin/notice/list(page=${page.endPage + 1})}" class="page-a" th:if="${page.next}">
+                  <li class="page-num next">&gt</li>
+                </a>
+              </ul>
             </div>
           </div>
         </div>

@@ -44,25 +44,25 @@
         <!--에코프로젝트 배너 2개  -->
         <div class="ecobanner-card-box">
           <!-- 에코프젝배너 -->
-          <div class="ecobanner-card" th:each="ingEco:${dashBoardEcoTopDTO}">
+          <div class="ecobanner-card">
             <!-- 에코프젝 글 -->
             <div class="ecobanner">
               <!-- 에코프젝 글 사진 -->
               <div class="eco-img">
-                <img th:src="'/upload_moamz/' + ${ingEco.fgPostFileRoot} + '/' + ${ingEco.fgPostFileUuid} + '_' + ${ingEco.fgPostFileName}"
+                <img th:src="'/upload_moamz/' + ${dashBoardEcoTopDTO.fgPostFileRoot} + '/' + ${dashBoardEcoTopDTO.fgPostFileUuid} + '_' + ${dashBoardEcoTopDTO.fgPostFileName}"
                   alt="bannerImg"
                 />
               </div>
               <!-- 에코프젝 글 내용 -->
               <div class="eco-article">
                 <div class="subject">eco project</div>
-                <div class="title" th:text="${ingEco.fgPostTitle}">환경을 위한 플로깅 프로젝트!</div>
+                <div class="title" th:text="${dashBoardEcoTopDTO.fgPostTitle}">환경을 위한 플로깅 프로젝트!</div>
                 <div class="period">
                   <img
                     th:src="@{/img/admin/calendar.png}"
                     alt="calendar"
                   />
-                  <div><span th:text="${ingEco.fgEcoStart}">24/10/10</span>~ <span th:text="${ingEco.fgEcoEnd}">24/10/17</span></div>
+                  <div><span th:text="${dashBoardEcoTopDTO.fgEcoStart}">24/10/10</span>~ <span th:text="${dashBoardEcoTopDTO.fgEcoEnd}">24/10/17</span></div>
                 </div>
                 <div class="like-and-sticker-box">
                   <div class="like">
@@ -70,14 +70,14 @@
                       th:src="@{/img/admin/heart.png}"
                       alt="like-btn"
                     />
-                    <div th:text="${ingEco.fgPostLikes}">22</div>
+                    <div th:text="${dashBoardEcoTopDTO.fgPostLikes}">22</div>
                   </div>
                   <div class="point-box">
                     <img th:src="@{/img/admin/point.png}" alt="point-icon">
-                    <span th:text="${ingEco.fgEcoPoints}">500</span>pt
+                    <span th:text="${dashBoardEcoTopDTO.fgEcoPoints}">500</span>pt
                   </div>
                   <div class="sticker">
-                    <div><span th:text="${ingEco.fgEcoParticipation}">한번만</span> 참여 가능</div>
+                    <div><span th:text="${dashBoardEcoTopDTO.fgEcoParticipation}">한번만</span> 참여 가능</div>
                   </div>
                 </div>
               </div>
@@ -88,18 +88,18 @@
               <div class="top-five-list-title">좋아요 TOP5 참여자</div>
               <!-- 리스트 -->
               <div class="top-five-list">
-                <ul th:each="ingEcoLikes, iterStat :${dashBoardEcoTopDTOLikes}" >
+                <ul th:each="ingEcoLikes1, iterStat :${dashBoardEcoTopLikes1DTO}" >
                   <!-- 리스트중 하나 -->
                   <li>
                     <div class="num" th:text="${iterStat.index + 1}">1</div>
-                    <div class="nickname" th:text="${ingEcoLikes.fgNormalNickname}">닉네임</div>
+                    <div class="nickname" th:text="${ingEcoLikes1.fgNormalNickname}">닉네임</div>
                     <div class="like-box">
                       <div class="like">
                         <img
                           th:src="@{/img/admin/heart.png}"
                           alt="likeBtn"
                         />
-                        <div>35</div>
+                        <div th:text="${ingEcoLikes1.fgPostLikes}">35</div>
                       </div>
                     </div>
                   </li>
@@ -159,6 +159,125 @@
 <!--                      </div>-->
 <!--                    </div>-->
 <!--                  </li>-->
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="ecobanner-card">
+            <!-- 에코프젝 글 -->
+            <div class="ecobanner">
+              <!-- 에코프젝 글 사진 -->
+              <div class="eco-img">
+                <img th:src="'/upload_moamz/' + ${dashBoardEcoTop2DTO.fgPostFileRoot} + '/' + ${dashBoardEcoTop2DTO.fgPostFileUuid} + '_' + ${dashBoardEcoTop2DTO.fgPostFileName}"
+                     alt="bannerImg"
+                />
+              </div>
+              <!-- 에코프젝 글 내용 -->
+              <div class="eco-article">
+                <div class="subject">eco project</div>
+                <div class="title" th:text="${dashBoardEcoTop2DTO.fgPostTitle}">환경을 위한 플로깅 프로젝트!</div>
+                <div class="period">
+                  <img
+                          th:src="@{/img/admin/calendar.png}"
+                          alt="calendar"
+                  />
+                  <div><span th:text="${dashBoardEcoTop2DTO.fgEcoStart}">24/10/10</span>~ <span th:text="${dashBoardEcoTop2DTO.fgEcoEnd}">24/10/17</span></div>
+                </div>
+                <div class="like-and-sticker-box">
+                  <div class="like">
+                    <img
+                            th:src="@{/img/admin/heart.png}"
+                            alt="like-btn"
+                    />
+                    <div th:text="${dashBoardEcoTop2DTO.fgPostLikes}">22</div>
+                  </div>
+                  <div class="point-box">
+                    <img th:src="@{/img/admin/point.png}" alt="point-icon">
+                    <span th:text="${dashBoardEcoTop2DTO.fgEcoPoints}">500</span>pt
+                  </div>
+                  <div class="sticker">
+                    <div><span th:text="${dashBoardEcoTop2DTO.fgEcoParticipation}">한번만</span> 참여 가능</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 인증글 탑5 리스트 -->
+            <div class="top-five-list-box">
+              <!-- 타이틀 -->
+              <div class="top-five-list-title">좋아요 TOP5 참여자</div>
+              <!-- 리스트 -->
+              <div class="top-five-list">
+                <ul th:each="ingEcoLikes2, iterStat :${dashBoardEcoTopLikes2DTO}" >
+                  <!-- 리스트중 하나 -->
+                  <li>
+                    <div class="num" th:text="${iterStat.index + 1}">1</div>
+                    <div class="nickname" th:text="${ingEcoLikes2.fgNormalNickname}">닉네임</div>
+                    <div class="like-box">
+                      <div class="like">
+                        <img
+                                th:src="@{/img/admin/heart.png}"
+                                alt="likeBtn"
+                        />
+                        <div th:text="${ingEcoLikes2.fgPostLikes}">35</div>
+                      </div>
+                    </div>
+                  </li>
+                  <!--                  &lt;!&ndash; 리스트중 하나 &ndash;&gt;-->
+                  <!--                  <li>-->
+                  <!--                    <div class="num">2</div>-->
+                  <!--                    <div class="nickname">닉네임</div>-->
+                  <!--                    <div class="like-box">-->
+                  <!--                      <div class="like">-->
+                  <!--                        <img-->
+                  <!--                                th:src="@{/img/admin/heart.png}"-->
+                  <!--                          alt="likeBtn"-->
+                  <!--                        />-->
+                  <!--                        <div>35</div>-->
+                  <!--                      </div>-->
+                  <!--                    </div>-->
+                  <!--                  </li>-->
+                  <!--                  &lt;!&ndash; 리스트중 하나 &ndash;&gt;-->
+                  <!--                  <li>-->
+                  <!--                    <div class="num">3</div>-->
+                  <!--                    <div class="nickname">닉네임</div>-->
+                  <!--                    <div class="like-box">-->
+                  <!--                      <div class="like">-->
+                  <!--                        <img-->
+                  <!--                                th:src="@{/img/admin/heart.png}"-->
+                  <!--                          alt="likeBtn"-->
+                  <!--                        />-->
+                  <!--                        <div>35</div>-->
+                  <!--                      </div>-->
+                  <!--                    </div>-->
+                  <!--                  </li>-->
+                  <!--                  &lt;!&ndash; 리스트중 하나 &ndash;&gt;-->
+                  <!--                  <li>-->
+                  <!--                    <div class="num">4</div>-->
+                  <!--                    <div class="nickname">닉네임</div>-->
+                  <!--                    <div class="like-box">-->
+                  <!--                      <div class="like">-->
+                  <!--                        <img-->
+                  <!--                                th:src="@{/img/admin/heart.png}"-->
+                  <!--                          alt="likeBtn"-->
+                  <!--                        />-->
+                  <!--                        <div>35</div>-->
+                  <!--                      </div>-->
+                  <!--                    </div>-->
+                  <!--                  </li>-->
+                  <!--                  &lt;!&ndash; 리스트중 하나 &ndash;&gt;-->
+                  <!--                  <li>-->
+                  <!--                    <div class="num">5</div>-->
+                  <!--                    <div class="nickname">닉네임</div>-->
+                  <!--                    <div class="like-box">-->
+                  <!--                      <div class="like">-->
+                  <!--                        <img-->
+                  <!--                                th:src="@{/img/admin/heart.png}"-->
+                  <!--                          alt="likeBtn"-->
+                  <!--                        />-->
+                  <!--                        <div>35</div>-->
+                  <!--                      </div>-->
+                  <!--                    </div>-->
+                  <!--                  </li>-->
                 </ul>
               </div>
             </div>
@@ -223,62 +342,62 @@
 <!--                      </div>-->
 <!--                    </div>-->
 <!--                  </li>-->
-<!--                  &lt;!&ndash; 리스트중 하나 &ndash;&gt;-->
-<!--                  <li>-->
-<!--                    <div class="num">2</div>-->
-<!--                    <div class="nickname">닉네임</div>-->
-<!--                    <div class="like-box">-->
-<!--                      <div class="like">-->
-<!--                        <img-->
-<!--                          src="../../static/img/admin/heart.png"-->
-<!--                          alt="likeBtn"-->
-<!--                        />-->
-<!--                        <div>35</div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </li>-->
-<!--                  &lt;!&ndash; 리스트중 하나 &ndash;&gt;-->
-<!--                  <li>-->
-<!--                    <div class="num">3</div>-->
-<!--                    <div class="nickname">닉네임</div>-->
-<!--                    <div class="like-box">-->
-<!--                      <div class="like">-->
-<!--                        <img-->
-<!--                          src="../../static/img/admin/heart.png"-->
-<!--                          alt="likeBtn"-->
-<!--                        />-->
-<!--                        <div>35</div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </li>-->
-<!--                  &lt;!&ndash; 리스트중 하나 &ndash;&gt;-->
-<!--                  <li>-->
-<!--                    <div class="num">4</div>-->
-<!--                    <div class="nickname">닉네임</div>-->
-<!--                    <div class="like-box">-->
-<!--                      <div class="like">-->
-<!--                        <img-->
-<!--                          src="../../static/img/admin/heart.png"-->
-<!--                          alt="likeBtn"-->
-<!--                        />-->
-<!--                        <div>35</div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </li>-->
-<!--                  &lt;!&ndash; 리스트중 하나 &ndash;&gt;-->
-<!--                  <li>-->
-<!--                    <div class="num">5</div>-->
-<!--                    <div class="nickname">닉네임</div>-->
-<!--                    <div class="like-box">-->
-<!--                      <div class="like">-->
-<!--                        <img-->
-<!--                          src="../../static/img/admin/heart.png"-->
-<!--                          alt="likeBtn"-->
-<!--                        />-->
-<!--                        <div>35</div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </li>-->
+<!--&lt;!&ndash;                  &lt;!&ndash; 리스트중 하나 &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                  <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="num">2</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="nickname">닉네임</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="like-box">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <div class="like">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <img&ndash;&gt;-->
+<!--&lt;!&ndash;                          src="../../static/img/admin/heart.png"&ndash;&gt;-->
+<!--&lt;!&ndash;                          alt="likeBtn"&ndash;&gt;-->
+<!--&lt;!&ndash;                        />&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div>35</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                  &lt;!&ndash; 리스트중 하나 &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                  <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="num">3</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="nickname">닉네임</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="like-box">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <div class="like">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <img&ndash;&gt;-->
+<!--&lt;!&ndash;                          src="../../static/img/admin/heart.png"&ndash;&gt;-->
+<!--&lt;!&ndash;                          alt="likeBtn"&ndash;&gt;-->
+<!--&lt;!&ndash;                        />&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div>35</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                  &lt;!&ndash; 리스트중 하나 &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                  <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="num">4</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="nickname">닉네임</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="like-box">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <div class="like">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <img&ndash;&gt;-->
+<!--&lt;!&ndash;                          src="../../static/img/admin/heart.png"&ndash;&gt;-->
+<!--&lt;!&ndash;                          alt="likeBtn"&ndash;&gt;-->
+<!--&lt;!&ndash;                        />&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div>35</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                  &lt;!&ndash; 리스트중 하나 &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                  <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="num">5</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="nickname">닉네임</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="like-box">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <div class="like">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <img&ndash;&gt;-->
+<!--&lt;!&ndash;                          src="../../static/img/admin/heart.png"&ndash;&gt;-->
+<!--&lt;!&ndash;                          alt="likeBtn"&ndash;&gt;-->
+<!--&lt;!&ndash;                        />&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div>35</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </li>&ndash;&gt;-->
 <!--                </ul>-->
 <!--              </div>-->
 <!--            </div>-->

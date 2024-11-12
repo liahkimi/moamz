@@ -1,9 +1,6 @@
 package com.example.moamz.service.admin.dashboard;
 
-import com.example.moamz.domain.dto.admin.dashboard.DashBoardAggregationDTO;
-import com.example.moamz.domain.dto.admin.dashboard.DashBoardEcoTopDTO;
-import com.example.moamz.domain.dto.admin.dashboard.DashBoardGraphDTO;
-import com.example.moamz.domain.dto.admin.eco.AdminEcoCertListDTO;
+import com.example.moamz.domain.dto.admin.dashboard.*;
 import com.example.moamz.mapper.admin.dashboard.DashBoardMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,14 +21,26 @@ public class DashBoardService {
         return dashBoardMapper.selectAggregation();
     }
 
-    //대시보드 중앙 보여주기 -에코 프로젝트 데이터 보여주기
-    public List<DashBoardEcoTopDTO> findDashBoardIngEco(){
+    // -최근 생성된 에코프젝 중 가장 최근 인 것
+    public Optional<DashBoardEcoTopDTO> findDashBoardIngEco(){
+
         return dashBoardMapper.selectIngEco();
     }
 
-    //대시보드 중앙 보여주기 - 인증글 TOP 5 리스트 보여주기
-    public List<DashBoardEcoTopDTO> findDashBoardEcoTopLikes(Long fgProjectId){
-        return dashBoardMapper.selectEcoTopLikes(fgProjectId);
+    // 최근 생성된 에코프젝 중 두번쨰로 최근인 것
+    public Optional<DashBoardEcoTop2DTO> findDashBoardIngEco2(){
+
+        return dashBoardMapper.selectIngEco2();
+    }
+
+    //에코프로젝트1의 top5좋아요리스트1
+    public List<DashBoardEcoTopLikes1DTO> findDashBoardEcoTopLikes1(Long fgProjectId){
+        return dashBoardMapper.selectEcoTopLikes1(fgProjectId);
+    }
+
+    //에코프로젝트2의 top5좋아요리스트2
+    public List<DashBoardEcoTopLikes2DTO> findDashBoardEcoTopLikes2(Long fgProjectId){
+        return dashBoardMapper.selectEcoTopLikes2(fgProjectId);
     }
 
     //    (진행중/종료된) 특정 한 에코 프로젝트의 인증글 목록보기
