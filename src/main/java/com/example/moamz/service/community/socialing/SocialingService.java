@@ -28,6 +28,6 @@ public class SocialingService {
 
     // 소셜링 insert
     public void writeSocialing(SocialingWriteDTO socialingWriteDTO){
-        socialingMapper.inserFgSocialing(socialingWriteDTO);
+        socialingMapper.insertFgSocialing(socialingWriteDTO);
     }
 }

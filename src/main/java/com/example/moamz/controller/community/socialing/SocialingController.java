@@ -3,6 +3,7 @@ package com.example.moamz.controller.community.socialing;
 import com.example.moamz.domain.dto.community.PostDTO;
 import com.example.moamz.domain.dto.community.socialing.SocialingDetailDTO;
 import com.example.moamz.domain.dto.community.socialing.SocialingListDTO;
+import com.example.moamz.domain.dto.community.socialing.SocialingWriteDTO;
 import com.example.moamz.service.community.PostService;
 import com.example.moamz.service.community.socialing.SocialingService;
 import lombok.RequiredArgsConstructor;
@@ -44,12 +45,27 @@ public class SocialingController {
     }
 
     @PostMapping("/socialingWrite")
-    public String socialingWritePost(@ModelAttribute SocialingDetailDTO socialingDetailDTO, @RequestBody PostDTO postDTO) {
-        
+    public String socialingWritePost(@ModelAttribute SocialingWriteDTO socialingWriteDTO) {
+
+        Long sampleUser = 1L;
+
+        PostDTO postDTO = new PostDTO();
+        postDTO.setFgPostType("socialing");
+        postDTO.setFgPostTitle(socialingWriteDTO.getFgPostTitle());
+        postDTO.setFgUserCode(sampleUser);
 
 
-        return "redirect:/community/socialing/socialingDetail/" + socialingDetailDTO.getFgPostId();
+        postService.writePost(postDTO);
+
+
+        socialingWriteDTO.setFgPostId(postDTO.getFgPostId());
+        socialingService.writeSocialing(socialingWriteDTO);
+
+
+        return "redirect:/socialing/socialingDetail/" + postDTO.getFgPostId();
     }
+
+
 }
 
 

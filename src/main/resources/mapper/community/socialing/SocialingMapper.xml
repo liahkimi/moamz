@@ -83,7 +83,7 @@
         #{fgSocialingStart},
         #{fgSocialingEnd},
         #{fgSocialingLocation},
-        '제한없음',
+        #{fgSocialingGenderRes},
         #{fgSocialingMinage},
         #{fgSocialingMaxage},
         #{fgSocialingContent}

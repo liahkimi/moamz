@@ -16,5 +16,5 @@ public interface SocialingMapper {
     SocialingDetailDTO socialingDetail(Long fgPostId);
 
 //    소셜링 insert
-    void inserFgSocialing(SocialingWriteDTO SocialingWriteDTO);
+    void insertFgSocialing(SocialingWriteDTO SocialingWriteDTO);
 }
