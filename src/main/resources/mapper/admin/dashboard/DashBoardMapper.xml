@@ -144,6 +144,7 @@ FROM dual
         GROUP BY EXTRACT(MONTH FROM o.FG_ORDER_DATE)
         ORDER BY order_month  -- 월별로 정렬
     </select>
+
     <!--월별 총 에코프젝 인증글 수-->
     <select id="selectMonthlyEcoCert" resultType="DashBoardGraphDTO">
         SELECT
