@@ -3,7 +3,7 @@
 <mapper namespace="com.example.moamz.mapper.admin.sellerInquiry.AdminSellerInquiryMapper">
     <!--판매자 미확인 문의글 목록 보여주기-->
     <select id="selectInquiryList" resultType="AdminSellerInquiryListDTO">
-        SELECT p.FG_POST_ID,p.FG_POST_TITLE, cu.FG_USER_ID, b.FG_BUSINESS_NAME,
+        SELECT i.FG_INQUIRY_STATUS,p.FG_POST_ID,p.FG_POST_TITLE, cu.FG_USER_ID, b.FG_BUSINESS_NAME,
                p.FG_POST_CREATED_AT
         FROM FG_INQUIRY i
                  JOIN FG_POST p ON i.FG_POST_ID = p.FG_POST_ID
@@ -57,5 +57,12 @@
           AND c.FG_USER_CODE = cu.FG_USER_CODE
           AND c.FG_POST_ID = #{fgPostId}
     </select>
+
+    <!--답변상태 변경하기 (처음엔 무조건 FG_INQUIRY_STATUS = '0')-->
+    <update id="changeStatusBtn" parameterType="Long">
+        UPDATE FG_INQUIRY
+        SET FG_INQUIRY_STATUS = '1'
+        WHERE FG_POST_ID = ${fgPostId}
+    </update>
 
 </mapper>

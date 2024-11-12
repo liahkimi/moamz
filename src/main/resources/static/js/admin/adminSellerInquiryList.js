@@ -29,3 +29,25 @@ sellerMngBtn.addEventListener('click',function(){
     alert("답변완료로 변경하시겠습니까?");
     event.stopPropagation();  // 이벤트 전파 막기
   }
+
+// 답변 상태 바꾸는 함수 => tr의 이벤트 영향 안받게 하기
+function changeStatus(event, fgPostId) {
+    event.stopPropagation();  // 이벤트 전파 막기
+    event.preventDefault();
+
+    if(confirm("답변완료로 변경하시겠습니까?")){
+        console.log(fgPostId);
+        fetch(`http://localhost:9999/admin/userInquiry/list/modifyEcoStatus/${fgPostId}`,{
+            method: 'post'
+        }).then(response => {
+            if(response.ok){
+                location.reload()
+            }else{
+                alert("ㅠㅠ");
+            }
+        })
+    }else{
+
+    }
+
+}

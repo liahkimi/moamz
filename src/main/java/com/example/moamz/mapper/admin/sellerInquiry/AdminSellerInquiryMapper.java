@@ -23,4 +23,8 @@ public interface AdminSellerInquiryMapper {
     //판매자 특정 문의글 상세보기의 댓글보기
     Optional<adminCommentDTO> selectUserInquiryDetailCommentById(@Param("fgPostId") Long fgPostId);
 
+
+    // 일반회원 답변상태 변경시키기
+    void changeStatusBtn(@Param("fgPostId") Long fgPostId);
+
 }
