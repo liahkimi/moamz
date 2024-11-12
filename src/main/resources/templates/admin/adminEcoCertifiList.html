@@ -49,7 +49,7 @@
                   <td th:text="${certList.fgPostCreatedAt}">2024/10/11</td>
                   <td th:text="${certList.fgPostLikes}">10</td>
                   <td>
-                    <button onclick="openModal(event)">포인트 지급하기</button>
+                    <button id="pointBtn" type="button" onclick="openModal(event)">포인트 지급하기</button>
                   </td>
                 </tr>
 
@@ -72,7 +72,7 @@
                   </select> -->
                   <div class="modal-btn">
                     <button type="button" onclick="closeModal()">취소</button>
-                    <button type="submit" id="subminBtn">적용</button>
+                    <button type="submit" id="submitBtn">적용</button>
                     <!-- 💥적용버튼 클릭시 가야할 곳 못 정함 -->
                   </div>
                 </form>

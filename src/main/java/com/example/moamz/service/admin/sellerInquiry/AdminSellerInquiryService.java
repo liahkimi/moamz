@@ -26,4 +26,10 @@ public class AdminSellerInquiryService {
     public AdminSellerInquiryDetailDTO findInquiryDetail(Long fgPostId){
         return adminSellerInquiryMapper.selectUserInquiryDetailById(fgPostId).orElseThrow(()-> new IllegalStateException("유효하지 않은 게시물입니다."));
     }
+
+    //일반회원 문의글 답변상태 변경시키기
+    public void updateStatusBtn(Long fgPostId){
+        adminSellerInquiryMapper.changeStatusBtn(fgPostId);
+    }
+
 }

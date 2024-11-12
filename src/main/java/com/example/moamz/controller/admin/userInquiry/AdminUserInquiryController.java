@@ -38,13 +38,13 @@ public class AdminUserInquiryController {
         return "admin/adminUserInquiryDetail";
     }
 
-//    //일반회원 문의목록 - '답변완료'버튼으로 상태 바꾸기
-//    @PostMapping("/list/modifyEcoStatus/{fgPostId}")
-//    public String modifyEcoStatus(@PathVariable("fgPostId") Long fgPostId,
-//                                  @SessionAttribute(value="fgUserCode",required=false) Long fgUserCode){
-//        adminUserInquiryService.
-//        return "redirect:/admin/userInquiry/list";
-//    }
+    //일반회원 문의목록 - '답변완료'버튼으로 상태 바꾸기
+    @PostMapping("/list/modifyEcoStatus/{fgPostId}")
+    public String modifyEcoStatus(@PathVariable("fgPostId") Long fgPostId,
+                                  @SessionAttribute(value="fgUserCode",required=false) Long fgUserCode){
+        adminUserInquiryService.updateStatusBtn(fgPostId);
+        return "redirect:/admin/userInquiry/list";
+    }
 
 
 }
