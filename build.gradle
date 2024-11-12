@@ -47,6 +47,9 @@ dependencies {
 
 	// Jakarta Servlet API 의존성 추가
 	implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+
+	// coolSms 문자인증 SDK
+	implementation 'net.nurigo:sdk:4.3.0'
 }
 
 tasks.named('test') {

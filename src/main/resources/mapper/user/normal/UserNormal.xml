@@ -4,7 +4,7 @@
 
     <select id="selectId" resultType="Long" parameterType="NormalLoginDTO">
         SELECT FG_USER_CODE
-        FROM FG_COMMENT_USER
+        FROM FG_COMMON_USER
         WHERE FG_USER_ID = #{fgUserID} AND FG_USER_PASSWORD = #{fgUserPassword}
     </select>
 
