@@ -1,6 +1,6 @@
 package com.example.moamz.mapper.community;
 
-import com.example.moamz.domain.dto.admin.page.Criteria;
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.domain.dto.community.CommentDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

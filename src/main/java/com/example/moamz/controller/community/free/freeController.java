@@ -1,13 +1,12 @@
 package com.example.moamz.controller.community.free;
 
-import com.example.moamz.domain.dto.admin.page.Criteria;
-import com.example.moamz.domain.dto.admin.page.Page;
+import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.Page;
 import com.example.moamz.domain.dto.community.free.FreeDetailDTO;
 import com.example.moamz.domain.dto.community.free.FreeListDTO;
 import com.example.moamz.domain.dto.community.free.FreeModifyDTO;
 import com.example.moamz.domain.dto.community.free.FreeWriteDTO;
 import com.example.moamz.service.community.free.FreeBoardService;
-import jakarta.servlet.ServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
 

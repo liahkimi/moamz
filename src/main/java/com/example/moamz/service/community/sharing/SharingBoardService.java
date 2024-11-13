@@ -1,13 +1,11 @@
 package com.example.moamz.service.community.sharing;
 
-import com.example.moamz.domain.dto.admin.page.Criteria;
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.domain.dto.community.sharing.SharingDetailDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingListDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingModifyDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingWriteDTO;
 import com.example.moamz.domain.dto.file.PostFileDTO;
-import com.example.moamz.domain.dto.file.ProductFileDTO;
-import com.example.moamz.domain.dto.mypage.seller.ProductRegistDTO;
 import com.example.moamz.mapper.community.PostMapper;
 import com.example.moamz.mapper.community.sharing.SharingBoardMapper;
 import com.example.moamz.mapper.file.PostFileMapper;

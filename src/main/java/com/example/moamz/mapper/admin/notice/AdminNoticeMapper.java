@@ -4,7 +4,7 @@ import com.example.moamz.domain.dto.admin.notice.AdminNoticeDetailDTO;
 import com.example.moamz.domain.dto.admin.notice.AdminNoticeListDTO;
 import com.example.moamz.domain.dto.admin.notice.AdminNoticeModifyDTO;
 import com.example.moamz.domain.dto.admin.notice.AdminNoticeWriteDTO;
-import com.example.moamz.domain.dto.admin.page.Criteria;
+import com.example.moamz.domain.dto.page.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
