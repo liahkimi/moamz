@@ -1,7 +1,7 @@
 package com.example.moamz.controller.community.sharing;
 
-import com.example.moamz.domain.dto.admin.page.Criteria;
-import com.example.moamz.domain.dto.admin.page.Page;
+import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.Page;
 import com.example.moamz.domain.dto.community.sharing.SharingDetailDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingListDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingModifyDTO;

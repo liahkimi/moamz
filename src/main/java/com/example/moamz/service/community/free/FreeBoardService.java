@@ -1,6 +1,6 @@
 package com.example.moamz.service.community.free;
 
-import com.example.moamz.domain.dto.admin.page.Criteria;
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.domain.dto.community.free.*;
 import com.example.moamz.mapper.community.PostMapper;
 import com.example.moamz.mapper.community.free.FreeLikeMapper;
