@@ -1,6 +1,6 @@
 package com.example.moamz.mapper.admin.sellerInquiry;
 
-import com.example.moamz.domain.dto.admin.adminCommentDTO;
+import com.example.moamz.domain.dto.admin.AdminCommentDTO;
 import com.example.moamz.domain.dto.admin.sellerInquiry.AdminSellerInquiryDetailDTO;
 import com.example.moamz.domain.dto.admin.sellerInquiry.AdminSellerInquiryListDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,7 +21,7 @@ public interface AdminSellerInquiryMapper {
     Optional<AdminSellerInquiryDetailDTO> selectUserInquiryDetailById(@Param("fgPostId") Long fgPostId);
 
     //판매자 특정 문의글 상세보기의 댓글보기
-    Optional<adminCommentDTO> selectUserInquiryDetailCommentById(@Param("fgPostId") Long fgPostId);
+    Optional<AdminCommentDTO> selectUserInquiryDetailCommentById(@Param("fgPostId") Long fgPostId);
 
 
     // 일반회원 답변상태 변경시키기

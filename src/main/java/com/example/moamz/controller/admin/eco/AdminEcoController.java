@@ -1,7 +1,10 @@
 package com.example.moamz.controller.admin.eco;
 
+import com.example.moamz.domain.dto.admin.AdminCommentDTO;
 import com.example.moamz.domain.dto.admin.eco.*;
 import com.example.moamz.domain.dto.admin.notice.AdminNoticeModifyDTO;
+import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.Page;
 import com.example.moamz.mapper.admin.eco.AdminEcoMapper;
 import com.example.moamz.service.admin.eco.AdminEcoService;
 import lombok.RequiredArgsConstructor;
@@ -24,16 +27,26 @@ public class AdminEcoController {
 
     //진행 OR 종료된 에코프로젝트 목록 보여주기
     @GetMapping("/list")
-    public String ingEcoList(Model model, @SessionAttribute(value="fgUserCode", required = false) Long fgUserCode){
+    public String ingEcoList(Criteria criteria, Model model, @SessionAttribute(value="fgUserCode", required = false) Long fgUserCode){
+        criteria.setAmount(2);
+        //진행중인 에코프젝 목록 dto
+        List<AdminIngEcoListDTO> adminIngEcoListDTO = adminEcoService.findAllIngEcoList(criteria);
+        int total = adminEcoService.findEcoTotal(); //에코프젝 총 갯수
 
-        List<AdminIngEcoListDTO> adminIngEcoListDTO = adminEcoService.findIngEcoList();
+        Page page = new Page(criteria, total);
+        model.addAttribute("page", page);
         model.addAttribute("adminIngEcoListDTO", adminIngEcoListDTO);
 
+
+        //완료된 에코프젝 목록 dto
         List<AdminFinEcoListDTO> adminFinEcoListDTO = adminEcoService.findFinEcoList();
         model.addAttribute("adminFinEcoListDTO", adminFinEcoListDTO);
+
         System.out.println("adminIngEcoListDTO = " + adminIngEcoListDTO);
             return "admin/adminEcoList";
         }
+
+    // 에코프젝 글 총 갯수 구하기
 
 
     //에코프로젝트 작성페이지 보여주기
@@ -91,12 +104,21 @@ public class AdminEcoController {
         return "admin/adminEcoCertifiList";
     }
 
-    // 진행중인 에코프로젝트 인증글 상세보기 페이지
+    // 진행중인 에코프로젝트 인증글 상세보기 페이지 + 댓글 보여주기
     @GetMapping("/ecoCertDetail/{fgPostId}/{fgProjectId}")
     public String ecoCertDetail(@SessionAttribute(value="fgUserCode", required=false) Long fgUserCode,
                                 @PathVariable("fgPostId") Long fgPostId,
                                 @PathVariable("fgProjectId") Long fgProjectId, Model model){
         AdminEcoCertDetailDTO adminEcoCertDetailDTO = adminEcoService.findEcoCertDetail(fgPostId,fgProjectId);
+        List<AdminCommentDTO> adminCommentDTO = adminEcoService.findEcoCertDetailComment(fgPostId);
+        model.addAttribute("adminCommentDTO", adminCommentDTO);
+        if (adminCommentDTO == null) {
+            log.info("⭐⭐⭐⭐⭐adminCommentDTO is null");
+        } else {
+            log.info("⭐⭐⭐⭐⭐adminCommentDTO : {}", adminCommentDTO);
+        }
+
+
         adminEcoCertDetailDTO.setFgProjectId(fgProjectId);
         model.addAttribute("adminEcoCertDetailDTO", adminEcoCertDetailDTO);
         return "/admin/adminEcoCertifiDetail";
@@ -121,6 +143,15 @@ public class AdminEcoController {
         AdminEcoCertDetailDTO adminEcoCertDetailDTO = adminEcoService.findEcoCertDetail(fgPostId,fgProjectId);
         adminEcoCertDetailDTO.setFgProjectId(fgProjectId);
         model.addAttribute("adminEcoCertDetailDTO", adminEcoCertDetailDTO);
+
+        List<AdminCommentDTO> adminCommentDTO = adminEcoService.findEcoCertDetailComment(fgPostId);
+        model.addAttribute("adminCommentDTO", adminCommentDTO);
+
+        if (adminCommentDTO == null) {
+            log.info("💥💥💥💥adminCommentDTO is null");
+        } else {
+            log.info("💥💥💥💥adminCommentDTO : {}", adminCommentDTO);
+        }
         return "/admin/adminEcoCertifiDetailFin";
     }
 
@@ -142,7 +173,31 @@ public class AdminEcoController {
 
 
     // 특정 에코프로젝트 인증글 작성자에게 포인트 지급해주기
+    // 지급버튼 클릭시, fgPostId가 모달창에 전달되도록
+    @GetMapping("/updatePoint/{fgPostId}")
+    public String ecoPoint(@SessionAttribute(value="fgUserCode", required=false) Long fgUserCode,
+                           @PathVariable("fgPostId") Long fgPostId,
+                           @ModelAttribute AdminEcoCertPointBtnDTO adminEcoCertPointBtnDTO,
+                           @RequestParam("fgPointReceived") Long fgPointReceived) {
+        // 포인트 지급 및 내역 기록 서비스 호출
+        adminEcoService.giveUserEcoPointAndLog(adminEcoCertPointBtnDTO);
 
+        // 리다이렉트 URL에 fgPostId 포함
+        return "redirect:/admin/eco/finEcoCertList/" + fgPostId;
+    }
+
+//    @GetMapping()
+
+//    @PostMapping("/updatePoint")
+//    public String ecoPoint(
+//            @RequestParam("fgPostId") Long fgPostId,
+//            @RequestParam("fgPointReceived") Long fgPointReceived) {
+//        // 포인트 지급 로직 처리
+//        adminEcoService.giveUserEcoPointAndLog(fgPostId, fgPointReceived);
+//
+//        // 처리 후 리디렉션
+//        return "redirect:/admin/eco/finEcoCertList/" + fgPostId;
+//    }
 
 
 

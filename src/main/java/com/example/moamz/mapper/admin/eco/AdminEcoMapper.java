@@ -1,6 +1,8 @@
 package com.example.moamz.mapper.admin.eco;
 
+import com.example.moamz.domain.dto.admin.AdminCommentDTO;
 import com.example.moamz.domain.dto.admin.eco.*;
+import com.example.moamz.domain.dto.page.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +12,10 @@ import java.util.Optional;
 @Mapper
 public interface AdminEcoMapper {
 //    진행중인 에코프로젝트 목록 가져오기
-    List<AdminIngEcoListDTO> selectIngEcoList();
+    List<AdminIngEcoListDTO> selectAllIngEcoList(Criteria criteria);
+
+//    에코프로젝트 글 총 갯수 조회
+    int selectEcoTotal();
 
 //    종료된 에코프로젝트 목록 가져오기
     List<AdminFinEcoListDTO> selectFinEcoList();
@@ -42,17 +47,21 @@ public interface AdminEcoMapper {
 //    에코프젝 인증글 상세 보기
      Optional<AdminEcoCertDetailDTO> selectEcoCertDetail(@Param("fgPostId") Long fgPostId, @Param("fgProjectId") Long fgProjectId);
 
-//  에코프젝 인증글 - 포인트 지급하기 (인증글 쓴사람의 회원번호 알아내기)
-    Optional<AdminEcoCertPointBtnDTO> selectEcoPointReceiver(@Param("fgPostId") Long fgPostId);
+//     에코프젝 인증글 상세페이지 댓글보기
+    List<AdminCommentDTO> selectEcoCertDetailComment(@Param("fgPostId") Long fgPostId);
 
-//  에코프젝 인증글 - 포인트 지급하기(해당 유저의 포인트 업데이트하기
-    void updateUserEcoPoint(@Param("fgPostId") Long fgPostId);
+////  에코프젝 인증글 - 포인트 지급하기 (인증글 쓴사람의 회원번호 알아내기)
+//    Optional<AdminEcoCertPointBtnDTO> selectEcoPointReceiver(@Param("fgPostId") Long fgPostId);
+//
+////  에코프젝 인증글 - 포인트 지급하기(해당 유저의 포인트 업데이트하기
+//    void updateUserEcoPoint(@Param("fgPostId") Long fgPostId);
+//
+////  에코프젝 인증글 -포인트 지급 내역 기록하기
+//    void  insertEcoPointLog(AdminEcoCertPointBtnDTO adminEcoCertPointBtnDTO);
 
-//  에코프젝 인증글 -포인트 지급 내역 기록하기
-    void  insertEcoPointLog(AdminEcoCertPointBtnDTO adminEcoCertPointBtnDTO);
 
-
-
+//  에코프젝 포인트 지급하기 (지급내역 기록 + 해당 유저 포인트 업데이트 하기
+    void updateUserEcoPointAndLog(AdminEcoCertPointBtnDTO adminEcoCertPointBtnDTO);
 
 
 

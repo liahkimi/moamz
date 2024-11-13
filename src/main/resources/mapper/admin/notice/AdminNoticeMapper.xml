@@ -28,7 +28,7 @@
         </selectKey>
 
         INSERT INTO FG_POST (FG_POST_ID, FG_POST_TYPE, FG_POST_TITLE, FG_USER_CODE)
-        VALUES (#{fgPostId}, 'notice', #{fgPostTitle}, (SELECT FG_USER_CODE FROM FG_COMMON_USER WHERE FG_USER_ID = '관리자'))
+        VALUES (#{fgPostId}, 'notice', #{fgPostTitle}, (SELECT FG_USER_CODE FROM FG_COMMON_USER WHERE FG_USER_ID = 'admin'))
     </insert>
 
     <insert id="insertNotice" parameterType="AdminNoticeWriteDTO">
