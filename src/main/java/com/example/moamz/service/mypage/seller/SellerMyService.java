@@ -4,6 +4,7 @@ import com.example.moamz.domain.dto.mypage.seller.StoreReviewDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.SellerInfoDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.SellerProfileDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.StoreModifyDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.mapper.mypage.seller.SellerMyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,16 @@ public class SellerMyService {
     // 업체 리뷰 조회 메서드
     public List<StoreReviewDTO> findMyStoreRv(Long businessId) {
         return sellerMyMapper.selectMyStoreRv(businessId);
+    }
+
+    // 업체 리뷰 조회 메서드 (페이지네이션)
+    public List<StoreReviewDTO> findMyStoreRvAll(Long businessId, Criteria criteria) {
+        return sellerMyMapper.selectMyStoreRvAll(businessId, criteria);
+    }
+
+    // 전체 리뷰 수 세는 메서드
+    public int findTotal(Long businessId) {
+        return sellerMyMapper.selectTotal(businessId);
     }
 
     // 판매자 업체 번호 반환 메서드

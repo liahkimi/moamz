@@ -4,7 +4,9 @@ import com.example.moamz.domain.dto.mypage.seller.StoreReviewDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.SellerInfoDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.SellerProfileDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.StoreModifyDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +21,12 @@ public interface SellerMyMapper {
 
     // 업체 리뷰 조회
     List<StoreReviewDTO> selectMyStoreRv(Long businessId);
+
+    // 업체 리뷰 조회 (페이지네이션)
+    List<StoreReviewDTO> selectMyStoreRvAll(@Param("businessId") Long businessId, @Param("criteria") Criteria criteria);
+
+    // 총 리뷰 수
+    int selectTotal(Long businessId);
 
     // 업체 아이디 반환
     Optional<Long> selectBusinessId(Long userCode);
