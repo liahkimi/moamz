@@ -57,7 +57,8 @@
                         <a th:href="@{/ecoproject/ecoCertList/{fgPostId}(fgPostId=${ecoList.fgPostId})}">
                         <div class="banner-box">
                             <div class="banner-img">
-                                <img th:src="@{/img/admin/plogging.jpg}" alt="plogging" />
+                                <img th:src="@{'/upload_moamz/' + ${ecoList.postFileRoot} + '/' + ${ecoList.postFileUuid}
+                                                + '_' + ${ecoList.postFileName}}">
                             </div>
                             <div class="banner-article">
                                 <div class="title-and-btns">
@@ -109,7 +110,8 @@
                     <div id="finished-eco" class="banner-hidden" th:each="ecoEnd:${ecoEndList}">
                         <div class="banner-box" th:hidden="${ecoEnd.fgPostId}">
                             <div class="banner-img">
-                                <img th:src="@{/img/admin/plogging.jpg}" alt="plogging" />
+                                <img th:src="@{'/upload_moamz/' + ${ecoEnd.postFileRoot} + '/' + ${ecoEnd.postFileUuid}
+                                                + '_' + ${ecoEnd.postFileName}}">
                             </div>
                             <div class="banner-article">
                                 <div class="title-and-btns">

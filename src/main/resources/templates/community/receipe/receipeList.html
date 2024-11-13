@@ -51,7 +51,8 @@
                 <div class="receipt-list" th:each="receipeList:${receipeLists}" th:onclick="|location.href='@{/recipe/recipeDetail/{fgPostId}(fgPostId=${receipeList.fgPostId})}'|">
                     <div class="receipe-box">
                         <div class="receipe-img">
-                            <img th:src="@{/img/community/receipe/kimchirice.png}">
+                            <img th:src="@{'/upload_moamz/' + ${receipeList.postFileRoot} + '/' + ${receipeList.postFileUuid}
+                                                + '_' + ${receipeList.postFileName}}" style="width: 210px; height: 190px; border-radius: 6px 6px 6px 6px;">
                         </div>
                         <div class="receipe-text" th:text="${receipeList.fgPostTitle}">
                             안성재식 김치볶음밥

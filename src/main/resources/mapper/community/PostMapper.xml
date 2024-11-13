@@ -19,7 +19,7 @@
         ) VALUES (
                      #{fgPostId},
                      #{fgPostType},
-                     #{fgPosxtTitle},
+                     #{fgPostTitle},
                      SYSDATE,
                      0,
                      0,

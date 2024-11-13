@@ -22,7 +22,8 @@
         <div class="post-info-wrap">
             <div class="post-title" th:text="${certDetail.fgPostTitle}">플로깅 인증</div>
             <div class="user-info-wrap">
-                <img th:src="${certDetail.fgUserProfile}" alt="프로필사진">
+                <img th:src="@{'/upload_moamz/' + ${certDetail.userFileRoot} + '/' + ${certDetail.userFileUuid}
+                                                + '_' + ${certDetail.userFileName}}">
                 <span class="user-nickname" th:text="${certDetail.fgNormalName}">역삼동불주먹먹먹먹먹</span>
                 <div class="post-write-time-wrap">
                     <span>작성일</span>
@@ -47,7 +48,8 @@
         </div>
         <!-- 게사글 내용 -->
         <div class="post-content-wrap" th:utext="${certDetail.fgCertContent}">
-            <img width="500px" height="400px" th:src="@{/img/community/ecoproject/flogging.png}">
+            <img th:src="@{'/upload_moamz/' + ${postFile.postFileRoot} + '/' + ${postFile.postFileUuid}
+                                                + '_' + ${postFile.postFileName}}">
             <p>플로깅인증</p>
             <p>플로깅</p>
 

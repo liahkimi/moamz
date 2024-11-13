@@ -18,13 +18,16 @@
             S.FG_SOCIALING_MAXAGE AS fgSocialingMaxage,
             S.FG_SOCIALING_GENDER_RES AS fgSocialingGenderRes,
             U.FG_USER_CODE AS fgUserCode,
-            U.FG_NORMAL_NAME AS fgNormalName
+            U.FG_NORMAL_NAME AS fgNormalName,
+            PF.FG_POST_FILE_ID AS postFileId,      -- 파일ID
+            PF.FG_POST_FILE_NAME AS postFileName,  -- 파일명
+            PF.FG_POST_FILE_ROOT AS postFileRoot,  -- 파일경로
+            PF.FG_POST_FILE_UUID AS postFileUuid   -- 파일UUID
         FROM
             FG_POST P
-                JOIN
-            FG_SOCIALING S ON P.FG_POST_ID = S.FG_POST_ID
-                JOIN
-            FG_NORMAL_USER U ON P.FG_USER_CODE = U.FG_USER_CODE
+                JOIN FG_SOCIALING S ON P.FG_POST_ID = S.FG_POST_ID
+                JOIN FG_NORMAL_USER U ON P.FG_USER_CODE = U.FG_USER_CODE
+                LEFT JOIN FG_POST_FILE PF ON P.FG_POST_ID = PF.FG_POST_ID  -- 파일 관련 정보 LEFT JOIN
         WHERE
             P.FG_POST_TYPE = 'socialing'
     </select>
@@ -45,15 +48,20 @@
             S.FG_SOCIALING_LOCATION AS fgSocialingLocation,
             S.FG_SOCIALING_MINAGE AS fgSocialingMinage,
             S.FG_SOCIALING_MAXAGE AS fgSocialingMaxage,
-            S.FG_SOCIALING_GENDER_RES AS fgSocialingGenderRes,
             U.FG_USER_CODE AS fgUserCode,
-            U.FG_NORMAL_NAME AS fgNormalName
+            U.FG_NORMAL_NAME AS fgNormalName,
+            F.FG_USER_FILE_ID AS userFileId,    -- 파일ID
+            F.FG_USER_FILE_NAME AS userFileName, -- 파일명
+            F.FG_USER_FILE_ROOT AS userFileRoot, -- 파일경로
+            F.FG_USER_FILE_UUID AS userFileUuid  -- 파일UUID
         FROM
             FG_POST P
                 JOIN
             FG_SOCIALING S ON P.FG_POST_ID = S.FG_POST_ID
                 JOIN
             FG_NORMAL_USER U ON P.FG_USER_CODE = U.FG_USER_CODE
+                LEFT JOIN
+            FG_USER_FILE F ON U.FG_USER_CODE = F.FG_USER_CODE  -- 유저 파일 추가
         WHERE
             P.FG_POST_ID = #{fgPostId}
           AND

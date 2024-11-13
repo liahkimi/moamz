@@ -27,15 +27,16 @@
         <div class="post-info-wrap">
             <div class="post-title" th:text="${receipeDetail.fgPostTitle}">안성재식 김치볶음밥</div>
             <div class="user-info-wrap">
-                <img src="../../../static/img/chat/chatProfileImg(hj).PNG" alt="프로필사진">
+                <img th:src="@{'/upload_moamz/' + ${receipeDetail.userFileRoot} + '/' + ${receipeDetail.userFileUuid}
+                                                + '_' + ${receipeDetail.userFileName}}">
                 <span class="user-nickname" th:text="${receipeDetail.fgNormalName}">역삼동불주먹먹먹먹먹</span>
                 <div class="post-write-time-wrap">
                     <span>작성일</span>
-                    <span id="post-write-time">24/10/13 14:10</span>
+                    <span id="post-write-time" th:text="${#temporals.format(receipeDetail.fgPostCreatedAt, 'yy/MM/dd HH:mm')}">24/10/13 14:10</span>
                 </div>
                 <div class="post-view-count-wrap">
                     <span>조회수</span>
-                    <span id="post-view-count">10</span>
+                    <span id="post-view-count" th:text="${receipeDetail.fgPostViews}">10</span>
                 </div>
                 <div class="btn-wrap">
                     <!-- 다른 사람이 쓴 글일 때 버튼 -->
@@ -55,21 +56,23 @@
         <div class="post-content-wrap">
             <div class="receipe-box">
                 <div class="receipe-make-time">
-                    <p class="receipe-box-top">조리 예상 시간</p>
+                    <p class="receipe-box-top" style="margin-bottom: 10px">조리 예상 시간</p>
+                    <span>
                     <img th:src="@{/img/community/receipe/time.png}" style="margin-right: 5px">
-                    <span th:text="${receipeList.fgReceipeTime}"></span>분
+                    <span th:text="${receipeDetail.fgReceipeTime}"></span>분
+                    </span>
                 </div>
                 <div class="receipe-ingredient">
                     <p class="receipe-box-top">
                         재료
                     </p>
-                    <p>밥, 대파, 포도씨유, 고추가루, 진간장, 흰설탕, 김치, 돼지고기 등</p>
+                    <p th:text="${receipeDetail.fgReceipeIngredients}">밥, 대파, 포도씨유, 고추가루, 진간장, 흰설탕, 김치, 돼지고기 등</p>
                 </div>
             </div>
             <div class="receipe-name">
                 🧾 조리설명
             </div>
-            <div class="recipe-content">
+            <div class="recipe-content" th:utext="${receipeDetail.fgReceipeContent}">
                 <img width="500px" height="400px" src="../../../static/img/community/receipe/kimchirice.png">
                 <p>1. 고기를 굽는다</p>
                 <p>2. 재료를 이것저것 넣는다</p>

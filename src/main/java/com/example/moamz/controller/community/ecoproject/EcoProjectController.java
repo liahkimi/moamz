@@ -7,12 +7,15 @@ import com.example.moamz.domain.dto.community.ecoproject.EcoCertWriteDTO;
 import com.example.moamz.domain.dto.community.ecoproject.EcoProjectListDTO;
 import com.example.moamz.service.community.PostService;
 import com.example.moamz.service.community.ecoproject.EcoProjectService;
+import com.example.moamz.service.file.PostFileService;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,6 +27,7 @@ import java.util.List;
 public class EcoProjectController {
     private final EcoProjectService ecoProjectService;
     private final PostService postService;
+    private final PostFileService postFileService;
 
     @GetMapping("/projectList")
     public String projectList(Model model) {
@@ -73,7 +77,7 @@ public class EcoProjectController {
 
         // PostDTO 세팅
         PostDTO postDTO = new PostDTO();
-        postDTO.setFgPostId(ecoCertWriteDTO.getFgPostId());  // ID 설정
+//        postDTO.setFgPostId(ecoCertWriteDTO.getFgPostId());  // ID 설정
         postDTO.setFgPostType("ecoCert");
         postDTO.setFgPostTitle(fgPostTitle);
         postDTO.setFgPostcreatedAt(LocalDateTime.now());

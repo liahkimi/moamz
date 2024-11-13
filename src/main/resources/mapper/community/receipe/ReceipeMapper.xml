@@ -4,23 +4,28 @@
 
 <!--    레시피 디테일-->
     <select id="selectRecipePost" resultType="ReceipeDetailDTO" parameterType="Long">
-        SELECT
-            P.FG_POST_ID AS fgPostId,
-            P.FG_POST_TITLE AS fgPostTitle,
-            P.FG_USER_CODE AS fgUserCode,
-            NU.FG_NORMAL_NAME AS fgNormalName,
-            R.FG_RECIPE_INGREDIENTS AS fgReceipeIngredients,
-            R.FG_RECIPE_TIME AS fgReceipeTime,
-            R.FG_RECIPE_CONTENT AS fgReceipeContent
-        FROM
-            FG_POST P
-                JOIN
-            FG_NORMAL_USER NU ON P.FG_USER_CODE = NU.FG_USER_CODE
-                JOIN
-            FG_RECIPE R ON P.FG_POST_ID = R.FG_POST_ID
-        WHERE
-            P.FG_POST_TYPE = 'recipe'
-          and p.fg_post_id = #{fgPostId}
+    SELECT
+        P.FG_POST_ID AS fgPostId,
+        P.FG_POST_TITLE AS fgPostTitle,
+        P.FG_USER_CODE AS fgUserCode,
+        P.FG_POST_CREATED_AT AS fgPostCreatedAt,
+        NU.FG_NORMAL_NAME AS fgNormalName,
+        R.FG_RECIPE_INGREDIENTS AS fgReceipeIngredients,
+        R.FG_RECIPE_TIME AS fgReceipeTime,
+        R.FG_RECIPE_CONTENT AS fgReceipeContent,
+        P.FG_POST_VIEWS AS fgPostViews,
+        UF.FG_USER_FILE_ID AS userFileId,
+        UF.FG_USER_FILE_NAME AS userFileName,
+        UF.FG_USER_FILE_ROOT AS userFileRoot,
+        UF.FG_USER_FILE_UUID AS userFileUuid
+    FROM
+        FG_POST P
+        JOIN FG_NORMAL_USER NU ON P.FG_USER_CODE = NU.FG_USER_CODE
+        JOIN FG_RECIPE R ON P.FG_POST_ID = R.FG_POST_ID
+        LEFT JOIN FG_USER_FILE UF ON NU.FG_USER_CODE = UF.FG_USER_CODE
+    WHERE
+        P.FG_POST_TYPE = 'recipe'
+        AND P.FG_POST_ID = #{fgPostId}
     </select>
 
 
@@ -29,7 +34,10 @@
         SELECT
             P.FG_POST_ID AS fgPostId,
             P.FG_POST_TYPE AS fgPostType,
-            F.FG_POST_FILE_ID AS fgPostFileId,
+            F.FG_POST_FILE_ID AS postFileId,
+            F.FG_POST_FILE_NAME AS postFileName,
+            F.FG_POST_FILE_ROOT AS postFileRoot,
+            F.FG_POST_FILE_UUID AS postFileUuid,
             P.FG_POST_TITLE AS fgPostTitle,
             R.FG_RECIPE_TIME AS fgReceipeTime,
             P.FG_POST_LIKES AS fgLikes
@@ -47,7 +55,7 @@
 
 
     <!-- FG_RECIPE 테이블 INSERT -->
-    <insert id="insertFgRecipe" parameterType="ReceipeWriteDTO">
+    <insert id="insertFgPostRecipe  " parameterType="ReceipeWriteDTO">
         INSERT INTO FG_RECIPE (
         <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
             select SEQ_FG_POST.currval from dual

@@ -26,4 +26,10 @@ public class SocialingDetailDTO {
     private String fgSocialingGenderRes;
     private Long fgUserCode;
     private String fgNormalName;
+
+    // 게시글 작성자 파일
+    private Long userFileId;         // 파일ID
+    private String userFileName;     // 파일명
+    private String userFileRoot;     // 파일경로
+    private String userFileUuid;     // UUID
 }

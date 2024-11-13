@@ -10,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -26,6 +28,7 @@ public class SocialingController {
         List<SocialingListDTO> socialList = socialingService.showSocialing();
 
         model.addAttribute("socialList", socialList);
+        System.out.println("socialList = " + socialList);
         return "/community/socialing/socialingList";
     }
 
@@ -45,7 +48,8 @@ public class SocialingController {
     }
 
     @PostMapping("/socialingWrite")
-    public String socialingWritePost(@ModelAttribute SocialingWriteDTO socialingWriteDTO) {
+    public String socialingWritePost(@ModelAttribute SocialingWriteDTO socialingWriteDTO,
+                                     @RequestParam("postFile") MultipartFile postFile) throws IOException {
 
         Long sampleUser = 1L;
 
@@ -59,7 +63,7 @@ public class SocialingController {
 
 
         socialingWriteDTO.setFgPostId(postDTO.getFgPostId());
-        socialingService.writeSocialing(socialingWriteDTO);
+        socialingService.writeSocialing(socialingWriteDTO, postFile);
 
 
         return "redirect:/socialing/socialingDetail/" + postDTO.getFgPostId();

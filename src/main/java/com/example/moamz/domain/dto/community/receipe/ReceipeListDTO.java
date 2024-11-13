@@ -16,4 +16,9 @@ public class ReceipeListDTO {
     private String fgPostTitle;
     private int fgReceipeTime;
     private int fgLikes;
+
+    private Long postFileId;        // 파일ID
+    private String postFileName;    // 파일명
+    private String postFileRoot;    // 파일경로
+    private String postFileUuid;    // 파일UUID
 }

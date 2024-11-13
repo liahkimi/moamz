@@ -21,9 +21,9 @@
         </div>
         <!-- 글 작성 영역 -->
         <div class="write-content-container">
-            <form method="post" th:action="@{/socialing/socialingWrite}">
+            <form method="post" th:action="@{/socialing/socialingWrite}" enctype="multipart/form-data">
                 <div class="write-item">
-                    <p class="write-label">📝 소셜링제목*</p>
+                    <p class="write-label">📝 제목*</p>
                     <input type="text" name="fgPostTitle" id="socialing-title" required/>
                 </div>
                 <div class="write-item">
@@ -57,7 +57,7 @@
                 </div>
                 <div class="write-item">
                     <div class="location-wrap">
-                        <p class="write-label">📝 소셜링위치*</p>
+                        <p class="write-label">📝 위치*</p>
                         <select required name="fgSocialingLocation">
                             <option value="" selected>위치를 선택하세요.</option>
                             <option value="서울">서울</option>
@@ -69,7 +69,7 @@
                         <p class="write-label">📝 성별제한*</p>
                         <select required name="fgSocialingGenderRes">
                             <option value="" selected>성별을 선택하세요.</option>
-                            <option value="성별무관">성별무관</option>
+                            <option value="제한없음">성별무관</option>
                             <option value="남자">남자만</option>
                             <option value="여자">여자만</option>
                         </select>
@@ -79,6 +79,20 @@
                     <p class="write-label">📝 나이제한*</p>
                     <input type="number" id="min-age" min=20 required name="fgSocialingMinage"/>세 이상&ensp;&ensp;
                     <input type="number" id="max-age" required name="fgSocialingMaxage"/>세 이하
+                </div>
+                <div class="file-wrap">
+                    <p class="write-label">📝 대표사진*</p>
+                    <!-- 썸네일 -->
+                    <div class="thumbnail-container">
+                        <div class="thumbnail-wrap">
+                            <!--lable을 누르면 input type=file이 실행-->
+                            <label for="attach">
+                                <div class="thumbnail-img"></div>
+                            </label>
+                            <div class="thumbnail-cancle-btn"></div>
+                        </div>
+                        <input type="file" id="attach" name="postFile" style="display: none;">
+                    </div>
                 </div>
                 <div class="write-item product-detail">
                     <p class="write-label">📝 상세내용*</p>
