@@ -1,5 +1,6 @@
 package com.example.moamz.mapper.community.free;
 
+import com.example.moamz.domain.dto.admin.page.Criteria;
 import com.example.moamz.domain.dto.community.free.*;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -25,6 +26,12 @@ public interface FreeMapper {
 
     // 게시글 목록
     List<FreeListDTO> selectFreeList();
+
+    // 게시글 목록(페이지네이션O)
+    List<FreeListDTO> selectFreeListAll(Criteria criteria);
+
+    // 자유게시판 전체 게시글 수 반환
+    int selectTotal();
 
     // 게시글 상세보기
     Optional<FreeDetailDTO> selectFreeDetail(Long postId);

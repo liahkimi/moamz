@@ -1,10 +1,13 @@
 package com.example.moamz.controller.community.free;
 
+import com.example.moamz.domain.dto.admin.page.Criteria;
+import com.example.moamz.domain.dto.admin.page.Page;
 import com.example.moamz.domain.dto.community.free.FreeDetailDTO;
 import com.example.moamz.domain.dto.community.free.FreeListDTO;
 import com.example.moamz.domain.dto.community.free.FreeModifyDTO;
 import com.example.moamz.domain.dto.community.free.FreeWriteDTO;
 import com.example.moamz.service.community.free.FreeBoardService;
+import jakarta.servlet.ServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -26,10 +29,26 @@ public class freeController {
     //
     // 자유게시판 목록 <GET>
     //
+//    @GetMapping("/list")
+//    public String freeList(Model model) {
+//        List<FreeListDTO> freeListDTO = freeBoardService.findFreeList();
+//        model.addAttribute("freeListDTO", freeListDTO);
+//        return "/community/free/freeList";
+//    }
     @GetMapping("/list")
-    public String freeList(Model model) {
-        List<FreeListDTO> freeListDTO = freeBoardService.findFreeList();
+    public String freeList(Criteria criteria, Model model) {
+        // 한 페이지에 게시글 15개씩 보이도록 설정
+        criteria.setAmount(15);
+
+        // 페이징을 포함한 리스트 반환
+        List<FreeListDTO> freeListDTO = freeBoardService.findFreeListAll(criteria);
+        // 자유게시판 전체 게시글 수
+        int total = freeBoardService.findTotal();
+        Page page = new Page(criteria, total);
+
+        model.addAttribute("page", page);
         model.addAttribute("freeListDTO", freeListDTO);
+        log.info("💛💛page {}", page);
         return "/community/free/freeList";
     }
 

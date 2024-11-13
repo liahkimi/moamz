@@ -19,6 +19,21 @@ export function getList(postId, callback) {
 
 
 
+
+//////////////////////////////////////////////////
+///// 댓글 목록 가져오기 모듈 (페이지네이션O)
+
+export function getListAll(postId, page, callback) {
+    fetch(`/api/comment/list/${postId}/comm?page=${page}`, {
+        method : 'GET'
+    }).then(response => response.json())  // 서버 응답을 json으로 변환
+        .then(commentList => {      // 변환된 json 데이터가 commentList에 담김
+            callback(commentList)   // commentList를 callback 함수로 전달함
+        });
+}
+
+
+
 //////////////////////////////////////////////////
 ///// 댓글 작성 모듈 (POST)
 
