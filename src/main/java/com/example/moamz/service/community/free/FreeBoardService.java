@@ -1,5 +1,6 @@
 package com.example.moamz.service.community.free;
 
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.domain.dto.community.free.*;
 import com.example.moamz.mapper.community.PostMapper;
 import com.example.moamz.mapper.community.free.FreeLikeMapper;
@@ -50,6 +51,16 @@ public class FreeBoardService {
     // 자유게시판 목록 메서드
     public List<FreeListDTO> findFreeList() {
         return freeMapper.selectFreeList();
+    }
+
+    // 자유게시판 목록 메서드 (페이지네이션O)
+    public List<FreeListDTO> findFreeListAll(Criteria criteria) {
+        return freeMapper.selectFreeListAll(criteria);
+    }
+
+    // 전체 게시글 수 세는 메서드
+    public int findTotal() {
+        return freeMapper.selectTotal();
     }
 
     // 자유게시판 상세보기 메서드

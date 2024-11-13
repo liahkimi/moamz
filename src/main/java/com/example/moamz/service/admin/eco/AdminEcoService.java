@@ -1,7 +1,9 @@
 package com.example.moamz.service.admin.eco;
 
+import com.example.moamz.domain.dto.admin.AdminCommentDTO;
 import com.example.moamz.domain.dto.admin.eco.*;
 import com.example.moamz.domain.dto.file.PostFileDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.mapper.admin.eco.AdminEcoMapper;
 import com.example.moamz.mapper.file.PostFileMapper;
 import lombok.RequiredArgsConstructor;
@@ -74,9 +76,12 @@ public class AdminEcoService {
     }
 
     //      진행중인 에코프로젝트 목록 가져오기
-    public List<AdminIngEcoListDTO> findIngEcoList(){
-        return adminEcoMapper.selectIngEcoList();
+    public List<AdminIngEcoListDTO> findAllIngEcoList(Criteria criteria){
+        return adminEcoMapper.selectAllIngEcoList(criteria);
     }
+
+    //  에코프로젝트 총 갯수 구하기
+    public int findEcoTotal(){return adminEcoMapper.selectEcoTotal();}
 
     //    종료된 에코프로젝트 목록 가져오기
     public List<AdminFinEcoListDTO> findFinEcoList(){
@@ -132,25 +137,35 @@ public class AdminEcoService {
                 .orElseThrow(() -> new IllegalStateException("유효하지 않은 게시물"));
     }
 
-    //  에코프젝 인증글 - 포인트 지급하기 버튼 서비스
-    public void giveEcoCertPoints(Long fgPostId) throws IOException {
-        // 1. 인증 글 작성자의 회원번호를 조회
-        Optional<AdminEcoCertPointBtnDTO> ecoPointReceiverOpt = adminEcoMapper.selectEcoPointReceiver(fgPostId);
-
-        if (ecoPointReceiverOpt.isPresent()) {
-            AdminEcoCertPointBtnDTO ecoPointReceiver = ecoPointReceiverOpt.get();
-            //.get() : Optional에 값이 존재할 때 그 값을 반환하는 Optional 메서드
-
-            // 2. 해당 유저의 포인트 업데이트
-            adminEcoMapper.updateUserEcoPoint(fgPostId);
-
-            // 3. 포인트 지급 내역을 기록
-            adminEcoMapper.insertEcoPointLog(ecoPointReceiver);
-        } else {
-            throw new IllegalArgumentException("해당 게시글에 대한 인증글 작성자가 존재하지 않습니다.");
-        }
+    //  에코프젝 인증글 상세보기 - 댓글보기
+    public List<AdminCommentDTO> findEcoCertDetailComment(Long fgPostId){
+        return adminEcoMapper.selectEcoCertDetailComment(fgPostId);
     }
 
+//    //  에코프젝 인증글 - 포인트 지급하기 버튼 서비스
+//    public void giveEcoCertPoints(Long fgPostId) throws IOException {
+//        // 1. 인증 글 작성자의 회원번호를 조회
+//        Optional<AdminEcoCertPointBtnDTO> ecoPointReceiverOpt = adminEcoMapper.selectEcoPointReceiver(fgPostId);
+//
+//        if (ecoPointReceiverOpt.isPresent()) {
+//            AdminEcoCertPointBtnDTO ecoPointReceiver = ecoPointReceiverOpt.get();
+//            //.get() : Optional에 값이 존재할 때 그 값을 반환하는 Optional 메서드
+//
+//            // 2. 해당 유저의 포인트 업데이트
+//            adminEcoMapper.updateUserEcoPoint(fgPostId);
+//
+//            // 3. 포인트 지급 내역을 기록
+//            adminEcoMapper.insertEcoPointLog(ecoPointReceiver);
+//        } else {
+//            throw new IllegalArgumentException("해당 게시글에 대한 인증글 작성자가 존재하지 않습니다.");
+//        }
+//    }
+
+    //   에코프젝 포인트 지급하기 버튼
+    public void giveUserEcoPointAndLog(AdminEcoCertPointBtnDTO adminEcoCertPointBtnDTO){
+        adminEcoMapper.updateUserEcoPointAndLog(adminEcoCertPointBtnDTO);
+
+    }
 
 
 

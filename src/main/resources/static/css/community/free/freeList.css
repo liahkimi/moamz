@@ -116,6 +116,7 @@ main {
 /* 게시글 목록 */
 .free-list-wrap {
     min-height: 400px;
+    margin-bottom: 20px;
 }
 .free-list {
     border: 1px solid #ddd;
@@ -129,7 +130,7 @@ main {
     text-align: center;
 }
 .post-title {
-    width: 410px;
+    width: 380px;
     padding: 0 10px;
     color: black;
     font-weight: bold;
@@ -151,10 +152,11 @@ main {
     font-size: 14px;
 }
 .post-write-time {
-    margin-right: 8px;
+    margin-right: 10px;
 }
 .post-icon-wrap {
-    margin-right: 8px;
+    width: 35px;
+    margin-right: 10px;
     display: flex;
     align-items: center;
 }
@@ -163,4 +165,21 @@ main {
     height: 15px;
     object-fit: fill;
     margin-right: 2px;
+}
+/* 페이지네이션 */
+.page-box {
+    display: flex;
+    justify-content: center;
+}
+.page-a {
+    width: 20px;
+    text-align: center;
+    color: #6a6a6a;
+}
+.page-num.active {
+    color: #CEDD61;
+    font-weight: bold;
+}
+.page-num:hover{
+    text-decoration-line: underline;
 }

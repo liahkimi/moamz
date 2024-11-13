@@ -39,6 +39,8 @@
     </delete>
 
 
+
+    <!-- ___________________________________________________________________________________ -->
     <!-- 게시글 목록(나눔가능) -->
     <select id="selectAvailableList" resultType="SharingListDTO">
         SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
@@ -81,6 +83,101 @@
         ORDER BY FG_POST_CREATED_AT DESC
     </select>
 
+
+
+    <!-- ___________________________________________________________________________________ -->
+    <!-- 게시글 목록(나눔가능, 페이징O) -->
+    <select id="selectAvailableListAll" parameterType="Criteria" resultType="SharingListDTO">
+        <![CDATA[
+        SELECT postId, postTitle, normalNickname, sharingStatus,
+               postFileRoot, postFileUuid, postFileName
+        FROM (
+                 SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
+                        nu.FG_NORMAL_NICKNAME AS normalNickname, s.FG_SHARING_STATUS AS sharingStatus,
+                        pf.FG_POST_FILE_ROOT AS postFileRoot, pf.FG_POST_FILE_UUID AS postFileUuid,
+                        pf.FG_POST_FILE_NAME AS postFileName,
+                        ROW_NUMBER() OVER (ORDER BY FG_POST_CREATED_AT DESC, p.FG_POST_ID DESC) AS RNUM
+                 FROM FG_SHARING s, FG_POST p, FG_NORMAL_USER nu, FG_POST_FILE pf
+                 WHERE p.FG_POST_ID = s.FG_POST_ID
+                   AND p.FG_POST_ID = pf.FG_POST_ID
+                   AND p.FG_USER_CODE = nu.FG_USER_CODE
+                   AND s.FG_SHARING_STATUS = '나눔가능'
+             )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+          AND RNUM <= #{page} * #{amount}
+        ]]>
+    </select>
+
+
+    <!-- 게시글 목록(예약중, 페이징O) -->
+    <select id="selectReservedListAll" parameterType="Criteria" resultType="SharingListDTO">
+        <![CDATA[
+        SELECT postId, postTitle, normalNickname, sharingStatus,
+               postFileRoot, postFileUuid, postFileName
+        FROM (
+                 SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
+                        nu.FG_NORMAL_NICKNAME AS normalNickname, s.FG_SHARING_STATUS AS sharingStatus,
+                        pf.FG_POST_FILE_ROOT AS postFileRoot, pf.FG_POST_FILE_UUID AS postFileUuid,
+                        pf.FG_POST_FILE_NAME AS postFileName,
+                        ROW_NUMBER() OVER (ORDER BY FG_POST_CREATED_AT DESC, p.FG_POST_ID DESC) AS RNUM
+                 FROM FG_SHARING s, FG_POST p, FG_NORMAL_USER nu, FG_POST_FILE pf
+                 WHERE p.FG_POST_ID = s.FG_POST_ID
+                   AND p.FG_POST_ID = pf.FG_POST_ID
+                   AND p.FG_USER_CODE = nu.FG_USER_CODE
+                   AND s.FG_SHARING_STATUS = '예약중'
+             )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+          AND RNUM <= #{page} * #{amount}
+        ]]>
+    </select>
+
+    <!-- 게시글 목록(나눔완료, 페이징O) -->
+    <select id="selectCompletedListAll" parameterType="Criteria" resultType="SharingListDTO">
+        <![CDATA[
+        SELECT postId, postTitle, normalNickname, sharingStatus,
+               postFileRoot, postFileUuid, postFileName
+        FROM (
+                 SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
+                        nu.FG_NORMAL_NICKNAME AS normalNickname, s.FG_SHARING_STATUS AS sharingStatus,
+                        pf.FG_POST_FILE_ROOT AS postFileRoot, pf.FG_POST_FILE_UUID AS postFileUuid,
+                        pf.FG_POST_FILE_NAME AS postFileName,
+                        ROW_NUMBER() OVER (ORDER BY FG_POST_CREATED_AT DESC, p.FG_POST_ID DESC) AS RNUM
+                 FROM FG_SHARING s, FG_POST p, FG_NORMAL_USER nu, FG_POST_FILE pf
+                 WHERE p.FG_POST_ID = s.FG_POST_ID
+                   AND p.FG_POST_ID = pf.FG_POST_ID
+                   AND p.FG_USER_CODE = nu.FG_USER_CODE
+                   AND s.FG_SHARING_STATUS = '나눔완료'
+             )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+          AND RNUM <= #{page} * #{amount}
+        ]]>
+    </select>
+
+    <!-- 나눔게시글 상태별 전체 게시글 수 -->
+    <select id="selectAvailableTotal" resultType="int">
+        SELECT COUNT(p.FG_POST_ID)
+        FROM FG_POST p, FG_SHARING s
+        WHERE p.FG_POST_ID = s.FG_POST_ID
+        AND s.FG_SHARING_STATUS = '나눔가능'
+    </select>
+
+    <select id="selectReservedTotal" resultType="int">
+        SELECT COUNT(p.FG_POST_ID)
+        FROM FG_POST p, FG_SHARING s
+        WHERE p.FG_POST_ID = s.FG_POST_ID
+          AND s.FG_SHARING_STATUS = '나눔가능'
+    </select>
+
+    <select id="selectCompletedTotal" resultType="int">
+        SELECT COUNT(p.FG_POST_ID)
+        FROM FG_POST p, FG_SHARING s
+        WHERE p.FG_POST_ID = s.FG_POST_ID
+          AND s.FG_SHARING_STATUS = '나눔가능'
+    </select>
+
+
+
+    <!-- ___________________________________________________________________________________ -->
     <!-- 게시글 상세 -->
     <select id="selectSharingDetail" parameterType="Long" resultType="SharingDetailDTO">
         SELECT p.FG_POST_ID AS postId, nu.FG_USER_CODE AS writerCode,

@@ -39,7 +39,7 @@
         WHERE FG_POST_ID = #{postId}
     </delete>
 
-    <!-- 목록 보여주기 -->
+    <!-- 목록 보여주기 (페이지네이션X) -->
     <select id="selectFreeList" resultType="FreeListDTO">
         SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
                nu.FG_NORMAL_NICKNAME AS normalNickname,
@@ -53,6 +53,33 @@
         GROUP BY p.FG_POST_ID, p.FG_POST_TITLE, nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT,
                  p.FG_POST_VIEWS, p.FG_POST_LIKES
         ORDER BY p.FG_POST_CREATED_AT DESC
+    </select>
+
+    <!-- 자유게시판 전체 게시글 수 반환 -->
+    <select id="selectTotal" resultType="int">
+        SELECT COUNT(FG_POST_ID)
+        FROM FG_POST
+        WHERE FG_POST_TYPE = 'free'
+    </select>
+
+    <!-- 자유게시판 목록 (페이지네이션O) -->
+    <select id="selectFreeListAll" parameterType="Criteria" resultType="FreeListDTO">
+    <![CDATA[
+        SELECT postId, postTitle, normalNickname, postCreateAt, postViews, postLikes, commentCount
+        FROM (
+                 SELECT p.FG_POST_ID AS postId, p.FG_POST_TITLE AS postTitle,
+                        nu.FG_NORMAL_NICKNAME AS normalNickname,
+                        TO_CHAR(p.FG_POST_CREATED_AT, 'YYYY/MM/DD') AS postCreateAt,
+                        p.FG_POST_VIEWS AS postViews, p.FG_POST_LIKES AS postLikes,
+                        (SELECT COUNT(*) FROM FG_COMMENT c WHERE c.FG_POST_ID = p.FG_POST_ID) AS commentCount,
+                        ROW_NUMBER() OVER (ORDER BY p.FG_POST_CREATED_AT DESC) AS RNUM
+                 FROM FG_POST p
+                      JOIN FG_NORMAL_USER nu ON p.FG_USER_CODE = nu.FG_USER_CODE
+                 WHERE p.FG_POST_TYPE = 'free'
+             )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+          AND RNUM <= #{page} * #{amount}
+        ]]>
     </select>
 
     <!-- 상세보기 -->
