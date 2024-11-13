@@ -1,6 +1,6 @@
 package com.example.moamz.service.community;
 
-import com.example.moamz.domain.dto.admin.page.Criteria;
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.domain.dto.community.CommentDTO;
 import com.example.moamz.domain.dto.page.Slice;
 import com.example.moamz.mapper.community.CommentMapper;
