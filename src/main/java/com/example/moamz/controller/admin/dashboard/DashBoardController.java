@@ -43,7 +43,7 @@ public class DashBoardController {
         Optional<DashBoardEcoTop2DTO> dashBoardEcoTop2DTO = dashBoardService.findDashBoardIngEco2();
         dashBoardEcoTop2DTO.ifPresent(dto -> model.addAttribute("dashBoardEcoTop2DTO", dto));
 //        model.addAttribute("dashBoardEcoTop2DTO", dashBoardEcoTop2DTO);
-//        log.info("dashBoardEcoTop2DTO {}", dashBoardEcoTopDTO);
+        log.info("dashBoardEcoTop2DTO {}", dashBoardEcoTopDTO);
 
 
         // 첫 번째 에코 프로젝트의 좋아요 top5 인증글
@@ -96,9 +96,30 @@ public class DashBoardController {
 
         // 월별 총 에코 프로젝트 인증글 수
         List<DashBoardGraphDTO> dashBoardGraphDTOEcoCert = dashBoardService.findDashBoardSelectMonthlyEcoCert();
+        for (int i = 0; i < 4; i++) {
+            int month = currentDate.minusMonths(i).getMonthValue(); // 한 달 전, 두 달 전...
+            String monthName = currentDate.minusMonths(i).getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH); // 영문 월 이름 생성
 
+            boolean monthFound = false; // 해당 월에 대한 데이터를 찾았는지 여부를 추적
 
+            for (DashBoardGraphDTO dto : dashBoardGraphDTOEcoCert) {
+                if (dto.getPostMonth() == month) {
+                    // attributeName을 선언하여 바로 사용
+                    String attributeName = monthName.toLowerCase() + "EcoCertPosts"; // augustEcoCertPosts, septemberEcoCertPosts...
+                    model.addAttribute(attributeName, dto.getMonthlyEcoCertPosts());
+                    log.info("Added to model: {} = {}", attributeName, dto.getMonthlyEcoCertPosts());
+                    monthFound = true; // 데이터를 찾았으므로 true로 설정
+                    break; // 해당 월 데이터를 찾으면 반복문 종료
+                }
+            }
 
+            if (!monthFound) {
+                // 데이터를 찾지 못한 경우 0을 설정
+                String attributeName = monthName.toLowerCase() + "EcoCertPosts"; // augustEcoCertPosts, septemberEcoCertPosts...
+                model.addAttribute(attributeName, 0);
+                log.info("No data found for {}. Set to 0", monthName);
+            }
+        }
         return "admin/adminDashboard";
     }
 
