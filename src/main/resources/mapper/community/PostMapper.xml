@@ -51,4 +51,5 @@
         SET FG_POST_VIEWS = FG_POST_VIEWS+1
         WHERE FG_POST_ID = ${postId}
     </update>
+
 </mapper>
