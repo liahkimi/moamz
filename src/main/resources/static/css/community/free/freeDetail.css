@@ -229,6 +229,13 @@ main {
     cursor: pointer;
 }
 
+/* 댓글 더보기 버튼 */
+#show-more-btn {
+    margin-top: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
 /* 목록으로 이동 버튼 */
 .move-list-btn {
     background-color: #A2B541;
