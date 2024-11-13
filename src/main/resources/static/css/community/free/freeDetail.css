@@ -2,7 +2,7 @@
 }
 main {
     color: #6a6a6a;
-    width: 700px;
+    width: 730px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@ main {
 }
 /* 게시글 영역 */
 .post-container {
-    width: 700px;
+    width: 730px;
     min-height: 400px;
     margin-bottom: 20px;
     padding: 40px 0;
@@ -48,7 +48,7 @@ main {
 }
 #is-edit {
     font-size: 14px;
-    margin-right: 20px;
+    margin-right: 15px;
 }
 .post-view-count-wrap {
     margin-right: 10px;
@@ -226,6 +226,13 @@ main {
     border: none;
     background-color: #7f7f7f;
     color: white;
+    cursor: pointer;
+}
+
+/* 댓글 더보기 버튼 */
+#show-more-btn {
+    margin-top: 10px;
+    text-align: center;
     cursor: pointer;
 }
 
