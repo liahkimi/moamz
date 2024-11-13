@@ -1,6 +1,7 @@
 package com.example.moamz.controller.mypage.normal;
 
 import com.example.moamz.domain.dto.mypage.normal.MySharingDTO;
+import com.example.moamz.domain.dto.mypage.normal.info.NormalProfileDTO;
 import com.example.moamz.service.mypage.normal.NormalMySharingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,18 +14,27 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/normal/my/sharing")
-@RequiredArgsConstructor  // final 필드 및 @Autowired 자동 처리
-@Slf4j  // 로그를 위한 어노테이션
+@RequiredArgsConstructor
+@Slf4j
 public class NormalMySharingController {
 
     private final NormalMySharingService normalMySharingService;
 
+
+//    @GetMapping("/profile")
+//    public String showUserMySharingPage(Model model) {
+//        // 필요한 데이터 로딩
+//        NormalProfileDTO normalProfileDTO = Service.getNormalProfileDTO();
+//        model.addAttribute("normalProfileDTO", normalProfileDTO);
+//        return "mypage/regular/userMySharing";
+//    }
+
     // '나눔 가능 상태' 조회
     @GetMapping("/possible")
     public String getSharingPossible(Model model) {
-        log.info("Getting sharing possible posts...");
         List<MySharingDTO> sharingPossibleList = normalMySharingService.getSharingPossible();
         model.addAttribute("sharingPossibleList", sharingPossibleList);
+        log.info("😊😊😊Getting sharing possible posts...:{}", sharingPossibleList);
         return "/mypage/regular/userMySharing";
     }
 

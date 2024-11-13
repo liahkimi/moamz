@@ -19,19 +19,19 @@ public class NormalMySharingService {
 
     // '나눔 가능 상태' 조회
     public List<MySharingDTO> getSharingPossible() {
-        log.info("Fetching possible sharing posts...");
+        log.info("😊😊😊 MySharingMapper.getSharingPossible");
         return mySharingMapper.selectSharingPossible();  // DB에서 나눔 가능 상태의 데이터를 조회
     }
 
     // '예약 중 상태' 조회
     public List<MySharingDTO> getSharingReservation() {
-        log.info("😍😍Fetching reservation sharing posts...");
+        log.info("😍😍 MySharingMapper.getSharingReservation");
         return mySharingMapper.selectSharingReservation();  // DB에서 예약 중 상태의 데이터를 조회
     }
 
     // '나눔 완료 상태' 조회
     public List<MySharingDTO> getSharingCompleted() {
-        log.info("Fetching completed sharing posts...");
+        log.info("🍎🍎 MySharingMapper.getSharingCompleted");
         return mySharingMapper.selectSharingCompleted();  // DB에서 나눔 완료 상태의 데이터를 조회
     }
 }

@@ -53,7 +53,7 @@ public class UserNormalController {
 
         return new RedirectView("/main");   
 
-        return new RedirectView("/main");
+//        return new RedirectView("/main");
 
 
     }

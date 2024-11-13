@@ -45,9 +45,9 @@
     <!-- 마이페이지 메뉴 카테고리 -->
     <div class="mypage-side-category">
       <ul>
-        <li class="category-list"><a href="#" class="clicked">● 상품 구매 내역</a></li>
+        <li class="category-list"><a href="/normal/purchase/" class="clicked">● 상품 구매 내역</a></li>
         <li class="category-list"><a href="userMySocialing.html">● MY소셜링</a></li>
-        <li class="category-list"><a href="userMySharing.html">● My나눔</a></li>
+        <li class="category-list"><a href="normal/my/sharing/completed">● My나눔</a></li>
         <li class="category-list"><a href="userMyReview.html">● MY리뷰</a></li>
         <li class="category-list"><a href="userMyLike.html">● MY좋아요</a></li>
         <li class="category-list"><a href="userMyPost.html">● MY게시글</a></li>
@@ -68,37 +68,38 @@
       <!-- 구매 내역 반복 출력 -->
       <div th:each="purchase : ${purchaseHistoryList}" class="userPurchaseHistory-list-box">
         <div class="purchase-date">
-          <span class="purchase-info-clock" th:text="${purchase.주문날짜}"></span>
-          <div class="purchase-state" th:text="${purchase.픽업여부}"></div>
+          <span class="purchase-info-clock" th:text="${purchase.fgOrderDate}"></span>
+          <div class="purchase-state" th:text="${purchase.fgPickupStatus}"></div>
         </div>
 
         <div class="purchase-info-detail-box">
           <div class="purchase-info">
             <!-- 상품 사진 -->
-            <img th:src="@{${purchase.상품사진}}" alt="구매상품사진">
+<!--            <img th:src="@{${purchase.상품사진}}" alt="구매상품사진">-->
+            <img th:src="'/upload_moamz/' + ${purchase.fgProductFileRoot} + '/' + ${purchase.fgProductFileUuid} + '_' + ${purchase.fgProductFileName}" alt="상품 사진"/>
             <div class="purchase-name">
               <!-- 상품명과 가격 -->
-              <span th:text="${purchase.상품명}"></span>
-              <span th:text="${purchase.상품가격}"></span>
+              <span th:text="${purchase.fgProductName}"></span>
+              <span th:text="${purchase.fgProductPrice}"></span>
             </div>
           </div>
           <div class="purchase-pickup">
             <!-- 픽업 예정 시간 -->
-            <span id="purchase-pickup-time" th:text="'픽업시간: ' + ${purchase.픽업예정시간}"></span>
+            <span id="purchase-pickup-time" th:text="'픽업시간: ' + ${purchase.fgPickupSchedule}"></span>
           </div>
           <div class="purchase-seller">
             <!-- 업체명 -->
-            <span id="purchase-seller-name" th:text="'업체명: ' + ${purchase.업체명}"></span>
+            <span id="purchase-seller-name" th:text="'업체명: ' + ${purchase.fgBusinessName}"></span>
           </div>
           <div class="purchase-requested">
             <!-- 요청 사항 -->
-            <span id="purchase-requested-term" th:text="'요청사항: ' + ${purchase.요청사항}"></span>
+            <span id="purchase-requested-term" th:text="'요청사항: ' + ${purchase.fgPickupRequest}"></span>
           </div>
         </div>
 
         <div id="detail-btn">
           <!-- 자세히 보기 버튼 -->
-          <a href="userPurchaseDetail.html">자세히 보러가기 &gt;</a>
+          <a th:href="@{/normal/purchase/detail}">자세히 보러가기 &gt;</a>
         </div>
       </div>
     </div>

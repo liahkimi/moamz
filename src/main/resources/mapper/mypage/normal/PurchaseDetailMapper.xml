@@ -5,7 +5,7 @@
     <select id="selectProductPickup" parameterType="Long" resultType="PurchaseDetailDTO">
         SELECT o.FG_ORDER_DATE, o.FG_ORDER_ID, p.FG_PICKUP_SCHEDULE, p.FG_PICKUP_COMPLETED,p.FG_PICKUP_REQUEST
         FROM FG_ORDER o JOIN FG_PICKUP p
-            ON o.FG_ORDER_ID = p.FG_ORDER_ID
+            ON o.FG_ORDER_ID = #{FG_ORDER_ID}
     </select>
 
     <!-- 업체명  -->
