@@ -14,6 +14,7 @@ public class SellerMngListDTO {
     private Long fgUserCode;  //회원번호
     private String fgUserId;  //회원id
     private String fgUserJoinDate;    //가입일
+    private String fgBusinessName; // 업체명
 
     private double fgAverageReviewRating; //업체 평점 (NVL(AVG(r.FG_REVIEW_RATING), 0))
      private int fgLikeCount;  //업체 좋아요 수 ( COUNT(DISTINCT l.FG_LIKE_ID),)

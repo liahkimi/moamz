@@ -61,21 +61,22 @@
 <!--            </div>-->
             <div class="comment-container">
               <div class="comment">댓글</div>
-              <div class="comment-box">
+              <div class="comment-box" th:each="ecoComment:${adminCommentDTO}">
                 <div class="comment-info">
-                  <div class="comment-id">user1</div>
-                  <div class="comment-date">2024/10/08 13:00</div>
-                  <div class="comment-modified">수정됨</div>
+                  <div class="comment-id" th:text="${ecoComment.fgNormalNickname}">user1</div>
+                  <div class="comment-date" th:text="${ecoComment.fgCommentDate}">2024/10/08 13:00</div>
+                  <div class="comment-modified" th:text="${ecoComment.fgCommentEdit}">수정됨</div>
                 </div>
-                <div class="comment-detail">부지런하시네요!</div>
-              </div><div class="comment-box">
-                <div class="comment-info">
-                  <div class="comment-id">user1</div>
-                  <div class="comment-date">2024/10/08 13:00</div>
-                  <div class="comment-modified">수정됨</div>
-                </div>
-                <div class="comment-detail">부지런하시네요!</div>
+                <div class="comment-detail" th:text="${ecoComment.fgCommentContent}">부지런하시네요!</div>
               </div>
+<!--              <div class="comment-box">-->
+<!--                <div class="comment-info">-->
+<!--                  <div class="comment-id">user1</div>-->
+<!--                  <div class="comment-date">2024/10/08 13:00</div>-->
+<!--                  <div class="comment-modified">수정됨</div>-->
+<!--                </div>-->
+<!--                <div class="comment-detail">부지런하시네요!</div>-->
+<!--              </div>-->
             </div>
           </div>
         </div>
