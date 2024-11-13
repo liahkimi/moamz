@@ -4,7 +4,7 @@ import com.example.moamz.domain.dto.admin.notice.AdminNoticeDetailDTO;
 import com.example.moamz.domain.dto.admin.notice.AdminNoticeListDTO;
 import com.example.moamz.domain.dto.admin.notice.AdminNoticeModifyDTO;
 import com.example.moamz.domain.dto.admin.notice.AdminNoticeWriteDTO;
-import com.example.moamz.domain.dto.admin.page.Criteria;
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.mapper.admin.notice.AdminNoticeMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

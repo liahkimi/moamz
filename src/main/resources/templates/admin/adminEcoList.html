@@ -111,7 +111,7 @@
                     <div class="calendar-icon-wrapper">
                       <img
                         class="banner-img"
-                        src="../../static/img/admin/calendar.png"
+                        th:src="@{/img/admin/calendar.png}"
                         alt="calendarIcon"
                       />
                       <div class="calendar-text">
@@ -122,7 +122,7 @@
                   </div>
                   <div class="like">
                     <img
-                      src="../../static/img/admin/heart.png"
+                      th:src="@{/img/admin/heart.png}"
                       alt="heartIcon"
                     />
                     <div class="like-value">
@@ -130,7 +130,7 @@
                     </div>
                   </div>
                   <div class="point-box">
-                    <img src="../../static/img/admin/point.png" alt="point-icon">
+                    <img th:src="@{/img/admin/point.png}" alt="point-icon">
                     <span th:text="${finEco.fgEcoPoints}">500</span>pt
                   </div>
                 </div>
@@ -158,21 +158,32 @@
         </div>
 
         <div class="pagination">
-          <button class="prev">Previous</button>
-          <button class="page active">1</button>
-          <button class="page">2</button>
-          <button class="page">3</button>
-          <button class="next">Next</button>
+          <ul class="page-box">
+            <a th:href="@{/admin/eco/list(page=${page.startPage - 1})}" class="page-a" th:if="${page.prev}">
+              <li class="page-num prev">&lt</li>
+            </a>
+            <!--        th:block은 화면에 영향을 주지않는 가짜 태그
+                        타임리프 문법을 사용하기 위해 만들어 쓴다.
+            -->
+            <th:block th:each="i : ${#numbers.sequence(page.startPage, page.endPage)}">
+              <a th:href="@{/admin/eco/list(page=${i})}" class="page-a">
+                <li class="page-num" th:classappend="${i == page.criteria.page ? 'active' : ''}" th:text="${i}"></li>
+              </a>
+            </th:block>
+            <a th:href="@{/admin/eco/list(page=${page.endPage + 1})}" class="page-a" th:if="${page.next}">
+              <li class="page-num next">&gt</li>
+            </a>
+          </ul>
         </div>
       </div>
     </main>
   </body>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<!--  <script>-->
-<!--    $(function () {-->
-<!--      $("#adminNavBar").load("adminNavBar.html");-->
-<!--      $("#adminHeader").load("adminHeader.html");-->
-<!--    });-->
-<!--  </script>-->
+  <script>
+    $(function () {
+      $("#adminNavBar").load("adminNavBar.html");
+      $("#adminHeader").load("adminHeader.html");
+    });
+  </script>
   <script th:src="@{/js/admin/adminEcoList.js}"></script>
 </html>

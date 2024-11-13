@@ -106,7 +106,7 @@
                 <tr th:each="sellerMngInfo, iterStat :${sellerMngListDTO}">
                   <td th:text="${iterStat.index + 1}">1</td>
                   <td th:text="${sellerMngInfo.fgUserId}">idididididi</td>
-                  <td th:text="${sellerMngInfo.fgBusinessId}">바나프레소오오오오오오</td>
+                  <td th:text="${sellerMngInfo.fgBusinessName}">바나프레소오오오오오오</td>
                   <td th:text="${sellerMngInfo.fgUserJoinDate}">2024/10/11</td>
                   <td >⭐<span th:text="${sellerMngInfo.fgAverageReviewRating}">5.0</span>(<span th:text="${sellerMngInfo.fgLikeCount}">10</span>)</td>
                   <td th:text="${sellerMngInfo.fgProductCount}">60</td>

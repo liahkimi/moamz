@@ -23,11 +23,14 @@
 
     <!--판매자회원 관리목록-->
     <select id="selectSellerMngList" resultType="SellerMngListDTO">
-        SELECT s.FG_USER_CODE, cu.FG_USER_ID, cu.FG_USER_JOIN_DATE,
-               NVL(AVG(r.FG_REVIEW_RATING), 0) AS FG_AVERAGE_REVIEW_RATING, --업체평점
-               COUNT(DISTINCT l.FG_LIKE_ID) AS FG_LIKE_COUNT, --좋아요수
-               SUM(p.FG_PRODUCT_ID) AS FG_PRODUCT_COUNT, --상품수
-               COUNT(CASE WHEN o.FG_PAYMENT_STATUS = '결제완료' THEN o.FG_PRODUCT_ID END) AS FG_SALES_COUNT--판매건수
+        SELECT s.FG_USER_CODE,
+               cu.FG_USER_ID,
+               cu.FG_USER_JOIN_DATE,
+               b.FG_BUSINESS_NAME, -- 업체명
+               NVL(AVG(r.FG_REVIEW_RATING), 0) AS FG_AVERAGE_REVIEW_RATING, -- 업체평점
+               COUNT(DISTINCT l.FG_LIKE_ID) AS FG_LIKE_COUNT, -- 좋아요수
+               SUM(p.FG_PRODUCT_ID) AS FG_PRODUCT_COUNT, -- 상품수
+               COUNT(CASE WHEN o.FG_PAYMENT_STATUS = '결제완료' THEN o.FG_PRODUCT_ID END) AS FG_SALES_COUNT -- 판매건수
         FROM FG_SELLER s
                  JOIN FG_COMMON_USER cu ON s.FG_USER_CODE = cu.FG_USER_CODE
                  JOIN FG_BUSINESS b ON s.FG_USER_CODE = b.FG_USER_CODE
@@ -38,8 +41,7 @@
         GROUP BY
             s.FG_USER_CODE,
             cu.FG_USER_ID,
-            cu.FG_USER_JOIN_DATE
-        ORDER BY FG_USER_CODE
-
+            cu.FG_USER_JOIN_DATE,
+            b.FG_BUSINESS_NAME
     </select>
 </mapper>

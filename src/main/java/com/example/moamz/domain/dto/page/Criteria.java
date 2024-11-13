@@ -1,4 +1,4 @@
-package com.example.moamz.domain.dto.admin.page;
+package com.example.moamz.domain.dto.page;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

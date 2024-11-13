@@ -1,7 +1,7 @@
 package com.example.moamz.controller.community.free;
 
-import com.example.moamz.domain.dto.admin.page.Criteria;
-import com.example.moamz.domain.dto.admin.page.Page;
+import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.Page;
 import com.example.moamz.domain.dto.community.free.FreeDetailDTO;
 import com.example.moamz.domain.dto.community.free.FreeListDTO;
 import com.example.moamz.domain.dto.community.free.FreeModifyDTO;
