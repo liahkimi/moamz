@@ -2,6 +2,9 @@
 ///// 댓글 관련 모듈 import하기
 import * as comment from "../comment.js";
 
+let page = 1;
+let hasNext  = true;
+
 
 
 
@@ -9,30 +12,33 @@ import * as comment from "../comment.js";
 ////////////////////////////////////////////////////////
 ///// 게시글 수정, 삭제버튼 처리
 
-const postUpdateBtn = document.getElementById('modify-btn');
-const postDeleteBtn = document.getElementById('delete-btn');
-const postId = document.querySelector('.post-info-wrap').getAttribute('data-id');
-//console.log(postId);
+{
+    let $postUpdateBtn = document.getElementById('modify-btn');
+    let $postDeleteBtn = document.getElementById('delete-btn');
+    let postId = document.querySelector('.post-info-wrap').getAttribute('data-id');
+    //console.log(postId);
 
 
-// 게시글 수정버튼
-postUpdateBtn.addEventListener('click', () => {
-   const isConfirm = confirm('글을 수정하시겠습니까?');
+    // 게시글 수정버튼
+    $postUpdateBtn?.addEventListener('click', () =>  {
+        const isConfirm = confirm('글을 수정하시겠습니까?');
 
-   if(isConfirm) {
-       location.href = '/free/update?postId=' + postId;
-   }
-});
+        if(isConfirm) {
+            location.href = '/free/update?postId=' + postId;
+        }
+    });
 
 
-// 게시글 삭제버튼
-postDeleteBtn.addEventListener('click', () => {
-    const isConfirm = confirm('해당 글을 삭제하시겠습니까?');
+    // 게시글 삭제버튼
+    $postDeleteBtn?.addEventListener('click', () => {
+        const isConfirm = confirm('해당 글을 삭제하시겠습니까?');
 
-    if (isConfirm) {
-        location.href = '/free/delete?postId=' + postId;
-    }
-});
+        if (isConfirm) {
+            location.href = '/free/delete?postId=' + postId;
+        }
+    });
+}
+
 
 
 
@@ -68,24 +74,30 @@ likeBtns.forEach((btn) => {
 
 {
     // 댓글 작성 버튼
-    const commentInputBtn = document.getElementById('comment-input-btn');
+    const $commentInputBtn = document.getElementById('comment-input-btn');
     // 댓글 입력 input 태그
-    const commentInput = document.getElementById('comment-input');
+    const $commentInput = document.getElementById('comment-input');
+    // 더보기 버튼
+    let $showMoreBtn = document.getElementById('show-more-btn');
+    let postId = document.querySelector('.post-info-wrap').getAttribute('data-id');
 
 
     // 처음 페이지 로드할 때 댓글 목록 가져오기
-    comment.getList(postId, displayComment);
+    comment.getListAll(postId, page, function(data) {
+        hasNext = data.hasNext;
+        displayComment(data.contentList);
+    });
 
 
     // 댓글 작성하기 버튼 이벤트
-    commentInputBtn.addEventListener('click', () => {
+    $commentInputBtn?.addEventListener('click', () => {
         // input 태그에 작성한 값(댓글 내용) 가져오기
-        let commentContent = commentInput.value;
+        let commentContent = $commentInput.value;
 
         // 댓글 내용이 비었는지 확인한다.
         if(commentContent.trim() === '') {
             alert('댓글 내용을 입력해주세요.');
-            commentInput.focus();
+            $commentInput.focus();
             return;
         }
 
@@ -98,12 +110,31 @@ likeBtns.forEach((btn) => {
         // 댓글 등록 함수 호출
         comment.insertComm(commInfo, () => {
             // input 태그 초기화
-            commentInput.value = '';
+            $commentInput.value = '';
+
+            // 페이지 초기화
+            page = 1;
 
             // 댓글 목록 다시 가져오기
-            comment.getList(postId, displayComment);
+            comment.getListAll(postId, page, function(data) {
+                hasNext = data.hasNext;
+                displayComment(data.contentList);
+            });
         });
     }); // 댓글 등록버튼 이벤트 끝
+
+
+    // 더보기 버튼을 클릭하면 다음 페이지 댓글을 가져온다.
+    $showMoreBtn?.addEventListener('click', () => {
+       // 페이지 증가
+       page++;
+
+       // 다음페이지 댓글 반환
+       comment.getListAll(postId, page, function(data) {
+           hasNext = data.hasNext;
+           appendComment(data.contentList);
+       });
+    });
 
 
 }
@@ -163,8 +194,14 @@ likeBtns.forEach((btn) => {
 
             // 모듈에서 댓글 수정 함수 호출
             comment.updateComm(updateInfo, () => {
+                // 페이지 초기화
+                page = 1;
+
                 // 댓글 목록을 다시 로딩한다.
-                comment.getList(postId, displayComment);
+                comment.getListAll(postId, page, function(data) {
+                    hasNext = data.hasNext;
+                    displayComment(data.contentList);
+                });
             })
 
         // 3️⃣클릭한 요소가 '삭제' 버튼일 때, 댓글을 삭제한다.
@@ -177,8 +214,13 @@ likeBtns.forEach((btn) => {
 
                 // 모듈에서 댓글 삭제 함수 호출
                 comment.removeComm(commentId, () => {
-                    // 댓글 목록을 다시 로드한다.
-                    comment.getList(postId, displayComment);
+                    page = 1;
+
+                    // 댓글 목록을 다시 로딩한다.
+                    comment.getListAll(postId, page, function(data) {
+                        hasNext = data.hasNext;
+                        displayComment(data.contentList);
+                    });
                 })
             }
 
@@ -228,6 +270,55 @@ function displayComment(commentList) {
 
     // 생성된 태그를 ul 태그 안에 출력해준다.
     commentContainer.innerHTML = tags;
+
+    // hasNext가 true일 때만 더보기 버튼이 표시되도록 제어함
+    const $showMoreBtn = document.getElementById('show-more-btn');
+    $showMoreBtn.style.display = hasNext ? 'block' : 'none';
+
+}
+
+
+
+
+
+////////////////////////////////////////////////////////
+///// 기존 댓글 목록에 새 댓글 추가해주는 함수
+
+function appendComment(commentList) {
+    // 댓글 목록이 보여질 태그
+    const commentContainer = document.querySelector('.comment-content-wrap ul');
+
+    // 댓글 목록을 출력할 태그 초기화
+    let tags = ``;
+
+    // connentList에 있는 댓글을 하나씩 html 태그로 생성한다.
+    commentList.forEach(comment => {
+        //console.log(comment);
+
+        tags += `
+            <li class="comment-list" data-id="${comment.fgCommentId}">
+                <div>
+                    <div class="comment-info-wrap">
+                        <span class="user-nickname">${comment.fgNormalNickname}</span>
+                        <span class="comment-write-time">${comment.fgCommentDate}</span>
+                        <span class="comment-modified">${comment.fgCommentEdit}</span>
+                    </div>
+                    <div class="comment-btn-wrap">
+                        <button type="button" class="comment-modify-btn">수정</button>
+                        <button type="button" class="comment-delete-btn">삭제</button>
+                    </div>
+                </div>
+                <p class="comment-content">${comment.fgCommentContent}</p>
+            </li>
+        `;
+    });
+
+    // 생성된 태그를 ul 태그 안에 출력해준다.
+    commentContainer.insertAdjacentHTML("beforeend", tags);
+
+    // hasNext가 true일 때만 더보기 버튼이 표시되도록 제어함
+    const $showMoreBtn = document.getElementById('show-more-btn');
+    $showMoreBtn.style.display = hasNext ? 'block' : 'none';
 
 }
 

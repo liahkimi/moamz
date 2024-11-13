@@ -1,6 +1,8 @@
 package com.example.moamz.controller.rest;
 
+import com.example.moamz.domain.dto.admin.page.Criteria;
 import com.example.moamz.domain.dto.community.CommentDTO;
+import com.example.moamz.domain.dto.page.Slice;
 import com.example.moamz.service.community.CommentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,27 @@ public class CommentRestController {
     private final CommentService commentService;
 
     //
+    // 댓글 목록 <GET 요청>, 페이지네이션 없음
+    //
+    @GetMapping("/list/{postId}")
+    public List<CommentDTO> selectCommemtList(@PathVariable(value="postId") Long postId) {
+        // 댓글 목록 가져오는 메서드 호출
+        return commentService.findCommentList(postId);
+    }
+
+    //
+    // 댓글 목록 <GET 요청>, 페이지네이션 있음
+    //
+    @GetMapping("/list/{postId}/comm")
+    public Slice<CommentDTO> selectCommentSlice(@PathVariable(value="postId") Long postId,
+                                                @RequestParam("page") int page) {
+        // 요청한 페이지와 페이지당 게시글 수를 설정한다.
+        Slice<CommentDTO> slice = commentService.findSlice(new Criteria(page, 5), postId);
+        return slice;
+    }
+
+
+    //
     // 댓글 등록 <POST 요청>
     //
     @PostMapping("/insert/{postId}")
@@ -30,16 +53,6 @@ public class CommentRestController {
 
         // 댓글 등록 서비스 호출하기
         commentService.registComment(commentDTO);
-    }
-
-    //
-    // 페이지 네이션 없음
-    // 댓글 목록 <GET 요청>
-    //
-    @GetMapping("/list/{postId}")
-    public List<CommentDTO> selectCommemtList(@PathVariable(value="postId") Long postId) {
-        // 댓글 목록 가져오는 메서드 호출
-        return commentService.findCommentList(postId);
     }
 
     //
