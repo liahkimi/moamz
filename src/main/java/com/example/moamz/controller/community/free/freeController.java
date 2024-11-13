@@ -36,7 +36,7 @@ public class freeController {
 //        return "/community/free/freeList";
 //    }
     @GetMapping("/list")
-    public String freeList(Criteria criteria, Model model, ServletRequest servletRequest) {
+    public String freeList(Criteria criteria, Model model) {
         // 한 페이지에 게시글 15개씩 보이도록 설정
         criteria.setAmount(15);
 

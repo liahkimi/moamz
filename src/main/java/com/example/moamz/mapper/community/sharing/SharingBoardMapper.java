@@ -1,5 +1,6 @@
 package com.example.moamz.mapper.community.sharing;
 
+import com.example.moamz.domain.dto.admin.page.Criteria;
 import com.example.moamz.domain.dto.community.sharing.SharingDetailDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingListDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingModifyDTO;
@@ -27,6 +28,16 @@ public interface SharingBoardMapper {
     List<SharingListDTO> selectAvailableList();
     List<SharingListDTO> selectReservedList();
     List<SharingListDTO> selectCompletedList();
+
+    // 게시글 목록 가져오기 (페이지네이션O)
+    List<SharingListDTO> selectAvailableListAll(Criteria criteria);
+    List<SharingListDTO> selectReservedListAll(Criteria criteria);
+    List<SharingListDTO> selectCompletedListAll(Criteria criteria);
+
+    // 자유게시판 전체 게시글 수 반환
+    int selectAvailableTotal();
+    int selectReservedTotal();
+    int selectCompletedTotal();
 
     // 게시글 상세보기
     Optional<SharingDetailDTO> selectSharingDetail(Long postId);

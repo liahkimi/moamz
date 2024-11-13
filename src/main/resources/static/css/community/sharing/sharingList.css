@@ -207,3 +207,20 @@ main {
     text-align: center;
     line-height: 20px;
 }
+/* 페이지네이션 */
+.page-box {
+    display: flex;
+    justify-content: center;
+}
+.page-a {
+    width: 20px;
+    text-align: center;
+    color: #6a6a6a;
+}
+.page-num.active {
+    color: #CEDD61;
+    font-weight: bold;
+}
+.page-num:hover{
+    text-decoration-line: underline;
+}

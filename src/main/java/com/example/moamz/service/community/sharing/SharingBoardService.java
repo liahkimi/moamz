@@ -1,5 +1,6 @@
 package com.example.moamz.service.community.sharing;
 
+import com.example.moamz.domain.dto.admin.page.Criteria;
 import com.example.moamz.domain.dto.community.sharing.SharingDetailDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingListDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingModifyDTO;
@@ -145,7 +146,29 @@ public class SharingBoardService {
         return sharingBoardMapper.selectCompletedList();
     }
 
-    // 5️⃣ 게시글 상세보기 메서드
+    // 5️⃣ 게시글 목록 가져오기 메서드 (페이지네이션 포함!!)
+    public List<SharingListDTO> findAvailableListAll(Criteria criteria) {
+        return sharingBoardMapper.selectAvailableListAll(criteria);
+    }
+    public List<SharingListDTO> findReservedListAll(Criteria criteria) {
+        return sharingBoardMapper.selectReservedListAll(criteria);
+    }
+    public List<SharingListDTO> findCompletedListAll(Criteria criteria) {
+        return sharingBoardMapper.selectCompletedListAll(criteria);
+    }
+
+    // 6️⃣ 나눔글 상태별 전체 게시글 수 반환 메서드
+    public int findAvailableTotal() {
+        return sharingBoardMapper.selectAvailableTotal();
+    }
+    public int findReservedTotal() {
+        return sharingBoardMapper.selectReservedTotal();
+    }
+    public int findCompletedTotal() {
+        return sharingBoardMapper.selectCompletedTotal();
+    }
+
+    // 7️⃣ 게시글 상세보기 메서드
     public SharingDetailDTO findSharingDetail(Long postId, Long userCode) {
 
         // 작성자 Code

@@ -98,11 +98,68 @@
                         </li>
                     </ul>
                 </div>
-                <!-- 페이지네이션 -->
-                <div class="pagination">
-                    <button id="prev-btn">&lt;</button>
-                    <span id="page-numbers">페이지네이션..</span>
-                    <button id="next-btn">&gt;</button>
+                <!-- 나눔 가능 페이지네이션 -->
+                <div class="page-container available">
+                    <ul class="page-box">
+                        <a th:href="@{/sharing/list(page=${avPage.startPage - 1})}" class="page-a" th:if="${avPage.prev}">
+                            <li class="page-num prev">&lt</li>
+                        </a>
+
+                        <!--  th:block  화면에 영향을 주지 않는 태그
+                              시작 페이지와 종료 페이지를 구분하기 위해서 사용한다.
+                        -->
+                        <th:block th:each="i : ${#numbers.sequence(avPage.startPage, avPage.endPage)}">
+                            <a th:href="@{/sharing/list(page=${i})}" class="page-a">
+                                <li class="page-num" th:classappend="${i == avPage.criteria.page ? 'active' : ''}"
+                                    th:text="${i}"></li>
+                            </a>
+                        </th:block>
+                        <a th:href="@{/sharing/list(page=${avPage.endPage + 1})}" class="page-a" th:if="${avPage.next}">
+                            <li class="page-num next">&gt</li>
+                        </a>
+                    </ul>
+                </div>
+                <!-- 예약중 페이지네이션 -->
+                <div class="page-container reserved hidden">
+                    <ul class="page-box">
+                        <a th:href="@{/sharing/list(page=${rePage.startPage - 1})}" class="page-a" th:if="${rePage.prev}">
+                            <li class="page-num prev">&lt</li>
+                        </a>
+
+                        <!--  th:block  화면에 영향을 주지 않는 태그
+                              시작 페이지와 종료 페이지를 구분하기 위해서 사용한다.
+                        -->
+                        <th:block th:each="i : ${#numbers.sequence(rePage.startPage, rePage.endPage)}">
+                            <a th:href="@{/sharing/list(page=${i})}" class="page-a">
+                                <li class="page-num" th:classappend="${i == rePage.criteria.page ? 'active' : ''}"
+                                    th:text="${i}"></li>
+                            </a>
+                        </th:block>
+                        <a th:href="@{/sharing/list(page=${rePage.endPage + 1})}" class="page-a" th:if="${rePage.next}">
+                            <li class="page-num next">&gt</li>
+                        </a>
+                    </ul>
+                </div>
+                <!-- 나눔완료 페이지네이션 -->
+                <div class="page-container completed hidden">
+                    <ul class="page-box">
+                        <a th:href="@{/sharing/list(page=${comPage.startPage - 1})}" class="page-a" th:if="${comPage.prev}">
+                            <li class="page-num prev">&lt</li>
+                        </a>
+
+                        <!--  th:block  화면에 영향을 주지 않는 태그
+                              시작 페이지와 종료 페이지를 구분하기 위해서 사용한다.
+                        -->
+                        <th:block th:each="i : ${#numbers.sequence(comPage.startPage, comPage.endPage)}">
+                            <a th:href="@{/sharing/list(page=${i})}" class="page-a">
+                                <li class="page-num" th:classappend="${i == comPage.criteria.page ? 'active' : ''}"
+                                    th:text="${i}"></li>
+                            </a>
+                        </th:block>
+                        <a th:href="@{/sharing/list(page=${comPage.endPage + 1})}" class="page-a" th:if="${comPage.next}">
+                            <li class="page-num next">&gt</li>
+                        </a>
+                    </ul>
                 </div>
             </div>
         </section>
