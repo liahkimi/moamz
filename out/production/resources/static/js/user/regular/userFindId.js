@@ -32,7 +32,7 @@ function findId() {
         alert(response);  // 서버에서 받은 아이디 또는 오류 메시지 출력
       },
       error: function() {
-        alert("아이디 찾기에 실패했습니다.");
+        alert("아이디 찾기에 실패했습니다. 이름과 휴대폰번호를 확인해 주세요.");
       }
     });
   } else {

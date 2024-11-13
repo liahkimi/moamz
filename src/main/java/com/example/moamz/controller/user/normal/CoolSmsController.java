@@ -3,6 +3,7 @@
 //import com.example.moamz.service.user.normal.CoolSmsService;
 //import lombok.RequiredArgsConstructor;
 //import lombok.extern.slf4j.Slf4j;
+//import net.nurigo.java_sdk.exceptions.CoolsmsException;
 //import org.springframework.stereotype.Controller;
 //import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +20,13 @@
 //    }
 //
 //    @GetMapping("/send-auth-code")
-//    public String sendAuthCode(@RequestParam String phone) {
-//        return coolSmsService.sendAuthCode(phone);
+//    public String sendAuthCode(@RequestParam String coolsms) throws CoolsmsException {
+//        return coolSmsService.sendVerificationMessage(coolsms);
 //    }
+//
+//
+//
+//
 //
 ////    // coolSMS 테스트 화면
 ////    @GetMapping("/sms")

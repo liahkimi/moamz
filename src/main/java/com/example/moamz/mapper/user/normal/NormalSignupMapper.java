@@ -5,6 +5,9 @@ import com.example.moamz.domain.dto.user.normal.NormalCommonSignupDTO;
 import com.example.moamz.domain.dto.user.normal.NormalPointDTO;
 import com.example.moamz.domain.dto.user.normal.NormalUserSignupDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Optional;
 
 @Mapper
 public interface NormalSignupMapper {
@@ -14,9 +17,11 @@ public interface NormalSignupMapper {
     void insertPoint(NormalPointDTO normalPointDTO);
 
     //아이디 중복확인
-    boolean checkedId(String fgUerId);
+    Optional<String> checkedId(@Param("fgUserId")String fgUserId);
+
+
     //닉네임 중복확인
-    boolean checkedNickname(String fgNormalNickname);
+    Optional<String> checkedNickname(@Param("fgNormalNickname")String fgNormalNickname);
 
 }
 

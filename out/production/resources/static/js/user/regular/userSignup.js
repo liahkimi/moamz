@@ -1,21 +1,46 @@
-const emailBtn = document.getElementById("email-btn");
 const nicknameBtn = document.getElementById("nickname-btn");
 
-emailBtn.addEventListener("click", () => {
-  //alert("이메일 중복 검사");
+function checkedId() {
+    var checkedId = $("#email-input").val();
 
-  // fetch.('중복검사용 controller uri',{
-  //     method : 'POST',
-  //     type : 'Content-Type : application',
-  //     body : //닉네임 json.st
-  // }).then(가지고온 값 => 함수처리).catch()
-});
+    if (checkedId) {
+        $.ajax({
+            url: "/normal/regular/checkId",
+            type: "POST",
+            data: { checkedId: checkedId },
+            success: function(response) {
+                alert(response);  // 서버에서 받은 아이디 또는 오류 메시지 출력
+            },
+            error: function() {
+                alert("이미 존재하는 아이디입니다.");
+            }
+        });
+    } else {
+        alert("아이디를 입력해 주세요.");
+    }
+}
 
-nicknameBtn.addEventListener("click", () => {
-  alert("닉네임 중복검사");
-});
+function checkedNickname() {
+    var checkedNickname = $("#nickname-input").val();
 
+    if (checkedNickname) {
+        $.ajax({
+            url: "/normal/regular/checkNickname",
+            type: "POST",
+            data: { checkedNickname: checkedNickname },
+            success: function(response) {
+                alert(response);  // 서버에서 받은 아이디 또는 오류 메시지 출력
+            },
+            error: function() {
+                alert("이미 존재하는 아이디입니다.");
+            }
+        });
+    } else {
+        alert("아이디를 입력해 주세요.");
+    }
+}
 
+  // ---------------------------------------------------------------------
 
   const input = document.getElementById("attach");
   const thumnail = document.querySelector("div.image");
@@ -168,6 +193,36 @@ $(document).ready(function() {
       countdown = setInterval(updateCountdown, 1000);
   });
 });
+//------------------------------------------------------------------------------------------
+//휴대폰번호 인증번호 보내기 버튼 클릭 이벤트
+// $('#phone-btn').click(function(){
+//
+//     var to = $('input[name="fgNormalPhone"]').val();
+//     $.ajax({
+//         url : "/memberPhoneCheck",
+//         type : "POST",
+//         data : "to=" + to,
+//         dataType : "json",
+//         success : function(data) {
+//             const checkNum = data;
+//             alert('checkNum:'+ checkNum);
+//
+//             //인증하기 버튼 클릭 이벤트
+//             $('#recheck-btn').click(function(){
+//                 const userNum = $('input[name="recheck-phone]').val();
+//                 if(checkNum == userNum){
+//                     alert('인증 성공하였습니다.');
+//                 }else {
+//                     alert('인증 실패하였습니다. 다시 입력해주세요.');
+//                 }
+//             });
+//
+//         },
+//         error : function() {
+//             alert("에러")
+//         }
+//     });
+// });
 
 // -----------------------------------------------------------------------------------------
 

@@ -14,6 +14,13 @@
         WHERE FG_USER_ID = #{fgUserId} AND FG_USER_PASSWORD = #{fgUserPassword}
     </select>
 
+    <!--아이디, 비밀번호 일치 여부 확인-->
+    <select id="idPasswordCheck" resultType="String" parameterType="String">
+        SELECT FG_USER_ID, FG_USER_PASSWORD
+        FROM FG_COMMON_USER
+        WHERE FG_USER_ID = #{fgUserId} AND FG_USER_PASSWORD = #{fgUserPassword}
+    </select>
+
 </mapper>
 
 

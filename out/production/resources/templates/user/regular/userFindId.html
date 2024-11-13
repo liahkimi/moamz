@@ -10,11 +10,11 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-  <header id="header"></header>
+<header id="header" th:replace="~{/main/fragment/header/userHeaderLogin.html}"></header>
   <div id="find-container">
 
     <div id="find-logo">
-      <img src="../../../static/img/user/logo-green.jpg" alt="">
+      <img th:src="@{/img/user/logo-green.jpg}" alt="">
     </div>
     <div id="login-find-id"><strong>회원 아이디 찾기</strong></div>
     <div id="login-wrap">
@@ -33,12 +33,6 @@
     </div>
     
   </div>
-  <footer id="footer"></footer>
+<footer id="footer" th:replace="~{/main/fragment/footer/userFooter.html}"></footer>
 </body>
-<script>
-  $(function() {
-      $("#header").load("../../main/fragment/header/userHeaderLogin.html");
-      $("#footer").load("../../main/fragment/footer/userFooter.html");
-  });
-</script>
 </html>

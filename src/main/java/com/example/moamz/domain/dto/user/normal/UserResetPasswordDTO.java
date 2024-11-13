@@ -12,4 +12,5 @@ import lombok.ToString;
 public class UserResetPasswordDTO {
     private Long fgUserCode;
     private String fgUserPassword;
+    private String fgUserPhone;
 }

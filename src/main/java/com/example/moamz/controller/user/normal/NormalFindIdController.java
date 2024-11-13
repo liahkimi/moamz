@@ -17,7 +17,7 @@ public class NormalFindIdController {
     private final NormalFindIdService normalFindIdService;
 
     @GetMapping("/findId")
-    public String join() {
+    public String findId() {
         return "/user/regular/userFindId";
     }
 
