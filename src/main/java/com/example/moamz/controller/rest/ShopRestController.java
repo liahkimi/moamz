@@ -16,7 +16,7 @@ public class ShopRestController {
     private final ProductService productService;
 
     @DeleteMapping("/shop/cart/delete/{fgCartDetailId}")
-    public ResponseEntity<String> deleteCartItem(@PathVariable Long fgCartDetailId) {
+    public ResponseEntity<String> deleteCartItem(@PathVariable("fgCartDetailId") Long fgCartDetailId) {
         try {
             productService.removeCartDetail(fgCartDetailId);
             return ResponseEntity.ok("삭제 완료");
@@ -25,4 +25,5 @@ public class ShopRestController {
                     .body("삭제 실패: " + e.getMessage());
         }
     }
+
 }
