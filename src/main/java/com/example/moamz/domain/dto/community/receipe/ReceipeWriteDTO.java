@@ -19,5 +19,6 @@ public class ReceipeWriteDTO {
     private String fgReceipeContent;
     private String fgReceipeIngredients;
     private LocalDateTime fgPostCreatedAt;
+    private String fgReceipeTime;
     private char fgPostEdit;
 }

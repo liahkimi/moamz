@@ -3,50 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../static/css/reset2.css">
-    <link rel="stylesheet" href="../../../static/css/community/receipe/receipeWrite.css">
-    <!-- include libraries(jQuery, bootstrap) -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!-- include summernote css/js -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/reset2.css}">
+    <link rel="stylesheet" th:href="@{/css/community/receipe/receipeWrite.css}">
+    <script defer th:src="@{/js/community/receipe/receipeWrite.js}"></script>
 
-    <script defer src="../../../static/js/community/receipe/receipeWrite.js"></script>
     <title>나눔게시판</title>
 </head>
 <body>
-    <header id="header"></header>
+<header id="header" th:replace="~{/main/fragment/header/userHeaderLogin}"></header>
     <main>
         <section class="write-header-section">
             <div class="write-title">레시피 작성하기</div>
             <div class="write-description">맛있는걸 먹고싶다</div>
         </section>
         <section class="write-content-section">
-            <form method="post" action="">
+            <form method="post" th:action="@{/recipe/recipeWrite}" enctype="multipart/form-data">
                 <div class="title-wrap">
                     <span class="write-form-title">📝 제목*</span>
-                    <input type="text" placeholder="제목을 작성해주세요." required/>
+                    <input type="text" id="title" name="fgPostTitle" placeholder="제목을 작성해주세요." required/>
                 </div>
                 <div class="title-wrap">
                     <span class="write-form-title">📝 재료*</span>
-                    <input type="text" placeholder="뭐가 들어갔을까요" required/>
+                    <input type="text" id="ingredients" name="fgReceipeIngredients" placeholder="뭐가 들어갔을까요" required/>
                 </div>
                 <div class="title-wrap">
                   <span class="write-form-time">📝 예상시간*</span>
-                  <input id="textarea-time" type="text" placeholder="얼마나 걸렸게" required/>
+                  <input id="textarea-time" id-="time" name="fgReceipeTime" type="text" placeholder="얼마나 걸렸게" required/>
               </div>
               <div class="file-wrap">
                 <span class="write-form-title">📝 대표사진*</span>
-                <div>
-                  <input type="file" name="" id="img-input" style="display: none;">
-                  <img src="./../../../static/img/community/receipe/graybox.png" alt="" id="file-input">
-                </div>
+                  <!-- 썸네일 -->
+                  <div class="thumbnail-container">
+                      <div class="thumbnail-wrap">
+                          <!--lable을 누르면 input type=file이 실행-->
+                          <label for="attach">
+                              <div class="thumbnail-img"></div>
+                          </label>
+                          <div class="thumbnail-cancle-btn"></div>
+                      </div>
+                      <input type="file" id="attach" name="postFile" style="display: none;">
+                  </div>
             </div>
                 <div class="edit-wrap">
                     <span class="write-form-title">📝 상세내용*</span>
-                    <textarea id="summernote" name="content"></textarea>
+                    <textarea id="summernote" name="fgReceipeContent"></textarea>
                 </div>
                 <div class="btn-wrap">
                     <button id="cancle-btn" type="button">취소</button>
@@ -55,14 +55,13 @@
             </form>
         </section>
     </main>
-    <footer id="footer"></footer>
+<footer id="footer" th:replace="~{/main/fragment/footer/userFooter}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-    $(function() {
-        $("#header").load("./../../main/fragment/header/userHeaderLogin.html");
-        $("#footer").load("./../../main/fragment/footer/userFooter.html");
-    });     
-</script>
-
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </html>

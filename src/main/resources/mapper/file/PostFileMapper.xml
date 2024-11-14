@@ -13,13 +13,20 @@
     <!--  게시물 대표파일 삭제하기  -->
     <delete id="deleteFile" parameterType="Long">
         DELETE FROM FG_POST_FILE
-        WHERE FG_POST_ID = #{boardId}
+        WHERE FG_POST_ID = #{fgPostId}
     </delete>
 
     <!--  파일 목록 가져오기  -->
     <select id="selectFileList" parameterType="Long" resultType="PostFileDTO">
         SELECT FG_POST_FILE_ID, FG_POST_FILE_NAME, FG_POST_FILE_ROOT, FG_POST_FILE_UUID, FG_POST_ID
         FROM FG_POST_FILE
-        WHERE FG_POST_ID = #{boardId}
+        WHERE FG_POST_ID = #{fgPostId}
+    </select>
+
+<!--    대표사진 가져오기-->
+    <select id="selectFile" parameterType="Long" resultType="PostFileDTO">
+        SELECT FG_POST_FILE_ID, FG_POST_FILE_NAME, FG_POST_FILE_ROOT, FG_POST_FILE_UUID, FG_POST_ID
+        FROM FG_POST_FILE
+        WHERE FG_POST_ID = #{fgPostId}
     </select>
 </mapper>

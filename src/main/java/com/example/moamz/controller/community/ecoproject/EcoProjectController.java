@@ -5,14 +5,19 @@ import com.example.moamz.domain.dto.community.ecoproject.EcoCertDetailDTO;
 import com.example.moamz.domain.dto.community.ecoproject.EcoCertListDTO;
 import com.example.moamz.domain.dto.community.ecoproject.EcoCertWriteDTO;
 import com.example.moamz.domain.dto.community.ecoproject.EcoProjectListDTO;
+import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.Page;
 import com.example.moamz.service.community.PostService;
 import com.example.moamz.service.community.ecoproject.EcoProjectService;
+import com.example.moamz.service.file.PostFileService;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,11 +29,17 @@ import java.util.List;
 public class EcoProjectController {
     private final EcoProjectService ecoProjectService;
     private final PostService postService;
+    private final PostFileService postFileService;
 
-    @GetMapping("/projectList")
-    public String projectList(Model model) {
-        List<EcoProjectListDTO> ecoProjectList = ecoProjectService.showProjectList();
-        List<EcoProjectListDTO> ecoEndList = ecoProjectService.showEndProjectList();
+    @GetMapping("/list")
+    public String projectList(Model model, Criteria criteria) {
+        criteria.setAmount(2);
+        List<EcoProjectListDTO> ecoProjectList = ecoProjectService.showEcoPage(criteria);
+        List<EcoProjectListDTO> ecoEndList = ecoProjectService.showEndEcoPage(criteria);
+
+        int total = ecoProjectList.size();
+        int totalEnd = ecoEndList.size();
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
 
         ecoProjectList.forEach(eco -> {
@@ -36,8 +47,12 @@ public class EcoProjectController {
             eco.setFormattedEcoEnd(eco.getFgEcoEnd().format(formatter));
         });
 
+        Page ecoPage = new Page(criteria, total);
+        Page endPage = new Page(criteria, totalEnd);
         model.addAttribute("ecoProjectList", ecoProjectList);
         model.addAttribute("ecoEndList", ecoEndList);
+        model.addAttribute("ecoPage", ecoPage);
+        model.addAttribute("endPage", endPage);
 
         return "community/ecoproject/ecoList";
     }
@@ -73,7 +88,7 @@ public class EcoProjectController {
 
         // PostDTO 세팅
         PostDTO postDTO = new PostDTO();
-        postDTO.setFgPostId(ecoCertWriteDTO.getFgPostId());  // ID 설정
+//        postDTO.setFgPostId(ecoCertWriteDTO.getFgPostId());  // ID 설정
         postDTO.setFgPostType("ecoCert");
         postDTO.setFgPostTitle(fgPostTitle);
         postDTO.setFgPostcreatedAt(LocalDateTime.now());

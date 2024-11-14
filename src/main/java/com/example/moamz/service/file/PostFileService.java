@@ -28,4 +28,9 @@ public class PostFileService {
     public List<PostFileDTO> findFileList(Long boardId) {
         return postFileMapper.selectFileList(boardId);
     }
+
+    // 게시글 대표사진 하나
+    public PostFileDTO findFile(Long fgPostId) {
+        return postFileMapper.selectFile(fgPostId);
+    }
 }
