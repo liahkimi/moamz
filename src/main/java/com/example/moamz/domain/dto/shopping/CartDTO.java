@@ -21,5 +21,5 @@ public class CartDTO {
     private String fgProductFileName;
     private String fgProductFileRoot;
     private String fgProductFileUuid;
-    private Long fgCardDetailId;
+    private Long fgCartDetailId;
 }

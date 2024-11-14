@@ -15,5 +15,7 @@ public interface PostFileMapper {
 
     // 파일 목록 가져오기
     List<PostFileDTO> selectFileList(Long boardId);
+
+    PostFileDTO selectFile(Long fgPostId);
 }
 

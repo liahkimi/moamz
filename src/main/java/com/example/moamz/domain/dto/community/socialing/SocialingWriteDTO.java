@@ -18,6 +18,7 @@ public class SocialingWriteDTO {
     private int fgSocialingMaxParticipants;
     private String fgSocialingStart;
     private String fgSocialingEnd;
+    private String fgSocialingGenderRes;
     private String fgSocialingLocation;
     private int fgSocialingMinage;
     private int fgSocialingMaxage;
