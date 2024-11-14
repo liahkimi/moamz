@@ -83,6 +83,7 @@ input[type='number']::-webkit-inner-spin-button {
     font-size: 17px;
     font-weight: bold;
     color: #a2b541;
+    white-space: nowrap;
 }
 /* textarea */
 textarea { 
@@ -113,4 +114,57 @@ textarea {
 #write-btn {
     border: none;
     background-color: #cedd61;
+}
+.file-wrap {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+.file-wrap input {
+    height: 28px;
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.file-wrap input:focus {
+    border: 1px solid #A2B541;
+}
+.file-wrap > div{
+    margin-top: 20px;
+    margin-left: 50px;
+}
+.thumbnail-wrap {
+    position: relative;
+    /* margin-right: auto; */
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.thumbnail-img {
+    background-image: url("../../../img/mypage/seller/thumbnail.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+}
+.thumbnail-cancle-btn {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    background-image: url("../../../img/mypage/seller/thumbnail_cancle_btn.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
+    right: 5px;
+    top: 5px;
 }

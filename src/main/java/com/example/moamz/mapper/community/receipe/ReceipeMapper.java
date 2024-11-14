@@ -5,6 +5,7 @@ import com.example.moamz.domain.dto.community.receipe.ReceipeDetailDTO;
 import com.example.moamz.domain.dto.community.receipe.ReceipeListDTO;
 import com.example.moamz.domain.dto.community.receipe.ReceipeModifyDTO;
 import com.example.moamz.domain.dto.community.receipe.ReceipeWriteDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -26,4 +27,7 @@ public interface ReceipeMapper {
     // receipe delete
     void deleteFgRecipe(Long fgPostId);
 
+    List<ReceipeListDTO> selectRecipePostListPage(Criteria criteria);
+
+    int countRecipe();
 }
