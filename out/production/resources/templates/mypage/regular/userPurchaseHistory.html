@@ -68,7 +68,7 @@
       <!-- 구매 내역 반복 출력 -->
       <div th:each="purchase : ${purchaseHistoryList}" class="userPurchaseHistory-list-box">
         <div class="purchase-date">
-          <span class="purchase-info-clock" th:text="${purchase.fgOrderDate}"></span>
+<!--          <span class="purchase-info-clock" th:text="${purchase.fgOrderDate}"></span>-->
           <div class="purchase-state" th:text="${purchase.fgPickupStatus}"></div>
         </div>
 
@@ -76,7 +76,7 @@
           <div class="purchase-info">
             <!-- 상품 사진 -->
 <!--            <img th:src="@{${purchase.상품사진}}" alt="구매상품사진">-->
-            <img th:src="'/upload_moamz/' + ${purchase.fgProductFileRoot} + '/' + ${purchase.fgProductFileUuid} + '_' + ${purchase.fgProductFileName}" alt="상품 사진"/>
+<!--            <img th:src="'/upload_moamz/' + ${purchase.fgProductFileRoot} + '/' + ${purchase.fgProductFileUuid} + '_' + ${purchase.fgProductFileName}" alt="상품 사진"/>-->
             <div class="purchase-name">
               <!-- 상품명과 가격 -->
               <span th:text="${purchase.fgProductName}"></span>
