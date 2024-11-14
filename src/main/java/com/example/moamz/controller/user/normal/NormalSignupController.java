@@ -42,9 +42,10 @@ public class NormalSignupController {
 
     //아이디 중복체크
     @PostMapping("/regular/checkId")
-    @ResponseBody
+    @ResponseBody // 메서드의 반환 값이 뷰를 반환하지 않고 직접 HTTP 응답 본문으로 전달되도록 설정
     public String checkedId(@RequestParam("checkedId") String fgUserId) {
-        log.info("😀😀😀😀😀😀userId:{}", fgUserId);
+        log.info("userId:{}", fgUserId);
+        // 사용자가 입력한 아이디로 중복 여부를 확인하는 서비스 호출
         String userId = normalSignupService.checkedId(fgUserId);
         if (userId != null) {
             return userId + "는 이미 존재하는 아이디입니다";  // 아이디 확인

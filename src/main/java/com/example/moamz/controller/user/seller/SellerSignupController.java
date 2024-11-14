@@ -38,4 +38,17 @@ public class SellerSignupController {
         return "redirect:/seller/seller/sellerLogin";
     }
 
+    //아이디 중복체크
+    @PostMapping("/seller/checkId")
+    @ResponseBody
+    public String checkedId(@RequestParam("checkedId") String fgUserId) {
+        log.info("😀😀😀😀😀😀userId:{}", fgUserId);
+        String userId = sellerSignupService.checkedId(fgUserId);
+        if (userId != null) {
+            return userId + "는 이미 존재하는 아이디입니다";  // 아이디 확인
+        } else {
+            return "사용할 수 있는 아이디입니다.";  // 실패 시 메시지
+        }
+    }
+
 }

@@ -19,7 +19,6 @@ public interface NormalSignupMapper {
     //아이디 중복확인
     Optional<String> checkedId(@Param("fgUserId")String fgUserId);
 
-
     //닉네임 중복확인
     Optional<String> checkedNickname(@Param("fgNormalNickname")String fgNormalNickname);
 

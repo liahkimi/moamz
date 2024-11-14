@@ -11,7 +11,7 @@
   <script defer th:src="@{/js/user/seller/sellerSignup.js}"></script>
 </head>
 <body>
-  <header id="header"></header>
+<header id="header" th:replace="~{/main/fragment/header/userHeaderLogin.html}"></header>
   <div id="signup-container">
 
     <div id="signup-logo">
@@ -35,7 +35,7 @@
       <div id="signup-wrap">
         <div id="signup-email">
           <input type="text" id="email-input" name="fgUserId" placeholder="아이디 입력(6~20 자리)">
-          <button id="email-btn" type="button">중복확인</button>
+          <button id="email-btn" onclick="checkedId()" type="button">중복확인</button>
           <!-- <input type="button" id="email-btn" placeholder="중복확인"> -->
           <input id="password-input" name="fgUserPassword" type="password" placeholder="비밀번호 입력(영문, 숫자, 특수문자 포함8~20)" required>
           <input id="password-recheck" type="password" placeholder="비밀번호 재확인" required>

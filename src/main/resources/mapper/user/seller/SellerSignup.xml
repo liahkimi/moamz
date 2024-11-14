@@ -34,4 +34,11 @@
         VALUES (#{userFileId}, #{userFileName}, #{userFileRoot}, #{userFileUuid}, #{userCode})
     </insert>
 
+    <!--아이디 중복체크-->
+    <select id="checkedId" parameterType="String" resultType="String">
+        SELECT FG_USER_ID
+        FROM FG_COMMON_USER
+        WHERE FG_USER_ID = #{fgUserId}
+    </select>
+
 </mapper>

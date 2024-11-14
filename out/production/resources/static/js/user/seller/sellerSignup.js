@@ -1,9 +1,22 @@
-const emailBtn = document.getElementById("email-btn");
+function checkedId() {
+    var checkedId = $("#email-input").val();
 
-emailBtn.addEventListener("click", () => {
-  alert("아이디 중복검사");
-});
-
+    if (checkedId) {
+        $.ajax({
+            url: "/seller/seller/checkId",
+            type: "POST",
+            data: { checkedId: checkedId },
+            success: function(response) {
+                alert(response);  // 서버에서 받은 아이디 또는 오류 메시지 출력
+            },
+            error: function() {
+                alert("이미 존재하는 아이디입니다.");
+            }
+        });
+    } else {
+        alert("아이디를 입력해 주세요.");
+    }
+}
 
 
 

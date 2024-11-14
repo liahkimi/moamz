@@ -91,11 +91,9 @@ public class SellerSignupService {
 
     }
 
-
-
-    // 닉네임 중복확인
-    public boolean checkedNickname(String fgUserId){
-
-        return sellerSignupMapper.checkedId(fgUserId);
+    // 아이디 중복확인
+    public String checkedId(String fgUserId) {
+        return sellerSignupMapper.checkedId(fgUserId)
+                .orElse(null);
     }
 }

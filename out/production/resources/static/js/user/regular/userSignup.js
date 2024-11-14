@@ -7,15 +7,16 @@ function checkedId() {
         $.ajax({
             url: "/normal/regular/checkId",
             type: "POST",
-            data: { checkedId: checkedId },
-            success: function(response) {
-                alert(response);  // 서버에서 받은 아이디 또는 오류 메시지 출력
+            data: { checkedId: checkedId }, // 서버로 전송할 데이터 (checkedId 파라미터에 입력된 아이디 값 전달)
+            success: function(response) { // 서버 응답이 성공적일 때 실행되는 콜백 함수
+                alert(response);
             },
-            error: function() {
+            error: function() { // 서버 요청이 실패했을 때 실행되는 콜백 함수
                 alert("이미 존재하는 아이디입니다.");
             }
         });
     } else {
+        // 아이디 입력란이 비어있으면 경고 메시지를 띄움
         alert("아이디를 입력해 주세요.");
     }
 }
