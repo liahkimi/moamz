@@ -4,6 +4,7 @@ import com.example.moamz.domain.dto.community.socialing.SocialingDetailDTO;
 import com.example.moamz.domain.dto.community.socialing.SocialingListDTO;
 import com.example.moamz.domain.dto.community.socialing.SocialingWriteDTO;
 import com.example.moamz.domain.dto.file.PostFileDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.mapper.community.PostMapper;
 import com.example.moamz.mapper.community.socialing.SocialingMapper;
 import com.example.moamz.mapper.file.PostFileMapper;
@@ -89,5 +90,13 @@ public class SocialingService {
             postFileDTO.setPostId(fgPostId);              // 파일DTO의 postId값 연결
             postFileMapper.insertFile(postFileDTO);     // 파일 테이블에 데이터 삽입
         }
+    }
+
+    public List<SocialingListDTO> showSocialingPage(Criteria criteria){
+        return socialingMapper.socialingListPage(criteria);
+    }
+
+    public int totalSocialing(){
+        return socialingMapper.countSocialing();
     }
 }

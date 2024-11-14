@@ -3,6 +3,7 @@ package com.example.moamz.mapper.community.socialing;
 import com.example.moamz.domain.dto.community.socialing.SocialingDetailDTO;
 import com.example.moamz.domain.dto.community.socialing.SocialingListDTO;
 import com.example.moamz.domain.dto.community.socialing.SocialingWriteDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface SocialingMapper {
 
 //    소셜링 insert
     void insertFgSocialing(SocialingWriteDTO SocialingWriteDTO);
+
+    List<SocialingListDTO> socialingListPage(Criteria criteria);
+
+    int countSocialing();
 }

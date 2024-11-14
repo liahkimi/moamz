@@ -5,6 +5,7 @@ import com.example.moamz.domain.dto.community.ecoproject.EcoCertListDTO;
 import com.example.moamz.domain.dto.community.ecoproject.EcoCertWriteDTO;
 import com.example.moamz.domain.dto.community.ecoproject.EcoProjectListDTO;
 import com.example.moamz.domain.dto.file.PostFileDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.mapper.community.PostMapper;
 import com.example.moamz.mapper.community.ecoproject.EcoProjectMapper;
 import com.example.moamz.mapper.file.PostFileMapper;
@@ -96,6 +97,22 @@ public class EcoProjectService {
 //    인증글 삭제
     public void deleteCert(Long fgPostId){
         ecoProjectMapper.ecoCertDelete(fgPostId);
+    }
+
+    public List<EcoProjectListDTO> showEcoPage(Criteria criteria){
+        return ecoProjectMapper.ecoProjectListPage(criteria);
+    }
+
+    public List<EcoProjectListDTO> showEndEcoPage(Criteria criteria){
+        return ecoProjectMapper.endecoProjectListPage( criteria );
+    }
+
+    public int totalEco(){
+        return ecoProjectMapper.countEco();
+    }
+
+    public int totalCert(){
+        return ecoProjectMapper.countCert();
     }
 }
 

@@ -4,6 +4,8 @@ import com.example.moamz.domain.dto.community.PostDTO;
 import com.example.moamz.domain.dto.community.receipe.ReceipeDetailDTO;
 import com.example.moamz.domain.dto.community.receipe.ReceipeListDTO;
 import com.example.moamz.domain.dto.community.receipe.ReceipeWriteDTO;
+import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.Page;
 import com.example.moamz.service.community.PostService;
 import com.example.moamz.service.community.receipe.ReceipeService;
 import lombok.RequiredArgsConstructor;
@@ -24,11 +26,16 @@ public class ReceipeController {
     private final PostService postService;
 
     @GetMapping("/list")
-    public String receipeList(Model model) {
+    public String receipeList(Model model, Criteria criteria) {
 
-        List<ReceipeListDTO> receipeLists = receipeService.showReceipes();
+        criteria.setAmount(8);
+        List<ReceipeListDTO> receipeLists = receipeService.showRecipePage(criteria);
+        int total = receipeService.totalRecipe();
+
+        Page page = new Page(criteria, total);
 
         model.addAttribute("receipeLists", receipeLists);
+        model.addAttribute("page", page);
 
         System.out.println("receipeLists = " + receipeLists);
 

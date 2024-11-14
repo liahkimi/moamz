@@ -4,6 +4,8 @@ import com.example.moamz.domain.dto.community.PostDTO;
 import com.example.moamz.domain.dto.community.socialing.SocialingDetailDTO;
 import com.example.moamz.domain.dto.community.socialing.SocialingListDTO;
 import com.example.moamz.domain.dto.community.socialing.SocialingWriteDTO;
+import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.Page;
 import com.example.moamz.service.community.PostService;
 import com.example.moamz.service.community.socialing.SocialingService;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +26,14 @@ public class SocialingController {
     private final PostService postService;
 
     @GetMapping("/list")
-    public String soclialingList(Model model) {
-        List<SocialingListDTO> socialList = socialingService.showSocialing();
+    public String soclialingList(Model model, Criteria criteria) {
+        criteria.setAmount(8);
+        List<SocialingListDTO> socialList = socialingService.showSocialingPage(criteria);
+        int total = socialingService.totalSocialing();
 
+        Page page = new Page(criteria, total);
+
+        model.addAttribute("page", page);
         model.addAttribute("socialList", socialList);
         System.out.println("socialList = " + socialList);
         return "/community/socialing/socialingList";

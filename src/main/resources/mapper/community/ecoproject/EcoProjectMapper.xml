@@ -75,7 +75,7 @@
         ]]>
     </select>
 
-    <!--    에코 인증글 디테일, 파일은 따로 추가해야함-->
+    <!--    에코 인증글 디테일, 파일은 따로 추가해야함(완)-->
     <select id="ecoCertDetail" resultType="EcoCertDetailDTO" parameterType="Long">
         SELECT
             P.FG_POST_TITLE AS fgPostTitle,
@@ -102,6 +102,107 @@
           AND EC.FG_POST_ID = #{fgPostId}
     </select>
 
+<!--    에코 진행중 페이징-->
+    <select id="ecoProjectListPage" parameterType="Criteria" resultType="EcoProjectListDTO">
+    <![CDATA[
+        SELECT * FROM (
+                          SELECT ROWNUM AS RNUM,
+                                 fgPostId,
+                                 fgPostTitle,
+                                 fgEcoStart,
+                                 fgEcoEnd,
+                                 fgPostLikes,
+                                 fgEcoInfo,
+                                 fgEcoParticipation,
+                                 fgFileUrl,
+                                 fgEcoStatus,
+                                 fgEcoDaysElapsed,
+                                 postFileId,
+                                 postFileName,
+                                 postFileRoot,
+                                 postFileUuid
+                          FROM (
+                                   SELECT
+                                       P.FG_POST_ID AS fgPostId,
+                                       P.FG_POST_TITLE AS fgPostTitle,
+                                       E.FG_ECO_START AS fgEcoStart,
+                                       E.FG_ECO_END AS fgEcoEnd,
+                                       P.FG_POST_LIKES AS fgPostLikes,
+                                       E.FG_ECO_INFO AS fgEcoInfo,
+                                       E.FG_ECO_PARTICIPATION AS fgEcoParticipation,
+                                       (F.FG_POST_FILE_ROOT || '/' || F.FG_POST_FILE_UUID || '_' || F.FG_POST_FILE_NAME) AS fgFileUrl,
+                                       '진행중' AS fgEcoStatus,
+                                       E.FG_ECO_END - E.FG_ECO_START AS fgEcoDaysElapsed,
+                                       F.FG_POST_FILE_ID AS postFileId,
+                                       F.FG_POST_FILE_NAME AS postFileName,
+                                       F.FG_POST_FILE_ROOT AS postFileRoot,
+                                       F.FG_POST_FILE_UUID AS postFileUuid
+                                   FROM FG_POST P
+                                            JOIN FG_ECO E ON P.FG_POST_ID = E.FG_POST_ID
+                                            LEFT JOIN FG_POST_FILE F ON P.FG_POST_ID = F.FG_POST_ID
+                                   WHERE P.FG_POST_TYPE = 'eco'
+                                     AND F.FG_POST_FILE_ID = (SELECT MIN(F2.FG_POST_FILE_ID)
+                                                              FROM FG_POST_FILE F2
+                                                              WHERE F2.FG_POST_ID = P.FG_POST_ID)
+                                     AND E.FG_ECO_END >= SYSDATE
+                                   ORDER BY P.FG_POST_ID DESC
+                               )
+                          WHERE ROWNUM <= #{page} * #{amount}
+                      )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+        ]]>
+</select>
+
+    <select id="endecoProjectListPage" parameterType="Criteria" resultType="EcoProjectListDTO">
+    <![CDATA[
+        SELECT * FROM (
+                          SELECT ROWNUM AS RNUM,
+                                 fgPostId,
+                                 fgPostTitle,
+                                 fgEcoStart,
+                                 fgEcoEnd,
+                                 fgPostLikes,
+                                 fgEcoInfo,
+                                 fgEcoParticipation,
+                                 fgFileUrl,
+                                 fgEcoStatus,
+                                 fgEcoDaysElapsed,
+                                 postFileId,
+                                 postFileName,
+                                 postFileRoot,
+                                 postFileUuid
+                          FROM (
+                                   SELECT
+                                       P.FG_POST_ID AS fgPostId,
+                                       P.FG_POST_TITLE AS fgPostTitle,
+                                       E.FG_ECO_START AS fgEcoStart,
+                                       E.FG_ECO_END AS fgEcoEnd,
+                                       P.FG_POST_LIKES AS fgPostLikes,
+                                       E.FG_ECO_INFO AS fgEcoInfo,
+                                       E.FG_ECO_PARTICIPATION AS fgEcoParticipation,
+                                       (F.FG_POST_FILE_ROOT || '/' || F.FG_POST_FILE_UUID || '_' || F.FG_POST_FILE_NAME) AS fgFileUrl,
+                                       '진행중' AS fgEcoStatus,
+                                       E.FG_ECO_END - E.FG_ECO_START AS fgEcoDaysElapsed,
+                                       F.FG_POST_FILE_ID AS postFileId,
+                                       F.FG_POST_FILE_NAME AS postFileName,
+                                       F.FG_POST_FILE_ROOT AS postFileRoot,
+                                       F.FG_POST_FILE_UUID AS postFileUuid
+                                   FROM FG_POST P
+                                            JOIN FG_ECO E ON P.FG_POST_ID = E.FG_POST_ID
+                                            LEFT JOIN FG_POST_FILE F ON P.FG_POST_ID = F.FG_POST_ID
+                                   WHERE P.FG_POST_TYPE = 'eco'
+                                     AND F.FG_POST_FILE_ID = (SELECT MIN(F2.FG_POST_FILE_ID)
+                                                              FROM FG_POST_FILE F2
+                                                              WHERE F2.FG_POST_ID = P.FG_POST_ID)
+                                     AND E.FG_ECO_END < SYSDATE
+                                   ORDER BY P.FG_POST_ID DESC
+                               )
+                          WHERE ROWNUM <= #{page} * #{amount}
+                      )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+        ]]>
+</select>
+
     <!--에코 인증글 리스트-->
     <select id="ecoCertList" resultType="EcoCertListDTO">
         SELECT EC.FG_POST_ID                                                         AS fgPostId,
@@ -120,6 +221,33 @@
         WHERE P.FG_POST_TYPE = 'ecoCert' and ec.FG_PROJECT_ID = #{fgProjectId}
     </select>
 
+<!--    인증글 페이징-->
+    <select id="ecoCertListPage" parameterType="Criteria" resultType="EcoCertListDTO">
+    <![CDATA[
+        SELECT * FROM (
+                          SELECT ROWNUM AS RNUM, fgPostId, fgPostTitle, fgPostCreatedAt, fgNormalName, fgPostLikes, fgCommentCount
+                          FROM (
+                                   SELECT
+                                       EC.FG_POST_ID AS fgPostId,
+                                       P.FG_POST_TITLE AS fgPostTitle,
+                                       P.FG_POST_CREATED_AT AS fgPostCreatedAt,
+                                       NU.FG_NORMAL_NAME AS fgNormalName,
+                                       P.FG_POST_LIKES AS fgPostLikes,
+                                       (SELECT COUNT(*) FROM FG_COMMENT C WHERE C.FG_POST_ID = P.FG_POST_ID) AS fgCommnetCount
+                                   FROM FG_ECO_CERT EC
+                                            JOIN FG_POST P ON EC.FG_POST_ID = P.FG_POST_ID
+                                            JOIN FG_NORMAL_USER NU ON P.FG_USER_CODE = NU.FG_USER_CODE
+                                            JOIN FG_ECO E ON EC.FG_PROJECT_ID = E.FG_POST_ID
+                                   WHERE P.FG_POST_TYPE = 'ecoCert'
+                                     AND EC.FG_PROJECT_ID = #{fgProjectId}
+                                   ORDER BY P.FG_POST_CREATED_AT DESC
+                               )
+                          WHERE ROWNUM <= #{page} * #{amount}
+                      )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+        ]]>
+</select>
+
     <!--    에코 인증글 글쓰기(1번)-->
     <insert id="ecoCertInsert" parameterType="EcoCertWriteDTO">
         <selectKey resultType="Long" keyProperty="fgPostId" order="BEFORE">
@@ -128,6 +256,14 @@
         INSERT INTO FG_ECO_CERT(fg_post_id, fg_cert_content, fg_project_id) VALUES(
         #{fgPostId}, #{fgCertContent}, #{fgProjectId})
     </insert>
+
+    <select id="countEco" resultType="int">
+        select count(*) from FG_ECO
+    </select>
+
+    <select id="countCert" resultType="int">
+        select count(*) from FG_ECO_CERT
+    </select>
 </mapper>
 
 

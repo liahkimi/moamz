@@ -68,6 +68,62 @@
             P.FG_POST_TYPE = 'socialing'
     </select>
 
+<!--    소셜링 리스트 페이징-->
+    <select id="socialingListPage" parameterType="Criteria" resultType="SocialingListDTO">
+    <![CDATA[
+        SELECT * FROM (
+                          SELECT ROWNUM AS RNUM,
+                                 fgPostId,
+                                 fgPostType,
+                                 fgPostTitle,
+                                 fgSocialingContent,
+                                 fgSocialingCategory,
+                                 fgSocialingMaxParticipants,
+                                 fgSocialingStart,
+                                 fgSocialingEnd,
+                                 fgSocialingLocation,
+                                 fgSocialingMinage,
+                                 fgSocialingMaxage,
+                                 fgSocialingGenderRes,
+                                 fgUserCode,
+                                 fgNormalName,
+                                 postFileId,
+                                 postFileName,
+                                 postFileRoot,
+                                 postFileUuid
+                          FROM (
+                                   SELECT
+                                       P.FG_POST_ID AS fgPostId,
+                                       P.FG_POST_TYPE AS fgPostType,
+                                       P.FG_POST_TITLE AS fgPostTitle,
+                                       S.FG_SOCIALING_CONTENT AS fgSocialingContent,
+                                       S.FG_SOCIALING_CATEGORY AS fgSocialingCategory,
+                                       S.FG_SOCIALING_MAX_PARTICIPANTS AS fgSocialingMaxParticipants,
+                                       S.FG_SOCIALING_START AS fgSocialingStart,
+                                       S.FG_SOCIALING_END AS fgSocialingEnd,
+                                       S.FG_SOCIALING_LOCATION AS fgSocialingLocation,
+                                       S.FG_SOCIALING_MINAGE AS fgSocialingMinage,
+                                       S.FG_SOCIALING_MAXAGE AS fgSocialingMaxage,
+                                       S.FG_SOCIALING_GENDER_RES AS fgSocialingGenderRes,
+                                       U.FG_USER_CODE AS fgUserCode,
+                                       U.FG_NORMAL_NAME AS fgNormalName,
+                                       F.FG_POST_FILE_ID AS postFileId,
+                                       F.FG_POST_FILE_NAME AS PostFileName,
+                                       F.FG_POST_FILE_ROOT AS postFileRoot,
+                                       F.FG_POST_FILE_UUID AS postFileUuid
+                                   FROM FG_POST P
+                                            JOIN FG_SOCIALING S ON P.FG_POST_ID = S.FG_POST_ID
+                                            JOIN FG_NORMAL_USER U ON P.FG_USER_CODE = U.FG_USER_CODE
+                                            LEFT JOIN FG_POST_FILE F ON P.FG_POST_ID = F.FG_POST_ID
+                                   WHERE P.FG_POST_TYPE = 'socialing'
+                                   ORDER BY P.FG_POST_ID DESC
+                               )
+                          WHERE ROWNUM <= #{page} * #{amount}
+                      )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+        ]]>
+</select>
+
     <!-- FG_SOCIALING 테이블 INSERT -->
     <insert id="insertFgSocialing" parameterType="SocialingWriteDTO">
         <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
@@ -116,4 +172,9 @@
                      #{fgPostId}
                  )
     </insert>
+
+    <select id="countSocialing" resultType="int">
+        SELECT COUNT(*) AS total
+        FROM FG_SOCIALING
+    </select>
 </mapper>

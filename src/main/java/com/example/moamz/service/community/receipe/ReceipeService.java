@@ -5,6 +5,7 @@ import com.example.moamz.domain.dto.community.receipe.ReceipeListDTO;
 import com.example.moamz.domain.dto.community.receipe.ReceipeModifyDTO;
 import com.example.moamz.domain.dto.community.receipe.ReceipeWriteDTO;
 import com.example.moamz.domain.dto.file.PostFileDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.mapper.community.PostMapper;
 import com.example.moamz.mapper.community.receipe.ReceipeMapper;
 import com.example.moamz.mapper.file.PostFileMapper;
@@ -102,5 +103,13 @@ public class ReceipeService {
 // 레시피 삭제
     public void deleteReceipe(Long fgPostId){
         receipeMapper.deleteFgRecipe(fgPostId);
+    }
+
+    public List<ReceipeListDTO> showRecipePage(Criteria criteria){
+        return receipeMapper.selectRecipePostListPage(criteria);
+    }
+
+    public int totalRecipe(){
+        return receipeMapper.countRecipe();
     }
 }
