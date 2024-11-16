@@ -4,7 +4,7 @@
     <!--일반회원 관리목록-->
     <select id="selectUserMngList" resultType="UserMngListDTO" >
         SELECT nu.FG_USER_CODE, nu.FG_NORMAL_NICKNAME,cu.FG_USER_ID, cu.FG_USER_JOIN_DATE,
-               NVL(pt.FG_POINT_TOTAL, 0),
+               NVL(pt.FG_POINT_TOTAL, 0) AS FG_POINT_TOTAL,
                COUNT(DISTINCT ps.FG_POST_ID) AS FG_POST_COUNT,  -- 중복 게시글 수 계산
                COUNT(DISTINCT CASE WHEN o.FG_PAYMENT_STATUS = '결제완료' THEN o.FG_ORDER_ID END) AS FG_PURCHASE_COUNT-- 결제완료 주문 건수
         FROM  FG_NORMAL_USER nu

@@ -239,11 +239,11 @@
 <!--&lt;!&ndash;에코프젝 인증글 -포인트 지급 내역 기록하기 &ndash;&gt;-->
 <!--<insert id="insertEcoPointLog" parameterType="AdminEcoCertPointBtnDTO">-->
 <!--    <selectKey keyProperty="fgPointDetailId" resultType="Long" order="BEFORE">-->
-<!--        SELECT SEQ_TEST_POINT_DETAIL.nextval FROM DUAL-->
+<!--        SELECT SEQ_POINT_DETAIL.nextval FROM DUAL-->
 <!--    </selectKey>-->
 <!--    INSERT INTO FG_POINT_DETAIL (FG_POINT_DETAIL_ID, FG_POINT_RECEIVED_DATE, FG_POINT_RECEIVED, FG_POINT_ID)-->
 <!--    VALUES (-->
-<!--               SEQ_TEST_POINT_DETAIL.NEXTVAL, SYSDATE, ${fgPointReceived},-->
+<!--               SEQ_POINT_DETAIL.NEXTVAL, SYSDATE, ${fgPointReceived},-->
 <!--               (SELECT FG_POINT_ID FROM FG_POINT WHERE FG_USER_CODE =-->
 <!--                                                       (SELECT P.FG_USER_CODE-->
 <!--                                                        FROM FG_POST P-->
@@ -252,40 +252,211 @@
 <!--           )-->
 <!--</insert>-->
 
-        <!--에코프로젝트 포인트 지급하기 (포인트지급내역 기록 + 포인트 실제 지급-->
-        <update id="updateUserEcoPointAndLog" parameterType="AdminEcoCertPointBtnDTO">
-            <!-- 포인트 지급 내역 기록용 ID 생성 -->
-            <selectKey keyProperty="fgPointDetailId" resultType="Long" order="BEFORE">
-                SELECT SEQ_TEST_POINT_DETAIL.nextval FROM DUAL
-            </selectKey>
+<!--        &lt;!&ndash;에코프로젝트 포인트 지급하기 (포인트지급내역 기록 + 포인트 실제 지급&ndash;&gt;-->
+<!--        <update id="updateUserEcoPointAndLog" parameterType="AdminEcoCertPointBtnDTO">-->
+<!--            &lt;!&ndash; 포인트 지급 내역 기록용 ID 생성 &ndash;&gt;-->
+<!--            <selectKey keyProperty="fgPointDetailId" resultType="Long" order="BEFORE">-->
+<!--                SELECT SEQ_TEST_POINT_DETAIL.nextval FROM DUAL-->
+<!--            </selectKey>-->
 
-            <!-- 포인트 업데이트 및 지급 내역 기록 -->
-            BEGIN
-            -- 사용자 포인트 업데이트
-            UPDATE FG_POINT
-            SET FG_POINT_TOTAL = FG_POINT_TOTAL + ${fgPointReceived}
-            WHERE FG_USER_CODE = (
-            SELECT FG_USER_CODE
-            FROM FG_POST p
-            JOIN FG_ECO_CERT e ON p.FG_POST_ID = e.FG_POST_ID
-            WHERE e.FG_POST_ID = #{fgPostId}
-            );
+<!--            &lt;!&ndash; 포인트 업데이트 및 지급 내역 기록 &ndash;&gt;-->
+<!--            BEGIN-->
+<!--            &#45;&#45; 사용자 포인트 업데이트-->
+<!--            UPDATE FG_POINT-->
+<!--            SET FG_POINT_TOTAL = FG_POINT_TOTAL + #{fgPointReceived}-->
+<!--            WHERE FG_USER_CODE = (-->
+<!--            SELECT FG_USER_CODE-->
+<!--            FROM FG_POST p-->
+<!--            JOIN FG_ECO_CERT e ON p.FG_POST_ID = e.FG_POST_ID-->
+<!--            WHERE e.FG_POST_ID = #{fgPostId}-->
+<!--            );-->
 
-            -- 포인트 지급 내역 기록
-            INSERT INTO FG_POINT_DETAIL (FG_POINT_DETAIL_ID, FG_POINT_RECEIVED_DATE, FG_POINT_RECEIVED, FG_POINT_ID)
-            VALUES (
-            #{fgPointDetailId}, SYSDATE, ${fgPointReceived},
-            (SELECT FG_POINT_ID
-            FROM FG_POINT
-            WHERE FG_USER_CODE = (
-            SELECT P.FG_USER_CODE
-            FROM FG_POST P
-            JOIN FG_ECO_CERT EC ON P.FG_POST_ID = EC.FG_POST_ID
-            WHERE EC.FG_POST_ID = #{fgPostId}
-            ))
-            );
-            END;
-        </update>
+<!--            &#45;&#45; 포인트 지급 내역 기록-->
+<!--            INSERT INTO FG_POINT_DETAIL (FG_POINT_DETAIL_ID, FG_POINT_RECEIVED_DATE, FG_POINT_RECEIVED, FG_POINT_ID)-->
+<!--            VALUES (-->
+<!--            #{fgPointDetailId}, SYSDATE, ${fgPointReceived},-->
+<!--            (SELECT FG_POINT_ID-->
+<!--            FROM FG_POINT-->
+<!--            WHERE FG_USER_CODE = (-->
+<!--            SELECT P.FG_USER_CODE-->
+<!--            FROM FG_POST P-->
+<!--            JOIN FG_ECO_CERT EC ON P.FG_POST_ID = EC.FG_POST_ID-->
+<!--            WHERE EC.FG_POST_ID = #{fgPostId}-->
+<!--            ))-->
+<!--            );-->
+<!--            END;-->
+<!--        </update>-->
+
+<!--    <update id="updateUserEcoPointAndLog" parameterType="AdminEcoCertPointBtnDTO">-->
+<!--        &lt;!&ndash; 포인트 지급 내역 기록용 ID 생성 &ndash;&gt;-->
+<!--        <selectKey keyProperty="fgPointDetailId" resultType="Long" order="BEFORE">-->
+<!--            SELECT SEQ_POINT_DETAIL.nextval FROM DUAL-->
+<!--        </selectKey>-->
+
+<!--        &lt;!&ndash; 포인트 업데이트 및 지급 내역 기록 &ndash;&gt;-->
+<!--        BEGIN-->
+<!--        &#45;&#45; 인증글 쓴 사람의 회원번호 알아내기-->
+<!--        DECLARE-->
+<!--        v_fg_user_code FG_POINT.FG_USER_CODE%TYPE;-->
+<!--        v_fg_point_id FG_POINT.FG_POINT_ID%TYPE;-->
+<!--        BEGIN-->
+<!--        &#45;&#45; 인증글의 작성자 회원번호 조회-->
+<!--        SELECT FG_USER_CODE-->
+<!--        INTO v_fg_user_code-->
+<!--        FROM FG_POST p-->
+<!--        JOIN FG_ECO_CERT e ON p.FG_POST_ID = e.FG_POST_ID-->
+<!--        WHERE e.FG_POST_ID = #{fgPostId}-->
+<!--        AND ROWNUM = 1;  &#45;&#45; 첫 번째 행만 반환하도록 보장-->
+
+<!--        &#45;&#45; 해당 유저의 포인트 업데이트하기-->
+<!--        &#45;&#45; 관리자 입력 포인트 만큼 더해주기-->
+<!--        UPDATE FG_POINT-->
+<!--        SET FG_POINT_TOTAL = FG_POINT_TOTAL + #{fgPointReceived}-->
+<!--        WHERE FG_USER_CODE = v_fg_user_code;-->
+
+<!--        &#45;&#45; 포인트 지급 내역 기록하기-->
+<!--        &#45;&#45; 해당 유저의 포인트 ID를 가져오기-->
+<!--        SELECT FG_POINT_ID-->
+<!--        INTO v_fg_point_id-->
+<!--        FROM FG_POINT-->
+<!--        WHERE FG_USER_CODE = v_fg_user_code-->
+<!--        AND ROWNUM = 1;  &#45;&#45; 첫 번째 행만 반환하도록 보장-->
+
+<!--        &#45;&#45; 포인트 지급 내역 기록-->
+<!--        INSERT INTO FG_POINT_DETAIL (FG_POINT_DETAIL_ID, FG_POINT_RECEIVED_DATE, FG_POINT_RECEIVED, FG_POINT_ID)-->
+<!--        VALUES (-->
+<!--        SEQ_POINT_DETAIL.NEXTVAL, SYSDATE, #{fgPointReceived}, v_fg_point_id-->
+<!--        );-->
+<!--        END;-->
+<!--        END;-->
+
+<!--    </update>-->
+
+<!--    <update id="updateUserEcoPointAndLog" parameterType="AdminEcoCertPointBtnDTO">-->
+<!--        <selectKey keyProperty="fgPointDetailId" resultType="Long" order="BEFORE">-->
+<!--            SELECT SEQ_POINT_DETAIL.nextval FROM DUAL-->
+<!--        </selectKey>-->
+<!--        DECLARE-->
+<!--        v_fg_user_code FG_POINT.FG_USER_CODE%TYPE;-->
+<!--        v_fg_point_id FG_POINT.FG_POINT_ID%TYPE;-->
+<!--        v_fg_post_id FG_POST.FG_POST_ID%TYPE := #{fgPostId};-->
+<!--        v_fg_point_received FG_POINT_DETAIL.FG_POINT_RECEIVED%TYPE := #{fgPointReceived};-->
+<!--        v_count NUMBER;-->
+<!--        BEGIN-->
+<!--        &#45;&#45; 데이터 존재 여부 확인-->
+<!--        SELECT COUNT(*)-->
+<!--        INTO v_count-->
+<!--        FROM FG_POST p-->
+<!--        JOIN FG_ECO_CERT e ON p.FG_POST_ID = e.FG_POST_ID-->
+<!--        WHERE e.FG_POST_ID = v_fg_post_id;-->
+
+<!--        IF v_count = 0 THEN-->
+<!--        RAISE_APPLICATION_ERROR(-20001, '해당 인증글 작성자를 찾을 수 없습니다.');-->
+<!--        ELSE-->
+<!--        &#45;&#45; 인증글의 작성자 회원번호 조회-->
+<!--        SELECT FG_USER_CODE-->
+<!--        INTO v_fg_user_code-->
+<!--        FROM (-->
+<!--        SELECT FG_USER_CODE-->
+<!--        FROM FG_POST p-->
+<!--        JOIN FG_ECO_CERT e ON p.FG_POST_ID = e.FG_POST_ID-->
+<!--        WHERE e.FG_POST_ID = v_fg_post_id-->
+<!--        ORDER BY p.FG_POST_ID ASC-->
+<!--        )-->
+<!--        WHERE ROWNUM = 1;-->
+<!--        END IF;-->
+
+<!--        &#45;&#45; 동일한 방식으로 FG_POINT_ID도 확인-->
+<!--        SELECT COUNT(*)-->
+<!--        INTO v_count-->
+<!--        FROM FG_POINT-->
+<!--        WHERE FG_USER_CODE = v_fg_user_code;-->
+
+<!--        IF v_count = 0 THEN-->
+<!--        RAISE_APPLICATION_ERROR(-20002, '해당 유저의 포인트 정보를 찾을 수 없습니다.');-->
+<!--        ELSE-->
+<!--        SELECT FG_POINT_ID-->
+<!--        INTO v_fg_point_id-->
+<!--        FROM FG_POINT-->
+<!--        WHERE FG_USER_CODE = v_fg_user_code-->
+<!--        AND ROWNUM = 1;-->
+<!--        END IF;-->
+
+<!--        &#45;&#45; 해당 유저의 포인트 업데이트-->
+<!--        UPDATE FG_POINT-->
+<!--        SET FG_POINT_TOTAL = FG_POINT_TOTAL + v_fg_point_received-->
+<!--        WHERE FG_USER_CODE = v_fg_user_code;-->
+
+<!--        &#45;&#45; 포인트 지급 내역 기록-->
+<!--        INSERT INTO FG_POINT_DETAIL (-->
+<!--        FG_POINT_DETAIL_ID, FG_POINT_RECEIVED_DATE, FG_POINT_RECEIVED, FG_POINT_ID-->
+<!--        ) VALUES (-->
+<!--        SEQ_POINT_DETAIL.NEXTVAL, SYSDATE, v_fg_point_received, v_fg_point_id-->
+<!--        );-->
+<!--        END;-->
+
+<!--    </update>-->
+
+
+    <update id="updateUserEcoPointAndLog" parameterType="AdminEcoCertPointBtnDTO">
+        <selectKey keyProperty="fgPointDetailId" resultType="Long" order="BEFORE">
+            SELECT SEQ_POINT_DETAIL.nextval FROM DUAL
+        </selectKey>
+
+        DECLARE
+        v_fg_user_code FG_POINT.FG_USER_CODE%TYPE;
+        v_fg_point_id FG_POINT.FG_POINT_ID%TYPE;
+        v_fg_post_id FG_POST.FG_POST_ID%TYPE; -- 인증글의 ID
+        v_fg_point_received NUMBER; -- 관리자 입력 포인트
+        BEGIN
+        -- 1. 인증글 작성자의 회원번호 조회
+        v_fg_post_id := #{fgPostId}; -- AdminEcoCertPointBtnDTO에서 fgPostId 값 설정
+        v_fg_point_received := #{fgPointReceived}; -- AdminEcoCertPointBtnDTO에서 fgPointReceived 값 설정
+
+        SELECT FG_USER_CODE
+        INTO v_fg_user_code
+        FROM FG_POST p
+        JOIN FG_ECO_CERT e ON p.FG_POST_ID = e.FG_POST_ID
+        WHERE e.FG_POST_ID = v_fg_post_id;
+
+        -- 2. 해당 유저의 포인트 정보가 있는지 확인하여 포인트 업데이트 또는 삽입
+        BEGIN
+        -- 포인트 정보가 존재하는 경우 업데이트
+        UPDATE FG_POINT
+        SET FG_POINT_TOTAL = FG_POINT_TOTAL + v_fg_point_received
+        WHERE FG_USER_CODE = v_fg_user_code;
+
+        -- 만약 업데이트된 행이 없다면, 포인트 정보가 없다는 의미로 새로 삽입
+        IF SQL%ROWCOUNT = 0 THEN
+        INSERT INTO FG_POINT (FG_POINT_ID, FG_USER_CODE, FG_POINT_TOTAL)
+        VALUES (SEQ_POINT.NEXTVAL, v_fg_user_code, v_fg_point_received);  -- 시퀀스 추가
+        END IF;
+        EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+        -- 만약 인증글 작성자의 회원번호가 없으면 예외 발생, 포인트 테이블에 새로 추가
+        INSERT INTO FG_POINT (FG_POINT_ID, FG_USER_CODE, FG_POINT_TOTAL)
+        VALUES (SEQ_POINT.NEXTVAL, v_fg_user_code, v_fg_point_received);  -- 시퀀스 추가
+        END;
+
+        -- 3. 포인트 ID 조회
+        SELECT FG_POINT_ID
+        INTO v_fg_point_id
+        FROM FG_POINT
+        WHERE FG_USER_CODE = v_fg_user_code;
+
+        -- 4. 포인트 지급 내역 기록
+        INSERT INTO FG_POINT_DETAIL (
+        FG_POINT_DETAIL_ID, FG_POINT_RECEIVED_DATE, FG_POINT_RECEIVED, FG_POINT_ID
+        )
+        VALUES (
+        SEQ_POINT_DETAIL.NEXTVAL, SYSDATE, v_fg_point_received, v_fg_point_id  -- 시퀀스 추가
+        );
+
+        COMMIT; -- 변경사항 커밋
+        END;
+
+    </update>
+
 
 
 

@@ -9,6 +9,8 @@ import com.example.moamz.mapper.admin.eco.AdminEcoMapper;
 import com.example.moamz.service.admin.eco.AdminEcoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +29,7 @@ public class AdminEcoController {
 
     //진행 OR 종료된 에코프로젝트 목록 보여주기
     @GetMapping("/list")
-    public String ingEcoList(Criteria criteria, Model model, @SessionAttribute(value="fgUserCode", required = false) Long fgUserCode){
+    public String ingEcoList(Criteria criteria, Model model, @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
         criteria.setAmount(2);
         //진행중인 에코프젝 목록 dto
         List<AdminIngEcoListDTO> adminIngEcoListDTO = adminEcoService.findAllIngEcoList(criteria);
@@ -43,15 +45,15 @@ public class AdminEcoController {
         model.addAttribute("adminFinEcoListDTO", adminFinEcoListDTO);
 
         System.out.println("adminIngEcoListDTO = " + adminIngEcoListDTO);
-            return "admin/adminEcoList";
-        }
+        return "admin/adminEcoList";
+    }
 
     // 에코프젝 글 총 갯수 구하기
 
 
     //에코프로젝트 작성페이지 보여주기
     @GetMapping("/write")
-    public String ecoWrite(@SessionAttribute(value="fgUserCode", required = false) Long fgUserCode) {
+    public String ecoWrite(@SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
 
         return fgUserCode == null ? "redirect:/admin/login" : "/admin/adminEcoWrite";
 
@@ -86,17 +88,16 @@ public class AdminEcoController {
 
     //에코프젝 상태 버튼클릭으로 변경하기 post
     @PostMapping("/list/modifyEcoStatus/{fgPostId}")
-    public String modifyEcoStatusPost(@PathVariable("fgPostId") Long fgPostId ,
-                                      @SessionAttribute(value="fgUserCode",required=false) Long fgUserCode){
+    public String modifyEcoStatusPost(@PathVariable("fgPostId") Long fgPostId,
+                                      @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
         adminEcoService.changeStatusBtn(fgPostId);
         return "redirect:/admin/eco/list";
     }
 
-    
-    
+
     // 진행중인 에코프로젝트 인증글목록 불러오기
     @GetMapping("/ecoCertList/{fgPostId}")
-    public String ecoCertList(@PathVariable("fgPostId") Long fgPostId, Model model ,@SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode){
+    public String ecoCertList(@PathVariable("fgPostId") Long fgPostId, Model model, @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
         List<AdminEcoCertListDTO> adminEcoCertListDTO = adminEcoService.findEcoCertList(fgPostId);
         model.addAttribute("adminEcoCertListDTO", adminEcoCertListDTO);
 
@@ -106,10 +107,10 @@ public class AdminEcoController {
 
     // 진행중인 에코프로젝트 인증글 상세보기 페이지 + 댓글 보여주기
     @GetMapping("/ecoCertDetail/{fgPostId}/{fgProjectId}")
-    public String ecoCertDetail(@SessionAttribute(value="fgUserCode", required=false) Long fgUserCode,
+    public String ecoCertDetail(@SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode,
                                 @PathVariable("fgPostId") Long fgPostId,
-                                @PathVariable("fgProjectId") Long fgProjectId, Model model){
-        AdminEcoCertDetailDTO adminEcoCertDetailDTO = adminEcoService.findEcoCertDetail(fgPostId,fgProjectId);
+                                @PathVariable("fgProjectId") Long fgProjectId, Model model) {
+        AdminEcoCertDetailDTO adminEcoCertDetailDTO = adminEcoService.findEcoCertDetail(fgPostId, fgProjectId);
         List<AdminCommentDTO> adminCommentDTO = adminEcoService.findEcoCertDetailComment(fgPostId);
         model.addAttribute("adminCommentDTO", adminCommentDTO);
         if (adminCommentDTO == null) {
@@ -127,7 +128,7 @@ public class AdminEcoController {
 
     // 완료된 에코프로젝트 인증글목록 불러오기
     @GetMapping("/finEcoCertList/{fgPostId}")
-    public String finEcoCertList(@PathVariable("fgPostId") Long fgPostId, Model model ,@SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode){
+    public String finEcoCertList(@PathVariable("fgPostId") Long fgPostId, Model model, @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
         List<AdminEcoCertListDTO> adminEcoCertListDTO = adminEcoService.findEcoCertList(fgPostId);
         model.addAttribute("adminEcoCertListDTO", adminEcoCertListDTO);
 
@@ -137,10 +138,10 @@ public class AdminEcoController {
 
     //완료된 에코프로젝트 인증글 상세보기 보여주기
     @GetMapping("/finEcoCertDetail/{fgPostId}/{fgProjectId}")
-    public String finEcoCertDetail(@SessionAttribute(value="fgUserCode", required=false) Long fgUserCode,
-                                @PathVariable("fgPostId") Long fgPostId,
-                                @PathVariable("fgProjectId") Long fgProjectId, Model model){
-        AdminEcoCertDetailDTO adminEcoCertDetailDTO = adminEcoService.findEcoCertDetail(fgPostId,fgProjectId);
+    public String finEcoCertDetail(@SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode,
+                                   @PathVariable("fgPostId") Long fgPostId,
+                                   @PathVariable("fgProjectId") Long fgProjectId, Model model) {
+        AdminEcoCertDetailDTO adminEcoCertDetailDTO = adminEcoService.findEcoCertDetail(fgPostId, fgProjectId);
         adminEcoCertDetailDTO.setFgProjectId(fgProjectId);
         model.addAttribute("adminEcoCertDetailDTO", adminEcoCertDetailDTO);
 
@@ -156,7 +157,7 @@ public class AdminEcoController {
     }
 
 
-//    //진행중인 에코프로젝트 수정하기 페이지 보여주기
+    //    //진행중인 에코프로젝트 수정하기 페이지 보여주기
 //    @GetMapping("/modify/{fgPostId}")
 //    public String ecoModify(@PathVariable("fgPostId") Long fgPostId, Model model){
 //        AdminIngEcoListDTO adminIngEcoListDTO = adminEcoService.findEcoProjectById(fgPostId);
@@ -166,19 +167,23 @@ public class AdminEcoController {
 //
     //특정 에코프로젝트 삭제하기
     @GetMapping("/remove/{fgPostId}")
-    public String ecoRemove(@PathVariable("fgPostId") Long fgPostId){
+    public String ecoRemove(@PathVariable("fgPostId") Long fgPostId) {
         adminEcoService.removeEcoProject(fgPostId);
         return "redirect:/admin/eco/list";
     }
 
 
     // 특정 에코프로젝트 인증글 작성자에게 포인트 지급해주기
-    // 지급버튼 클릭시, fgPostId가 모달창에 전달되도록
+    // 지급버튼 클릭시, fgPostId가 모달창에 전달되도록 getMapping하는 부분
     @GetMapping("/updatePoint/{fgPostId}")
-    public String ecoPoint(@SessionAttribute(value="fgUserCode", required=false) Long fgUserCode,
+    public String ecoPoint(@SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode,
                            @PathVariable("fgPostId") Long fgPostId,
                            @ModelAttribute AdminEcoCertPointBtnDTO adminEcoCertPointBtnDTO,
-                           @RequestParam("fgPointReceived") Long fgPointReceived) {
+                           @RequestParam("fgPointReceived") long fgPointReceived) {
+       // DTO에 fgPostId와 fgPointReceived값 설정
+        adminEcoCertPointBtnDTO.setFgPostId(fgPostId);
+        adminEcoCertPointBtnDTO.setFgPointReceived(fgPointReceived);
+
         // 포인트 지급 및 내역 기록 서비스 호출
         adminEcoService.giveUserEcoPointAndLog(adminEcoCertPointBtnDTO);
 
@@ -186,22 +191,44 @@ public class AdminEcoController {
         return "redirect:/admin/eco/finEcoCertList/" + fgPostId;
     }
 
-//    @GetMapping()
 
-//    @PostMapping("/updatePoint")
-//    public String ecoPoint(
-//            @RequestParam("fgPostId") Long fgPostId,
-//            @RequestParam("fgPointReceived") Long fgPointReceived) {
-//        // 포인트 지급 로직 처리
-//        adminEcoService.giveUserEcoPointAndLog(fgPostId, fgPointReceived);
-//
-//        // 처리 후 리디렉션
-//        return "redirect:/admin/eco/finEcoCertList/" + fgPostId;
-//    }
+    @PostMapping("/updatePoint")
+    @ResponseBody
+    public ResponseEntity<?> givePoints(@RequestBody AdminEcoCertPointBtnDTO adminEcoCertPointBtnDTO,
+                                        @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
+
+        Long fgPostId = adminEcoCertPointBtnDTO.getFgPostId();  // @RequestBody로 받아온 fgPostId 사용
+        log.info("💥fgPostId: " + fgPostId);
+        log.info("💥fgPointReceived: " + adminEcoCertPointBtnDTO.getFgPointReceived());
+        log.info("💥fgPointReceived: " + adminEcoCertPointBtnDTO.getFgUserCode());
+        log.info("💥fgPointReceived: " + adminEcoCertPointBtnDTO.getFgPointId());
+
+        if (fgUserCode == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+
+        try {
+            adminEcoService.giveUserEcoPointAndLog(adminEcoCertPointBtnDTO);
+            log.info("🥲🥲🥲🥲 adminEcoCertPointBtnDTO =", adminEcoCertPointBtnDTO);
+            return ResponseEntity.ok("포인트 지급 완료");
+        } catch (Exception e) {
+            log.error("포인트 지급 중 오류 발생 {}", e.getMessage());
+            log.info("🫠adminEcoCertPointBtnDTO: " + (adminEcoCertPointBtnDTO != null ? adminEcoCertPointBtnDTO.toString() : "DTO is null"));
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("{\"message\": \"포인트 지급 실패\"}");
+        }
+    }
+
 
 
 
 }
+    
+
+
+
+
 
 
 

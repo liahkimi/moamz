@@ -17,110 +17,104 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-@Controller
-@RequestMapping("/admin/dashboard")
-@RequiredArgsConstructor
-@Slf4j
+@Controller  // Spring MVC의 Controller 어노테이션. 이 클래스가 웹 요청을 처리함을 나타냄
+@RequestMapping("/admin/dashboard")  // 요청 URL에 '/admin/dashboard' 경로가 포함된 경우 이 컨트롤러에서 처리
+@RequiredArgsConstructor  // final 필드를 생성자 주입하는 Lombok 어노테이션
+@Slf4j  // SLF4J 로깅을 위한 Lombok 어노테이션
 public class DashBoardController {
-    private final DashBoardService dashBoardService;
-    LocalDate currentDate = LocalDate.now(); //현재 날짜
+    private final DashBoardService dashBoardService;  // 대시보드 서비스 의존성 주입
+    LocalDate currentDate = LocalDate.now();  // 현재 날짜를 가져오는 LocalDate 객체
 
-    //대시보드 보여주기
-    @GetMapping("")
+    // 대시보드 보여주기 위한 메소드
+    @GetMapping("")  // 기본 GET 요청에 대해 처리 ("/admin/dashboard")
     public String showDashBoard(@SessionAttribute(value="fgUserCode", required = false) Long fgUserCode ,Model model) {
-        //대시보드 상단 집계 데이터
+        // 대시보드 상단 집계 데이터 조회
         Optional<DashBoardAggregationDTO> dashBoardAggregationDTO = dashBoardService.findDashBoardAggregation();
-        dashBoardAggregationDTO.ifPresent(dto -> model.addAttribute("dashBoardAggregationDTO", dto));
+        dashBoardAggregationDTO.ifPresent(dto -> model.addAttribute("dashBoardAggregationDTO", dto));  // 데이터가 있으면 model에 추가
 
-        //-최근 생성된 에코프젝 중 가장 최근 인 것
-      Optional<DashBoardEcoTopDTO> dashBoardEcoTopDTO = dashBoardService.findDashBoardIngEco();
-        dashBoardEcoTopDTO.ifPresent(dto -> model.addAttribute("dashBoardEcoTopDTO", dto));
-//        model.addAttribute("dashBoardEcoTopDTO", dashBoardEcoTopDTO);
-//        log.info("dashBoardEcoTopDTO {}", dashBoardEcoTopDTO);
+        // 최근 생성된 에코 프로젝트 중 가장 최근 것
+        Optional<DashBoardEcoTopDTO> dashBoardEcoTopDTO = dashBoardService.findDashBoardIngEco();
+        dashBoardEcoTopDTO.ifPresent(dto -> model.addAttribute("dashBoardEcoTopDTO", dto));  // 데이터가 있으면 model에 추가
 
-
-        //최근 생성된 에코프젝 중 두번쨰로 최근인 것
+        // 최근 생성된 에코 프로젝트 중 두 번째로 최근인 것
         Optional<DashBoardEcoTop2DTO> dashBoardEcoTop2DTO = dashBoardService.findDashBoardIngEco2();
-        dashBoardEcoTop2DTO.ifPresent(dto -> model.addAttribute("dashBoardEcoTop2DTO", dto));
-//        model.addAttribute("dashBoardEcoTop2DTO", dashBoardEcoTop2DTO);
-        log.info("dashBoardEcoTop2DTO {}", dashBoardEcoTopDTO);
+        dashBoardEcoTop2DTO.ifPresent(dto -> model.addAttribute("dashBoardEcoTop2DTO", dto));  // 데이터가 있으면 model에 추가
+        log.info("dashBoardEcoTop2DTO {}", dashBoardEcoTopDTO);  // 두 번째 에코 프로젝트 정보 로그 출력
 
-
-        // 첫 번째 에코 프로젝트의 좋아요 top5 인증글
+        // 첫 번째 에코 프로젝트의 좋아요 상위 5개 인증글 조회
         if (dashBoardEcoTopDTO.isPresent()) {
-            Long fgProjectId1 = dashBoardEcoTopDTO.get().getFgProjectId();
-            log.info("First Eco Project ID: {}", fgProjectId1);
+            Long fgProjectId1 = dashBoardEcoTopDTO.get().getFgProjectId();  // 첫 번째 프로젝트의 ID를 가져옴
+            log.info("First Eco Project ID: {}", fgProjectId1);  // 첫 번째 프로젝트 ID 로그 출력
 
-            List<DashBoardEcoTopLikes1DTO> dashBoardEcoTopLikes1DTO = dashBoardService.findDashBoardEcoTopLikes1(fgProjectId1);
-            model.addAttribute("dashBoardEcoTopLikes1DTO", dashBoardEcoTopLikes1DTO);
+            List<DashBoardEcoTopLikes1DTO> dashBoardEcoTopLikes1DTO = dashBoardService.findDashBoardEcoTopLikes1(fgProjectId1);  // 좋아요 상위 5개 인증글 조회
+            model.addAttribute("dashBoardEcoTopLikes1DTO", dashBoardEcoTopLikes1DTO);  // 모델에 추가
         }
 
-        // 두 번째 에코 프로젝트의 좋아요 top5 인증글
+        // 두 번째 에코 프로젝트의 좋아요 상위 5개 인증글 조회
         if (dashBoardEcoTop2DTO.isPresent()) {
-            Long fgProjectId2 = dashBoardEcoTop2DTO.get().getFgProjectId();
-            log.info("Second Eco Project ID: {}", fgProjectId2);
+            Long fgProjectId2 = dashBoardEcoTop2DTO.get().getFgProjectId();  // 두 번째 프로젝트의 ID를 가져옴
+            log.info("Second Eco Project ID: {}", fgProjectId2);  // 두 번째 프로젝트 ID 로그 출력
 
-            List<DashBoardEcoTopLikes2DTO> dashBoardEcoTopLikes2DTO = dashBoardService.findDashBoardEcoTopLikes2(fgProjectId2);
-            model.addAttribute("dashBoardEcoTopLikes2DTO", dashBoardEcoTopLikes2DTO);
+            List<DashBoardEcoTopLikes2DTO> dashBoardEcoTopLikes2DTO = dashBoardService.findDashBoardEcoTopLikes2(fgProjectId2);  // 좋아요 상위 5개 인증글 조회
+            model.addAttribute("dashBoardEcoTopLikes2DTO", dashBoardEcoTopLikes2DTO);  // 모델에 추가
         }
 
-
-        // 월별 쇼핑몰 총 구매건수 등락 추이 --> 현재 달로부터 근 4개월간의 그래프를 표현하고 싶은데...
+        // 월별 쇼핑몰 총 구매 건수 등락 추이 (최근 4개월 데이터)
         List<DashBoardGraphDTO> dashBoardGraphDTO = dashBoardService.findDashBoardSelectMonthlyPurchase();
-        // 이번 달을 포함한 최근 4개월을 역순으로 계산
+        // 최근 4개월을 역순으로 가져오기
         for (int i = 0; i < 4; i++) {
-            int month = currentDate.minusMonths(i).getMonthValue(); // 한 달 전, 두 달 전...
-            String monthName = currentDate.minusMonths(i).getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH); // 영문 월 이름 생성
+            int month = currentDate.minusMonths(i).getMonthValue();  // 한 달 전, 두 달 전, 세 달 전...
+            String monthName = currentDate.minusMonths(i).getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);  // 해당 월의 영문 이름
 
-            boolean monthFound = false; // 해당 월에 대한 데이터를 찾았는지 여부를 추적
+            boolean monthFound = false;  // 해당 월에 대한 데이터를 찾았는지 여부를 추적
 
+            // 월별 데이터가 있는지 확인하고 모델에 추가
             for (DashBoardGraphDTO dto : dashBoardGraphDTO) {
                 if (dto.getOrderMonth() == month) {
-                    // 여기서 attributeName을 선언하여 바로 사용
-                    String attributeName = monthName.toLowerCase() + "TotalOrders"; // augustTotalOrders, septemberTotalOrders...
-                    model.addAttribute(attributeName, dto.getMonthlyTotalOrders());
-                    log.info("Added to model: {} = {}", attributeName, dto.getMonthlyTotalOrders());
-                    monthFound = true; // 데이터를 찾았으므로 true로 설정
-                    break; // 해당 월 데이터를 찾으면 반복문 종료
+                    String attributeName = monthName.toLowerCase() + "TotalOrders";  // 월별 데이터 이름 생성 (예: augustTotalOrders)
+                    model.addAttribute(attributeName, dto.getMonthlyTotalOrders());  // 모델에 해당 데이터를 추가
+                    log.info("Added to model: {} = {}", attributeName, dto.getMonthlyTotalOrders());  // 로그 출력
+                    monthFound = true;  // 데이터를 찾았으므로 true로 설정
+                    break;  // 데이터를 찾았으면 더 이상 반복하지 않음
                 }
             }
 
+            // 데이터가 없으면 0으로 설정
             if (!monthFound) {
-                // 데이터를 찾지 못한 경우 0을 설정
-                String attributeName = monthName.toLowerCase() + "TotalOrders"; // augustTotalOrders, septemberTotalOrders...
-                model.addAttribute(attributeName, 0);
-                log.info("No data found for {}. Set to 0", monthName);
+                String attributeName = monthName.toLowerCase() + "TotalOrders";  // 월별 데이터 이름 생성
+                model.addAttribute(attributeName, 0);  // 0으로 모델에 추가
+                log.info("No data found for {}. Set to 0", monthName);  // 데이터가 없다는 로그 출력
             }
         }
-
 
         // 월별 총 에코 프로젝트 인증글 수
         List<DashBoardGraphDTO> dashBoardGraphDTOEcoCert = dashBoardService.findDashBoardSelectMonthlyEcoCert();
         for (int i = 0; i < 4; i++) {
-            int month = currentDate.minusMonths(i).getMonthValue(); // 한 달 전, 두 달 전...
-            String monthName = currentDate.minusMonths(i).getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH); // 영문 월 이름 생성
+            int month = currentDate.minusMonths(i).getMonthValue();  // 한 달 전, 두 달 전...
+            String monthName = currentDate.minusMonths(i).getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);  // 해당 월의 영문 이름
 
-            boolean monthFound = false; // 해당 월에 대한 데이터를 찾았는지 여부를 추적
+            boolean monthFound = false;  // 해당 월에 대한 데이터를 찾았는지 여부를 추적
 
+            // 월별 데이터가 있는지 확인하고 모델에 추가
             for (DashBoardGraphDTO dto : dashBoardGraphDTOEcoCert) {
                 if (dto.getPostMonth() == month) {
-                    // attributeName을 선언하여 바로 사용
-                    String attributeName = monthName.toLowerCase() + "EcoCertPosts"; // augustEcoCertPosts, septemberEcoCertPosts...
-                    model.addAttribute(attributeName, dto.getMonthlyEcoCertPosts());
-                    log.info("Added to model: {} = {}", attributeName, dto.getMonthlyEcoCertPosts());
-                    monthFound = true; // 데이터를 찾았으므로 true로 설정
-                    break; // 해당 월 데이터를 찾으면 반복문 종료
+                    String attributeName = monthName.toLowerCase() + "EcoCertPosts";  // 월별 인증글 데이터 이름 생성
+                    model.addAttribute(attributeName, dto.getMonthlyEcoCertPosts());  // 모델에 해당 데이터를 추가
+                    log.info("Added to model: {} = {}", attributeName, dto.getMonthlyEcoCertPosts());  // 로그 출력
+                    monthFound = true;  // 데이터를 찾았으므로 true로 설정
+                    break;  // 데이터를 찾았으면 더 이상 반복하지 않음
                 }
             }
 
+            // 데이터가 없으면 0으로 설정
             if (!monthFound) {
-                // 데이터를 찾지 못한 경우 0을 설정
-                String attributeName = monthName.toLowerCase() + "EcoCertPosts"; // augustEcoCertPosts, septemberEcoCertPosts...
-                model.addAttribute(attributeName, 0);
-                log.info("No data found for {}. Set to 0", monthName);
+                String attributeName = monthName.toLowerCase() + "EcoCertPosts";  // 월별 인증글 데이터 이름 생성
+                model.addAttribute(attributeName, 0);  // 0으로 모델에 추가
+                log.info("No data found for {}. Set to 0", monthName);  // 데이터가 없다는 로그 출력
             }
         }
-        return "admin/adminDashboard";
-    }
 
+        // 대시보드 화면에 정보를 보여주기 위한 뷰 반환
+        return "admin/adminDashboard";  // adminDashboard 뷰를 반환
+    }
 }
