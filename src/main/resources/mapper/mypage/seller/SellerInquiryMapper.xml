@@ -23,7 +23,7 @@
         WHERE FG_POST_ID = #{postId}
     </delete>
 
-    <!-- 문의글 목록 -->
+    <!-- 문의글 목록 (페이지네이션x) -->
     <select id="selectInquiryList" parameterType="Long" resultType="InquiryListDTO">
         SELECT  p.FG_POST_ID AS postId,
                 p.FG_POST_TITLE AS postTitle,
@@ -36,6 +36,36 @@
         WHERE p.FG_POST_ID = i.FG_POST_ID
           AND p.FG_USER_CODE = #{userCode}
         ORDER BY p.FG_POST_CREATED_AT DESC
+    </select>
+
+    <!-- 문의글 목록 (페이지네이션o) -->
+    <select id="selectInquiryListAll" parameterType="Criteria" resultType="InquiryListDTO">
+    <![CDATA[
+        SELECT postId, postTitle, postId, postTitle, postCreatedAt, inquiryStatus
+        FROM (
+            SELECT  p.FG_POST_ID AS postId,
+            p.FG_POST_TITLE AS postTitle,
+            TO_CHAR(p.FG_POST_CREATED_AT, 'YY/MM/DD HH24:MI') AS postCreatedAt,
+            CASE i.FG_INQUIRY_STATUS
+            WHEN '0' THEN '확인중'
+            WHEN '1' THEN '답변완료'
+            END AS inquiryStatus,
+            ROW_NUMBER() over (ORDER BY p.FG_POST_CREATED_AT DESC, p.FG_POST_ID DESC) AS RNUM
+            FROM FG_POST p, FG_INQUIRY i
+            WHERE p.FG_POST_ID = i.FG_POST_ID
+            AND p.FG_USER_CODE = #{userCode}
+        )
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+          AND RNUM <= #{criteria.page} * #{criteria.amount}
+        ]]>
+    </select>
+
+    <!-- 회원이 작성한 문의글 수 반환 -->
+    <select id="selectTotal" parameterType="Long" resultType="int">
+        SELECT COUNT(FG_POST_ID)
+        FROM FG_POST
+        WHERE FG_POST_TYPE = 'inquiry'
+          AND FG_USER_CODE = #{userCode}
     </select>
 
     <!-- 문의글 상세 -->

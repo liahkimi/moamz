@@ -25,27 +25,6 @@ public class SellerMyController {
 
 
     // 리뷰 보기 페이지
-//    @GetMapping("/storeReview")
-//    public String getStoreReview(@SessionAttribute(value="fgUserCode", required=false) Long userCode,
-//                                 Model model) {
-//        // 세션에 userCode가 null이면 로그인 페이지로 이동
-//        if(userCode == null) {
-//            return "redirect:/seller/seller/sellerLogin";
-//        }
-//
-//        // 판매자 업체id값 가져오기
-//        Long businessId = sellerMyService.findBusinessId(userCode);
-//
-//        List<StoreReviewDTO> storeReviewDTO = sellerMyService.findMyStoreRv(businessId);
-//        SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(userCode, businessId);
-//
-//        model.addAttribute("storeReviewDTO", storeReviewDTO);
-//        model.addAttribute("sellerProfileDTO", sellerProfileDTO);
-//
-//        // 리뷰 확인 페이지로 이동
-//        return "mypage/seller/sellerReviewCheck";
-//    }
-
     @GetMapping("/storeReview")
     public String getStoreReview(@SessionAttribute(value="fgUserCode", required=false) Long userCode,
                                  Criteria criteria,

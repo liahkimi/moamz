@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/like")
 @RequiredArgsConstructor
 @Slf4j
-public class LikeRestController {
+public class FreeLikeRestController {
     private final FreeLikeService  freeLikeService;
 
     //

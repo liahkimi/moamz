@@ -4,7 +4,9 @@ import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryCommentDTO;
 import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryDetailDTO;
 import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryListDTO;
 import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryWriteDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +24,12 @@ public interface SellerInquiryMapper {
 
     // 문의글 목록
     List<InquiryListDTO> selectInquiryList(Long userCode);
+
+    // 문의글 목록 (페이지네이션O)
+    List<InquiryListDTO> selectInquiryListAll(@Param("criteria") Criteria criteria, @Param("userCode") Long userCode);
+
+    // 회원이 작성한 문의글 수
+    int selectTotal(Long userCode);
 
     // 문의글 상세
     Optional<InquiryDetailDTO> selectInquiryDetail(Long postId);
