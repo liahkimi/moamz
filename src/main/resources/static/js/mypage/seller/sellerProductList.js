@@ -57,11 +57,66 @@ function loadProductList(status, page = 1) {
 
             // 상품 목록 초기화
             productListContainer.innerHTML = ``;
-
+/*
+data.forEach(productListDTO => {
+                const productElement =
+                    <li class="product-list" data-id="${productListDTO.productId}">
+                        <div class="product-title-wrap">
+                            <div class="product-name">${productListDTO.productName}</div>
+                            <div class="btn-wrap">
+                                ${status === 'onSale' ? <button type="button" class="product-completed-btn">판매종료</button> : ''}
+                                <button type="button" class="product-delete-btn">삭제</button>
+                            </div>
+                        </div>
+                        <div class="product-info-wrap">
+                            <div class="product-item-img" style="background-image: url(/upload_moamz/${productListDTO.productFileRoot}/${productListDTO.productFileUuid}_${productListDTO.productFileName});"></div>
+                            <div class="product-detail-wrap">
+                                <div class="product-item">
+                                    <p class="product-label">카테고리</p>
+                                    <p>${productListDTO.categoryId}</p>
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">상품가격</p>
+                                    <span>${productListDTO.productPrice}</span>원
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">등록수량</p>
+                                    <span>${productListDTO.productStock}</span>
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">중량</p>
+                                    <span>${productListDTO.productWeight}</span>g
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">소비기한</p>
+                                    <span>${productListDTO.productExpDate}</span>까지
+                                </div>
+                                <div class="product-item">
+                                    <p class="product-label">상품등록일</p>
+                                    <span>${productListDTO.productTime}</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="product-item">
+                                    <p class="product-label">상품상세</p>
+                                    <span class="product-detail">${productListDTO.productContent}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="move-to-detail" onclick="location.href='/seller/product/detail/${productListDTO.productId}'">자세히 보러가기 ></p>
+                        </div>
+                    </li>
+                ;
+                productListContainer.innerHTML += productElement;
+            });
+        })
+        .catch(error => console.error('상품 목록을 가져오는 데 실패했습니다:', error));
+ */
             // 각 상품을 html 요소로 생성한다.
             data.productListDTO.forEach(product => {
                 const productElement = `
-                <li class="product-list">
+                <li class="product-list" data-id="${product.productId}">
                     <div class="product-title-wrap">
                         <div class="product-name">${product.productName}</div>
                         <div class="btn-wrap">
@@ -77,9 +132,23 @@ function loadProductList(status, page = 1) {
                             <div class="product-item"><p class="product-label">등록수량</p><span>${product.productStock}</span></div>
                             <div class="product-item"><p class="product-label">중량</p><span>${product.productWeight}</span>g</div>
                             <div class="product-item"><p class="product-label">소비기한</p><span>${product.productExpDate}</span></div>
+                            <div class="product-item">
+                                    <p class="product-label">상품등록일</p>
+                                    <span>${product.productTime}</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="product-item">
+                                    <p class="product-label">상품상세</p>
+                                    <span class="product-detail">${product.productContent}</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </li>`;
+                        <div>
+                            <p class="move-to-detail" onclick="location.href='/seller/product/detail/${product.productId}'">자세히 보러가기 ></p>
+                        </div>
+                    </li>
+                `;
                 productListContainer.innerHTML += productElement;
             });
 
@@ -93,6 +162,7 @@ function loadProductList(status, page = 1) {
 
 //
 // 페이지네이션 업데이트 함수
+//
 function updatePagination(page) {
     // 페이지네이션 컨테이너
     const paginationContainer = document.getElementById('pagination');

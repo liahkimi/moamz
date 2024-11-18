@@ -158,7 +158,6 @@ main {
 .page-a {
     color: #6a6a6a;
 }
-
 .page-a.active {
     color: #CEDD61;
     font-weight: bold;
