@@ -21,8 +21,6 @@ public class SellerMyService {
 
     // 판매자 프로필 가져오기 메서드
     public SellerProfileDTO getSellerProfile(Long businessId, Long userCode) {
-        //businessId = 1L;
-        //userCode = 1L;
 
         // 판매자 프로필 조회
         SellerProfileDTO sellerProfileDTO = sellerMyMapper.selectStoreProfile(userCode);

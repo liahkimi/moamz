@@ -88,16 +88,16 @@ public class SharingController {
     @PostMapping("/update")
     public String updateSharing(SharingModifyDTO sharingModifyDTO,
                                 @RequestParam("postFile") MultipartFile file,
-                                @RequestParam("fileChanged") boolean fileChanged,
-                                RedirectAttributes redirectAttributes) {
+                                @RequestParam("fileChanged") boolean fileChanged) {
         try {
             // 나눔글, 파일 수정 메서드 호출
             sharingBoardService.updateSharing(sharingModifyDTO, file, fileChanged);
-
         } catch (IOException e) {
+            // 파일 처리 중 발생하는 예외를 RuntimeException으로 처리
             throw new RuntimeException(e);
         }
 
+        // 상세 페이지를 반환하기 위해 URL에 postId값 넣기
         Long postId = sharingModifyDTO.getPostId();
         return "redirect:/sharing/detail/" + postId;
     }

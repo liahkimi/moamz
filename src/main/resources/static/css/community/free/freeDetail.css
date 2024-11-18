@@ -57,7 +57,7 @@ main {
     margin-left: auto;
     margin-right: 5px;
 }
-/* 다른사람이 쓴 글일 때 보이는 버튼 */
+/* 다른사람이 쓴 글일 때 보이는 버튼(좋아요, 채팅) */
 .btn-others {
     text-align: right;
     display: flex;
@@ -91,7 +91,7 @@ main {
     cursor: pointer;
     margin-left: 5px;
 }
-/* 내가 쓴 글일때 보이는 버튼 */
+/* 내가 쓴 글일때 보이는 버튼(좋아요, 수정, 삭제) */
 .btn-writer {
     text-align: right;
     display: flex;
