@@ -1,6 +1,8 @@
 package com.example.moamz.controller.mypage.seller;
 
 import com.example.moamz.domain.dto.mypage.seller.ProductListDTO;
+import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.Page;
 import com.example.moamz.service.mypage.seller.SellerMyService;
 import com.example.moamz.service.mypage.seller.SellerProductService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/seller/product")
@@ -29,24 +32,42 @@ public class SellerProductRestController {
 
     // 상품 목록 비동기로 가져오는 메서드
     @GetMapping("/list")
-    public ResponseEntity<List<ProductListDTO>> getProductList(
-            @SessionAttribute(value="fgUserCode", required = false) Long userCode,
-            // 쿼리스트링에서 status값을 받아옴
-            @RequestParam(name = "status", required = false, defaultValue = "onSale") String status) {
-        List<ProductListDTO> productListDTO;
-
+    public ResponseEntity<Map<String, Object>> getProductList(@SessionAttribute(value="fgUserCode", required = false) Long userCode,
+                                                               // 쿼리스트링에서 status값을 받아옴
+                                                               @RequestParam(name = "status", required = false, defaultValue = "onSale") String status,
+                                                               Criteria criteria) {
         // businessId값 가져오기
         Long businessId = sellerMyService.findBusinessId(userCode);
 
+        // 한 페이지에 게시글 5개씩 보이도록 설정
+        criteria.setAmount(5);
+
+        // 결과 리스트, 페이지네이션 변수 정의
+        List<ProductListDTO> productListDTO;
+        int total;
+
+        // 판매 상태에 따라 목록 가져오기
         if ("onSale".equals(status)) {
-            productListDTO = sellerProductService.findOnSales(businessId);    // 판매중 상품 목록
-            System.out.println("💜💜💜DTO : " + productListDTO);
-            return ResponseEntity.ok(productListDTO);
+            productListDTO = sellerProductService.findOnSalesAll(businessId, criteria);    // 판매중 상품 목록
+            // 전체 상품 수
+            total = sellerProductService.findOnsaleTotal(businessId);
         } else {
-            productListDTO = sellerProductService.findNotOnSales(businessId); // 판매완료 상품 목록
-            System.out.println("💜💜💜DTO : " + productListDTO);
-            return ResponseEntity.ok(productListDTO);
+            productListDTO = sellerProductService.findNotOnSalesAll(businessId, criteria); // 판매완료 상품 목록
+            // 전체 상품 수
+            total = sellerProductService.findNotOnsaleTotal(businessId);
         }
+
+        // 페이지
+        Page page = new Page(criteria, total);
+
+        // 응답 객체 정의
+        Map<String, Object> response = new HashMap<>();
+        response.put("page", page);
+        response.put("productListDTO", productListDTO);
+
+        System.out.println("🧡🧡🧡응답객체 " + response);
+        // page 정보, 리스트를 담아서 응답 객체 반환
+        return ResponseEntity.ok(response);
     } // getProductList 끝
 
 
