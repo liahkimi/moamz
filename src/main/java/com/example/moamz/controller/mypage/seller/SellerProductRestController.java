@@ -30,7 +30,10 @@ public class SellerProductRestController {
         this.sellerMyService = sellerMyService;
     }
 
-    // 상품 목록 비동기로 가져오는 메서드
+    //
+    // 상품 목록 <GET 요청>
+    // 페이지네이션 O
+    //
     @GetMapping("/list")
     public ResponseEntity<Map<String, Object>> getProductList(@SessionAttribute(value="fgUserCode", required = false) Long userCode,
                                                                // 쿼리스트링에서 status값을 받아옴
@@ -71,7 +74,9 @@ public class SellerProductRestController {
     } // getProductList 끝
 
 
-    // 상품 상태 변경 메서드
+    //
+    // 상품 상태 변경 <PATCH 요청>
+    //
     @PatchMapping("/status/{productId}")
     public ResponseEntity<Map<String, String>> updateProductStatus(@PathVariable("productId") Long productId) {
         // 응답 결과를 json 객체로 전달하기 위해 Map 사용
@@ -89,8 +94,9 @@ public class SellerProductRestController {
         }
     }
 
-    // 상품 삭제 메서드
-    // 상품 삭제
+    //
+    // 상품 삭제 <DELETE 요청>
+    //
     @DeleteMapping("/delete/{productId}")
     public ResponseEntity<Map<String, String>> deleteProduct(@PathVariable("productId") Long productId) {
         Map<String, String> response = new HashMap<>();

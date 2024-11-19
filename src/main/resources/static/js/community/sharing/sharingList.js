@@ -17,7 +17,6 @@ let currentStatus = 'available';
 
 // 초기 화면에서 나눔 가능 게시글 로드
 loadSharingList('available', 1);
-console.log(pageContainer);
 
 
 
@@ -62,7 +61,9 @@ function loadSharingList(status, page=1) {
                     </li>
                 `;
 
-                // 생성된 html 태그를 리스트 컨테이너에 추가
+            }); //forEach 끝
+
+                // 생성된 html 태그를 ul태그에 추가
                 listContainerUl.innerHTML += listElement;
 
                 // 모든 게시글 목록 숨기기
@@ -75,7 +76,6 @@ function loadSharingList(status, page=1) {
 
                 // 페이지네이션 업데이트
                 updatePagination(page);
-            });
         });
 }
 
