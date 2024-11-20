@@ -67,4 +67,20 @@ public class SellerSalesRestController {
         System.out.println("🧡 response : " + response);
         return ResponseEntity.ok(response);
     }
+
+    // 주문확인 -> 픽업대기 변경 메서드
+    @PatchMapping("/updateReady/{orderId}")
+    public void updateStatusReadyToPickup(@PathVariable("orderId") Long orderId) {
+
+        sellerSalesService.updateStatusReadyToPickup(orderId);
+
+    }
+
+    // 픽업대기 -> 픽업완료 변경 메서드
+    @PatchMapping("/updatePickup/{orderId}")
+    public void updateStatusCompletePickup(@PathVariable("orderId") Long orderId) {
+
+        sellerSalesService.updateStatusCompletePickup(orderId);
+
+    }
 }
