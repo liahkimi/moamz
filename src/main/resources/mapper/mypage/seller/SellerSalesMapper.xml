@@ -55,6 +55,125 @@
         ORDER BY o.FG_ORDER_DATE DESC
     </select>
 
+
+    <!--
+            페이지네이션 O
+    -->
+    <!-- 판매 목록 (주문 확인중 상태) -->
+    <select id="selectCheckOrderAll" parameterType="Criteria" resultType="SalesListDTO">
+    <![CDATA[
+        SELECT orderId, orderDate, productName, orderPerPrice, pickupSchedule,
+               pickupCompleteTime, normalNickname, pickupRequest, pickupStatus,
+               productFileName, productFileRoot, productFileUuid
+        FROM(
+                SELECT o.FG_ORDER_ID AS orderId, o.FG_ORDER_DATE AS orderDate, p.FG_PRODUCT_NAME AS productName,
+                       o.FG_ORDER_PER_PRICE AS orderPerPrice, TO_CHAR(pick.FG_PICKUP_SCHEDULE, 'YYYY/MM/DD HH24:MI') AS pickupSchedule,
+                       TO_CHAR(pick.FG_PICKUP_COMPLETED, 'YYYY/MM/DD HH24:MI') AS pickupCompleteTime, nu.FG_NORMAL_NICKNAME AS normalNickname,
+                       pick.FG_PICKUP_REQUEST AS pickupRequest, pick.FG_PICKUP_STATUS AS pickupStatus,
+                       pf.FG_PRODUCT_FILE_NAME AS productFileName, pf.FG_PRODUCT_FILE_ROOT AS productFileRoot,
+                       pf.FG_PRODUCT_FILE_UUID AS productFileUuid,
+                       ROW_NUMBER() OVER (ORDER BY o.FG_ORDER_DATE DESC, o.FG_ORDER_ID DESC) AS RNUM
+                FROM FG_ORDER o, FG_PRODUCT p, FG_PRODUCT_FILE pf,  FG_PICKUP pick, FG_NORMAL_USER nu
+                WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
+                  AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+                  AND o.FG_USER_CODE = nu.FG_USER_CODE
+                  AND p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+                  AND p.FG_BUSINESS_ID = #{businessId}
+                  AND pick.FG_PICKUP_STATUS = '주문확인중'
+            )
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+          AND RNUM <= #{criteria.page} * #{criteria.amount}
+    ]]>
+    </select>
+
+    <!-- 판매 목록 (픽업 대기중 상태) -->
+    <select id="selectReadyToPickupAll" parameterType="Criteria" resultType="SalesListDTO">
+    <![CDATA[
+        SELECT orderId, orderDate, productName, orderPerPrice, pickupSchedule,
+               pickupCompleteTime, normalNickname, pickupRequest, pickupStatus,
+               productFileName, productFileRoot, productFileUuid
+        FROM(
+                SELECT o.FG_ORDER_ID AS orderId, o.FG_ORDER_DATE AS orderDate, p.FG_PRODUCT_NAME AS productName,
+                       o.FG_ORDER_PER_PRICE AS orderPerPrice, TO_CHAR(pick.FG_PICKUP_SCHEDULE, 'YYYY/MM/DD HH24:MI') AS pickupSchedule,
+                       TO_CHAR(pick.FG_PICKUP_COMPLETED, 'YYYY/MM/DD HH24:MI') AS pickupCompleteTime, nu.FG_NORMAL_NICKNAME AS normalNickname,
+                       pick.FG_PICKUP_REQUEST AS pickupRequest, pick.FG_PICKUP_STATUS AS pickupStatus,
+                       pf.FG_PRODUCT_FILE_NAME AS productFileName, pf.FG_PRODUCT_FILE_ROOT AS productFileRoot,
+                       pf.FG_PRODUCT_FILE_UUID AS productFileUuid,
+                       ROW_NUMBER() OVER (ORDER BY o.FG_ORDER_DATE DESC, o.FG_ORDER_ID DESC) AS RNUM
+                FROM FG_ORDER o, FG_PRODUCT p, FG_PRODUCT_FILE pf,  FG_PICKUP pick, FG_NORMAL_USER nu
+                WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
+                  AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+                  AND o.FG_USER_CODE = nu.FG_USER_CODE
+                  AND p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+                  AND p.FG_BUSINESS_ID = #{businessId}
+                  AND pick.FG_PICKUP_STATUS = '픽업대기중'
+            )
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+          AND RNUM <= #{criteria.page} * #{criteria.amount}
+        ]]>
+    </select>
+
+    <!-- 판매 목록 (픽업 완료 상태) -->
+    <select id="selectCompletePickupAll" parameterType="Criteria" resultType="SalesListDTO">
+    <![CDATA[
+        SELECT orderId, orderDate, productName, orderPerPrice, pickupSchedule,
+               pickupCompleteTime, normalNickname, pickupRequest, pickupStatus,
+               productFileName, productFileRoot, productFileUuid
+        FROM(
+                SELECT o.FG_ORDER_ID AS orderId, o.FG_ORDER_DATE AS orderDate, p.FG_PRODUCT_NAME AS productName,
+                       o.FG_ORDER_PER_PRICE AS orderPerPrice, TO_CHAR(pick.FG_PICKUP_SCHEDULE, 'YYYY/MM/DD HH24:MI') AS pickupSchedule,
+                       TO_CHAR(pick.FG_PICKUP_COMPLETED, 'YYYY/MM/DD HH24:MI') AS pickupCompleteTime, nu.FG_NORMAL_NICKNAME AS normalNickname,
+                       pick.FG_PICKUP_REQUEST AS pickupRequest, pick.FG_PICKUP_STATUS AS pickupStatus,
+                       pf.FG_PRODUCT_FILE_NAME AS productFileName, pf.FG_PRODUCT_FILE_ROOT AS productFileRoot,
+                       pf.FG_PRODUCT_FILE_UUID AS productFileUuid,
+                       ROW_NUMBER() OVER (ORDER BY o.FG_ORDER_DATE DESC, o.FG_ORDER_ID DESC) AS RNUM
+                FROM FG_ORDER o, FG_PRODUCT p, FG_PRODUCT_FILE pf,  FG_PICKUP pick, FG_NORMAL_USER nu
+                WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
+                  AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+                  AND o.FG_USER_CODE = nu.FG_USER_CODE
+                  AND p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+                  AND p.FG_BUSINESS_ID = #{businessId}
+                  AND pick.FG_PICKUP_STATUS = '픽업완료'
+            )
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+          AND RNUM <= #{criteria.page} * #{criteria.amount}
+        ]]>
+    </select>
+
+
+    <!--
+        판매 내역별 총 주문 수 세기
+    -->
+    <!-- 상품준비중인 주문 수 반환 -->
+    <select id="selectCheckOrderTotal" parameterType="Long" resultType="int">
+        SELECT COUNT(o.FG_ORDER_ID)
+        FROM FG_ORDER o, FG_PICKUP pick
+        WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
+        AND o.FG_BUSINESS_ID = #{businessId}
+        AND pick.FG_PICKUP_STATUS = '주문확인중'
+    </select>
+
+    <!-- 픽업대기중인 주문 수 반환 -->
+    <select id="selectReadyToPickupTotal" parameterType="Long" resultType="int">
+        SELECT COUNT(o.FG_ORDER_ID)
+        FROM FG_ORDER o, FG_PICKUP pick
+        WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
+          AND o.FG_BUSINESS_ID = #{businessId}
+          AND pick.FG_PICKUP_STATUS = '픽업대기중'
+    </select>
+
+    <!-- 픽업완료된 주문 수 반환 -->
+    <select id="selectCompletePickupTotal" parameterType="Long" resultType="int">
+        SELECT COUNT(o.FG_ORDER_ID)
+        FROM FG_ORDER o, FG_PICKUP pick
+        WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
+          AND o.FG_BUSINESS_ID = #{businessId}
+          AND pick.FG_PICKUP_STATUS = '픽업완료'
+    </select>
+
+
+
+
     <!-- 픽업 상태 변경 (주문확인중 -> 픽업대기중) -->
     <update id="modifyStatusReadyToPickup" parameterType="Long">
         UPDATE FG_PICKUP

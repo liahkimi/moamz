@@ -207,20 +207,26 @@ main {
     text-align: center;
     line-height: 20px;
 }
-/* 페이지네이션 */
+
+/* 페이지네이션(비동기) */
 .page-box {
     display: flex;
     justify-content: center;
+    padding: 15px 0;
 }
-.page-a {
+/* li 태그 */
+.page-number {
     width: 20px;
     text-align: center;
+}
+/* a태그 */
+.page-a {
     color: #6a6a6a;
 }
-.page-num.active {
+.page-a.active {
     color: #CEDD61;
     font-weight: bold;
 }
-.page-num:hover{
+.page-a:hover{
     text-decoration-line: underline;
 }
