@@ -24,8 +24,10 @@ public class SellerSalesController {
     private final SellerSalesService sellerSalesService;
     private final SellerMyService sellerMyService;
 
-
-    // 판매한 상품 내역 페이지
+    //
+    // 판매 내역 <GET 요청>
+    // 판매자 프로필만 전달함. 판매 내역은 RestController에서 처리
+    //
     @GetMapping("/list")
     public String salesList(@SessionAttribute(value="fgUserCode", required = false) Long userCode,
                             Model model) {
@@ -41,16 +43,15 @@ public class SellerSalesController {
         SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(businessId, userCode);
 
         // 상품 준비 상태별 판매 목록 가져오기
-        List<SalesListDTO> readyList = sellerSalesService.findCheckOrder(businessId);
-        List<SalesListDTO> pickupList = sellerSalesService.findReadyToPickUp(businessId);
-        List<SalesListDTO> completedList = sellerSalesService.findCompletePickup(businessId);
+//        List<SalesListDTO> readyList = sellerSalesService.findCheckOrder(businessId);
+//        List<SalesListDTO> pickupList = sellerSalesService.findReadyToPickUp(businessId);
+//        List<SalesListDTO> completedList = sellerSalesService.findCompletePickup(businessId);
 
         // 모델에 추가
         model.addAttribute("sellerProfileDTO", sellerProfileDTO);
-        model.addAttribute("readyList", readyList);
-        model.addAttribute("pickupList", pickupList);
-        model.addAttribute("completedList", completedList);
-        //log.info("💜💜💜salesListDTO : {}", salesListDTO);
+//        model.addAttribute("readyList", readyList);
+//        model.addAttribute("pickupList", pickupList);
+//        model.addAttribute("completedList", completedList);
 
         return "mypage/seller/sellerSalesHistory";
     }

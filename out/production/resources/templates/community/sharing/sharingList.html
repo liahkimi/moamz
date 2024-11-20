@@ -57,108 +57,32 @@
                 <!-- 나눔가능 -->
                 <div id="sharing-available-list" class="sharing-list-container">
                     <ul>
-                        <li class="sharing-card-view" th:each="availableList : ${availableList}" th:onclick="|location.href='/sharing/detail/' + ${availableList.postId}|">
-                            <img th:src="@{'/upload_moamz/' + ${availableList.postFileRoot} + '/' + ${availableList.postFileUuid}
-                                                + '_' + ${availableList.postFileName}}" alt="나눔물품 이미지">
-                            <div class="sharing-title" th:text="${availableList.postTitle}">나눔글 제목</div>
-                            <div class="sharing-wrap">
-                                <div class="sharing-nickname" th:text="${availableList.normalNickname}">닉네임</div>
-                                <div class="sharing-status available" th:text="${availableList.sharingStatus}">나눔상태</div>
-                            </div>
-                        </li>
+<!--                        <li class="sharing-card-view" th:each="availableList : ${availableList}" th:onclick="|location.href='/sharing/detail/' + ${availableList.postId}|">-->
+<!--                            <img th:src="@{'/upload_moamz/' + ${availableList.postFileRoot} + '/' + ${availableList.postFileUuid}-->
+<!--                                                + '_' + ${availableList.postFileName}}" alt="나눔물품 이미지">-->
+<!--                            <div class="sharing-title" th:text="${availableList.postTitle}">나눔글 제목</div>-->
+<!--                            <div class="sharing-wrap">-->
+<!--                                <div class="sharing-nickname" th:text="${availableList.normalNickname}">닉네임</div>-->
+<!--                                <div class="sharing-status available" th:text="${availableList.sharingStatus}">나눔상태</div>-->
+<!--                            </div>-->
+<!--                        </li>-->
                     </ul>
                 </div>
 
                  <!-- 예약중 -->
                  <div id="sharing-reserved-list" class="sharing-list-container hidden">
                     <ul>
-                        <li class="sharing-card-view" th:each="reservedList : ${reservedList}" th:onclick="|location.href='/sharing/detail/' + ${reservedList.postId}|">
-                            <img th:src="@{'/upload_moamz/' + ${reservedList.postFileRoot} + '/' + ${reservedList.postFileUuid}
-                                                + '_' + ${reservedList.postFileName}}" alt="나눔물품 이미지">
-                            <div class="sharing-title" th:text="${reservedList.postTitle}">나눔글 제목</div>
-                            <div class="sharing-wrap">
-                                <div class="sharing-nickname" th:text="${reservedList.normalNickname}">닉네임</div>
-                                <div class="sharing-status reserved" th:text="${reservedList.sharingStatus}">상태</div>
-                            </div>
-                        </li>
                     </ul>
                 </div>
 
                 <!-- 나눔완료 -->
                 <div id="sharing-completed-list" class="sharing-list-container hidden">
                     <ul>
-                        <li class="sharing-card-view" th:each="completedList : ${completedList}" th:onclick="|location.href='/sharing/detail/' + ${completedList.postId}|">
-                            <img th:src="@{'/upload_moamz/' + ${completedList.postFileRoot} + '/' + ${completedList.postFileUuid}
-                                                + '_' + ${completedList.postFileName}}" alt="나눔물품 이미지">
-                            <div class="sharing-title" th:text="${completedList.postTitle}">제목</div>
-                            <div class="sharing-wrap">
-                                <div class="sharing-nickname" th:text="${completedList.normalNickname}">닉네임</div>
-                                <div class="sharing-status completed" th:text="${completedList.sharingStatus}">상태</div>
-                            </div>
-                        </li>
                     </ul>
                 </div>
-                <!-- 나눔 가능 페이지네이션 -->
-                <div class="page-container available">
-                    <ul class="page-box">
-                        <a th:href="@{/sharing/list(page=${avPage.startPage - 1})}" class="page-a" th:if="${avPage.prev}">
-                            <li class="page-num prev">&lt</li>
-                        </a>
-
-                        <!--  th:block  화면에 영향을 주지 않는 태그
-                              시작 페이지와 종료 페이지를 구분하기 위해서 사용한다.
-                        -->
-                        <th:block th:each="i : ${#numbers.sequence(avPage.startPage, avPage.endPage)}">
-                            <a th:href="@{/sharing/list(page=${i})}" class="page-a">
-                                <li class="page-num" th:classappend="${i == avPage.criteria.page ? 'active' : ''}"
-                                    th:text="${i}"></li>
-                            </a>
-                        </th:block>
-                        <a th:href="@{/sharing/list(page=${avPage.endPage + 1})}" class="page-a" th:if="${avPage.next}">
-                            <li class="page-num next">&gt</li>
-                        </a>
-                    </ul>
-                </div>
-                <!-- 예약중 페이지네이션 -->
-                <div class="page-container reserved hidden">
-                    <ul class="page-box">
-                        <a th:href="@{/sharing/list(page=${rePage.startPage - 1})}" class="page-a" th:if="${rePage.prev}">
-                            <li class="page-num prev">&lt</li>
-                        </a>
-
-                        <!--  th:block  화면에 영향을 주지 않는 태그
-                              시작 페이지와 종료 페이지를 구분하기 위해서 사용한다.
-                        -->
-                        <th:block th:each="i : ${#numbers.sequence(rePage.startPage, rePage.endPage)}">
-                            <a th:href="@{/sharing/list(page=${i})}" class="page-a">
-                                <li class="page-num" th:classappend="${i == rePage.criteria.page ? 'active' : ''}"
-                                    th:text="${i}"></li>
-                            </a>
-                        </th:block>
-                        <a th:href="@{/sharing/list(page=${rePage.endPage + 1})}" class="page-a" th:if="${rePage.next}">
-                            <li class="page-num next">&gt</li>
-                        </a>
-                    </ul>
-                </div>
-                <!-- 나눔완료 페이지네이션 -->
-                <div class="page-container completed hidden">
-                    <ul class="page-box">
-                        <a th:href="@{/sharing/list(page=${comPage.startPage - 1})}" class="page-a" th:if="${comPage.prev}">
-                            <li class="page-num prev">&lt</li>
-                        </a>
-
-                        <!--  th:block  화면에 영향을 주지 않는 태그
-                              시작 페이지와 종료 페이지를 구분하기 위해서 사용한다.
-                        -->
-                        <th:block th:each="i : ${#numbers.sequence(comPage.startPage, comPage.endPage)}">
-                            <a th:href="@{/sharing/list(page=${i})}" class="page-a">
-                                <li class="page-num" th:classappend="${i == comPage.criteria.page ? 'active' : ''}"
-                                    th:text="${i}"></li>
-                            </a>
-                        </th:block>
-                        <a th:href="@{/sharing/list(page=${comPage.endPage + 1})}" class="page-a" th:if="${comPage.next}">
-                            <li class="page-num next">&gt</li>
-                        </a>
+                <!-- 페이지네이션 -->
+                <div class="page-container">
+                    <ul class="page-box"  id="pagination">
                     </ul>
                 </div>
             </div>

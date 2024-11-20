@@ -14,7 +14,8 @@ public class FreeLikeDTO {
     // 자유게시판 좋아요 DTO
     //
 
+    private Long likeId;      // 좋아요ID
     private Long userCode;    // 사용자CODE
     private Long postId;      // 게시물ID
-    private boolean isLiked;  // 좋아요 여부 반환 필드
+
 }
