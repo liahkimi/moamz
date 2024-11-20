@@ -31,7 +31,7 @@ public class EcoProjectController {
     private final PostService postService;
     private final PostFileService postFileService;
 
-    @GetMapping("/list")
+    @GetMapping("/projectList")
     public String projectList(Model model, Criteria criteria) {
         criteria.setAmount(2);
         List<EcoProjectListDTO> ecoProjectList = ecoProjectService.showEcoPage(criteria);

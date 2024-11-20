@@ -58,12 +58,12 @@ $(document).ready(function() {
 
 // 모든 삭제 버튼에 대해 클릭 이벤트 추가
 $('.cart-delete').each(function () {
-    let fgCartDetailId = $(this).data('fg-cart-detail-id'); // data-id 값 가져오기
+    let fgCartDetailId = $(this).data('fg-cart-detail-id'); // data-값 가져오기
 
     $(this).on('click', function () {
         let isConfirmed = confirm("삭제할까요?");
         if (isConfirmed) {
-            console.log(fgCartDetailId); // 각 data-id 값 출력
+            console.log(fgCartDetailId); // 각 data- 값 출력
 
             $.ajax({
                 url: `http://localhost:9999/shop/cart/delete/` + fgCartDetailId,

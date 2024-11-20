@@ -20,7 +20,8 @@ public class ShopRestController {
         try {
             productService.removeCartDetail(fgCartDetailId);
             return ResponseEntity.ok("삭제 완료");
-        } catch (Exception e) {
+        } catch (InternalError e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("삭제 실패: " + e.getMessage());
         }
