@@ -24,44 +24,47 @@ completedMenu.addEventListener('click', () => {
 });
 
 
+
+
+
 ///////////////////////////////////////////////////
 //// 상품 목록 불러오기 비동기 처리
 
-// 페이지 처음 로드했을 때 판매중인 상품 목록이 보여야 함
+// 현재 페이지, 상품 상태 초기화
+let currentPage = 1;
+let currentStatus = 'onSale';
+
+// 초기 상품 목록 로드
 loadProductList('onSale');
 
-// 상품 목록 비동기 처리 함수
-function loadProductList(status) {
-    // onSale 메뉴이면 ongoing-product-list
-    // 아니면 completed-product-list에 목록 추가
-    const productListContainer = document.getElementById(status === 'onSale'
-        ? 'ongoing-product-list' : 'completed-product-list');
+//
+// 상품 목록 로드 함수 (페이지 지정을 하지 않을 경우 default = 1)
+//
+function loadProductList(status, page = 1) {
+    currentPage = page;
+    currentStatus = status;
 
-    // ajax 요청으로 상품 목록 가져오기
-    fetch(`/api/seller/product/list?status=${status}`, {
+    // 페이지네이션을 포함한 상품 목록 요청
+    fetch(`/api/seller/product/list?status=${status}&page=${page}`, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json', },
+        headers: { 'Content-Type': 'application/json' },    // 요청 헤더에 json 타입 설정
     })
-        .then(response => {
-            // 네트워크 응답상태 확인
-            if (!response.ok) {
-                throw new Error('❌❌❌❌❌네트워크 응답 에러');
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            // 기존 목록 초기화
-            productListContainer.innerHTML = '';
+            // 상품 상태(status 변수 의 값)에 따라
+            // 보여질 상품 목록 컨테이너를 동적으로 결정한다.
+            const productListContainer = document.getElementById(status === 'onSale' ? 'ongoing-product-list' : 'completed-product-list');
 
-            // 컨트롤러에서 받아온 productListDTO를 DOM에 뿌리기
-            // 판매 종료 버튼은 completed-product-list에만 보여야 한다.
-            data.forEach(productListDTO => {
-                const productElement = `
+            // 상품 목록 초기화
+            productListContainer.innerHTML = ``;
+/*
+data.forEach(productListDTO => {
+                const productElement =
                     <li class="product-list" data-id="${productListDTO.productId}">
                         <div class="product-title-wrap">
                             <div class="product-name">${productListDTO.productName}</div>
                             <div class="btn-wrap">
-                                ${status === 'onSale' ? `<button type="button" class="product-completed-btn">판매종료</button>` : ''}
+                                ${status === 'onSale' ? <button type="button" class="product-completed-btn">판매종료</button> : ''}
                                 <button type="button" class="product-delete-btn">삭제</button>
                             </div>
                         </div>
@@ -104,12 +107,153 @@ function loadProductList(status) {
                             <p class="move-to-detail" onclick="location.href='/seller/product/detail/${productListDTO.productId}'">자세히 보러가기 ></p>
                         </div>
                     </li>
-                `;
+                ;
                 productListContainer.innerHTML += productElement;
             });
         })
         .catch(error => console.error('상품 목록을 가져오는 데 실패했습니다:', error));
+ */
+            // 각 상품을 html 요소로 생성한다.
+            data.productListDTO.forEach(product => {
+                const productElement = `
+                <li class="product-list" data-id="${product.productId}">
+                    <div class="product-title-wrap">
+                        <div class="product-name">${product.productName}</div>
+                        <div class="btn-wrap">
+                            ${status === 'onSale' ? `<button type="button" class="product-completed-btn">판매종료</button>` : ''}
+                            <button type="button" class="product-delete-btn">삭제</button>
+                        </div>
+                    </div>
+                    <div class="product-info-wrap">
+                        <div class="product-item-img" style="background-image: url(/upload_moamz/${product.productFileRoot}/${product.productFileUuid}_${product.productFileName});"></div>
+                        <div class="product-detail-wrap">
+                            <div class="product-item"><p class="product-label">카테고리</p><p>${product.categoryId}</p></div>
+                            <div class="product-item"><p class="product-label">상품가격</p><span>${product.productPrice}</span>원</div>
+                            <div class="product-item"><p class="product-label">등록수량</p><span>${product.productStock}</span></div>
+                            <div class="product-item"><p class="product-label">중량</p><span>${product.productWeight}</span>g</div>
+                            <div class="product-item"><p class="product-label">소비기한</p><span>${product.productExpDate}</span></div>
+                            <div class="product-item">
+                                    <p class="product-label">상품등록일</p>
+                                    <span>${product.productTime}</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="product-item">
+                                    <p class="product-label">상품상세</p>
+                                    <span class="product-detail">${product.productContent}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="move-to-detail" onclick="location.href='/seller/product/detail/${product.productId}'">자세히 보러가기 ></p>
+                        </div>
+                    </li>
+                `;
+                productListContainer.innerHTML += productElement;
+            });
+
+            // 페이지네이션 정보를 업데이트하는 함수 호출
+            updatePagination(data.page);
+        })
+        .catch(error => {
+            console.error('상품 목록 로딩 실패:', error);
+        });
 }
+
+//
+// 페이지네이션 업데이트 함수
+//
+function updatePagination(page) {
+    // 페이지네이션 컨테이너
+    const paginationContainer = document.getElementById('pagination');
+    // 페이지네이션 초기화
+    paginationContainer.innerHTML = '';
+
+    // 이전 페이지 버튼
+    if (page.prev) {    // 이전 페이지가 존재하는 경우
+        // a 태그(이전 페이지 링크)를 생성하고 링크 주소를 #으로 설정한다.
+        const prevPage = document.createElement('a');
+        prevPage.href = '#';
+
+        // a 태그에 클래스를 추가한다.
+        prevPage.classList.add('page-a');
+
+        // < 값 설정
+        prevPage.innerHTML = `&lt;`;
+
+        // 이전 페이지 버튼을 클릭했을 때 로드할 페이지 지정
+        prevPage.onclick = () => loadProductList(currentStatus, page.startPage - 1);
+
+        // 이전 페이지 버튼 생성
+        const prevButton = document.createElement('li');
+        // li 태그에 클래스를 추가한다.
+        prevButton.classList.add('page-number');
+
+        // 생성한 이전 페이지 링크를 li태그(버튼)에 추가한다.
+        prevButton.appendChild(prevPage);
+
+        // 페이지네이션 컨테이너에 이전 페이지 버튼을 추가한다.
+        paginationContainer.appendChild(prevButton);
+    }
+
+    // 페이지 번호 생성 (시작페이지 ~ 끝페이지를 반복)
+    for (let i = page.startPage; i <= page.endPage; i++) {
+        // 각 페이지 번호를 표시하는 li태그 생성하고 클래스 지정하기
+        const pageItem = document.createElement('li');
+        pageItem.classList.add('page-number');
+
+        // 페이지 번호 링크 설정하고 링크 주소를 #으로 설정
+        const pageLink = document.createElement('a');
+        pageLink.href = '#';
+        pageLink.classList.add('page-a');
+
+        // 현재 페이지일 때 active 클래스 설정
+        if (i === page.criteria.page) {
+            pageLink.classList.add('active');
+        }
+
+
+        // 페이지 번호를 나타내는 텍스트
+        pageLink.textContent = i;
+
+        // 각 페이지를 표시하는 li클래스를 클릭했을 때 보여줄 페이지 설정
+        pageLink.onclick = () => loadProductList(currentStatus, i);
+
+        // 생성한 링크를 li태그(페이지 번호 버튼)에 추가
+        pageItem.appendChild(pageLink);
+
+        // 페이지네이션 컨테이너에 페이지 번호 추가
+        paginationContainer.appendChild(pageItem);
+    }
+
+    // 다음 페이지 버튼
+    if (page.next) {    // 다음 페이지가 존재하는 경우
+        // 다음 페이지 링크를 생성하고 링크 주소를 #으로 설정한다.
+        const nextPage = document.createElement('a');
+        nextPage.href = '#';
+
+        // a태그에 클래스 추가
+        nextPage.classList.add('page-a');
+
+        // < 값 설정
+        nextPage.innerHTML = `&gt;`;
+
+        // 다음 페이지 버튼을 클릭했을 때 보여줄 페이지 지정
+        nextPage.onclick = () => loadProductList(currentStatus, page.endPage + 1);
+
+        // 다음 페이지 버튼을 li 태그로 생성하고 클래스를 추가한다.
+        const nextButton = document.createElement('li');
+        nextButton.classList.add('page-number');
+
+        // 다음 페이지 버튼에 링크를 추가한다.
+        nextButton.appendChild(nextPage);
+
+        // 페이지네이션 영역에 다음 페이지 버튼을 추가한다.
+        paginationContainer.appendChild(nextButton);
+    }
+}
+
+
 
 
 ///////////////////////////////////////////////////

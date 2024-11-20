@@ -43,6 +43,9 @@ main {
     cursor: pointer;
 }
 /* 문의 리스트 */
+.inquiry-list-container {
+    min-height: 900px;
+}
 .inquiry-list {
     display: flex;
     align-items: center;
@@ -89,4 +92,23 @@ main {
 }
 .hidden {
     display: none;
+}
+
+/* 페이지네이션 */
+.page-box {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+.page-a {
+    width: 20px;
+    text-align: center;
+    color: #6a6a6a;
+}
+.page-num.active {
+    color: #CEDD61;
+    font-weight: bold;
+}
+.page-num:hover{
+    text-decoration-line: underline;
 }

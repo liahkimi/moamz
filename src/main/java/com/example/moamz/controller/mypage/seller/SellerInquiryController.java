@@ -5,6 +5,8 @@ import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryCommentDTO;
 import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryDetailDTO;
 import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryListDTO;
 import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryWriteDTO;
+import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.Page;
 import com.example.moamz.mapper.mypage.seller.SellerInquiryMapper;
 import com.example.moamz.service.mypage.seller.SellerInquiryService;
 import com.example.moamz.service.mypage.seller.SellerMyService;
@@ -38,6 +40,7 @@ public class SellerInquiryController {
     // 문의글 목록 페이지 열기
     @GetMapping("/list")
     public String list(@SessionAttribute(value="fgUserCode", required=false) Long userCode,
+                        Criteria criteria,
                         Model model) {
         // 세션에 userCode가 null이면 로그인 페이지로 리다이렉트
         if(userCode == null) {
@@ -50,15 +53,21 @@ public class SellerInquiryController {
         // 판매자 프로필 가져오기
         SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(userCode, businessCode);
 
-        // 목록 가져오기 메서드
-        List<InquiryListDTO> inquiryList = sellerInquiryService.findInquiryList(userCode);
+        // 한 페이지에 게시글 20개씩 보이도록 설정
+        criteria.setAmount(20);
+
+        // 페이징을 포함한 목록 반환
+        List<InquiryListDTO> inquiryList = sellerInquiryService.findInquiryListAll(userCode, criteria);
+        // 전체 문의글 수
+        int total = sellerInquiryService.findTotal(userCode);
+        Page page = new Page(criteria, total);
 
         // 모델에 문의글 목록, 판매자 프로필 추가해서 뷰로 전달
+        model.addAttribute("page", page);
         model.addAttribute("inquiryList", inquiryList);
         model.addAttribute("sellerProfileDTO", sellerProfileDTO);
 
-        return userCode==null ? "redirect:/seller/seller/sellerLogin" :
-                "mypage/seller/sellerAdminInquiryList";
+        return "mypage/seller/sellerAdminInquiryList";
     }
 
     // 문의글 등록 post 요청 처리

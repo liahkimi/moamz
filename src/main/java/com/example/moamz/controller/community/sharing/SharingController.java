@@ -88,16 +88,16 @@ public class SharingController {
     @PostMapping("/update")
     public String updateSharing(SharingModifyDTO sharingModifyDTO,
                                 @RequestParam("postFile") MultipartFile file,
-                                @RequestParam("fileChanged") boolean fileChanged,
-                                RedirectAttributes redirectAttributes) {
+                                @RequestParam("fileChanged") boolean fileChanged) {
         try {
             // 나눔글, 파일 수정 메서드 호출
             sharingBoardService.updateSharing(sharingModifyDTO, file, fileChanged);
-
         } catch (IOException e) {
+            // 파일 처리 중 발생하는 예외를 RuntimeException으로 처리
             throw new RuntimeException(e);
         }
 
+        // 상세 페이지를 반환하기 위해 URL에 postId값 넣기
         Long postId = sharingModifyDTO.getPostId();
         return "redirect:/sharing/detail/" + postId;
     }
@@ -123,51 +123,10 @@ public class SharingController {
 
     //
     // 게시글 목록 <GET>
+    // 나눔 게시글 상태별 목록 제공은 restController에서 수행
     //
-//    @GetMapping("/list")
-//    public String sharingList(Model model) {
-//
-//        // 나눔 상태별 게시글 목록 가져오기
-//        List<SharingListDTO> availableList = sharingBoardService.findAvailableList();
-//        List<SharingListDTO> reservedList = sharingBoardService.findReservedList();
-//        List<SharingListDTO> completedList = sharingBoardService.findCompletedList();
-//
-//        // 모델에 추가
-//        model.addAttribute("availableList", availableList);
-//        model.addAttribute("reservedList", reservedList);
-//        model.addAttribute("completedList", completedList);
-//
-//        return "/community/sharing/sharingList";
-//    }
     @GetMapping("/list")
     public String sharingList(Criteria criteria, Model model) {
-        // 한 페이지에 게시글 9개씩 보이도록 설정
-        criteria.setAmount(9);
-
-        // 나눔 상태별 게시글 목록 가져오기 (페이징 포함)
-        List<SharingListDTO> availableList  = sharingBoardService.findAvailableListAll(criteria);
-        List<SharingListDTO> reservedList = sharingBoardService.findReservedListAll(criteria);
-        List<SharingListDTO> completedList = sharingBoardService.findCompletedListAll(criteria);
-
-        // 나눔 상태별 전체 게시글 수
-        int availableTotal = sharingBoardService.findAvailableTotal();
-        int reservedTotal = sharingBoardService.findReservedTotal();
-        int completedTotal = sharingBoardService.findCompletedTotal();
-
-        // 페이지 수
-        Page avPage = new Page(criteria, availableTotal);
-        Page rePage = new Page(criteria, reservedTotal);
-        Page comPage = new Page(criteria, completedTotal);
-
-        // 모델에 추가
-        model.addAttribute("avPage", avPage);
-        model.addAttribute("rePage", rePage);
-        model.addAttribute("comPage", comPage);
-
-        model.addAttribute("availableList", availableList);
-        model.addAttribute("reservedList", reservedList);
-        model.addAttribute("completedList", completedList);
-
         return "/community/sharing/sharingList";
     }
 
