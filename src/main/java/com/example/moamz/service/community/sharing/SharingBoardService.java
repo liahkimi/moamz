@@ -6,8 +6,6 @@ import com.example.moamz.domain.dto.community.sharing.SharingListDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingModifyDTO;
 import com.example.moamz.domain.dto.community.sharing.SharingWriteDTO;
 import com.example.moamz.domain.dto.file.PostFileDTO;
-import com.example.moamz.domain.dto.file.ProductFileDTO;
-import com.example.moamz.domain.dto.mypage.seller.ProductRegistDTO;
 import com.example.moamz.mapper.community.PostMapper;
 import com.example.moamz.mapper.community.sharing.SharingBoardMapper;
 import com.example.moamz.mapper.file.PostFileMapper;
@@ -95,18 +93,16 @@ public class SharingBoardService {
     public void updateSharing(SharingModifyDTO sharingModifyDTO,
                               MultipartFile file,
                               boolean fileChanged) throws IOException {
-        // 게시글 수정
+        // 게시글 수정 쿼리문 실행
         sharingBoardMapper.modifyPost(sharingModifyDTO);
+        // 게시글 수정 여부 update
         sharingBoardMapper.modifySharing(sharingModifyDTO);
 
         // postId값 변수에 저장
         Long postId = sharingModifyDTO.getPostId();
 
-        log.info("💛💛💛 파일 수정여부 {}", fileChanged);
-
         // 이미지 파일이 변경되었을 때만 파일 삭제 후 재등록 한다.
         if (fileChanged) {
-            System.out.println("💛💛💛 여기 실행됨???");
             postFileMapper.deleteFile(postId);  // 기존 파일 삭제
 
             if (!file.isEmpty()) {              // 새 파일이 있을 때만 삽입
@@ -115,8 +111,6 @@ public class SharingBoardService {
                 postFileMapper.insertFile(postFileDTO);     // 파일 테이블에 새로운 파일 삽입
             }
         }
-
-
     }// updateSharing 메서드 끝
 
 

@@ -6,10 +6,12 @@ import com.example.moamz.domain.dto.mypage.seller.ProductListDTO;
 import com.example.moamz.domain.dto.mypage.seller.ProductRegistDTO;
 import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryDetailDTO;
 import com.example.moamz.domain.dto.mypage.seller.inquiry.InquiryListDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.mapper.file.ProductFileMapper;
 import com.example.moamz.mapper.mypage.seller.SellerProductMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,6 +93,26 @@ public class SellerProductService {
     // 3️⃣ 판매 종료 상품 목록 가져오기 메서드
     public List<ProductListDTO> findNotOnSales(Long businessId) {
         return sellerProductMapper.selectNotOnSales(businessId);
+    }
+
+    // 2️⃣-1. 판매중인 상품 목록 가져오기 메서드 (페이지네이션O)
+    public List<ProductListDTO> findOnSalesAll(@Param("businessId") Long businessId, @Param("criteria") Criteria criteria) {
+        return sellerProductMapper.selectOnSalesAll(businessId, criteria);
+    }
+
+    // 3️⃣-1. 판매 종료 상품 목록 가져오기 메서드 (페이지네이션O)
+    public List<ProductListDTO> findNotOnSalesAll(@Param("businessId") Long businessId, @Param("criteria") Criteria criteria) {
+        return sellerProductMapper.selectNotOnSalesAll(businessId, criteria);
+    }
+
+    // 2️⃣-2. 판매중인 상품 수 세는 메서드
+    public int findOnsaleTotal(Long businessId) {
+        return sellerProductMapper.selectOnsaleTotal(businessId);
+    }
+
+    // 3️⃣-2. 판매 종료 상품 수 세는 메서드
+    public int findNotOnsaleTotal(Long businessId) {
+        return sellerProductMapper.selectNotOnsaleTotal(businessId);
     }
 
     // 4️⃣ 상품 판매상태 변경 메서드
