@@ -50,6 +50,81 @@
         ORDER BY FG_PRODUCT_TIME DESC
     </select>
 
+    <!--
+            페이지네이션
+    -->
+    <!-- 등록한 상품 목록(판매중, 페이지네이션) -->
+    <select id="selectOnSalesAll" parameterType="Criteria" resultType="ProductListDTO">
+    <![CDATA[
+        SELECT productId, productName, categoryId, productPrice, productStock, productWeight,
+               productExpDate, productTime, productContent,
+               productFileId, productFileName, productFileRoot, productFileUuid
+        FROM (
+            SELECT p.FG_PRODUCT_ID AS productId, p.FG_PRODUCT_NAME AS productName, c.FG_CATEGORY_NAME AS categoryId,
+                   p.FG_PRODUCT_PRICE AS productPrice, p.FG_PRODUCT_STOCK AS productStock,
+                   p.FG_PRODUCT_WEIGHT AS productWeight,
+                   TO_CHAR(p.FG_PRODUCT_EXP_DATE, 'YYYY/MM/DD HH24:MI') AS productExpDate,
+                   TO_CHAR(p.FG_PRODUCT_TIME, 'YYYY/MM/DD') AS productTime,
+                   p.FG_PRODUCT_CONTENT AS productContent,
+                   pf.FG_PRODUCT_FILE_ID AS productFileId, pf.FG_PRODUCT_FILE_NAME AS productFileName,
+                   pf.FG_PRODUCT_FILE_ROOT AS productFileRoot, pf.FG_PRODUCT_FILE_UUID AS productFileUuid,
+                   ROW_NUMBER() OVER (ORDER BY p.FG_PRODUCT_TIME DESC, p.FG_PRODUCT_ID DESC) AS RNUM
+            FROM FG_PRODUCT p, FG_CATEGORY c, FG_PRODUCT_FILE pf
+            WHERE p.FG_CATEGORY_ID = c.FG_CATEGORY_ID
+              AND p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+              AND p.FG_PRODUCT_STATUS = '판매중'
+              AND p.FG_BUSINESS_ID = #{businessId}
+        )
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+          AND RNUM <= #{criteria.page} * #{criteria.amount}
+        ]]>
+    </select>
+
+    <!-- 등록한 상품 목록(판매종료, 페이지네이션) -->
+    <select id="selectNotOnSalesAll" parameterType="Criteria" resultType="ProductListDTO">
+    <![CDATA[
+        SELECT productId, productName, categoryId, productPrice, productStock, productWeight,
+               productExpDate, productTime, productContent,
+               productFileId, productFileName, productFileRoot, productFileUuid
+        FROM (
+                 SELECT p.FG_PRODUCT_ID AS productId, p.FG_PRODUCT_NAME AS productName, c.FG_CATEGORY_NAME AS categoryId,
+                        p.FG_PRODUCT_PRICE AS productPrice, p.FG_PRODUCT_STOCK AS productStock,
+                        p.FG_PRODUCT_WEIGHT AS productWeight,
+                        TO_CHAR(p.FG_PRODUCT_EXP_DATE, 'YYYY/MM/DD HH24:MI') AS productExpDate,
+                        TO_CHAR(p.FG_PRODUCT_TIME, 'YYYY/MM/DD') AS productTime,
+                        p.FG_PRODUCT_CONTENT AS productContent,
+                        pf.FG_PRODUCT_FILE_ID AS productFileId, pf.FG_PRODUCT_FILE_NAME AS productFileName,
+                        pf.FG_PRODUCT_FILE_ROOT AS productFileRoot, pf.FG_PRODUCT_FILE_UUID AS productFileUuid,
+                        ROW_NUMBER() OVER (ORDER BY p.FG_PRODUCT_TIME DESC, p.FG_PRODUCT_ID DESC) AS RNUM
+                 FROM FG_PRODUCT p, FG_CATEGORY c, FG_PRODUCT_FILE pf
+                 WHERE p.FG_CATEGORY_ID = c.FG_CATEGORY_ID
+                   AND p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+                   AND p.FG_PRODUCT_STATUS = '판매종료'
+                   AND p.FG_BUSINESS_ID = #{businessId}
+             )
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+          AND RNUM <= #{criteria.page} * #{criteria.amount}
+        ]]>
+    </select>
+
+    <!-- 상품 수 반환(판매중) -->
+    <select id="selectOnsaleTotal" parameterType="Long" resultType="int">
+        SELECT COUNT(FG_PRODUCT_ID)
+        FROM FG_PRODUCT
+        WHERE FG_BUSINESS_ID = #{businessId}
+          AND FG_PRODUCT_STATUS = '판매중'
+    </select>
+
+    <!-- 상품 수 반환(판매종료) -->
+    <select id="selectNotOnsaleTotal" parameterType="Long" resultType="int">
+        SELECT COUNT(FG_PRODUCT_ID)
+        FROM FG_PRODUCT
+        WHERE FG_BUSINESS_ID = #{businessId}
+          AND FG_PRODUCT_STATUS = '판매종료'
+    </select>
+
+
+
     <!-- 상품 판매상태 변경 -->
     <update id="modifyProductStatus" parameterType="Long">
         UPDATE FG_PRODUCT

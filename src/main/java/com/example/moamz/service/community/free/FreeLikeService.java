@@ -24,20 +24,21 @@ public class FreeLikeService {
     }
 
     // 좋아요 추가 메서드
-    public void likePost(Long userCode, Long postId) {
+    public void likePost(@Param("userCode") Long userCode, @Param("postId") Long postId) {
         // DTO 생성
         FreeLikeDTO freeLikeDTO = new FreeLikeDTO();
         freeLikeDTO.setUserCode(userCode);
         freeLikeDTO.setPostId(postId);
-
+        System.out.println("🧡🧡🧡좋아여 : " + freeLikeDTO);
         // 좋아요 추가
         freeLikeMapper.insertLike(freeLikeDTO);
+
         // 게시물 좋아요 수 증가
         freeLikeMapper.increaseLike(postId);
     }
 
     // 좋아요 삭제 메서드
-    public void UnlikePost(Long userCode, Long postId) {
+    public void unlikePost(@Param("userCode") Long userCode, @Param("postId") Long postId) {
         // 좋아요 삭제
         freeLikeMapper.deleteLike(userCode, postId);
         // 게시물 좋아요 수 감소
