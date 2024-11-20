@@ -24,7 +24,6 @@
     </select>
 
     <!-- 판매자 프로필 -->
-
     <select id="selectStoreProfile" parameterType="Long" resultType="SellerProfileDTO">
         SELECT uf.FG_USER_FILE_NAME AS userFileName,
                uf.FG_USER_FILE_ROOT AS userFileRoot,
@@ -56,6 +55,36 @@
           AND rv.FG_ORDER_ID = o.FG_ORDER_ID
           AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
           AND rv.FG_BUSINESS_ID = #{businessId}
+    </select>
+
+    <!-- 업체 리뷰 조회 (페이징O) -->
+    <select id="selectMyStoreRvAll" parameterType="Criteria" resultType="StoreReviewDTO">
+        <![CDATA[
+        SELECT normalNickname, reviewContent, productName, reviewRating,
+               reviewCreatedAt
+        FROM (
+                 SELECT nu.FG_NORMAL_NICKNAME AS normalNickname,
+                        rv.FG_REVIEW_CONTENT AS reviewContent,
+                        p.FG_PRODUCT_NAME AS productName,
+                        rv.FG_REVIEW_RATING AS reviewRating,
+                        TO_CHAR(rv.FG_REVIEW_CREATED_AT, 'YYYY/MM/DD HH24:MI') AS reviewCreatedAt,
+                        ROW_NUMBER() OVER (ORDER BY rv.FG_REVIEW_CREATED_AT DESC, rv.FG_REVIEW_ID DESC) AS RNUM
+                 FROM FG_REVIEW rv, FG_NORMAL_USER nu, FG_PRODUCT p, FG_ORDER o
+                 WHERE rv.FG_USER_CODE = nu.FG_USER_CODE
+                   AND rv.FG_ORDER_ID = o.FG_ORDER_ID
+                   AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
+                   AND rv.FG_BUSINESS_ID = #{businessId}
+             )
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+          AND RNUM <= #{criteria.page} * #{criteria.amount}
+        ]]>
+    </select>
+
+    <!-- 총 리뷰 수 -->
+    <select id="selectTotal" resultType="int">
+        SELECT COUNT(FG_REVIEW_ID)
+        FROM FG_REVIEW
+        WHERE FG_BUSINESS_ID = #{businessId}
     </select>
 
     <!-- 판매자 업체 아이디 반환 -->

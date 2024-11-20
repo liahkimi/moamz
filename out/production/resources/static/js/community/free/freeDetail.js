@@ -4,6 +4,7 @@ import * as comment from "../comment.js";
 
 let page = 1;
 let hasNext  = true;
+const postId = document.querySelector('.post-info-wrap').getAttribute('data-id');
 
 
 
@@ -15,7 +16,7 @@ let hasNext  = true;
 {
     let $postUpdateBtn = document.getElementById('modify-btn');
     let $postDeleteBtn = document.getElementById('delete-btn');
-    let postId = document.querySelector('.post-info-wrap').getAttribute('data-id');
+    // let postId = document.querySelector('.post-info-wrap').getAttribute('data-id');
     //console.log(postId);
 
 
@@ -43,32 +44,6 @@ let hasNext  = true;
 
 
 
-
-////////////////////////////////////////////////////////
-///// 좋아요
-
-const likeBtns = document.querySelectorAll('.like-btn');
-
-
-likeBtns.forEach((btn) => {
-    btn.addEventListener('click', function () {
-        // 클릭하면 active 적용
-        btn.classList.toggle('active');
-
-        // 하트 이미지 변경
-        const img = btn.querySelector('img');
-        if (btn.classList.contains('active')) {
-            img.src = "../../../static/img/community/like_icon_greenheart.png";
-        } else {
-            img.src = "../../../static/img/community/like_icon_fullheart.png";
-        }
-    });
-});
-
-
-
-
-
 ////////////////////////////////////////////////////////
 ///// 댓글 작성하기
 
@@ -79,7 +54,7 @@ likeBtns.forEach((btn) => {
     const $commentInput = document.getElementById('comment-input');
     // 더보기 버튼
     let $showMoreBtn = document.getElementById('show-more-btn');
-    let postId = document.querySelector('.post-info-wrap').getAttribute('data-id');
+    // let postId = document.querySelector('.post-info-wrap').getAttribute('data-id');
 
 
     // 처음 페이지 로드할 때 댓글 목록 가져오기
@@ -150,7 +125,7 @@ likeBtns.forEach((btn) => {
     // 댓글 목록이 보여질 태그
     let $commentContainer = document.querySelector('.comment-content-wrap ul');
     // postId값 가져오기
-    const postId = document.querySelector('.post-info-wrap').getAttribute('data-id');
+    // const postId = document.querySelector('.post-info-wrap').getAttribute('data-id');
 
     // 해당 태그 안에서 클릭 이벤트를 감지함
     $commentContainer.addEventListener('click', (e) => {
@@ -321,6 +296,90 @@ function appendComment(commentList) {
     $showMoreBtn.style.display = hasNext ? 'block' : 'none';
 
 }
+
+
+
+
+
+////////////////////////////////////////////////////////
+///// 좋아요
+
+{
+    const likeBtn = document.querySelector('.like-btn');
+    const heartIcon = likeBtn.querySelector('img');
+    let countSpan = likeBtn.querySelector('span');
+
+    // 좋아요 버튼의 초기 상태 설정하기
+    getIsLiked(postId, function(isLiked) {
+        if(isLiked === 'TRUE') {
+            // 이미 좋아요를 누른 게시글일 때 스타일 지정
+            likeBtn.classList.add('active');
+            heartIcon.src = "/img/community/like_icon_greenheart.png";
+        } else {
+            // 좋아요를 누르지 않은 게시글일 때 스타일 지정
+            likeBtn.classList.remove('active');
+            heartIcon.src = "/img/community/like_icon_fullheart.png";
+        }
+    });
+
+    // 좋아요 버튼 눌렀을 때
+    likeBtn.addEventListener('click', () => {
+        updateLikeBtn(postId, function(likeCount) {
+            console.log(`likecount : ${likeCount}`);
+            if(likeBtn.classList.contains('active')) {
+                // 이미 좋아요를 누른 상태라면, 스타일 해제하기
+                likeBtn.classList.remove('active');
+                heartIcon.src = "/img/community/like_icon_fullheart.png";
+            } else {
+                // 좋아요를 누르지 않은 상태라면, 좋아요 스타일 지정하기
+                likeBtn.classList.add('active');
+                heartIcon.src = "/img/community/like_icon_greenheart.png";
+            }
+            // 업데이트된 좋아요 수를 적용하기
+            countSpan.textContent = likeCount;
+        });
+    });
+}
+
+// 좋아요를 누른 게시글인지 요청하는 함수
+function getIsLiked(postId, callback) {
+    fetch(`/api/like/isLiked/${postId}`, {
+            method: 'GET'
+    }).then(response => response.text())
+        .then(isLiked => {
+            callback(isLiked);
+        });
+}
+
+// 좋아요 버튼 눌렀을 때 처리하는 함수
+function updateLikeBtn(postId, callback) {
+    fetch(`/api/like/${postId}`, {
+        method: 'POST'
+    }).then(response => response.json())
+        .then(response => {
+            callback(response.likeCount);
+        });
+}
+
+
+
+
+
+
+// likeBtns.forEach((btn) => {
+//     btn.addEventListener('click', function () {
+//         // 클릭하면 active 적용여부 토글
+//         btn.classList.toggle('active');
+//
+//         // 하트 이미지 변경
+//         const img = btn.querySelector('img');
+//         if (btn.classList.contains('active')) {
+//             img.src = "/img/community/like_icon_greenheart.png";
+//         } else {
+//             img.src = "/img/community/like_icon_fullheart.png";
+//         }
+//     });
+// });
 
 
 

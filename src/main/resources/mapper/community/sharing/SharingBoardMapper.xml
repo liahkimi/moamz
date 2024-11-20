@@ -165,14 +165,14 @@
         SELECT COUNT(p.FG_POST_ID)
         FROM FG_POST p, FG_SHARING s
         WHERE p.FG_POST_ID = s.FG_POST_ID
-          AND s.FG_SHARING_STATUS = '나눔가능'
+          AND s.FG_SHARING_STATUS = '예약중'
     </select>
 
     <select id="selectCompletedTotal" resultType="int">
         SELECT COUNT(p.FG_POST_ID)
         FROM FG_POST p, FG_SHARING s
         WHERE p.FG_POST_ID = s.FG_POST_ID
-          AND s.FG_SHARING_STATUS = '나눔가능'
+          AND s.FG_SHARING_STATUS = '나눔완료'
     </select>
 
 
