@@ -50,7 +50,7 @@ public class NormalSignupController {
         if (userId != null) {
             return userId + "는 이미 존재하는 아이디입니다";  // 아이디 확인
         } else {
-            return "사용할 수 있는 아이디입니다.";  // 실패 시 메시지
+            return "사용할 수 있는 아이디입니다.";  // 아이디가 없을 때 메시지
         }
     }
 

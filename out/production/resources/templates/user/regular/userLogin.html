@@ -27,8 +27,8 @@
     <form th:action="@{/normal/regular/userLogin}" method="post">
       <div id="login_box">
         <div id="login_box_text">
-          <input class="login_text" type="email" name="fgUserId" placeholder="이메일 주소를 입력해 주세요" required>
-          <input class="login_text" type="password" name="fgUserPassword" placeholder="비밀번호" required>
+          <input class="login_text" type="email" id="fgUserId" name="fgUserId" placeholder="이메일 주소를 입력해 주세요" required>
+          <input class="login_text" type="password" id="fgUserPassword" name="fgUserPassword" placeholder="비밀번호" required>
         </div>
         <div id="login-box_btn">
           <button type="submit" id="login_but">로그인</button>

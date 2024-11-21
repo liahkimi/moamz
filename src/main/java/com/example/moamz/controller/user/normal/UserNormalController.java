@@ -37,7 +37,7 @@ public class UserNormalController {
         // 로그인 정보가 없으면 (아이디나 비밀번호가 틀리면) 로그인 실패 처리
         if (loginInfo == null) {
             log.warn("로그인 실패 : 잘못된 아이디 또는 비밀번호");
-            return new RedirectView("/user/regular/userLogin?error=true");  // 에러 메시지를 URL에 전달
+            return new RedirectView("/user/regular/userLogin");  // 에러 메시지를 URL에 전달
         }
 
         // 로그인 성공 시 세션에 사용자 정보 저장 (fgUserId, fgUserCode)
@@ -57,4 +57,22 @@ public class UserNormalController {
         return new RedirectView("/main");
 
     }
+
+    //로그인 아이디, 비밀번호 확인
+    @PostMapping("/checkIdPassword")
+    @ResponseBody // 메서드의 반환 값이 뷰를 반환하지 않고 직접 HTTP 응답 본문으로 전달되도록 설정
+    public String checkedLogin(@RequestParam("checkedId") String fgUserId,
+                               @RequestParam("checkedPassword")String fgUserPassword) {
+        log.info("userId:{}", fgUserId);
+
+        String userLogin = userNormalService.idPasswordCheck(fgUserId, fgUserPassword);
+        if (userLogin != null) {
+            return "MOAMZ에 오신걸 환영합니다.";  // 아이디 확인
+        } else {
+            return "아이디 또는 비밀번호를 확인해주세요.";  // 아이디가 없을 때 메시지
+        }
+
+
+    }
+
 }

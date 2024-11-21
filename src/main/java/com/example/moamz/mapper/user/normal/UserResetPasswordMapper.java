@@ -12,7 +12,7 @@ public interface UserResetPasswordMapper {
     //회원Session
 //    Optional<Long> normalSession(@Param("fgUserId")String fgUserId);
 
-    //아이디, 비밀번호 조회
+    //아이디, 휴대폰 조회
     Optional<UserResetPasswordDTO> selectPassword(@Param("fgUserId") String fgUserId,
                                    @Param("fgNormalPhone") String fgNormalPhone);
 
