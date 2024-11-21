@@ -3,6 +3,7 @@ package com.example.moamz.mapper.mypage.seller;
 import com.example.moamz.domain.dto.mypage.seller.StoreReviewDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.SellerInfoDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.SellerProfileDTO;
+import com.example.moamz.domain.dto.mypage.seller.info.StoreInfoDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.StoreModifyDTO;
 import com.example.moamz.domain.dto.page.Criteria;
 import org.apache.ibatis.annotations.Mapper;
@@ -34,26 +35,32 @@ public interface SellerMyMapper {
     // 유저 아이디 반환
     String selectSellerId(Long userCode);
 
-    // 아이디, 비밀번호 확인해서 userCode 반환
-    Optional<Long> selectSellerCode(String userId, String userPassword);
+    // userCode로 회원 비밀번호 조회
+    Optional<String> selectSellerPw(Long userCode);
 
     // 개인정보 가져오기
     SellerInfoDTO selectSellerInfo(Long userCode);
 
+    // 휴대폰번호 가져오기
+    String selectSellerPhone(Long userCode);
+
     // 휴대폰번호 변경
-    void modifySellerPhone(String sellerPhone);
+    void modifySellerPhone(@Param("inputPhone") String inputPhone, @Param("userCode") Long userCode);
 
     // 비밀번호 변경
-    void modifySellerPw(String userPassword);
+    void modifySellerPw(@Param("inputPw") String inputPw, @Param("userCode") Long userCode);
 
     // 업체 정보 가져오기
-    SellerInfoDTO selectStoreInfo(Long userCode);
+    StoreInfoDTO selectStoreInfo(Long userCode);
 
     // 업체 정보 변경하기
     void modifyStoreInfo(StoreModifyDTO storeModifyDTO);
 
     // 회원 탈퇴
     void deleteUser(Long userCode);
+
+    // 탈퇴 가능한 회원인지 조회
+    int selectWithdrawAvailable(Long businessId);
 
 }
 
