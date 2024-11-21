@@ -193,4 +193,8 @@ public class SellerMyService {
         sellerMyMapper.deleteUser(userCode);
     }
 
+    // 탈퇴 가능한 회원인지 조회
+    public int findWithdrawAvailable(Long businessId) {
+        return sellerMyMapper.selectWithdrawAvailable(businessId);
+    }
 }

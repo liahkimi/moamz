@@ -59,5 +59,8 @@ public interface SellerMyMapper {
     // 회원 탈퇴
     void deleteUser(Long userCode);
 
+    // 탈퇴 가능한 회원인지 조회
+    int selectWithdrawAvailable(Long businessId);
+
 }
 

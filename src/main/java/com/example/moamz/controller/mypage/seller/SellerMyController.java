@@ -55,7 +55,7 @@ public class SellerMyController {
         Page page = new Page(criteria, total);
 
         // 판매자 프로필 반환
-        SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(userCode, businessId);
+        SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(businessId, userCode);
 
         // 모델에 전달
         model.addAttribute("page", page);
@@ -249,8 +249,57 @@ public class SellerMyController {
     // 회원 탈퇴 <GET 요청>
     //
     @GetMapping("/withdraw")
-    public String getWithdraw() {
+    public String getWithdraw(@SessionAttribute(value = "fgUserCode", required = false) Long userCode,
+                              Model model) {
+
+        // 세션에 userCode가 null이면 로그인 페이지로 이동
+        if(userCode == null) {
+            return "redirect:/seller/seller/sellerLogin";
+        }
+
+        // userId 반환 메서드
+        String sellerId = sellerMyService.findSellerId(userCode);
+
+        // 모델에 담아서 보내기
+        model.addAttribute("sellerId", sellerId);
         return "/mypage/seller/sellerWithdraw";
+    }
+
+    //
+    // 회원 탈퇴 <POST 요청>
+    //
+    @PostMapping("/withdraw")
+    public String getWithdraw(@SessionAttribute(value = "fgUserCode", required = false) Long userCode,
+                              @RequestParam("inputPw") String inputPw,
+                              RedirectAttributes redirectAttributes,
+                              HttpSession httpSession) {
+
+        // 업체id 조회
+        Long businessId = sellerMyService.findBusinessId(userCode);
+
+        // 비밀번호가 맞는지 확인
+        if(inputPw.equals(sellerMyService.findSellerPw(userCode))) {
+            // 비밀번호가 일치한다면 탈퇴 가능한 회원인지 조회
+            int ongoingOrder = sellerMyService.findWithdrawAvailable(businessId);
+
+            // 진행중인 주문건이 존재한다면 탈퇴할 수 없다
+            if(ongoingOrder > 0) {
+                redirectAttributes.addFlashAttribute("Message", "모든 주문이 「픽업완료」 상태일 때 회원 탈퇴가 가능합니다.");
+                return "redirect:/seller/my/withdraw";
+            }
+
+            //진행중인 주문이 없을 때 회원 탈퇴 메서드 호출
+            sellerMyService.removeUser(userCode);
+
+            // 로그아웃
+            httpSession.invalidate();
+
+            // 메인페이지로 리다이렉트
+            return "redirect:/main";
+        } else {
+            redirectAttributes.addFlashAttribute("Message", "비밀번호가 일치하지 않습니다.");
+            return "redirect:/seller/my/withdraw";
+        }
     }
 }
 
