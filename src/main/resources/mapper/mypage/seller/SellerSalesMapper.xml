@@ -197,7 +197,7 @@
                p.FG_PRODUCT_PRICE AS productPrice,
                TO_CHAR(p.FG_PRODUCT_EXP_DATE, 'YY-MM-DD HH24:MI') AS productExpDate,
                p.FG_PRODUCT_WEIGHT AS productWeight, p.FG_PRODUCT_CONTENT AS productContent,
-               nu.FG_NORMAL_NICKNAME ASnormalNickname, pick.FG_PICKUP_SCHEDULE AS pickupSchedule,
+               nu.FG_NORMAL_NICKNAME AS normalNickname, pick.FG_PICKUP_SCHEDULE AS pickupSchedule,
                pick.FG_PICKUP_REQUEST AS pickupRequest,
                pick.FG_PICKUP_STATUS AS pickupStatus, pick.FG_PICKUP_COMPLETED AS pickupCompletedTime,
                pf.FG_PRODUCT_FILE_ROOT AS productFileRoot, pf.FG_PRODUCT_FILE_NAME AS productFileName,
