@@ -28,7 +28,9 @@ public class SellerProductController {
     public final SellerProductService sellerProductService;
     public final SellerMyService sellerMyService;
 
-    // 상품 등록 페이지 열기
+    //
+    // 상품 등록 페이지 열기 <GET 요청>
+    //
     @GetMapping("/regist")
     public String productRegist(@SessionAttribute(value="fgUserCode", required = false) Long userCode) {
         // 세션에 userCode가 null이면 로그인 페이지로 리다이렉트
@@ -37,7 +39,9 @@ public class SellerProductController {
                     "mypage/seller/sellerProductRegistration";
     }
 
-    // 상품 등록 post 요청 처리하기
+    //
+    // 상품 등록 <POST 요청>
+    //
     @PostMapping("/regist")
     public String productRegister(ProductRegistDTO productRegistDTO,
                                   RedirectAttributes redirectAttributes,
@@ -71,9 +75,10 @@ public class SellerProductController {
         return "redirect:/seller/product/detail/" + productRegistDTO.getProductId();
     }
 
-
-    // 등록한 상품 목록 페이지 열기
+    //
+    // 등록한 상품 목록 페이지 <GET 요청>
     // 상품 목록은 RestController에서 비동기처리를 하기 때문에 여기서는 프로필 정보만 넘겨준다.
+    //
     @GetMapping("/list")
     public String productList(@SessionAttribute(value="fgUserCode", required = false) Long userCode,
                               Model model) {
@@ -94,7 +99,9 @@ public class SellerProductController {
         return "mypage/seller/sellerProductList";
     }
 
-    // 상품 상세보기 페이지
+    //
+    // 상품 상세보기 <GET 요청>
+    //
     @GetMapping("/detail/{productId}")
     public String productDetail(@PathVariable("productId") Long productId,
                                 @SessionAttribute(value="fgUserCode", required = false) Long userCode,
