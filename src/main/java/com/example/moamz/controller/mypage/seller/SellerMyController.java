@@ -1,12 +1,15 @@
 package com.example.moamz.controller.mypage.seller;
 
+import com.example.moamz.controller.admin.user.AdminUserController;
 import com.example.moamz.domain.dto.mypage.seller.StoreReviewDTO;
+import com.example.moamz.domain.dto.mypage.seller.info.SellerInfoDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.SellerProfileDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.StoreInfoDTO;
 import com.example.moamz.domain.dto.mypage.seller.info.StoreModifyDTO;
 import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.domain.dto.page.Page;
 import com.example.moamz.service.mypage.seller.SellerMyService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
@@ -25,6 +28,7 @@ import java.util.List;
 @RequestMapping("/seller/my")
 public class SellerMyController {
     private final SellerMyService sellerMyService;
+    private final AdminUserController adminUserController;
 
     //
     // 리뷰 보기 페이지 <GET 요청>
@@ -166,7 +170,87 @@ public class SellerMyController {
     // 개인정보 수정 페이지 <GET 요청>
     //
     @GetMapping("/infoModify")
-    public String getInfoModify() {
+    public String getInfoModify(@SessionAttribute(value="fgUserCode", required = false)Long userCode,
+                                SellerInfoDTO sellerInfoDTO,
+                                Model model) {
+
+        // 세션에 userCode가 null이면 로그인 페이지로 이동
+        if(userCode == null) {
+            return "redirect:/seller/seller/sellerLogin";
+        }
+
+        // 개인정보 가져오기
+        sellerInfoDTO = sellerMyService.findSellerInfo(userCode);
+
+        // 모델에 담아서 보내기
+        model.addAttribute("sellerInfoDTO", sellerInfoDTO);
+
         return "/mypage/seller/sellerInfoModify";
     }
+
+    //
+    // 비밀번호 변경 <POST 요청>
+    //
+    @PostMapping("/updatePw")
+    @ResponseBody
+    public boolean updatePw(@SessionAttribute(value = "fgUserCode", required = false) Long userCode,
+                         @RequestParam("inputPw") String inputPw,
+                         HttpSession httpSession) {
+
+        // 이전 비밀번호 가져오기
+        String oldPw = sellerMyService.findSellerPw(userCode);
+
+        // 이전 비밀번호와 새 비밀번호가 다른지 검사
+        if(!oldPw.equals(inputPw)) {
+            // 이전 비밀번호와 새 비밀번호가 다를 때 비밀번호 변경 메서드 실행
+            sellerMyService.updateSellerPassword(inputPw, userCode);
+
+            // 로그아웃
+            httpSession.invalidate();
+
+            // true값 리턴
+            return true;
+        }
+
+        // 이전 비밀번호와 새 비밀번호가 같으면 false값 반환
+        return false;
+    }
+
+    //
+    // 핸드폰번호 변경 <POST 요청>
+    //
+    @PostMapping("/updatePhone")
+    @ResponseBody
+    public boolean updatePhone(@SessionAttribute(value = "fgUserCode", required = false) Long userCode,
+                            @RequestParam("inputPhone") String inputPhone) {
+
+        // 이전 핸드폰번호 가져오기
+        String oldPhone = sellerMyService.findSellerPhone(userCode);
+
+        System.out.println("🧡old" + oldPhone);
+        System.out.println("🧡inputPhone" + inputPhone);
+
+        // 이전 핸드폰번호와 새 핸드폰번호가 다른지 검사
+        if(!oldPhone.equals(inputPhone)) {
+            // 이전 핸드폰번호와 새 핸드폰번호가 다를 때 핸드폰번호 변경 메서드 실행
+            sellerMyService.updateSellerPhone(inputPhone, userCode);
+
+            // true값 리턴
+            return true;
+        }
+
+        // 이전 핸드폰번호와 새 핸드폰번호가 같으면 false값 반환
+        return false;
+    }
+
+
+
+    //
+    // 회원 탈퇴 <GET 요청>
+    //
+    @GetMapping("/withdraw")
+    public String getWithdraw() {
+        return "/mypage/seller/sellerWithdraw";
+    }
 }
+

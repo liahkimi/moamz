@@ -120,17 +120,24 @@
         AND cu.FG_USER_CODE = #{userCode}
     </select>
 
+    <!-- 휴대폰번호 조회하기 -->
+    <select id="selectSellerPhone" parameterType="Long" resultType="String">
+        SELECT FG_SELLER_PHONE
+        FROM FG_SELLER
+        WHERE FG_USER_CODE = #{userCode}
+    </select>
+
     <!-- 휴대폰번호 변경하기 -->
-    <update id="modifySellerPhone" parameterType="String">
+    <update id="modifySellerPhone">
         UPDATE FG_SELLER
-        SET FG_SELLER_PHONE = #{sellerPhone}
+        SET FG_SELLER_PHONE = #{inputPhone}
         WHERE FG_USER_CODE = #{userCode}
     </update>
 
     <!-- 비밀번호 변경하기 -->
-    <update id="modifySellerPw" parameterType="String">
+    <update id="modifySellerPw">
         UPDATE FG_COMMON_USER
-        SET FG_USER_PASSWORD = #{userPassword}
+        SET FG_USER_PASSWORD = #{inputPw}
         WHERE FG_USER_CODE = #{userCode}
     </update>
 

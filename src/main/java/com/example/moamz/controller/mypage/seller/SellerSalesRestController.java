@@ -64,7 +64,7 @@ public class SellerSalesRestController {
         // 응답 객체에 page, 리스트 정보 담아서 반환하기
         response.put("page", page);
         response.put("salesList", salesList);
-        System.out.println("🧡 response : " + response);
+
         return ResponseEntity.ok(response);
     }
 

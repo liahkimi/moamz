@@ -146,14 +146,18 @@ public class SellerMyService {
         return sellerMyMapper.selectSellerInfo(userCode);
     }
 
+    // 휴대폰번호 조회하기 메서드
+    public String findSellerPhone(Long userCode) {
+        return sellerMyMapper.selectSellerPhone(userCode);
+    }
     // 휴대폰번호 변경 메서드
-    public void updateSellerPhone(String sellerPhone) {
-        sellerMyMapper.modifySellerPhone(sellerPhone);
+    public void updateSellerPhone(@Param("inputPhone") String inputPhone, @Param("userCode") Long userCode) {
+        sellerMyMapper.modifySellerPhone(inputPhone, userCode);
     }
 
     // 비밀번호 변경 메서드
-    public void updateSellerPassword(String userPassword) {
-        sellerMyMapper.modifySellerPw(userPassword);
+    public void updateSellerPassword(@Param("inputPw") String inputPw, @Param("userCode") Long userCode) {
+        sellerMyMapper.modifySellerPw(inputPw, userCode);
     }
 
     // 업체정보 가져오기 메서드

@@ -41,11 +41,14 @@ public interface SellerMyMapper {
     // 개인정보 가져오기
     SellerInfoDTO selectSellerInfo(Long userCode);
 
+    // 휴대폰번호 가져오기
+    String selectSellerPhone(Long userCode);
+
     // 휴대폰번호 변경
-    void modifySellerPhone(String sellerPhone);
+    void modifySellerPhone(@Param("inputPhone") String inputPhone, @Param("userCode") Long userCode);
 
     // 비밀번호 변경
-    void modifySellerPw(String userPassword);
+    void modifySellerPw(@Param("inputPw") String inputPw, @Param("userCode") Long userCode);
 
     // 업체 정보 가져오기
     StoreInfoDTO selectStoreInfo(Long userCode);
