@@ -3,39 +3,46 @@
 <mapper namespace="com.example.moamz.mapper.mypage.normal.PurchaseDetailMapper">
     <!-- 주문 픽업 시간   -->
     <select id="selectProductPickup" parameterType="Long" resultType="PurchaseDetailDTO">
-        SELECT o.FG_ORDER_DATE, o.FG_ORDER_ID, p.FG_PICKUP_SCHEDULE, p.FG_PICKUP_COMPLETED,p.FG_PICKUP_REQUEST
+        SELECT o.FG_ORDER_DATE, o.FG_ORDER_ID, p.FG_PICKUP_SCHEDULE, p.FG_PICKUP_COMPLETED,p.FG_PICKUP_REQUEST,
+               p.FG_PICKUP_STATUS, o.FG_BUSINESS_ID
         FROM FG_ORDER o JOIN FG_PICKUP p
-            ON o.FG_ORDER_ID = #{FG_ORDER_ID}
+                             ON o.FG_ORDER_ID = p.FG_ORDER_ID
+        WHERE o.FG_ORDER_ID = #{fgOrderId}
     </select>
 
     <!-- 업체명  -->
     <select id="selectProductBusiness" parameterType="Long" resultType="PurchaseDetailDTO">
         SELECT uf.FG_USER_FILE_ID, uf.FG_USER_FILE_ROOT, uf.FG_USER_FILE_NAME, uf.FG_USER_FILE_UUID, b.FG_BUSINESS_NAME, b.FG_BUSINESS_ADDRESS,
-            b.FG_BUSINESS_ADDRESS_DETAIL, b.FG_BUSINESS_OPEN_TIME, b.FG_BUSINESS_PHONE
+               b.FG_BUSINESS_ADDRESS_DETAIL AS fgBusinessAddressDetail, b.FG_BUSINESS_OPEN_TIME, b.FG_BUSINESS_CLOSE_TIME, b.FG_BUSINESS_PHONE
         FROM FG_USER_FILE uf JOIN FG_BUSINESS b
-            ON uf.FG_USER_CODE = b.FG_USER_CODE
+                                  ON uf.FG_USER_CODE = b.FG_USER_CODE
+        WHERE b.FG_BUSINESS_ID = #{fgBusinessId}
+
     </select>
 
     <!-- 상품 정보  -->
     <select id="selectProduct" parameterType="Long" resultType="PurchaseDetailDTO">
-        SELECT nu.FG_USER_CODE,pf.FG_PRODUCT_FILE_ID, pf.FG_PRODUCT_FILE_NAME, pf.FG_PRODUCT_FILE_UUID, pf.FG_PRODUCT_FILE_ROOT,p.FG_PRODUCT_NAME,p.FG_PRODUCT_EXP_DATE,p.FG_PRODUCT_WEIGHT,
-            p.FG_PRODUCT_STOCK,p.FG_PRODUCT_PRICE
+        SELECT pf.FG_PRODUCT_FILE_ID, pf.FG_PRODUCT_FILE_NAME, pf.FG_PRODUCT_FILE_UUID, pf.FG_PRODUCT_FILE_ROOT,
+               p.FG_PRODUCT_NAME,p.FG_PRODUCT_EXP_DATE,p.FG_PRODUCT_WEIGHT,
+               p.FG_PRODUCT_STOCK,p.FG_PRODUCT_PRICE
         FROM FG_PRODUCT p JOIN FG_PRODUCT_FILE pf
-            ON p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
-        JOIN FG_NORMAL_USER nu
-            ON p.FG_BUSINESS_ID = nu.FG_USER_CODE
-        WHERE nu.FG_USER_CODE = #{fgUserCode}
+                               ON p.FG_PRODUCT_ID = pf.FG_PRODUCT_ID
+                          JOIN FG_NORMAL_USER nu
+                               ON p.FG_BUSINESS_ID = nu.FG_USER_CODE
+                          JOIN FG_ORDER o
+                               ON p.FG_PRODUCT_ID = o.FG_PRODUCT_ID
+        WHERE o.FG_ORDER_ID = #{fgOrderId}
     </select>
 
     <!-- 상품 가격  -->
     <select id="selectProductPrice" parameterType="Long" resultType="PurchaseDetailDTO">
-        SELECT FG_USER_CODE, FG_ORDER_PER_PRICE, FG_ORDER_USED_POINT, FG_ORDER_AMOUNT, FG_ORDER_ID
+        SELECT FG_USER_CODE, FG_ORDER_PER_PRICE, FG_ORDER_USED_POINT, FG_ORDER_AMOUNT
         FROM FG_ORDER
-        WHERE FG_USER_CODE = #{fgUserCode}
+        WHERE FG_ORDER_ID = #{fgOrderId}
     </select>
 
-<!--    <select id="selectPurchaseHistory" resultType="PurchaseHistory">-->
-<!--        SELECT * FROM purchase_history WHERE user_id = #{userId}-->
-<!--    </select>-->
+    <!--    <select id="selectPurchaseHistory" resultType="PurchaseHistory">-->
+    <!--        SELECT * FROM purchase_history WHERE user_id = #{userId}-->
+    <!--    </select>-->
 
 </mapper>

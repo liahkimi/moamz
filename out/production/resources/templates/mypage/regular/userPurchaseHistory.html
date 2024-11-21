@@ -45,15 +45,15 @@
     <!-- 마이페이지 메뉴 카테고리 -->
     <div class="mypage-side-category">
       <ul>
-        <li class="category-list"><a href="/normal/purchase/" class="clicked">● 상품 구매 내역</a></li>
+        <li class="category-list"><a th:href="@{/normal/purchase/list}" class="clicked">● 상품 구매 내역</a></li>
         <li class="category-list"><a href="userMySocialing.html">● MY소셜링</a></li>
-        <li class="category-list"><a href="normal/my/sharing/completed">● My나눔</a></li>
-        <li class="category-list"><a href="userMyReview.html">● MY리뷰</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/sharing/completed}">● My나눔</a></li>
+        <li class="category-list"><a th:href="@{userMyReview.html}">● MY리뷰</a></li>
         <li class="category-list"><a href="userMyLike.html">● MY좋아요</a></li>
         <li class="category-list"><a href="userMyPost.html">● MY게시글</a></li>
         <li class="category-list"><a href="userInfoAuth.html">● 회원정보변경</a></li>
         <li class="category-list"><a href="userInfoAuth.html">● 비밀번호변경</a></li>
-        <li class="category-list"><a href="userAdminInquiryList.html">● 관리자 문의</a></li>
+        <li class="category-list"><a th:href="@{/normal/inquiry/list}">● 관리자 문의</a></li>
       </ul>
     </div>
   </div>
@@ -68,15 +68,15 @@
       <!-- 구매 내역 반복 출력 -->
       <div th:each="purchase : ${purchaseHistoryList}" class="userPurchaseHistory-list-box">
         <div class="purchase-date">
-<!--          <span class="purchase-info-clock" th:text="${purchase.fgOrderDate}"></span>-->
+          <span class="purchase-info-clock" th:text="${purchase.fgOrderDate}"></span>
           <div class="purchase-state" th:text="${purchase.fgPickupStatus}"></div>
         </div>
 
         <div class="purchase-info-detail-box">
           <div class="purchase-info">
             <!-- 상품 사진 -->
-<!--            <img th:src="@{${purchase.상품사진}}" alt="구매상품사진">-->
-<!--            <img th:src="'/upload_moamz/' + ${purchase.fgProductFileRoot} + '/' + ${purchase.fgProductFileUuid} + '_' + ${purchase.fgProductFileName}" alt="상품 사진"/>-->
+            <!--            <img th:src="@{${purchase.상품사진}}" alt="구매상품사진">-->
+            <img th:src="'/upload_moamz/' + ${purchase.fgProductFileRoot} + '/' + ${purchase.fgProductFileUuid} + '_' + ${purchase.fgProductFileName}" alt="상품 사진"/>
             <div class="purchase-name">
               <!-- 상품명과 가격 -->
               <span th:text="${purchase.fgProductName}"></span>
@@ -99,7 +99,8 @@
 
         <div id="detail-btn">
           <!-- 자세히 보기 버튼 -->
-          <a th:href="@{/normal/purchase/detail}">자세히 보러가기 &gt;</a>
+<!--          /detail/{orderId}(orderId=${order.id})-->
+          <a th:href="@{/normal/purchase/detail/{fgOrderId}(fgOrderId=${purchase.fgOrderId})}">자세히 보러가기 &gt;</a>
         </div>
       </div>
     </div>

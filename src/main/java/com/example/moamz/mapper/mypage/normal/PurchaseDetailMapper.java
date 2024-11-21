@@ -8,17 +8,19 @@ import java.util.List;
 
 @Mapper
 public interface PurchaseDetailMapper {
+    PurchaseDetailDTO selectPurchaseDetail(Long fgOrderId);
+
     // 주문 픽업
-    List<PurchaseDetailDTO> selectProductPickup(Long fgOrderId);
+    PurchaseDetailDTO selectProductPickup(Long fgOrderId);
 
     // 업체명
-    List<PurchaseDetailDTO> selectProductBusiness(Long fgUserCode);
+    PurchaseDetailDTO selectProductBusiness(Long fgBusinessId);
 
     // 상품 정보
-    List<PurchaseDetailDTO> selectProduct(Long fgUserCode);
+    PurchaseDetailDTO selectProduct(Long fgOrderId);
 
     // 상품 가격
-    List<PurchaseDetailDTO> selectProductPrice();
+    PurchaseDetailDTO selectProductPrice(Long fgOrderId);
 
     List<PurchaseHistoryDTO> selectPurchaseHistory(Long userCode);
 }

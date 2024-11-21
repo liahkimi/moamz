@@ -3,16 +3,18 @@
 <mapper namespace="com.example.moamz.mapper.mypage.normal.PurchaseHistoryMapper">
     <select id="selectPurchaseList" parameterType="Long" resultType="PurchaseHistoryDTO">
         SELECT
---             o.FG_ORDER_DATE AS fgOrderDate,
---                pf.FG_PRODUCT_FILE_ROOT AS fgProductFileRoot,
---                pf.FG_PRODUCT_FILE_NAME AS fgProductFileName,
-               p.FG_PRODUCT_NAME AS fgProductName,
-               p.FG_PRODUCT_PRICE AS fgProductPrice,
-               pick.FG_PICKUP_SCHEDULE AS fgPickupSchedule,
-               b.FG_BUSINESS_NAME AS fgBusinessName, pick.FG_PICKUP_REQUEST AS fgPickupRequest,
-               pick.FG_PICKUP_STATUS AS fgPickupStatus,
---                pf.FG_PRODUCT_FILE_UUID AS fgProductFileUuid,
-               pf.FG_PRODUCT_FILE_ID AS fgProductFileId
+            o.FG_ORDER_ID AS fgOrderId,
+            o.FG_ORDER_DATE AS fgOrderDate,
+            p.FG_PRODUCT_NAME AS fgProductName,
+            p.FG_PRODUCT_PRICE AS fgProductPrice,
+            pick.FG_PICKUP_SCHEDULE AS fgPickupSchedule,
+            b.FG_BUSINESS_NAME AS fgBusinessName,
+            pick.FG_PICKUP_REQUEST AS fgPickupRequest,
+            pick.FG_PICKUP_STATUS AS fgPickupStatus,
+            pf.FG_PRODUCT_FILE_ID AS fgProductFileId,
+            pf.FG_PRODUCT_FILE_NAME AS fgProductFileName,
+            pf.FG_PRODUCT_FILE_ROOT AS fgProductFileRoot,
+            pf.FG_PRODUCT_FILE_UUID AS fgProductFileUuid
         FROM FG_ORDER o, FG_PICKUP pick, FG_PRODUCT p, FG_PRODUCT_FILE pf, FG_BUSINESS b
         WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
           AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID
