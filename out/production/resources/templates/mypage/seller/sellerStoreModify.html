@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../static/css/reset2.css">
-    <link rel="stylesheet" href="../../../static/css/mypage/seller/sellerStoreModify.css">
-    <script defer src="../../../static/js/mypage/seller/sellerStoreModify.js"></script>
+    <link rel="stylesheet" th:href="@{/css/reset2.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/seller/sellerStoreModify.css}">
+    <script defer th:src="@{/js/mypage/seller/sellerStoreModify.js}"></script>
+    <!-- 우편번호 api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title>마이페이지</title>
 </head>
 <body>
-    <header id="header"></header>
+    <header id="header" th:replace="~{/main/fragment/header/sellerHeader}"></header>
     <main>
+        <!-- alertMessage 처리 -->
+        <div th:if="${Message}">
+            <script>
+                alert("[[${Message}]]");
+            </script>
+        </div>
+
         <div class="product-write-container">
             <!-- 제목 영역 -->
             <div class="title-wrap">
@@ -18,16 +28,17 @@
             </div>
             <!-- 정보 변경 영역 -->
             <div class="write-content-container">
-                <form method="post" action="">
+                <form method="post" action="/seller/my/storeModify" enctype="multipart/form-data">
                     <!-- 변경 안되는 영역 -->
                     <div class="cannot-modify-container">
+                        <input type="hidden" name="userCode" th:value="${storeInfoDTO.userCode}">
                         <div class="modify-item">
                             <label class="modify-label" for="store-name">업체명</label>
-                            <input id="store-name" type="text" value="오브제 그린 역삼점" disabled>
+                            <input id="store-name" type="text" th:value="${storeInfoDTO.businessName}" disabled>
                         </div>
                         <div class="modify-item">
                             <label class="modify-label" for="business-num">사업자번호</label>
-                            <input id="business-num" type="text" value="123-45-12345" disabled>
+                            <input id="business-num" type="text" th:value="${storeInfoDTO.businessNumber}" disabled>
                         </div>
                     </div>
                     <!-- 썸네일 영역 -->
@@ -36,43 +47,48 @@
                         <div class="thumbnail-wrap">
                             <!--lable을 누르면 input type=file이 실행-->
                             <label for="attach">
-                                <div class="thumbnail-img"></div>
+                                <div class="thumbnail-img" th:style="'background-image : url(/upload_moamz/' +
+                                    ${storeInfoDTO.userFileRoot} + '/' + ${storeInfoDTO.userFileUuid} +
+                                    '_' + ${storeInfoDTO.userFileName} + ')'"></div>
                             </label>
                             <div class="thumbnail-cancle-btn"></div>
                         </div>
-                        <input type="file" id="attach" style="display: none;"> 
+                        <!-- 실제 파일 정보가 담기는 태그 -->
+                        <input type="file" id="attach" name="userFile" style="display: none;">
+                        <!-- 파일 변경여부 감지 태그 -->
+                        <input type="hidden" id="fileChanged" name="fileChanged" value="false">
                     </div>
 
                     <!-- 업체주소 영역-->
                     <div class="address-modify-container">
                         <label class="modify-item modify-label">업체주소</label>
                         <div class="modify-item">
-                            <input id="address-num" type="text" value="12345" disabled>
-                            <input type="button" id="address-search-btn" value="검색">
+                            <input id="address-num" type="text" name="postcode" th:value="${storeInfoDTO.postcode}" readonly>
+                            <input type="button" id="address-search-btn" value="검색" onclick="findPostCode()">
                         </div>
-                        <input id="address-detail-1" class="modify-item" type="text" value="서울특별시 강남구 테헤란로 146" disabled>
-                        <input id="address-detail-2" class="modify-item" type="text" value="현익빌딩 3층, 4층">
+                        <input id="address-detail-1" class="modify-item" type="text" name="address" th:value="${storeInfoDTO.address}" readonly>
+                        <input id="address-detail-2" class="modify-item" type="text" name="addressDetail" th:value="${storeInfoDTO.addressDetail}">
                     </div>
                     <!-- 업체 대표번호 영역 -->
                     <div class="store-phone-num-container">
                         <label class="modify-item modify-label" for="store-phone-num">업체 대표번호</label>
-                        <input id="store-phone-num" class="modify-item" type="number" value="025380021">
+                        <input id="store-phone-num" class="modify-item" type="text" name="businessPhone" th:value="${storeInfoDTO.businessPhone}">
                     </div>
                     <!-- 영업시간 영역 -->
                     <div class="store-run-hours-container">
                         <div>
                             <label class="modify-item modify-label" for="store-open-time">오픈 시간</label>
-                            <input id="store-open-time" type="time"/>
+                            <input id="store-open-time" type="time" name="openTime" th:value="${storeInfoDTO.openTime}"/>
                         </div>
                         <div>
                             <label class="modify-item modify-label" for="store-close-time">마감 시간</label>
-                            <input id="store-close-time" type="time"/>
+                            <input id="store-close-time" type="time" name="closeTime" th:value="${storeInfoDTO.closeTime}"/>
                         </div>
                     </div>
                     <!-- 업체 상세정보 -->
                     <div class="store-detail-container">
                         <label class="modify-item modify-label" for="store-detail">업체 상세정보</label>
-                        <textarea id="store-detail"></textarea>
+                        <textarea id="store-detail" name="businessDetail" th:text="${storeInfoDTO.businessDetail}"></textarea>
                     </div>
                 </form>
                 <!-- 버튼 -->
@@ -89,13 +105,6 @@
             
         </div>
     </main>
-    <footer id="footer"></footer>
+    <footer id="footer" th:replace="~{/main/fragment/footer/sellerFooter}"></footer>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(function() {
-        $("#header").load("../../main/fragment/header/sellerHeader.html");
-        $("#footer").load("../../main/fragment/footer/sellerFooter.html");
-    });
-</script>
 </html>

@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../static/css/reset2.css">
-    <link rel="stylesheet" href="../../../static/css/mypage/seller/sellerInfoModify.css">
-    <script defer src="../../../static/js/mypage/seller/sellerInfoModify.js"></script>
-    <script defer src="../../../static/js/mypage/seller/sellerInfoModify-Phone.js"></script>
+    <link rel="stylesheet" th:href="@{/css/reset2.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/seller/sellerInfoModify.css}">
+    <script defer th:src="@{/js/mypage/seller/sellerInfoModify.js}"></script>
     <title>마이페이지</title>
 </head>
 <body>
-    <header id="header"></header>
+    <header id="header" th:replace="~{/main/fragment/header/sellerHeader}"></header>
     <main>
         <div class="product-write-container">
             <!-- 제목 영역 -->
@@ -75,13 +74,6 @@
             
         </div>
     </main>
-    <footer id="footer"></footer>
+    <footer id="footer" th:replace="~{/main/fragment/footer/sellerFooter}"></footer>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(function() {
-        $("#header").load("../../main/fragment/header/sellerHeader.html");
-        $("#footer").load("../../main/fragment/footer/sellerFooter.html");
-    });
-</script>
 </html>

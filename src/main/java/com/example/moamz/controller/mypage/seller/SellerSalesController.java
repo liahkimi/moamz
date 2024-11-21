@@ -48,27 +48,9 @@ public class SellerSalesController {
         return "mypage/seller/sellerSalesHistory";
     }
 
-
-    // 주문확인 -> 픽업대기 변경 메서드
-    @PostMapping("/updateReady/{orderId}")
-    public String updateStatusReadyToPickup(@PathVariable("orderId") Long orderId) {
-
-        sellerSalesService.updateStatusReadyToPickup(orderId);
-
-        return "redirect:/seller/sales/list";
-    }
-
-    // 픽업대기 -> 픽업완료 변경 메서드
-    @PostMapping("/updatePickup/{orderId}")
-    public String updateStatusCompletePickup(@PathVariable("orderId") Long orderId) {
-
-        sellerSalesService.updateStatusCompletePickup(orderId);
-
-        return "redirect:/seller/sales/list";
-    }
-
-
-    // 상세보기 페이지
+    //
+    // 상세보기 페이지 <GET 요청>
+    //
     @GetMapping("/detail/{orderId}")
     public String salesDetail(@PathVariable("orderId") Long orderId,
                               @SessionAttribute(value="fgUserCode", required = false) Long userCode,
