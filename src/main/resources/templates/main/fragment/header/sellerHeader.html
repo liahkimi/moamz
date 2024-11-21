@@ -21,9 +21,11 @@
         </li>
       </ul>
       <div class="header-btn">
-        <div class="btn-img"><img th:src="@{/img/main/fragment/header/user.png}"></div>
-        <div class="btn-img"><img th:src="@{/img/main/fragment/header/chat.png}"></div>
-        <div class="btn-img"><img th:src="@{/img/main/fragment/header/notification.png}"></div>
+        <div class="btn-img">
+          <img th:src="@{/img/main/fragment/header/user.png}" onclick="location.href='/seller/sales/list'" alt="마이페이지 아이콘">
+        </div>
+        <div class="btn-img"><img th:src="@{/img/main/fragment/header/chat.png}" alt="채팅 아이콘"></div>
+        <div class="btn-img"><img th:src="@{/img/main/fragment/header/notification.png}" alt="알림창 아이콘"></div>
         <button class="login"  id="logout" type="button" onclick="location.href='/seller/logout'">로그아웃</button>
       </div>
       <!-- <button>로그아웃</button> -->
