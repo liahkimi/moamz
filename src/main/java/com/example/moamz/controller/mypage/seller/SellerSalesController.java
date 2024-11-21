@@ -42,41 +42,15 @@ public class SellerSalesController {
         // 판매자 프로필 가져오기
         SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(businessId, userCode);
 
-        // 상품 준비 상태별 판매 목록 가져오기
-//        List<SalesListDTO> readyList = sellerSalesService.findCheckOrder(businessId);
-//        List<SalesListDTO> pickupList = sellerSalesService.findReadyToPickUp(businessId);
-//        List<SalesListDTO> completedList = sellerSalesService.findCompletePickup(businessId);
-
         // 모델에 추가
         model.addAttribute("sellerProfileDTO", sellerProfileDTO);
-//        model.addAttribute("readyList", readyList);
-//        model.addAttribute("pickupList", pickupList);
-//        model.addAttribute("completedList", completedList);
 
         return "mypage/seller/sellerSalesHistory";
     }
 
-
-    // 주문확인 -> 픽업대기 변경 메서드
-    @PostMapping("/updateReady/{orderId}")
-    public String updateStatusReadyToPickup(@PathVariable("orderId") Long orderId) {
-
-        sellerSalesService.updateStatusReadyToPickup(orderId);
-
-        return "redirect:/seller/sales/list";
-    }
-
-    // 픽업대기 -> 픽업완료 변경 메서드
-    @PostMapping("/updatePickup/{orderId}")
-    public String updateStatusCompletePickup(@PathVariable("orderId") Long orderId) {
-
-        sellerSalesService.updateStatusCompletePickup(orderId);
-
-        return "redirect:/seller/sales/list";
-    }
-
-
-    // 상세보기 페이지
+    //
+    // 상세보기 페이지 <GET 요청>
+    //
     @GetMapping("/detail/{orderId}")
     public String salesDetail(@PathVariable("orderId") Long orderId,
                               @SessionAttribute(value="fgUserCode", required = false) Long userCode,

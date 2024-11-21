@@ -7,8 +7,7 @@ const withdrawBtn = document.getElementById('withdraw-btn');
 cancleBtn.addEventListener('click', () => {
     const isConfirm = confirm('취소하시겠습니까?');
     if (isConfirm) {
-        window.location.href = 'sellerProductList.html';
-    } else {
+        window.location.href = '/seller/sales/list';
     }
 });
 
@@ -29,15 +28,9 @@ withdrawBtn.addEventListener('click', (e) => {
         return;
     }
 
-    // 비밀번호 일치여부도 나중에 확인해야함
-
-    
     const isConfirm = confirm('정말로 탈퇴하시겠습니까?');
     if(isConfirm) {
-        alert('회원 탈퇴가 완료되었습니다.');
-        location.href='../../main/main/mainPage.html'
-    } else {
-        
+        // form 요소 제출하기
+        document.querySelector('form').submit();
     }
-
-})
+});

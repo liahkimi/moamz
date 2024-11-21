@@ -12,8 +12,6 @@ const pickupCompleteList = document.getElementById('product-completed-list');
 const readyCompleteBtn = document.querySelectorAll('.ready-complete-btn');
 // 고객픽업완료 버튼
 const pickupCompleteBtn = document.querySelectorAll('.pickup-complete-btn');
-// 자세히 보기 버튼
-const moveDetailBtn = document.querySelectorAll('.move-to-detail');
 
 // 페이지네이션 ul 태그
 const pageContainer = document.getElementById('pagination');
@@ -56,13 +54,12 @@ function loadSalesList(status, page = 1) {
 
             // 가져온 판매 내역을 html 요소로 생성한다.
             salesList.forEach(list => {
-                console.log(list);
 
                 // 픽업 상태에 따라 보여줄 버튼
                 let pickupBtn = '';
                 if(status === 'ready') {
                     pickupBtn = `<button type="button" class="ready-complete-btn">상품 준비 완료</button>`;
-                } else if (status === 'reserved') {
+                } else if (status === 'pickup') {
                     pickupBtn = `<button type="button" class="pickup-complete-btn">고객 픽업 완료</button>`;
                 }
 
@@ -72,7 +69,7 @@ function loadSalesList(status, page = 1) {
                     timeWrapHtml = `
                         <div class="time-wrap">
                             <p class="list-title">픽업완료시간</p>
-                            <p>${list.pickupCompletedTime}</p>
+                            <p>${list.pickupCompleteTime}</p>
                         </div>
                     `;
                 } else {
@@ -280,76 +277,56 @@ pickupCompleteMenu.addEventListener('click', () => {
 /////////////////////////////////////////////////////
 //// 주문확인중 -> 픽업대기중 상태로 변경
 
-// readyCompleteBtn.forEach(btn => {
-//     btn.addEventListener('click', function() {
-//         console.log('클릭');
-//         // const isConfirm = confirm("'픽업대기중' 상태로 변경하시겠습니까?");
-//         //
-//         // if (isConfirm) {
-//         //     // orderId값 가져오기
-//         //     const orderId = btn.closest('li').getAttribute('data-id');
-//         //     console.log(orderId);
-//         //
-//         //     // 상태 변경 fetch 요청
-//         //     fetch(`/seller/sales/updateReady/${orderId}`, {
-//         //         method: 'POST'
-//         //     }).then(response => {
-//         //         if (response.ok) {
-//         //             alert('변경되었습니다.');
-//         //             location.reload();
-//         //         }
-//         //     });
-//         //
-//         // }
-//     }); // addEventListener 끝
-// }); // forEach 끝
+productReadyList.addEventListener('click', (e) => {
+    if(e.target && e.target.classList.contains('ready-complete-btn')) {
+        const isConfirm = confirm("'픽업대기중' 상태로 변경하시겠습니까?");
 
+        if(isConfirm) {
+            // 클릭된 요소의 data-id값(productId) 가져오기
+            const orderId = e.target.closest('.product-list').dataset.id;
 
-
-
-// /////////////////////////////////////////////////////
-// //// 픽업대기중 -> 픽업완료 상태로 변경
-//
-// pickupCompleteBtn.forEach(btn => {
-//     btn.addEventListener('click', function() {
-//
-//         const isConfirm = confirm("'픽업완료' 상태로 변경하시겠습니까?");
-//
-//         if (isConfirm) {
-//             // orderId값 가져오기
-//             const orderId = btn.closest('li').getAttribute('data-id');
-//             console.log(orderId);
-//
-//             // 상태변경 fetch 요청
-//             fetch(`/seller/sales/updatePickup/${orderId}`, {
-//                 method: 'POST'
-//             }).then(response => {
-//                 if (response.ok) {
-//                     alert('변경되었습니다.');
-//                     location.reload();
-//                 }
-//             });
-//
-//         }
-//     }); // addEventListener 끝
-// }); // forEach 끝
-
+            // 픽업 상태 변경 요청
+            fetch(`/api/seller/sales/updateReady/${orderId}`, {
+                method: 'PATCH'
+            }).then(response => {
+                if(response.ok) {
+                    alert('변경되었습니다.');
+                    // 변경 후 목록 새고로침
+                    loadSalesList(currentStatus, currentPage);
+                } else {
+                    console.log('상품 상태 변경 실패 : ', response.error);
+                }
+            });
+        }
+    }
+});
 
 
 
 /////////////////////////////////////////////////////
-//// 자세히 보기 버튼
+//// 픽업대기중 -> 픽업완료 상태로 변경
 
-// moveDetailBtn.forEach(btn => {
-//     btn.addEventListener('click', function () {
-//         // orderId값 가져오기
-//         const orderId = btn.closest('li').getAttribute('data-id');
-//         console.log(orderId);
-//
-//         // 컨트롤러로 get 요청 보내기
-//         window.location.href = `/seller/sales/detail/${orderId}`;
-//     })
-// })
+readyToPickupList.addEventListener('click', (e) => {
+    if(e.target && e.target.classList.contains('pickup-complete-btn')) {
+        const isConfirm = confirm("'픽업완료' 상태로 변경하시겠습니까?");
 
+        if(isConfirm) {
+            // 클릭된 요소의 data-id값(productId) 가져오기
+            const orderId = e.target.closest('.product-list').dataset.id;
 
-// 페이지네이션..
+            // 픽업 상태 변경 요청
+            fetch(`/api/seller/sales/updatePickup/${orderId}`, {
+                method: 'PATCH'
+            }).then(response => {
+                if(response.ok) {
+                    alert('변경되었습니다.');
+                    // 변경 후 목록 새고로침
+                    loadSalesList(currentStatus, currentPage);
+                } else {
+                    console.log('상품 상태 변경 실패 : ', response.error);
+                }
+            });
+        }
+    }
+});
+
