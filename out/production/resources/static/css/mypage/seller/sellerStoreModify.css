@@ -1,18 +1,22 @@
 .product-write-container {
     width: 700px;
-    margin: 30px auto ;
+    margin: 80px auto ;
 }
 /* 제목 영역 */
 .write-title {
     font-size: 50px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 /* 정보 변경 영역 */
 .write-content-container {
     width: 100%;
     /* text-align: center; */
+}
+.modify-label {
+    width: 120px;
+    font-weight: bold;
 }
 /* 변경 안되는 영역 */
 .cannot-modify-container {
