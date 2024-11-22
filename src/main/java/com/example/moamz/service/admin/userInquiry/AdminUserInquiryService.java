@@ -2,6 +2,7 @@ package com.example.moamz.service.admin.userInquiry;
 
 import com.example.moamz.domain.dto.admin.userInquiry.AdminUserInquiryDetailDTO;
 import com.example.moamz.domain.dto.admin.userInquiry.AdminUserInquiryListDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import com.example.moamz.mapper.admin.userInquiry.AdminUserInquiryMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,7 @@ public class AdminUserInquiryService {
 
     private final AdminUserInquiryMapper adminUserInquiryMapper;
 
-    //일반회원  문의목록 보여주기
+    //일반회원  문의목록 보여주기 (페이지네이션 x)
     public List<AdminUserInquiryListDTO> findInquiryList(){
         return adminUserInquiryMapper.selectInquiryList();
     }
@@ -40,8 +41,15 @@ public class AdminUserInquiryService {
         adminUserInquiryMapper.changeStatusBtn(fgPostId);
     }
 
+    //일반회원문의 글 총갯수 구하기
+    public int findUserInquiryTotal(){
+        return adminUserInquiryMapper.selectUserInquiryTotal();
+    }
 
-
+    //모든 일반회원문의 목록 페이지 보기 (페이지네이션 o)
+    public List<AdminUserInquiryListDTO> findAllUserInquiryPage(Criteria criteria){
+        return adminUserInquiryMapper.selectAllUserInquiryPage(criteria);
+    }
 
 
 }

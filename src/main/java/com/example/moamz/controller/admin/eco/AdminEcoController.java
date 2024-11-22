@@ -48,7 +48,7 @@ public class AdminEcoController {
         return "admin/adminEcoList";
     }
 
-    // 에코프젝 글 총 갯수 구하기
+
 
 
     //에코프로젝트 작성페이지 보여주기

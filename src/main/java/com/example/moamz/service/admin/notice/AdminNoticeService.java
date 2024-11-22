@@ -34,7 +34,7 @@ public class AdminNoticeService {
         return adminNoticeMapper.selectNoticeById(fgPostId).orElseThrow(() -> new IllegalStateException("유효하지 않은 게시물"));
     }
 
-    //공지사항 목록 보기
+    //공지사항 목록 보기 (페이지네이션 x)
     public List<AdminNoticeListDTO> findNoticeAll(){
         return adminNoticeMapper.selectNoticeAll();
     }

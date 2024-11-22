@@ -46,10 +46,10 @@
               </thead>
               <tbody>
                 <tr style="cursor: pointer;" th:each="inquiry, iterStat :${adminUserInquiryListDTO}" th:onclick="|location.href='@{/admin/userInquiry/detail(fgPostId=${inquiry.fgPostId})}'|">
-                  <td th:text="${iterStat.index + 1}">1</td>
-                  <td th:text="${inquiry.fgPostTitle}">판매자가 전화를 안받는데 어떡하죠?</td>
-                  <td th:text="${inquiry.fgNormalNickname}">user1</td>
-                  <td th:text="${inquiry.fgPostCreatedAt}">2024/10/11 13:00</td>
+                  <td  th:text="${(page.criteria.getPage() - 1) * page.criteria.getAmount() + iterStat.index + 1}">번호</td>
+                  <td th:text="${inquiry.fgPostTitle}">문의제목</td>
+                  <td th:text="${inquiry.fgNormalNickname}">작성자닉네임</td>
+                  <td th:text="${inquiry.fgPostCreatedAt}">작성일</td>
                     <td>
                         <button type="button"
                                 th:if="${inquiry.fgInquiryStatus == '0'}"
@@ -164,13 +164,31 @@
               </tbody>
             </table>
             <div class="pagination">
-              <button class="prev">Previous</button>
-              <button class="page active">1</button>
-              <button class="page">2</button>
-              <button class="page">3</button>
-              <button class="next">Next</button>
+              <ul class="page-box">
+                <a th:href="@{/admin/userInquiry/list(page=${page.startPage - 1})}" class="page-a" th:if="${page.prev}">
+                  <li class="page-num prev">&lt</li>
+                </a>
+                <!--        th:block은 화면에 영향을 주지않는 가짜 태그
+                            타임리프 문법을 사용하기 위해 만들어 쓴다.
+                -->
+                <th:block th:each="i : ${#numbers.sequence(page.startPage, page.endPage)}">
+                  <a th:href="@{/admin/userInquiry/list(page=${i})}" class="page-a">
+                    <li class="page-num" th:classappend="${i == page.criteria.page ? 'active' : ''}" th:text="${i}"></li>
+                  </a>
+                </th:block>
+                <a th:href="@{/admin/userInquiry/list(page=${page.endPage + 1})}" class="page-a" th:if="${page.next}">
+                  <li class="page-num next">&gt</li>
+                </a>
+              </ul>
             </div>
-          </div>
+<!--            <div class="pagination">-->
+<!--              <button class="prev">Previous</button>-->
+<!--              <button class="page active">1</button>-->
+<!--              <button class="page">2</button>-->
+<!--              <button class="page">3</button>-->
+<!--              <button class="next">Next</button>-->
+<!--            </div>-->
+<!--          </div>-->
 <!--          &lt;!&ndash; 답변된 회원 목록 &ndash;&gt;-->
 <!--          <div id="seller-table-container" class="table-hidden">-->
 <!--            <table>-->
@@ -302,6 +320,7 @@
 <!--              <button class="next">Next</button>-->
 <!--            </div>-->
 <!--          </div>-->
+          </div>
         </div>
       </div>
     </main>

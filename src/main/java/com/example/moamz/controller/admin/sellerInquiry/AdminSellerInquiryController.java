@@ -2,6 +2,8 @@ package com.example.moamz.controller.admin.sellerInquiry;
 
 import com.example.moamz.domain.dto.admin.sellerInquiry.AdminSellerInquiryDetailDTO;
 import com.example.moamz.domain.dto.admin.sellerInquiry.AdminSellerInquiryListDTO;
+import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.Page;
 import com.example.moamz.mapper.admin.sellerInquiry.AdminSellerInquiryMapper;
 import com.example.moamz.service.admin.sellerInquiry.AdminSellerInquiryService;
 import com.example.moamz.service.admin.userInquiry.AdminUserInquiryService;
@@ -22,9 +24,12 @@ public class AdminSellerInquiryController {
 
     //판매자 문의목록 보여주기
     @GetMapping("/list")
-    public String inquiryList(@SessionAttribute(value="fgUserCode")Long fgUserCode, Model model){
-        List<AdminSellerInquiryListDTO> adminSellerInquiryListDTO = adminSellerInquiryService.findInquiryList();
+    public String inquiryList(@SessionAttribute(value="fgUserCode" ,required=false)Long fgUserCode, Criteria criteria, Model model){
+        List<AdminSellerInquiryListDTO> adminSellerInquiryListDTO = adminSellerInquiryService.findAllSellerInquiryPage(criteria);
+        int total = adminSellerInquiryService.findSellerInquiryTotal(); //판매자문의글 총 갯수
+        Page page = new Page(criteria, total);
 
+        model.addAttribute("page", page);
         model.addAttribute("adminSellerInquiryListDTO", adminSellerInquiryListDTO);
         return "admin/adminSellerInquiryList";
     }
