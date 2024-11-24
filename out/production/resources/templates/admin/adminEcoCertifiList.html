@@ -42,7 +42,7 @@
               </thead>
               <tbody>
                 <tr onclick="goToDetailPage()"  th:onclick="|goToDetailPage(event,${certList.fgPostId},${certList.fgProjectId})|" th:each ="certList, iterStat :${adminEcoCertListDTO}">
-                  <td th:text="${iterStat.index + 1}">1</td>
+                  <td th:text="${(ingCertPage.criteria.getPage() - 1) * ingCertPage.criteria.getAmount() + iterStat.index + 1}">1</td>
                   <td th:text="${certList.fgPostTitle}">오늘 플로깅 인증합니다!</td>
                   <td th:text="${certList.fgNormalNickname}">user1</td>
                   <td th:text="${certList.fgPostCreatedAt}">2024/10/11</td>
@@ -73,11 +73,22 @@
               </div>
             </div>
             <div class="pagination">
-              <button class="prev">Previous</button>
-              <button class="page active">1</button>
-              <button class="page">2</button>
-              <button class="page">3</button>
-              <button class="next">Next</button>
+              <ul class="page-box">
+                <a th:href="@{/admin/eco/ecoCertList/{fgPostId}(fgPostId=${fgPostId},page=${ingCertPage.startPage - 1})}" class="page-a" th:if="${ingCertPage.prev}">
+                  <li class="page-num prev">&lt</li>
+                </a>
+                <!--        th:block은 화면에 영향을 주지않는 가짜 태그
+                            타임리프 문법을 사용하기 위해 만들어 쓴다.
+                -->
+                <th:block th:each="i : ${#numbers.sequence(ingCertPage.startPage, ingCertPage.endPage)}">
+                  <a th:href="@{/admin/eco/ecoCertList/{fgPostId}(fgPostId=${fgPostId},page=${i})}" class="page-a">
+                    <li class="page-num" th:classappend="${i == ingCertPage.criteria.page ? 'active' : ''}" th:text="${i}"></li>
+                  </a>
+                </th:block>
+                <a th:href="@{/admin/eco/ecoCertList/{fgPostId}(fgPostId=${fgPostId}, page=${ingCertPage.endPage + 1})}" class="page-a" th:if="${ingCertPage.next}">
+                  <li class="page-num next">&gt</li>
+                </a>
+              </ul>
             </div>
           </div>
         </div>

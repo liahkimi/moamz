@@ -284,6 +284,7 @@ td button:hover{
     justify-content: center;
 }
 
+
 .page-num {
     border: 1px solid ;
     width: 25px;
@@ -296,6 +297,8 @@ td button:hover{
     background-color: white;
     cursor: pointer;
 }
+
+
 
 .active,
 .page-num:hover {

@@ -27,25 +27,35 @@ import java.util.List;
 public class AdminEcoController {
     private final AdminEcoService adminEcoService;
 
-    //진행 OR 종료된 에코프로젝트 목록 보여주기
-    @GetMapping("/list")
+    //진행중인 에코프로젝트 목록 보여주기
+    @GetMapping("/ingList")
     public String ingEcoList(Criteria criteria, Model model, @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
         criteria.setAmount(2);
-        //진행중인 에코프젝 목록 dto
-        List<AdminIngEcoListDTO> adminIngEcoListDTO = adminEcoService.findAllIngEcoList(criteria);
-        int total = adminEcoService.findEcoTotal(); //에코프젝 총 갯수
 
-        Page page = new Page(criteria, total);
-        model.addAttribute("page", page);
+        List<AdminIngEcoListDTO> adminIngEcoListDTO = adminEcoService.findAllIngEcoList(criteria);
+        int ingTotal = adminEcoService.findEcoTotal(); //에코프젝 총 갯수
+        Page ingPage = new Page(criteria, ingTotal);
+        model.addAttribute("ingPage", ingPage);
         model.addAttribute("adminIngEcoListDTO", adminIngEcoListDTO);
 
+        return "admin/adminEcoList";
+    }
+
+    //종료된 에코프로젝트 목록 보여주기
+    @GetMapping("/finList")
+    public String finEcoList(Criteria criteria, Model model, @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
+        criteria.setAmount(2);
 
         //완료된 에코프젝 목록 dto
-        List<AdminFinEcoListDTO> adminFinEcoListDTO = adminEcoService.findFinEcoList();
+        List<AdminFinEcoListDTO> adminFinEcoListDTO = adminEcoService.findAllFinEcoList(criteria);
+        int finTotal = adminEcoService.findFinEcoTotal(); //에코프젝 총 갯수
+        Page finPage = new Page(criteria, finTotal);
+        model.addAttribute("finPage", finPage);
         model.addAttribute("adminFinEcoListDTO", adminFinEcoListDTO);
 
-        System.out.println("adminIngEcoListDTO = " + adminIngEcoListDTO);
-        return "admin/adminEcoList";
+        log.info("💥💥💥💥+adminFinEcoListDTO, {}", adminFinEcoListDTO);
+
+        return "admin/adminFinEcoList";
     }
 
 
@@ -97,11 +107,15 @@ public class AdminEcoController {
 
     // 진행중인 에코프로젝트 인증글목록 불러오기
     @GetMapping("/ecoCertList/{fgPostId}")
-    public String ecoCertList(@PathVariable("fgPostId") Long fgPostId, Model model, @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
-        List<AdminEcoCertListDTO> adminEcoCertListDTO = adminEcoService.findEcoCertList(fgPostId);
-        model.addAttribute("adminEcoCertListDTO", adminEcoCertListDTO);
+    public String ecoCertList(@PathVariable("fgPostId") Long fgPostId , Model model, Criteria criteria,
+                              @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
+        List<AdminEcoCertListDTO> adminEcoCertListDTO = adminEcoService.findAllEcoCertPage(criteria, fgPostId);
+        int ingCertTotal = adminEcoService.findEcoCertTotal(fgPostId);
+        Page ingCertPage = new Page(criteria, ingCertTotal);
 
-        System.out.println("adminEcoCertListDTO = " + adminEcoCertListDTO);
+        model.addAttribute("fgPostId", fgPostId);
+        model.addAttribute("ingCertPage", ingCertPage);
+        model.addAttribute("adminEcoCertListDTO", adminEcoCertListDTO);
         return "admin/adminEcoCertifiList";
     }
 
@@ -113,11 +127,6 @@ public class AdminEcoController {
         AdminEcoCertDetailDTO adminEcoCertDetailDTO = adminEcoService.findEcoCertDetail(fgPostId, fgProjectId);
         List<AdminCommentDTO> adminCommentDTO = adminEcoService.findEcoCertDetailComment(fgPostId);
         model.addAttribute("adminCommentDTO", adminCommentDTO);
-        if (adminCommentDTO == null) {
-            log.info("⭐⭐⭐⭐⭐adminCommentDTO is null");
-        } else {
-            log.info("⭐⭐⭐⭐⭐adminCommentDTO : {}", adminCommentDTO);
-        }
 
 
         adminEcoCertDetailDTO.setFgProjectId(fgProjectId);
@@ -128,11 +137,25 @@ public class AdminEcoController {
 
     // 완료된 에코프로젝트 인증글목록 불러오기
     @GetMapping("/finEcoCertList/{fgPostId}")
-    public String finEcoCertList(@PathVariable("fgPostId") Long fgPostId, Model model, @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
-        List<AdminEcoCertListDTO> adminEcoCertListDTO = adminEcoService.findEcoCertList(fgPostId);
-        model.addAttribute("adminEcoCertListDTO", adminEcoCertListDTO);
+    public String finEcoCertList(@PathVariable("fgPostId") Long fgPostId, Model model, Criteria criteria,
+                                 @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
+        List<AdminEcoCertListDTO> adminFinEcoCertListDTO = adminEcoService.findAllEcoCertPage(criteria, fgPostId);
+        int finCertTotal = adminEcoService.findEcoCertTotal(fgPostId);
+        Page finCertPage = new Page(criteria, finCertTotal);
 
-        System.out.println("adminEcoCertListDTO = " + adminEcoCertListDTO);
+        System.out.println("Total Certification Count: " + finCertTotal);
+
+        // prev, next 값 출력
+        System.out.println("prev: " + finCertPage.isPrev());  // prev 값 확인
+        System.out.println("next: " + finCertPage.isNext());  // next 값 확인
+
+        model.addAttribute("fgPostId", fgPostId);
+        model.addAttribute("finCertPage", finCertPage);
+        model.addAttribute("adminFinEcoCertListDTO", adminFinEcoCertListDTO);
+
+        log.info("✔️✔️✔️✔️✔️+adminFinEcoCertListDTO, {}", adminFinEcoCertListDTO);
+
+        System.out.println("adminEcoCertListDTO = " + adminFinEcoCertListDTO);
         return "admin/adminEcoCertifiListFin";
     }
 

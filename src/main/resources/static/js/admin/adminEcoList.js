@@ -18,6 +18,20 @@ finishedBtn.addEventListener("click", () => {
 });
 
 
+
+function showIngList() {
+    document.getElementById('ongoing-eco__btn').classList.remove('active-btn');
+    document.getElementById('finished-eco__btn').classList.add('active-btn');
+}
+
+function showFinList() {
+    document.getElementById('ongoing-eco__btn').classList.remove('active-btn');
+    document.getElementById('finished-eco__btn').classList.add('active-btn');
+}
+
+
+
+
 //진행중인 에코리스트 배너클릭시 해당 인증목록 페이지로 이동
 function goToDetailPage(event, fgPostId) {
     event.stopPropagation();
