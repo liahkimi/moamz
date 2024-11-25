@@ -1,6 +1,7 @@
 package com.example.moamz.service.admin.userMng;
 
 import com.example.moamz.domain.dto.admin.userInquiry.AdminUserInquiryListDTO;
+import com.example.moamz.domain.dto.admin.userMng.AdminSearchDTO;
 import com.example.moamz.domain.dto.admin.userMng.SellerMngListDTO;
 import com.example.moamz.domain.dto.admin.userMng.UserMngListDTO;
 import com.example.moamz.domain.dto.page.Criteria;
@@ -48,5 +49,21 @@ public class UserMngService {
     //모든 판매자목록 보기 (페이지네이션o)
     public List<SellerMngListDTO> findAllSellerMngPage(Criteria criteria){
         return userMngMapper.selectAllSellerMngPage(criteria);
+    }
+
+
+    // 사용자 유형 조회
+    public String searchUserTypeByUserId(String fgUserId) {
+        return userMngMapper.findUserTypeByUserId(fgUserId);
+    }
+
+    // 일반 회원 검색
+    public List<UserMngListDTO> findNormalUserByUserId(String fgUserId, Criteria criteria) {
+        return userMngMapper.searchNormalUserByUserId(fgUserId, criteria);
+    }
+
+    // 판매자 회원 검색
+    public List<SellerMngListDTO> findSellerByUserId(String fgUserId, Criteria criteria) {
+        return userMngMapper.searchSellerByUserId(fgUserId, criteria);
     }
 }

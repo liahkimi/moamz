@@ -26,7 +26,7 @@ public class AdminUserInquiryService {
 
 
     //일반회원 특정 문의글 상세보기
-    public AdminUserInquiryDetailDTO findInquiryDetail(Long fgPostId){
+    public AdminUserInquiryDetailDTO findInquiryDetail(Long fgPostId, Long fgUserCode){
         return adminUserInquiryMapper.selectUserInquiryDetailById(fgPostId).orElseThrow(()-> new IllegalStateException("유효하지 않은 게시물 입니다."));
     }
 

@@ -1,10 +1,12 @@
 package com.example.moamz.mapper.admin.userMng;
 
 import com.example.moamz.domain.dto.admin.userInquiry.AdminUserInquiryListDTO;
+import com.example.moamz.domain.dto.admin.userMng.AdminSearchDTO;
 import com.example.moamz.domain.dto.admin.userMng.SellerMngListDTO;
 import com.example.moamz.domain.dto.admin.userMng.UserMngListDTO;
 import com.example.moamz.domain.dto.page.Criteria;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,5 +30,16 @@ public interface UserMngMapper {
 
     //모든 판매자목록 보기 (페이지네이션o)
     List<SellerMngListDTO> selectAllSellerMngPage(Criteria criteria);
+
+//    List<AdminSearchDTO> searchByUserId(String fgUserId);
+
+    // 사용자 유형 조회
+    String findUserTypeByUserId(String fgUserId);
+
+    // 일반 회원 검색
+    List<UserMngListDTO> searchNormalUserByUserId(@Param("fgUserId") String fgUserId, @Param("criteria") Criteria criteria);
+
+    // 판매자 회원 검색
+    List<SellerMngListDTO> searchSellerByUserId(@Param("fgUserId") String fgUserId, @Param("criteria") Criteria criteria);
 
 }

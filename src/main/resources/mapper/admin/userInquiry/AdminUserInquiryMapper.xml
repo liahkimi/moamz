@@ -27,6 +27,7 @@
     <select id="selectUserInquiryDetailById" parameterType="Long" resultType="AdminUserInquiryDetailDTO">
         SELECT p.FG_POST_ID,p.FG_POST_TITLE ,
                uf.FG_USER_FILE_ROOT,uf.FG_USER_FILE_NAME,uf.FG_USER_FILE_UUID,
+               cu.FG_USER_ID,
                nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT,
                i.FG_INQUIRY_STATUS, i.FG_INQUIRY_CONTENT
         FROM FG_INQUIRY i
@@ -36,18 +37,18 @@
                  JOIN FG_USER_FILE uf ON p.FG_USER_CODE = uf.FG_USER_CODE
         WHERE i.FG_POST_ID =#{fgPostId}
     </select>
-  <!--일반회원 특정 문의글 상세보기에 있는 댓글 보여주기?????(이렇게 하는게 맞나...???)-->
-    <select id="selectUserInquiryDetailCommentById" parameterType="Long" resultType="adminCommentDTO">
-        SELECT c.FG_POST_ID,cu.FG_USER_TYPE, c.FG_COMMENT_DATE, c.FG_COMMENT_CONTENT,
-               CASE
-                   WHEN c.FG_COMMENT_EDIT = '0' THEN ' '
-                   WHEN c.FG_COMMENT_EDIT = '1' THEN '수정됨'
-                   END AS isEdited
-        FROM FG_COMMENT c, FG_POST p, FG_COMMON_USER cu
-        WHERE c.FG_POST_ID = p.FG_POST_ID
-          AND c.FG_USER_CODE = cu.FG_USER_CODE
-          AND c.FG_POST_ID = #{fgPostId}
-    </select>
+<!--  &lt;!&ndash;일반회원 특정 문의글 상세보기에 있는 댓글 보여주기?????(이렇게 하는게 맞나...???)&ndash;&gt;-->
+<!--    <select id="selectUserInquiryDetailCommentById" parameterType="Long" resultType="adminCommentDTO">-->
+<!--        SELECT c.FG_POST_ID,cu.FG_USER_TYPE, c.FG_COMMENT_DATE, c.FG_COMMENT_CONTENT,-->
+<!--               CASE-->
+<!--                   WHEN c.FG_COMMENT_EDIT = '0' THEN ' '-->
+<!--                   WHEN c.FG_COMMENT_EDIT = '1' THEN '수정됨'-->
+<!--                   END AS isEdited-->
+<!--        FROM FG_COMMENT c, FG_POST p, FG_COMMON_USER cu-->
+<!--        WHERE c.FG_POST_ID = p.FG_POST_ID-->
+<!--          AND c.FG_USER_CODE = cu.FG_USER_CODE-->
+<!--          AND c.FG_POST_ID = #{fgPostId}-->
+<!--    </select>-->
 
     <!--답변상태 변경하기 (처음엔 무조건 FG_INQUIRY_STATUS = '0')-->
     <update id="changeStatusBtn" parameterType="Long">

@@ -45,7 +45,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr style="cursor: pointer;" th:each="inquiry, iterStat :${adminUserInquiryListDTO}" th:onclick="|location.href='@{/admin/userInquiry/detail(fgPostId=${inquiry.fgPostId})}'|">
+                <tr style="cursor: pointer;"
+                    th:each="inquiry, iterStat :${adminUserInquiryListDTO}"
+                    th:onclick="|location.href='/admin/userInquiry/detail/' + ${inquiry.fgPostId}|"
+                >
                   <td  th:text="${(page.criteria.getPage() - 1) * page.criteria.getAmount() + iterStat.index + 1}">번호</td>
                   <td th:text="${inquiry.fgPostTitle}">문의제목</td>
                   <td th:text="${inquiry.fgNormalNickname}">작성자닉네임</td>

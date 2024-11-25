@@ -31,7 +31,7 @@
 
     <!--판매자 특정 문의글 상세보기-->
     <select id="selectUserInquiryDetailById" parameterType="Long" resultType="AdminSellerInquiryDetailDTO">
-        SELECT p.FG_POST_TITLE,
+        SELECT  p.FG_POST_ID,p.FG_POST_TITLE,
                uf.FG_USER_FILE_ROOT,uf.FG_USER_FILE_NAME,uf.FG_USER_FILE_UUID,
                cu.FG_USER_ID, b.FG_BUSINESS_NAME,
                p.FG_POST_CREATED_AT, i.FG_INQUIRY_STATUS,

@@ -27,9 +27,8 @@
         </div>
         <!-- 검색창 -->
         <div class="search-input">
-            <input type="text" placeholder="검색" />
-            <!--💥추후 button  검색구현하기 -->
-            <button>
+            <input type="text" id="fgUserId" placeholder="아이디로 회원 검색"  onkeydown="if(event.key === 'Enter') searchUser()" />
+            <button onclick="searchUser()">
                 <img
                         class="icon"
                         th:src="@{/img/admin/search.png}"
@@ -158,12 +157,10 @@
     </div>
 </main>
 </body>
-<!--  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
-<!--  <script>-->
-<!--      $(function() {-->
-<!--          $("#adminNavBar").load("adminNavBar.html");-->
-<!--          $("#adminHeader").load("adminHeader.html")-->
-<!--      });-->
-<!--  </script>-->
-
+<script>
+    function searchUser() {
+        var fgUserId = document.getElementById("fgUserId").value;
+        location.href = '/admin/userMng/search?fgUserId=' + encodeURIComponent(fgUserId);
+    }
+</script>
 </html>

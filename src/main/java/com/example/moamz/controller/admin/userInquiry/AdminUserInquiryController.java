@@ -34,12 +34,21 @@ public class AdminUserInquiryController {
     }
 
     //문의 상세페이지 보여주기
-    @GetMapping("/detail")
-    public String inquiryDetail(@SessionAttribute(value="fgUserCode",required=false) Long fgUserCode,@RequestParam("fgPostId") Long fgPostId, Model model){
-        System.out.println("view 컨트롤러");
-        AdminUserInquiryDetailDTO adminUserInquiryDetailDTO = adminUserInquiryService.findInquiryDetail(fgPostId);
+    @GetMapping("/detail/{fgPostId}")
+    public String inquiryDetail(@PathVariable("fgPostId") Long fgPostId,
+                                @SessionAttribute(value="fgUserCode",required=false) Long fgUserCode, Model model){
+        AdminUserInquiryDetailDTO adminUserInquiryDetailDTO = adminUserInquiryService.findInquiryDetail(fgPostId, fgUserCode);
+
+        if(fgUserCode.equals(adminUserInquiryDetailDTO.getWriterCode())) {
+            // 내가 작성한 게시글이면 isMyPost = true
+            adminUserInquiryDetailDTO.setMyPost(true);
+        } else {
+            // 내가 작상힌 게시글이 아니면 isMyPost = false
+            adminUserInquiryDetailDTO.setMyPost(false);
+        }
 
         model.addAttribute("adminUserInquiryDetailDTO", adminUserInquiryDetailDTO);
+        log.info("👻👻👻adminSellerInquiryDetailDTO, {}", adminUserInquiryDetailDTO);
         return "admin/adminUserInquiryDetail";
     }
 

@@ -126,4 +126,99 @@
         WHERE RNUM > (#{page} - 1) * #{amount}
         ]]>
     </select>
+
+<!--        &lt;!&ndash; userId로 검색 &ndash;&gt;-->
+<!--        <select id="searchByUserId" parameterType="String" resultType="AdminSearchDTO">-->
+<!--            SELECT-->
+<!--                nu.FG_USER_CODE,-->
+<!--                cu.FG_USER_ID,-->
+<!--                cu.FG_USER_JOIN_DATE,-->
+<!--                nu.FG_NORMAL_NICKNAME,-->
+<!--                NVL(pt.FG_POINT_TOTAL, 0) AS FG_POINT_TOTAL,-->
+<!--                COUNT(DISTINCT ps.FG_POST_ID) AS FG_POST_COUNT,-->
+<!--                COUNT(DISTINCT CASE WHEN o.FG_PAYMENT_STATUS = '결제완료' THEN o.FG_ORDER_ID END) AS FG_PURCHASE_COUNT,-->
+<!--                s.FG_USER_CODE AS SELLER_USER_CODE,-->
+<!--                b.FG_BUSINESS_NAME,-->
+<!--                NVL(AVG(r.FG_REVIEW_RATING), 0) AS FG_AVERAGE_REVIEW_RATING,-->
+<!--                COUNT(DISTINCT l.FG_LIKE_ID) AS FG_LIKE_COUNT,-->
+<!--                COUNT(DISTINCT p.FG_PRODUCT_ID) AS FG_PRODUCT_COUNT,-->
+<!--                COUNT(CASE WHEN o2.FG_PAYMENT_STATUS = '결제완료' THEN o2.FG_PRODUCT_ID END) AS FG_SALES_COUNT-->
+<!--            FROM-->
+<!--                FG_COMMON_USER cu-->
+<!--                    LEFT JOIN FG_NORMAL_USER nu ON cu.FG_USER_CODE = nu.FG_USER_CODE-->
+<!--                    LEFT JOIN FG_POINT pt ON nu.FG_USER_CODE = pt.FG_USER_CODE-->
+<!--                    LEFT JOIN FG_POST ps ON nu.FG_USER_CODE = ps.FG_USER_CODE-->
+<!--                    LEFT JOIN FG_ORDER o ON nu.FG_USER_CODE = o.FG_USER_CODE-->
+<!--                    LEFT JOIN FG_SELLER s ON cu.FG_USER_CODE = s.FG_USER_CODE-->
+<!--                    LEFT JOIN FG_BUSINESS b ON s.FG_USER_CODE = b.FG_USER_CODE-->
+<!--                    LEFT JOIN FG_LIKE l ON l.FG_BUSINESS_ID = b.FG_BUSINESS_ID-->
+<!--                    LEFT JOIN FG_PRODUCT p ON b.FG_BUSINESS_ID = p.FG_BUSINESS_ID-->
+<!--                    LEFT JOIN FG_ORDER o2 ON p.FG_PRODUCT_ID = o2.FG_PRODUCT_ID-->
+<!--                    LEFT JOIN FG_REVIEW r ON b.FG_BUSINESS_ID = r.FG_BUSINESS_ID-->
+<!--            WHERE cu.FG_USER_ID = #{fgUserId}-->
+<!--            GROUP BY-->
+<!--                nu.FG_USER_CODE,-->
+<!--                nu.FG_NORMAL_NICKNAME,-->
+<!--                cu.FG_USER_ID,-->
+<!--                cu.FG_USER_JOIN_DATE,-->
+<!--                pt.FG_POINT_TOTAL,-->
+<!--                s.FG_USER_CODE,-->
+<!--                b.FG_BUSINESS_NAME-->
+<!--        </select>-->
+
+    <!-- FG_USER_TYPE 가져오기 -->
+    <select id="findUserTypeByUserId" resultType="string">
+        SELECT FG_USER_TYPE
+        FROM FG_COMMON_USER
+        WHERE FG_USER_ID = #{fgUserId}
+    </select>
+
+    <!-- 일반회원 검색 -->
+    <select id="searchNormalUserByUserId" resultType="UserMngListDTO">
+        SELECT nu.FG_USER_CODE,
+               nu.FG_NORMAL_NICKNAME,
+               cu.FG_USER_ID,
+               cu.FG_USER_JOIN_DATE,
+               NVL(pt.FG_POINT_TOTAL, 0) AS FG_POINT_TOTAL,
+               COUNT(DISTINCT ps.FG_POST_ID) AS FG_POST_COUNT,
+               COUNT(DISTINCT CASE WHEN o.FG_PAYMENT_STATUS = '결제완료' THEN o.FG_ORDER_ID END) AS FG_PURCHASE_COUNT
+        FROM FG_NORMAL_USER nu
+                 JOIN FG_COMMON_USER cu ON nu.FG_USER_CODE = cu.FG_USER_CODE
+                 LEFT JOIN FG_POINT pt ON nu.FG_USER_CODE = pt.FG_USER_CODE
+                 LEFT JOIN FG_POST ps ON nu.FG_USER_CODE = ps.FG_USER_CODE
+                 LEFT JOIN FG_ORDER o ON nu.FG_USER_CODE = o.FG_USER_CODE
+        WHERE cu.FG_USER_ID = #{fgUserId}
+        GROUP BY nu.FG_USER_CODE, nu.FG_NORMAL_NICKNAME, cu.FG_USER_ID, cu.FG_USER_JOIN_DATE, pt.FG_POINT_TOTAL
+    </select>
+
+    <!-- 판매자 회원 검색 -->
+    <select id="searchSellerByUserId" resultType="SellerMngListDTO">
+        SELECT s.FG_USER_CODE,
+               cu.FG_USER_ID,
+               cu.FG_USER_JOIN_DATE,
+               b.FG_BUSINESS_NAME,
+               NVL(AVG(r.FG_REVIEW_RATING), 0) AS FG_AVERAGE_REVIEW_RATING,
+               COUNT(DISTINCT l.FG_LIKE_ID) AS FG_LIKE_COUNT,
+               COUNT(DISTINCT p.FG_PRODUCT_ID) AS FG_PRODUCT_COUNT,
+               COUNT(CASE WHEN o.FG_PAYMENT_STATUS = '결제완료' THEN o.FG_PRODUCT_ID END) AS FG_SALES_COUNT
+        FROM FG_SELLER s
+                 JOIN FG_COMMON_USER cu ON s.FG_USER_CODE = cu.FG_USER_CODE
+                 JOIN FG_BUSINESS b ON s.FG_USER_CODE = b.FG_USER_CODE
+                 LEFT JOIN FG_LIKE l ON l.FG_BUSINESS_ID = b.FG_BUSINESS_ID
+                 LEFT JOIN FG_PRODUCT p ON p.FG_BUSINESS_ID = b.FG_BUSINESS_ID
+                 LEFT JOIN FG_ORDER o ON p.FG_PRODUCT_ID = o.FG_PRODUCT_ID
+                 LEFT JOIN FG_REVIEW r ON b.FG_BUSINESS_ID = r.FG_BUSINESS_ID
+        WHERE cu.FG_USER_ID = #{fgUserId}
+        GROUP BY s.FG_USER_CODE, cu.FG_USER_ID, cu.FG_USER_JOIN_DATE, b.FG_BUSINESS_NAME
+    </select>
+
+
+
+
 </mapper>
+
+
+
+
+
+

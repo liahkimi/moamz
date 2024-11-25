@@ -1,6 +1,7 @@
 package com.example.moamz.controller.admin.userMng;
 
 
+import com.example.moamz.domain.dto.admin.userMng.AdminSearchDTO;
 import com.example.moamz.domain.dto.admin.userMng.SellerMngListDTO;
 import com.example.moamz.domain.dto.admin.userMng.UserMngListDTO;
 import com.example.moamz.domain.dto.page.Criteria;
@@ -50,6 +51,43 @@ public class UserMngController {
         model.addAttribute("sellerMngListDTO", sellerMngListDTO);
 
         return "admin/adminSellerManagement";
+    }
+
+    // 검색 기능 추가
+    @GetMapping("/search")
+    public String searchUserById(
+            @RequestParam("fgUserId") String fgUserId,
+            Model model,
+            Criteria criteria) {
+
+        // 1. 사용자 유형 확인
+        String userType = userMngService.searchUserTypeByUserId(fgUserId);
+
+        // 2. 일반 회원 처리
+        if ("일반회원".equals(userType)) {
+            List<UserMngListDTO> userMngListDTO = userMngService.findNormalUserByUserId(fgUserId, criteria);
+            int userTotal = userMngService.findUserMngTotal(); // 일반 회원 총 인원 수
+            Page userPage = new Page(criteria, userTotal);
+            model.addAttribute("userPage", userPage);
+            model.addAttribute("userMngListDTO", userMngListDTO);
+
+            return "admin/adminUserManagement";
+
+            // 3. 판매자 회원 처리
+        } else if ("판매자".equals(userType)) {
+            List<SellerMngListDTO> sellerMngListDTO = userMngService.findSellerByUserId(fgUserId, criteria);
+            int sellerTotal = userMngService.findSellerMngTotal(); // 판매자 총 인원 수
+            Page sellerPage = new Page(criteria, sellerTotal);
+            model.addAttribute("sellerPage", sellerPage);
+            model.addAttribute("sellerMngListDTO", sellerMngListDTO);
+
+            return "admin/adminSellerManagement";
+
+            // 4. 사용자 유형이 없거나 잘못된 경우
+        } else {
+            model.addAttribute("errorMessage", "해당 ID를 가진 사용자가 존재하지 않습니다.");
+            return "admin/adminSearchError";
+        }
     }
 
 
