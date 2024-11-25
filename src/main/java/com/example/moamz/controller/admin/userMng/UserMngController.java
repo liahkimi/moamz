@@ -57,15 +57,21 @@ public class UserMngController {
     @GetMapping("/search")
     public String searchUserById(
             @RequestParam("fgUserId") String fgUserId,
-            Model model,
-            Criteria criteria) {
+            @RequestParam(value = "page", defaultValue = "1") int page, // 기본값 설정
+            @RequestParam(value = "amount", defaultValue = "10000000") int amount, // 임의로 검색할때 페이지네이션 1로 나오게 하기 위함
+            Model model) {
+
+        // Criteria 객체를 생성하고 기본값을 설정
+        Criteria criteria = new Criteria();
+        criteria.setPage(page);
+        criteria.setAmount(amount);
 
         // 1. 사용자 유형 확인
         String userType = userMngService.searchUserTypeByUserId(fgUserId);
 
         // 2. 일반 회원 처리
         if ("일반회원".equals(userType)) {
-            List<UserMngListDTO> userMngListDTO = userMngService.findNormalUserByUserId(fgUserId, criteria);
+            List<UserMngListDTO> userMngListDTO = userMngService.findNormalUserByUserId(fgUserId , criteria);
             int userTotal = userMngService.findUserMngTotal(); // 일반 회원 총 인원 수
             Page userPage = new Page(criteria, userTotal);
             model.addAttribute("userPage", userPage);
