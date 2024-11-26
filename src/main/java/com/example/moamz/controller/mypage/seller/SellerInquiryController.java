@@ -48,10 +48,10 @@ public class SellerInquiryController {
         }
 
         // 현재 로그인한 판매자의 businessId값 찾기
-        Long businessCode = sellerMyService.findBusinessId(userCode);
+        Long businessId = sellerMyService.findBusinessId(userCode);
 
         // 판매자 프로필 가져오기
-        SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(userCode, businessCode);
+        SellerProfileDTO sellerProfileDTO = sellerMyService.getSellerProfile(businessId, userCode);
 
         // 한 페이지에 게시글 20개씩 보이도록 설정
         criteria.setAmount(20);

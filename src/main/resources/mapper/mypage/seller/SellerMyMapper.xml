@@ -102,12 +102,11 @@
         WHERE FG_USER_CODE = ${userCode}
     </select>
 
-    <!-- 아이디, 비밀번호 확인 -->
-    <select id="selectSellerCode" resultType="Long">
-        SELECT FG_USER_CODE
+    <!-- userCode로 비밀번호 조회하기 -->
+    <select id="selectSellerPw" parameterType="Long" resultType="String">
+        SELECT FG_USER_PASSWORD
         FROM FG_COMMON_USER
-        WHERE FG_USER_ID = #{userId}
-          AND FG_USER_PASSWORD = #{userPassword}
+        WHERE FG_USER_CODE = #{userCode}
     </select>
 
     <!-- 개인정보 가져오기 -->
@@ -121,31 +120,42 @@
         AND cu.FG_USER_CODE = #{userCode}
     </select>
 
+    <!-- 휴대폰번호 조회하기 -->
+    <select id="selectSellerPhone" parameterType="Long" resultType="String">
+        SELECT FG_SELLER_PHONE
+        FROM FG_SELLER
+        WHERE FG_USER_CODE = #{userCode}
+    </select>
+
     <!-- 휴대폰번호 변경하기 -->
-    <update id="modifySellerPhone" parameterType="String">
+    <update id="modifySellerPhone">
         UPDATE FG_SELLER
-        SET FG_SELLER_PHONE = #{sellerPhone}
+        SET FG_SELLER_PHONE = #{inputPhone}
         WHERE FG_USER_CODE = #{userCode}
     </update>
 
     <!-- 비밀번호 변경하기 -->
-    <update id="modifySellerPw" parameterType="String">
+    <update id="modifySellerPw">
         UPDATE FG_COMMON_USER
-        SET FG_USER_PASSWORD = #{userPassword}
+        SET FG_USER_PASSWORD = #{inputPw}
         WHERE FG_USER_CODE = #{userCode}
     </update>
 
     <!-- 업체 정보 가져오기 -->
-    <select id="selectStoreInfo" parameterType="Long" resultType="SellerInfoDTO">
+    <select id="selectStoreInfo" parameterType="Long" resultType="StoreInfoDTO">
         -- 업체명, 사업자번호, 주소, 대표번호, 시간, 상세정보
-        SELECT b.FG_BUSINESS_NAME AS businessName, b.FG_BUSINESS_NUMBER AS businessNumber,
+        SELECT b.FG_USER_CODE AS userCode,
+               b.FG_BUSINESS_NAME AS businessName, b.FG_BUSINESS_NUMBER AS businessNumber,
                b.FG_BUSINESS_POSTCODE AS postcode,
                b.FG_BUSINESS_ADDRESS AS address, b.FG_BUSINESS_ADDRESS_DETAIL AS addressDetail,
                b.FG_BUSINESS_PHONE AS businessPhone,
                b.FG_BUSINESS_OPEN_TIME AS openTime, b.FG_BUSINESS_CLOSE_TIME AS closeTime,
-               b.FG_BUSINESS_DETAIL AS businessDetail
-        FROM FG_BUSINESS b, FG_COMMON_USER cu
-        WHERE cu.FG_USER_CODE = #{userCode}
+               b.FG_BUSINESS_DETAIL AS businessDetail,
+               uf.FG_USER_FILE_ROOT AS userFileRoot, uf.FG_USER_FILE_NAME AS userFileName,
+               uf.FG_USER_FILE_UUID AS userFileUuid
+        FROM FG_BUSINESS b, FG_USER_FILE uf
+        WHERE b.FG_USER_CODE = uf.FG_USER_CODE
+          AND b.FG_USER_CODE = #{userCode}
     </select>
 
     <!-- 업체 정보 변경하기 -->
@@ -167,21 +177,13 @@
         WHERE FG_USER_CODE = #{userCode}
     </delete>
 
-    <!-- 판매자 프로필 쿼리 -->
-    <!--         SELECT uf.FG_USER_FILE_NAME AS userFileName,
-               uf.FG_USER_FILE_ROOT AS userFileRoot,
-               uf.FG_USER_FILE_UUID AS userFileUuid,
-                b.FG_BUSINESS_NAME AS businessName,
-               b.FG_BUSINESS_RATING AS businessRating,
-               COALESCE(SUM(o.FG_ORDER_QUANTITY * p.FG_PRODUCT_WEIGHT), 0) AS totalWeight
-        FROM FG_BUSINESS b, FG_USER_FILE uf, FG_ORDER o, FG_PRODUCT p
-        WHERE b.FG_USER_CODE = uf.FG_USER_CODE
-          AND o.FG_PRODUCT_ID = p.FG_PRODUCT_ID(+)
-          AND p.FG_BUSINESS_ID = b.FG_BUSINESS_ID(+)
-          AND o.FG_PAYMENT_STATUS = '결제완료'
-          AND b.FG_USER_CODE = #{userCode}
-        GROUP BY uf.FG_USER_FILE_NAME, uf.FG_USER_FILE_ROOT, uf.FG_USER_FILE_UUID,
-                 b.FG_BUSINESS_NAME, b.FG_BUSINESS_RATING
-     -->
+    <!-- 주문확인중, 픽업대기중인 상품이 있는지 확인 -->
+    <select id="selectWithdrawAvailable" parameterType="Long" resultType="int">
+        SELECT COUNT(o.FG_ORDER_ID)
+        FROM FG_ORDER o, FG_PICKUP pick
+        WHERE o.FG_ORDER_ID = pick.FG_ORDER_ID
+          AND o.FG_BUSINESS_ID = #{businessId}
+          AND (pick.FG_PICKUP_STATUS = '주문확인중' OR pick.FG_PICKUP_STATUS = '픽업대기중')
+    </select>
 
 </mapper>
