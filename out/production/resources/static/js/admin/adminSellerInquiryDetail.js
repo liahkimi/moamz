@@ -23,7 +23,6 @@ const postId = document.querySelector('.content').getAttribute('data-id');
     comment.getListAll(postId, page, function(data) {
         hasNext = data.hasNext;
         displayComment(data.contentList);
-        console.log(data.contentList);
     });
 
 
@@ -47,7 +46,6 @@ const postId = document.querySelector('.content').getAttribute('data-id');
 
         // 댓글 등록 함수 호출
         comment.insertComm(commInfo, () => {
-            console.log(commInfo);
             // input 태그 초기화
             $commentInput.value = '';
 
@@ -56,7 +54,6 @@ const postId = document.querySelector('.content').getAttribute('data-id');
 
             // 댓글 목록 다시 가져오기
             comment.getListAll(postId, page, function(data) {
-                console.log(data);
                 hasNext = data.hasNext;
                 displayComment(data.contentList);
             });
@@ -178,13 +175,11 @@ const postId = document.querySelector('.content').getAttribute('data-id');
 function displayComment(commentList) {
     // 댓글 목록이 보여질 태그
     const commentContainer = document.querySelector('.comment-content-wrap ul');
-    // console.log(commentList);
     // 댓글 목록을 출력할 태그 초기화
     let tags = ``;
 
     // connentList에 있는 댓글을 하나씩 html 태그로 생성한다.
     commentList.forEach(comment => {
-        //console.log(comment);
 
         tags += `
             <li class="comment-list" data-id="${comment.fgCommentId}">
@@ -226,7 +221,6 @@ function appendComment(commentList) {
 
     // connentList에 있는 댓글을 하나씩 html 태그로 생성한다.
     commentList.forEach(comment => {
-        //console.log(comment);
 
         tags += `
             <li class="comment-list" data-id="${comment.fgCommentId}">

@@ -49,7 +49,6 @@ public class AdminSellerInquiryController {
         }
 
         model.addAttribute("adminSellerInquiryDetailDTO", adminSellerInquiryDetailDTO);
-        log.info("🫠🫠🫠adminSellerInquiryDetailDTO, {}", adminSellerInquiryDetailDTO);
         return "admin/adminSellerInquiryDetail";
     }
 

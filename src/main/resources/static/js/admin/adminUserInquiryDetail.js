@@ -184,7 +184,6 @@ function displayComment(commentList) {
 
     // connentList에 있는 댓글을 하나씩 html 태그로 생성한다.
     commentList.forEach(comment => {
-        //console.log(comment);
 
         tags += `
             <li class="comment-list" data-id="${comment.fgCommentId}">
@@ -226,7 +225,6 @@ function appendComment(commentList) {
 
     // connentList에 있는 댓글을 하나씩 html 태그로 생성한다.
     commentList.forEach(comment => {
-        //console.log(comment);
 
         tags += `
             <li class="comment-list" data-id="${comment.fgCommentId}">
