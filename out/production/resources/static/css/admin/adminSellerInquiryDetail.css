@@ -30,9 +30,14 @@ a {
     height: 100vh;
   }
   body{
-    width: 1690px ;
-    overflow: hidden;
+    margin: 0;
+    /*width: 1690px ;*/
+    /*overflow: hidden;*/
+    display: flex;
+    flex-direction: column;
+    height: 80%;
   }
+
   
   /* 로고 */
   header .admin-logo {
