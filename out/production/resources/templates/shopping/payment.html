@@ -25,31 +25,24 @@
                     <img th:src="@{/img/shopping/abocado.png}" alt="">
                 </div>
                 <div class="payment-payment-product-text">
-                    <div class="payment-payment-product-text-name">
+                    <div class="payment-payment-product-text-name" th:text="${productName}">
                         [Dole] 아보카도
                     </div>
                     <div class="payment-payment-product-text-eco">
                         <span>
-                            <div class="payment-payment-product-text-eco-calendar">
+                            <div class="payment-payment-product-text-eco-calendar" th:text="${#temporals.format(productExpTime, 'yy.MM.dd')}">
                                 <img th:src="@{/img/shopping/productListcalendar.png}" alt="">
                                 24.10.15
                             </div>
-                            <div class="payment-payment-product-text-eco-co2">
+                            <div class="payment-payment-product-text-eco-co2" th:text="${productWeight}">
                                 <img th:src="@{/img/shopping/productListco2.png}" alt="">
                                 2kg
                             </div>
                         </span>
                     </div>
-                    <div class="payment-payment-product-price">
+                    <div class="payment-payment-product-price" th:text="${productPrice}">
                         <span>
                             75,600원
-                            <div class="payment-product-count-btn">
-                                <button type="button" id="inc">+</button>
-                                <div class="payment-product-count-num" id="counting">
-                                    1
-                                </div>
-                                <button type="button" id="dec">-</button>
-                            </div>
                         </span>
                     </div>
                 </div>

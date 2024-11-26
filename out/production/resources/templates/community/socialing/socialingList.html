@@ -49,48 +49,72 @@
         <!-- 소셜링 영역 -->
         <div class="board-container">
             <div class="sharing-board-category">
-                <div id="eat-together-btn" class="sharing-category-btn active">
+                <div id="eat-together-btn" class="sharing-category-btn"
+                     th:classappend="${selectedCategory == '함께먹어요' ? 'active' : ''}"
+                     data-category="함께먹어요">
                     함께 먹어요
                 </div>
-                <div id="go-together-btn" class="sharing-category-btn">
+                <div id="go-together-btn" class="sharing-category-btn"
+                     th:classappend="${selectedCategory == '함께떠나요' ? 'active' : ''}"
+                     data-category="함께떠나요">
                     함께 떠나요
                 </div>
-                <div id="volunteer-btn" class="sharing-category-btn">봉사활동</div>
-                <div id="hobby-btn" class="sharing-category-btn">취미</div>
-                <div id="activity-btn" class="sharing-category-btn">운동</div>
-                <div id="improvement-btn" class="sharing-category-btn">
+                <div id="volunteer-btn" class="sharing-category-btn"
+                     th:classappend="${selectedCategory == '봉사활동' ? 'active' : ''}"
+                     data-category="봉사활동">
+                    봉사활동
+                </div>
+                <div id="hobby-btn" class="sharing-category-btn"
+                     th:classappend="${selectedCategory == '취미' ? 'active' : ''}"
+                     data-category="취미">
+                    취미
+                </div>
+                <div id="activity-btn" class="sharing-category-btn"
+                     th:classappend="${selectedCategory == '운동' ? 'active' : ''}"
+                     data-category="운동">
+                    운동
+                </div>
+                <div id="improvement-btn" class="sharing-category-btn"
+                     th:classappend="${selectedCategory == '자기개발' ? 'active' : ''}"
+                     data-category="자기개발">
                     자기개발
                 </div>
-                <div id="challenge-btn" class="sharing-category-btn">챌린지</div>
+                <div id="challenge-btn" class="sharing-category-btn"
+                     th:classappend="${selectedCategory == '챌린지' ? 'active' : ''}"
+                     data-category="챌린지">
+                    챌린지
+                </div>
             </div>
+
+
             <!-- 함께 먹어요 -->
             <div id="eat-together-list" class="sharing-list-container">
                 <ul>
 
-                    <li class="socialing-card-view" th:each="socialEat:${socialList}" th:if="${socialEat.fgSocialingCategory == '함께먹어요'}"
-                        th:onclick="|location.href='@{/socialing/socialingDetail/{fgPostId}(fgPostId=${socialEat.fgPostId})}'|">
+                    <li class="socialing-card-view" th:each="socialing:${socialList}" th:if="${socialing.fgSocialingCategory == '함께먹어요'}"
+                        th:onclick="|location.href='@{/socialing/socialingDetail/{fgPostId}(fgPostId=${socialing.fgPostId})}'|">
                         <div class="socialing-img">
-                            <img th:src="@{'/upload_moamz/' + ${socialEat.postFileRoot} + '/' + ${socialEat.postFileUuid}
-                                                + '_' + ${socialEat.postFileName}}" style="height: 160px; width: 160px;">
+                            <img th:src="@{'/upload_moamz/' + ${socialing.postFileRoot} + '/' + ${socialing.postFileUuid}
+                                                + '_' + ${socialing.postFileName}}" style="height: 160px; width: 160px;">
                         </div>
                         <div class="socialing-description">
-                            <div class="socialing-title" th:text="${socialEat.fgPostTitle}">우리 함께 모여 저녁식사 어때요?</div>
+                            <div class="socialing-title" th:text="${socialing.fgPostTitle}">우리 함께 모여 저녁식사 어때요?</div>
                             <div class="socialing-period">
                                 <img th:src="@{/img/community/socialing/calendar.png}" alt="yogaPic"/>
-                                <span class="socialing-start-date" th:text="${#temporals.format(socialEat.fgSocialingStart, 'yy.MM.dd')}"></span> -
-                                <span class="socialing-end-date" th:text="${#temporals.format(socialEat.fgSocialingEnd, 'yy.MM.dd')}"></span>
+                                <span class="socialing-start-date" th:text="${#temporals.format(socialing.fgSocialingStart, 'yy.MM.dd')}"></span> -
+                                <span class="socialing-end-date" th:text="${#temporals.format(socialing.fgSocialingEnd, 'yy.MM.dd')}"></span>
 
                             </div>
                             <div class="socialing-personnel">
                                 <img
                                         th:src="@{/img/community/socialing/people.png}" alt="yogaPic"/>
-                                <span class="socialing-current-personnel">2</span>/<span class= "socialing-maximum-personnel">8</span>
+                                <span class="socialing-current-personnel">2</span>/<span class= "socialing-maximum-personnel" th:text="${socialing.fgSocialingMaxParticipants}">8</span>
                             </div>
                             <div class="socialing-marks">
                                 <div class="socialing-age-mark">
-                                    <span class="socialing-minimum-age" th:text="${socialEat.fgSocialingMinage}">20</span>-<span class="socialing-maximum-age" th:text="${socialEat.fgSocialingMinage}">30</span>살
+                                    <span class="socialing-minimum-age" th:text="${socialing.fgSocialingMinage}">20</span>-<span class="socialing-maximum-age" th:text="${socialing.fgSocialingMinage}">30</span>살
                                 </div>
-                                <div class="socialing-sex" th:text="${socialEat.fgSocialingGenderRes}">성별무관</div>
+                                <div class="socialing-sex" th:text="${socialing.fgSocialingGenderRes}">성별무관</div>
                             </div>
                         </div>
                     </li>
@@ -108,43 +132,30 @@
             <!-- 함께 떠나요 -->
             <div id="go-together-list" class="sharing-list-container hidden">
                 <ul>
-                    <li class="socialing-card-view">
+                    <li class="socialing-card-view" th:each="socialing:${socialList}" th:if="${socialing.fgSocialingCategory == '함께떠나요'}"
+                        th:onclick="|location.href='@{/socialing/socialingDetail/{fgPostId}(fgPostId=${socialing.fgPostId})}'|">
                         <div class="socialing-img">
-                            <img
-                                    th:src="@{/img/community/socialing/dining.webp}"
-                                    alt="yogaPic"
-                            />
+                            <img th:src="@{'/upload_moamz/' + ${socialing.postFileRoot} + '/' + ${socialing.postFileUuid}
+                                                + '_' + ${socialing.postFileName}}" style="height: 160px; width: 160px;">
                         </div>
                         <div class="socialing-description">
-                            <div class="socialing-title">다함께 요가!</div>
+                            <div class="socialing-title" th:text="${socialing.fgPostTitle}">우리 함께 모여 저녁식사 어때요?</div>
                             <div class="socialing-period">
-                                <img
-                                        th:src="@{/img/community/socialing/calendar.png}"
-                                        alt="yogaPic"
-                                />
-                                <span class="socialing-start-date">2024/10/18</span>-<span
-                                    class="socialing-end-date"
-                            >2024/11/15</span
-                            >
+                                <img th:src="@{/img/community/socialing/calendar.png}" alt="yogaPic"/>
+                                <span class="socialing-start-date" th:text="${#temporals.format(socialing.fgSocialingStart, 'yy.MM.dd')}"></span> -
+                                <span class="socialing-end-date" th:text="${#temporals.format(socialing.fgSocialingEnd, 'yy.MM.dd')}"></span>
+
                             </div>
                             <div class="socialing-personnel">
                                 <img
-                                        th:src="@{/img/community/socialing/people.png}"
-                                        alt="yogaPic"
-                                />
-                                <span class="socialing-current-personnel">2</span>/<span
-                                    socialing-maximum-personnel
-                            >8</span
-                            >
+                                        th:src="@{/img/community/socialing/people.png}" alt="yogaPic"/>
+                                <span class="socialing-current-personnel">2</span>/<span class= "socialing-maximum-personnel" th:text="${socialing.fgSocialingMaxParticipants}">8</span>
                             </div>
                             <div class="socialing-marks">
                                 <div class="socialing-age-mark">
-                                    <span class="socialing-minimum-age">20</span>-<span
-                                        class="socialing-maximum-age"
-                                >30</span
-                                >대
+                                    <span class="socialing-minimum-age" th:text="${socialing.fgSocialingMinage}">20</span>-<span class="socialing-maximum-age" th:text="${socialing.fgSocialingMinage}">30</span>살
                                 </div>
-                                <div class="socialing-sex">성별무관</div>
+                                <div class="socialing-sex" th:text="${socialing.fgSocialingGenderRes}">성별무관</div>
                             </div>
                         </div>
                     </li>
@@ -162,43 +173,30 @@
             <!-- 봉사활동 -->
             <div id="volunteer-list" class="sharing-list-container hidden">
                 <ul>
-                    <li class="socialing-card-view">
+                    <li class="socialing-card-view" th:each="socialing:${socialList}" th:if="${socialing.fgSocialingCategory == '봉사활동'}"
+                        th:onclick="|location.href='@{/socialing/socialingDetail/{fgPostId}(fgPostId=${socialing.fgPostId})}'|">
                         <div class="socialing-img">
-                            <img
-                                    th:src="@{/img/community/socialing/dining.wepb}"
-                                    alt="yogaPic"
-                            />
+                            <img th:src="@{'/upload_moamz/' + ${socialing.postFileRoot} + '/' + ${socialing.postFileUuid}
+                                                + '_' + ${socialing.postFileName}}" style="height: 160px; width: 160px;">
                         </div>
                         <div class="socialing-description">
-                            <div class="socialing-title">다함께 봉사활동!</div>
+                            <div class="socialing-title" th:text="${socialing.fgPostTitle}">우리 함께 모여 저녁식사 어때요?</div>
                             <div class="socialing-period">
-                                <img
-                                        th:src="@{/img/community/socialing/calendar.png}"
-                                        alt="yogaPic"
-                                />
-                                <span class="socialing-start-date">2024/10/18</span>-<span
-                                    class="socialing-end-date"
-                            >2024/11/15</span
-                            >
+                                <img th:src="@{/img/community/socialing/calendar.png}" alt="yogaPic"/>
+                                <span class="socialing-start-date" th:text="${#temporals.format(socialing.fgSocialingStart, 'yy.MM.dd')}"></span> -
+                                <span class="socialing-end-date" th:text="${#temporals.format(socialing.fgSocialingEnd, 'yy.MM.dd')}"></span>
+
                             </div>
                             <div class="socialing-personnel">
                                 <img
-                                        th:src="@{/img/community/socialing/people.png}"
-                                        alt="yogaPic"
-                                />
-                                <span class="socialing-current-personnel">2</span>/<span
-                                    socialing-maximum-personnel
-                            >8</span
-                            >
+                                        th:src="@{/img/community/socialing/people.png}" alt="yogaPic"/>
+                                <span class="socialing-current-personnel">2</span>/<span class= "socialing-maximum-personnel" th:text="${socialing.fgSocialingMaxParticipants}">8</span>
                             </div>
                             <div class="socialing-marks">
                                 <div class="socialing-age-mark">
-                                    <span class="socialing-minimum-age">20</span>-<span
-                                        class="socialing-maximum-age"
-                                >30</span
-                                >대
+                                    <span class="socialing-minimum-age" th:text="${socialing.fgSocialingMinage}">20</span>-<span class="socialing-maximum-age" th:text="${socialing.fgSocialingMinage}">30</span>살
                                 </div>
-                                <div class="socialing-sex">성별무관</div>
+                                <div class="socialing-sex" th:text="${socialing.fgSocialingGenderRes}">성별무관</div>
                             </div>
                         </div>
                     </li>
@@ -216,43 +214,30 @@
             <!-- 취미 -->
             <div id="hobby-list" class="sharing-list-container hidden">
                 <ul>
-                    <li class="socialing-card-view">
+                    <li class="socialing-card-view" th:each="socialing:${socialList}" th:if="${socialing.fgSocialingCategory == '취미'}"
+                        th:onclick="|location.href='@{/socialing/socialingDetail/{fgPostId}(fgPostId=${socialing.fgPostId})}'|">
                         <div class="socialing-img">
-                            <img
-                                    th:src="@{/static/img/community/socialing/dining.webp}"
-                                    alt="yogaPic"
-                            />
+                            <img th:src="@{'/upload_moamz/' + ${socialing.postFileRoot} + '/' + ${socialing.postFileUuid}
+                                                + '_' + ${socialing.postFileName}}" style="height: 160px; width: 160px;">
                         </div>
                         <div class="socialing-description">
-                            <div class="socialing-title">다함께 취미생활!</div>
+                            <div class="socialing-title" th:text="${socialing.fgPostTitle}">우리 함께 모여 저녁식사 어때요?</div>
                             <div class="socialing-period">
-                                <img
-                                        th:src="@{/img/community/socialing/calendar.png}"
-                                        alt="yogaPic"
-                                />
-                                <span class="socialing-start-date">2024/10/18</span>-<span
-                                    class="socialing-end-date"
-                            >2024/11/15</span
-                            >
+                                <img th:src="@{/img/community/socialing/calendar.png}" alt="yogaPic"/>
+                                <span class="socialing-start-date" th:text="${#temporals.format(socialing.fgSocialingStart, 'yy.MM.dd')}"></span> -
+                                <span class="socialing-end-date" th:text="${#temporals.format(socialing.fgSocialingEnd, 'yy.MM.dd')}"></span>
+
                             </div>
                             <div class="socialing-personnel">
                                 <img
-                                        th:src="@{/img/community/socialing/people.png}"
-                                        alt="yogaPic"
-                                />
-                                <span class="socialing-current-personnel">2</span>/<span
-                                    socialing-maximum-personnel
-                            >8</span
-                            >
+                                        th:src="@{/img/community/socialing/people.png}" alt="yogaPic"/>
+                                <span class="socialing-current-personnel">2</span>/<span class= "socialing-maximum-personnel" th:text="${socialing.fgSocialingMaxParticipants}">8</span>
                             </div>
                             <div class="socialing-marks">
                                 <div class="socialing-age-mark">
-                                    <span class="socialing-minimum-age">20</span>-<span
-                                        class="socialing-maximum-age"
-                                >30</span
-                                >대
+                                    <span class="socialing-minimum-age" th:text="${socialing.fgSocialingMinage}">20</span>-<span class="socialing-maximum-age" th:text="${socialing.fgSocialingMinage}">30</span>살
                                 </div>
-                                <div class="socialing-sex">성별무관</div>
+                                <div class="socialing-sex" th:text="${socialing.fgSocialingGenderRes}">성별무관</div>
                             </div>
                         </div>
                     </li>
@@ -270,43 +255,30 @@
             <!-- 운동 -->
             <div id="activity-list" class="sharing-list-container hidden">
                 <ul>
-                    <li class="socialing-card-view">
+                    <li class="socialing-card-view" th:each="socialing:${socialList}" th:if="${socialing.fgSocialingCategory == '운동'}"
+                        th:onclick="|location.href='@{/socialing/socialingDetail/{fgPostId}(fgPostId=${socialing.fgPostId})}'|">
                         <div class="socialing-img">
-                            <img
-                                    th:src="@{/img/community/socialing/yoga.jpg}"
-                                    alt="yogaPic"
-                            />
+                            <img th:src="@{'/upload_moamz/' + ${socialing.postFileRoot} + '/' + ${socialing.postFileUuid}
+                                                + '_' + ${socialing.postFileName}}" style="height: 160px; width: 160px;">
                         </div>
                         <div class="socialing-description">
-                            <div class="socialing-title">다함께 요가!</div>
+                            <div class="socialing-title" th:text="${socialing.fgPostTitle}">우리 함께 모여 저녁식사 어때요?</div>
                             <div class="socialing-period">
-                                <img
-                                        th:src="@{/img/community/socialing/calendar.png}"
-                                        alt="yogaPic"
-                                />
-                                <span class="socialing-start-date">2024/10/18</span>-<span
-                                    class="socialing-end-date"
-                            >2024/11/15</span
-                            >
+                                <img th:src="@{/img/community/socialing/calendar.png}" alt="yogaPic"/>
+                                <span class="socialing-start-date" th:text="${#temporals.format(socialing.fgSocialingStart, 'yy.MM.dd')}"></span> -
+                                <span class="socialing-end-date" th:text="${#temporals.format(socialing.fgSocialingEnd, 'yy.MM.dd')}"></span>
+
                             </div>
                             <div class="socialing-personnel">
                                 <img
-                                        th:src="@{/img/community/socialing/people.png}"
-                                        alt="yogaPic"
-                                />
-                                <span class="socialing-current-personnel">2</span>/<span
-                                    socialing-maximum-personnel
-                            >8</span
-                            >
+                                        th:src="@{/img/community/socialing/people.png}" alt="yogaPic"/>
+                                <span class="socialing-current-personnel">2</span>/<span class= "socialing-maximum-personnel" th:text="${socialing.fgSocialingMaxParticipants}">8</span>
                             </div>
                             <div class="socialing-marks">
                                 <div class="socialing-age-mark">
-                                    <span class="socialing-minimum-age">20</span>-<span
-                                        class="socialing-maximum-age"
-                                >30</span
-                                >대
+                                    <span class="socialing-minimum-age" th:text="${socialing.fgSocialingMinage}">20</span>-<span class="socialing-maximum-age" th:text="${socialing.fgSocialingMinage}">30</span>살
                                 </div>
-                                <div class="socialing-sex">성별무관</div>
+                                <div class="socialing-sex" th:text="${socialing.fgSocialingGenderRes}">성별무관</div>
                             </div>
                         </div>
                     </li>
@@ -324,43 +296,30 @@
             <!-- 자기개발 -->
             <div id="improvement-list" class="sharing-list-container hidden">
                 <ul>
-                    <li class="socialing-card-view">
+                    <li class="socialing-card-view" th:each="socialing:${socialList}" th:if="${socialing.fgSocialingCategory == '자기개발'}"
+                        th:onclick="|location.href='@{/socialing/socialingDetail/{fgPostId}(fgPostId=${socialing.fgPostId})}'|">
                         <div class="socialing-img">
-                            <img
-                                    th:src="@{/img/community/socialing/yoga.jpg}"
-                                    alt="yogaPic"
-                            />
+                            <img th:src="@{'/upload_moamz/' + ${socialing.postFileRoot} + '/' + ${socialing.postFileUuid}
+                                                + '_' + ${socialing.postFileName}}" style="height: 160px; width: 160px;">
                         </div>
                         <div class="socialing-description">
-                            <div class="socialing-title">다함께 자기개발!</div>
+                            <div class="socialing-title" th:text="${socialing.fgPostTitle}">우리 함께 모여 저녁식사 어때요?</div>
                             <div class="socialing-period">
-                                <img
-                                        th:src="@{/img/community/socialing/calendar.png}"
-                                        alt="yogaPic"
-                                />
-                                <span class="socialing-start-date">2024/10/18</span>-<span
-                                    class="socialing-end-date"
-                            >2024/11/15</span
-                            >
+                                <img th:src="@{/img/community/socialing/calendar.png}" alt="yogaPic"/>
+                                <span class="socialing-start-date" th:text="${#temporals.format(socialing.fgSocialingStart, 'yy.MM.dd')}"></span> -
+                                <span class="socialing-end-date" th:text="${#temporals.format(socialing.fgSocialingEnd, 'yy.MM.dd')}"></span>
+
                             </div>
                             <div class="socialing-personnel">
                                 <img
-                                        th:src="@{/img/community/socialing/people.png}"
-                                        alt="yogaPic"
-                                />
-                                <span class="socialing-current-personnel">2</span>/<span
-                                    socialing-maximum-personnel
-                            >8</span
-                            >
+                                        th:src="@{/img/community/socialing/people.png}" alt="yogaPic"/>
+                                <span class="socialing-current-personnel">2</span>/<span class= "socialing-maximum-personnel" th:text="${socialing.fgSocialingMaxParticipants}">8</span>
                             </div>
                             <div class="socialing-marks">
                                 <div class="socialing-age-mark">
-                                    <span class="socialing-minimum-age">20</span>-<span
-                                        class="socialing-maximum-age"
-                                >30</span
-                                >대
+                                    <span class="socialing-minimum-age" th:text="${socialing.fgSocialingMinage}">20</span>-<span class="socialing-maximum-age" th:text="${socialing.fgSocialingMinage}">30</span>살
                                 </div>
-                                <div class="socialing-sex">성별무관</div>
+                                <div class="socialing-sex" th:text="${socialing.fgSocialingGenderRes}">성별무관</div>
                             </div>
                         </div>
                     </li>
@@ -378,43 +337,30 @@
             <!-- 챌린지 -->
             <div id="challenge-list" class="sharing-list-container hidden">
                 <ul>
-                    <li class="socialing-card-view">
+                    <li class="socialing-card-view" th:each="socialing:${socialList}" th:if="${socialing.fgSocialingCategory == '챌린지'}"
+                        th:onclick="|location.href='@{/socialing/socialingDetail/{fgPostId}(fgPostId=${socialing.fgPostId})}'|">
                         <div class="socialing-img">
-                            <img
-                                    th:src="@{/img/community/socialing/yoga.jpg}"
-                                    alt="yogaPic"
-                            />
+                            <img th:src="@{'/upload_moamz/' + ${socialing.postFileRoot} + '/' + ${socialing.postFileUuid}
+                                                + '_' + ${socialing.postFileName}}" style="height: 160px; width: 160px;">
                         </div>
                         <div class="socialing-description">
-                            <div class="socialing-title">다함께 챌린지!</div>
+                            <div class="socialing-title" th:text="${socialing.fgPostTitle}">우리 함께 모여 저녁식사 어때요?</div>
                             <div class="socialing-period">
-                                <img
-                                        th:src="@{/img/community/socialing/calendar.png}"
-                                        alt="yogaPic"
-                                />
-                                <span class="socialing-start-date">2024/10/18</span>-<span
-                                    class="socialing-end-date"
-                            >2024/11/15</span
-                            >
+                                <img th:src="@{/img/community/socialing/calendar.png}" alt="yogaPic"/>
+                                <span class="socialing-start-date" th:text="${#temporals.format(socialing.fgSocialingStart, 'yy.MM.dd')}"></span> -
+                                <span class="socialing-end-date" th:text="${#temporals.format(socialing.fgSocialingEnd, 'yy.MM.dd')}"></span>
+
                             </div>
                             <div class="socialing-personnel">
                                 <img
-                                        th:src="@{/img/community/socialing/people.png}"
-                                        alt="yogaPic"
-                                />
-                                <span class="socialing-current-personnel">2</span>/<span
-                                    socialing-maximum-personnel
-                            >8</span
-                            >
+                                        th:src="@{/img/community/socialing/people.png}" alt="yogaPic"/>
+                                <span class="socialing-current-personnel">2</span>/<span class= "socialing-maximum-personnel" th:text="${socialing.fgSocialingMaxParticipants}">8</span>
                             </div>
                             <div class="socialing-marks">
                                 <div class="socialing-age-mark">
-                                    <span class="socialing-minimum-age">20</span>-<span
-                                        class="socialing-maximum-age"
-                                >30</span
-                                >대
+                                    <span class="socialing-minimum-age" th:text="${socialing.fgSocialingMinage}">20</span>-<span class="socialing-maximum-age" th:text="${socialing.fgSocialingMinage}">30</span>살
                                 </div>
-                                <div class="socialing-sex">성별무관</div>
+                                <div class="socialing-sex" th:text="${socialing.fgSocialingGenderRes}">성별무관</div>
                             </div>
                         </div>
                     </li>
@@ -433,22 +379,27 @@
             <!-- 페이지네이션 -->
             <div class="pagination">
                 <ul class="page-box">
-                    <a th:href="@{/socialing/list(page=${page.startPage - 1})}" class="page-a" th:if="${page.prev}">
+                    <!-- 이전 버튼 -->
+                    <a th:href="@{/socialing/list(page=${page.startPage - 1}, category=${selectedCategory != null ? selectedCategory : '함께먹어요'})}"
+                       class="page-a" th:if="${page.prev}">
                         <li class="page-num prev">&lt</li>
                     </a>
-                    <!--        th:block은 화면에 영향을 주지않는 가짜 태그
-                                타임리프 문법을 사용하기 위해 만들어 쓴다.
-                    -->
+
+                    <!-- 페이지 번호 -->
                     <th:block th:each="i : ${#numbers.sequence(page.startPage, page.endPage)}">
-                        <a th:href="@{/socialing/list(page=${i})}" class="page-a">
-                            <li class="page-num" th:classappend="${i == page.criteria.page ? 'active' : ''}" th:text="${i}"></li>
+                        <a th:href="@{/socialing/list(page=${i}, category=${selectedCategory != null ? selectedCategory : '함께먹어요'})}" class="page-a">
+                            <li class="page-num" th:classappend="${i == (page.socialCriteria?.page ?: -1) ? 'active' : ''}" th:text="${i}"></li>
                         </a>
                     </th:block>
-                    <a th:href="@{/socialing/list(page=${page.endPage + 1})}" class="page-a" th:if="${page.next}">
+
+                    <!-- 다음 버튼 -->
+                    <a th:href="@{/socialing/list(page=${page.endPage + 1}, category=${selectedCategory != null ? selectedCategory : ''})}"
+                       class="page-a" th:if="${page.next}">
                         <li class="page-num next">&gt</li>
                     </a>
                 </ul>
             </div>
+
         </div>
     </section>
 </main>

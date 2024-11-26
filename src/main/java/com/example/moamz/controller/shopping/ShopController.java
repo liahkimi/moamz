@@ -42,6 +42,24 @@ public class ShopController {
         return "shopping/cart";
     }
 
+    @PostMapping("/payment")
+    public String processPayment(@RequestParam("productId") Long productId,
+                                 @RequestParam("productName") String productName,
+                                 @RequestParam("productPrice") Integer productPrice,
+                                 @RequestParam("productWeight") Double productWeight,
+                                 @RequestParam("productExpTime") String productExpTime,
+                                 Model model) {
+        // 상품 정보를 모델에 추가
+        model.addAttribute("productId", productId);
+        model.addAttribute("productName", productName);
+        model.addAttribute("productPrice", productPrice);
+        model.addAttribute("productWeight", productWeight);
+        model.addAttribute("productExpTime", productExpTime);
+
+        // 결제 페이지로 이동
+        return "shopping/payment";
+    }
+
     @GetMapping("/payment")
     public String payment(Model model){
         return "shopping/payment";

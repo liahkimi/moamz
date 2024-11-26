@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" th:href="@{/css/reset.2css}">
     <link rel="stylesheet" th:href="@{/css/community/ecoproject/ecoList.css}">
-    <script defer th:src="@{/js/community/ecoproject/ecoList.js}"></script>
+    <script defer th:src="@{/js/community/ecoproject/ecoEndList.js}"></script>
 </head>
 <body>
 <header id="header" th:replace="~{/main/fragment/header/userHeaderLogin}"></header>
@@ -49,65 +49,65 @@
             <div class="eco-banner" >
                 <div class="content">
                     <div class="toggle-btn-container">
-                        <button id="ongoing-eco__btn" class="active-btn">진행중</button>
-                        <button id="finished-eco__btn"  th:onclick="|location.href='@{/ecoproject/projectEndList}'|">완료</button>
+                        <button id="ongoing-eco__btn" th:onclick="|location.href='@{/ecoproject/projectList}'|">진행중</button>
+                        <button id="finished-eco__btn" class="active-btn">완료</button>
                     </div>
                     <!-- 진행중인 에코배너 화면 -->
-                    <div id="ongoing-eco" th:each="ecoList:${ecoProjectList}">
+                    <div id="ongoing-eco" class="banner-hidden" th:each="ecoList:${ecoProjectList}">
                         <a th:href="@{/ecoproject/ecoCertList/{fgPostId}(fgPostId=${ecoList.fgPostId})}">
-                        <div class="banner-box">
-                            <div class="banner-img">
-                                <img th:src="@{'/upload_moamz/' + ${ecoList.postFileRoot} + '/' + ${ecoList.postFileUuid}
+                            <div class="banner-box">
+                                <div class="banner-img">
+                                    <img th:src="@{'/upload_moamz/' + ${ecoList.postFileRoot} + '/' + ${ecoList.postFileUuid}
                                                 + '_' + ${ecoList.postFileName}}">
-                            </div>
-                            <div class="banner-article">
-                                <div class="title-and-btns">
-                                    <div class="title" th:text="${ecoList.fgPostTitle}">환경을 위한 플로깅 프로젝트!</div>
-
                                 </div>
-                                <div class="calendar-and-like">
-                                    <div class="calendar">
-                                        <div class="calendar-icon-wrapper">
-                                            <img th:src="@{/img/admin/calendar.png}" alt="plogging" />
+                                <div class="banner-article">
+                                    <div class="title-and-btns">
+                                        <div class="title" th:text="${ecoList.fgPostTitle}">환경을 위한 플로깅 프로젝트!</div>
 
-                                            <div class="calendar-text">
-                                                <span th:text="${ecoList.formattedEcoStart}">24/10/10</span> ~
-                                                <span th:text="${ecoList.formattedEcoEnd}">24/10/17</span>
+                                    </div>
+                                    <div class="calendar-and-like">
+                                        <div class="calendar">
+                                            <div class="calendar-icon-wrapper">
+                                                <img th:src="@{/img/admin/calendar.png}" alt="plogging" />
+
+                                                <div class="calendar-text">
+                                                    <span th:text="${ecoList.formattedEcoStart}">24/10/10</span> ~
+                                                    <span th:text="${ecoList.formattedEcoEnd}">24/10/17</span>
+                                                </div>
+                                            </div>
+                                            <div class="calendar-period"><span th:text="${ecoList.fgEcoDaysElapsed} + '일 동안'">1</span></div>
+                                        </div>
+                                        <div class="like">
+                                            <img th:src="@{/img/admin/heart.png}" alt="plogging" />
+
+                                            <div class="like-value">
+                                                <span th:text="${ecoList.fgPostLikes}">22</span>
                                             </div>
                                         </div>
-                                        <div class="calendar-period"><span th:text="${ecoList.fgEcoDaysElapsed} + '일 동안'">1</span></div>
                                     </div>
-                                    <div class="like">
-                                        <img th:src="@{/img/admin/heart.png}" alt="plogging" />
-
-                                        <div class="like-value">
-                                            <span th:text="${ecoList.fgPostLikes}">22</span>
-                                        </div>
+                                    <div class="description">
+                                        <div class="description-title">프로젝트 소개</div>
+                                        <p class="description-detail"  th:text="${ecoList.fgEcoInfo}">
+                                            플로깅은 스웨덴에서 시작된 환경 운동으로, 조깅을 하면서 동시에 쓰레기를 줍는 활동입니다. 건강과 환경 보호를 동시에 실천할 수 있는 이 멋진
+                                            운동은 조깅보다 더 많은 칼로리를 소모할 수 있습니다.
+                                        </p>
                                     </div>
+                                    <div class="certi-list">
+                                        <div class="certi-title"  >인증 사항</div>
+                                        <p class="certi-detail" th:text="${ecoList.fgCertInfo}">
+                                            1.플로깅 활동을 하며 주운 쓰레기 사진<br/>
+                                            2.소감/후기
+                                        </p>
+                                    </div>
+                                    <div class="join-sticker"  th:text="${ecoList.fgEcoParticipation}">한번만 참여 가능</div>
                                 </div>
-                                <div class="description">
-                                    <div class="description-title">프로젝트 소개</div>
-                                    <p class="description-detail"  th:text="${ecoList.fgEcoInfo}">
-                                        플로깅은 스웨덴에서 시작된 환경 운동으로, 조깅을 하면서 동시에 쓰레기를 줍는 활동입니다. 건강과 환경 보호를 동시에 실천할 수 있는 이 멋진
-                                        운동은 조깅보다 더 많은 칼로리를 소모할 수 있습니다.
-                                    </p>
-                                </div>
-                                <div class="certi-list">
-                                    <div class="certi-title"  >인증 사항</div>
-                                    <p class="certi-detail" th:text="${ecoList.fgCertInfo}">
-                                        1.플로깅 활동을 하며 주운 쓰레기 사진<br/>
-                                        2.소감/후기
-                                    </p>
-                                </div>
-                                <div class="join-sticker"  th:text="${ecoList.fgEcoParticipation}">한번만 참여 가능</div>
                             </div>
-                        </div>
                         </a>
 
                     </div>
 
                     <!-- 완료된 에코배너 화면 -->
-                    <div id="finished-eco" class="banner-hidden" th:each="ecoEnd:${ecoEndList}">
+                    <div id="finished-eco" th:each="ecoEnd:${ecoEndList}">
                         <div class="banner-box" th:hidden="${ecoEnd.fgPostId}">
                             <div class="banner-img">
                                 <img th:src="@{'/upload_moamz/' + ${ecoEnd.postFileRoot} + '/' + ${ecoEnd.postFileUuid}
@@ -160,20 +160,20 @@
             </div>
 
             <!-- 페이지네이션 -->
-            <div class="pagination" id="ongoing-page">
+            <div class="pagination" id="end-page">
                 <ul class="page-box">
-                    <a th:href="@{/ecoproject/projectList(page=${ecoPage.startPage - 1})}" class="page-a" th:if="${ecoPage.prev}">
+                    <a th:href="@{/ecoproject/projectEndList(page=${endPage.startPage - 1})}" class="page-a" th:if="${endPage.prev}">
                         <li class="page-num prev">&lt</li>
                     </a>
                     <!--        th:block은 화면에 영향을 주지않는 가짜 태그
                                 타임리프 문법을 사용하기 위해 만들어 쓴다.
                     -->
-                    <th:block th:each="i : ${#numbers.sequence(ecoPage.startPage, ecoPage.endPage)}">
-                        <a th:href="@{/ecoproject/projectList(page=${i})}" class="page-a">
-                            <li class="page-num" th:classappend="${i == ecoPage.criteria.page ? 'active' : ''}" th:text="${i}"></li>
+                    <th:block th:each="i : ${#numbers.sequence(endPage.startPage, endPage.endPage)}">
+                        <a th:href="@{/ecoproject/projectEndList(page=${i})}" class="page-a">
+                            <li class="page-num" th:classappend="${i == endPage.criteria.page ? 'active' : ''}" th:text="${i}"></li>
                         </a>
                     </th:block>
-                    <a th:href="@{/ecoproject/projectList(page=${ecoPage.endPage + 1})}" class="page-a" th:if="${ecoPage.next}">
+                    <a th:href="@{/ecoproject/projectEndList(page=${endPage.endPage + 1})}" class="page-a" th:if="${endPage.next}">
                         <li class="page-num next">&gt</li>
                     </a>
                 </ul>

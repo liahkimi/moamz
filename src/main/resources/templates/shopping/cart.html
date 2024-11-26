@@ -15,88 +15,114 @@
 
 <main>
     <div class="cart-container container">
-        <form action="#" method="post">
+        <form action="/shop/payment" method="post" id="cartForm">
+            <input type="hidden" name="productId" id="selectedProductId">
+            <input type="hidden" name="productName" id="selectedProductName">
+            <input type="hidden" name="productPrice" id="selectedProductPrice">
+            <input type="hidden" name="productWeight" id="selectedProductWeight">
+            <input type="hidden" name="productExpTime" id="selectedProductExpTime">
+            <!-- 상단 장바구니 안내 영역 -->
             <div class="cart-wrap1">
                 <div class="cart-top">
                     <div class="cart-top-cart">
-            <span>
-               <img th:src="@{/img/shopping/cart.png}" alt="">
-              장바구니
-            </span>
+                        <span>
+                            <img th:src="@{/img/shopping/cart.png}" alt="장바구니 아이콘">
+                            장바구니
+                        </span>
                     </div>
                     <div class="cart-top-text">
-                        단품 결제만 가능합니다. 주문 품목 한가지만 선택해주세요.
+                        단품 결제만 가능합니다. 주문 품목 한 가지만 선택해주세요.
                     </div>
                 </div>
             </div>
+
+            <!-- 상품 리스트 영역 -->
             <div class="cart-wrap2">
                 <div class="cart-product">
                     <div class="cart-product-top">
-            <span>
-                <img th:src="@{/img/shopping/shop.png}" alt="">
-            </span>
+                        <span>
+                            <img th:src="@{/img/shopping/shop.png}" alt="상점 아이콘">
+                        </span>
                     </div>
-                    <div class="cart-product-detail" th:each="cartList:${cartLists}">
 
-              <span>
-                  <div class="cart-product-detail-product">
+                    <!-- 상품 상세 리스트 -->
+                    <div class="cart-product-detail" th:each="cartList : ${cartLists}">
+                        <div class="cart-product-detail-product">
+                            <!-- 삭제 버튼 -->
                             <div class="cart-product-top-btn">
-                                <button type="button" class="cart-delete" th:data-fg-cart-detail-id="${cartList.fgCartDetailId}">X</button>
+                                <button type="button" class="cart-delete"
+                                        th:data-fg-cart-detail-id="${cartList.fgCartDetailId}">
+                                    X
+                                </button>
                             </div>
-                <input type="radio" name="selectProduct" id="" class="cart-radio">
-                <div class="cart-product-detail-product-intro">
-                  <div class="cart-product-detail-product-intro-img">
-                    <img th:src="@{/img/shopping/banana.png}" alt="" style="width: 220px; height: 180px;" >
-                  </div>
-                  <div class="cart-product-detail-product-intro-text">
-                    <div class="cart-product-detail-product-intro-text-name" th:text="${cartList.fgProductName}">
-                      [Dole] 아보카도
-                    </div>
-                    <div class="cart-product-detail-product-intro-text-price" th:text="${cartList.fgProductPrice + '원'}"
-                         th:attr="data-fg-product-price=${cartList.fgProductPrice}">
-                      9,900원
-                    </div>
-                    <div class="cart-product-detail-product-intro-text-eco">
-                      <span>
-                          <div class="cart-product-detail-product-intro-text-img"
-                               th:text="${#strings.substring(cartList.fgProductExpTime, 2, 4)} + '.' + ${#strings.substring(cartList.fgProductExpTime, 5, 7)} + '.' + ${#strings.substring(cartList.fgProductExpTime, 8, 10)}">
-                              <img th:src="@{/img/shopping/productListcalendar.png}" alt="">
-                              24.10.15
-                          </div>
-                          <div class="cart-product-detail-product-intro-text-weight" th:text="${cartList.fgProductWeight + ' kg'}"
-                               th:attr="data-fg-product-weight=${cartList.fgProductWeight}">
-                              <img th:src="@{/img/shopping/productListco2.png}" alt="">
-                              2kg
-                          </div>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="cart-product-count-btn">
-                  <button type="button" class="inc">+</button>
-                  <div class="cart-product-count-num" id="count">
-                      1
-                  </div>
-                  <button type="button" class="dec">-</button>
-                </div>
-              </span>
+
+                            <!-- 상품 선택 라디오 -->
+                            <input type="radio" name="selectProduct" class="cart-radio">
+
+                            <!-- 상품 정보 -->
+                            <div class="cart-product-detail-product-intro">
+                                <!-- 상품 이미지 -->
+                                <div class="cart-product-detail-product-intro-img">
+                                    <img th:src="@{/img/shopping/banana.png}" alt="${cartList.fgProductName}"
+                                         style="width: 220px; height: 180px;">
+                                </div>
+
+                                <!-- 상품 텍스트 정보 -->
+                                <div class="cart-product-detail-product-intro-text">
+                                    <div class="cart-product-detail-product-intro-text-name"
+                                         th:text="${cartList.fgProductName}">
+                                        상품명
+                                    </div>
+                                    <div class="cart-product-detail-product-intro-text-price"
+                                         th:text="${cartList.fgProductPrice} + '원'"
+                                         th:attr="data-fg-product-price=${cartList.fgProductPrice}">
+                                        가격
+                                    </div>
+                                    <div class="cart-product-detail-product-intro-text-eco">
+                                        <span>
+                                            <!-- 유통기한 -->
+                                            <div class="cart-product-detail-product-intro-text-img"
+                                                 th:text="${#strings.substring(cartList.fgProductExpTime, 2, 4)} + '.' + ${#strings.substring(cartList.fgProductExpTime, 5, 7)} + '.' + ${#strings.substring(cartList.fgProductExpTime, 8, 10)}">
+                                                <img th:src="@{/img/shopping/productListcalendar.png}" alt="유통기한">
+                                            </div>
+                                            <!-- 상품 무게 -->
+                                            <div class="cart-product-detail-product-intro-text-weight"
+                                                 th:text="${cartList.fgProductWeight} + ' kg'"
+                                                 th:attr="data-fg-product-weight=${cartList.fgProductWeight}">
+                                                <img th:src="@{/img/shopping/productListco2.png}" alt="무게">
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 수량 조절 버튼 -->
+                            <div class="cart-product-count-btn">
+                                <button type="button" class="inc">+</button>
+                                <div class="cart-product-count-num" id="count">1</div>
+                                <button type="button" class="dec">-</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-    </div>
-    <div class="cart-wrap3">
-        <div class="cart-bottom">
-          <span>
-            결제 예정 금액 : 9,900원
-            <button type="button" id="pay" th:onclick="|location.href='@{/shop/payment}'|">
-              <img th:src="@{/img/shopping/pay.png}" alt="">
-            </button>
-          </span>
-        </div>
-    </div>
-    </form>
+
+            <!-- 결제 정보 영역 -->
+            <div class="cart-wrap3">
+                <div class="cart-bottom">
+                    <span>
+                        결제 예정 금액: <span id="total-price">9,900원</span>
+                        <button type="button" id="pay"
+                                th:onclick="|location.href='@{/shop/payment}'|">
+                            <img th:src="@{/img/shopping/pay.png}" alt="결제하기">
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </form>
     </div>
 </main>
+
 <footer id="footer" th:replace="~{/main/fragment/footer/userFooter}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

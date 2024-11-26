@@ -79,3 +79,28 @@ $('.cart-delete').each(function () {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // 모든 라디오 버튼 가져오기
+    const radios = document.querySelectorAll(".cart-radio");
+    const form = document.getElementById("cartForm");
+
+    // 선택된 상품 정보를 hidden input에 설정
+    radios.forEach((radio) => {
+        radio.addEventListener("change", function () {
+            document.getElementById("selectedProductId").value = radio.getAttribute("data-product-id");
+            document.getElementById("selectedProductName").value = radio.getAttribute("data-product-name");
+            document.getElementById("selectedProductPrice").value = radio.getAttribute("data-product-price");
+            document.getElementById("selectedProductWeight").value = radio.getAttribute("data-product-weight");
+            document.getElementById("selectedProductExpTime").value = radio.getAttribute("data-product-exp-time");
+        });
+    });
+
+    // 폼 전송 시 선택 확인
+    form.addEventListener("submit", function (e) {
+        if (!document.querySelector('input[name="selectProduct"]:checked')) {
+            e.preventDefault();
+            alert("상품을 선택해주세요.");
+        }
+    });
+});

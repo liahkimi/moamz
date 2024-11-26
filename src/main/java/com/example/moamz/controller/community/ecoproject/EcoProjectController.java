@@ -6,6 +6,7 @@ import com.example.moamz.domain.dto.community.ecoproject.EcoCertListDTO;
 import com.example.moamz.domain.dto.community.ecoproject.EcoCertWriteDTO;
 import com.example.moamz.domain.dto.community.ecoproject.EcoProjectListDTO;
 import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.EcoCertCriteria;
 import com.example.moamz.domain.dto.page.Page;
 import com.example.moamz.service.community.PostService;
 import com.example.moamz.service.community.ecoproject.EcoProjectService;
@@ -55,6 +56,32 @@ public class EcoProjectController {
         model.addAttribute("endPage", endPage);
 
         return "community/ecoproject/ecoList";
+    }
+
+    @GetMapping("/projectEndList")
+    public String projectEndList(Model model, Criteria criteria) {
+        criteria.setAmount(2);
+        List<EcoProjectListDTO> ecoProjectList = ecoProjectService.showEcoPage(criteria);
+        List<EcoProjectListDTO> ecoEndList = ecoProjectService.showEndEcoPage(criteria);
+
+        int total = ecoProjectList.size();
+        int totalEnd = ecoEndList.size();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
+
+        ecoProjectList.forEach(eco -> {
+            eco.setFormattedEcoStart(eco.getFgEcoStart().format(formatter));
+            eco.setFormattedEcoEnd(eco.getFgEcoEnd().format(formatter));
+        });
+
+        Page ecoPage = new Page(criteria, total);
+        Page endPage = new Page(criteria, totalEnd);
+        model.addAttribute("ecoProjectList", ecoProjectList);
+        model.addAttribute("ecoEndList", ecoEndList);
+        model.addAttribute("ecoPage", ecoPage);
+        model.addAttribute("endPage", endPage);
+
+        return "community/ecoproject/ecoEndList";
     }
 
     @GetMapping("/ecoCertDetail/{fgPostId}")
@@ -110,11 +137,21 @@ public class EcoProjectController {
 
 
     @GetMapping("/ecoCertList/{fgPostId}")
-    public String ecoCertList(@PathVariable("fgPostId") Long fgProjectId, Model model) {
+    public String ecoCertList(@PathVariable("fgPostId") Long fgProjectId, Model model, EcoCertCriteria ecoCertCriteria) {
+        ecoCertCriteria.setAmount(10);
+        ecoCertCriteria.setFgProjectId(fgProjectId);
 
-        List<EcoCertListDTO> ecoCertList = ecoProjectService.showCertList(fgProjectId);
+        List<EcoCertListDTO> ecoCertList = ecoProjectService.showEcoCertPage(ecoCertCriteria);
+        int total = ecoCertList.size();
+
+        Page page = new Page(ecoCertCriteria, total);
+
+        System.out.println("ecoapsd = " + ecoCertList);
+        System.out.println("page = " + page);
 
         model.addAttribute("ecoCerts", ecoCertList);
+        model.addAttribute("fgProjectId", fgProjectId);
+        model.addAttribute("page", page);
 
         return "community/ecoproject/ecoCertificationBoard";
     }

@@ -222,7 +222,7 @@
     </select>
 
 <!--    인증글 페이징-->
-    <select id="ecoCertListPage" parameterType="Criteria" resultType="EcoCertListDTO">
+    <select id="ecoCertListPage" parameterType="EcoCertCriteria" resultType="EcoCertListDTO">
     <![CDATA[
         SELECT * FROM (
                           SELECT ROWNUM AS RNUM, fgPostId, fgPostTitle, fgPostCreatedAt, fgNormalName, fgPostLikes, fgCommentCount
@@ -233,7 +233,7 @@
                                        P.FG_POST_CREATED_AT AS fgPostCreatedAt,
                                        NU.FG_NORMAL_NAME AS fgNormalName,
                                        P.FG_POST_LIKES AS fgPostLikes,
-                                       (SELECT COUNT(*) FROM FG_COMMENT C WHERE C.FG_POST_ID = P.FG_POST_ID) AS fgCommnetCount
+                                       (SELECT COUNT(*) FROM FG_COMMENT C WHERE C.FG_POST_ID = P.FG_POST_ID) AS fgCommentCount
                                    FROM FG_ECO_CERT EC
                                             JOIN FG_POST P ON EC.FG_POST_ID = P.FG_POST_ID
                                             JOIN FG_NORMAL_USER NU ON P.FG_USER_CODE = NU.FG_USER_CODE
