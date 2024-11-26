@@ -27,8 +27,8 @@ export function getListAll(postId, page, callback) {
     fetch(`/api/comment/list/${postId}/comm?page=${page}`, {
         method : 'GET'
     }).then(response => response.json())  // 서버 응답을 json으로 변환
-        .then(commentList => {      // 변환된 json 데이터가 commentList에 담김
-            callback(commentList)   // commentList를 callback 함수로 전달함
+        .then(commentList => {       // 변환된 json 데이터가 commentList에 담김
+            callback(commentList)    // commentList를 callback 함수로 전달함
         });
 }
 
@@ -46,8 +46,9 @@ export function insertComm(commInfo, callback) {
             { fgCommentContent : commInfo.commentContent} // 요청 본문에 commentContent를 추가함
         )
     }).then(response => {
+        console.log(response);
         // 서버 응답 상태가 성공(200)인 경우, callback 함수를 호출한다.
-            if(response.status === 200) { callback(); }
+        if(response.status === 200) { callback(); }
     });
 }
 
@@ -65,8 +66,8 @@ export function updateComm(updateInfo, callback) {
             { fgCommentContent : updateInfo.commentContent}       // 요청 본문에 commentContent를 추가함
         )
     }).then(response => {
-            // 서버 응답 상태가 성공(200)인 경우, callback 함수를 호출한다.
-            if(response.status === 200) { callback(); }
+        // 서버 응답 상태가 성공(200)인 경우, callback 함수를 호출한다.
+        if(response.status === 200) { callback(); }
     });
 }
 

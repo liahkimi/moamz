@@ -44,12 +44,15 @@ function loadSharingList(status, page=1) {
             // 목록을 뿌려줄 ul 태그 선택
             const listContainerUl = listContainer.querySelector('ul');
 
+            // 목록 html 태그를 담을 변수
+            let listElement = '';
+
             // 목록 초기화
             listContainerUl.innerHTML = ``;
 
             // 가져온 각 목록을 html 요소로 생성한다.
             sharingList.forEach(list => {
-                const listElement = `
+                listElement = `
                     <li class="sharing-card-view" onclick="location.href='/sharing/detail/${list.postId}'">
                         <img src="/upload_moamz/${list.postFileRoot}/${list.postFileUuid}_${list.postFileName}" 
                              alt="나눔물품 이미지">
@@ -61,11 +64,25 @@ function loadSharingList(status, page=1) {
                     </li>
                 `;
 
-            }); //forEach 끝
-
                 // 생성된 html 태그를 ul태그에 추가
                 listContainerUl.innerHTML += listElement;
 
+                // // 모든 게시글 목록 숨기기
+                // availableList.classList.add('hidden');
+                // reservedList.classList.add('hidden');
+                // completedList.classList.add('hidden');
+                //
+                // // 요청이 들어온 상태의 목록만 보여주기
+                // listContainer.classList.remove('hidden');
+                //
+                // // 페이지네이션 업데이트
+                // updatePagination(page);
+
+            }); //forEach 끝
+
+                // // 생성된 html 태그를 ul태그에 추가
+                // listContainerUl.innerHTML += listElement;
+                //
                 // 모든 게시글 목록 숨기기
                 availableList.classList.add('hidden');
                 reservedList.classList.add('hidden');
