@@ -49,8 +49,8 @@ dependencies {
 	implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
 
 	// coolSms 문자인증 SDK
-//	implementation 'net.nurigo:sdk:4.3.0'
-	implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
+	implementation 'net.nurigo:sdk:4.3.0'
+//	implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
 }
 
 tasks.named('test') {

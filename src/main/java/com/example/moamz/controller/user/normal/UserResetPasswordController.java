@@ -7,10 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -52,6 +50,16 @@ public class UserResetPasswordController {
                                  Model model) {
         model.addAttribute("fgUserId", fgUserId);
         return "/user/regular/userResetPassword";
+    }
+
+    // 비밀번호 변경 요청을 처리하는 엔드포인트
+//    @PutMapping("/changePassword")
+    @PostMapping("/changePassword")
+    public String updatePassword(UserResetPasswordDTO userResetPasswordDTO,
+                                 RedirectAttributes redirectAttributes) {
+        userResetPasswordService.updatePassword(userResetPasswordDTO);
+        redirectAttributes.addAttribute("fgUserId", userResetPasswordDTO.getFgUserId());
+        return "/user/regular/userLogin";
     }
 
 }
