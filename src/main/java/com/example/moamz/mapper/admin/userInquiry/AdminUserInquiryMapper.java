@@ -3,6 +3,7 @@ package com.example.moamz.mapper.admin.userInquiry;
 import com.example.moamz.domain.dto.admin.AdminCommentDTO;
 import com.example.moamz.domain.dto.admin.userInquiry.AdminUserInquiryDetailDTO;
 import com.example.moamz.domain.dto.admin.userInquiry.AdminUserInquiryListDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,5 +28,10 @@ public interface AdminUserInquiryMapper {
     // 일반회원 답변상태 변경시키기
     void changeStatusBtn(@Param("fgPostId") Long fgPostId);
 
+    // 일반회원 문의글 총 갯수 조회
+    int selectUserInquiryTotal();
+
+    // 모든 일반회원 문의 페이지 목록 보기
+    List<AdminUserInquiryListDTO> selectAllUserInquiryPage(Criteria criteria);
 
 }

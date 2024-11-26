@@ -7,17 +7,26 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Mapper
 public interface AdminEcoMapper {
-//    진행중인 에코프로젝트 목록 가져오기
-    List<AdminIngEcoListDTO> selectAllIngEcoList(Criteria criteria);
 
-//    에코프로젝트 글 총 갯수 조회
+//    진행중인 에코프로젝트 총 갯수 (for pagination)
     int selectEcoTotal();
 
-//    종료된 에코프로젝트 목록 가져오기
+//    진행중인 모든 에코프로젝트 목록 보기(pagination o)
+    List<AdminIngEcoListDTO> selectAllIngEcoList(Criteria criteria);
+
+//    종료된 에코프로젝트 총 갯수 (for pagination)
+    int selectFinEcoTotal();
+
+//  종료된 모든 에코프로젝트 목록 보기(pagination o)
+    List<AdminFinEcoListDTO> selectAllFinEcoList(Criteria criteria);
+
+
+//    종료된 에코프로젝트 목록 가져오기 (pagination x)
     List<AdminFinEcoListDTO> selectFinEcoList();
 
 //    특정 한 에코프로젝트만 조회하기
@@ -41,8 +50,14 @@ public interface AdminEcoMapper {
 //   에코프젝 종료시키기 버튼 클릭시 (처음엔 무조건  FG_ECO_STATUS = '0')
     void finishBtn(@Param("fgPostId") Long fgPostId);
 
-//    (진행중/종료된) 특정 한 에코 프로젝트의 인증글 목록보기
+//    (진행중/종료된) 특정 한 에코 프로젝트의 인증글 목록보기 (pagination x)
     List<AdminEcoCertListDTO> selectEcoCertList(@Param("fgProjectId") Long fgProjectId);
+
+//    진행중이거나 완료된 특정 한 에코 프젝의 총 인증글 수 조회하기 (for pagination)
+    int selectEcoCertTotal(@Param("fgProjectId") Long fgProjectId);
+
+//    진행중이거나 완료된 특정 한 에코프젝의 모든 인증글 목록 보기 (pagination o)
+    List<AdminEcoCertListDTO>  selectAllEcoCertPage(Map<String, Object> map);
 
 //    에코프젝 인증글 상세 보기
      Optional<AdminEcoCertDetailDTO> selectEcoCertDetail(@Param("fgPostId") Long fgPostId, @Param("fgProjectId") Long fgProjectId);

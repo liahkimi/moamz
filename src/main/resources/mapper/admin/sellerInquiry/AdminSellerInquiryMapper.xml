@@ -31,7 +31,7 @@
 
     <!--판매자 특정 문의글 상세보기-->
     <select id="selectUserInquiryDetailById" parameterType="Long" resultType="AdminSellerInquiryDetailDTO">
-        SELECT p.FG_POST_TITLE,
+        SELECT  p.FG_POST_ID,p.FG_POST_TITLE,
                uf.FG_USER_FILE_ROOT,uf.FG_USER_FILE_NAME,uf.FG_USER_FILE_UUID,
                cu.FG_USER_ID, b.FG_BUSINESS_NAME,
                p.FG_POST_CREATED_AT, i.FG_INQUIRY_STATUS,
@@ -64,5 +64,57 @@
         SET FG_INQUIRY_STATUS = '1'
         WHERE FG_POST_ID = ${fgPostId}
     </update>
+
+    <!--판매자문의  글 총 갯수-->
+    <select id="selectSellerInquiryTotal" resultType="int">
+        SELECT COUNT(p.FG_POST_ID)
+        FROM FG_POST p
+                 INNER JOIN FG_COMMON_USER cu
+                            ON p.FG_USER_CODE = cu.FG_USER_CODE
+        WHERE p.FG_POST_TYPE = 'inquiry'
+          AND cu.FG_USER_TYPE = '판매자'
+    </select>
+
+
+    <!--모든 판매자문의 목록 보기-->
+    <select id="selectAllSellerInquiryPage" parameterType="Criteria" resultType="AdminSellerInquiryListDTO">
+    <![CDATA[
+        SELECT ROWNUM AS RNUM, FG_POST_ID, FG_POST_TITLE, fgPostCreatedAt, FG_INQUIRY_STATUS, FG_BUSINESS_NAME,FG_USER_ID
+        FROM (
+                 SELECT ROWNUM AS RNUM, FG_POST_ID, FG_POST_TITLE, fgPostCreatedAt, FG_USER_ID, FG_BUSINESS_NAME, FG_INQUIRY_STATUS
+                 FROM (
+                          SELECT i.FG_INQUIRY_STATUS,p.FG_POST_ID,p.FG_POST_TITLE, cu.FG_USER_ID, b.FG_BUSINESS_NAME,
+                                 TO_CHAR(p.FG_POST_CREATED_AT, 'YY/MM/DD HH24:MI') AS fgPostCreatedAt
+                          FROM FG_INQUIRY i
+                                   JOIN FG_POST p ON i.FG_POST_ID = p.FG_POST_ID
+                                   JOIN FG_COMMON_USER cu  ON p.FG_USER_CODE = cu.FG_USER_CODE
+                                   JOIN FG_SELLER s ON p.FG_USER_CODE = s.FG_USER_CODE
+                                   JOIN FG_BUSINESS b ON p.FG_USER_CODE = b.FG_USER_CODE
+                          ORDER BY p.FG_POST_CREATED_AT DESC --최신 문의글 순
+                      )
+                 WHERE ROWNUM <= #{page} * #{amount}
+             )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+        ]]>
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>

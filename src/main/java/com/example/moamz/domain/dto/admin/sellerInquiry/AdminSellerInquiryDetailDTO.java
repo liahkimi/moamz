@@ -25,5 +25,7 @@ public class AdminSellerInquiryDetailDTO {
     private String fgInquiryContent;         // 글 내용
 
     private Long fgPostId;                  // 게시글ID
-    private Long fgUserCode;                //  회원번호
+
+    private Long writerCode;        // 작성자CODE
+    private boolean isMyPost;       // 내 게시글인지 여부
 }

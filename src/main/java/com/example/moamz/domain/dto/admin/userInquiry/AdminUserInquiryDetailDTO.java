@@ -12,7 +12,6 @@ import lombok.ToString;
 public class AdminUserInquiryDetailDTO {
 //  일반회원 문의글 상세보기  (미확인/답변완료 공통) -댓글은 따로..
     private Long fgPostId;                  // 게시글ID
-    private Long fgUserCode;                //  회원번호
 
     private String fgPostTitle;             // 제목
     //작성자 프로필 사진
@@ -24,4 +23,8 @@ public class AdminUserInquiryDetailDTO {
     private String fgPostCreatedAt;           // 작성일
     private String fgInquiryStatus;          // 문의글 상태 (미확인/답변완료)
     private String fgInquiryContent;         // 글 내용
+
+
+    private Long writerCode;        // 작성자CODE
+    private boolean isMyPost;       // 내 게시글인지 여부
 }

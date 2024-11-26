@@ -3,6 +3,8 @@ package com.example.moamz.mapper.admin.sellerInquiry;
 import com.example.moamz.domain.dto.admin.AdminCommentDTO;
 import com.example.moamz.domain.dto.admin.sellerInquiry.AdminSellerInquiryDetailDTO;
 import com.example.moamz.domain.dto.admin.sellerInquiry.AdminSellerInquiryListDTO;
+import com.example.moamz.domain.dto.admin.userInquiry.AdminUserInquiryListDTO;
+import com.example.moamz.domain.dto.page.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -24,7 +26,14 @@ public interface AdminSellerInquiryMapper {
     Optional<AdminCommentDTO> selectUserInquiryDetailCommentById(@Param("fgPostId") Long fgPostId);
 
 
-    // 일반회원 답변상태 변경시키기
+    // 판매자 답변상태 변경시키기
     void changeStatusBtn(@Param("fgPostId") Long fgPostId);
+
+    // 판매자 문의글 총 갯수 조회
+    int selectSellerInquiryTotal();
+
+    // 모든 판매자 문의 페이지 목록 보기
+    List<AdminSellerInquiryListDTO> selectAllSellerInquiryPage(Criteria criteria);
+
 
 }
