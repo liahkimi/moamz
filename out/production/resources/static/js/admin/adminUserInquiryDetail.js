@@ -232,7 +232,7 @@ function appendComment(commentList) {
             <li class="comment-list" data-id="${comment.fgCommentId}">
                 <div>
                     <div class="comment-info-wrap">
-                        <span class="user-nickname">${comment.fgNormalNickname}</span>
+                        <span class="user-nickname">${comment.fgUserId}</span>
                         <span class="comment-write-time">${comment.fgCommentDate}</span>
                         <span class="comment-modified">${comment.fgCommentEdit}</span>
                     </div>

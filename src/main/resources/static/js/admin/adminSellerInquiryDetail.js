@@ -23,6 +23,7 @@ const postId = document.querySelector('.content').getAttribute('data-id');
     comment.getListAll(postId, page, function(data) {
         hasNext = data.hasNext;
         displayComment(data.contentList);
+        console.log(data.contentList);
     });
 
 
@@ -46,6 +47,7 @@ const postId = document.querySelector('.content').getAttribute('data-id');
 
         // 댓글 등록 함수 호출
         comment.insertComm(commInfo, () => {
+            console.log(commInfo);
             // input 태그 초기화
             $commentInput.value = '';
 
@@ -54,6 +56,7 @@ const postId = document.querySelector('.content').getAttribute('data-id');
 
             // 댓글 목록 다시 가져오기
             comment.getListAll(postId, page, function(data) {
+                console.log(data);
                 hasNext = data.hasNext;
                 displayComment(data.contentList);
             });
@@ -169,16 +172,13 @@ const postId = document.querySelector('.content').getAttribute('data-id');
 
 }
 
-
-
-
 ////////////////////////////////////////////////////////
 ///// 댓글 목록 화면에 보여주는 함수
 
 function displayComment(commentList) {
     // 댓글 목록이 보여질 태그
     const commentContainer = document.querySelector('.comment-content-wrap ul');
-
+    // console.log(commentList);
     // 댓글 목록을 출력할 태그 초기화
     let tags = ``;
 
@@ -190,7 +190,7 @@ function displayComment(commentList) {
             <li class="comment-list" data-id="${comment.fgCommentId}">
                 <div>
                     <div class="comment-info-wrap">
-                        <span class="user-nickname">${comment.fgNormalNickname}</span>
+                        <span class="user-nickname">${comment.fgUserId}</span>
                         <span class="comment-write-time">${comment.fgCommentDate}</span>
                         <span class="comment-modified">${comment.fgCommentEdit}</span>
                     </div>
@@ -232,7 +232,7 @@ function appendComment(commentList) {
             <li class="comment-list" data-id="${comment.fgCommentId}">
                 <div>
                     <div class="comment-info-wrap">
-                        <span class="user-nickname">${comment.fgNormalNickname}</span>
+                        <span class="user-nickname">${comment.fgUserId}</span>
                         <span class="comment-write-time">${comment.fgCommentDate}</span>
                         <span class="comment-modified">${comment.fgCommentEdit}</span>
                     </div>

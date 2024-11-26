@@ -24,6 +24,7 @@ public class AdminUserInquiryDetailDTO {
     private String fgInquiryStatus;          // 문의글 상태 (미확인/답변완료)
     private String fgInquiryContent;         // 글 내용
 
+
     private Long writerCode;        // 작성자CODE
     private boolean isMyPost;       // 내 게시글인지 여부
 }
