@@ -2,21 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.moamz.mapper.admin.eco.AdminEcoMapper">
 
-<!--진행중인 에코프로젝트 목록 보여주기-->
+<!--진행중인 에코프로젝트 목록 보여주기 (pagination x)-->
     <select id="selectIngEcoList" resultType="AdminIngEcoListDTO">
         SELECT DISTINCT
-            PF.FG_POST_FILE_ROOT,
-            PF.FG_POST_FILE_NAME,
-            PF.FG_POST_FILE_UUID,
-            P.FG_POST_TITLE,
-            P.FG_POST_ID,
-            P.FG_POST_LIKES,
+            PF.FG_POST_FILE_ROOT,PF.FG_POST_FILE_NAME,PF.FG_POST_FILE_UUID,P.FG_POST_TITLE,P.FG_POST_ID,P.FG_POST_LIKES,
             TO_CHAR(E.FG_ECO_START, 'YYYY/MM/DD') AS fgEcoStartToChar,
             TO_CHAR(E.FG_ECO_END, 'YYYY/MM/DD') AS fgEcoEndToChar,
-            E.FG_ECO_POINTS,
-            E.FG_ECO_INFO,
-            E.FG_CERT_INFO,
-            E.FG_ECO_PARTICIPATION,
+            E.FG_ECO_POINTS,E.FG_ECO_INFO,E.FG_CERT_INFO,E.FG_ECO_PARTICIPATION,
             TO_CHAR((E.FG_ECO_END - E.FG_ECO_START) + 1) || '일간' AS FG_ECO_PERIOD
         FROM FG_POST_FILE PF
                  JOIN FG_POST P ON PF.FG_POST_ID = P.FG_POST_ID
@@ -25,31 +17,24 @@
           AND E.FG_ECO_STATUS = '1'
     </select>
 
-    <!--게시글 총 갯수-->
+    <!--진행중인 에코프로젝트 총 갯수 (for pagination)-->
     <select id="selectEcoTotal" resultType="int">
-        SELECT COUNT(FG_POST_ID)
-        FROM  FG_POST
-        WHERE FG_POST_TYPE = 'eco'
+        SELECT COUNT(p.FG_POST_ID)
+        FROM  FG_POST p
+                  INNER JOIN FG_ECO e on p.FG_POST_ID = e.FG_POST_ID
+        WHERE p.FG_POST_TYPE = 'eco' AND e.FG_ECO_STATUS = '1'
     </select>
 
-    <!--모든 페이지 목록 보기-->
+    <!--진행중인 모든 에코프로젝트 목록 보기(pagination o)-->
     <select id="selectAllIngEcoList" parameterType="Criteria" resultType="AdminIngEcoListDTO">
     <![CDATA[
         SELECT *
         FROM (
-                 SELECT ROWNUM AS RNUM,
-                        PF.FG_POST_FILE_ROOT,
-                        PF.FG_POST_FILE_NAME,
-                        PF.FG_POST_FILE_UUID,
-                        P.FG_POST_TITLE,
-                        P.FG_POST_ID,
-                        P.FG_POST_LIKES,
+                 SELECT ROWNUM AS RNUM,PF.FG_POST_FILE_ROOT,PF.FG_POST_FILE_NAME,PF.FG_POST_FILE_UUID,P.FG_POST_TITLE,
+                        P.FG_POST_ID,P.FG_POST_LIKES,
                         TO_CHAR(E.FG_ECO_START, 'YYYY/MM/DD') AS fgEcoStartToChar,
                         TO_CHAR(E.FG_ECO_END, 'YYYY/MM/DD') AS fgEcoEndToChar,
-                        E.FG_ECO_POINTS,
-                        E.FG_ECO_INFO,
-                        E.FG_CERT_INFO,
-                        E.FG_ECO_PARTICIPATION,
+                        E.FG_ECO_POINTS,E.FG_ECO_INFO,E.FG_CERT_INFO,E.FG_ECO_PARTICIPATION,
                         TO_CHAR((E.FG_ECO_END - E.FG_ECO_START) + 1) || '일간' AS FG_ECO_PERIOD
                  FROM FG_POST_FILE PF
                           JOIN FG_POST P ON PF.FG_POST_ID = P.FG_POST_ID
@@ -94,6 +79,46 @@
         WHERE P.FG_POST_TYPE = 'eco'
           AND E.FG_ECO_STATUS = '0'
     </select>
+
+    <!--종료된 에코프로젝트 총 갯수 (for pagination)-->
+    <select id="selectFinEcoTotal" resultType="int">
+        SELECT COUNT(p.FG_POST_ID)
+        FROM  FG_POST p
+                  INNER JOIN FG_ECO e on p.FG_POST_ID = e.FG_POST_ID
+        WHERE p.FG_POST_TYPE = 'eco' AND e.FG_ECO_STATUS = '0'
+    </select>
+
+    <!--종료된 모든 에코프로젝트 목록 보기(pagination o)-->
+    <select id="selectAllFinEcoList" parameterType="Criteria" resultType="AdminFinEcoListDTO">
+    <![CDATA[
+        SELECT *
+        FROM (
+                 SELECT ROWNUM AS RNUM,PF.FG_POST_FILE_ROOT,PF.FG_POST_FILE_NAME,PF.FG_POST_FILE_UUID,P.FG_POST_TITLE,
+                        P.FG_POST_ID,P.FG_POST_LIKES,
+                        TO_CHAR(E.FG_ECO_START, 'YYYY/MM/DD') AS fgEcoStartToChar,
+                        TO_CHAR(E.FG_ECO_END, 'YYYY/MM/DD') AS fgEcoEndToChar,
+                        E.FG_ECO_POINTS,E.FG_ECO_INFO,E.FG_CERT_INFO,E.FG_ECO_PARTICIPATION,
+                        TO_CHAR((E.FG_ECO_END - E.FG_ECO_START) + 1) || '일간' AS FG_ECO_PERIOD
+                 FROM FG_POST_FILE PF
+                          JOIN FG_POST P ON PF.FG_POST_ID = P.FG_POST_ID
+                          JOIN FG_ECO E ON P.FG_POST_ID = E.FG_POST_ID
+                          LEFT JOIN (
+                     SELECT FG_POST_FILE_ID, FG_POST_FILE_NAME, FG_POST_FILE_ROOT, FG_POST_FILE_UUID, FG_POST_ID
+                     FROM (
+                              SELECT FG_POST_FILE_ID, FG_POST_FILE_NAME, FG_POST_FILE_ROOT, FG_POST_FILE_UUID, FG_POST_ID,
+                                     RANK() OVER(PARTITION BY FG_POST_ID ORDER BY FG_POST_FILE_ID) AS RK
+                              FROM FG_POST_FILE
+                          )
+                     WHERE RK = 1
+                 ) F ON PF.FG_POST_ID = F.FG_POST_ID
+                 WHERE P.FG_POST_TYPE = 'eco'
+                   AND E.FG_ECO_STATUS = '0'
+                 ORDER BY P.FG_POST_ID DESC
+             )
+        WHERE RNUM <= #{page} * #{amount}
+          AND RNUM > (#{page} - 1) * #{amount}
+        ]]>
+</select>
 
 
 <!--에코프로젝트 글 작성하기 (공통게시글테이블 insert)-->
@@ -152,7 +177,7 @@
 
 
 
-    <!--(진행중/종료된) 특정 한 에코 프로젝트의 인증글 목록보기-->
+    <!--(진행중/종료된) 특정 한 에코 프로젝트의 인증글 목록보기 (pagination x)-->
 <select id="selectEcoCertList" parameterType="Long" resultType="AdminEcoCertListDTO">
     SELECT DISTINCT p.FG_POST_ID, ec.FG_PROJECT_ID , p.FG_POST_TITLE, nu.FG_NORMAL_NICKNAME, p.FG_POST_CREATED_AT,p.FG_POST_LIKES
     FROM FG_POST p
@@ -162,6 +187,46 @@
     WHERE FG_POST_TYPE = 'ecoCert' AND ec.FG_PROJECT_ID =#{fgProjectId}
     ORDER BY p.FG_POST_LIKES DESC
 </select>
+
+    <!--진행중이거나 완료된 특정 한 에코 프젝의 총 인증글 수 조회하기 (for pagination)-->
+    <select id="selectEcoCertTotal" parameterType="Long" resultType="int">
+        SELECT COUNT(DISTINCT p.FG_POST_ID)
+        FROM FG_POST p
+                 JOIN FG_NORMAL_USER nu ON p.FG_USER_CODE = nu.FG_USER_CODE
+                 JOIN FG_ECO_CERT ec ON p.FG_POST_ID = ec.FG_POST_ID
+                 JOIN FG_ECO e ON ec.FG_PROJECT_ID = e.FG_POST_ID
+        WHERE p.FG_POST_TYPE = 'ecoCert'
+          AND ec.FG_PROJECT_ID = #{fgProjectId}
+
+    </select>
+
+    <!--진행중이거나 완료된 특정 한 에코프젝의 모든 인증글 목록 보기 (pagination o)-->
+    <select id="selectAllEcoCertPage" parameterType="map" resultType="AdminEcoCertListDTO">
+    <![CDATA[
+        SELECT *
+        FROM (
+                 SELECT ROWNUM AS RNUM,FG_POST_ID,FG_PROJECT_ID,FG_POST_TITLE,FG_NORMAL_NICKNAME,
+                        FG_POST_CREATED_AT,FG_POST_LIKES
+                 FROM (
+                          SELECT DISTINCT p.FG_POST_ID,ec.FG_PROJECT_ID,p.FG_POST_TITLE,nu.FG_NORMAL_NICKNAME,
+                                          p.FG_POST_CREATED_AT, p.FG_POST_LIKES
+                          FROM FG_POST p
+                                   JOIN FG_NORMAL_USER nu ON p.FG_USER_CODE = nu.FG_USER_CODE
+                                   JOIN FG_ECO_CERT ec ON p.FG_POST_ID = ec.FG_POST_ID
+                                   JOIN FG_ECO e ON ec.FG_PROJECT_ID = e.FG_POST_ID
+                          WHERE p.FG_POST_TYPE = 'ecoCert'
+                            AND ec.FG_PROJECT_ID = #{fgProjectId}
+                          ORDER BY p.FG_POST_LIKES DESC
+                      )
+                 WHERE ROWNUM <= #{page} * #{amount}
+             )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+        ]]>
+    </select>
+
+
+
+
 
 <!--특정 에코프젝 1개만 조회하기-->
     <select id="selectEcoProjectById" parameterType="java.lang.Long" resultType="AdminIngEcoListDTO">
@@ -218,74 +283,58 @@
         ORDER BY c.FG_COMMENT_DATE DESC
     </select>
 
-<!--에코프젝 인증글 - 포인트 지급하기 (인증글 쓴사람의 회원번호 알아내기)-->
-<!--<select id="selectEcoPointReceiver" parameterType="Long" resultType="AdminEcoCertPointBtnDTO">-->
-<!--    SELECT FG_USER_CODE-->
-<!--    FROM FG_POST p-->
-<!--             JOIN FG_ECO_CERT  e ON p.FG_POST_ID = e.FG_POST_ID-->
-<!--    WHERE e.FG_POST_ID = #{fgPostId}-->
-<!--</select>-->
+<!--에코프젝 인증글 작성자에게 포인트 지급하기 버튼-->
+    <update id="updateUserEcoPointAndLog" parameterType="AdminEcoCertPointBtnDTO">
+        <selectKey keyProperty="fgPointDetailId" resultType="Long" order="BEFORE">
+            SELECT SEQ_POINT_DETAIL.nextval FROM DUAL
+        </selectKey>
 
-<!--&lt;!&ndash;에코프젝 인증글 - 포인트 지급하기(해당 유저의 포인트 업데이트하기)&ndash;&gt;-->
-<!--<update id="updateUserEcoPoint" parameterType="Long">-->
-<!--    UPDATE FG_POINT-->
-<!--    SET FG_POINT_TOTAL = FG_POINT_TOTAL + ${fgPointReceived}-->
-<!--    WHERE FG_USER_CODE = (  SELECT FG_USER_CODE-->
-<!--                            FROM FG_POST p-->
-<!--                                     JOIN FG_ECO_CERT  e ON p.FG_POST_ID = e.FG_POST_ID-->
-<!--                            WHERE e.FG_POST_ID = #{fgPostId})-->
-<!--</update>-->
+        DECLARE
+        v_fg_user_code FG_POINT.FG_USER_CODE%TYPE; --회원번호
+        v_fg_point_id FG_POINT.FG_POINT_ID%TYPE; --포인트 ID
+        v_fg_post_id FG_POST.FG_POST_ID%TYPE; -- 인증글의 ID
+        v_fg_point_received NUMBER; -- 입력한 포인트
+        BEGIN
+        -- 1. 인증글 작성자의 회원번호 조회
+        v_fg_post_id := #{fgPostId}; -- AdminEcoCertPointBtnDTO에서 fgPostId 값 설정
+        v_fg_point_received := #{fgPointReceived}; -- AdminEcoCertPointBtnDTO에서 fgPointReceived 값 설정
 
-<!--&lt;!&ndash;에코프젝 인증글 -포인트 지급 내역 기록하기 &ndash;&gt;-->
-<!--<insert id="insertEcoPointLog" parameterType="AdminEcoCertPointBtnDTO">-->
-<!--    <selectKey keyProperty="fgPointDetailId" resultType="Long" order="BEFORE">-->
-<!--        SELECT SEQ_TEST_POINT_DETAIL.nextval FROM DUAL-->
-<!--    </selectKey>-->
-<!--    INSERT INTO FG_POINT_DETAIL (FG_POINT_DETAIL_ID, FG_POINT_RECEIVED_DATE, FG_POINT_RECEIVED, FG_POINT_ID)-->
-<!--    VALUES (-->
-<!--               SEQ_TEST_POINT_DETAIL.NEXTVAL, SYSDATE, ${fgPointReceived},-->
-<!--               (SELECT FG_POINT_ID FROM FG_POINT WHERE FG_USER_CODE =-->
-<!--                                                       (SELECT P.FG_USER_CODE-->
-<!--                                                        FROM FG_POST P-->
-<!--                                                                 JOIN FG_ECO_CERT EC ON P.FG_POST_ID = EC.FG_POST_ID-->
-<!--                                                        WHERE EC.FG_POST_ID = #{fgPostId}))-->
-<!--           )-->
-<!--</insert>-->
+        SELECT FG_USER_CODE
+        INTO v_fg_user_code
+        FROM FG_POST p
+        JOIN FG_ECO_CERT e ON p.FG_POST_ID = e.FG_POST_ID
+        WHERE e.FG_POST_ID = v_fg_post_id;
 
-        <!--에코프로젝트 포인트 지급하기 (포인트지급내역 기록 + 포인트 실제 지급-->
-        <update id="updateUserEcoPointAndLog" parameterType="AdminEcoCertPointBtnDTO">
-            <!-- 포인트 지급 내역 기록용 ID 생성 -->
-            <selectKey keyProperty="fgPointDetailId" resultType="Long" order="BEFORE">
-                SELECT SEQ_TEST_POINT_DETAIL.nextval FROM DUAL
-            </selectKey>
+        -- 2. 해당 유저의 포인트 정보가 있는지 확인하여 포인트 업데이트 또는 삽입
+        BEGIN
+        -- 포인트 정보가 존재하는 경우 업데이트
+        UPDATE FG_POINT
+        SET FG_POINT_TOTAL = FG_POINT_TOTAL + v_fg_point_received
+        WHERE FG_USER_CODE = v_fg_user_code;
 
-            <!-- 포인트 업데이트 및 지급 내역 기록 -->
-            BEGIN
-            -- 사용자 포인트 업데이트
-            UPDATE FG_POINT
-            SET FG_POINT_TOTAL = FG_POINT_TOTAL + ${fgPointReceived}
-            WHERE FG_USER_CODE = (
-            SELECT FG_USER_CODE
-            FROM FG_POST p
-            JOIN FG_ECO_CERT e ON p.FG_POST_ID = e.FG_POST_ID
-            WHERE e.FG_POST_ID = #{fgPostId}
-            );
+        -- 만약 업데이트된 행이 없다면, 새로 삽입
+        IF SQL%ROWCOUNT = 0 THEN
+        INSERT INTO FG_POINT (FG_POINT_ID, FG_USER_CODE, FG_POINT_TOTAL)
+        VALUES (SEQ_POINT.NEXTVAL, v_fg_user_code, v_fg_point_received);
+        END IF;
+        END;
 
-            -- 포인트 지급 내역 기록
-            INSERT INTO FG_POINT_DETAIL (FG_POINT_DETAIL_ID, FG_POINT_RECEIVED_DATE, FG_POINT_RECEIVED, FG_POINT_ID)
-            VALUES (
-            #{fgPointDetailId}, SYSDATE, ${fgPointReceived},
-            (SELECT FG_POINT_ID
-            FROM FG_POINT
-            WHERE FG_USER_CODE = (
-            SELECT P.FG_USER_CODE
-            FROM FG_POST P
-            JOIN FG_ECO_CERT EC ON P.FG_POST_ID = EC.FG_POST_ID
-            WHERE EC.FG_POST_ID = #{fgPostId}
-            ))
-            );
-            END;
-        </update>
+        -- 3. 포인트 ID 조회
+        SELECT FG_POINT_ID
+        INTO v_fg_point_id
+        FROM FG_POINT
+        WHERE FG_USER_CODE = v_fg_user_code;
+
+        -- 4. 포인트 지급 내역 기록
+        INSERT INTO FG_POINT_DETAIL (
+        FG_POINT_DETAIL_ID, FG_POINT_RECEIVED_DATE, FG_POINT_RECEIVED, FG_POINT_ID
+        )
+        VALUES (
+        SEQ_POINT_DETAIL.NEXTVAL, SYSDATE, v_fg_point_received, v_fg_point_id  -- 시퀀스 추가
+        );
+        END;
+    </update>
+
 
 
 

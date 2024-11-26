@@ -44,7 +44,7 @@
               </thead>
               <tbody>
                 <tr th:each="notice, iterStat :${adminNoticeListDTO}" th:onclick="|location.href='@{/admin/notice/detail(fgPostId=${notice.fgPostId})}'|">
-                  <td th:text="${iterStat.index + 1}">1</td>
+                  <td th:text="${(page.criteria.getPage() - 1) * page.criteria.getAmount() + iterStat.index + 1}">1</td>
                   <td th:text="${notice.fgPostTitle}">[ 공지 ] 시스템 점검 1.0.0.1 완료되었습니다.</td>
                   <td class="gray-text" th:text="${notice.fgPostCreatedAt}">2024/10/11</td>
 

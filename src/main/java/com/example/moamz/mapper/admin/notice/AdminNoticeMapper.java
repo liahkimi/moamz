@@ -56,12 +56,12 @@ public interface AdminNoticeMapper {
     // 공지사항 글 상세보기
     Optional<AdminNoticeDetailDTO> selectNoticeById(@Param("fgPostId") Long fgPostId);
 
-    // 공지사항 목록 보기
+    // 공지사항 목록 보기 (페이지네이션 x)
     List<AdminNoticeListDTO> selectNoticeAll();
 
     // 공지사항 글 총 갯수 조회
     int selectNoticeTotal();
 
-    // 모든 공지사항 페이지 목록 보기
+    // 모든 공지사항 페이지 목록 보기 (페이지네이션 o)
     List<AdminNoticeListDTO> selectAllNoticePage(Criteria criteria);
 }
