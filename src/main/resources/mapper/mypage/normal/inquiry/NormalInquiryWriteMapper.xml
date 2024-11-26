@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.moamz.mapper.mypage.normal.inquiry.NormalInquiryWriteMapper">
+<mapper namespace="com.example.moamz.mapper.mypage.normal.inquiry.NormalInquiryMapper">
     <insert id="insertInquiryWrite" parameterType="NormalInquiryWriteDTO">
-        <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
-            SELECT SEQ_POST.nextVal FROM DUAL
-        </selectKey>
+<!--        <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">-->
+<!--            SELECT SEQ_POST.nextVal FROM DUAL-->
+<!--        </selectKey>-->
         -- 문의글 작성
         INSERT INTO FG_POST (FG_POST_ID, FG_POST_TYPE, FG_POST_TITLE, FG_USER_CODE)
         VALUES (#{fgPostId}, #{fgPostType}, #{fgPostTitle}, #{fgUserCode})
 
         INSERT INTO FG_INQUIRY (FG_POST_ID, FG_INQUIRY_CONTENT)
         VALUES (#{fgPostId}, #{fgInquiryContent})
+    </insert>
+
+    <insert id="insertInquiryPost" parameterType="NormalInquiryWriteDTO">
+        <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
+        SELECT SEQ_POST.nextVal FROM DUAL
+        </selectKey>
+
+        INSERT INTO FG_POST (FG_POST_ID, FG_POST_TYPE, FG_POST_TITLE, FG_POST_CODE)
+        VALUES (#{fgPostId}, 'inquiry', #{fgPostTitle}, #{fgPostCode})
     </insert>
 
 </mapper>

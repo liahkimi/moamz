@@ -14,20 +14,20 @@
         <!-- 게시글 영역 -->
         <div class="post-container">
             <!-- 게시글 정보 -->
-            <div class="post-info-wrap">
-                <div class="post-title">가게 사장님이 연락두절 되었는데 어떻게하죠ㅠㅠ</div>
+            <div class="post-info-wrap" th:attr="data-id=${normalInquiryDetailDTO.fgPostId}">
+                <div class="post-title" th:text="${normalInquiryDetailDTO.fgPostTitle}">가게 사장님이 연락두절 되었는데 어떻게하죠ㅠㅠ</div>
                 <div class="user-info-wrap">
-                    <span class="user-nickname">역삼동불주먹</span>
+                    <span class="user-nickname" th:text="${normalInquiryDetailDTO.fgNormalNickname}">역삼동불주먹</span>
                     <div class="post-write-time-wrap">
                         <span>작성일</span>
-                        <span id="post-write-time">24/10/13 14:10</span>
+                        <span id="post-write-time" th:text="${normalInquiryDetailDTO.fgPostCreatedAt}">24/10/13 14:10</span>
                         <button type="button" id="delete-btn">삭제</button>
                     </div>
                 </div>
             </div>
             <!-- 게사글 내용 -->
             <div class="post-content-wrap">
-                <p>채팅도 안보고 문도 닫혀있고 정말 화나네요!!</p>
+                <p th:text="${normalInquiryDetailDTO.fgInquiryContent}">채팅도 안보고 문도 닫혀있고 정말 화나네요!!</p>
             </div>
         </div>
         <!-- 댓글 영역 -->
@@ -36,15 +36,15 @@
             <div class="comment-wrap">
                 <div class="comment-content-wrap">
                     <ul>
-                        <li class="comment-list">
+                        <li class="comment-list" th:each="comment: ${normalCommentList}">
                             <!-- 댓글 정보 -->
                             <div class="comment-info-wrap">
                                 <span class="user-nickname">관리자</span>
-                                <span class="comment-write-time">24/10/13</span>
-                                <span class="comment-modified">수정됨</span>
+                                <span class="comment-write-time" th:text="${comment.fgCommentDate}">24/10/13</span>
+                                <span class="comment-modified" th:text="${comment.fgCommentEdit}">수정됨</span>
                             </div>
                             <!-- 댓글 내용 -->
-                            <p class="comment-content">정말 안타깝네요..</p>
+                            <p class="comment-content" th:text="${comment.fgCommentContent}">정말 안타깝네요..</p>
                         </li>
                     
                     </ul>

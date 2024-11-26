@@ -89,34 +89,15 @@
             <!-- 문의내역 리스트 -->
             <div class="inquiry-list-container">
                 <ul>
-                    <li class="inquiry-list">
-                        <div class="inquiry-number">1</div>
-                        <a href="userAdminInquiryDetail.html" class="inquiry-title">사장님이 연락두절 되었는데 어떻게 해야하나요?ㅠㅠ고객님이 연락두절 되었는데 어떻게 해야하나요?ㅠㅠ</a>
-                        <div class="inquiry-date">24/10/16</div>
+                    <li th:each="inquiry, iterStat: ${NormalInquiryList}" class="inquiry-list">
+                        <div class="inquiry-number" th:text="${iterStat.index + 1}">1</div>
+                        <a th:href="@{/normal/inquiry/detail/{fgPostId}(fgPostId=${inquiry.fgPostId})}" class="inquiry-title"
+                        th:text="${inquiry.fgPostTitle}">사장님이 연락두절 되었는데 어떻게 해야하나요?ㅠㅠ고객님이 연락두절 되었는데 어떻게 해야하나요?ㅠㅠ</a>
+                        <div class="inquiry-date" th:text="${inquiry.fgPostCreatedAt}">24/10/16</div>
                         <!-- 답변상태 -->
                         <div class="status-wrap">
-                            <div class="inquiry-status completed hidden">답변완료</div>
-                            <div class="inquiry-status unanswered">미확인</div>
-                        </div>
-                    </li>
-                    <li class="inquiry-list">
-                        <div class="inquiry-number">1</div>
-                        <a href="userAdminInquiryDetail.html" class="inquiry-title">사장님이 연락두절 되었는데 어떻게 해야하나요?ㅠㅠ</a>
-                        <div class="inquiry-date">24/10/16</div>
-                        <!-- 답변상태 -->
-                        <div class="status-wrap">
-                            <div class="inquiry-status completed">답변완료</div>
-                            <div class="inquiry-status unanswered hidden">미확인</div>
-                        </div>
-                    </li>
-                    <li class="inquiry-list">
-                        <div class="inquiry-number">1</div>
-                        <a href="userAdminInquiryDetail.html" class="inquiry-title">사장님이 연락두절 되었는데 어떻게 해야하나요?ㅠㅠ</a>
-                        <div class="inquiry-date">24/10/16</div>
-                        <!-- 답변상태 -->
-                        <div class="status-wrap">
-                            <div class="inquiry-status completed">답변완료</div>
-                            <div class="inquiry-status unanswered hidden">미확인</div>
+                            <div th:class="${inquiry.fgInquiryStatus == '답변완료' ? 'inquiry-status completed' : 'hidden'}">답변완료</div>
+                            <div th:class="${inquiry.inquiryStatus == '확인중' ? 'inquiry-status unanswered' : 'hidden'}">확인중</div>
                         </div>
                     </li>
                 </ul>
