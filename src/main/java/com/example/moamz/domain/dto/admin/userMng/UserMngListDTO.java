@@ -21,8 +21,8 @@ public class UserMngListDTO {
     private int fgPurchaseCount;  //총 구매건 수 ( COUNT(CASE WHEN o.FG_PAYMENT_STATUS='결제완료' THEN o.FG_ORDER_ID END))
 //                                    주문테이블에서 결제상테가 결제완료인것만 구매한 것으로 간주하기로 함.
     private Long fgPostId; //게시글id
-    private String fgPaymentStatus; //상품 결제여부 -ERDCLOUD 필드명 fgOrderStats임
-    private Long fgOrderId; //주문(결제)id <-Long타입 맞나..?
+    private String fgPaymentStatus; //상품 결제여부 -ERDCLOUD 필드명 fgOrderStatus
+    private Long fgOrderId; //주문(결제)id
 
 
     

@@ -24,7 +24,7 @@
             <div class="page-title">에코프로젝트 인증글 목록</div>
           </div>
           <div class="go-list-btn">
-            <button type="button" onclick="location.href='adminEcoList.html'">
+            <button type="button" th:onclick="|location.href='@{/admin/eco/list}'|">
               에코프로젝트 목록으로
             </button>
           </div>
@@ -45,8 +45,8 @@
               </thead>
               <tbody>
                 <!-- 💥추후 각 tr클릭시 해당 상세페이지로 이동시키기 -->
-                <tr  th:onclick="|goToDetailPage(event,${certList.fgPostId},${certList.fgProjectId})|" th:each ="certList, iterStat :${adminEcoCertListDTO}">
-                  <td th:text="${iterStat.index + 1}">1</td>
+                <tr  th:onclick="|goToDetailPage(event,${certList.fgPostId},${certList.fgProjectId})|" th:each ="certList, iterStat :${adminFinEcoCertListDTO}">
+                  <td th:text="${(finCertPage.criteria.getPage() - 1) * finCertPage.criteria.getAmount() + iterStat.index + 1}">1</td>
                   <td th:text="${certList.fgPostTitle}">오늘 플로깅 인증합니다!</td>
                   <td th:text="${certList.fgNormalNickname}">user1</td>
                   <td th:text="${certList.fgPostCreatedAt}">2022/10/11</td>
@@ -191,13 +191,23 @@
               </div>
             </div>
 
-            <!-- 💥추후 페이지네이션 js 구현하기 -->
             <div class="pagination">
-              <button class="prev">Previous</button>
-              <button class="page active">1</button>
-              <button class="page">2</button>
-              <button class="page">3</button>
-              <button class="next">Next</button>
+              <ul class="page-box">
+                <a th:href="@{/admin/eco/finEcoCertList/{fgPostId}(fgPostId=${fgPostId},page=${finCertPage.startPage - 1})}" class="page-a" th:if="${finCertPage.prev}">
+                  <li class="page-num prev">&lt</li>
+                </a>
+                <!--        th:block은 화면에 영향을 주지않는 가짜 태그
+                            타임리프 문법을 사용하기 위해 만들어 쓴다.
+                -->
+                <th:block th:each="i : ${#numbers.sequence(finCertPage.startPage, finCertPage.endPage)}">
+                  <a th:href="@{/admin/eco/finEcoCertList/{fgPostId}(fgPostId=${fgPostId}, page=${i})}" class="page-a">
+                    <li class="page-num" th:classappend="${i == finCertPage.criteria.page ? 'active' : ''}" th:text="${i}"></li>
+                  </a>
+                </th:block>
+                <a th:href="@{/admin/eco/finEcoCertList/{fgPostId}(fgPostId=${fgPostId}, page=${finCertPage.endPage + 1})}" class="page-a" th:if="${finCertPage.next}">
+                  <li class="page-num next">&gt</li>
+                </a>
+              </ul>
             </div>
           </div>
         </div>

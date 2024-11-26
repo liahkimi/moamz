@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>에코프로젝트</title>
+    <link rel="stylesheet" th:href="@{/css/reset2.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminEcoList.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminHeader.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminNavBar.css}" />
+  </head>
+  <body>
+    <header id="adminHeader" th:replace="~{/admin/adminHeader :: header}"></header>
+    <main>
+      <nav id="adminNavBar" th:replace="~{/admin/adminNavBar :: nav}"></nav>
+      <div class="content-box">
+        <div class="page-title-box">
+          <div class="page-title">에코 프로젝트</div>
+          <button th:onclick="|location.href='@{/admin/eco/write}'|">
+            글 작성하기
+          </button>
+        </div>
+        <!-- 흰색 게시판 전체 -->
+        <div class="content">
+          <div class="toggle-btn-container">
+            <button id="ongoing-eco__btn"  th:onclick="|location.href='@{/admin/eco/ingList}'|">진행중</button>
+            <button id="finished-eco__btn"  class="active-btn">완료</button>
+          </div>
+          <!-- 완료된 에코배너 화면 -->
+          <div id="finished-eco" >
+            <div class="banner-box" onclick="goToDetailPageFin()" th:onclick="|goToDetailPageFin(event, '${finEco.fgPostId}', '${finEco.fgProjectId}')|"   th:each="finEco:${adminFinEcoListDTO}">
+              <div class="banner-img">
+                <img th:src="'/upload_moamz/' + ${finEco.fgPostFileRoot} + '/' + ${finEco.fgPostFileUuid} + '_' + ${finEco.fgPostFileName}" alt="plogging"/>
+              </div>
+              <div class="banner-article">
+                <div class="title-and-editBtn">
+                  <div class="title" th:text="${finEco.fgPostTitle}">환경을 위한 플로깅 프로젝트!</div>
+                </div>
+                <div class="calendar-and-like">
+                  <div class="calendar">
+                    <div class="calendar-icon-wrapper">
+                      <img
+                        class="banner-img"
+                        th:src="@{/img/admin/calendar.png}"
+                        alt="calendarIcon"
+                      />
+                      <div class="calendar-text">
+                        <span th:text="${finEco.fgEcoStartToChar}">24/10/10</span>~<span th:text="${finEco.fgEcoEndToChar}">24/10/17</span>
+                      </div>
+                    </div>
+                    <div class="calendar-period"><span th:text="${finEco.fgEcoPeriod}">1</span>주일간</div>
+                  </div>
+                  <div class="like">
+                    <img
+                      th:src="@{/img/admin/heart.png}"
+                      alt="heartIcon"
+                    />
+                    <div class="like-value">
+                      <span th:text="${finEco.fgPostLikes}">22</span>
+                    </div>
+                  </div>
+                  <div class="point-box">
+                    <img th:src="@{/img/admin/point.png}" alt="point-icon">
+                    <span th:text="${finEco.fgEcoPoints}">500</span>pt
+                  </div>
+                </div>
+                <div class="description">
+                  <div class="description-title">프로젝트 소개</div>
+                  <p class="description-detail" th:text="${finEco.fgEcoInfo}">
+                    플로깅은 스웨덴에서 시작된 환경 운동으로, 조깅을 하면서
+                    동시에 쓰레기를 줍는<br />
+                    활동입니다. 건강과 환경 보호를 동시에 실천할 수 있는 이 멋진
+                    운동은 조깅보다 더<br />
+                    많은 칼로리를 소모할 수 있습니다.
+                  </p>
+                </div>
+                <div class="certi-list">
+                  <div class="certi-title">인증 사항</div>
+                  <p class="certi-detail" th:text="${finEco.fgCertInfo}">
+                    1.플로깅 활동을 하며 주운 쓰레기 사진<br />
+                    2.소감/후기
+                  </p>
+                </div>
+                <div class="join-sticker"><span th:text="${finEco.fgEcoParticipation}">한번만</span> 참여 가능</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <ul class="page-box">
+            <a th:href="@{/admin/eco/finList(page=${finPage.startPage - 1})}" class="page-a" th:if="${finPage.prev}">
+              <li class="page-num prev">&lt</li>
+            </a>
+            <!--        th:block은 화면에 영향을 주지않는 가짜 태그
+                        타임리프 문법을 사용하기 위해 만들어 쓴다.
+            -->
+            <th:block th:each="i : ${#numbers.sequence(finPage.startPage, finPage.endPage)}">
+              <a th:href="@{/admin/eco/finList(page=${i})}" class="page-a">
+                <li class="page-num" th:classappend="${i == finPage.criteria.page ? 'active' : ''}" th:text="${i}"></li>
+              </a>
+            </th:block>
+            <a th:href="@{/admin/eco/finList(page=${finPage.endPage + 1})}" class="page-a" th:if="${finPage.next}">
+              <li class="page-num next">&gt</li>
+            </a>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    $(function () {
+      $("#adminNavBar").load("adminNavBar.html");
+      $("#adminHeader").load("adminHeader.html");
+    });
+  </script>
+  <script th:src="@{/js/admin/adminEcoList.js}"></script>
+</html>
