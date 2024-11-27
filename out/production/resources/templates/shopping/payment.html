@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6c263a566abdc8418b204d2062452eca&libraries=services"></script>
-    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/reset2.css}">
     <script th:src="@{/js/shopping/payment.js}"></script>
     <link rel="stylesheet" th:href="@{/css/shopping/payment.css}">
 </head>
@@ -22,34 +22,29 @@
         <div class="payment-payment">
             <div class="payment-payment-product">
                 <div class="payment-payment-product-img">
-                    <img th:src="@{/img/shopping/abocado.png}" alt="">
+<!--                    <img th:src="@{'/upload_moamz/' + ${productFileRoot} + '/' + ${productFileUuid}-->
+<!--                                                + '_' + ${productFileName}}" style="width: 200px; height: 180px;">-->
+                    <img th:src="@{/img/shopping/banana.png}" style="width: 200px; height: 180px;">
                 </div>
                 <div class="payment-payment-product-text">
-                    <div class="payment-payment-product-text-name">
+                    <div class="payment-payment-product-text-name" th:text="${productName}" style="white-space: nowrap">
                         [Dole] 아보카도
                     </div>
                     <div class="payment-payment-product-text-eco">
                         <span>
-                            <div class="payment-payment-product-text-eco-calendar">
+                            <div class="payment-payment-product-text-eco-calendar"th:text="${#temporals.format(productExpTime, 'yy.MM.dd')}">
                                 <img th:src="@{/img/shopping/productListcalendar.png}" alt="">
                                 24.10.15
                             </div>
-                            <div class="payment-payment-product-text-eco-co2">
+                            <div class="payment-payment-product-text-eco-co2" th:text="${productWeight} + 'kg'">
                                 <img th:src="@{/img/shopping/productListco2.png}" alt="">
                                 2kg
                             </div>
                         </span>
                     </div>
-                    <div class="payment-payment-product-price">
+                    <div class="payment-payment-product-price" th:text="${productPrice} + '원'">
                         <span>
                             75,600원
-                            <div class="payment-product-count-btn">
-                                <button type="button" id="inc">+</button>
-                                <div class="payment-product-count-num" id="counting">
-                                    1
-                                </div>
-                                <button type="button" id="dec">-</button>
-                            </div>
                         </span>
                     </div>
                 </div>
@@ -60,7 +55,7 @@
                 </div>
                 <div class="payment-payment-payment-price">
                     <div class="payment-payment-payment-price-product">
-                        <span>
+                        <span th:text="${productPrice} + '원'">
                             <div class="payment-payment-payment-text">
                                 상품 금액
                             </div>
@@ -80,7 +75,7 @@
                 <div class="payment-payment-payment-final">
                     <div class="payment-payment-payment-final-price">
                         결제 예정 금액
-                        <span>75,400원</span>
+                        <span th:text="${productPrice} + '원'">75,400원</span>
                     </div>
                     <div class="payment-payment-payment-final-policy">
                         회원 본인은 주문내용을 확인했으며, 

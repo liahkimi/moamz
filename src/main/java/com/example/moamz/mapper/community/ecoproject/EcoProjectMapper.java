@@ -6,6 +6,7 @@ import com.example.moamz.domain.dto.community.ecoproject.EcoCertListDTO;
 import com.example.moamz.domain.dto.community.ecoproject.EcoCertWriteDTO;
 import com.example.moamz.domain.dto.community.ecoproject.EcoProjectListDTO;
 import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.EcoCertCriteria;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -34,6 +35,8 @@ public interface EcoProjectMapper {
     List<EcoProjectListDTO> ecoProjectListPage(Criteria criteria);
 
     List<EcoProjectListDTO> endecoProjectListPage(Criteria criteria);
+
+    List<EcoCertListDTO> ecoCertListPage(EcoCertCriteria ecoCertCriteria);
 
     int countEco();
 

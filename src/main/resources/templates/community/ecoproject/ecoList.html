@@ -50,15 +50,16 @@
                 <div class="content">
                     <div class="toggle-btn-container">
                         <button id="ongoing-eco__btn" class="active-btn">진행중</button>
-                        <button id="finished-eco__btn">완료</button>
+                        <button id="finished-eco__btn"  th:onclick="|location.href='@{/ecoproject/projectEndList}'|">완료</button>
                     </div>
                     <!-- 진행중인 에코배너 화면 -->
                     <div id="ongoing-eco" th:each="ecoList:${ecoProjectList}">
                         <a th:href="@{/ecoproject/ecoCertList/{fgPostId}(fgPostId=${ecoList.fgPostId})}">
                         <div class="banner-box">
                             <div class="banner-img">
-                                <img th:src="@{'/upload_moamz/' + ${ecoList.postFileRoot} + '/' + ${ecoList.postFileUuid}
-                                                + '_' + ${ecoList.postFileName}}">
+<!--                                <img th:src="@{'/upload_moamz/' + ${ecoList.postFileRoot} + '/' + ${ecoList.postFileUuid}-->
+<!--                                                + '_' + ${ecoList.postFileName}}">-->
+                                <img th:src="@{/img/community/socialing/yoga.jpg}">
                             </div>
                             <div class="banner-article">
                                 <div class="title-and-btns">
@@ -160,24 +161,23 @@
             </div>
 
             <!-- 페이지네이션 -->
-            <div class="pagination">
-                <button id="prev-btn">&lt;</button>
-                <span class="page-numbers">
-                    <a href="">1</a>
-                  </span>
-                <span class="page-numbers">
-                    <a href="">2</a>
-                  </span>
-                <span class="page-numbers">
-                    <a href="">3</a>
-                  </span>
-                <span class="page-numbers">
-                    <a href="">4</a>
-                  </span>
-                <span class="page-numbers">
-                    <a href="">5</a>
-                  </span>
-                <button id="next-btn">&gt;</button>
+            <div class="pagination" id="ongoing-page">
+                <ul class="page-box">
+                    <a th:href="@{/ecoproject/projectList(page=${ecoPage.startPage - 1})}" class="page-a" th:if="${ecoPage.prev}">
+                        <li class="page-num prev">&lt</li>
+                    </a>
+                    <!--        th:block은 화면에 영향을 주지않는 가짜 태그
+                                타임리프 문법을 사용하기 위해 만들어 쓴다.
+                    -->
+                    <th:block th:each="i : ${#numbers.sequence(ecoPage.startPage, ecoPage.endPage)}">
+                        <a th:href="@{/ecoproject/projectList(page=${i})}" class="page-a">
+                            <li class="page-num" th:classappend="${i == ecoPage.criteria.page ? 'active' : ''}" th:text="${i}"></li>
+                        </a>
+                    </th:block>
+                    <a th:href="@{/ecoproject/projectList(page=${ecoPage.endPage + 1})}" class="page-a" th:if="${ecoPage.next}">
+                        <li class="page-num next">&gt</li>
+                    </a>
+                </ul>
             </div>
         </div>
     </section>
