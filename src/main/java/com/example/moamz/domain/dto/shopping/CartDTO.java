@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
@@ -17,9 +19,9 @@ public class CartDTO {
     private String fgProductName;
     private int fgProductPrice;
     private String fgProductWeight;
-    private String fgProductExpTime;
-    private String fgProductFileName;
-    private String fgProductFileRoot;
-    private String fgProductFileUuid;
+    private LocalDateTime fgProductExpTime;
+    private String ProductFileName;
+    private String ProductFileRoot;
+    private String ProductFileUuid;
     private Long fgCartDetailId;
 }

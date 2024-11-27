@@ -64,7 +64,7 @@ button:hover{
     justify-content: space-around;
 }
 .payment-payment-product-text-name{
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bolder;
 }
 .payment-product-count-btn{
@@ -157,7 +157,7 @@ textarea{
 .payment-payment-payment-final-policy{
     width: 70%;
     margin: 0 auto;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     color: rgba(0, 0, 0, 0.4);
 }
 .payment-payment-payment-final-btn{
