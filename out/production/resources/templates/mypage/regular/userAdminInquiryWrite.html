@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../static/css/reset2.css">
-    <link rel="stylesheet" href="../../../static/css/mypage/regular/userAdminInquiryWrite.css">
-    <script defer src="../../../static/js/mypage/regular/userAdminInquiryWrite.js"></script>
+    <link rel="stylesheet" th:href="@{/css/reset2.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/regular/userAdminInquiryWrite.css}">
+    <script defer th:src="@{/js/mypage/regular/userAdminInquiryWrite.js}"></script>
     <title>마이페이지</title>
 </head>
 <body>
-    <header id="header"></header>
+    <header id="header" th:replace="~{/main/fragment/header/userHeaderLogin.html}"></header>
     <main>
         <div class="product-write-container">
             <!-- 제목 영역 -->
@@ -18,7 +18,7 @@
             </div>
             <!-- 글 작성 영역 -->
             <div class="write-content-container">
-                <form method="post" action="">
+                <form method="post" th:action="@{/normal/inquiry/regist}">
                     <div class="write-item">
                         <p class="write-label">📝 문의제목*</p>
                         <input type="text" required/>
@@ -35,13 +35,7 @@
             </div>
         </div>
     </main>
-    <footer id="footer"></footer>
+    <footer id="footer" th:replace="~{/main/fragment/footer/userFooter.html}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(function() {
-        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
-        $("#footer").load("../../main/fragment/footer/userFooter.html");
-    });
-</script>
 </html>

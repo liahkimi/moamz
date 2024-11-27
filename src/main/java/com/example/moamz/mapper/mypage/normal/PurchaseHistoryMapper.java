@@ -7,6 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface PurchaseHistoryMapper {
-    List<PurchaseHistoryDTO> selectPurchaseList();
+//    List<PurchaseHistoryDTO> selectPurchaseList();
+    List<PurchaseHistoryDTO> selectPurchaseList(Long fgUserCode);
 
 }

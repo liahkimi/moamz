@@ -47,10 +47,10 @@
   <div class="main-eco">
     <div class="eco-title">
       <img th:src="@{/img/main/main/main-eco.png}" alt="힘자랑">
-      <span><a th:href="@{/ecoproject/projectList}">HOT 지구를 위한 에코 프로젝트</a></span>
+      <span><a th:href="@{/ecoproject/list}">HOT 지구를 위한 에코 프로젝트</a></span>
     </div>
     <div class="eco-project" >
-      <div class="eco-card" th:each="eco : ${mainEcoList}" onclick="location.href=`/ecoproject/ecoCertList`">
+      <div class="eco-card" th:each="eco : ${mainEcoList}" onclick="location.href=`/ecoproject/ecoCertList/{fgPostId}`">
         <div class="eco-img">
 <!--          <img th:src="@{/img/main/main/eco-img.png}" alt="에코 프로젝트">-->
           <img th:src="'/upload_moamz/' + ${eco.fgPostFileRoot} + '/' + ${eco.fgPostFileUuid} + '_' + ${eco.fgPostFileName}" alt="에코 프로젝트 사진"/>

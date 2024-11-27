@@ -11,8 +11,10 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class NormalInquiryDetailCommentDTO {
-    private Long fgUserCode;
-    private Long fgCommentId;
+//    private Long fgUserCode;
+//    private Long fgCommentId;
+    private Long fgPostId;
     private String fgCommentDate;
     private String fgCommentContent;
+    private String fgCommentEdit;
 }

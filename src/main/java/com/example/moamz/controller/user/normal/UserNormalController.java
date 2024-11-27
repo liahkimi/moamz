@@ -50,7 +50,11 @@ public class UserNormalController {
     public RedirectView logout(HttpSession session){
         session.invalidate();
 
-        return new RedirectView("/main");
+
+        return new RedirectView("/main");   
+
+//        return new RedirectView("/main");
+
 
     }
 }
