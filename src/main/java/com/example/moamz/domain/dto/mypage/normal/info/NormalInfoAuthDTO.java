@@ -10,7 +10,9 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class NormalInfoAuthDTO {
-    private String fgUserCode;
-    private String fgUserId;
-    private String fgUserPassword;
+    // 회원 정보 변경 전 인증페이지 DTO
+
+    private Long fgUserCode;    //회원 번호
+    private String fgUserId;    //회원 아이디 (이메일)
+    private String fgUserPassword; //회원 비밀번호
 }
