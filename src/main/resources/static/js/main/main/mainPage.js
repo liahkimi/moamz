@@ -19,7 +19,7 @@ function changeSlide() {
         mainBtn.setAttribute('data-href', '/shop/list'); // 상품페이지로 이동
     } else {
         mainBtn.textContent = "커뮤니티로 이동 →";
-        mainBtn.setAttribute('data-href', '/ecoproject/projectList'); // 커뮤니티 페이지로 이동
+        mainBtn.setAttribute('data-href', '/ecoproject/list'); // 커뮤니티 페이지로 이동
     }
 }
 

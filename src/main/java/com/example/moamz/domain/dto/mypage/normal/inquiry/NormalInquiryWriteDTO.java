@@ -11,9 +11,12 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class NormalInquiryWriteDTO {
-    private Long fgUserCOde;
     private Long fgPostId;
+    private String fgPostType;
     private String fgPostTitle;
+    private Long fgUserCode;
     private String fgInquiryContent;
+
+
 }
 
