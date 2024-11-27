@@ -5,6 +5,7 @@ import com.example.moamz.domain.dto.community.socialing.SocialingListDTO;
 import com.example.moamz.domain.dto.community.socialing.SocialingWriteDTO;
 import com.example.moamz.domain.dto.file.PostFileDTO;
 import com.example.moamz.domain.dto.page.Criteria;
+import com.example.moamz.domain.dto.page.SocialCriteria;
 import com.example.moamz.mapper.community.PostMapper;
 import com.example.moamz.mapper.community.socialing.SocialingMapper;
 import com.example.moamz.mapper.file.PostFileMapper;
@@ -92,11 +93,11 @@ public class SocialingService {
         }
     }
 
-    public List<SocialingListDTO> showSocialingPage(Criteria criteria){
-        return socialingMapper.socialingListPage(criteria);
+    public List<SocialingListDTO> showSocialingPage(SocialCriteria socialCriteria){
+        return socialingMapper.socialingListPage(socialCriteria);
     }
 
-    public int totalSocialing(){
-        return socialingMapper.countSocialing();
+    public int totalSocialing(String category){
+        return socialingMapper.countSocialing(category);
     }
 }
