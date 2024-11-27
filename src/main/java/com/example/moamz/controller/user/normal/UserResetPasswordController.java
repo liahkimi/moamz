@@ -45,6 +45,7 @@ public class UserResetPasswordController {
         return new RedirectView("/normal/changePassword?fgUserId=" + fgUserId);
     }
 
+    //새 비밀번호 변경 페이지
     @GetMapping("/changePassword")
     public String changePassword(@RequestParam("fgUserId") String fgUserId,
                                  Model model) {
@@ -52,8 +53,7 @@ public class UserResetPasswordController {
         return "/user/regular/userResetPassword";
     }
 
-    // 비밀번호 변경 요청을 처리하는 엔드포인트
-//    @PutMapping("/changePassword")
+    // 새 비밀번호 변경
     @PostMapping("/changePassword")
     public String updatePassword(UserResetPasswordDTO userResetPasswordDTO,
                                  RedirectAttributes redirectAttributes) {

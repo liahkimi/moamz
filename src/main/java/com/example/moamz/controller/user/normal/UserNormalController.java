@@ -76,7 +76,6 @@ public class UserNormalController {
             return "아이디 또는 비밀번호를 확인해주세요.";  // 아이디가 없을 때 메시지
         }
 
-
     }
 
 }

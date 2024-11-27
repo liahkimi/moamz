@@ -25,7 +25,7 @@ import java.util.UUID;
 public class SellerSignupService {
     private final SellerSignupMapper sellerSignupMapper;
 
-    @Value("C:/upload_moamz")
+    @Value("C:/upload_moamz/")
     private String fileDir;
 
     // 파일 업로드 경로를 생성 메서드

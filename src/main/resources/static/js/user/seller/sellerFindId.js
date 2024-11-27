@@ -19,26 +19,27 @@
 // });
 
 //------------------------------------------------------------------------------------------------
+function sellerFindId() {
+    var name = $("#find-name-check").val();
+    var phone = $("#find-phone-check").val();
 
-// function checkedId() {
-//   var checkedId = $("#email-input").val();
-//
-//   if (checkedId) {
-//     $.ajax({
-//       url: "/normal/regular/userSignup",
-//       type: "POST",
-//       data: { checkedId: checkedId },
-//       success: function(response) {
-//         alert(response);  // 서버에서 받은 아이디 또는 오류 메시지 출력
-//       },
-//       error: function() {
-//         alert("이미 존재하는 아이디입니다.");
-//       }
-//     });
-//   } else {
-//     alert("아이디를 입력해 주세요.");
-//   }
-// }
+    if (name && phone) {
+        $.ajax({
+            url: "/seller/seller/findId",
+            type: "GET",
+            data: { name: name, phone: phone },
+            success: function(response) {
+                alert(response);  // 서버에서 받은 아이디 또는 오류 메시지 출력
+            },
+            error: function() {
+                alert("아이디 찾기에 실패했습니다. 이름과 휴대폰번호를 확인해 주세요.");
+            }
+        });
+    } else {
+        alert("이름과 휴대폰번호를 모두 입력해주세요.");
+    }
+}
+
 
 
 

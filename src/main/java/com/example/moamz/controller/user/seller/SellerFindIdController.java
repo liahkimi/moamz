@@ -25,7 +25,7 @@ public class SellerFindIdController {
         String userId = sellerFindIdService.selectFindId(fgSellerName,fgSellerPhone);
         log.info("😀😀😀😀😀😀fgUserName:{}, fgSellerPhone:{}", fgSellerName, fgSellerPhone);
         if(userId != null){
-            return userId;
+            return userId + "입니다";
         }else {
             return "아이디를 찾을 수 없습니다.";
         }
