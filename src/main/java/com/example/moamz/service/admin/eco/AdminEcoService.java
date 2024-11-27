@@ -16,10 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Transactional
@@ -75,15 +72,24 @@ public class AdminEcoService {
         return new SimpleDateFormat("yyyy/MM/dd").format(new Date());
     }
 
-    //      진행중인 에코프로젝트 목록 가져오기
+    //     진행중인 에코프로젝트 총 갯수 (for pagination)
+    public int findEcoTotal(){return adminEcoMapper.selectEcoTotal();}
+
+    //     진행중인 모든 에코프로젝트 목록 보기(pagination o)
     public List<AdminIngEcoListDTO> findAllIngEcoList(Criteria criteria){
         return adminEcoMapper.selectAllIngEcoList(criteria);
     }
 
-    //  에코프로젝트 총 갯수 구하기
-    public int findEcoTotal(){return adminEcoMapper.selectEcoTotal();}
+    //     종료된 에코프로젝트 총 갯수 (for pagination)
+    public int findFinEcoTotal(){ return adminEcoMapper.selectFinEcoTotal();}
 
-    //    종료된 에코프로젝트 목록 가져오기
+    //     종료된 모든 에코프로젝트 목록 보기(pagination o)
+  public List<AdminFinEcoListDTO> findAllFinEcoList(Criteria criteria){
+        return adminEcoMapper.selectAllFinEcoList(criteria);
+  }
+
+
+    //     종료된 에코프로젝트 목록 가져오기 (pagination x)
     public List<AdminFinEcoListDTO> findFinEcoList(){
         return adminEcoMapper.selectFinEcoList();
     }
@@ -126,10 +132,26 @@ public class AdminEcoService {
     }
 
 
-    //    (진행중/종료된) 특정 한 에코 프로젝트의 인증글 목록보기
+    //    (진행중/종료된) 특정 한 에코 프로젝트의 인증글 목록보기 (pagination x)
     public List<AdminEcoCertListDTO> findEcoCertList(Long fgProjectId ){
         return adminEcoMapper.selectEcoCertList(fgProjectId);
     }
+    // 진행중이거나 완료된 특정 한 에코 프젝의 총 인증글 수 조회하기 (for pagination)
+    public int findEcoCertTotal(Long fgProjectId){return adminEcoMapper.selectEcoCertTotal(fgProjectId);}
+
+    //  진행중이거나 완료된 특정 한 에코프젝의 모든 인증글 목록 보기 (pagination o)
+    public List<AdminEcoCertListDTO> findAllEcoCertPage(Criteria criteria, Long fgProjectId) {
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("fgProjectId", fgProjectId);  // 에코 프로젝트 ID
+        params.put("page", criteria.getPage());  // 페이지 번호
+        params.put("amount", criteria.getAmount());  // 페이지 당 항목 수
+
+        log.info("✔️✔️✔️✔️✔️Parameters sent to mapper: {}", params);//{amount=12, fgProjectId=123, page=1}
+        return adminEcoMapper.selectAllEcoCertPage(params);
+    }
+
+
 
     //    에코프젝 인증글 상세 보기
     public AdminEcoCertDetailDTO findEcoCertDetail(Long fgPostId, Long fgProjectId){

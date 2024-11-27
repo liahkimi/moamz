@@ -41,95 +41,59 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- 💥추후 각 tr클릭시 해당 상세페이지로 이동시키기 -->
                 <tr onclick="goToDetailPage()"  th:onclick="|goToDetailPage(event,${certList.fgPostId},${certList.fgProjectId})|" th:each ="certList, iterStat :${adminEcoCertListDTO}">
-                  <td th:text="${iterStat.index + 1}">1</td>
+                  <td th:text="${(ingCertPage.criteria.getPage() - 1) * ingCertPage.criteria.getAmount() + iterStat.index + 1}">1</td>
                   <td th:text="${certList.fgPostTitle}">오늘 플로깅 인증합니다!</td>
                   <td th:text="${certList.fgNormalNickname}">user1</td>
                   <td th:text="${certList.fgPostCreatedAt}">2024/10/11</td>
                   <td th:text="${certList.fgPostLikes}">10</td>
-<!--                  <td class="last-col">-->
-<!--                    <button id="pointBtn" type="button"-->
-<!--                            th:fgPostId="${fgPostId}"-->
-<!--                            onclick="openModal(this)"-->
-<!--                            >포인트 지급하기</button>-->
-<!--                  </td>-->
-<!--                </tr>-->
-<!--              </tbody>-->
-<!--            </table>-->
-<!--            &lt;!&ndash; The Modal &ndash;&gt;-->
-<!--            <div id="myModal" class="modal">-->
-<!--              &lt;!&ndash; Modal content &ndash;&gt;-->
-<!--              <div class="modal-content">-->
-<!--                <span class="close" onclick="closeModal()">&times;</span>-->
-<!--                <h1>포인트 지급</h1>-->
-<!--                <form action="#" method="POST">-->
-<!--                  <div class="point-title">point : </div>-->
-<!--                  <input type="number">-->
-<!--                  &lt;!&ndash; <select name="pointAmount" id="pointAmount" class="custom-select">-->
-<!--                    <option value="100">100</option>-->
-<!--                    <option value="200">200</option>-->
-<!--                    <option value="300">300</option>-->
-<!--                  </select> &ndash;&gt;-->
-<!--                  <div class="modal-btn">-->
-<!--                    <button type="button" onclick="closeModal()">취소</button>-->
-<!--                    <button type="submit" id="submitBtn">적용</button>-->
-<!--                    &lt;!&ndash; 💥적용버튼 클릭시 가야할 곳 못 정함 &ndash;&gt;-->
-<!--                  </div>-->
-<!--                </form>-->
-<!--              </div>-->
-<!--            </div>-->
-
-          <!-- 버튼에 fgPostId 전달 -->
-          <td class="last-col">
-            <button id="pointBtn" type="button"
-                    th:data-fg-post-id="${fgPostId}"
-                    onclick="openModal(this)">
-              포인트 지급하기
-            </button>
-          </td>
-        </table>
-
-          <!-- 모달 창 구조 -->
-          <div id="myModal" class="modal">
-            <div class="modal-content">
-              <span class="close" onclick="closeModal()">&times;</span>
-              <h1>포인트 지급</h1>
-              <form id="pointForm" action="#" method="POST">
-                <!-- 숨겨진 필드에 fgPostId 값 저장 -->
-                <input type="hidden" name="fgPostId" id="modalFgPostId" th:data-fg-post-id="${fgPostId}" >
-
-                <div class="point-title">point:</div>
-                <input type="number" name="fgPointReceived" id="fgPointReceived" required>
-                <div class="modal-btn">
-                  <button type="button" onclick="closeModal()">취소</button>
-                  <button type="submit" id="submitBtn">적용</button>
-                </div>
-              </form>
+                  <td class="last-col">
+                    <button id="pointBtn" type="button"
+                            th:data-fg-post-id="${certList.fgPostId}"
+                            onclick="openModal(event)"
+                            >포인트 지급하기</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h1>포인트 지급</h1>
+                <form id="pointForm">
+                  <input type="hidden" id="modalFgPostId" name="fgPostId">
+                  <div class="point-title">point : </div>
+                  <input type="number" id="pointInput" name="fgPointReceived" placeholder="지급할 포인트를 입력하세요">
+                  <div class="modal-btn">
+                    <button type="button" onclick="closeModal()">취소</button>
+                    <button type="submit" id="submitBtn">적용</button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-
-
-            <!-- 💥추후 페이지네이션 js 구현하기 -->
             <div class="pagination">
-              <button class="prev">Previous</button>
-              <button class="page active">1</button>
-              <button class="page">2</button>
-              <button class="page">3</button>
-              <button class="next">Next</button>
+              <ul class="page-box">
+                <a th:href="@{/admin/eco/ecoCertList/{fgPostId}(fgPostId=${fgPostId},page=${ingCertPage.startPage - 1})}" class="page-a" th:if="${ingCertPage.prev}">
+                  <li class="page-num prev">&lt</li>
+                </a>
+                <!--        th:block은 화면에 영향을 주지않는 가짜 태그
+                            타임리프 문법을 사용하기 위해 만들어 쓴다.
+                -->
+                <th:block th:each="i : ${#numbers.sequence(ingCertPage.startPage, ingCertPage.endPage)}">
+                  <a th:href="@{/admin/eco/ecoCertList/{fgPostId}(fgPostId=${fgPostId},page=${i})}" class="page-a">
+                    <li class="page-num" th:classappend="${i == ingCertPage.criteria.page ? 'active' : ''}" th:text="${i}"></li>
+                  </a>
+                </th:block>
+                <a th:href="@{/admin/eco/ecoCertList/{fgPostId}(fgPostId=${fgPostId}, page=${ingCertPage.endPage + 1})}" class="page-a" th:if="${ingCertPage.next}">
+                  <li class="page-num next">&gt</li>
+                </a>
+              </ul>
             </div>
           </div>
-
         </div>
       </div>
     </main>
   </body>
-<!--  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
-<!--  <script>-->
-<!--    $(function () {-->
-<!--      $("#adminNavBar").load("adminNavBar.html");-->
-<!--      $("#adminHeader").load("adminHeader.html");-->
-<!--    });-->
-<!--  </script>-->
   <script th:src="@{/js/admin/adminEcoCertifiList.js}"></script>
 </html>

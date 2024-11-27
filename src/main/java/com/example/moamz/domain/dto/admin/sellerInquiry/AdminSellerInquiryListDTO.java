@@ -19,4 +19,6 @@ public class AdminSellerInquiryListDTO {
     private Long fgPostId;                  // 게시글ID
     private Long fgUserCode;                //  회원번호
     private String fgInquiryStatus; // 답변 상태
+
+
 }

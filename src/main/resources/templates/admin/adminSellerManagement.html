@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원관리</title>
+    <link rel="stylesheet" th:href="@{/css/reset2.css}" />
+    <link
+            rel="stylesheet"
+            th:href="@{/css/admin/adminSellerManagement.css}"
+    />
+    <link rel="stylesheet" th:href="@{/css/admin/adminHeader.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminNavBar.css}" />
+    <script th:src="@{/js/admin/adminUserManagement.js}"></script>
+</head>
+<body>
+<header id="adminHeader" th:replace="~{/admin/adminHeader :: header}">
+</header>
+<main>
+    <nav id="adminNavBar" th:replace="~{/admin/adminNavBar :: nav}" >
+    </nav>
+    <!-- 우측 녹색 메인 화면-->
+    <div class="content-box">
+        <!-- 타이틀 : dashboard -->
+        <div class="page-title-box">
+            <div class="page-title">회원관리</div>
+        </div>
+        <!-- 검색창 -->
+        <div class="search-input">
+            <input type="text" id="fgUserId" placeholder="아이디로 회원 검색"  onkeydown="if(event.key === 'Enter') searchUser()" />
+            <button onclick="searchUser()">
+                <img
+                        class="icon"
+                        th:src="@{/img/admin/search.png}"
+                        alt="search"
+                />
+            </button>
+        </div>
+        <!-- 흰색 게시판 전체 -->
+        <div class="content">
+            <div class="toggle-btn-container">
+                <button id="user-management-btn"
+                        th:onclick="|location.href='@{/admin/userMng/userList}'|">
+                    일반회원
+                </button>
+                <button id="seller-management-btn"  class="active-btn" onclick="showSellerTable()">판매자회원</button>
+            </div>
+            <!-- 일반 회원 목록 -->
+<!--            <div id="user-table-container" style="display:none;">-->
+<!--                <table>-->
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                        <th>회원번호</th>-->
+<!--                        <th>닉네임</th>-->
+<!--                        <th>아이디(이메일주소)</th>-->
+<!--                        <th>가입일</th>-->
+<!--                        <th>포인트</th>-->
+<!--                        <th>게시글수</th>-->
+<!--                        <th>구매건수</th>-->
+<!--                        <th>관리</th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                    <tr th:each="userMngInfo, iterStat :${userMngListDTO}">-->
+<!--                        <td th:text="${(userPage.criteria.getPage() - 1) * userPage.criteria.getAmount() + iterStat.index + 1}">1</td>-->
+<!--                        <td th:text="${userMngInfo.fgNormalNickname}">nickname</td>-->
+<!--                        <td th:text="${userMngInfo.fgUserId}">idididididi@gmail.com</td>-->
+<!--                        <td th:text="${userMngInfo.fgUserJoinDate}">2024/10/11</td>-->
+<!--                        <td th:text="${userMngInfo.fgPointTotal}">10</td>-->
+<!--                        <td th:text="${userMngInfo.fgPostCount}">15</td>-->
+<!--                        <td th:text="${userMngInfo.fgPurchaseCount}">30</td>-->
+<!--                        <td>-->
+<!--                            <button>-->
+<!--                                <img-->
+<!--                                        th:src="@{/img/admin/more-horizontal.png}"-->
+<!--                                        alt="morebtn"-->
+<!--                                />-->
+<!--                            </button>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--                <div class="pagination" style="display:none;">-->
+<!--                    <ul class="page-box">-->
+<!--                        <a th:href="@{/admin/userMng/list(page=${userPage.startPage - 1})}" class="page-a" th:if="${userPage.prev}">-->
+<!--                            <li class="page-num prev">&lt</li>-->
+<!--                        </a>-->
+<!--                        &lt;!&ndash;        th:block은 화면에 영향을 주지않는 가짜 태그-->
+<!--                                    타임리프 문법을 사용하기 위해 만들어 쓴다.-->
+<!--                        &ndash;&gt;-->
+<!--                        <th:block th:each="i : ${#numbers.sequence(userPage.startPage, userPage.endPage)}">-->
+<!--                            <a th:href="@{/admin/userMng/list(page=${i})}" class="page-a">-->
+<!--                                <li class="page-num" th:classappend="${i == userPage.criteria.page ? 'active' : ''}" th:text="${i}"></li>-->
+<!--                            </a>-->
+<!--                        </th:block>-->
+<!--                        <a th:href="@{/admin/userMng/list(page=${userPage.endPage + 1})}" class="page-a" th:if="${userPage.next}">-->
+<!--                            <li class="page-num next">&gt</li>-->
+<!--                        </a>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+            <!-- 판매자 회원 목록 -->
+            <div id="seller-table-container" >
+                <table>
+                    <thead>
+                    <tr >
+                        <th>회원번호</th>
+                        <th>아이디</th>
+                        <th>업체명</th>
+                        <th>가입일</th>
+                        <th>업체평점(좋아요)</th>
+                        <th>상품수</th>
+                        <th>판매건수</th>
+                        <th>관리</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="sellerMngInfo, iterStat :${sellerMngListDTO}">
+                        <td th:text="${(sellerPage.criteria.getPage() - 1) * sellerPage.criteria.getAmount() + iterStat.index + 1}">1</td>
+                        <td th:text="${sellerMngInfo.fgUserId}">idididididi</td>
+                        <td th:text="${sellerMngInfo.fgBusinessName}">바나프레소오오오오오오</td>
+                        <td th:text="${sellerMngInfo.fgUserJoinDate}">2024/10/11</td>
+                        <td >⭐<span th:text="${sellerMngInfo.fgAverageReviewRating}">5.0</span>(<span th:text="${sellerMngInfo.fgLikeCount}">10</span>)</td>
+                        <td th:text="${sellerMngInfo.fgProductCount}">60</td>
+                        <td th:text="${sellerMngInfo.fgSalesCount}">58</td>
+                        <td>
+                            <button>
+                                <img
+                                        th:src="@{/img/admin/more-horizontal.png}"
+                                        alt="morebtn"
+                                />
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <ul class="page-box">
+                        <a th:href="@{/admin/userMng/sellerList(page=${sellerPage.startPage - 1})}" class="page-a" th:if="${sellerPage.prev}">
+                            <li class="page-num prev">&lt</li>
+                        </a>
+                        <!--        th:block은 화면에 영향을 주지않는 가짜 태그
+                                    타임리프 문법을 사용하기 위해 만들어 쓴다.
+                        -->
+                        <th:block th:each="i : ${#numbers.sequence(sellerPage.startPage, sellerPage.endPage)}">
+                            <a th:href="@{/admin/userMng/sellerList(page=${i})}" class="page-a">
+                                <li class="page-num" th:classappend="${i == sellerPage.criteria.page ? 'active' : ''}" th:text="${i}"></li>
+                            </a>
+                        </th:block>
+                        <a th:href="@{/admin/userMng/sellerList(page=${sellerPage.endPage + 1})}" class="page-a" th:if="${sellerPage.next}">
+                            <li class="page-num next">&gt</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+<script>
+    function searchUser() {
+        var fgUserId = document.getElementById("fgUserId").value;
+        location.href = '/admin/userMng/search?fgUserId=' + encodeURIComponent(fgUserId);
+    }
+</script>
+</html>
