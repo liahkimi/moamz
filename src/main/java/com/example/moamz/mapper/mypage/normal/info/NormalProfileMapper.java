@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface NormalProfileMapper {
-    List<NormalProfileDTO> selectProfile();
+    List<NormalProfileDTO> selectProfile(Long fgUserCode);
 }

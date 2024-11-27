@@ -10,7 +10,7 @@
             ON p.FG_POST_ID = pf.FG_POST_ID
         JOIN FG_SHARING s
             ON p.FG_POST_ID = s.FG_POST_ID
-        WHERE s.FG_SHARING_STATUS = '나눔가능';
+        WHERE s.FG_SHARING_STATUS = '나눔가능'
     </select>
 
 
@@ -22,7 +22,7 @@
             ON p.FG_POST_ID = pf.FG_POST_ID
         JOIN FG_SHARING s
             ON p.FG_POST_ID = s.FG_POST_ID
-        WHERE s.FG_SHARING_STATUS = '예약중';
+        WHERE s.FG_SHARING_STATUS = '예약중'
     </select>
 
 
@@ -34,7 +34,7 @@
             ON p.FG_POST_ID = pf.FG_POST_ID
         JOIN FG_SHARING s
             ON p.FG_POST_ID = s.FG_POST_ID
-        WHERE s.FG_SHARING_STATUS = '나눔완료';
+        WHERE s.FG_SHARING_STATUS = '나눔완료'
     </select>
 
 </mapper>

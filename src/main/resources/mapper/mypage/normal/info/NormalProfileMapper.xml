@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.moamz.mapper.mypage.normal.info.NormalProfileMapper">
-    <select id="selectProfile" resultType="NormalProfileDTO">
+    <select id="selectProfile" parameterType="Long" resultType="NormalProfileDTO">
         SELECT nu.FG_USER_CODE, uf.FG_USER_FILE_ID, uf.FG_USER_FILE_ROOT, uf.FG_USER_FILE_UUID,  nu.FG_NORMAL_NICKNAME,
             p.FG_POINT_ID, p.FG_POINT_TOTAL, p.FG_CARBON_REDUCTION
         FROM FG_NORMAL_USER nu LEFT JOIN FG_POINT p

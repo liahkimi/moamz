@@ -5,12 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Getter @Setter @ToString
 @NoArgsConstructor
 public class MySharingDTO {
     private Long fgUserCode;
     private String fgPostTitle;
-    private String fgPostCreatedAt;
+    private LocalDateTime fgPostCreatedAt;
     private String fgSharingStatus;
 
     // 나눔 사진 파일
