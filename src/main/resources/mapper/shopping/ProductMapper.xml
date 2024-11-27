@@ -3,11 +3,22 @@
 <mapper namespace="com.example.moamz.mapper.shopping.ProductMapper">
 <!--    상품 리스트 mapper-->
     <select id="productList" resultType="ProductListDTO">
-        select FG_PRODUCT_ID, FG_PRODUCT_NAME, FG_PRODUCT_CONTENT, FG_PRODUCT_EXP_DATE,
-                FG_PRODUCT_STOCK, FG_PRODUCT_PRICE, FG_PRODUCT_WEIGHT, FG_PRODUCT_CONTENT, FG_PRODUCT_TIME,
-                FG_CATEGORY_NAME
-        from FG_PRODUCT p join  FG_CATEGORY c
-        on p.FG_CATEGORY_ID = c.FG_CATEGORY_ID
+        select p.FG_PRODUCT_ID AS fgProductId,
+               p.FG_PRODUCT_NAME AS fgProductName,
+               p.FG_PRODUCT_CONTENT AS fgProductContent,
+               p.FG_PRODUCT_EXP_DATE AS fgProductExpDate,
+               p.FG_PRODUCT_STOCK AS fgProductStock,
+               p.FG_PRODUCT_PRICE AS fgProductPrice,
+               p.FG_PRODUCT_WEIGHT AS fgProductWeight,
+               p.FG_PRODUCT_CONTENT AS fgProductContent,
+               p.FG_PRODUCT_TIME AS fgProductTime,
+               c.FG_CATEGORY_NAME AS fgCategoryName,
+               f.FG_PRODUCT_FILE_NAME AS productFileName,
+               f.FG_PRODUCT_FILE_ROOT AS productFileRoot,
+               f.FG_PRODUCT_FILE_UUID AS productFileUuid
+        from FG_PRODUCT p
+                 join FG_CATEGORY c on p.FG_CATEGORY_ID = c.FG_CATEGORY_ID
+                 left join FG_PRODUCT_FILE f on p.FG_PRODUCT_ID = f.FG_PRODUCT_ID
     </select>
 
 <!--    주문등록-->
@@ -123,9 +134,9 @@
             p.FG_PRODUCT_PRICE AS fgProductPrice,
             p.FG_PRODUCT_WEIGHT AS fgProductWeight,
             p.FG_PRODUCT_EXP_DATE AS fgProductExpTime,
-            f.FG_PRODUCT_FILE_NAME AS fgProductFileName,
-            f.FG_PRODUCT_FILE_ROOT AS fgProductFileRoot,
-            f.FG_PRODUCT_FILE_UUID AS fgProductFileUUID,
+            f.FG_PRODUCT_FILE_NAME AS ProductFileName,
+            f.FG_PRODUCT_FILE_ROOT AS ProductFileRoot,
+            f.FG_PRODUCT_FILE_UUID AS ProductFileUUID,
             d.FG_CART_DETAIL_ID as fgCartDetailId
         FROM
             FG_CART c

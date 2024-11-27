@@ -231,24 +231,28 @@
                 </div>
                 <!-- 페이지네이션 -->
                 <div class="pagination">
-                    <button id="prev-btn">&lt;</button>
-                    <span class="page-numbers">
-                      <a href="./ecoCertificationBoard.html">1</a>
-                    </span>
-                    <span class="page-numbers">
-                      <a href="./ecoCertificationBoard.html">2</a>
-                    </span>
-                    <span class="page-numbers">
-                      <a href="./ecoCertificationBoard.html">3</a>
-                    </span>
-                    <span class="page-numbers">
-                      <a href="./ecoCertificationBoard.html">4</a>
-                    </span>
-                    <span class="page-numbers">
-                      <a href="./ecoCertificationBoard.html">5</a>
-                    </span>
-                    <button id="next-btn">&gt;</button>
+                    <ul class="page-box">
+                        <!-- 이전 버튼 -->
+                        <a th:href="@{/ecoproject/ecoCertList/(fgPostId=${fgProjectId}, page=${page.startPage - 1})}" class="page-a" th:if="${page.prev}">
+                            <li class="page-num prev">&lt;</li>
+                        </a>
+
+                        <!-- 페이지 번호 -->
+                        <th:block th:each="i : ${#numbers.sequence(page.startPage, page.endPage)}">
+                            <a th:href="@{/ecoproject/ecoCertList/{fgPostId}(fgPostId=${fgProjectId}, page=${i})}" class="page-a">
+                                <li class="page-num" th:classappend="${i == page.ecoCertCriteria.page ? 'active' : ''}" th:text="${i}"></li>
+                            </a>
+                        </th:block>
+
+                        <!-- 다음 버튼 -->
+                        <a th:href="@{/ecoproject/ecoCertList/{fgPostId}(fgPostId=${fgProjectId}, page=${page.endPage + 1})}" class="page-a" th:if="${page.next}">
+                            <li class="page-num next">&gt;</li>
+                        </a>
+                    </ul>
                 </div>
+
+
+
             </div>
         </section>
     </main>

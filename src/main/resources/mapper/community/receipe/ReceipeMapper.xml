@@ -94,7 +94,7 @@
 
 
     <!-- FG_RECIPE 테이블 INSERT -->
-    <insert id="insertFgPostRecipe  " parameterType="ReceipeWriteDTO">
+    <insert id="insertFgPostRecipe" parameterType="ReceipeWriteDTO">
         INSERT INTO FG_RECIPE (
         <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
             select SEQ_FG_POST.currval from dual
