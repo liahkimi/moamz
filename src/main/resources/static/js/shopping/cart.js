@@ -8,6 +8,7 @@ $(document).ready(function() {
         const $decrementButton = $(this).find(".dec"); // 감소 버튼 선택
         const $productWeightDisplay = $(this).closest(".cart-product-detail-product").find(".cart-product-detail-product-intro-text-weight"); // 무게 표시 선택
         const $productPriceDisplay = $(this).closest(".cart-product-detail-product").find(".cart-product-detail-product-intro-text-price"); // 가격 표시 선택
+        const id = document.querySelector('#selectedProductName');
 
         // data-* 속성 값 가져오기
         let productWeight = parseFloat($productWeightDisplay.data("fg-product-weight"));
@@ -16,6 +17,7 @@ $(document).ready(function() {
         // 값이 올바르게 가져와졌는지 확인 (디버깅용)
         console.log('Weight:', productWeight);
         console.log('Price:', productPrice);
+        console.log('id', id.value);
 
         // 초기 카운트, 무게, 가격 표시 설정
         updateCartDisplay(count);
@@ -86,15 +88,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("cartForm");
 
     // 선택된 상품 정보를 hidden input에 설정
-    radios.forEach((radio) => {
-        radio.addEventListener("change", function () {
-            document.getElementById("selectedProductId").value = radio.getAttribute("data-product-id");
-            document.getElementById("selectedProductName").value = radio.getAttribute("data-product-name");
-            document.getElementById("selectedProductPrice").value = radio.getAttribute("data-product-price");
-            document.getElementById("selectedProductWeight").value = radio.getAttribute("data-product-weight");
-            document.getElementById("selectedProductExpTime").value = radio.getAttribute("data-product-exp-time");
-        });
-    });
+    // radios.forEach((radio) => {
+    //     radio.addEventListener("change", function () {
+    //         document.getElementById("selectedProductId").value = radio.getAttribute("data-product-id");
+    //         document.getElementById("selectedProductName").value = radio.getAttribute("data-product-name");
+    //         document.getElementById("selectedProductPrice").value = radio.getAttribute("data-product-price");
+    //         document.getElementById("selectedProductWeight").value = radio.getAttribute("data-product-weight");
+    //         document.getElementById("selectedProductExpTime").value = radio.getAttribute("data-product-exp-time");
+    //     });
+    // });
 
     // 폼 전송 시 선택 확인
     form.addEventListener("submit", function (e) {

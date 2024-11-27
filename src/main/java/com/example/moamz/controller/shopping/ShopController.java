@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -47,23 +49,36 @@ public class ShopController {
                                  @RequestParam("productName") String productName,
                                  @RequestParam("productPrice") Integer productPrice,
                                  @RequestParam("productWeight") Double productWeight,
-                                 @RequestParam("productExpTime") String productExpTime,
-                                 Model model) {
-        // 상품 정보를 모델에 추가
-        model.addAttribute("productId", productId);
-        model.addAttribute("productName", productName);
-        model.addAttribute("productPrice", productPrice);
-        model.addAttribute("productWeight", productWeight);
-        model.addAttribute("productExpTime", productExpTime);
+                                 @RequestParam("productExpTime") LocalDateTime productExpTime,
+                                 @RequestParam("productFileRoot") String productFileRoot,
+                                 @RequestParam("productFileUuid") String productFileUuid,
+                                 @RequestParam("productFileName") String productFileName,
+                                 RedirectAttributes redirectAttributes) {
+        // RedirectAttributes로 데이터 전달
+        System.out.println("productId = " + productId);
+        redirectAttributes.addFlashAttribute("productId", productId);
+        redirectAttributes.addFlashAttribute("productName", productName);
+        redirectAttributes.addFlashAttribute("productPrice", productPrice);
+        redirectAttributes.addFlashAttribute("productWeight", productWeight);
+        redirectAttributes.addFlashAttribute("productExpTime", productExpTime);
+        redirectAttributes.addFlashAttribute("productFileRoot", productFileRoot);
+        redirectAttributes.addFlashAttribute("productFileUuid", productFileUuid);
+        redirectAttributes.addFlashAttribute("productFileName", productFileName);
 
-        // 결제 페이지로 이동
-        return "shopping/payment";
+        return "redirect:/shop/payment";
     }
+
 
     @GetMapping("/payment")
-    public String payment(Model model){
+    public String getPaymentPage(Model model) {
+        // 플래시 속성에서 데이터 가져오기 (Redirect 이후)
+        if (!model.containsAttribute("productId")) {
+            model.addAttribute("productId", "No Data");
+        }
         return "shopping/payment";
     }
+
+
 
     @GetMapping("/storeList")
     public String shoplist(Model model){

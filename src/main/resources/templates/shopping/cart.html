@@ -16,11 +16,7 @@
 <main>
     <div class="cart-container container">
         <form action="/shop/payment" method="post" id="cartForm">
-            <input type="hidden" name="productId" id="selectedProductId">
-            <input type="hidden" name="productName" id="selectedProductName">
-            <input type="hidden" name="productPrice" id="selectedProductPrice">
-            <input type="hidden" name="productWeight" id="selectedProductWeight">
-            <input type="hidden" name="productExpTime" id="selectedProductExpTime">
+
             <!-- 상단 장바구니 안내 영역 -->
             <div class="cart-wrap1">
                 <div class="cart-top">
@@ -47,6 +43,7 @@
 
                     <!-- 상품 상세 리스트 -->
                     <div class="cart-product-detail" th:each="cartList : ${cartLists}">
+
                         <div class="cart-product-detail-product">
                             <!-- 삭제 버튼 -->
                             <div class="cart-product-top-btn">
@@ -58,17 +55,18 @@
 
                             <!-- 상품 선택 라디오 -->
                             <input type="radio" name="selectProduct" class="cart-radio">
-
                             <!-- 상품 정보 -->
                             <div class="cart-product-detail-product-intro">
                                 <!-- 상품 이미지 -->
                                 <div class="cart-product-detail-product-intro-img">
-                                    <img th:src="@{/img/shopping/banana.png}" alt="${cartList.fgProductName}"
-                                         style="width: 220px; height: 180px;">
+<!--                                    <img th:src="@{'/upload_moamz/' + ${cartList.productFileRoot} + '/' + ${cartList.productFileUuid}-->
+<!--                                                + '_' + ${cartList.productFileName}}" style="width: 220px; height: 180px;">-->
+                                    <img th:src="@{/img/shopping/banana.png}" style="width: 220px; height: 180px;">
                                 </div>
 
                                 <!-- 상품 텍스트 정보 -->
                                 <div class="cart-product-detail-product-intro-text">
+
                                     <div class="cart-product-detail-product-intro-text-name"
                                          th:text="${cartList.fgProductName}">
                                         상품명
@@ -82,7 +80,7 @@
                                         <span>
                                             <!-- 유통기한 -->
                                             <div class="cart-product-detail-product-intro-text-img"
-                                                 th:text="${#strings.substring(cartList.fgProductExpTime, 2, 4)} + '.' + ${#strings.substring(cartList.fgProductExpTime, 5, 7)} + '.' + ${#strings.substring(cartList.fgProductExpTime, 8, 10)}">
+                                                 th:text="${#temporals.format(cartList.fgProductExpTime, 'yy.MM.dd')}">
                                                 <img th:src="@{/img/shopping/productListcalendar.png}" alt="유통기한">
                                             </div>
                                             <!-- 상품 무게 -->
@@ -95,6 +93,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="productId" id="selectedProductId" th:value="${cartList.fgProductId}">
+                            <input type="hidden" name="productName" id="selectedProductName" th:value="${cartList.fgProductName}">
+                            <input type="hidden" name="productPrice" id="selectedProductPrice" th:value="${cartList.fgProductPrice}">
+                            <input type="hidden" name="productWeight" id="selectedProductWeight" th:value="${cartList.fgProductWeight}">
+                            <input type="hidden" name="productExpTime" id="selectedProductExpTime" th:value="${cartList.fgProductExpTime}">
+                            <input type="hidden" name="productFileRoot" id="selectedProductFileRoot" th:value="${cartList.productFileRoot}">
+                            <input type="hidden" name="productFileUuid" id="selectedProductFileUuid" th:value="${cartList.productFileUuid}">
+                            <input type="hidden" name="productFileName" id="selectedProductFileName" th:value="${cartList.productFileName}">
 
                             <!-- 수량 조절 버튼 -->
                             <div class="cart-product-count-btn">
@@ -112,8 +118,8 @@
                 <div class="cart-bottom">
                     <span>
                         결제 예정 금액: <span id="total-price">9,900원</span>
-                        <button type="button" id="pay"
-                                th:onclick="|location.href='@{/shop/payment}'|">
+                        <button type="submit" id="pay">
+<!--                            th:onclick="|location.href='@{/shop/payment}'|"-->
                             <img th:src="@{/img/shopping/pay.png}" alt="결제하기">
                         </button>
                     </span>

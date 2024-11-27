@@ -94,8 +94,9 @@
                     <li class="socialing-card-view" th:each="socialing:${socialList}" th:if="${socialing.fgSocialingCategory == '함께먹어요'}"
                         th:onclick="|location.href='@{/socialing/socialingDetail/{fgPostId}(fgPostId=${socialing.fgPostId})}'|">
                         <div class="socialing-img">
-                            <img th:src="@{'/upload_moamz/' + ${socialing.postFileRoot} + '/' + ${socialing.postFileUuid}
-                                                + '_' + ${socialing.postFileName}}" style="height: 160px; width: 160px;">
+<!--                            <img th:src="@{'/upload_moamz/' + ${socialing.postFileRoot} + '/' + ${socialing.postFileUuid}-->
+<!--                                                + '_' + ${socialing.postFileName}}" style="height: 160px; width: 160px;">-->
+                            <img th:src="@{/img/community/socialing/dining.webp}">
                         </div>
                         <div class="socialing-description">
                             <div class="socialing-title" th:text="${socialing.fgPostTitle}">우리 함께 모여 저녁식사 어때요?</div>
