@@ -54,7 +54,11 @@ public class UserNormalController {
     public RedirectView logout(HttpSession session){
         session.invalidate(); // 현재 세션을 무효화 (로그아웃)
 
-        return new RedirectView("/main");
+
+        return new RedirectView("/main");   
+
+//        return new RedirectView("/main");
+
 
     }
 }

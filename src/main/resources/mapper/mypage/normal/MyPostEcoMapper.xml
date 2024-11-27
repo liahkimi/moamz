@@ -8,5 +8,6 @@
             ON p.FG_POST_ID = pf.FG_POST_ID
         JOIN FG_ECO e
             ON p.FG_POST_ID = e.FG_POST_ID
+        WHERE FG_ECO_CERT = 1
     </select>
 </mapper>

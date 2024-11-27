@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class NormalInquiryListDTO {
-    private Long fgUserCode;
     private String fgPostTitle;
     private String fgPostCreatedAt;
+    private Long fgUserCode;
 }
