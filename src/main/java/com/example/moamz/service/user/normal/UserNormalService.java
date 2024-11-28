@@ -27,4 +27,10 @@ public class UserNormalService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원 정보"));
     }
 
+    //아이디, 비밀번호 확인
+    public String idPasswordCheck(String fgUserId, String fgUserPassword) {
+        return userNormalMapper.idPasswordCheck(fgUserId,fgUserPassword)
+                .orElse(null);
+    }
+
 }

@@ -5,6 +5,9 @@ import com.example.moamz.domain.dto.user.seller.SellerBusinessDTO;
 import com.example.moamz.domain.dto.user.seller.SellerCommonSignupDTO;
 import com.example.moamz.domain.dto.user.seller.SellerUserSignupDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Optional;
 
 @Mapper
 public interface SellerSignupMapper {
@@ -14,5 +17,8 @@ public interface SellerSignupMapper {
     void insertUserFile(UserFileDTO userFileDTO);
 
     //아이디 중복확인
-    boolean checkedId(String fgUerId);
+    Optional<String> checkedId(@Param("fgUserId")String fgUserId);
+
+    //사업자번호 중복확인
+    Optional<String> checkedBusiness(@Param("fgBusinessNumber")String fgBusinessNumber);
 }

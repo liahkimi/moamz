@@ -14,4 +14,8 @@ public interface SellerLoginMapper {
     Optional<SellerSessionDTO> selectLoginInfo(@Param("fgUserId") String fgUserId,
 
                                                    @Param("fgUserPassword") String fgUserPassword);
+
+    //로그인 아아디, 비밀번호 확인
+    Optional<String> loginCheck(@Param("fgUserId") String fgUserId,
+                                     @Param("fgUserPassword") String fgUserPassword);
 }
