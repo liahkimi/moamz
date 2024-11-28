@@ -9,8 +9,7 @@ import java.util.Optional;
 @Mapper
 public interface NormalFindIdMapper {
 
-//    Optional<String> selectFindId(@Param("fgUserPassword") String fgUSerId, @Param("fgUserPassword") String fgUserPassword);
-    Optional<NormalFindIdDTO> selectFindId(@Param("fgNormalName")String fgNormalName,
-                                           @Param("fgNormalPhone") String fgNormalPhone,
-                                           @Param("fgUserId") String fgUserId);
+//    Optional<String> selectFindId(@Param("fgUserId") String fgUSerId, @Param("fgUserPassword") String fgUserPassword);
+    Optional<String> selectFindId(@Param("fgNormalName")String fgNormalName,
+                                           @Param("fgNormalPhone") String fgNormalPhone);
 }

@@ -95,46 +95,16 @@ public class NormalSignupService {
 
 
 
-//    //MultipartFile : 업로드된 파일을 처리할 때 사용하는 인터페이스
-//    public void insertUserFile(UserFileDTO userFileDTO, List<MultipartFile> files) {
-//        normalSignupMapper.insertUserFile(userFileDTO);
-//        Long fgUserFileId = userFileDTO.getUserFileId();
-//
-//        for(MultipartFile file : files){
-//            if(file.isEmpty()){
-//                break;
-//            }
-//
-//            userFileDTO = saveFile(file);
-//            fileDTO.setBoardId(boardId);
-//            fileMapper.insertFile(fileDTO);
-//
-//        }
-//    }
-
-//    public void insertCommonUser(NormalCommonSignupDTO normalSignupDTO) {
-//        normalSignupMapper.insertCommonUser(normalSignupDTO);
-//    }
-//
-//    public void insertNormalUser(NormalUserSignupDTO normalUserSignupDTO) {
-//        normalSignupMapper.insertNormalUser(normalUserSignupDTO);
-//    }
-
-
-//    public void insertPoint(NormalSignupDTO normalSignupDTO) {
-//        normalSignupMapper.insertPoint(normalSignupDTO);
-//    }
-
     // 아이디 중복확인
-    public boolean checkedId(String fgUserId) {
-
-        return normalSignupMapper.checkedId(fgUserId);
+    public String checkedId(String fgUserId) {
+        return normalSignupMapper.checkedId(fgUserId)
+                .orElse(null);
     }
 
     // 닉네임 중복확인
-    public boolean checkedNickname(String fgNormalNickname){
-
-        return normalSignupMapper.checkedNickname(fgNormalNickname);
+    public String checkedNickname(String fgNormalNickname) {
+        return normalSignupMapper.checkedNickname(fgNormalNickname)
+                .orElse(null);
     }
 
 }

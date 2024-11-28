@@ -10,6 +10,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class NormalFindPasswordDTO {
-    private Long fgUserId;
+    private Long fgUserCode;
+    private String fgUserId;
     private String fgNormalPhone;
 }

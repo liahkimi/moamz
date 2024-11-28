@@ -25,7 +25,7 @@ import java.util.UUID;
 public class SellerSignupService {
     private final SellerSignupMapper sellerSignupMapper;
 
-    @Value("C:/upload_moamz")
+    @Value("C:/upload_moamz/")
     private String fileDir;
 
     // 파일 업로드 경로를 생성 메서드
@@ -91,11 +91,15 @@ public class SellerSignupService {
 
     }
 
-
-
-    // 닉네임 중복확인
-    public boolean checkedNickname(String fgUserId){
-
-        return sellerSignupMapper.checkedId(fgUserId);
+    // 아이디 중복확인
+    public String checkedId(String fgUserId) {
+        return sellerSignupMapper.checkedId(fgUserId)
+                .orElse(null);
     }
+    // 사업자 중복확인
+    public String checkedBusiness(String fgBusinessNumber) {
+        return sellerSignupMapper.checkedBusiness(fgBusinessNumber)
+                .orElse(null);
+    }
+
 }

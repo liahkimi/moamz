@@ -7,10 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -55,4 +52,22 @@ public class SellerLoginController {
         log.info("💛💛💛💛로그아웃 되었습니다.");
         return new RedirectView("/main");
     }
+
+    //로그인 아이디, 비밀번호 확인
+    @PostMapping("/loginCheck")
+    @ResponseBody // 메서드의 반환 값이 뷰를 반환하지 않고 직접 HTTP 응답 본문으로 전달되도록 설정
+    public String checkedLogin(@RequestParam("checkedId") String fgUserId,
+                               @RequestParam("checkedPassword")String fgUserPassword) {
+        log.info("userId:{}", fgUserId);
+
+        String userLogin = sellerLoginService.loginCheck(fgUserId, fgUserPassword);
+        if (userLogin != null) {
+            return "MOAMZ에 오신걸 환영합니다.";  // 아이디 확인
+        } else {
+            return "아이디 혹은 비밀번호를 확인해주세요.";  // 아이디가 없을 때 메시지
+        }
+
+    }
+
+
 }

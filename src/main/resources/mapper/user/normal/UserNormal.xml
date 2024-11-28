@@ -4,12 +4,19 @@
 
     <select id="selectId" resultType="Long" parameterType="NormalLoginDTO">
         SELECT FG_USER_CODE
-        FROM FG_COMMENT_USER
+        FROM FG_COMMON_USER
         WHERE FG_USER_ID = #{fgUserID} AND FG_USER_PASSWORD = #{fgUserPassword}
     </select>
 
     <select id="selectLoginInfo" resultType="NormalSessionDTO" parameterType="NormalLoginDTO">
         SELECT FG_USER_CODE, FG_USER_ID
+        FROM FG_COMMON_USER
+        WHERE FG_USER_ID = #{fgUserId} AND FG_USER_PASSWORD = #{fgUserPassword}
+    </select>
+
+    <!--아이디, 비밀번호 일치 여부 확인-->
+    <select id="idPasswordCheck" parameterType="String">
+        SELECT FG_USER_ID, FG_USER_PASSWORD
         FROM FG_COMMON_USER
         WHERE FG_USER_ID = #{fgUserId} AND FG_USER_PASSWORD = #{fgUserPassword}
     </select>

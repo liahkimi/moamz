@@ -5,7 +5,7 @@ const check = document.getElementById("find-phone-recheck");
 
 find.addEventListener("click", () => {
   if(!name.value.trim()){
-    alert("이름을 입력해주세요");
+    alert("아이디을 입력해주세요");
     return;
   }
   if(!phone.value.trim()){
