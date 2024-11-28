@@ -1,7 +1,6 @@
 package com.example.moamz.controller.user.normal;
 
 import com.example.moamz.domain.dto.user.normal.NormalCommonSignupDTO;
-import com.example.moamz.domain.dto.user.normal.NormalFileDTO;
 import com.example.moamz.domain.dto.user.normal.NormalPointDTO;
 import com.example.moamz.domain.dto.user.normal.NormalUserSignupDTO;
 import com.example.moamz.service.user.normal.NormalSignupService;
@@ -38,12 +37,34 @@ public class NormalSignupController {
                 normalPointDTO,
                 file);
 
-
-//        log.info("userDTO = {}", normalCommonSignupDTO);
-//        normalSignupService.insertCommonUser(normalCommonSignupDTO);
-//        normalSignupService.insertNormalUser(normalUserSignupDTO);
-////        normalSignupService.insertUserFile(normalSignupDTO);
-////        normalSignupService.insertPoint(normalSignupDTO);
         return "redirect:/normal/regular/userLogin";
     }
+
+    //아이디 중복체크
+    @PostMapping("/regular/checkId")
+    @ResponseBody // 메서드의 반환 값이 뷰를 반환하지 않고 직접 HTTP 응답 본문으로 전달되도록 설정
+    public String checkedId(@RequestParam("checkedId") String fgUserId) {
+        log.info("userId:{}", fgUserId);
+        // 사용자가 입력한 아이디로 중복 여부를 확인하는 서비스 호출
+        String userId = normalSignupService.checkedId(fgUserId);
+        if (userId != null) {
+            return userId + "는 이미 존재하는 아이디입니다";  // 아이디 확인
+        } else {
+            return "사용할 수 있는 아이디입니다.";  // 아이디가 없을 때 메시지
+        }
+    }
+
+    //닉네임 중복체크
+    @PostMapping("/regular/checkNickname")
+    @ResponseBody
+    public String checkedNickname(@RequestParam("checkedNickname") String fgNormalNickname) {
+        log.info("😀😀😀😀😀😀userId:{}", fgNormalNickname);
+        String userNickname = normalSignupService.checkedNickname(fgNormalNickname);
+        if (userNickname != null) {
+            return userNickname + "는 이미 존재하는 닉네임입니다";  // 아이디 확인
+        } else {
+            return "사용할 수 있는 닉네임입니다.";  // 실패 시 메시지
+        }
+    }
+
 }

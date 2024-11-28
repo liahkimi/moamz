@@ -24,4 +24,14 @@ public class SellerLoginService {
         return sellerLoginMapper.selectLoginInfo(fgUserID, fgUserPassword)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다"));
     }
+
+    //아이디, 비밀번호 확인
+    public String loginCheck(String fgUserId, String fgUserPassword) {
+        return sellerLoginMapper.loginCheck(fgUserId,fgUserPassword)
+                .orElse(null);
+    }
 }
+
+
+
+

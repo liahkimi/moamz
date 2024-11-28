@@ -9,11 +9,11 @@ import java.util.Optional;
 @Mapper
 public interface UserResetPasswordMapper {
 
-    //아이디, 비밀번호 조회
-    Optional<String> selectPassword(@Param("fgUserId") String fgUserId,
+    //아이디, 휴대폰 조회
+    Optional<UserResetPasswordDTO> selectPassword(@Param("fgUserId") String fgUserId,
                                    @Param("fgNormalPhone") String fgNormalPhone);
 
     //비밀번호 변경
-    int updatePassword(UserResetPasswordDTO userResetPasswordDTO);
+    void updatePassword(UserResetPasswordDTO userResetPasswordDTO);
 
 }

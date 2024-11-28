@@ -15,7 +15,10 @@ public interface UserNormalMapper {
     Optional<Long> selectId(@Param("fgUserId")String fgUserId, @Param("fgUserPassword") String fgUserPassword);
 
     Optional<NormalSessionDTO> selectLoginInfo(@Param("fgUserId") String fgUserId,
-                                                   @Param("fgUserPassword") String fgUserPassword
-    );
+                                                   @Param("fgUserPassword") String fgUserPassword);
+
+    //로그인 아아디, 비밀번호 확인
+    Optional<String> idPasswordCheck(@Param("fgUserId") String fgUserId,
+                                     @Param("fgUserPassword") String fgUserPassword);
 
 }

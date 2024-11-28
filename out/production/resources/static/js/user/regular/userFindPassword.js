@@ -7,7 +7,7 @@ const check = document.getElementById("find-phone-recheck");
 
 find.addEventListener("click", () => {
   if(!name.value.trim()){
-    alert("이름을 입력해주세요");
+    alert("이메일을 입력해주세요");
     return;
   }
   if(!phone.value.trim()){
@@ -64,14 +64,14 @@ $(document).ready(function() {
 });
 
 // 문자인증 발송 -----------------------------------------------------------------------------
-const { CoolsmsMessageService } = require('coolsms-node-sdk');
-const messageService = new CoolsmsMessageService("NCSHY7GOUORRBG7D", "ATX63JHOP6SNVCJAWPFHZXHMYI8ULYBO");
-
-messageService.send({
-  'to': '01071286831',
-  'from': '01071286831',
-  'text': 'SMS는 한글 45자, 영자 90자까지 입력할 수 있습니다.'
-});
+// const { CoolsmsMessageService } = require('coolsms-node-sdk');
+// const messageService = new CoolsmsMessageService("NCSHY7GOUORRBG7D", "ATX63JHOP6SNVCJAWPFHZXHMYI8ULYBO");
+//
+// messageService.send({
+//   'to': '01071286831',
+//   'from': '01071286831',
+//   'text': 'SMS는 한글 45자, 영자 90자까지 입력할 수 있습니다.'
+// });
 
 // $btnSend.on('click', () => {
 //   const { CoolsmsMessageService } = require('coolsms-node-sdk');

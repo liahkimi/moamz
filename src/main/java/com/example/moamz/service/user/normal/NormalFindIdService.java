@@ -14,9 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class NormalFindIdService {
     private final NormalFindIdMapper normalFindIdMapper;
 
-    public NormalFindIdDTO findIdInfo(String fgNormalName, String fgNormalPhone, String fgUserId) {
-        return normalFindIdMapper.selectFindId(fgNormalName, fgNormalPhone, fgUserId)
+    public String findIdInfo(String fgNormalName, String fgNormalPhone) {
+        return normalFindIdMapper.selectFindId(fgNormalName, fgNormalPhone)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디"));
     }
+
 
 }
