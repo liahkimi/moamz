@@ -1,7 +1,6 @@
 package com.example.moamz.mapper.user.normal;
 
 import com.example.moamz.domain.dto.user.normal.UserResetPasswordDTO;
-import com.example.moamz.domain.vo.user.normal.UserCertiVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,6 +16,4 @@ public interface UserResetPasswordMapper {
     //비밀번호 변경
     void updatePassword(UserResetPasswordDTO userResetPasswordDTO);
 
-    // 문자 인증
-    void insertCerti(UserCertiVO userCertiVO);
 }

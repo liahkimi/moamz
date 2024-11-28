@@ -51,4 +51,29 @@ public class SellerSignupController {
         }
     }
 
+    //사업자 중복체크
+    @PostMapping("/seller/checkBusiness")
+    @ResponseBody
+    public String checkedBusiness(@RequestParam("checkedBusiness") String fgBusinessNumber) {
+        log.info("😀😀😀😀😀😀businessNumber:{}", fgBusinessNumber);
+        String businessNumber = sellerSignupService.checkedBusiness(fgBusinessNumber);
+        if (businessNumber != null) {
+            return businessNumber + "는 이미 존재하는 사업자입니다";  // 사업자 확인
+        } else {
+            return "사용할 수 있는 사업자번호입니다.";  // 실패 시 메시지
+        }
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,4 @@
+// 아이디 중복체크
 function checkedId() {
     var checkedId = $("#email-input").val();
 
@@ -15,6 +16,27 @@ function checkedId() {
         });
     } else {
         alert("아이디를 입력해 주세요.");
+    }
+}
+
+//사업자번호 중복체크
+function checkedBusiness() {
+    var checkedBusiness = $("#business-input").val();
+
+    if (checkedBusiness) {
+        $.ajax({
+            url: "/seller/seller/checkBusiness",
+            type: "POST",
+            data: { checkedBusiness: checkedBusiness },
+            success: function(response) {
+                alert(response);  // 서버에서 받은 아이디 또는 오류 메시지 출력
+            },
+            error: function() {
+                alert("이미 존재하는 사업자입니다.");
+            }
+        });
+    } else {
+        alert("사업자번호를 입력해 주세요.");
     }
 }
 

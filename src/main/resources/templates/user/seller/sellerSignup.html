@@ -46,7 +46,7 @@
         <div id="signup-phone">
           <input id="name-input" name="fgSellerName" type="text" placeholder="이름" required>
           <input type="text" id="input-phone" name="fgSellerPhone" placeholder="휴대폰번호" required>
-          <button id="phone-btn" type="button">중복확인</button>
+          <button id="phone-btn" type="button">인증</button>
           <input type="text" id="recheck-phone" placeholder="인증번호" required>
           <span id="time"></span>
           <button id="recheck-btn">확인</button>
@@ -60,7 +60,7 @@
         </div>
         <div id="signup-business"> 
           <input type="text" id="business-input" name="fgBusinessNumber" placeholder="사업자번호" required>
-          <button id="business-btn" type="button">업체확인</button>
+          <button id="business-btn" type="button" onclick="checkedBusiness()">업체확인</button>
           <input type="text" id="business-name" name="fgBusinessName" placeholder="업체명" required>
           <input type="text" id="business-phone" name="fgBusinessPhone" placeholder= "업체 전화번호" required>
         </div>

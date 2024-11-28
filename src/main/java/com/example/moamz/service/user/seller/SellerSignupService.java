@@ -96,4 +96,10 @@ public class SellerSignupService {
         return sellerSignupMapper.checkedId(fgUserId)
                 .orElse(null);
     }
+    // 사업자 중복확인
+    public String checkedBusiness(String fgBusinessNumber) {
+        return sellerSignupMapper.checkedBusiness(fgBusinessNumber)
+                .orElse(null);
+    }
+
 }

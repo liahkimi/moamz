@@ -41,4 +41,11 @@
         WHERE FG_USER_ID = #{fgUserId}
     </select>
 
+    <!--사업자번호 중복체크-->
+    <select id="checkedBusiness" parameterType="String" resultType="String">
+        SELECT FG_BUSINESS_NUMBER
+        FROM FG_BUSINESS
+        WHERE FG_BUSINESS_NUMBER = #{fgBusinessNumber}
+    </select>
+
 </mapper>

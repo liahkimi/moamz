@@ -18,4 +18,7 @@ public interface SellerSignupMapper {
 
     //아이디 중복확인
     Optional<String> checkedId(@Param("fgUserId")String fgUserId);
+
+    //사업자번호 중복확인
+    Optional<String> checkedBusiness(@Param("fgBusinessNumber")String fgBusinessNumber);
 }

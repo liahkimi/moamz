@@ -1,15 +1,18 @@
 package com.example.moamz.controller.user.seller;
 
+import com.example.moamz.domain.dto.user.normal.UserResetPasswordDTO;
 import com.example.moamz.domain.dto.user.seller.SellerResetPasswordDTO;
 import com.example.moamz.service.user.seller.SellerResetService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -42,9 +45,25 @@ public class SellerResetPasswordController {
         // 인증 성공 시 세션에 사용자 정보 저장 (fgUserId)
         session.setAttribute("fgUserId", idPasswordInfo.getFgUserId());// .getFgUserId();???
 
-        return new RedirectView("/seller/changePassword?fgUserId=" + fgUserId);
+        return new RedirectView("/seller/changePasswordSeller?fgUserId=" + fgUserId);
     }
 
+    //새 비밀번호 변경 페이지
+    @GetMapping("/changePasswordSeller")
+    public String changePassword(@RequestParam("fgUserId") String fgUserId,
+                                 Model model) {
+        model.addAttribute("fgUserId", fgUserId);
+//        return "/user/regular/userResetPassword";
+        return "/user/seller/sellerResetPassword";
+    }
 
+    // 새 비밀번호 변경
+    @PostMapping("/changePasswordSeller")
+    public String updatePassword(SellerResetPasswordDTO sellerResetPasswordDTO,
+                                 RedirectAttributes redirectAttributes) {
+        sellerResetService.updatePassword(sellerResetPasswordDTO);
+        redirectAttributes.addAttribute("fgUserId", sellerResetPasswordDTO.getFgUserId());
+        return "/user/regular/userLogin";
+    }
 
 }
