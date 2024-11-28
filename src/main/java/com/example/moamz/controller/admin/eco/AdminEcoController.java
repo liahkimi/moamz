@@ -93,7 +93,7 @@ public class AdminEcoController {
         } else {
             System.out.println("오류 : adminEcoWriteDTO.getFgPostId가 서비스 호출 후 null입니다.");
         }
-        return "redirect:/admin/eco/list";
+        return "redirect:/admin/eco/ingList";
     }
 
     //에코프젝 상태 버튼클릭으로 변경하기 post
@@ -101,7 +101,7 @@ public class AdminEcoController {
     public String modifyEcoStatusPost(@PathVariable("fgPostId") Long fgPostId,
                                       @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
         adminEcoService.changeStatusBtn(fgPostId);
-        return "redirect:/admin/eco/list";
+        return "redirect:/admin/eco/ingList";
     }
 
 
@@ -192,7 +192,7 @@ public class AdminEcoController {
     @GetMapping("/remove/{fgPostId}")
     public String ecoRemove(@PathVariable("fgPostId") Long fgPostId) {
         adminEcoService.removeEcoProject(fgPostId);
-        return "redirect:/admin/eco/list";
+        return "redirect:/admin/eco/ingList";
     }
 
 
