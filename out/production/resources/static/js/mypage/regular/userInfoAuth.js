@@ -21,12 +21,25 @@ checkBtn.addEventListener('click', (e) => {
         return;
     }
 
-    const isConfirm = confirm('확인 누르면 회원정보 변경, 취소 누르면 비밀번호 변경으로 이동합니다');
-    if(isConfirm) {
-        location.href='userInfoModify.html';
-    } else {
-        location.href='userResetPassword.html';
-    }
-    // 비밀번호 일치하면 수정 페이지로 넘기기
-    // 비밀번호 틀리면 alert
+
+    // post 요청 보낼 url 처리
+    const form = document.querySelector('form');
+
+    // requestPage값 가져오기
+    const requestPage = form.getAttribute('data-requestPage');
+
+    form.action =  `/normal/my/infoAuth?requestPage=${requestPage}`;
+
+    // 폼 태그 제출하기
+    form.submit();
+
+    // const isConfirm = confirm('확인 누르면 회원정보 변경, 취소 누르면 비밀번호 변경으로 이동합니다');
+    // if(isConfirm) {
+    //     location.href='userInfoModify.html';
+    // } else {
+    //     location.href='userResetPassword.html';
+    // }
+    // // 비밀번호 일치하면 수정 페이지로 넘기기
+    // // 비밀번호 틀리면 alert
+
 });
