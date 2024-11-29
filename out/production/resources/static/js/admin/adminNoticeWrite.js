@@ -1,19 +1,5 @@
 const content = document.querySelector(".write-form");
-// const cancleBtn = document.getElementById('cancle-btn');
-//
-// // 작성하기 화면의 취소버튼 클릭
-// // => 컨펌창 띄우기 => 취소에 대한 확인=> 컨펌창 닫고 목록화면으로
-// //                 => 취소에 대한 취소 => 컨펌창만 닫기
-// cancleBtn.addEventListener('click', (e)=>{
-//     e.stopPropagation();
-//     e.preventDefault();
-//     const isConfirm = confirm('글 작성을 취소하시겠습니까? 작업중인 내용이 저장되지 않습니다.');
-//     if(isConfirm){
-//         window.location.href = '/admin/notice/list';
-//     }else{
-//
-//     }
-// });
+
 
 // 작성하기화면의 등록버튼 클릭
 document.addEventListener('DOMContentLoaded', () => {

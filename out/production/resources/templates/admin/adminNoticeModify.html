@@ -21,7 +21,7 @@
 <!--      rel="stylesheet"-->
 <!--    />-->
 <!--    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>-->
-    <script defer th:src="@{/js/admin/adminNoticeModify.js}"></script>
+
   </head>
   <body>
     <header id="adminHeader" th:replace="~{/admin/adminHeader :: header}"></header>
@@ -46,7 +46,7 @@
               <span class="write-form-detail">📝 상세내용*</span>
               <div class="summernote-box">
                 <div class="h-sum">
-                  <textarea
+                  <textarea id="contentInput"
                   th:utext="${adminNoticeDetailDTO.fgNoticeContent}"
                   name="fgNoticeContent"
                   required
@@ -62,6 +62,7 @@
       </div>
     </main>
   </body>
+  <script defer th:src="@{/js/admin/adminNoticeModify.js}"></script>
   <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <!--  <script>-->
 <!--    $(function () {-->
