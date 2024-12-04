@@ -65,7 +65,7 @@ public class AdminEcoController {
     @GetMapping("/write")
     public String ecoWrite(@SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
 
-        return fgUserCode == null ? "redirect:/admin/login" : "/admin/adminEcoWrite";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "/admin/adminEcoWrite";
 
     }
 
@@ -75,6 +75,12 @@ public class AdminEcoController {
                            @SessionAttribute("fgUserCode") Long fgUserCode,
                            RedirectAttributes redirectAttributes,
                            @RequestParam("postFile") List<MultipartFile> files) {
+
+        // 세션이 없으면 로그인 페이지로 리다이렉트
+        if (fgUserCode == null) {
+            return "redirect:/admin/login?error=sessionExpired"; // 세션 만료 오류 메시지 추가
+        }
+
         adminEcoWriteDTO.setFgUserCode(fgUserCode);  // 작성자 정보 넣기
         System.out.println("서비스 호출 전 adminEcoWriteDTO : " + adminEcoWriteDTO);
 
@@ -96,10 +102,14 @@ public class AdminEcoController {
         return "redirect:/admin/eco/ingList";
     }
 
-    //에코프젝 상태 버튼클릭으로 변경하기 post
+    //에코프젝 상태 버튼클릭으로 변경하기 post <-⭐⭐⭐⭐⭐세션없을때 상태 변경은 막았지만 로그인창으로 안 감....
     @PostMapping("/list/modifyEcoStatus/{fgPostId}")
     public String modifyEcoStatusPost(@PathVariable("fgPostId") Long fgPostId,
                                       @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
+        // 세션이 없으면 로그인 페이지로 리다이렉트
+        if (fgUserCode == null) {
+            return "redirect:/admin/login?error=sessionExpired"; // 세션 만료 오류 메시지 추가
+        }
         adminEcoService.changeStatusBtn(fgPostId);
         return "redirect:/admin/eco/ingList";
     }
@@ -116,7 +126,8 @@ public class AdminEcoController {
         model.addAttribute("fgPostId", fgPostId);
         model.addAttribute("ingCertPage", ingCertPage);
         model.addAttribute("adminEcoCertListDTO", adminEcoCertListDTO);
-        return "admin/adminEcoCertifiList";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminEcoCertifiList";
+//        return "admin/adminEcoCertifiList";
     }
 
     // 진행중인 에코프로젝트 인증글 상세보기 페이지 + 댓글 보여주기
@@ -131,7 +142,7 @@ public class AdminEcoController {
 
         adminEcoCertDetailDTO.setFgProjectId(fgProjectId);
         model.addAttribute("adminEcoCertDetailDTO", adminEcoCertDetailDTO);
-        return "/admin/adminEcoCertifiDetail";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "/admin/adminEcoCertifiDetail";
     }
 
 
@@ -156,7 +167,7 @@ public class AdminEcoController {
         log.info("✔️✔️✔️✔️✔️+adminFinEcoCertListDTO, {}", adminFinEcoCertListDTO);
 
         System.out.println("adminEcoCertListDTO = " + adminFinEcoCertListDTO);
-        return "admin/adminEcoCertifiListFin";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminEcoCertifiListFin";
     }
 
     //완료된 에코프로젝트 인증글 상세보기 보여주기
@@ -176,7 +187,7 @@ public class AdminEcoController {
         } else {
             log.info("💥💥💥💥adminCommentDTO : {}", adminCommentDTO);
         }
-        return "/admin/adminEcoCertifiDetailFin";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "/admin/adminEcoCertifiDetailFin";
     }
 
 
@@ -190,9 +201,15 @@ public class AdminEcoController {
 //
     //특정 에코프로젝트 삭제하기
     @GetMapping("/remove/{fgPostId}")
-    public String ecoRemove(@PathVariable("fgPostId") Long fgPostId) {
+    public  String ecoRemove(@PathVariable("fgPostId") Long fgPostId,
+                            @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
+        // 세션이 없으면 로그인 페이지로 리다이렉트
+        if (fgUserCode == null) {
+            return "redirect:/admin/login?error=sessionExpired"; // 세션 만료 오류 메시지 추가
+        }
         adminEcoService.removeEcoProject(fgPostId);
         return "redirect:/admin/eco/ingList";
+
     }
 
 
@@ -212,6 +229,7 @@ public class AdminEcoController {
 
         // 리다이렉트 URL에 fgPostId 포함
         return "redirect:/admin/eco/finEcoCertList/" + fgPostId;
+
     }
 
 

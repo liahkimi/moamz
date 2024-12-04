@@ -36,7 +36,7 @@ public class UserMngController {
         model.addAttribute("userPage", userPage);
         model.addAttribute("userMngListDTO", userMngListDTO);
 
-        return "admin/adminUserManagement";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminUserManagement";
     }
 
     // 판매자 회원관리 목록 보여주기
@@ -50,7 +50,7 @@ public class UserMngController {
         model.addAttribute("sellerPage", sellerPage);
         model.addAttribute("sellerMngListDTO", sellerMngListDTO);
 
-        return "admin/adminSellerManagement";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminSellerManagement";
     }
 
     // 검색 기능 추가
@@ -59,7 +59,13 @@ public class UserMngController {
             @RequestParam("fgUserId") String fgUserId,
             @RequestParam(value = "page", defaultValue = "1") int page, // 기본값 설정
             @RequestParam(value = "amount", defaultValue = "10000000") int amount, // 임의로 검색할때 페이지네이션 1로 나오게 하기 위함
-            Model model) {
+            Model model,
+            @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
+
+        // 세션이 없으면 로그인 페이지로 리다이렉트
+        if (fgUserCode == null) {
+            return "redirect:/admin/login?error=sessionExpired"; // 세션 만료 오류 메시지 추가
+        }
 
         // Criteria 객체를 생성하고 기본값을 설정
         Criteria criteria = new Criteria();

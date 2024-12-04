@@ -115,6 +115,6 @@ public class DashBoardController {
         }
 
         // 대시보드 화면에 정보를 보여주기 위한 뷰 반환
-        return "admin/adminDashboard";  // adminDashboard 뷰를 반환
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminDashboard";
     }
 }

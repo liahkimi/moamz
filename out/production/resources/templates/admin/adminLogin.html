@@ -7,20 +7,35 @@
     <title>로그인</title>
     <link rel="stylesheet" th:href="@{/css/reset2.css}" />
     <link rel="stylesheet" th:href="@{/css/admin/adminLogin.css}" />
+    <script>
+        // URL의 쿼리 파라미터에서 "error"를 확인하고 alert 표시
+        window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('error') && urlParams.get('error') === 'true') {
+        alert('로그인 실패: 사용자 ID 또는 비밀번호가 잘못되었습니다.');
+      }
+      };
+    </script>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('error') === 'sessionExpired') {
+        alert('세션이 만료되었습니다. 다시 로그인하세요.');
+      }
+    </script>
   </head>
   <body>
-    <header>
-      <div class="logo-wrap">
-        <img th:src="@{/img/admin/logo.png}" alt="logo" />
-      </div>
-    </header>
-    <main>
-      <div class="loginbox-container">
-        <div class="loginbox-wrap">
-          <div class="loginbox-title">
-            <span>관리자 로그인</span>
-          </div>
-          <!-- 추후 action 값 넣기 -->
+  <header>
+    <div class="logo-wrap">
+      <img th:src="@{/img/admin/logo.png}" alt="logo"/>
+    </div>
+  </header>
+  <main>
+    <div class="loginbox-container">
+      <div class="loginbox-wrap">
+        <div class="loginbox-title">
+          <span>관리자 로그인</span>
+        </div>
+        <!-- 추후 a ction 값 넣기 -->
           <form th:action="@{/admin/login}" method="post">
             <p>아이디</p>
             <input type="text" name="fgUserId"/>
@@ -30,6 +45,10 @@
             </div>
             <input type="submit" value="Log In" id="submit-btn"/>
           </form>
+        <!-- 오류 메시지가 있으면 출력 -->
+        <div th:if="${error}">
+          <p style="color: red;">[[${error}]]</p>
+        </div>
         </div>
       </div>
     </main>

@@ -40,13 +40,17 @@ public class AdminSellerInquiryController {
                                 @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode, Model model){
         AdminSellerInquiryDetailDTO adminSellerInquiryDetailDTO = adminSellerInquiryService.findInquiryDetail(fgPostId, fgUserCode);
 
-        if(fgUserCode.equals(adminSellerInquiryDetailDTO.getWriterCode())) {
-            // 내가 작성한 게시글이면 isMyPost = true
-            adminSellerInquiryDetailDTO.setMyPost(true);
-        } else {
-            // 내가 작상힌 게시글이 아니면 isMyPost = false
-            adminSellerInquiryDetailDTO.setMyPost(false);
-        }
+        String formattedContent = adminSellerInquiryDetailDTO.getFgInquiryContent().replaceAll("\n", "<br>");
+
+        adminSellerInquiryDetailDTO.setFgInquiryContent(formattedContent);
+
+//        if(fgUserCode.equals(adminSellerInquiryDetailDTO.getWriterCode())) {
+//            // 내가 작성한 게시글이면 isMyPost = true
+//            adminSellerInquiryDetailDTO.setMyPost(true);
+//        } else {
+//            // 내가 작상힌 게시글이 아니면 isMyPost = false
+//            adminSellerInquiryDetailDTO.setMyPost(false);
+//        }
 
         model.addAttribute("adminSellerInquiryDetailDTO", adminSellerInquiryDetailDTO);
         return "admin/adminSellerInquiryDetail";
