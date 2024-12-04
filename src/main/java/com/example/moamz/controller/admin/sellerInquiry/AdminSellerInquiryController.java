@@ -31,7 +31,7 @@ public class AdminSellerInquiryController {
 
         model.addAttribute("page", page);
         model.addAttribute("adminSellerInquiryListDTO", adminSellerInquiryListDTO);
-        return "admin/adminSellerInquiryList";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminSellerInquiryList";
     }
 
     //판매자 문의글 상세페이지 보여주기
@@ -40,16 +40,20 @@ public class AdminSellerInquiryController {
                                 @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode, Model model){
         AdminSellerInquiryDetailDTO adminSellerInquiryDetailDTO = adminSellerInquiryService.findInquiryDetail(fgPostId, fgUserCode);
 
-        if(fgUserCode.equals(adminSellerInquiryDetailDTO.getWriterCode())) {
-            // 내가 작성한 게시글이면 isMyPost = true
-            adminSellerInquiryDetailDTO.setMyPost(true);
-        } else {
-            // 내가 작상힌 게시글이 아니면 isMyPost = false
-            adminSellerInquiryDetailDTO.setMyPost(false);
-        }
+        String formattedContent = adminSellerInquiryDetailDTO.getFgInquiryContent().replaceAll("\n", "<br>");
+
+        adminSellerInquiryDetailDTO.setFgInquiryContent(formattedContent);
+
+//        if(fgUserCode.equals(adminSellerInquiryDetailDTO.getWriterCode())) {
+//            // 내가 작성한 게시글이면 isMyPost = true
+//            adminSellerInquiryDetailDTO.setMyPost(true);
+//        } else {
+//            // 내가 작상힌 게시글이 아니면 isMyPost = false
+//            adminSellerInquiryDetailDTO.setMyPost(false);
+//        }
 
         model.addAttribute("adminSellerInquiryDetailDTO", adminSellerInquiryDetailDTO);
-        return "admin/adminSellerInquiryDetail";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminSellerInquiryDetail";
     }
 
     //판매자 문의목록 - '답변완료'버튼으로 상태 바꾸기

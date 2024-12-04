@@ -30,31 +30,56 @@ public class AdminUserInquiryController {
 
         model.addAttribute("page", page);
         model.addAttribute("adminUserInquiryListDTO", adminUserInquiryListDTO);
-        return "admin/adminUserInquiryList";
+
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminUserInquiryList";
     }
 
     //문의 상세페이지 보여주기
+//    @GetMapping("/detail/{fgPostId}")
+//    public String inquiryDetail(@PathVariable("fgPostId") Long fgPostId,
+//                                @SessionAttribute(value="fgUserCode",required=false) Long fgUserCode, Model model){
+//        AdminUserInquiryDetailDTO adminUserInquiryDetailDTO = adminUserInquiryService.findInquiryDetail(fgPostId, fgUserCode);
+//
+////        if(fgUserCode.equals(adminUserInquiryDetailDTO.getWriterCode())) {
+////            // 내가 작성한 게시글이면 isMyPost = true
+////            adminUserInquiryDetailDTO.setMyPost(true);
+////        } else {
+////            // 내가 작성힌 게시글이 아니면 isMyPost = false
+////            adminUserInquiryDetailDTO.setMyPost(false);
+////        }
+//
+//        model.addAttribute("adminUserInquiryDetailDTO", adminUserInquiryDetailDTO);
+//        return "admin/adminUserInquiryDetail";
+//    }
+    // 일반회원 문의 상세페이지 보여주기
     @GetMapping("/detail/{fgPostId}")
     public String inquiryDetail(@PathVariable("fgPostId") Long fgPostId,
-                                @SessionAttribute(value="fgUserCode",required=false) Long fgUserCode, Model model){
+                                @SessionAttribute(value="fgUserCode", required=false) Long fgUserCode, Model model) {
+        // 문의 상세 내용을 가져옵니다.
         AdminUserInquiryDetailDTO adminUserInquiryDetailDTO = adminUserInquiryService.findInquiryDetail(fgPostId, fgUserCode);
 
-        if(fgUserCode.equals(adminUserInquiryDetailDTO.getWriterCode())) {
-            // 내가 작성한 게시글이면 isMyPost = true
-            adminUserInquiryDetailDTO.setMyPost(true);
-        } else {
-            // 내가 작상힌 게시글이 아니면 isMyPost = false
-            adminUserInquiryDetailDTO.setMyPost(false);
-        }
+        // inquiryContent 내의 줄바꿈 문자를 <br>로 변환
+        String formattedContent = adminUserInquiryDetailDTO.getFgInquiryContent().replaceAll("\n", "<br>");
 
+        // 변환된 내용을 DTO에 다시 설정 (기존의 inquiryContent에 업데이트)
+        adminUserInquiryDetailDTO.setFgInquiryContent(formattedContent);
+
+        // 모델에 DTO 추가
         model.addAttribute("adminUserInquiryDetailDTO", adminUserInquiryDetailDTO);
-        return "admin/adminUserInquiryDetail";
+
+        // 상세 페이지로 이동
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminUserInquiryDetail";
     }
+
 
     //일반회원 문의목록 - '답변완료'버튼으로 상태 바꾸기
     @PostMapping("/list/modifyEcoStatus/{fgPostId}")
     public String modifyEcoStatus(@PathVariable("fgPostId") Long fgPostId,
                                   @SessionAttribute(value="fgUserCode",required=false) Long fgUserCode){
+        // 세션이 없으면 로그인 페이지로 리다이렉트
+        if (fgUserCode == null) {
+            return "redirect:/admin/login?error=sessionExpired"; // 세션 만료 오류 메시지 추가
+        }
         adminUserInquiryService.updateStatusBtn(fgPostId);
         return "redirect:/admin/userInquiry/list";
     }
