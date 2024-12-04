@@ -76,7 +76,7 @@
           <div class="purchase-info">
             <!-- 상품 사진 -->
             <!--            <img th:src="@{${purchase.상품사진}}" alt="구매상품사진">-->
-            <img th:src="'/upload_moamz/' + ${purchase.fgProductFileRoot} + '/' + ${purchase.fgProductFileUuid} + '_' + ${purchase.fgProductFileName}" alt="상품 사진"/>
+            <img th:src="'/upload_moamz/' + ${purchase.fgProductFileRoot} + '/' + ${purchase.fgProductFileUuid} + '_' + ${purchase.fgProductFileName}" alt="상품"/>
             <div class="purchase-name">
               <!-- 상품명과 가격 -->
               <span th:text="${purchase.fgProductName}"></span>

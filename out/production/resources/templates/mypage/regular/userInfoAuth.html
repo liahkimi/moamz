@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>userInfoAuth</title>
-  <link rel="stylesheet" href="../../../static/css/reset2.css">
-  <link rel="stylesheet" href="../../../static/css/mypage/regular/userInfoAuth.css">
-  <script defer src="../../../static/js/mypage/regular/userInfoAuth.js"></script>
+  <link rel="stylesheet" th:href="@{/css/reset2.css}">
+  <link rel="stylesheet" th:href="@{/css/mypage/regular/userInfoAuth.css}">
+  <script defer th:src="@{/js/mypage/regular/userInfoAuth.js}"></script>
 </head>
 <body>
   <header id="header"></header>
@@ -30,13 +30,7 @@
       </div>
     </div>
   </div>
-  <footer id="footer"></footer>
+  <footer id="footer" th:replace="~{/main/fragment/footer/userFooter.html}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(function() {
-        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
-        $("#footer").load("../../main/fragment/footer/userFooter.html");
-    });
-</script>
 </html>

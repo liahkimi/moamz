@@ -45,33 +45,15 @@
       <!-- 마이페이지 메뉴 카테고리 -->
       <div class="mypage-side-category">
         <ul>
-            <li class="category-list">
-              <a href="userPurchaseHistory.html">● 상품 구매 내역</a>
-            </li>
-            <li class="category-list">
-              <a href="userMySocialing.html" class="clicked">● MY소셜링</a>
-            </li>
-            <li class="category-list">
-              <a href="userMySharing.html">● My나눔</a>
-            </li>
-            <li class="category-list">
-              <a href="userMyReview.html">● MY리뷰</a>
-            </li>
-            <li class="category-list">
-              <a href="userMyLike.html">● MY좋아요</a>
-            </li>
-            <li class="category-list">
-              <a href="userMyPost.html">● MY게시글</a>
-            </li>
-            <li class="category-list">
-              <a href="userInfoModify.html">● 회원정보변경</a>
-            </li>
-            <li class="category-list">
-              <a href="userResetPassword.html">● 비밀번호변경</a>
-            </li>
-            <li class="category-list">
-              <a href="userAdminInquiryList.html">● 관리자 문의</a>
-            </li>
+          <li class="category-list"><a th:href="@{/normal/purchase/list}">● 상품 구매 내역</a></li>
+          <li class="category-list"><a href="userMySocialing.html" class="clicked">● MY소셜링</a></li>
+          <li class="category-list"><a th:href="@{/normal/my/sharing/completed}">● My나눔</a></li>
+          <li class="category-list"><a th:href="@{userMyReview.html}">● MY리뷰</a></li>
+          <li class="category-list"><a href="userMyLike.html">● MY좋아요</a></li>
+          <li class="category-list"><a href="userMyPost.html">● MY게시글</a></li>
+          <li class="category-list"><a href="userInfoAuth.html">● 회원정보변경</a></li>
+          <li class="category-list"><a href="userInfoAuth.html">● 비밀번호변경</a></li>
+          <li class="category-list"><a th:href="@{/normal/inquiry/list}">● 관리자 문의</a></li>
         </ul>
       </div>
     </div>
