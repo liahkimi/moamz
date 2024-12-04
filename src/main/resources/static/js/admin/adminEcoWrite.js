@@ -23,6 +23,7 @@ registerBtn.addEventListener('click',(e)=> {
     const joinSelect = document.getElementById('join'); // 참여횟수 select
     const startDateInput = document.querySelector('input.start-date-value'); // 시작날짜 input
     const endDateInput = document.querySelector('input.end-date-value'); // 종료날짜 input
+    const pointInput = document.querySelector('input.point-value'); // 포인트 input
 
   // 제목 확인
   if (titleInput.value.trim() === '') {
@@ -44,6 +45,10 @@ else if (startDateInput.value === '') {
 else if (endDateInput.value === '') {
     alert('종료날짜를 선택해주세요.');
 }
+// 종료날짜 확인
+else if (pointInput.value === '') {
+        alert('포인트를 입력해주세요.');
+    }
 // 상세 내용 확인
 else if (contentInput.trim() === '') {
     alert('프로젝트를 소개해주세요.');

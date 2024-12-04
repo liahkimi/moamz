@@ -8,7 +8,7 @@ const deleteBtn = document.getElementById('delete-btn');
 function deleteNotice(event, fgPostId) {
     event.stopPropagation();
     event.preventDefault();
-    if (confirm("완료된 프로젝트로 변경하시겠습니까?")) {
+    if (confirm("해당 글을 삭제하시겠습니까?")) {
         window.location.href = `/admin/notice/remove/${fgPostId}`;
     }
 
@@ -36,6 +36,9 @@ const modifyBtn = document.getElementById('btn-modify');
 modifyBtn.addEventListener("click", function(){
     // console.log("클릭함");
        let fgPostId = this.dataset.id;
-       console.log(fgPostId);
-       location.href = `/admin/notice/modify?fgPostId=${fgPostId}`;
+       // console.log(fgPostId);
+    if (confirm("해당 글을 수정하시겠습니까?")) {
+        window.location.href = `/admin/notice/modify?fgPostId=${fgPostId}`;
+    }
+
    })

@@ -5,13 +5,13 @@
   <select id="selectUserCode" resultType="Long" parameterType="AdminUserDTO">
       SELECT FG_USER_CODE
       FROM FG_COMMON_USER
-      WHERE FG_USER_ID = #{fgUserId} AND FG_USER_PASSWORD = #{fgUserPassword}
+      WHERE FG_USER_ID = #{fgUserId} AND FG_USER_PASSWORD = #{fgUserPassword} AND FG_USER_TYPE ='관리자'
   </select>
 <!--세션 정보를 가져오는 쿼리-->
     <select id="selectLoginInfo" resultType="AdminUserSessionDTO" parameterType="AdminUserDTO">
         SELECT FG_USER_CODE , FG_USER_ID
         FROM FG_COMMON_USER
-        WHERE FG_USER_ID = #{fgUserId} AND FG_USER_PASSWORD = #{fgUserPassword}
+        WHERE FG_USER_ID = #{fgUserId} AND FG_USER_PASSWORD = #{fgUserPassword} AND FG_USER_TYPE ='관리자'
     </select>
 
 

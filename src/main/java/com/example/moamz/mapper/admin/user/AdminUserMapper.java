@@ -14,5 +14,5 @@ public interface AdminUserMapper {
     //구체적인 sql 실행은 myBatis가 자동으로 바인딩 한다.
     Optional<Long> selectUserCode(@Param("fgUserId")String fgUserId, @Param("fgUserPassword")String fgUserPassword);
 //    세션 가져오기
-    Optional<AdminUserSessionDTO> selectLoginInfo(@Param("fgUserId")String fgUserId, @Param("fgUserPassword")String fgUserPassword);
+    AdminUserSessionDTO selectLoginInfo(@Param("fgUserId")String fgUserId, @Param("fgUserPassword")String fgUserPassword);
 }
