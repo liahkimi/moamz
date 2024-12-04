@@ -31,7 +31,7 @@ public class AdminSellerInquiryController {
 
         model.addAttribute("page", page);
         model.addAttribute("adminSellerInquiryListDTO", adminSellerInquiryListDTO);
-        return "admin/adminSellerInquiryList";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminSellerInquiryList";
     }
 
     //판매자 문의글 상세페이지 보여주기
@@ -53,7 +53,7 @@ public class AdminSellerInquiryController {
 //        }
 
         model.addAttribute("adminSellerInquiryDetailDTO", adminSellerInquiryDetailDTO);
-        return "admin/adminSellerInquiryDetail";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminSellerInquiryDetail";
     }
 
     //판매자 문의목록 - '답변완료'버튼으로 상태 바꾸기

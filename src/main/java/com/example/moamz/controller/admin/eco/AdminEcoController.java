@@ -37,8 +37,7 @@ public class AdminEcoController {
         Page ingPage = new Page(criteria, ingTotal);
         model.addAttribute("ingPage", ingPage);
         model.addAttribute("adminIngEcoListDTO", adminIngEcoListDTO);
-
-        return "admin/adminEcoList";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminEcoList";
     }
 
     //종료된 에코프로젝트 목록 보여주기
@@ -54,8 +53,7 @@ public class AdminEcoController {
         model.addAttribute("adminFinEcoListDTO", adminFinEcoListDTO);
 
         log.info("💥💥💥💥+adminFinEcoListDTO, {}", adminFinEcoListDTO);
-
-        return "admin/adminFinEcoList";
+        return fgUserCode == null ? "redirect:/admin/login?error=sessionExpired" : "admin/adminFinEcoList";
     }
 
 
@@ -102,7 +100,7 @@ public class AdminEcoController {
         return "redirect:/admin/eco/ingList";
     }
 
-    //에코프젝 상태 버튼클릭으로 변경하기 post <-⭐⭐⭐⭐⭐세션없을때 상태 변경은 막았지만 로그인창으로 안 감....
+    //에코프젝 상태 버튼클릭으로 변경하기 post
     @PostMapping("/list/modifyEcoStatus/{fgPostId}")
     public String modifyEcoStatusPost(@PathVariable("fgPostId") Long fgPostId,
                                       @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode) {
