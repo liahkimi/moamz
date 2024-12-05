@@ -1,8 +1,7 @@
 # 🌱환경을 생각하는 MZ들의 공간, MOAMZ
 스프링부트 프로젝트
 
-
-<img width="500" alt="moamz_logo" src="https://github.com/user-attachments/assets/f7230f08-9a71-449c-855f-6f2651ab0d5c">
+<img width="350" alt="moamz_logo" src="https://github.com/user-attachments/assets/cdebdc01-4cac-4073-b94e-dcc9668ebf14">
 <br>
 
 ## 🖥️서비스 소개
@@ -44,7 +43,7 @@
 
 
 ## 📜MOAMZ 포트폴리오(PDF)
-* <링크이름>(링크주소)
+* <MOAMZ 포트폴리오>()
 
 ## 💽ERD 구성
 <details>
