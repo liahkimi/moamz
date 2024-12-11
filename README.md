@@ -66,7 +66,7 @@
 https://github.com/user-attachments/assets/7e7dc439-2d58-41c5-8101-5f0fe6e908f5
 
 
-### 관리자 로그인 [상세보기 - WIKI 이동](https://github.com/liahkimi/moamz/wiki/%EA%B4%80%EB%A6%AC%EC%9E%90%EB%A1%9C%EA%B7%B8%EC%9D%B8#%EA%B4%80%EB%A6%AC%EC%9E%90-%EB%A1%9C%EA%B7%B8%EC%9D%B8)
+### 관리자 로그인 [상세보기 - WIKI 이동](https://github.com/liahkimi/moamz/wiki/%EA%B4%80%EB%A6%AC%EC%9E%90-%EB%A1%9C%EA%B7%B8%EC%9D%B8)
 
 ### 대시보드 [상세보기 - WIKI 이동](https://github.com/liahkimi/moamz/wiki/%EB%8C%80%EC%8B%9C%EB%B3%B4%EB%93%9C)
 
