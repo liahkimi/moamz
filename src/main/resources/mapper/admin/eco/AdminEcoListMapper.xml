@@ -2,20 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.moamz.mapper.admin.eco.AdminEcoMapper">
 
-<!--진행중인 에코프로젝트 목록 보여주기 (pagination x)-->
-    <select id="selectIngEcoList" resultType="AdminIngEcoListDTO">
-        SELECT DISTINCT
-            PF.FG_POST_FILE_ROOT,PF.FG_POST_FILE_NAME,PF.FG_POST_FILE_UUID,P.FG_POST_TITLE,P.FG_POST_ID,P.FG_POST_LIKES,
-            TO_CHAR(E.FG_ECO_START, 'YYYY/MM/DD') AS fgEcoStartToChar,
-            TO_CHAR(E.FG_ECO_END, 'YYYY/MM/DD') AS fgEcoEndToChar,
-            E.FG_ECO_POINTS,E.FG_ECO_INFO,E.FG_CERT_INFO,E.FG_ECO_PARTICIPATION,
-            TO_CHAR((E.FG_ECO_END - E.FG_ECO_START) + 1) || '일간' AS FG_ECO_PERIOD
-        FROM FG_POST_FILE PF
-                 JOIN FG_POST P ON PF.FG_POST_ID = P.FG_POST_ID
-                 JOIN FG_ECO E ON P.FG_POST_ID = E.FG_POST_ID
-        WHERE P.FG_POST_TYPE = 'eco'
-          AND E.FG_ECO_STATUS = '1'
-    </select>
+
 
     <!--진행중인 에코프로젝트 총 갯수 (for pagination)-->
     <select id="selectEcoTotal" resultType="int">
@@ -25,60 +12,45 @@
         WHERE p.FG_POST_TYPE = 'eco' AND e.FG_ECO_STATUS = '1'
     </select>
 
-    <!--진행중인 모든 에코프로젝트 목록 보기(pagination o)-->
+<!--진행중인 에코프로젝트 목록 보여주기 (pagination O)    -->
     <select id="selectAllIngEcoList" parameterType="Criteria" resultType="AdminIngEcoListDTO">
-    <![CDATA[
+<![CDATA[
         SELECT *
         FROM (
-                 SELECT ROWNUM AS RNUM,PF.FG_POST_FILE_ROOT,PF.FG_POST_FILE_NAME,PF.FG_POST_FILE_UUID,P.FG_POST_TITLE,
-                        P.FG_POST_ID,P.FG_POST_LIKES,
-                        TO_CHAR(E.FG_ECO_START, 'YYYY/MM/DD') AS fgEcoStartToChar,
-                        TO_CHAR(E.FG_ECO_END, 'YYYY/MM/DD') AS fgEcoEndToChar,
-                        E.FG_ECO_POINTS,E.FG_ECO_INFO,E.FG_CERT_INFO,E.FG_ECO_PARTICIPATION,
-                        TO_CHAR((E.FG_ECO_END - E.FG_ECO_START) + 1) || '일간' AS FG_ECO_PERIOD
-                 FROM FG_POST_FILE PF
-                          JOIN FG_POST P ON PF.FG_POST_ID = P.FG_POST_ID
-                          JOIN FG_ECO E ON P.FG_POST_ID = E.FG_POST_ID
-                          LEFT JOIN (
-                     SELECT FG_POST_FILE_ID, FG_POST_FILE_NAME, FG_POST_FILE_ROOT, FG_POST_FILE_UUID, FG_POST_ID
-                     FROM (
-                              SELECT FG_POST_FILE_ID, FG_POST_FILE_NAME, FG_POST_FILE_ROOT, FG_POST_FILE_UUID, FG_POST_ID,
-                                     RANK() OVER(PARTITION BY FG_POST_ID ORDER BY FG_POST_FILE_ID) AS RK
-                              FROM FG_POST_FILE
-                          )
-                     WHERE RK = 1
-                 ) F ON PF.FG_POST_ID = F.FG_POST_ID
-                 WHERE P.FG_POST_TYPE = 'eco'
-                   AND E.FG_ECO_STATUS = '1'
-                 ORDER BY P.FG_POST_ID DESC
+                 SELECT ROWNUM AS RNUM, FG_POST_FILE_ROOT, FG_POST_FILE_NAME, FG_POST_FILE_UUID, FG_POST_TITLE,
+                        FG_POST_ID, FG_POST_LIKES, fgEcoStartToChar, fgEcoEndToChar, FG_ECO_POINTS,
+                        FG_ECO_INFO, FG_CERT_INFO, FG_ECO_PARTICIPATION, FG_ECO_PERIOD
+                 FROM (
+                          SELECT F.FG_POST_FILE_ROOT, F.FG_POST_FILE_NAME, F.FG_POST_FILE_UUID, P.FG_POST_TITLE,
+                                 P.FG_POST_ID, P.FG_POST_LIKES,
+                                 TO_CHAR(E.FG_ECO_START, 'YYYY/MM/DD') AS fgEcoStartToChar,
+                                 TO_CHAR(E.FG_ECO_END, 'YYYY/MM/DD') AS fgEcoEndToChar,
+                                 E.FG_ECO_POINTS, E.FG_ECO_INFO, E.FG_CERT_INFO, E.FG_ECO_PARTICIPATION,
+                                 TO_CHAR((E.FG_ECO_END - E.FG_ECO_START) + 1) || '일간' AS FG_ECO_PERIOD
+                          FROM FG_POST P
+                                   JOIN FG_ECO E ON P.FG_POST_ID = E.FG_POST_ID
+                                   LEFT JOIN (
+                              SELECT FG_POST_FILE_ID, FG_POST_FILE_NAME, FG_POST_FILE_ROOT, FG_POST_FILE_UUID, FG_POST_ID
+                              FROM (
+                                       SELECT FG_POST_FILE_ID, FG_POST_FILE_NAME, FG_POST_FILE_ROOT, FG_POST_FILE_UUID, FG_POST_ID,
+                                              RANK() OVER(PARTITION BY FG_POST_ID ORDER BY FG_POST_FILE_ID ASC) AS RK
+                                       FROM FG_POST_FILE
+                                   )
+                              WHERE RK = 1
+                          ) F ON P.FG_POST_ID = F.FG_POST_ID
+                          WHERE P.FG_POST_TYPE = 'eco'
+                            AND E.FG_ECO_STATUS = '1'
+                          ORDER BY P.FG_POST_ID DESC -- 정렬 확정
+                      )
              )
         WHERE RNUM <= #{page} * #{amount}
           AND RNUM > (#{page} - 1) * #{amount}
         ]]>
 </select>
 
-<!--종료된 에코프로젝트 목록 보여주기 -->
-    <select id="selectFinEcoList" resultType="AdminFinEcoListDTO">
-        SELECT DISTINCT
-            PF.FG_POST_FILE_ROOT,
-            PF.FG_POST_FILE_NAME,
-            PF.FG_POST_FILE_UUID,
-            P.FG_POST_ID,
-            P.FG_POST_TITLE,
-            P.FG_POST_LIKES,
-            E.FG_ECO_START,
-            E.FG_ECO_END,
-            E.FG_ECO_POINTS,
-            E.FG_ECO_INFO,
-            E.FG_CERT_INFO,
-            E.FG_ECO_PARTICIPATION,
-            TO_CHAR((E.FG_ECO_END - E.FG_ECO_START) + 1) || '일간' AS FG_ECO_PERIOD
-        FROM FG_POST_FILE PF
-                 JOIN FG_POST P ON PF.FG_POST_ID = P.FG_POST_ID
-                 JOIN FG_ECO E ON P.FG_POST_ID = E.FG_POST_ID
-        WHERE P.FG_POST_TYPE = 'eco'
-          AND E.FG_ECO_STATUS = '0'
-    </select>
+
+
+
 
     <!--종료된 에코프로젝트 총 갯수 (for pagination)-->
     <select id="selectFinEcoTotal" resultType="int">
@@ -88,16 +60,24 @@
         WHERE p.FG_POST_TYPE = 'eco' AND e.FG_ECO_STATUS = '0'
     </select>
 
-    <!--종료된 모든 에코프로젝트 목록 보기(pagination o)-->
+    <!--종료된 에코프로젝트 목록 보여주기 (pagination O)    -->
     <select id="selectAllFinEcoList" parameterType="Criteria" resultType="AdminFinEcoListDTO">
-    <![CDATA[
+<![CDATA[
         SELECT *
         FROM (
-                 SELECT ROWNUM AS RNUM,PF.FG_POST_FILE_ROOT,PF.FG_POST_FILE_NAME,PF.FG_POST_FILE_UUID,P.FG_POST_TITLE,
-                        P.FG_POST_ID,P.FG_POST_LIKES,
+                 SELECT ROW_NUMBER() OVER (ORDER BY P.FG_POST_ID DESC) AS RNUM, -- FG_POST_ID 높은 순으로 정렬 후 번호 부여
+                        F.FG_POST_FILE_ROOT,
+                        F.FG_POST_FILE_NAME,
+                        F.FG_POST_FILE_UUID,
+                        P.FG_POST_TITLE,
+                        P.FG_POST_ID,
+                        P.FG_POST_LIKES,
                         TO_CHAR(E.FG_ECO_START, 'YYYY/MM/DD') AS fgEcoStartToChar,
                         TO_CHAR(E.FG_ECO_END, 'YYYY/MM/DD') AS fgEcoEndToChar,
-                        E.FG_ECO_POINTS,E.FG_ECO_INFO,E.FG_CERT_INFO,E.FG_ECO_PARTICIPATION,
+                        E.FG_ECO_POINTS,
+                        E.FG_ECO_INFO,
+                        E.FG_CERT_INFO,
+                        E.FG_ECO_PARTICIPATION,
                         TO_CHAR((E.FG_ECO_END - E.FG_ECO_START) + 1) || '일간' AS FG_ECO_PERIOD
                  FROM FG_POST_FILE PF
                           JOIN FG_POST P ON PF.FG_POST_ID = P.FG_POST_ID
@@ -106,14 +86,13 @@
                      SELECT FG_POST_FILE_ID, FG_POST_FILE_NAME, FG_POST_FILE_ROOT, FG_POST_FILE_UUID, FG_POST_ID
                      FROM (
                               SELECT FG_POST_FILE_ID, FG_POST_FILE_NAME, FG_POST_FILE_ROOT, FG_POST_FILE_UUID, FG_POST_ID,
-                                     RANK() OVER(PARTITION BY FG_POST_ID ORDER BY FG_POST_FILE_ID) AS RK
+                                     RANK() OVER(PARTITION BY FG_POST_ID ORDER BY FG_POST_FILE_ID ASC) AS RK
                               FROM FG_POST_FILE
                           )
                      WHERE RK = 1
                  ) F ON PF.FG_POST_ID = F.FG_POST_ID
                  WHERE P.FG_POST_TYPE = 'eco'
                    AND E.FG_ECO_STATUS = '0'
-                 ORDER BY P.FG_POST_ID DESC
              )
         WHERE RNUM <= #{page} * #{amount}
           AND RNUM > (#{page} - 1) * #{amount}
@@ -121,7 +100,9 @@
 </select>
 
 
-<!--에코프로젝트 글 작성하기 (공통게시글테이블 insert)-->
+
+
+    <!--에코프로젝트 글 작성하기 (공통게시글테이블 insert)-->
     <insert id="insertEcoPost" parameterType="AdminEcoWriteDTO">
         <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
             SELECT SEQ_POST.nextval FROM DUAL

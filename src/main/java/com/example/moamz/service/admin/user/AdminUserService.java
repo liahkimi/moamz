@@ -27,10 +27,11 @@ public class AdminUserService {
         log.info("로그인 시도 : {}", fgUserId);
         log.info("입력된 비밀번호 : {}", fgUserPassword); // 비밀번호는 로그에 찍지 않는 것이 좋음
 
-        return adminUserMapper.selectLoginInfo(fgUserId, fgUserPassword)
-                .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원 정보"));
+//        return adminUserMapper.selectLoginInfo(fgUserId, fgUserPassword)
+//                .orElseThrow(() -> new IllegalStateException("존재하지 않는 회원 정보"));
+        AdminUserSessionDTO dto = adminUserMapper.selectLoginInfo(fgUserId, fgUserPassword);
+        return dto; // ID나 비밀번호가 일치하지 않으면 null을 반환하도록 설정
+    }
 
     }
 
-
-}

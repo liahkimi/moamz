@@ -11,5 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class UserResetPasswordDTO {
     private Long fgUserCode;
+    private String fgUserId;
     private String fgUserPassword;
+    private String fgNormalPhone;
 }

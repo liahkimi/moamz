@@ -10,7 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 @Slf4j
-public class SellerFindService {
+public class SellerFindIdService {
     private final SellerFindIdMapper sellerFindIdMapper;
+    
+    public String selectFindId(String fgSellerName, String fgSellerPhone){
+        return sellerFindIdMapper.selectFindId(fgSellerName, fgSellerPhone)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디"));
+    }
 
 }

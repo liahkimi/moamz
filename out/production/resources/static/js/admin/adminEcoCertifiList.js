@@ -10,15 +10,16 @@ function goToDetailPageFin() {
     window.location.href = "adminEcoCertifiDetailFin.html";  // 특정 상세 페이지 URL로 이동
 }
 
-// 모달 열기 함수
-function openModal(event) {
-    event.stopPropagation();  // 클릭 이벤트 전파를 차단하여 tr 클릭 이벤트 방지
-    const fgPostId = event.target.getAttribute("data-fg-post-id"); // 클릭된 요소에서 `data-fg-post-id` 속성 값을 가져옴
-    // console.log(fgPostId);  // 가져온 `fgPostId` 값을 콘솔에 출력하여 확인
-    document.getElementById("modalFgPostId").value = fgPostId; // 숨겨진 input 필드에 `fgPostId` 값 설정
-    document.getElementById('myModal').style.display = "block";  // 모달 창을 보이도록 설정
-}
-
+// // 모달 열기 함수
+// function openModal(event) {
+//     event.stopPropagation();  // 클릭 이벤트 전파를 차단하여 tr 클릭 이벤트 방지
+//     const fgPostId = event.target.getAttribute("data-fg-post-id"); // 클릭된 요소에서 `data-fg-post-id` 속성 값을 가져옴
+//     // console.log(fgPostId);  // 가져온 `fgPostId` 값을 콘솔에 출력하여 확인
+//     document.getElementById("modalFgPostId").value = fgPostId; // 숨겨진 input 필드에 `fgPostId` 값 설정
+//     document.getElementById('myModal').style.display = "block";  // 모달 창을 보이도록 설정
+// }
+//
+//
 // 모달 닫기 함수
 function closeModal() {
     document.getElementById('myModal').style.display = "none";  // 모달 창을 보이지 않도록 설정
@@ -30,8 +31,6 @@ document.getElementById('pointForm').addEventListener('submit', function (e) {
     const postId = document.getElementById('modalFgPostId').value; // 숨겨진 input에서 `postId` 값 가져오기
     const points = document.getElementById('pointInput').value; // 입력된 포인트 값 가져오기
 
-    console.log(postId); // `postId`를 콘솔에 출력하여 확인
-    console.log(points); // 입력된 포인트 값을 콘솔에 출력하여 확인
 
     // 포인트가 입력되지 않았거나 0 이하의 값을 입력한 경우 경고 메시지 표시 후 종료
     if (!points || points <= 0) {
@@ -68,3 +67,35 @@ document.getElementById('pointForm').addEventListener('submit', function (e) {
             alert(`오류 발생: ${err.message}`); // 오류 메시지 표시
         });
 });
+
+function checkSessionAndOpenModal(event) {
+    event.stopPropagation();  // 클릭 이벤트 전파를 차단하여 tr 클릭 이벤트 방지
+
+    // 세션 확인 API 요청
+    fetch('/api/checkSession', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => {
+            if (response.status === 401) {  // 세션이 없으면 401 Unauthorized
+                // 로그인 페이지로 리디렉션
+                location.href = '/admin/login?error=sessionExpired';
+            } else {
+                // 세션이 있으면 모달을 띄운다
+                openModal(event); // 모달 열기 함수 호출
+            }
+        })
+        .catch(err => {
+            alert('세션 확인 중 오류 발생');
+        });
+}
+
+function openModal(event) {
+    const fgPostId = event.target.getAttribute("data-fg-post-id"); // 버튼에서 fgPostId 가져오기
+    document.getElementById("modalFgPostId").value = fgPostId; // 모달 내 숨겨진 input 필드에 fgPostId 값 설정
+    document.getElementById('myModal').style.display = "block"; // 모달 창을 보이도록 설정
+}
+
+

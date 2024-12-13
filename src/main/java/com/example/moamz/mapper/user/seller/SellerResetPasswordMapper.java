@@ -8,11 +8,11 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Optional;
 
 @Mapper
-public interface SellerResetMapper {
+public interface SellerResetPasswordMapper {
 
-    Optional<String> selectPassword(@Param("fgUserId") String fgUserId,
+    Optional<SellerResetPasswordDTO> selectPassword(@Param("fgUserId") String fgUserId,
                                     @Param("fgSellerPhone") String fgNormalPhone);
 
     //비밀번호 변경
-    int updatePassword(SellerResetPasswordDTO sellerResetPasswordDTO);
+    void updatePassword(SellerResetPasswordDTO sellerResetPasswordDTO);
 }
