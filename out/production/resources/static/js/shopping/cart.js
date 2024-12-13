@@ -9,6 +9,9 @@ $(document).ready(function() {
         const $productWeightDisplay = $(this).closest(".cart-product-detail-product").find(".cart-product-detail-product-intro-text-weight"); // 무게 표시 선택
         const $productPriceDisplay = $(this).closest(".cart-product-detail-product").find(".cart-product-detail-product-intro-text-price"); // 가격 표시 선택
         const id = document.querySelector('#selectedProductName');
+        const $hiddenPriceInput = $("#selectedProductPrice"); // Hidden input 값 업데이트
+        const $hiddenPriceWeight = $('#selectedProductWeight');
+        const $hiddenQuantity = $('#selectedProductQuantity');
 
         // data-* 속성 값 가져오기
         let productWeight = parseFloat($productWeightDisplay.data("fg-product-weight"));
@@ -42,12 +45,16 @@ $(document).ready(function() {
         function updateCartDisplay(count) {
             // 수량에 따른 무게, 가격 계산 후 업데이트
             const totalWeight = (productWeight * count).toFixed(2);  // 무게 계산
-            const totalPrice = (productPrice * count).toLocaleString();  // 가격 계산 (천 단위 구분)
+            const totalPrice = (productPrice * count);  // 가격 계산 (천 단위 구분)
 
             // 화면에 표시
             $countDisplay.text(count);  // 카운트 표시 업데이트
             $productWeightDisplay.text(totalWeight + ' kg');  // 무게 업데이트
             $productPriceDisplay.text(totalPrice + '원');  // 가격 업데이트
+
+            $hiddenPriceInput.val(totalPrice);
+            $hiddenPriceWeight.val(totalWeight);
+            $hiddenQuantity.val(count);
         }
     });
 });

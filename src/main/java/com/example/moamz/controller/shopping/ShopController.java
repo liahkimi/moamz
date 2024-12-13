@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/shop")
@@ -49,6 +50,7 @@ public class ShopController {
                                  @RequestParam("productName") String productName,
                                  @RequestParam("productPrice") Integer productPrice,
                                  @RequestParam("productWeight") Double productWeight,
+                                 @RequestParam("productQuantity") int productQuantity,
                                  @RequestParam("productExpTime") LocalDateTime productExpTime,
                                  @RequestParam("productFileRoot") String productFileRoot,
                                  @RequestParam("productFileUuid") String productFileUuid,
@@ -56,9 +58,16 @@ public class ShopController {
                                  RedirectAttributes redirectAttributes) {
         // RedirectAttributes로 데이터 전달
         System.out.println("productId = " + productId);
+
+       Long orderId = productService.payOrderId();
+       Long orderDetailId = productService.payOrderDetailId();
+
+        redirectAttributes.addFlashAttribute("orderId", orderId);
+        redirectAttributes.addFlashAttribute("orderDetailId", orderDetailId);
         redirectAttributes.addFlashAttribute("productId", productId);
         redirectAttributes.addFlashAttribute("productName", productName);
         redirectAttributes.addFlashAttribute("productPrice", productPrice);
+        redirectAttributes.addFlashAttribute("productQuantity", productQuantity);
         redirectAttributes.addFlashAttribute("productWeight", productWeight);
         redirectAttributes.addFlashAttribute("productExpTime", productExpTime);
         redirectAttributes.addFlashAttribute("productFileRoot", productFileRoot);
