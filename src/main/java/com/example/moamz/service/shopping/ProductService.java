@@ -83,4 +83,8 @@ public class ProductService {
     public void approveOrder(){
         productMapper.approveOrder();
     }
+
+    public ProductShopDetailDTO showProduct(Long fgProductId) {
+        return productMapper.showProduct(fgProductId);
+    }
 }

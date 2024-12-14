@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.moamz.mapper.shopping.ProductMapper">
 <!--    상품 리스트 mapper-->
-    <select id="productList" resultType="ProductListDTO">
+    <select id="productList" resultType="ProductListMainDTO">
         select p.FG_PRODUCT_ID AS fgProductId,
                p.FG_PRODUCT_NAME AS fgProductName,
                p.FG_PRODUCT_CONTENT AS fgProductContent,
@@ -202,6 +202,44 @@
             WHERE ROWNUM = 1
         )
     </update>
+
+    <select id="showProduct" resultType="ProductShopDetailDTO" parameterType="Long">
+        SELECT
+            P.FG_PRODUCT_ID AS fgProductId,
+            P.FG_PRODUCT_NAME AS fgProductName,
+            P.FG_PRODUCT_PRICE AS fgProductPrice,
+            P.FG_PRODUCT_WEIGHT AS fgProductWeight,
+            P.FG_PRODUCT_EXP_DATE AS fgProductExpDate,
+            P.FG_PRODUCT_STOCK AS fgProductStock,
+            P.FG_PRODUCT_CONTENT AS fgProductContent,
+            P.FG_PRODUCT_TIME AS fgProductTime,
+
+            B.FG_BUSINESS_ID AS fgBusinessId,
+            B.FG_BUSINESS_NAME AS fgBusinessName,
+            B.FG_BUSINESS_OPEN_TIME AS fgBusinessOpenTime,
+            B.FG_BUSINESS_CLOSE_TIME AS fgBusinessCloseTime,
+            B.FG_BUSINESS_ADDRESS AS fgBusinessAddress,
+            B.FG_BUSINESS_ADDRESS_DETAIL AS fgBusinessAddressDetail,
+            B.FG_BUSINESS_POSTCODE AS fgBusinessPostCode,
+            B.FG_BUSINESS_DETAIL AS fgBusinessDetail,
+            B.FG_BUSINESS_PHONE AS fgBusinessPhone,
+            B.FG_BUSINESS_RATING AS fgBusinessRating,
+            B.FG_BUSINESS_LIKES AS fgBusinessLikes,
+
+            F.FG_PRODUCT_FILE_NAME AS productFileName,
+            F.FG_PRODUCT_FILE_ROOT AS productFileRoot,
+            F.FG_PRODUCT_FILE_UUID AS productFileUuid
+        FROM
+            FG_PRODUCT P
+                LEFT JOIN
+            FG_BUSINESS B ON P.FG_BUSINESS_ID = B.FG_BUSINESS_ID
+                LEFT JOIN
+            FG_PRODUCT_FILE F ON P.FG_PRODUCT_ID = F.FG_PRODUCT_ID
+        WHERE
+            P.FG_PRODUCT_ID = #{fgProductId}
+    </select>
+
+
 </mapper>
 
 

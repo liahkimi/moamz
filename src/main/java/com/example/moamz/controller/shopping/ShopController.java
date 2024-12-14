@@ -2,6 +2,7 @@ package com.example.moamz.controller.shopping;
 
 import com.example.moamz.domain.dto.shopping.CartDTO;
 import com.example.moamz.domain.dto.shopping.CartDetailDTO;
+import com.example.moamz.domain.dto.shopping.ProductShopDetailDTO;
 import com.example.moamz.domain.dto.shopping.ProductListMainDTO;
 import com.example.moamz.service.shopping.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/shop")
@@ -28,6 +28,15 @@ public class ShopController {
         model.addAttribute("productList", productList);
 
         return "shopping/productList";
+    }
+
+    @GetMapping("/detail/{fgProductId}")
+    public String productDetail(@PathVariable("fgProductId") Long fgProductId, Model model){
+        ProductShopDetailDTO prodcutDetail = productService.showProduct(fgProductId);
+
+        model.addAttribute("prodcutDetail", prodcutDetail);
+
+        return "shopping/productDetail";
     }
 
     @GetMapping("/cart")

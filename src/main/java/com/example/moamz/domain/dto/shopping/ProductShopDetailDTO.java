@@ -1,17 +1,11 @@
 package com.example.moamz.domain.dto.shopping;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-public class ProductListMainDTO {
+@Data
+public class ProductShopDetailDTO {
     private Long fgProductId;
     private String fgProductName;
     private int fgProductPrice;
@@ -20,10 +14,17 @@ public class ProductListMainDTO {
     private int fgProductStock;
     private String fgProductContent;
     private LocalDateTime fgProductTime;
-    private String fgSubCategoryId;
-    private String fgSubCategoryName;
     private Long fgBusinessId;
     private String fgBusinessName;
+    private String fgBusinessOpenTime;
+    private String fgBusinessCloseTime;
+    private String fgBusinessAddress;
+    private String fgBusinessAddressDetail;
+    private String fgBusinessPostCode;
+    private String fgBusinessDetail;
+    private String fgBusinessPhone;
+    private String fgBusinessRating;
+    private String fgBusinessLikes;
 
     private String productFileName;
     private String productFileRoot;

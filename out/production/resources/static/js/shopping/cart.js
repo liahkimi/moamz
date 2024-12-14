@@ -95,18 +95,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("cartForm");
 
     // 선택된 상품 정보를 hidden input에 설정
-    // radios.forEach((radio) => {
-    //     radio.addEventListener("change", function () {
-    //         document.getElementById("selectedProductId").value = radio.getAttribute("data-product-id");
-    //         document.getElementById("selectedProductName").value = radio.getAttribute("data-product-name");
-    //         document.getElementById("selectedProductPrice").value = radio.getAttribute("data-product-price");
-    //         document.getElementById("selectedProductWeight").value = radio.getAttribute("data-product-weight");
-    //         document.getElementById("selectedProductExpTime").value = radio.getAttribute("data-product-exp-time");
-    //     });
-    // });
+    radios.forEach((radio) => {
+        radio.addEventListener("change", function () {
+            // 선택된 라디오 버튼의 값 (상품 ID) 가져오기
+            const productId = radio.value;
+
+            // 해당 상품의 숨겨진 데이터를 가져와 hidden input에 설정
+            document.getElementById("selectedProductId").value = document.getElementById(`productId-${productId}`).value;
+            document.getElementById("selectedProductName").value = document.getElementById(`productName-${productId}`).value;
+            document.getElementById("selectedProductPrice").value = document.getElementById(`productPrice-${productId}`).value;
+            document.getElementById("selectedProductWeight").value = document.getElementById(`productWeight-${productId}`).value;
+            document.getElementById("selectedProductExpTime").value = document.getElementById(`productExpTime-${productId}`).value;
+            document.getElementById("selectedProductFileRoot").value = document.getElementById(`productFileRoot-${productId}`).value;
+            document.getElementById("selectedProductFileUuid").value = document.getElementById(`productFileUuid-${productId}`).value;
+            document.getElementById("selectedProductFileName").value = document.getElementById(`productFileName-${productId}`).value;
+        });
+    });
 
     // 폼 전송 시 선택 확인
     form.addEventListener("submit", function (e) {
+        // 라디오 버튼이 선택되지 않았을 경우 전송 방지 및 경고 표시
         if (!document.querySelector('input[name="selectProduct"]:checked')) {
             e.preventDefault();
             alert("상품을 선택해주세요.");

@@ -53,4 +53,6 @@ public interface ProductMapper {
     OrderDTO getLatestOrder();
 
     void approveOrder();
+
+    ProductShopDetailDTO showProduct(Long fgProductId);
 }
