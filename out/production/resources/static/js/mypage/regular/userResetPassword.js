@@ -68,7 +68,7 @@ checkPw.addEventListener('input', checkFormValidity);
 pwModifyBtn.addEventListener('click', () => {
     const isConfirm = confirm('비밀번호를 변경하시겠습니까? 다시 로그인이 필요합니다.');
     if(isConfirm) {
-        location.href='../../user/regular/userLogin.html'
+        location.href='/normal/regular/userLogin'
     } else {
 
     }

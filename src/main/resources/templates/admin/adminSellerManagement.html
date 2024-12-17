@@ -111,7 +111,7 @@
                         <th>업체평점(좋아요)</th>
                         <th>상품수</th>
                         <th>판매건수</th>
-                        <th>관리</th>
+<!--                        <th>관리</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -123,14 +123,14 @@
                         <td >⭐<span th:text="${sellerMngInfo.fgAverageReviewRating}">5.0</span>(<span th:text="${sellerMngInfo.fgLikeCount}">10</span>)</td>
                         <td th:text="${sellerMngInfo.fgProductCount}">60</td>
                         <td th:text="${sellerMngInfo.fgSalesCount}">58</td>
-                        <td>
-                            <button>
-                                <img
-                                        th:src="@{/img/admin/more-horizontal.png}"
-                                        alt="morebtn"
-                                />
-                            </button>
-                        </td>
+<!--                        <td>-->
+<!--                            <button>-->
+<!--                                <img-->
+<!--                                        th:src="@{/img/admin/more-horizontal.png}"-->
+<!--                                        alt="morebtn"-->
+<!--                                />-->
+<!--                            </button>-->
+<!--                        </td>-->
                     </tr>
                     </tbody>
                 </table>

@@ -322,7 +322,9 @@ main .content-box .ecobanner-card-box .ecobanner-card .top-five-list-box .top-fi
     display: flex;
     justify-content: space-between;
 }
-.chart-box {
+.chart-box #shoppingChart{
+    width:630px;
+    height:100px;
 }
 .chart-box canvas{
     background-color: white;

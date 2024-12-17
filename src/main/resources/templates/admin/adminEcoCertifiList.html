@@ -21,7 +21,7 @@
             <div class="page-title">에코프로젝트 인증글 목록</div>
           </div>
           <div class="go-list-btn">
-            <button type="button" th:onclick="|location.href='@{/admin/eco/list}'|">
+            <button type="button" th:onclick="|location.href='@{/admin/eco/ingList}'|">
               에코프로젝트 목록으로
             </button>
           </div>
@@ -50,8 +50,9 @@
                   <td class="last-col">
                     <button id="pointBtn" type="button"
                             th:data-fg-post-id="${certList.fgPostId}"
-                            onclick="openModal(event)"
-                            >포인트 지급하기</button>
+                            onclick="checkSessionAndOpenModal(event)">
+                            <!--onclick="openModal(event); event.stopPropagation();"-->
+                            포인트 지급하기</button>
                   </td>
                 </tr>
               </tbody>
@@ -61,7 +62,7 @@
               <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
                 <h1>포인트 지급</h1>
-                <form id="pointForm">
+                <form id="pointForm" onclick="openModalWithSessionCheck()">
                   <input type="hidden" id="modalFgPostId" name="fgPostId">
                   <div class="point-title">point : </div>
                   <input type="number" id="pointInput" name="fgPointReceived" placeholder="지급할 포인트를 입력하세요">

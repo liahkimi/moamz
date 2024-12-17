@@ -242,6 +242,7 @@ body {
   .content-detail-box p {
     height: 100%;
     border-bottom: 1px solid #d7d4d4;
+    line-height: 1.8;
   }
 
   .content-img img {
@@ -412,6 +413,7 @@ body {
 }
 /* 댓글 수정 textarea */
 .modify-content {
+  line-height: 1.8;
   width: 87%;
   padding: 5px;
   /* 크기 조절 버튼 제거 */

@@ -9,28 +9,29 @@
   <script defer th:src="@{/js/mypage/regular/userInfoAuth.js}"></script>
 </head>
 <body>
-  <header id="header"></header>
+  <header id="header" th:replace="~{/main/fragment/header/userHeaderLogin}"></header>
   <div id="auth-container">
     <div id="auth-wrap">
+    <!--제목 영역-->
       <div id="auth-text">
         <h2>회원 정보 확인</h2>
         <p>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다</p>
       </div>
-      <div id="auth-box">
+      <!-- 회원정보 입력 영역 -->
+      <form id="auth-box" method="post" action="/normal/my/infoAuth" th:attr="data-requestPage=${requestPage}">
         <div id="auth-id">
-          <h3>ID</h3><input type="text" placeholder="user123@gmail.com" readonly>
+          <h3>ID</h3><input type="text" id="user-id" th:value="${fgUserId}"  />
         </div>
         <div id="auth-pw">
-          <h3>PW</h3><input type="password" id="input-password">
+          <h3>PW</h3><input type="password" id="input-password" name="input-password" required />
         </div>
-      </div>
+      </form>
       <div id="auth-box-btn">
-        <button id="check">확인</button>
-        <button id="cancel">취소</button>
+        <button id="check" type="button">확인</button>
+        <button id="cancel"  type="submit">취소</button>
       </div>
     </div>
   </div>
-  <footer id="footer" th:replace="~{/main/fragment/footer/userFooter.html}"></footer>
+  <footer id="footer"></footer>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </html>

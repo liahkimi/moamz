@@ -47,40 +47,90 @@ function goToDetailPageFin(event, fgPostId) {
 
 
 //삭제 버튼
+// function deleteEco(event, fgPostId) {
+//     event.stopPropagation();
+//     event.preventDefault();
+//     if(confirm("해당 에코프로젝트를 삭제하시겠습니까?")){
+//         window.location.href = `/admin/eco/remove/${fgPostId}`;
+//     }
+//
+// }
 function deleteEco(event, fgPostId) {
     event.stopPropagation();
     event.preventDefault();
-    if(confirm("해당 에코프로젝트를 삭제하시겠습니까?")){
-        window.location.href = `/admin/eco/remove/${fgPostId}`;
-    }
 
+    // 세션 유효성 먼저 확인 (GET 요청)
+    fetch(`/admin/eco/remove/${fgPostId}`, {
+        method: "GET",
+        redirect: "follow", // 리다이렉트 허용
+    }).then(response => {
+        if (response.redirected) {
+            // 세션이 만료되어 리다이렉트된 경우
+            window.location.href = response.url;
+        } else if (response.ok) {
+            // 서버 접근 성공 시 삭제 확인
+            if (confirm("해당 에코프로젝트를 삭제하시겠습니까?")) {
+                window.location.href = `/admin/eco/remove/${fgPostId}`;
+            }
+        } else {
+            alert("삭제 요청에 실패했습니다.");
+        }
+    }).catch(error => {
+        console.error("세션 확인 중 오류 발생:", error);
+        alert("요청 중 문제가 발생했습니다.");
+    });
 }
 
-// 배너의 종료시키기 버튼 클릭시 이벤트
-function changeStatus(event , fgPostId) {
+
+
+// // 배너의 종료시키기 버튼 클릭시 이벤트
+// function changeStatus(event , fgPostId) {
+//     console.log(event.target);
+//     event.stopPropagation();
+//     event.preventDefault();
+//     // console.log(fgPostId);
+//
+//     if (confirm("완료된 프로젝트로 변경하시겠습니까?")) {
+//             fetch(`http://localhost:9999/admin/eco/list/modifyEcoStatus/${fgPostId}`, {
+//                 method: 'post'
+//             }).then(response => {
+//                 if(response.ok){
+//                     location.reload();
+//                 }else{
+//                     alert('ㅠㅠ');
+//                 }
+//             })
+//         } else {
+//             //변경 취소하고 컨펌창만 닫기
+//         }
+//     }
+
+// // 배너의 종료시키기 버튼 클릭시 이벤트
+function changeStatus(event, fgPostId) {
     console.log(event.target);
     event.stopPropagation();
     event.preventDefault();
-    // console.log(fgPostId);
 
-    if (confirm("완료된 프로젝트로 변경하시겠습니까?")) {
-            //비동기처리되어 완료된 프로젝트로 변경시키기
-            // window.location.href = `/admin/eco/list/modifyEcoStatus/${fgPostId}`;
-
-
-            fetch(`http://localhost:9999/admin/eco/list/modifyEcoStatus/${fgPostId}`, {
-                method: 'post'
-            }).then(response => {
-                if(response.ok){
-                    location.reload();
-                }else{
-                    alert('ㅠㅠ');
-                }
-            })
+    // 서버로 먼저 세션과 상태 요청
+    fetch(`http://localhost:9999/admin/eco/list/modifyEcoStatus/${fgPostId}`, {
+        method: 'post',
+    }).then(response => {
+        if (response.redirected) {
+            // 세션이 만료되어 리다이렉트된 경우
+            window.location.href = response.url;
+        } else if (response.ok) {
+            // 서버 처리 성공 시 확인창 띄우기
+            if (confirm("완료된 프로젝트로 변경하시겠습니까?")) {
+                location.reload(); // 필요 시 새로고침
+            }
         } else {
-            //변경 취소하고 컨펌창만 닫기
+            alert("상태 변경 요청에 실패했습니다.");
         }
-    }
+    }).catch(error => {
+        console.error("요청 중 오류 발생:", error);
+        alert("요청 중 문제가 발생했습니다.");
+    });
+}
 
 
 

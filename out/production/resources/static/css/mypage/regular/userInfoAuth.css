@@ -44,12 +44,20 @@
   width: 80px;
 }
 #auth-id>input{
-  width: 100%;
-  height: 30px;
-  border-radius: 5px;
-  background-color: #dddddd;
-  border: none;
+  /*width: 100%;*/
+  /*height: 30px;*/
+  /*border-radius: 5px;*/
+  /*background-color: #dddddd;*/
+  /*border: none;*/
+  padding: 0 10px;
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: rgba(239, 239, 239, 0.3);
 }
+
+
 #auth-pw{
   display: flex;
   margin-top: 5px;
@@ -60,10 +68,11 @@
   width: 80px;
 }
 #auth-pw>input{
-  width: 100%;
-  height: 30px;
-  border-radius: 5px;
-  border: 1px solid #dddddd;
+  padding: 0 10px;
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
 }
 #auth-box-btn{
   margin: auto;

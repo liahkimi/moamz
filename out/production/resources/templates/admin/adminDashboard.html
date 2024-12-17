@@ -413,86 +413,83 @@
             <canvas id="ecoCertifyChart" width="630px" height="250px"></canvas>
           </div>
         </div>
-      </div>
-      </div>
-    </main>
-  </body>
-<!--  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
-<!--<script>-->
-<!--    $(function() {-->
-<!--        $("#adminNavBar").load("adminNavBar.html");-->
-<!--        $("#adminHeader").load("adminHeader.html")-->
-<!--    });-->
-<!--</script>-->
-  <script th:inline="javascript">
-    // Thymeleaf로 전달된 값을 JavaScript 배열로 할당
-    let augustTotalOrders = [[${augustTotalOrders}]];
-    let septemberTotalOrders = [[${septemberTotalOrders}]];
-    let octoberTotalOrders = [[${octoberTotalOrders}]];
-    let novemberTotalOrders = [[${novemberTotalOrders}]];
+        <script th:inline="javascript">
+          // Thymeleaf로 전달된 값을 JavaScript 배열로 할당
+          let augustTotalOrders = [[${augustTotalOrders}]];
+          let septemberTotalOrders = [[${septemberTotalOrders}]];
+          let octoberTotalOrders = [[${octoberTotalOrders}]];
+          let novemberTotalOrders = [[${novemberTotalOrders}]];
 
-    // 위의 각 변수들을 배열로 변경해야 하기 때문에 아래와 같이 설정
-    let totalOrders = [augustTotalOrders, septemberTotalOrders, octoberTotalOrders, novemberTotalOrders];
+          // 위의 각 변수들을 배열로 변경하여 설정
+          let totalOrders = [augustTotalOrders, septemberTotalOrders, octoberTotalOrders, novemberTotalOrders];
 
-    // Chart.js 설정
-    const ctx = document.getElementById('shoppingChart').getContext('2d');
-
-    const shoppingChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['8월', '9월', '10월', '11월'],  // X축 라벨
-        datasets: [{
-          label: '월별 쇼핑몰 총 구매 건 수 등락 추이', // 차트 제목
-          data: totalOrders.flat(),  // Y축 데이터 (배열을 평탄화)
-          // backgroundColor: 'rgba(75, 192, 192, 0.2)', // 막대 그래프 배경색
-          borderColor: '#1B494C', // 막대 그래프 테두리 색
-          // borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true // Y축이 0부터 시작하도록 설정
+          // 기존 차트가 있으면 destroy() 호출
+          if (window.myShoppingChart) {
+            window.myShoppingChart.destroy();
           }
-        }
-      }
-    });
-  </script>
-  <script th:inline="javascript">
-    // Thymeleaf로 전달된 값을 JavaScript 배열로 할당
-    let augustEcoCertPosts = [[${augustEcoCertPosts}]];
-    let septemberEcoCertPosts = [[${septemberEcoCertPosts}]];
-    let octoberEcoCertPosts = [[${octoberEcoCertPosts}]];
-    let novemberEcoCertPosts = [[${novemberEcoCertPosts}]];
 
-    // 위의 각 변수들을 배열로 변경하여 설정
-    let ecoCertPosts = [augustEcoCertPosts, septemberEcoCertPosts, octoberEcoCertPosts, novemberEcoCertPosts];
+          // 쇼핑몰 총 구매 건 수 차트 생성
+          const shoppingCtx = document.getElementById('shoppingChart').getContext('2d');
+          window.myShoppingChart = new Chart(shoppingCtx, {
+            type: 'line',
+            data: {
+              labels: ['8월', '9월', '10월', '11월'],
+              datasets: [{
+                label: '월별 쇼핑몰 총 구매 건 수 등락 추이',
+                data: totalOrders.flat(),  // Y축 데이터 (배열을 평탄화)
+                borderColor: '#1B494C',
+                fill: false,  // 선형 그래프의 경우 채우지 않도록 설정
+              }]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
 
-    // Chart.js 설정
-    const ecoCtx = document.getElementById('ecoCertifyChart').getContext('2d');
+          // 두 번째 차트: 에코 인증 글 수
+          let augustEcoCertPosts = [[${augustEcoCertPosts}]];
+          let septemberEcoCertPosts = [[${septemberEcoCertPosts}]];
+          let octoberEcoCertPosts = [[${octoberEcoCertPosts}]];
+          let novemberEcoCertPosts = [[${novemberEcoCertPosts}]];
 
-    const ecoCertifyChart = new Chart(ecoCtx, {
-      type: 'bar',
-      data: {
-        labels: ['8월', '9월', '10월', '11월'],  // X축 라벨
-        datasets: [{
-          label: '월별 에코 프로젝트 인증 글 수', // 차트 제목
-          data: ecoCertPosts.flat(),  // Y축 데이터 (배열을 평탄화)
-          backgroundColor: '#1B494C', // 라인 그래프 배경색
-          borderColor: '#1B494C', // 라인 그래프 테두리 색
-          // borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true // Y축이 0부터 시작하도록 설정
+          // 위의 각 변수들을 배열로 변경하여 설정
+          let ecoCertPosts = [augustEcoCertPosts, septemberEcoCertPosts, octoberEcoCertPosts, novemberEcoCertPosts];
+
+          // 기존 차트가 있으면 destroy() 호출
+          if (window.myEcoCertifyChart) {
+            window.myEcoCertifyChart.destroy();
           }
-        }
-      }
-    });
-  </script>
-<script th:src="@{/js/admin/adminDashboard.js}"></script>
+
+          // 에코 프로젝트 인증 글 수 차트 생성
+          const ecoCtx = document.getElementById('ecoCertifyChart').getContext('2d');
+          window.myEcoCertifyChart = new Chart(ecoCtx, {
+            type: 'bar',
+            data: {
+              labels: ['8월', '9월', '10월', '11월'],
+              datasets: [{
+                label: '월별 에코 프로젝트 인증 글 수',
+                data: ecoCertPosts.flat(),
+                backgroundColor: '#1B494C',
+                borderColor: '#1B494C',
+                borderWidth: 1
+              }]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        </script>
+
+
+        <script th:src="@{/js/admin/adminDashboard.js}"></script>
 </html>
