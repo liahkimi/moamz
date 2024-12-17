@@ -3,6 +3,7 @@ package com.example.moamz.controller.mypage.normal;
 import com.example.moamz.domain.dto.mypage.normal.MyPostEcoDTO;
 import com.example.moamz.domain.dto.mypage.normal.MyPostFreeDTO;
 import com.example.moamz.domain.dto.mypage.normal.MyPostRecipeDTO;
+import com.example.moamz.mapper.mypage.normal.NormalMyPostMapper;
 import com.example.moamz.service.mypage.normal.NormalMyPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import java.util.List;
 public class NormalMyPostController {
 
     private final NormalMyPostService normalMyPostService;
+    private final NormalMyPostMapper normalMyPostMapper;
 
     // 마이페이지 > 에코 프로젝트 게시글 목록
     @GetMapping("/normal/my/postEco")
